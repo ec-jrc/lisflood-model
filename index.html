@@ -47,8 +47,7 @@
 <br>
 <div style="text-align: center;"><img style="width: 2041px; height: 558px;" alt="EU logo" src="media/image2.png"><img style="width: 276px; height: 184px;" alt="JRC logo" src="media/image3.png"></div>
 <h1 style="text-align: center;"><big style="font-family: Helvetica,Arial,sans-serif;">LISFLOOD MANUAL</big></h1>
-<div style="text-align: center;"><img style="width: 473px; height: 555px;" alt="LF_Cycle" src="media/image4.jpg"><br>
-</div>
+<br>
 <div style="text-align: center;"><img style="width: 557px; height: 211px;" alt="background" src="media/image5.jpg"><br>
 
 
@@ -360,24 +359,24 @@ with the user.</p>
 </tbody>
 </table>
 
-<h1 id="section-5"></h1>
-<h1 id="section-6"></h1>
-<h1 id="section-7"></h1>
-<h1 id="introduction">1. Introduction</h1>
-<p>The LISFLOOD model is a hydrological rainfall-runoff model that is
-capable of simulating the hydrological processes that occur in a
-catchment. LISFLOOD has been developed by the floods group of the
-Natural Hazards Project of the Joint Research Centre (JRC) of the
-European Commission. The specific development objective was to produce
-a tool that can be used in large and trans-national catchments for a
-variety of applications, including:</p>
-<ul>
+
+
+
+<h1 id="introduction"><span style="font-family: Helvetica,Arial,sans-serif;">Introduction</span></h1>
+<p style="font-family: Helvetica,Arial,sans-serif;">The LISFLOOD model
+is a hydrological rainfall-runoff model that is capable of simulating
+the hydrological processes that occur in a catchment. LISFLOOD has been
+developed by the floods group of the Natural Hazards Project of the
+Joint Research Centre (JRC) of the European Commission. The specific
+development objective was to produce a tool that can be used in large
+and trans-national catchments for a variety of applications, including:</p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
 <li><p>Flood forecasting</p></li>
 <li><p>Assessing the effects of river regulation measures</p></li>
 <li><p>Assessing the effects of land-use change</p></li>
 <li><p>Assessing the effects of climate change</p></li>
 </ul>
-<p>Although a wide variety of existing hydrological models are available that are suitable for <em>each</em> of these individual tasks, few <em>single</em> models are capable of doing <em>all</em>
+<p style="font-family: Helvetica,Arial,sans-serif;">Although a wide variety of existing hydrological models are available that are suitable for <em>each</em> of these individual tasks, few <em>single</em> models are capable of doing <em>all</em>
 these jobs. Besides this, our objective requires a model that is
 spatially distributed and –at least to a certain extent-
 physically-based. Also, the focus of our work is on European
@@ -403,11 +402,12 @@ output as well. In addition, all output can be written as grids, or
 time series at user-defined points or areas. The user has complete
 control over how output is written, thus minimising any waste of disk
 space or CPU time.</p>
-<h2 id="about-lisflood">About LISFLOOD</h2>
-<p>The LISFLOOD model is implemented in the PCRaster Environmental
-Modelling language Version 3.0.0 (Wesseling et al., 1996), wrapped in a
-Python based interface. PCRaster is a raster GIS environment that has
-its own high-level computer language, which allows the construction of
+<h2 style="font-family: Helvetica,Arial,sans-serif;" id="about-lisflood">About LISFLOOD</h2>
+<p><span style="font-family: Helvetica,Arial,sans-serif;">The LISFLOOD
+model is implemented in the PCRaster Environmental Modelling language
+Version 3.0.0 (Wesseling et al., 1996), wrapped in a Python based
+interface. PCRaster is a raster GIS environment that has its own
+high-level computer language, which allows the construction of
 iterative spatio-temporal environmental models. The Python wrapper of
 LISFLOOD enables the user to control the model inputs and outputs and
 the selection of the model modules. This approach combines the power,
@@ -415,45 +415,55 @@ relative simplicity and maintainability of code written in the the
 PCRaster Environmental Modelling language and the flexibility of
 Python. LISFLOOD runs on any operating for which Python and PCRaster
 are available. Currently these include 32-bits Windows (e.g. Windows
-XP, Vista, 7) and a number of Linux distributions.</p>
-<h2 id="about-this-user-manual">About this User Manual</h2>
-<p>This revised User Manual documents LISFLOOD version December 1 2013,
-and replaces all previous documentation of the model (e.g. van der
-Knijff &amp; de Roo, 2008; de Roo <em>et. al.</em>, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.</p>
-<p>Chapter 2 explains the theory behind the model, including all model
-equations and the changes to the previous version. The remaining
-chapters cover all practical aspects of working with LISFLOOD. Chapter
-3 to 8 explains how to setup LISFLOOD, how to modify the settings and
-the outputs.</p>
-<p>A series of Annexes at the end of this document describe some
-optional features that can be activated when running the model. Most
-model users will not need these features (which are disabled by
-default), and for the sake of clarity we therefore decided to keep
-their description out of the main text. The current document does not
-cover the calculation of the potential evapo(transpi)ration rates that
-are needed as input to the model. A separate pre-processor (LISVAP)
-exists that calculates these variables from standard (gridded)
-meteorological observations. LISVAP is documented in a separate volume
-(van der Knijff, 2006).</p>
-<p><span id="_Toc353538795" class="anchor"></span><strong>2. Process descriptions</strong></p>
-<h2 id="overview">Overview</h2>
-<p>Figure 2.1 gives an overview of the structure of the LISFLOOD model.
-Basically, the model is made up of the following components:</p>
-<ul>
+XP, Vista, 7) and a number of Linux distributions</span>.</p>
+<h2 style="font-family: Helvetica,Arial,sans-serif;" id="about-this-user-manual">About this User Manual</h2>
+<p style="font-family: Helvetica,Arial,sans-serif;">This revised User
+Manual documents LISFLOOD version December 1 2013, and replaces all
+previous documentation of the model (e.g. van der Knijff &amp; de Roo,
+2008; de Roo <em>et. al.</em>, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">"Process
+description" chapter&nbsp; explains the theory behind the model,
+including all model equations and the changes to the previous version.
+The remaining chapters cover all practical aspects of working with
+LISFLOOD. Chapter 3 to 8 explains how to setup LISFLOOD, how to modify
+the settings and the outputs.</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">A series of Annexes
+at the end of this document describe some optional features that can be
+activated when running the model. Most model users will not need these
+features (which are disabled by default), and for the sake of clarity
+we therefore decided to keep their description out of the main text.
+The current document does not cover the calculation of the potential
+evapo(transpi)ration rates that are needed as input to the model. A
+separate pre-processor (LISVAP) exists that calculates these variables
+from standard (gridded) meteorological observations. LISVAP is
+documented in a separate volume (van der Knijff, 2006).</p>
+<h1 style="font-family: Helvetica,Arial,sans-serif;"><span id="_Toc353538795" class="anchor"></span><strong>2. Process descriptions</strong></h1>
+
+<h1>Overview</h1>
+
+<p style="font-family: Helvetica,Arial,sans-serif;">Figure 2.1 gives an
+overview of the structure of the LISFLOOD model. Basically, the model
+is made up of the following components:</p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
 <li><p>a 2-layer soil water balance sub-model</p></li>
 <li><p>sub-models for the simulation of groundwater and subsurface flow (using 2 parallel interconnected linear reservoirs)</p></li>
 <li><p>a sub-model for the routing of surface runoff to the nearest river channel</p></li>
 <li><p>a sub-model for the routing of channel flow (not shown in the Figure)</p></li>
 </ul>
-<p>The processes that are simulated by the model include snow melt (not
-shown in the Figure), infiltration, interception of rainfall, leaf
-drainage, evaporation and water uptake by vegetation, surface runoff,
-preferential flow (bypass of soil layer), exchange of soil moisture
-between the two soil layers and drainage to the groundwater,
-sub-surface and groundwater flow, and flow through river channels. Each
-of these processes is described in more detail in the following.</p>
-<p></p><embed src="e:%5Cgh-pages%5C/media/image6.emf" style="width: 5.75in; height: 7.32292in;">
-<p><em>Figure 2.1 Overview of the LISFLOOD model. P = precipitation; Int = interception; EW<sub>int</sub> = evaporation of intercepted water; D<sub>int</sub> = leaf drainage; ES<sub>a</sub> = evaporation from soil surface; T<sub>a</sub> = transpiration (water uptake by plant roots); INF<sub>act</sub> = infiltration; R<sub>s</sub> = surface runoff; D<sub>1,2</sub> = drainage from top- to subsoil; D<sub>2,gw</sub> = drainage from subsoil to upper groundwater zone; D<sub>pref,gw</sub> = preferential flow to upper groundwater zone; D<sub>uz,lz</sub> = drainage from upper- to lower groundwater zone; Q<sub>uz</sub> = outflow from upper groundwater zone; Q<sub>l</sub> = outflow from lower groundwater zone; D<sub>loss</sub>
+<p style="font-family: Helvetica,Arial,sans-serif;">The processes that
+are simulated by the model include snow melt (not shown in the Figure),
+infiltration, interception of rainfall, leaf drainage, evaporation and
+water uptake by vegetation, surface runoff, preferential flow (bypass
+of soil layer), exchange of soil moisture between the two soil layers
+and drainage to the groundwater, sub-surface and groundwater flow, and
+flow through river channels. Each of these processes is described in
+more detail in the following.</p>
+<div style="text-align: center;"><img style="width: 473px; height: 555px;" alt="LF_Cycle" src="media/image4.jpg"><br>
+</div>
+
+
+<p style="font-family: Helvetica,Arial,sans-serif;"></p><embed src="e:%5Cgh-pages%5C/media/image6.emf" style="width: 5.75in; height: 7.32292in; font-family: Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif;"><em>Figure 2.1 Overview of the LISFLOOD model. P = precipitation; Int = interception; EW<sub>int</sub> = evaporation of intercepted water; D<sub>int</sub> = leaf drainage; ES<sub>a</sub> = evaporation from soil surface; T<sub>a</sub> = transpiration (water uptake by plant roots); INF<sub>act</sub> = infiltration; R<sub>s</sub> = surface runoff; D<sub>1,2</sub> = drainage from top- to subsoil; D<sub>2,gw</sub> = drainage from subsoil to upper groundwater zone; D<sub>pref,gw</sub> = preferential flow to upper groundwater zone; D<sub>uz,lz</sub> = drainage from upper- to lower groundwater zone; Q<sub>uz</sub> = outflow from upper groundwater zone; Q<sub>l</sub> = outflow from lower groundwater zone; D<sub>loss</sub>
 = loss from lower groundwater zone. Note that snowmelt is not included
 in the Figure (even though it is simulated by the model).</em></p>
 <h2 id="treatment-of-meteorological-input-variables">Treatment of meteorological input variables</h2>
