@@ -9,6 +9,13 @@ height="3.078472222222222in"}
 
 Disclaimer
 ==========
+$$
+M = \left( \begin{array}{ccc}
+x_{11} & x_{12} & \ldots \\
+x_{21} & x_{22} & \ldots \\
+\vdots & \vdots & \ldots \\
+\end{array} \right)
+$$
 
 Both the program code and this manual have been carefully inspected
 before printing. However, no warranties, either expressed or implied,
