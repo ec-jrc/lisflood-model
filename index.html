@@ -363,25 +363,26 @@ with the user.</p>
 
 
 <h1 id="introduction"><span style="font-family: Helvetica,Arial,sans-serif;">Introduction</span></h1>
-<p style="font-family: Helvetica,Arial,sans-serif;">The LISFLOOD model
-is a hydrological rainfall-runoff model that is capable of simulating
-the hydrological processes that occur in a catchment. LISFLOOD has been
-developed by the floods group of the Natural Hazards Project of the
-Joint Research Centre (JRC) of the European Commission. The specific
-development objective was to produce a tool that can be used in large
-and trans-national catchments for a variety of applications, including:</p>
+<span style="font-family: Helvetica,Arial,sans-serif;">The LISFLOOD
+model is a hydrological rainfall-runoff model that is capable of
+simulating the hydrological processes that occur in a catchment.
+LISFLOOD has been developed by the floods group of the Natural Hazards
+Project of the Joint Research Centre (JRC) of the European Commission.
+The specific development objective was to produce a tool that can be
+used in large and trans-national catchments for a variety of
+applications, including:</span>
 <ul style="font-family: Helvetica,Arial,sans-serif;">
-<li><p>Flood forecasting</p></li>
-<li><p>Assessing the effects of river regulation measures</p></li>
-<li><p>Assessing the effects of land-use change</p></li>
-<li><p>Assessing the effects of climate change</p></li>
+<li>Flood forecasting</li>
+<li>Assessing the effects of river regulation measures</li>
+<li>Assessing the effects of land-use change</li>
+<li>Assessing the effects of climate change</li>
 </ul>
-<p style="font-family: Helvetica,Arial,sans-serif;">Although a wide variety of existing hydrological models are available that are suitable for <em>each</em> of these individual tasks, few <em>single</em> models are capable of doing <em>all</em>
+<span style="font-family: Helvetica,Arial,sans-serif;">Although a wide variety of existing hydrological models are available that are suitable for </span><em style="font-family: Helvetica,Arial,sans-serif;">each</em><span style="font-family: Helvetica,Arial,sans-serif;"> of these individual tasks, few </span><em style="font-family: Helvetica,Arial,sans-serif;">single</em><span style="font-family: Helvetica,Arial,sans-serif;"> models are capable of doing </span><em style="font-family: Helvetica,Arial,sans-serif;">all</em><span style="font-family: Helvetica,Arial,sans-serif;">
 these jobs. Besides this, our objective requires a model that is
 spatially distributed and –at least to a certain extent-
 physically-based. Also, the focus of our work is on European
 catchments. Since several databases exist that contain pan-European
-information on soils (King <em>et al.</em>, 1997; Wösten <em>et al.</em>, 1999), land cover (CEC, 1993), topography (Hiederer &amp; de Roo, 2003) and meteorology (Rijks <em>et al.</em>,
+information on soils (King </span><em style="font-family: Helvetica,Arial,sans-serif;">et al.</em><span style="font-family: Helvetica,Arial,sans-serif;">, 1997; Wösten </span><em style="font-family: Helvetica,Arial,sans-serif;">et al.</em><span style="font-family: Helvetica,Arial,sans-serif;">, 1999), land cover (CEC, 1993), topography (Hiederer &amp; de Roo, 2003) and meteorology (Rijks </span><em style="font-family: Helvetica,Arial,sans-serif;">et al.</em><span style="font-family: Helvetica,Arial,sans-serif;">,
 1998), it would be advantageous to have a model that makes the best
 possible use of these data. Finally, the wide scope of our objective
 implies that changes and extensions to the model will be required from
@@ -401,9 +402,9 @@ and state variables (soil moisture, for example) can be written as
 output as well. In addition, all output can be written as grids, or
 time series at user-defined points or areas. The user has complete
 control over how output is written, thus minimising any waste of disk
-space or CPU time.</p>
+space or CPU time.</span>
 <h2 style="font-family: Helvetica,Arial,sans-serif;" id="about-lisflood">About LISFLOOD</h2>
-<p><span style="font-family: Helvetica,Arial,sans-serif;">The LISFLOOD
+<span style="font-family: Helvetica,Arial,sans-serif;">The LISFLOOD
 model is implemented in the PCRaster Environmental Modelling language
 Version 3.0.0 (Wesseling et al., 1996), wrapped in a Python based
 interface. PCRaster is a raster GIS environment that has its own
@@ -415,31 +416,33 @@ relative simplicity and maintainability of code written in the the
 PCRaster Environmental Modelling language and the flexibility of
 Python. LISFLOOD runs on any operating for which Python and PCRaster
 are available. Currently these include 32-bits Windows (e.g. Windows
-XP, Vista, 7) and a number of Linux distributions</span>.</p>
+XP, Vista, 7) and a number of Linux distributions.</span>
 <h2 style="font-family: Helvetica,Arial,sans-serif;" id="about-this-user-manual">About this User Manual</h2>
-<p style="font-family: Helvetica,Arial,sans-serif;">This revised User
-Manual documents LISFLOOD version December 1 2013, and replaces all
-previous documentation of the model (e.g. van der Knijff &amp; de Roo,
-2008; de Roo <em>et. al.</em>, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.</p>
-<p style="font-family: Helvetica,Arial,sans-serif;">"Process
+<span style="font-family: Helvetica,Arial,sans-serif;">This revised
+User Manual documents LISFLOOD version December 1 2013, and replaces
+all previous documentation of the model (e.g. van der Knijff &amp; de
+Roo, 2008; de Roo </span><em style="font-family: Helvetica,Arial,sans-serif;">et. al.</em><span style="font-family: Helvetica,Arial,sans-serif;">, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.
+</span><br style="font-family: Helvetica,Arial,sans-serif;">
+<span style="font-family: Helvetica,Arial,sans-serif;">"Process
 description" chapter&nbsp; explains the theory behind the model,
 including all model equations and the changes to the previous version.
 The remaining chapters cover all practical aspects of working with
 LISFLOOD. Chapter 3 to 8 explains how to setup LISFLOOD, how to modify
-the settings and the outputs.</p>
-<p style="font-family: Helvetica,Arial,sans-serif;">A series of Annexes
-at the end of this document describe some optional features that can be
-activated when running the model. Most model users will not need these
-features (which are disabled by default), and for the sake of clarity
-we therefore decided to keep their description out of the main text.
-The current document does not cover the calculation of the potential
-evapo(transpi)ration rates that are needed as input to the model. A
-separate pre-processor (LISVAP) exists that calculates these variables
-from standard (gridded) meteorological observations. LISVAP is
-documented in a separate volume (van der Knijff, 2006).</p>
+the settings and the outputs.
+</span><br style="font-family: Helvetica,Arial,sans-serif;">
+<span style="font-family: Helvetica,Arial,sans-serif;">A series of
+Annexes at the end of this document describe some optional features
+that can be activated when running the model. Most model users will not
+need these features (which are disabled by default), and for the sake
+of clarity we therefore decided to keep their description out of the
+main text. The current document does not cover the calculation of the
+potential evapo(transpi)ration rates that are needed as input to the
+model. A separate pre-processor (LISVAP) exists that calculates these
+variables from standard (gridded) meteorological observations. LISVAP
+is documented in a separate volume (van der Knijff, 2006).</span>
 <h1 style="font-family: Helvetica,Arial,sans-serif;"><span id="_Toc353538795" class="anchor"></span><strong>2. Process descriptions</strong></h1>
 
-<h1>Overview</h1>
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Overview</h2>
 
 <p style="font-family: Helvetica,Arial,sans-serif;">Figure 2.1 gives an
 overview of the structure of the LISFLOOD model. Basically, the model
@@ -463,14 +466,27 @@ more detail in the following.</p>
 
 
 <p style="font-family: Helvetica,Arial,sans-serif;"></p><embed src="e:%5Cgh-pages%5C/media/image6.emf" style="width: 5.75in; height: 7.32292in; font-family: Helvetica,Arial,sans-serif;">
-<p style="font-family: Helvetica,Arial,sans-serif;"><em>Figure 2.1 Overview of the LISFLOOD model. P = precipitation; Int = interception; EW<sub>int</sub> = evaporation of intercepted water; D<sub>int</sub> = leaf drainage; ES<sub>a</sub> = evaporation from soil surface; T<sub>a</sub> = transpiration (water uptake by plant roots); INF<sub>act</sub> = infiltration; R<sub>s</sub> = surface runoff; D<sub>1,2</sub> = drainage from top- to subsoil; D<sub>2,gw</sub> = drainage from subsoil to upper groundwater zone; D<sub>pref,gw</sub> = preferential flow to upper groundwater zone; D<sub>uz,lz</sub> = drainage from upper- to lower groundwater zone; Q<sub>uz</sub> = outflow from upper groundwater zone; Q<sub>l</sub> = outflow from lower groundwater zone; D<sub>loss</sub>
-= loss from lower groundwater zone. Note that snowmelt is not included
-in the Figure (even though it is simulated by the model).</em></p>
-<h2 id="treatment-of-meteorological-input-variables">Treatment of meteorological input variables</h2>
-<p>The meteorological conditions provide the driving forces behind the
-water balance. LISFLOOD uses the following meteorological input
-variables:</p>
-<table>
+<span style="font-family: Helvetica,Arial,sans-serif;">Figure 2.1
+Overview of the LISFLOOD model. P = precipitation; Int = interception;
+EWint = evaporation of intercepted water; Dint = leaf drainage; ESa =
+evaporation from soil surface; Ta = transpiration (water uptake by
+plant roots); INFact = infiltration; Rs = surface runoff; D1,2 =
+drainage from top- to subsoil; D2,gw = drainage from subsoil to upper
+groundwater zone; Dpref,gw = preferential flow to upper groundwater
+zone; Duz,lz = drainage from upper- to lower groundwater zone; Quz =
+outflow from upper groundwater zone; Ql = outflow from lower
+groundwater zone; Dloss = loss from lower groundwater zone. Note that
+snowmelt is not included in the Figure (even though it is simulated by
+the model).
+</span><br>
+<br>
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Treatment of meteorological input variables</h2>
+
+<span style="font-family: Helvetica,Arial,sans-serif;">The
+meteorological conditions provide the driving forces behind the water
+balance. LISFLOOD uses the following meteorological input variables:<br>
+</span>
+<table style="font-family: Helvetica,Arial,sans-serif;">
 <thead>
 <tr class="header">
 <th><em>P</em></th>
@@ -506,18 +522,20 @@ variables:</p>
 </tr>
 </tbody>
 </table>
-<p>Both precipitation and evaporation are internally converted from <em>intensities</em> [mm day<sup>-1</sup>] to <em>quantities per time step</em> [mm] by multiplying them with the time step, <em>∆t</em> (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as <em>quantities per time step</em> [mm] in the following, unless stated otherwise. <em>ET0</em>, <em>EW0</em> and <em>ES0</em>
+<span style="font-family: Helvetica,Arial,sans-serif;">Both precipitation and evaporation are internally converted from </span><em style="font-family: Helvetica,Arial,sans-serif;">intensities</em><span style="font-family: Helvetica,Arial,sans-serif;"> [mm day</span><sup style="font-family: Helvetica,Arial,sans-serif;">-1</sup><span style="font-family: Helvetica,Arial,sans-serif;">] to </span><em style="font-family: Helvetica,Arial,sans-serif;">quantities per time step</em><span style="font-family: Helvetica,Arial,sans-serif;"> [mm] by multiplying them with the time step, </span><em style="font-family: Helvetica,Arial,sans-serif;">∆t</em><span style="font-family: Helvetica,Arial,sans-serif;"> (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as </span><em style="font-family: Helvetica,Arial,sans-serif;">quantities per time step</em><span style="font-family: Helvetica,Arial,sans-serif;"> [mm] in the following, unless stated otherwise. </span><em style="font-family: Helvetica,Arial,sans-serif;">ET0</em><span style="font-family: Helvetica,Arial,sans-serif;">, </span><em style="font-family: Helvetica,Arial,sans-serif;">EW0</em><span style="font-family: Helvetica,Arial,sans-serif;"> and </span><em style="font-family: Helvetica,Arial,sans-serif;">ES0</em><span style="font-family: Helvetica,Arial,sans-serif;">
 can be calculated using standard meteorological observations. To this
 end a dedicated pre-processing application has been developed (LISVAP),
-which is documented in a separate volume (van der Knijff, 2006).</p>
-<h2 id="rain-and-snow">Rain and snow</h2>
-<p>If the average temperatur is below 1°C, all precipitation is assumed
-to be snow. A snow correction factor is used to correct for undercatch
-of snow precipitation. Unlike rain, snow accumulates on the soil
-surface until it melts. The rate of snowmelt is estimated using a
-simple degree-day factor method. Degree-day factor type snow melt
-models usually take the following form (e.g. see WMO, 1986):</p>
-<p>(2-1)</p>
+which is documented in a separate volume (van der Knijff, 2006).</span>
+<h2 style="font-family: Helvetica,Arial,sans-serif;" id="rain-and-snow">Rain and snow</h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">If the average
+temperature is below 1°C, all precipitation is assumed to be snow. A
+snow correction factor is used to correct for undercatch of snow
+precipitation. Unlike rain, snow accumulates on the soil surface until
+it melts. The rate of snowmelt is estimated using a simple degree-day
+factor method. Degree-day factor type snow melt models usually take the
+following form (e.g. see WMO, 1986):</span>
+<p>(2-1) $\alpha<br>
+</p>
 <p>where <em>M</em> is the rate of snowmelt, <em>T<sub>avg</sub></em> is the average daily temperature, <em>T<sub>m</sub></em> is some critical temperature and <em>C<sub>m</sub></em> is a degree-day factor [mm °C<sup>-1</sup> day<sup>-1</sup>]. Speers <em>et al.</em>
 (1979) developed an extension of this equation which accounts for
 accelerated snowmelt that takes place when it is raining (cited in
@@ -529,6 +547,7 @@ energy source for snowmelt). LISFLOOD uses a variation on the equation
 of Speers <em>et al.</em> The modified equation simply assumes that
 for each mm of rainfall, the rate of snowmelt increases with 1%
 (compared to a ‘dry’ situation). This yields the following equation:</p>
+
 <p>(2-2)</p>
 <p>where <em>M</em> is the snowmelt per time step [mm], <em>R</em> is rainfall (not snow!) intensity [mm day<sup>-1</sup>], and <em>Δt</em> is the time interval [days]. <em>T<sub>m</sub></em> has a value of 0 °C, and <em>C<sub>m</sub></em> is a degree-day factor [mm °C<sup>-1</sup> day<sup>-1</sup>]. However, it should be stressed that the value of <em>C<sub>m</sub></em> can actually vary greatly both in space and time (e.g. see Martinec <em>et al</em>., 1998).</p>
 <p>Therefore, in practice this parameter is often treated as a calibration constant. A low value of C<sub>m</sub> indicates slow snow melt. C<sub>Seasonal</sub>
