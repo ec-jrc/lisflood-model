@@ -9,8 +9,7 @@ height="3.078472222222222in"}
 
 Disclaimer
 ==========
-$$
-M = \left( \begin{array}{ccc}
+$$M = \left( \begin{array}{ccc}
 x_{11} & x_{12} & \ldots \\
 x_{21} & x_{22} & \ldots \\
 \vdots & \vdots & \ldots \\
