@@ -3,4 +3,4 @@ markdown: kramdown
 
 kramdown:
   input: GFM
-theme: jekyll-theme-cayman
+theme: minima
