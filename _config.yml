@@ -10,7 +10,7 @@ description: > # this means to ignore newlines until "twitter_username:"
 twitter_username: jekyllrb
 github_username:  jekyll
 rss: rss
-markdown:kramdown
+
 # dribbble_username: jekyll
 # facebook_username: jekyll
 # flickr_username: jekyll
@@ -34,6 +34,14 @@ show_excerpts: false # set to true to show excerpts on the homepage
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 minima:
   date_format: "%b %-d, %Y"
+  
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    span: false
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
