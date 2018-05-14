@@ -360,9 +360,8 @@ between the two soil layers and drainage to the groundwater, sub-surface
 and groundwater flow, and flow through river channels. Each of these
 processes is described in more detail in the following.
 
-![](/media/image6.jpg)
-*Figure 2.1 Overview of the LISFLOOD model. P = precipitation; Int = interception; EW~int~ = evaporation of intercepted water; D~int~ = leaf drainage; ES~a~ = evaporation from soil surface; T~a~ = transpiration (water uptake by plant roots); INF~act~ = infiltration; R~s~ = surface runoff; D~1,2~ = drainage from top- to subsoil; D~2,gw~ = drainage from subsoil to upper groundwater zone; D~pref,gw~ = preferential flow to upper groundwater zone; D~uz,lz~ = drainage from upper- to lower groundwater zone; Q~uz~ = outflow from upper groundwater zone; Q~l~ = outflow from lower groundwater zone; D~loss~ = loss from lower groundwater zone. Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
 
+*Figure 2.1 Overview of the LISFLOOD model. P = precipitation; Int = interception; <sub> $$EW_{int} = evaporation\  of\  intercepted\ water$$; D~int~ = leaf drainage; ES~a~ = evaporation from soil surface; T~a~ = transpiration (water uptake by plant roots); INF~act~ = infiltration; R~s~ = surface runoff; D~1,2~ = drainage from top- to subsoil; D~2,gw~ = drainage from subsoil to upper groundwater zone; D~pref,gw~ = preferential flow to upper groundwater zone; D~uz,lz~ = drainage from upper- to lower groundwater zone; Q~uz~ = outflow from upper groundwater zone; Q~l~ = outflow from lower groundwater zone; D~loss~ = loss from lower groundwater zone. Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
 
 Treatment of meteorological input variables
 -------------------------------------------
