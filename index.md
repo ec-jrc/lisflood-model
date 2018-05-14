@@ -1,11 +1,7 @@
-![](media/media/image1.png){width="7.35in"
-height="0.22361111111111112in"}![](media/media/image2.png){width="8.266666666666667in"
-height="1.9131944444444444in"}![](media/media/image3.png){width="0.9201388888888888in"
-height="0.6131944444444445in"}
 
-![](media/media/image4.emf){width="2.5118110236220472in"
-height="2.9448818897637796in"}![](media/media/image5.emf){width="8.26736111111111in"
-height="3.078472222222222in"}
+![](media/image1.png)![](media/image2.png)![](media/image3.png)
+
+![](media/image4.emf)![](media/image5.emf)
 
 Disclaimer
 ==========
@@ -21,334 +17,294 @@ with the user.
 
 **CONTENTS**
 
-[1. Introduction 1](#introduction)
+[1. Introduction ](#introduction)
 
-[About LISFLOOD 1](#about-lisflood)
+[About LISFLOOD ](#about-lisflood)
 
-[About this User Manual 2](#about-this-user-manual)
+[About this User Manual ](#about-this-user-manual)
 
-[2. Process descriptions 3](#_Toc353538795)
+[2. Process descriptions ](#_Toc353538795)
 
-[Overview 3](#overview)
+[Overview ](#overview)
 
-[Treatment of meteorological input variables
-5](#treatment-of-meteorological-input-variables)
+[Treatment of meteorological input variables](#treatment-of-meteorological-input-variables)
 
-[Rain and snow 5](#rain-and-snow)
+[Rain and snow ](#rain-and-snow)
 
-[Frost index soil 8](#frost-index-soil)
+[Frost index soil ](#frost-index-soil)
 
-[Adressing sub-grid variability in land cover
-9](#adressing-sub-grid-variability-in-land-cover)
+[Adressing sub-grid variability in land cover](#adressing-sub-grid-variability-in-land-cover)
 
-[Soil model 10](#soil-model)
+[Soil model ](#soil-model)
 
-[Interception 12](#interception)
+[Interception ](#interception)
 
-[Evaporation of intercepted water 13](#evaporation-of-intercepted-water)
+[Evaporation of intercepted water ](#evaporation-of-intercepted-water)
 
-[Water available for infiltration and direct runoff
-14](#water-available-for-infiltration-and-direct-runoff)
+[Water available for infiltration and direct runoff](#water-available-for-infiltration-and-direct-runoff)
 
-[Water uptake by plant roots and transpiration
-14](#water-uptake-by-plant-roots-and-transpiration)
+[Water uptake by plant roots and transpiration](#water-uptake-by-plant-roots-and-transpiration)
 
-[Direct evaporation from the soil surface
-16](#direct-evaporation-from-the-soil-surface)
+[Direct evaporation from the soil surface](#direct-evaporation-from-the-soil-surface)
 
-[Infiltration capacity 17](#infiltration-capacity)
+[Infiltration capacity ](#infiltration-capacity)
 
-[Preferential bypass flow 18](#preferential-bypass-flow)
+[Preferential bypass flow ](#preferential-bypass-flow)
 
-[Actual infiltration and surface runoff
-19](#actual-infiltration-and-surface-runoff)
+[Actual infiltration and surface runoff](#actual-infiltration-and-surface-runoff)
 
-[Soil moisture redistribution 20](#soil-moisture-redistribution)
+[Soil moisture redistribution ](#soil-moisture-redistribution)
 
-[Groundwater 22](#groundwater)
+[Groundwater ](#groundwater)
 
-[Routing of surface runoff to channel
-23](#routing-of-surface-runoff-to-channel)
+[Routing of surface runoff to channel](#routing-of-surface-runoff-to-channel)
 
-[Routing of sub-surface runoff to channel
-25](#routing-of-sub-surface-runoff-to-channel)
+[Routing of sub-surface runoff to channel](#routing-of-sub-surface-runoff-to-channel)
 
-[Channel routing 25](#channel-routing)
+[Channel routing ](#channel-routing)
 
-[Special simulation options 26](#special-simulation-options)
+[Special simulation options ](#special-simulation-options)
 
-[3. Installation of the LISFLOOD model
-27](#installation-of-the-lisflood-model)
+[3. Installation of the LISFLOOD model](#installation-of-the-lisflood-model)
 
-[System requirements 27](#system-requirements)
+[System requirements ](#system-requirements)
 
-[Installation on Windows systems 27](#installation-on-windows-systems)
+[Installation on Windows systems ](#installation-on-windows-systems)
 
-[Installation on Linux systems 28](#installation-on-linux-systems)
+[Installation on Linux systems ](#installation-on-linux-systems)
 
-[Running the model 28](#running-the-model)
+[Running the model ](#running-the-model)
 
-[4. Model setup: input files 29](#_Toc84077416)
+[4. Model setup: input files ](#_Toc84077416)
 
-[Input maps 29](#input-maps)
+[Input maps ](#input-maps)
 
-[Role of "mask" and "channels" maps 29](#role-of-mask-and-channels-maps)
+[Role of "mask" and "channels" maps ](#role-of-mask-and-channels-maps)
 
-[Map location attributes and distance units
-29](#map-location-attributes-and-distance-units)
+[Map location attributes and distance units](#map-location-attributes-and-distance-units)
 
-[Naming of meteorological variable maps
-30](#naming-of-meteorological-variable-maps)
+[Naming of meteorological variable maps](#naming-of-meteorological-variable-maps)
 
-[Leaf area index maps 32](#leaf-area-index-maps)
+[Leaf area index maps ](#leaf-area-index-maps)
 
-[Input tables 32](#input-tables)
+[Input tables ](#input-tables)
 
-[Organisation of input data 33](#organisation-of-input-data)
+[Organisation of input data ](#organisation-of-input-data)
 
-[Generating input base maps 34](#generating-input-base-maps)
+[Generating input base maps ](#generating-input-base-maps)
 
-[5. LISFLOOD setup: the settings file
-35](#lisflood-setup-the-settings-file)
+[5. LISFLOOD setup: the settings file](#lisflood-setup-the-settings-file)
 
-[Layout of the settings file 35](#layout-of-the-settings-file)
+[Layout of the settings file ](#layout-of-the-settings-file)
 
-[lfuser and and lfbinding elements
-36](#lfuser-and-and-lfbinding-elements)
+[lfuser and and lfbinding elements](#lfuser-and-and-lfbinding-elements)
 
-[Variables in the lfbinding element
-40](#variables-in-the-lfbinding-element)
+[Variables in the lfbinding element](#variables-in-the-lfbinding-element)
 
-[Variables in the lfuser element 41](#variables-in-the-lfuser-element)
+[Variables in the lfuser element ](#variables-in-the-lfuser-element)
 
-[lfoption element 42](#lfoption-element)
+[lfoption element ](#lfoption-element)
 
-[Viewing available options 42](#viewing-available-options)
+[Viewing available options ](#viewing-available-options)
 
-[Defining options 43](#defining-options)
+[Defining options ](#defining-options)
 
-[6. Preparing the settings file 45](#preparing-the-settings-file)
+[6. Preparing the settings file ](#preparing-the-settings-file)
 
-[Time-related constants 45](#time-related-constants)
+[Time-related constants ](#time-related-constants)
 
-[Parameters related to evapo(transpi)ration and interception
-47](#parameters-related-to-evapotranspiration-and-interception)
+[Parameters related to evapo(transpi)ration and interception](#parameters-related-to-evapotranspiration-and-interception)
 
-[Parameters related to snow and frost
-48](#parameters-related-to-snow-and-frost)
+[Parameters related to snow and frost](#parameters-related-to-snow-and-frost)
 
-[Infiltration parameters 50](#infiltration-parameters)
+[Infiltration parameters ](#infiltration-parameters)
 
-[Groundwater parameters 51](#groundwater-parameters)
+[Groundwater parameters ](#groundwater-parameters)
 
-[Routing parameters 52](#routing-parameters)
+[Routing parameters ](#routing-parameters)
 
-[Parameters related to numerics 53](#parameters-related-to-numerics)
+[Parameters related to numerics ](#parameters-related-to-numerics)
 
-[File paths 53](#file-paths)
+[File paths ](#file-paths)
 
-[Prefixes of meteo and vegetation related variables
-55](#prefixes-of-meteo-and-vegetation-related-variables)
+[Prefixes of meteo and vegetation related variables](#prefixes-of-meteo-and-vegetation-related-variables)
 
-[Initial conditions 56](#initial-conditions)
+[Initial conditions ](#initial-conditions)
 
-[Running the model 60](#running-the-model-1)
+[Running the model ](#running-the-model-1)
 
-[Using options 61](#using-options)
+[Using options ](#using-options)
 
-[7. Initialisation of LISFLOOD 62](#initialisation-of-lisflood)
+[7. Initialisation of LISFLOOD ](#initialisation-of-lisflood)
 
-[Introduction 62](#introduction-1)
+[Introduction ](#introduction-1)
 
-[An example 62](#an-example)
+[An example ](#an-example)
 
-[Setting up a LISFLOOD run (cold start)
-63](#setting-up-a-lisflood-run-cold-start)
+[Setting up a LISFLOOD run (cold start)](#setting-up-a-lisflood-run-cold-start)
 
-[Initialisation of the lower groundwater zone
-64](#initialisation-of-the-lower-groundwater-zone)
+[Initialisation of the lower groundwater zone](#initialisation-of-the-lower-groundwater-zone)
 
-[Lower groundwater zone: steady state storage
-65](#lower-groundwater-zone-steady-state-storage)
+[Lower groundwater zone: steady state storage](#lower-groundwater-zone-steady-state-storage)
 
-[Steady-state storage in practice 68](#steady-state-storage-in-practice)
+[Steady-state storage in practice ](#steady-state-storage-in-practice)
 
-[Use pre-run to calculate average recharge
-68](#use-pre-run-to-calculate-average-recharge)
+[Use pre-run to calculate average recharge](#use-pre-run-to-calculate-average-recharge)
 
-[Checking the lower zone initialisation
-69](#checking-the-lower-zone-initialisation)
+[Checking the lower zone initialisation](#checking-the-lower-zone-initialisation)
 
-[Using a previous run (warm start) 70](#using-a-previous-run-warm-start)
+[Using a previous run (warm start) ](#using-a-previous-run-warm-start)
 
-[Summary of LISFLOOD initialisation procedure
-70](#summary-of-lisflood-initialisation-procedure)
+[Summary of LISFLOOD initialisation procedure](#summary-of-lisflood-initialisation-procedure)
 
-[8. Output generated by LISFLOOD 73](#output-generated-by-lisflood)
+[8. Output generated by LISFLOOD ](#output-generated-by-lisflood)
 
-[Default LISFLOOD output 73](#default-lisflood-output)
+[Default LISFLOOD output ](#default-lisflood-output)
 
-[Additional output 74](#additional-output)
+[Additional output ](#additional-output)
 
-[References 77](#references)
+[References ](#references)
 
-[Annex 1: Simulation of reservoirs
-79](#annex-1-simulation-of-reservoirs)
+[Annex 1: Simulation of reservoirs](#annex-1-simulation-of-reservoirs)
 
-[Introduction 79](#introduction-2)
+[Introduction ](#introduction-2)
 
-[Description of the reservoir routine
-79](#description-of-the-reservoir-routine)
+[Description of the reservoir routine](#description-of-the-reservoir-routine)
 
-[Preparation of input data 80](#preparation-of-input-data)
+[Preparation of input data ](#preparation-of-input-data)
 
-[Preparation of settings file 81](#preparation-of-settings-file)
+[Preparation of settings file ](#preparation-of-settings-file)
 
-[Reservoir output files 82](#reservoir-output-files)
+[Reservoir output files ](#reservoir-output-files)
 
-[Annex 2: Polder option 85](#annex-2-polder-option)
+[Annex 2: Polder option ](#annex-2-polder-option)
 
-[Introduction 85](#introduction-3)
+[Introduction ](#introduction-3)
 
-[Description of the polder routine
-85](#description-of-the-polder-routine)
+[Description of the polder routine](#description-of-the-polder-routine)
 
-[Regulated and unregulated polders
-86](#regulated-and-unregulated-polders)
+[Regulated and unregulated polders](#regulated-and-unregulated-polders)
 
-[Preparation of input data 87](#preparation-of-input-data-1)
+[Preparation of input data ](#preparation-of-input-data-1)
 
-[Preparation of settings file 88](#preparation-of-settings-file-1)
+[Preparation of settings file ](#preparation-of-settings-file-1)
 
-[Polder output files 89](#polder-output-files)
+[Polder output files ](#polder-output-files)
 
-[Limitations 90](#limitations)
+[Limitations ](#limitations)
 
-[Annex 3: Simulation of lakes 91](#annex-3-simulation-of-lakes)
+[Annex 3: Simulation of lakes ](#annex-3-simulation-of-lakes)
 
-[Introduction 91](#introduction-4)
+[Introduction ](#introduction-4)
 
-[Description of the lake routine 91](#description-of-the-lake-routine)
+[Description of the lake routine ](#description-of-the-lake-routine)
 
-[Initialisation of the lake routine
-92](#initialisation-of-the-lake-routine)
+[Initialisation of the lake routine](#initialisation-of-the-lake-routine)
 
-[Preparation of input data 93](#preparation-of-input-data-2)
+[Preparation of input data ](#preparation-of-input-data-2)
 
-[Preparation of settings file 94](#preparation-of-settings-file-2)
+[Preparation of settings file ](#preparation-of-settings-file-2)
 
-[Lake output files 96](#lake-output-files)
+[Lake output files ](#lake-output-files)
 
-[Annex 4: Inflow hydrograph 97](#_Toc353538887)
+[Annex 4: Inflow hydrograph ](#_Toc353538887)
 
-[Introduction 97](#introduction-5)
+[Introduction ](#introduction-5)
 
-[Description of the inflow hydrograph routine
-97](#description-of-the-inflow-hydrograph-routine)
+[Description of the inflow hydrograph routine](#description-of-the-inflow-hydrograph-routine)
 
-[Using inflow hydrographs 97](#using-inflow-hydrographs)
+[Using inflow hydrographs ](#using-inflow-hydrographs)
 
-[Substituting subcatchments with measured inflow hydrographs
-99](#substituting-subcatchments-with-measured-inflow-hydrographs)
+[Substituting subcatchments with measured inflow hydrographs](#substituting-subcatchments-with-measured-inflow-hydrographs)
 
-[Exclude subcatchments from MaskMap
-99](#exclude-subcatchments-from-maskmap)
+[Exclude subcatchments from MaskMap](#exclude-subcatchments-from-maskmap)
 
-[Make sure your inflow points are where you need them
-100](#make-sure-your-inflow-points-are-where-you-need-them)
+[Make sure your inflow points are where you need them](#make-sure-your-inflow-points-are-where-you-need-them)
 
-[Annex 5: Double kinematic 101](#_Toc353538894)
+[Annex 5: Double kinematic ](#_Toc353538894)
 
-[Introduction 101](#introduction-6)
+[Introduction ](#introduction-6)
 
-[Background 101](#background)
+[Background ](#background)
 
-[Double kinematic wave approach 102](#double-kinematic-wave-approach)
+[Double kinematic wave approach ](#double-kinematic-wave-approach)
 
-[Using double kinematic wave 103](#using-double-kinematic-wave)
+[Using double kinematic wave ](#using-double-kinematic-wave)
 
-[Automatic change of the number of sub steps (optional)
-104](#automatic-change-of-the-number-of-sub-steps-optional)
+[Automatic change of the number of sub steps (optional)](#automatic-change-of-the-number-of-sub-steps-optional)
 
-[Annex 6: Dynamic wave 107](#_Toc353538900)
+[Annex 6: Dynamic wave ](#_Toc353538900)
 
-[Introduction 107](#introduction-7)
+[Introduction ](#introduction-7)
 
-[Time step selection 107](#time-step-selection)
+[Time step selection ](#time-step-selection)
 
-[Input data 108](#input-data)
+[Input data ](#input-data)
 
-[Layout of the cross-section parameter table
-108](#layout-of-the-cross-section-parameter-table)
+[Layout of the cross-section parameter table](#layout-of-the-cross-section-parameter-table)
 
-[Using the dynamic wave 109](#using-the-dynamic-wave)
+[Using the dynamic wave ](#using-the-dynamic-wave)
 
-[Annex 7: Using the transmission loss option
-111](#annex-7-using-the-transmission-loss-option)
+[Annex 7: Using the transmission loss option](#annex-7-using-the-transmission-loss-option)
 
-[Introduction 111](#introduction-8)
+[Introduction ](#introduction-8)
 
-[Description of the transmission loss approach
-111](#description-of-the-transmission-loss-approach)
+[Description of the transmission loss approach](#description-of-the-transmission-loss-approach)
 
-[Using transmission loss 112](#using-transmission-loss)
+[Using transmission loss ](#using-transmission-loss)
 
-[Transmission loss output file 113](#transmission-loss-output-file)
+[Transmission loss output file ](#transmission-loss-output-file)
 
-[Annex 8: Including water use 115](#annex-8-including-water-use)
+[Annex 8: Including water use ](#annex-8-including-water-use)
 
-[Introduction 115](#introduction-9)
+[Introduction ](#introduction-9)
 
-[Calculation of water use 115](#calculation-of-water-use)
+[Calculation of water use ](#calculation-of-water-use)
 
-[Preparation of input data 116](#preparation-of-input-data-3)
+[Preparation of input data ](#preparation-of-input-data-3)
 
-[Preparation of settings file 117](#preparation-of-settings-file-3)
+[Preparation of settings file ](#preparation-of-settings-file-3)
 
-[Water use output files 118](#water-use-output-files)
+[Water use output files ](#water-use-output-files)
 
-[Annex 9: Simulation and reporting of water levels
-119](#annex-9-simulation-and-reporting-of-water-levels)
+[Annex 9: Simulation and reporting of water levels](#annex-9-simulation-and-reporting-of-water-levels)
 
-[Introduction 119](#introduction-10)
+[Introduction ](#introduction-10)
 
-[Calculation of water levels 119](#calculation-of-water-levels)
+[Calculation of water levels ](#calculation-of-water-levels)
 
-[Reporting of water levels 120](#reporting-of-water-levels)
+[Reporting of water levels ](#reporting-of-water-levels)
 
-[Preparation of settings file 120](#preparation-of-settings-file-4)
+[Preparation of settings file ](#preparation-of-settings-file-4)
 
-[Annex 10: Simulation and reporting of soil moisture as pF values
-121](#annex-10-simulation-and-reporting-of-soil-moisture-as-pf-values)
+[Annex 10: Simulation and reporting of soil moisture as pF values](#annex-10-simulation-and-reporting-of-soil-moisture-as-pf-values)
 
-[Introduction 121](#introduction-11)
+[Introduction ](#introduction-11)
 
-[Calculation of pF 121](#calculation-of-pf)
+[Calculation of pF ](#calculation-of-pf)
 
-[Reporting of pF 122](#reporting-of-pf)
+[Reporting of pF ](#reporting-of-pf)
 
-[Preparation of settings file 122](#preparation-of-settings-file-5)
+[Preparation of settings file ](#preparation-of-settings-file-5)
 
-[Annex 11: LISFLOOD options 125](#annex-11-lisflood-options)
+[Annex 11: LISFLOOD options ](#annex-11-lisflood-options)
 
-[Annex 12: LISFLOOD input maps and tables
-129](#annex-12-lisflood-input-maps-and-tables)
+[Annex 12: LISFLOOD input maps and tables](#annex-12-lisflood-input-maps-and-tables)
 
-[Maps 129](#maps)
+[Maps ](#maps)
 
-[Tables 133](#tables)
+[Tables ](#tables)
 
-[Annex 13: LISFLOOD output 135](#annex-13-lisflood-output)
+[Annex 13: LISFLOOD output ](#annex-13-lisflood-output)
 
-[Time series 135](#time-series)
+[Time series ](#time-series)
 
-[Maps 138](#maps-1)
+[Maps ](#maps-1)
 
-[Index 141](#index)
+[Index ](#index)
 
 1. Introduction
-===============
-
+---------------------
 The LISFLOOD model is a hydrological rainfall-runoff model that is
 capable of simulating the hydrological processes that occur in a
 catchment. LISFLOOD has been developed by the floods group of the
@@ -365,34 +321,7 @@ variety of applications, including:
 
 -   Assessing the effects of climate change
 
-Although a wide variety of existing hydrological models are available
-that are suitable for *each* of these individual tasks, few *single*
-models are capable of doing *all* these jobs. Besides this, our
-objective requires a model that is spatially distributed and --at least
-to a certain extent- physically-based. Also, the focus of our work is on
-European catchments. Since several databases exist that contain
-pan-European information on soils (King *et al.*, 1997; Wösten *et al.*,
-1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and
-meteorology (Rijks *et al.*, 1998), it would be advantageous to have a
-model that makes the best possible use of these data. Finally, the wide
-scope of our objective implies that changes and extensions to the model
-will be required from time to time. Therefore, it is essential to have a
-model code that can be easily maintained and modified. LISFLOOD has been
-specifically developed to satisfy these requirements. The model is
-designed to be applied across a wide range of spatial and temporal
-scales. LISFLOOD is grid-based, and applications so far have employed
-grid cells of as little as 100 metres for medium-sized catchments, to
-5000 metres for modelling the whole of Europe and up to 0.1° (around 10
-km) for modelling globally. Long-term water balance can be simulated
-(using a daily time step), as well as individual flood events (using
-hourly time intervals, or even smaller). The output of a "water balance
-run" can be used to provide the initial conditions of a "flood run".
-Although the model's primary output product is channel discharge, all
-internal rate and state variables (soil moisture, for example) can be
-written as output as well. In addition, all output can be written as
-grids, or time series at user-defined points or areas. The user has
-complete control over how output is written, thus minimising any waste
-of disk space or CPU time.
+Although a wide variety of existing hydrological models are available that are suitable for *each* of these individual tasks, few *single* models are capable of doing *all* these jobs. Besides this, our objective requires a model that is spatially distributed and, at least to a certain extent, physically-based. Also, the focus of our work is on European catchments. Since several databases exist that contain pan-European information on soils (King *et al.*, 1997; Wösten *et al.*, 1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and meteorology (Rijks *et al.*, 1998), it would be advantageous to have a model that makes the best possible use of these data. Finally, the wide scope of our objective implies that changes and extensions to the model will be required from time to time. Therefore, it is essential to have a model code that can be easily maintained and modified. LISFLOOD has been specifically developed to satisfy these requirements. The model is designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, and applications so far have employed grid cells of as little as 100 metres for medium-sized catchments, to 5000 metres for modelling the whole of Europe and up to 0.1° (around 10 km) for modelling globally. Long-term water balance can be simulated (using a daily time step), as well as individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". Although the model's primary output product is channel discharge, all internal rate and state variables (soil moisture, for example) can be written as output as well. In addition, all output can be written as grids, or time series at user-defined points or areas. The user has complete control over how output is written, thus minimising any waste of disk space or CPU time.
 
 About LISFLOOD
 --------------
