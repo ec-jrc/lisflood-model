@@ -1,6 +1,6 @@
 
-![HeaderJRC]({{ "/media/image1.png" | absolute_url }})
-![](media/image1.png)![](media/image2.png)![](media/image3.png)
+
+![](media/image2.png)![](media/image3.png)
 
 ![](media/image4.emf)![](media/image5.emf)
 
