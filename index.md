@@ -4,14 +4,7 @@
 Disclaimer
 ==========
 
-Both the program code and this manual have been carefully inspected
-before printing. However, no warranties, either expressed or implied,
-are made concerning the accuracy, completeness, reliability, usability,
-performance, or fitness for any particular purpose of the information
-contained in this manual, to the software described in this manual, and
-to other material supplied in connection therewith. The material is
-provided \"as is\". The entire risk as to its quality and performance is
-with the user.
+Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
 **CONTENTS**
 
@@ -360,11 +353,11 @@ processes is described in more detail in the following.
 
 ![image6](media\image6.jpg)
 
-*Figure 2.1 Overview of the LISFLOOD model.* 
+###### *Figure 2.1 Overview of the LISFLOOD model.* 
 
 ###### $P = precipitation;$ $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water; $ $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots); $ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone; $ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone;$ $ Q_l = outflow \ from \ lower \ groundwater \ zone;  $ $D_{loss} = loss \ from \ lower \ groundwater zone.$
 
-*Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
+###### *Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
 
 
 
