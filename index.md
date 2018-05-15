@@ -377,51 +377,24 @@ variables:
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
-Both precipitation and evaporation are internally converted from
-*intensities* \[mm day^-1^\] to *quantities per time step* \[mm\] by
-multiplying them with the time step, *∆t* (in days). For the sake of
-consistency, all in- and outgoing fluxes will also be described as
-*quantities per time step* \[mm\] in the following, unless stated
-otherwise. *ET0*, *EW0* and *ES0* can be calculated using standard
-meteorological observations. To this end a dedicated pre-processing
-application has been developed (LISVAP), which is documented in a
-separate volume (van der Knijff, 2006).
+######Note that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates######
+
+Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* \[$mm$\] by multiplying them with the time step, *∆t* (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* \[mm\] in the following, unless stated otherwise. *ET0*, *EW0* and *ES0* can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
 
 Rain and snow
 -------------
 
-If the average temperatur is below 1°C, all precipitation is assumed to
-be snow. A snow correction factor is used to correct for undercatch of
-snow precipitation. Unlike rain, snow accumulates on the soil surface
-until it melts. The rate of snowmelt is estimated using a simple
-degree-day factor method. Degree-day factor type snow melt models
-usually take the following form (e.g. see WMO, 1986):
-$$M = {C_m}({T_{avg}} - {T_m})$$	
+If the average temperature is below 1°C, all precipitation is assumed to be snow. A snow correction factor is used to correct for undercatch of snow precipitation. Unlike rain, snow accumulates on the soil surface 
+until it melts. The rate of snowmelt is estimated using a simple degree-day factor method. Degree-day factor type snow melt models usually take the following form (e.g. see WMO, 1986):
+
+$M = {C_m}({T_{avg}} - {T_m})$ (2-1)
 
 
-where *M* is the rate of snowmelt, *T~avg~* is the average daily
-temperature, *T~m~* is some critical temperature and *C~m~* is a
-degree-day factor \[mm °C^-1^ day^-1^\]. Speers *et al.* (1979)
-developed an extension of this equation which accounts for accelerated
-snowmelt that takes place when it is raining (cited in Young, 1985). The
-equation is supposed to apply when rainfall is greater than 30 mm in 24
-hours. Moreover, although the equation is reported to work sufficiently
-well in forested areas, it is not valid in areas that are above the tree
-line, where radiation is the main energy source for snowmelt). LISFLOOD
-uses a variation on the equation of Speers *et al.* The modified
-equation simply assumes that for each mm of rainfall, the rate of
-snowmelt increases with 1% (compared to a 'dry' situation). This yields
-the following equation:
+where *M* is the rate of snowmelt, $T_{avg}$ is the average daily temperature, $T_m$ is some critical temperature and $C_m$ is a degree-day factor \[$\frac{mm} {°C \ day}$\]. Speers *et al.* (1979) developed an extension of this equation which accounts for accelerated snowmelt that takes place when it is raining (cited in Young, 1985). The equation is supposed to apply when rainfall is greater than 30 mm in 24 hours. Moreover, although the equation is reported to work sufficiently well in forested areas, it is not valid in areas that are above the tree line, where  radiation is the main energy source for snowmelt). LISFLOOD uses a variation on the equation of Speers *et  al.* The modified equation simply assumes that for each mm of rainfall, the rate of snowmelt increases with 1% (compared to a 'dry' situation). This yields the following equation:
 
-\$$M = {C\_m} \\cdot {C\_{Seasonal}}(1 + 0.01 \\cdot R\\Delta
-t)({T\_{avg}} - {T\_m}) \\cdot \\Delta t\$$ (2-2)
+$M = {C_m} \cdot C_{Seasonal}(1 + 0.01 \cdot R\Delta t)(T_{avg} - T_m) \cdot \Delta t$ (2-2)
 
-where *M* is the snowmelt per time step \[mm\], *R* is rainfall (not
-snow!) intensity \[mm day^-1^\], and *Δt* is the time interval \[days\].
-*T~m~* has a value of 0 °C, and *C~m~* is a degree-day factor \[mm
-°C^-1^ day^-1^\]. However, it should be stressed that the value of
-*C~m~* can actually vary greatly both in space and time (e.g. see
-Martinec *et al*., 1998).
+where *M* is the snowmelt per time step \[$mm$\], *R* is rainfall (not snow!) intensity \[$\frac {mm}{day}$], and $\Delta t$ is the time interval \[$days$\]. $T_m$ has a value of 0 $^\circ C$, and $C_m$ is a degree-day factor \[$\frac{mm} {^\circ C \cdot day}$\]. However, it should be stressed that the value of $C_m$ can actually vary greatly both in space and time (e.g. see Martinec *et al*., 1998).
 
 Therefore, in practice this parameter is often treated as a calibration
 constant. A low value of C~m~ indicates slow snow melt. C~Seasonal~ is a
