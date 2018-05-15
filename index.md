@@ -1,6 +1,4 @@
 
-
-
 ![](media/image2.png)
 
 Disclaimer
@@ -360,8 +358,15 @@ between the two soil layers and drainage to the groundwater, sub-surface
 and groundwater flow, and flow through river channels. Each of these
 processes is described in more detail in the following.
 
-<sub>Figure 2.1 Overview of the LISFLOOD model. 
-$P = precipitation;$  $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water;$  $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots);$ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone;$ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone; $ $Q_l = outflow \ from \ lower \ groundwater \ zone; $ $D_{loss} = loss \ from \ lower \ groundwater zone.$ Note that snowmelt is not included in the Figure (even though it is simulated by the model).</sub>
+![image6](media\image6.jpg)
+
+*Figure 2.1 Overview of the LISFLOOD model.* 
+
+###### $P = precipitation;$ $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water; $ $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots); $ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone; $ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone;$ $ Q_l = outflow \ from \ lower \ groundwater \ zone;  $ $D_{loss} = loss \ from \ lower \ groundwater zone.$
+
+*Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
+
+
 
 
 Treatment of meteorological input variables
@@ -371,12 +376,13 @@ The meteorological conditions provide the driving forces behind the
 water balance. LISFLOOD uses the following meteorological input
 variables:
 
-  *P*        :   Precipitation                                        [mm day^-1^]
-  ---------- --- ---------------------------------------------------- ----------------
-  *ET0*      :   Potential (reference) evapotranspiration rate        \[mm day^-1^\]
-  *EW0*      :   Potential evaporation rate from open water surface   \[mm day^-1^\]
-  *ES0*      :   Potential evaporation rate from bare soil surface    \[mm day^-1^\]
-  *T~avg~*   :   Average *daily* temperature[^1]                      \[°C\]
+| Code      | Description                                        | Unit               |
+| --------- | -------------------------------------------------- | ------------------ |
+| $P$       | Precipitation                                      | $[\frac{mm}{day}]$ |
+| $ET0$     | Potential (reference) evapotranspiration rate      | $[\frac{mm}{day}]$ |
+| $EW0$     | Potential evaporation rate from open water surface | $[\frac{mm}{day}]$ |
+| $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
+| $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
 Both precipitation and evaporation are internally converted from
 *intensities* \[mm day^-1^\] to *quantities per time step* \[mm\] by
@@ -621,9 +627,9 @@ individually modelled categories of land cover classes
 **Table 2.1** S*ummary of hydrological properties of the four categories
 modelled individually in the modified version of LISFLOOD.*
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **Category**                                                                             **Evapotranspiration**                                           **Soil**                                                    **Runoff**
-  ---------------------------------------------------------------------------------------- ---------------------------------------------------------------- ----------------------------------------------------------- ---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------- ---------------------------------------------------------------- ----------------------------------------------------------- ---------------------------------------------------------------------------------
   Forest                                                                                   High level of evapo-transpiration (high Leaf area index);\       Large rooting depth                                         Low concentration time
                                                                                            seasonally dependant                                                                                                         
 
@@ -745,7 +751,7 @@ water that is available for infiltration, *W~av~* \[mm\] equals (Supit
 where:
 
   *R*        : Rainfall \[mm day^-1^\]
-  ---------- ---------------------------
+---------- ---------------------------
   *M*        : Snow melt \[mm\]
   *D~int~*   : Leaf drainage \[mm\]
   *Int*      : Interception \[mm\]
@@ -814,7 +820,7 @@ Figure 2.8 further illustrates the relation between *RWS*, *w*,
 height="3.40625in"}
 
   Name:             W~wp~                                                                            W~crit~                         W~fc~               
-  ----------------- ------------------ ------------------------------------------------------------- ---------------------------- -- ------------------- -----------
+----------------- ------------------ ------------------------------------------------------------- ---------------------------- -- ------------------- -----------
   Soil moisture:    at wilting point                                                                 critical amount for plants      at field capacity   saturated
   pF-value:         4.2                                                                                                              1.8                 0
   Characteristic:   Residual water     Effective field capacity                                      Air capacity                                        
@@ -1573,7 +1579,7 @@ Table 4.1 shows that the default prefix for precipitation is "pr", which
 produces the following file names:
 
   pr000000.007   : at time step 7
-  -------------- ----------------------
+-------------- ----------------------
   pr000035.260   : at time step 35260
 
 LISFLOOD can handle two types of stacks. First, there are *regular*
@@ -1581,7 +1587,7 @@ stacks, in which a map is defined for each time step. For instance, the
 following 10-step stack is a regular stack:
 
   **t **   **map name**
-  -------- --------------
+-------- --------------
   1        pr000000.001
   2        pr000000.002
   3        pr000000.003
@@ -1598,7 +1604,7 @@ stacks. A *sparse* stack is a stack in which maps are not defined for
 all time steps, for instance:
 
   **t **   **map name**
-  -------- --------------
+-------- --------------
   1        pr000000.001
   2        \-
   3        \-
@@ -1624,7 +1630,7 @@ define 1 for the first hour of each day and leave out the rest, for
 instance:
 
   **t **   **map name**
-  -------- --------------
+-------- --------------
   1        ta000000.001
   2        \-
   :        :
@@ -1784,8 +1790,8 @@ and this makes it very easy add structure. For a LISFLOOD settings file,
 the basic structure looks like this:
 
   **\<lfsettings\>**   Start of settings element
-  -------------------- ----------------------------------------------
-                       
+-------------------- ----------------------------------------------
+
   **\<lfuser\>**       Start of element with user-defined variables
                        
   **\</lfuser\>**      End of element with user-defined variables
@@ -1822,7 +1828,7 @@ From this you can see the following things:
 In brief, the main function of each element is:
 
   *lfuser*      : definition of paths to all in- and output files, and main model parameters (calibration + time-related)
-  ------------- -----------------------------------------------------------------------------------------------------------
+------------- -----------------------------------------------------------------------------------------------------------
   *lfbinding*   : definition of all individual in- and output files, and model parameters
   *lfoptions*   : switches to turn specific components of the model on or off
 
@@ -2135,7 +2141,7 @@ of the following categories:
 > instance:
 
   pr000000.007   : at time step 7
-  -------------- ----------------------
+-------------- ----------------------
   pr000035.260   : at time step 35260
 
 > To avoid unexpected behaviour, do **not** use numbers in the prefix!
@@ -2155,9 +2161,9 @@ of the following categories:
 >
 > For the first time step this yields the following file name:
 
-  -------------- --
+-------------- --
   pr100000.001   
-  -------------- --
+-------------- --
 
 > But this is actually interpreted as time step 100,000,001!
 
@@ -3299,7 +3305,7 @@ variable (and LAI and water use).
 > suffix. For instance, using a prefix 'pr' we get:
 
   pr000000.007   : at time step 7
-  -------------- ----------------------
+-------------- ----------------------
   pr000035.260   : at time step 35260
 
 > To avoid unexpected behaviour, **never** use numbers in the prefix!
@@ -3309,9 +3315,9 @@ variable (and LAI and water use).
 >
 > For the first time step this yields the following file name:
 
-  -------------- --
+-------------- --
   pr100000.001   
-  -------------- --
+-------------- --
 
 > But this is actually interpreted as time step 100,000,001!
 > **Therefore, do not use numbers in the prefix!**
@@ -3977,7 +3983,7 @@ Solving this for *LZ* gives the steady state storage:
 We can check this for our numerical examples:
 
   *T~lz~*   *I*   *LZ~ss~*
-  --------- ----- ----------
+--------- ----- ----------
   250       0.2   50
   1000      1.5   1500
 
@@ -4596,7 +4602,7 @@ Depending on the relative filling of the reservoir, outflow (*O~res~*,
 with:
 
   S         : Reservoir storage capacity \[m^3^\]
-  --------- ----------------------------------------------------------------
+--------- ----------------------------------------------------------------
   F         : Reservoir fill (fraction, 1 at total storage capacity) \[-\]
   L~c~      : Conservative storage limit \[-\]
   L~n~      : Normal storage limit \[-\]
@@ -4779,7 +4785,7 @@ Reservoir output files
 The reservoir routine produces 3 additional time series and one map, as
 listed in the following table:
 
-  ---------------------------------------------- ------------------ --------------------------------------- ----------- -------------
+---------------------------------------------- ------------------ --------------------------------------- ----------- -------------
   ***Table A1.2** Output of reservoir routine*                                                                          
   **Maps**                                       **Default name**   **Description**                         **Units**   **Remarks**
   ReservoirFillState                             rsfilxxx.xxx       reservoir fill at last time step[^10]   \-          
@@ -4788,7 +4794,7 @@ listed in the following table:
   ReservoirInflowTS                              qresin.tss         inflow into reservoirs                  m^3^/s      
   ReservoirOutflowTS                             qresout.tss        outflow out of reservoirs               m^3^/s      
   ReservoirFillTS                                resfill.tss        reservoir fill                          \-          
-  ---------------------------------------------- ------------------ --------------------------------------- ----------- -------------
+---------------------------------------------- ------------------ --------------------------------------- ----------- -------------
 
 Note that you can use the map with the reservoir fill at the last time
 step to define the initial conditions of a succeeding simulation, e.g.:
@@ -5037,7 +5043,7 @@ The polder routine produces 2 additional time series and one map (or
 stack of maps, depending on the value of LISFLOOD variable
 *ReportSteps*), as listed in the following table:
 
-  ------------------------------------------- ------------------ ------------------------------------------------------------------------------------------------------------------ ----------- -------------
+------------------------------------------- ------------------ ------------------------------------------------------------------------------------------------------------------ ----------- -------------
   ***Table A2.2** Output of polder routine*                                                                                                                                                     
   **Maps**                                    **Default name**   **Description**                                                                                                    **Units**   **Remarks**
   PolderLevelState                            hpolxxxx.xxx       water level in polder at last time step[^11]                                                                       m           
@@ -5045,7 +5051,7 @@ stack of maps, depending on the value of LISFLOOD variable
   **Time series**                             **Default name**   **Description**                                                                                                    **Units**   **Remarks**
   PolderLevelTS                               hPolder.tss        water level in polder (at polder locations)                                                                        m           
   PolderFluxTS                                qPolder.tss        Flux into and out of polder (positive for flow from channel to polder, negative for flow from polder to channel)   m^3^/s      
-  ------------------------------------------- ------------------ ------------------------------------------------------------------------------------------------------------------ ----------- -------------
+------------------------------------------- ------------------ ------------------------------------------------------------------------------------------------------------------ ----------- -------------
 
 Note that you can use the map with the polder level at the last time
 step to define the initial conditions of a succeeding simulation, e.g.:
@@ -5088,7 +5094,7 @@ using the following rating curve (e.g. Maidment, 1992):
 \$${O\_{lake}} = A{(H - {H\_0})\^B}\$$
 
   O~lake~   : Lake outflow rate \[m^3^ s^-1^\]
-  --------- ---------------------------------------------------
+--------- ---------------------------------------------------
   H         : Water level in lake \[m\]
   H~0~      : Water level at which lake outflow is zero \[m\]
   A, B      : Constants \[-\]
@@ -5215,7 +5221,7 @@ a sub-catchment of a larger map (by selecting the subcatchment in the
 mask map). This situation can usually be avoided by extending the mask
 map by one cell in downstream direction.
 
-  -------------------------------------------------- ------------------ ------------------------------------------- ----------- ---------------------------------------
+-------------------------------------------------- ------------------ ------------------------------------------- ----------- ---------------------------------------
   ***Table A3.2** Input requirements lake routine*                                                                              
   **Maps**                                           **Default name**   **Description**                             **Units**   **Remarks**
   LakeSites                                          lakes.map          lake locations                              \-          nominal
@@ -5225,7 +5231,7 @@ map by one cell in downstream direction.
   TabLakeH0                                          lakeh0.txt         water level at which lake outflow is zero   m           relative to average lake bottom level
   TabLakeA                                           lakea.txt          lake parameter A                            \-          ≈ outlet width in meters
   TabLakeB                                           lakeb.txt          lake parameter B                            \-          1.5-2
-  -------------------------------------------------- ------------------ ------------------------------------------- ----------- ---------------------------------------
+-------------------------------------------------- ------------------ ------------------------------------------- ----------- ---------------------------------------
 
 ![reservoirPlacementNew](media/media/image42.png){width="4.75in"
 height="2.125in"}
@@ -5319,7 +5325,7 @@ Lake output files
 The lake routine produces 4 additional time series and one map (or
 stack), as listed in the following table:
 
-  ----------------------------------------- ------------------ ----------------------------------- ----------- -------------
+----------------------------------------- ------------------ ----------------------------------- ----------- -------------
   ***Table A3.3** Output of lake routine*                                                                      
   **Maps**                                  **Default name**   **Description**                     **Units**   **Remarks**
   LakeLevelState                            lakhxxxx.xxx       lake level at last time step[^12]   m           
@@ -5329,7 +5335,7 @@ stack), as listed in the following table:
   LakeOutflowTS                             qLakeOut.tss       flow out of lakes                   m^3^/s      
   LakeEWTS                                  EWLake.tss         lake evaporation                    mm          
   LakeLevelTS                               hLake.tss          lake level                          m           
-  ----------------------------------------- ------------------ ----------------------------------- ----------- -------------
+----------------------------------------- ------------------ ----------------------------------- ----------- -------------
 
 Note that you can use the map with the lake level at the last time step
 to define the initial conditions of a succeeding simulation, e.g.:
@@ -5370,14 +5376,14 @@ The table below lists the input requirements for the inflow hydrograph
 option. All you need is a map that defines where you want to add the
 inflow, and a time series with the corresponding inflow rates.
 
-  --------------------------------------------------------------- ------------------ ---------------------------------- ----------- -------------
+--------------------------------------------------------------- ------------------ ---------------------------------- ----------- -------------
   ***Table A4.1** Input requirements inflow hydrograph routine*                                                                     
   **Maps**                                                        **Default name**   **Description**                    **Units**   **Remarks**
   InflowPoints                                                    \-                 locations for inflow hydrographs   \-          nominal
                                                                                                                                     
   **Time series**                                                 **Default name**   **Description**                    **Units**   **Remarks**
   QInTS                                                           \-                 inflow hydrograph(s)               m^3^/s      
-  --------------------------------------------------------------- ------------------ ---------------------------------- ----------- -------------
+--------------------------------------------------------------- ------------------ ---------------------------------- ----------- -------------
 
 Using the inflow hydrograph option involves four steps:
 
@@ -5387,7 +5393,7 @@ Using the inflow hydrograph option involves four steps:
 2.  Save the inflow hydrograph(s) in PCRaster time series format; inflow
     hydrographs need to be given in \[m^3^ s^-1^\]
 
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **IMPORTANT**: PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the *InflowPoints* map; the second series to unique identifier 2, and so on. So, even if your *InflowPoints* map only contains (as an example) identifiers 3 and 4, you *still need to include the columns for identifiers 1 and 2*!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at *t=1*, even if you set *StepStart* to some higher value. For more info on time series files please have a look at the PCRaster documentation.
   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -6185,11 +6191,11 @@ Transmission loss output file
 The transmission option can produce an additional time series as listed
 in the following table:
 
-  ------------------------------------------------------------------------------------ -------------------- ---------------------------------- -----------
+------------------------------------------------------------------------------------ -------------------- ---------------------------------- -----------
   ***Table A7.3** Output of transmission loss routine -- Average upstream of gauges*                                                           
   **Time series**                                                                      **Default name**     **Description**                    **Units**
   TransLossAvUps                                                                       TransLossAvUps.tss   Transmission loss in the channel   mm
-  ------------------------------------------------------------------------------------ -------------------- ---------------------------------- -----------
+------------------------------------------------------------------------------------ -------------------- ---------------------------------- -----------
 
 Annex 8: Including water use
 ============================
@@ -6251,14 +6257,14 @@ Preparation of input data
 Table A8.1 gives an overview about the maps and table needed for the
 water use option.
 
-  ----------------------------------------------- ------------------ --------------------------------------------------------- ----------- --
+----------------------------------------------- ------------------ --------------------------------------------------------- ----------- --
   ***Table A8.1** Input requirements water use*                                                                                            
   **Maps**                                        **Default name**   **Description**                                           **Units**   
   Yearly stack of water use maps                  wuse0000.xxx       Total water withdrawal                                    m^3^/s      
                                                                                                                                            
   **Table**                                       **Default name**   **Description**                                           **Units**   
   WUseofDay                                       WUseofDays.txt     Assignment of day of the year to map stack of water use   \-          
-  ----------------------------------------------- ------------------ --------------------------------------------------------- ----------- --
+----------------------------------------------- ------------------ --------------------------------------------------------- ----------- --
 
 A sparse map stack of one year of total water withdrawal \[m^3^/s\] with
 a map every 10 days or a month is needed. Because it is assumed that
@@ -6458,7 +6464,7 @@ Water use output files
 The water use routine can produce 2 additional time series and one map
 (or stack), as listed in the following table:
 
-  ---------------------------------------------- ------------------- ----------------- ----------- -------------
+---------------------------------------------- ------------------- ----------------- ----------- -------------
   ***Table A8.3** Output of water use routine*                                                     
   **Maps**                                       **Default name**    **Option**        **Units**   **Remarks**
   WaterUseMaps                                   wusexxxx.xxx        repwateruseMaps   m^3^/s      
@@ -6466,7 +6472,7 @@ The water use routine can produce 2 additional time series and one map
   **Time series**                                **Default name**    **Option**        **Units**   **Remarks**
   Number of loops                                stepsWaterUse.tss                     \-          
   WaterUseTS                                     wateruseUps.tss     repwateruseTS     m^3^/s      
-  ---------------------------------------------- ------------------- ----------------- ----------- -------------
+---------------------------------------------- ------------------- ----------------- ----------- -------------
 
 Annex 9: Simulation and reporting of water levels
 =================================================
@@ -6737,12 +6743,12 @@ Map stacks:
 +----------------------------------------------------------+
 
   ***Table A10.1** pF map output*                                             
-  --------------------------------- ----------------- ----------------------- --------------------
+--------------------------------- ----------------- ----------------------- --------------------
   **Description**                   **Option name**   **Settings variable**   **Default prefix**
   pF upper layer                    repPF1Maps        PF1Maps                 pftop
   pF lower layer                    repPF2Maps        PF2Maps                 pfsub
 
-  -------------------------------------------------------------- ----------------------- ------------------
+-------------------------------------------------------------- ----------------------- ------------------
   ***Table A10.2** pF timeseries output*                                                 
   **pF at sites (option *repPFSites*)**                                                  
   **Description**                                                **Settings variable**   **Default name**
@@ -6753,7 +6759,7 @@ Map stacks:
   **Description**                                                **Settings variable**   **Default name**
   pF upper layer                                                 PF1AvUpsTS              pFTopUps.tss
   pF lower layer                                                 PF2AvUpsTS              pFSubUps.tss
-  -------------------------------------------------------------- ----------------------- ------------------
+-------------------------------------------------------------- ----------------------- ------------------
 
 Annex 11: LISFLOOD options
 ==========================
@@ -6778,7 +6784,7 @@ file that is provided with LISFLOOD always contains file definitions for
 all optional output maps and time series. The use of the *output*
 options is described in detail in Chapter 8.
 
-  ------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------- -------------
+------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------- -------------
   ***Table A11.1** LISFLOOD options (continued on next page)*                                                                                                                        
                                                                                                                                                                                      
   **SIMULATION OPTIONS**                                                                                                                                                             
@@ -6810,7 +6816,7 @@ options is described in detail in Chapter 8.
   repMBTs                                                       Report timeseries of absolute cumulative mass balance error                                                          1
   repMBMMTs                                                     Report timeseries of cumulative mass balance error expressed as mm water slice                                       1
                                                                                                                                                                                      
-  ------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------- -------------
+------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------- -------------
 
 +-----------------------+-----------------------+-----------------------+
 | ***Table A11.1**      |
@@ -6933,7 +6939,7 @@ options is described in detail in Chapter 8.
 |                       |
 +-----------------------+-----------------------+-----------------------+
 
-  ------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------- -------------
+------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------- -------------
   ***Table A11.1** LISFLOOD options (continued from previous page)*                                                                                                                           
   **OUTPUT, MAPS, RATE VARIABLES**                                                                                                                                                            
   **Option**                                                          **Description**                                                                                                         **Default**
@@ -6961,7 +6967,7 @@ options is described in detail in Chapter 8.
   repLZAvInflowMap                                                    Report computed average inflow rate into lower zone (map, at last time step)                                            0
   repLZAvInflowSites                                                  Report computed average inflow rate into lower zone (time series, at points defined on sites map)                       0
   repLZAvInflowUpsGauges                                              Report computed average inflow rate into lower zone (time series, averaged over upstream area of each gauge location)   0
-  ------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------- -------------
+------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------- -------------
 
  Annex 12: LISFLOOD input maps and tables
 =========================================
@@ -7427,7 +7433,7 @@ LISFLOOD setting
 The following table gives an overview:
 
   ***Table A12.3** LISFLOOD input tables*                      
-  ----------------------------------------- ------------------ -------------------------------------------
+----------------------------------------- ------------------ -------------------------------------------
   **LAND USE**                                                 
   **Table**                                 **Default name**   **Description**
   Day of the year -\> LAI                   LaiOfDay.txt       Lookup table: Day of the year -\> LAI map
@@ -7554,7 +7560,7 @@ Time series
 | frost index     | °C days^-1^     | FrostIndexTS    | frost.tss       |
 +-----------------+-----------------+-----------------+-----------------+
 
-  --------------------------------------------------------------------------------------- ------------- ----------------------- -------------------
+--------------------------------------------------------------------------------------- ------------- ----------------------- -------------------
   ***Table A13.2** LISFLOOD optional output time series (continued from previous page)*                                         
   **RATE VARIABLES AT SITES (option *repRateSites*)**[^23]                                                                      
   **Description**                                                                         **Units**     **Settings variable**   **Default name**
@@ -7576,7 +7582,7 @@ Time series
   total runoff                                                                            mm/timestep   TotalRunoffTS           totalRunoff.tss
   percolation from upper to lower zone                                                    mm/timestep   GwPercUZLZTS            percUZLZ.tss
   loss from lower zone                                                                    mm/timestep   GwLossTS                loss.tss
-  --------------------------------------------------------------------------------------- ------------- ----------------------- -------------------
+--------------------------------------------------------------------------------------- ------------- ----------------------- -------------------
 
 +-----------------+-----------------+-----------------+-----------------+
 | TIME SERIES,    |
@@ -7735,21 +7741,21 @@ Time series
 | zone            |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
 
-  ------------------------------------------------------- -------------------------- ----------------------- ------------------
+------------------------------------------------------- -------------------------- ----------------------- ------------------
   **WATER LEVEL IN CHANNEL (option *repWaterLevelTs*)**                                                      
   **Description**                                         **Units**                  **Settings variable**   **Default name**
   water level in channel                                  m (above channel bottom)   WaterLevelTS            waterLevel.tss
-  ------------------------------------------------------- -------------------------- ----------------------- ------------------
+------------------------------------------------------- -------------------------- ----------------------- ------------------
 
 Finally, some additional output options exist that don't fit in any of
 the above categories.
 
-  ------------------------------------------------- ------------------------ ------------ ----------------------- ------------------
+------------------------------------------------- ------------------------ ------------ ----------------------- ------------------
   **OUTPUT RELATED TO LOWER ZONE INITIALISATION**                                                                 
   **Description**                                   **Option**                            **Settings variable**   **Default name**
   average inflow into lower zone                    repLZAvInflowSites       mm day^-1^   LZAvInflowTS            lzAvIn.tss
   average inflow into lower zone                    repLZAvInflowUpsGauges   mm day^-1^   LZAvInflowAvUpsTS       lzAvInUps.tss
-  ------------------------------------------------- ------------------------ ------------ ----------------------- ------------------
+------------------------------------------------- ------------------------ ------------ ----------------------- ------------------
 
  Maps
 -----
