@@ -25,3 +25,11 @@ facebook:
   app_id: 1798910940422432 # cayman-blog
   #authors: lorepirri
 #  admins:
+  
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    span: false
