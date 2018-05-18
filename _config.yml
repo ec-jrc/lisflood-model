@@ -136,6 +136,8 @@ author:
 include:
   - .htaccess
   - _pages
+
+  include: ["_pages"]
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -261,7 +263,7 @@ defaults:
   # _posts
   - scope:
       path: ""
-      type: posts
+      type: pages
     values:
       layout: single
       author_profile: true
