@@ -1,30 +1,39 @@
-title: Cayman Blog Theme
-description: Cayman Blog Theme is a clean, responsive blogging theme for Jekyll and GitHub Pages, with social/SEO features.
-show_downloads: true
+title: Lisflood Manual
+author: GitHub User
+email: 
+description: > # this means to ignore newlines until "twitter_username:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
 
-baseurl: "/cayman-blog" # change this to the subpath of your site, e.g. /blog. Leave it empty if you don't need it.
-url: "https://lorepirri.github.io" # change this to the base hostname & protocol for your site
+# social links
+twitter_username: jekyllrb
+github_username:  jekyll
+rss: rss
 
-google_analytics:
-# cayman-blog date format
+# dribbble_username: jekyll
+# facebook_username: jekyll
+# flickr_username: jekyll
+# instagram_username: jekyll
+# linkedin_username: jekyll
+# pinterest_username: jekyll
+# youtube_username: jekyll
+# googleplus_username: +jekyll
+
+# Mastodon instances
+# mastodon:
+# - username: jekyll
+#   instance: example.com
+# - username: jekyll2
+#   instance: example.com
+
+
+show_excerpts: false # set to true to show excerpts on the homepage
+
+# Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
-cayman-blog:
+minima:
   date_format: "%b %-d, %Y"
-
-theme: # leave it empty
-
-# social
-author: "Lore Pirri"
-image: /thumbnail-jumbo.png
-twitter:
-  username: lorepirri
-#  site:
-facebook:
-  #publisher: 1592372034171500
-  #profile_id: 1809805629
-  app_id: 1798910940422432 # cayman-blog
-  #authors: lorepirri
-#  admins:
   
 markdown: kramdown
 kramdown:
@@ -33,3 +42,15 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     span: false
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.html
+
+# Build settings
+theme: jekyll-theme-cayman
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
