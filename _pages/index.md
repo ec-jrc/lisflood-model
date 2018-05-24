@@ -332,7 +332,7 @@ Overview
 Figure 2.1 gives an overview of the structure of the LISFLOOD model.
 Basically, the model is made up of the following components:
 
-$$ \sum {a}$$
+
 
 -   a 2-layer soil water balance sub-model
 
