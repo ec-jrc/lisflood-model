@@ -8,13 +8,7 @@ Both the program code and this manual have been carefully inspected before print
 
 **CONTENTS**
 
-[1. Introduction ](#introduction)
 
-[About LISFLOOD ](#about-lisflood)
-
-[About this User Manual ](#about-this-user-manual)
-
-[2. Process descriptions ](#_Toc353538795)
 
 [Overview ](#overview)
 
