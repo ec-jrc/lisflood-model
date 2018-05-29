@@ -75,7 +75,7 @@ The meteorological conditions provide the driving forces behind the water balanc
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
-######Note that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates######
+#####Note that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates#####
 
 Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* \[$mm$\] by multiplying them with the time step, *∆t* (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* \[mm\] in the following, unless stated otherwise. *ET0*, *EW0* and *ES0* can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
 
@@ -107,13 +107,9 @@ Figure 2.2 shows an example where a mean value of: 3.0 mm °C^-1^ d^-1^is used. 
 
 ![image7](media\image7.jpg)
 
+###### Figure 2.2 Sinus shaped snow melt coefficient (C~m~) as a function of days of year
 
-
-***Figure 2.2** Sinus shaped snow melt coefficient (C~m~) as a function
-of days of year*
-
-At high altitudes, where the temperature never exceeds 1ºC, the model
-accumulates snow without any reduction because of melting loss. In these
+At high altitudes, where the temperature never exceeds 1ºC, the model accumulates snow without any reduction because of melting loss. In these
 altitudes runoff from glacier melt is an important part. The snow will
 accumulate and converted into firn. Then firn is converted to ice and
 transported to the lower regions. This can take decades or even hundred
