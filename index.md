@@ -2,70 +2,53 @@
 ![](media/image2.png)
 
 # Disclaimer
-==========
-
 Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
+
+
 ## Introduction
-The LISFLOOD model is a hydrological rainfall-runoff model that is
-capable of simulating the hydrological processes that occur in a
-catchment. LISFLOOD has been developed by the floods group of the
-Natural Hazards Project of the Joint Research Centre (JRC) of the
-European Commission. The specific development objective was to produce a
-tool that can be used in large and trans-national catchments for a
-variety of applications, including:
+The LISFLOOD model is a hydrological rainfall-runoff model that is capable of simulating the hydrological processes that occur in a catchment. LISFLOOD has been developed by the floods group of the Natural Hazards Project of the Joint Research Centre (JRC) of the European Commission. The specific development objective was to produce a tool that can be used in large and trans-national catchments for a variety of applications, including:
 
--   Flood forecasting
+- Flood forecasting
 
--   Assessing the effects of river regulation measures
+- Assessing the effects of river regulation measures
+- Assessing the effects of land-use change
+- Assessing the effects of climate change
 
--   Assessing the effects of land-use change
+Although a wide variety of existing hydrological models are available that are suitable for *each* of these individual tasks, few *single* models are capable of doing *all* these jobs. Besides this, our objective requires a model that is spatially distributed and, at least to a certain extent, physically-based. Also, the focus of our work is on European catchments. Since several databases exist that contain pan-European information on soils (King *et al.*, 1997; Wösten *et al.*, 1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and meteorology (Rijks *et al.*, 1998), it would be advantageous to have a model that makes the best possible use of these data. Finally, the wide scope of our objective implies that changes and extensions to the model will be required from time to time. Therefore, it is essential to have a model code that can be easily  maintained and modified. LISFLOOD has been specifically developed to satisfy these requirements. The model is designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, and applications so far have employed grid cells of as little as 100 metres for medium-sized catchments, to 5000 metres for modelling the whole of Europe and up to 0.1° (around 10 km) for modelling globally. Long-term water balance can be simulated (using a daily time step), as well as individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". Although the model's primary output product is channel discharge, all internal rate and state variables (soil moisture, for example) can be written as output as well. In addition, all output can be written as grids, or time series at user-defined points or areas. The user has complete control over how output is written, thus minimising any waste of disk space or CPU time.
 
--   Assessing the effects of climate change
-
-Although a wide variety of existing hydrological models are available that are suitable for *each* of these individual tasks, few *single* models are capable of doing *all* these jobs. Besides this, our objective requires a model that is spatially distributed and, at least to a certain extent, physically-based. Also, the focus of our work is on European catchments. Since several databases exist that contain pan-European information on soils (King *et al.*, 1997; Wösten *et al.*, 1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and meteorology (Rijks *et al.*, 1998), it would be advantageous to have a model that makes the best possible use of these data. Finally, the wide scope of our objective implies that changes and extensions to the model will be required from time to time. Therefore, it is essential to have a model code that can be easily maintained and modified. LISFLOOD has been specifically developed to satisfy these requirements. The model is designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, and applications so far have employed grid cells of as little as 100 metres for medium-sized catchments, to 5000 metres for modelling the whole of Europe and up to 0.1° (around 10 km) for modelling globally. Long-term water balance can be simulated (using a daily time step), as well as individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". Although the model's primary output product is channel discharge, all internal rate and state variables (soil moisture, for example) can be written as output as well. In addition, all output can be written as grids, or time series at user-defined points or areas. The user has complete control over how output is written, thus minimising any waste of disk space or CPU time.
-
-[:top](#top)
+[:top:](#top)
 
 ## About LISFLOOD
 
 The LISFLOOD model is implemented in the PCRaster Environmental Modelling language Version 3.0.0 (Wesseling et al., 1996), wrapped in a Python based interface. PCRaster is a raster GIS environment that has its own high-level computer language, which allows the construction of iterative spatio-temporal environmental models. The Python wrapper of LISFLOOD enables the user to control the model inputs and outputs and the selection of the model modules. This approach combines the power, relative simplicity and maintainability of code written in the the PCRaster Environmental Modelling language and the flexibility of Python.
 LISFLOOD runs on any operating for which Python and PCRaster are available. Currently these include 32-bits Windows (e.g. Windows XP, Vista, 7) and a number of Linux distributions.
 
+[:top:](#top)
 ## About this User Manual
 
 This revised User Manual documents LISFLOOD version December 1 2013, and replaces all previous documentation of the model (e.g. van der Knijff & de Roo, 2008; de Roo *et. al.*, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.
 Chapter 2 explains the theory behind the model, including all model equations and the changes to the previous version. The remaining chapters cover all practical aspects of working with LISFLOOD. Chapter 3 to 8 explains how to setup LISFLOOD, how to modify the settings and the outputs.
 A series of Annexes at the end of this document describe some optional features that can be activated  when running the model. Most model users will not need these features (which are disabled by default), and for the sake of clarity we therefore decided to keep their description out of the main text. The  current document does not cover the calculation of the potential evapo (transpi)ration rates that are  needed as input to the model. A separate pre-processor (LISVAP) exists that calculates these variables  from standard (gridded) meteorological observations. LISVAP is documented in a separate volume (van  der Knijff, 2006). 
 
-## 2. Process descriptions
-
 [:top:](#top)
+
+##Process descriptions
 
 Overview
 --------
 
 Figure 2.1 gives an overview of the structure of the LISFLOOD model.
 
-$$ \sum {a}$$
-
 -   a 2-layer soil water balance sub-model
 
--   sub-models for the simulation of groundwater and subsurface flow
-    (using 2 parallel interconnected linear reservoirs)
+-   sub-models for the simulation of groundwater and subsurface flow (using 2 parallel interconnected linear reservoirs)
 
--   a sub-model for the routing of surface runoff to the nearest river
-    channel
+-   a sub-model for the routing of surface runoff to the nearest river channel
 
--   a sub-model for the routing of channel flow (not shown in the
-    Figure)
+-   a sub-model for the routing of channel flow (not shown in the Figure)
 
-The processes that are simulated by the model include snow melt (not
-shown in the Figure), infiltration, interception of rainfall, leaf
-drainage, evaporation and water uptake by vegetation, surface runoff,
-preferential flow (bypass of soil layer), exchange of soil moisture
-between the two soil layers and drainage to the groundwater, sub-surface
-and groundwater flow, and flow through river channels. Each of these
+The processes that are simulated by the model include snow melt (not shown in the Figure), infiltration, interception of rainfall, leaf drainage, evaporation and water uptake by vegetation, surface runoff, preferential flow (bypass of soil layer), exchange of soil moisture between the two soil layers and drainage to the groundwater, sub-surface and groundwater flow, and flow through river channels. Each of these
 processes is described in more detail in the following.
 
 ![image6](media\image6.jpg)
@@ -77,14 +60,12 @@ processes is described in more detail in the following.
 ###### *Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
 
 
-
+[:top:](#top)
 
 Treatment of meteorological input variables
 -------------------------------------------
 
-The meteorological conditions provide the driving forces behind the
-water balance. LISFLOOD uses the following meteorological input
-variables:
+The meteorological conditions provide the driving forces behind the water balance. LISFLOOD uses the following meteorological input variables:
 
 | Code      | Description                                        | Unit               |
 | --------- | -------------------------------------------------- | ------------------ |
@@ -97,6 +78,8 @@ variables:
 ######Note that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates######
 
 Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* \[$mm$\] by multiplying them with the time step, *∆t* (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* \[mm\] in the following, unless stated otherwise. *ET0*, *EW0* and *ES0* can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
+
+[:top:](#top)
 
 Rain and snow
 -------------
@@ -113,26 +96,18 @@ $M = {C_m} \cdot C_{Seasonal}(1 + 0.01 \cdot R\Delta t)(T_{avg} - T_m) \cdot \De
 
 where *M* is the snowmelt per time step \[$mm$\], *R* is rainfall (not snow!) intensity \[$\frac {mm}{day}$], and $\Delta t$ is the time interval \[$days$\]. $T_m$ has a value of 0 $^\circ C$, and $C_m$ is a degree-day factor \[$\frac{mm} {^\circ C \cdot day}$\]. However, it should be stressed that the value of $C_m$ can actually vary greatly both in space and time (e.g. see Martinec *et al*., 1998).
 
-Therefore, in practice this parameter is often treated as a calibration
-constant. A low value of C~m~ indicates slow snow melt. C~Seasonal~ is a
-seasonal variable melt factor which is also used in several other models
-(e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two
-reasons to use a seasonally variable melt factor:
+Therefore, in practice this parameter is often treated as a calibration constant. A low value of C~m~ indicates slow snow melt. C~Seasonal~ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 
--   The solar radiation has an effect on the energy balance and varies
-    with the time of the year.
+-   The solar radiation has an effect on the energy balance and varies with the time of the year.
 
--   The albedo of the snow has a seasonal variation, because fresh snow
-    is more common in the mid winter and aged snow in the late
-    winter/spring. This produce an even greater seasonal variation in
+-   The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in
     the amount of net solar radiation
 
-Figure 2.2 shows an example where a mean value of: 3.0 mm °C^-1^ d^-1^is
-used. The value of C~m~ is reduced by 0.5 at 21^st^ December and a 0.5
-is added on the 21^st^ June. In between a sinus function is applied
+Figure 2.2 shows an example where a mean value of: 3.0 mm °C^-1^ d^-1^is used. The value of C~m~ is reduced by 0.5 at 21^st^ December and a 0.5 is added on the 21^st^ June. In between a sinus function is applied
 
-![](media/media/image7.emf){width="5.510416666666667in"
-height="2.9166666666666665in"}
+![image7](media\image7.emf)
+
+
 
 ***Figure 2.2** Sinus shaped snow melt coefficient (C~m~) as a function
 of days of year*
@@ -190,6 +165,8 @@ centroid of each zone*
 
 *L temperature lapse rate.*
 
+[:top:](#top)
+
 Frost index soil
 ----------------
 
@@ -223,6 +200,8 @@ is frozen and transpiration, evaporation, infiltration and the outflow
 to the second soil layer and to upper groundwater layer is set to zero.
 Any rainfall is bypassing the soil and transformed into surface runoff
 till the frost index is equal or less than 56.
+
+[:top:](#top)
 
 Adressing sub-grid variability in land cover
 --------------------------------------------
@@ -258,6 +237,8 @@ height="3.025in"}
 ***Figure 2.6*** LISFLOOD land cover aggregation by modelling aggregated
 land use classes separately: Percentages of forest (dark green); water
 (blue), impervious surface (red), other classes (light green)
+
+[:top:](#top)
 
 Soil model
 ----------
@@ -348,6 +329,8 @@ internal flux or states (e.g. preferential flow for forested areas) can
 be written to disk as map or timeseries by activate LISFLOOD's options
 (described in Chapter 8).
 
+[:top:](#top)
+
 Interception
 ------------
 
@@ -383,6 +366,8 @@ element (pixel). *k* is estimated as:
 The value of *Int* can never exceed the interception storage capacity,
 which is defined as the difference between *S~max~* and the accumulated
 amount of water that is stored as interception, *Int~cum~*.
+
+[:top:](#top)
 
 Evaporation of intercepted water
 --------------------------------
@@ -421,6 +406,8 @@ where *D~int~* is the amount of leaf drainage per time step \[mm\] and
 *T~int~* is a time constant for the interception store \[days\], which
 is set to 1 day.
 
+[:top:](#top)
+
 Water available for infiltration and direct runoff
 --------------------------------------------------
 
@@ -448,6 +435,8 @@ fraction', direct runoff is calculated as:
 where *R~d~* is in \[mm\] per time step. Note here that *W~av~* is valid
 for the permeable fraction only, whereas *R~d~* is valid for the direct
 runoff fraction.
+
+[:top:](#top)
 
 Water uptake by plant roots and transpiration
 ---------------------------------------------
@@ -524,6 +513,8 @@ upper soil layer is updated after the transpiration calculations:
 
 \$${w\_1} = {w\_1} - {T\_a}\$$ (2-18)
 
+[:top:](#top)
+
 Direct evaporation from the soil surface
 ----------------------------------------
 
@@ -562,6 +553,8 @@ soil is frozen. The amount of moisture in the upper soil layer is
 updated after the evaporation calculations:
 
 \$${w\_1} = {w\_1} - E{S\_a}\$$ (2-22)
+
+[:top:](#top)
 
 Infiltration capacity
 ---------------------
@@ -613,6 +606,8 @@ height="2.3826388888888888in"}
 **Figure 2.10** Analogy picture of increasing Xinanjiang empirical shape
 parameter b
 
+[:top:](#top)
+
 Preferential bypass flow
 ------------------------
 
@@ -652,6 +647,8 @@ height="2.875in"}
 
 **Figure 2.11** Soil moisture and preferential flow relation
 
+[:top:](#top)
+
 Actual infiltration and surface runoff
 --------------------------------------
 
@@ -671,6 +668,8 @@ infiltration takes place. The amount of moisture in the upper soil layer
 is updated after the infiltration calculations:
 
 \$${w\_1} = {w\_1} + IN{F\_{act}}\$$ (2-28)
+
+[:top:](#top)
 
 Soil moisture redistribution 
 -----------------------------
@@ -782,6 +781,8 @@ moisture in both layers are updated as follows:
 
 \$${w\_2} = {w\_2} + {D\_{1,2}} - {D\_{2,gw}}\$$ (2-41)
 
+[:top:](#top)
+
 Groundwater
 -----------
 
@@ -851,6 +852,8 @@ Note that these equations are again valid for the permeable fraction of
 the pixel only: storage in the direct runoff fraction equals 0 for both
 *UZ* and *LZ*.
 
+[:top:](#top)
+
 Routing of surface runoff to channel
 ------------------------------------
 
@@ -918,6 +921,8 @@ words, the routine only routes the surface runoff *to* the nearest
 channel; no runoff *through* the channel network is simulated at this
 stage (runoff- and channel routing are completely separated).
 
+[:top:](#top)
+
 Routing of sub-surface runoff to channel
 ----------------------------------------
 
@@ -942,6 +947,8 @@ height="3.1354166666666665in"}
 
 *Figure 2.12 Routing of groundwater to channel network. Groundwater flow
 is routed to the nearest 'channel' pixel.*
+
+[:top:](#top)
 
 Channel routing
 ---------------
@@ -984,6 +991,8 @@ size (*Δx*) in case of meandering channels. The kinematic wave channel
 routing can be run using a smaller time-step than the over simulation
 timestep, *Δt*, if needed.
 
+[:top:](#top)
+
 Special simulation options
 --------------------------
 
@@ -1010,6 +1019,8 @@ Features are:
 -   Using water use maps (Annex 8)
 
 -   Simulating water levels (Annex 9)
+
+[:top:](#top)
 
  3. Installation of the LISFLOOD model
 ======================================
@@ -1081,6 +1092,8 @@ variable. In Windows XP you can do this by selecting 'settings' from the
 locate the 'Path' variable in the 'system variables' window and click on
 'Edit' (this requires local Administrator privileges).
 
+[:top:](#top)
+
 Installation on Linux systems
 -----------------------------
 
@@ -1118,6 +1131,8 @@ will look something like this:
 |                                                                         |
 | **\</lfconfig\>**                                                       |
 +-------------------------------------------------------------------------+
+
+[:top:](#top)
 
 Running the model
 -----------------
@@ -1159,6 +1174,8 @@ describes all the data that are required to run the model. Files that
 are specific to *optional* LISFLOOD features (e.g. inflow hydrographs,
 reservoirs) are not listed here; they are described in the documentation
 for each option.
+
+[:top:](#top)
 
 Input maps
 ----------
@@ -1299,18 +1316,7 @@ all time steps, for instance:
   9        \-
   10       \-
 
-Here, maps are defined *only* for time steps 1, 4 and 7. In this case,
-LISFLOOD will use the map values of *pr000000.001* during time steps 1,
-2 and 3, those of *pr000000.004* during time steps 4, 5 and 6, and those
-of *pr000000.007* during time
-
-steps 7, 8, 9 and 10. Since both regular and sparse stacks can be
-combined within one single run, sparse stacks can be very useful to save
-disk space. For instance, LISFLOOD always needs the *average daily*
-temperature, even when the model is run on an hourly time step. So,
-instead of defining 24 identical maps for each hour, you can simply
-define 1 for the first hour of each day and leave out the rest, for
-instance:
+Here, maps are defined *only* for time steps 1, 4 and 7. In this case, LISFLOOD will use the map values of *pr000000.001* during time steps 1, 2 and 3, those of *pr000000.004* during time steps 4, 5 and 6, and those of *pr000000.007* during timesteps 7, 8, 9 and 10. Since both regular and sparse stacks can be combined within one single run, sparse stacks can be very useful to save disk space. For instance, LISFLOOD always needs the *average daily* temperature, even when the model is run on an hourly time step. So, instead of defining 24 identical maps for each hour, you can simply define 1 for the first hour of each day and leave out the rest, for instance:
 
   **t **   **map name**
 -------- --------------
@@ -1329,6 +1335,8 @@ daily basis. So for hourly model runs it is often convenient to define
 *E0*, *ES0* and *ET0* in sparse stacks as well. Leaf Area Index (*LAI*)
 is a variable that changes relatively slowly over time, and as a result
 it is usually advantageous to define *LAI* in a sparse map stack.
+
+[:top:](#top)
 
 Leaf area index maps 
 ---------------------
@@ -1374,6 +1382,8 @@ lai00000.060. On the 1^st^ March 2011 the map lai00000.060 is taken
 again as LAI input. To let LISFLLOD know which map has to be used at
 which day a lookup table (LaiOfDay.txt) is necessary.
 
+[:top:](#top)
+
 Input tables
 ------------
 
@@ -1398,6 +1408,8 @@ The following table gives an overview:
 | Day of the year -\>   | LaiOfDay.txt          | Lookup table: Day of  |
 | LAI                   |                       | the year -\> LAI map  |
 +-----------------------+-----------------------+-----------------------+
+
+[:top:](#top)
 
 Organisation of input data
 --------------------------
@@ -1434,6 +1446,8 @@ height="4.541666666666667in"}
 
 *Figure 4.1 Suggested file structure for LISFLOOD*
 
+[:top:](#top)
+
 Generating input base maps
 --------------------------
 
@@ -1460,6 +1474,8 @@ The settings file has an XML ('E**x**tensible **M**arkup **L**anguage')
 structure. You can edit it using any text editor (e.g. Notepad, Editpad,
 Emacs, vi). Alternatively, you can also use a dedicated XML editor such
 as XMLSpy.
+
+[:top:](#top)
 
 Layout of the settings file
 ---------------------------
