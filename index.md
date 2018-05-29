@@ -40,7 +40,7 @@ A series of Annexes at the end of this document describe some optional features 
 
 ## 2. Process descriptions
 
-[top:](#top)
+[:top:](#top)
 
 Overview
 --------
