@@ -105,7 +105,7 @@ Therefore, in practice this parameter is often treated as a calibration constant
 
 Figure 2.2 shows an example where a mean value of: 3.0 mm °C^-1^ d^-1^is used. The value of C~m~ is reduced by 0.5 at 21^st^ December and a 0.5 is added on the 21^st^ June. In between a sinus function is applied
 
-![image7](media\image7.emf)
+![image7](media\image7.jpg)
 
 
 
