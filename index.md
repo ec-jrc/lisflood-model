@@ -15,7 +15,7 @@ The LISFLOOD model is a hydrological rainfall-runoff model that is capable of si
 - Assessing the effects of land-use change
 - Assessing the effects of climate change
 
-Although a wide variety of existing hydrological models are available that are suitable for *each* of these individual tasks, few *single* models are capable of doing *all* these jobs. Besides this, our objective requires a model that is spatially distributed and, at least to a certain extent, physically-based. Also, the focus of our work is on European catchments. Since several databases exist that contain pan-European information on soils (King *et al.*, 1997; Wösten *et al.*, 1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and meteorology (Rijks *et al.*, 1998), it would be advantageous to have a model that makes the best possible use of these data. Finally, the wide scope of our objective implies that changes and extensions to the model will be required from time to time. Therefore, it is essential to have a model code that can be easily  maintained and modified. LISFLOOD has been specifically developed to satisfy these requirements. The model is designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, and applications so far have employed grid cells of as little as 100 metres for medium-sized catchments, to 5000 metres for modelling the whole of Europe and up to 0.1° (around 10 km) for modelling globally. Long-term water balance can be simulated (using a daily time step), as well as individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". Although the model's primary output product is channel discharge, all internal rate and state variables (soil moisture, for example) can be written as output as well. In addition, all output can be written as grids, or time series at user-defined points or areas. The user has complete control over how output is written, thus minimising any waste of disk space or CPU time..
+Although a wide variety of existing hydrological models are available that are suitable for *each* of these individual tasks, few *single* models are capable of doing *all* these jobs. Besides this, our objective requires a model that is spatially distributed and, at least to a certain extent, physically-based. Also, the focus of our work is on European catchments. Since several databases exist that contain pan-European information on soils (King *et al.*, 1997; Wösten *et al.*, 1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and meteorology (Rijks *et al.*, 1998), it would be advantageous to have a model that makes the best possible use of these data. Finally, the wide scope of our objective implies that changes and extensions to the model will be required from time to time. Therefore, it is essential to have a model code that can be easily  maintained and modified. LISFLOOD has been specifically developed to satisfy these requirements. The model is designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, and applications so far have employed grid cells of as little as 100 metres for medium-sized catchments, to 5000 metres for modelling the whole of Europe and up to 0.1° (around 10 km) for modelling globally. Long-term water balance can be simulated (using a daily time step), as well as individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". Although the model's primary output product is channel discharge, all internal rate and state variables (soil moisture, for example) can be written as output as well. In addition, all output can be written as grids, or time series at user-defined points or areas. The user has complete control over how output is written, thus minimising any waste of disk space or CPU time.
 
 [:top:](#top)
 
@@ -53,10 +53,10 @@ processes is described in more detail in the following.
 
 ![](media/image6.jpg)
 
-###### *Figure 2.1 Overview of the LISFLOOD model.* 
+###### Figure 2.1 Overview of the LISFLOOD model. 
 ###### $P = precipitation;$ $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water; $ $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots); $ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone; $ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone;$ $ Q_l = outflow \ from \ lower \ groundwater \ zone;  $ $D_{loss} = loss \ from \ lower \ groundwater zone.$
 
-###### *Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
+###### Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
 
 
 [:top:](#top)
@@ -66,6 +66,8 @@ Treatment of meteorological input variables
 
 The meteorological conditions provide the driving forces behind the water balance. LISFLOOD uses the following meteorological input variables:
 
+
+
 | Code      | Description                                        | Unit               |
 | --------- | -------------------------------------------------- | ------------------ |
 | $P$       | Precipitation                                      | $[\frac{mm}{day}]$ |
@@ -73,6 +75,8 @@ The meteorological conditions provide the driving forces behind the water balanc
 | $EW0$     | Potential evaporation rate from open water surface | $[\frac{mm}{day}]$ |
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
+
+
 ###### Note that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates
 
 Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* \[$mm$\] by multiplying them with the time step, *∆t* (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* \[mm\] in the following, unless stated otherwise. *ET0*, *EW0* and *ES0* can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
@@ -111,7 +115,7 @@ At high altitudes, where the temperature never exceeds $1^\circ C$, the model ac
 
 ![](media/image8.png)
 
-######Figure 2.3 Sinus shaped ice melt coefficient as a function of days of year
+###### Figure 2.3 Sinus shaped ice melt coefficient as a function of days of year
 
 The amount of snowmelt and icemelt together can never exceed the actual snow cover that is present on the surface.
 
