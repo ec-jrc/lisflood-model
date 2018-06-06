@@ -122,19 +122,19 @@ The amount of snowmelt and icemelt together can never exceed the actual snow cov
 For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level. This is shown in Figure 2.4.
 
 The division in elevation zones was changed from a uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km
-grid cell. 3 elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of 0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
+grid cell. 3 elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
 
-![](media/image10.png){width="4.71875in" height="4.5in"}
+![](media/image10.png)
 
 ######Figure 2.4 Definition of sub-pixel elevation zones for snow
 
-accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone*
+accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone
 
-*$StD: Standard \  Deviation\  of \ the\  DEM$*
+$StD: Standard \  Deviation\  of \ the\  DEM$
 
-*$quant: 0.9674 \ Quantile\  of\  the\  normal\  distribution:\  u_{0,833}=0.9674$
+$quant: 0.9674 \ Quantile\  of\  the\  normal\  distribution:\  u_{0,833}=0.9674$
 
-*$L \ temperature\  lapse\  rate.$*
+$L \ temperature\  lapse\  rate.$
 
 [:top:](#top)
 
@@ -220,9 +220,7 @@ differently for each of this four aggregated classes. The total sum of evapotran
 
 ![](media/image24.png)
 
-###### Figure 2.7 In order $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ 
-
-###### Simulation of aggregated land cover classes in LISFLOOD.
+###### Figure 2.7  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ simulation of aggregated land cover classes in LISFLOOD.
 
 In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in Chapter 8).
 
