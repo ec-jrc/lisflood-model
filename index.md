@@ -101,37 +101,21 @@ Therefore, in practice this parameter is often treated as a calibration constant
 -   The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in
     the amount of net solar radiation
 
-Figure 2.2 shows an example where a mean value of: 3.0 mm °C^-1^ d^-1^is used. The value of C~m~ is reduced by 0.5 at 21^st^ December and a 0.5 is added on the 21^st^ June. In between a sinus function is applied
+Figure 2.2 shows an example where a mean value of: 3.0 $\frac{mm} {^\circ C \cdot day}$  is used. The value of $C_m$ is reduced by 0.5 at $21^{st}$ December and a 0.5 is added on the $21^{st}$ June. In between a sinus function is applied
 
 ![](media/image7.jpg)
 
-###### Figure 2.2 Sinus shaped snow melt coefficient (C~m~) as a function of days of year
+###### Figure 2.2 Sinus shaped snow melt coefficient ($C_m$) as a function of days of year
 
-At high altitudes, where the temperature never exceeds 1ºC, the model accumulates snow without any reduction because of melting loss. In these
-altitudes runoff from glacier melt is an important part. The snow will
-accumulate and converted into firn. Then firn is converted to ice and
-transported to the lower regions. This can take decades or even hundred
-years. In the ablation area the ice is melted. In LISFLOOD this process
-is emulated by melting the snow in higher altitudes on an annual basis
-over summer. A sinus function is used to start ice melting in summer,
-starting on the 15 June and ending on the 15 September (see fig 2.3) and
-using the temperature of zone B (see fig 2.3.)
+At high altitudes, where the temperature never exceeds $1^\circ C$, the model accumulates snow without any reduction because of melting loss. In these altitudes runoff from glacier melt is an important part. The snow will accumulate and converted into firn. Then firn is converted to ice and transported to the lower regions. This can take decades or even hundred years. In the ablation area the ice is melted. In LISFLOOD this process is emulated by melting the snow in higher altitudes on an annual basis over summer. A sinus function is used to start ice melting in summer, starting on the 15 June and ending on the 15 September (see fig 2.3) and using the temperature of zone B (see fig 2.3.)
 
-![](media/media/image8.png){width="5.511805555555555in"
-height="2.917361111111111in"}
+![](media/image8.png)
 
-***Figure 2.3** Sinus shaped ice melt coefficient as a function of days
-of year*
+***Figure 2.3** Sinus shaped ice melt coefficient as a function of days of year*
 
-The amount of snowmelt and icemelt together can never exceed the actual
-snow cover that is present on the surface.
+The amount of snowmelt and icemelt together can never exceed the actual snow cover that is present on the surface.
 
-For large pixel sizes, there may be considerable sub-pixel heterogeneity
-in snow accumulation and melt, which is a particular problem if there
-are large elevation differences within a pixel. Because of this, snow
-melt and accumulation are modelled separately for 3 separate elevation
-zones, which are defined at the sub-pixel level. This is shown in Figure
-2.4.
+For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level. This is shown in Figure 2.4.
 
 The division in elevation zones was changed from a uniform distribution
 in the previous LISFLOOD version to a normal distribution, which fits
