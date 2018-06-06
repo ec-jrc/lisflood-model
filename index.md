@@ -98,7 +98,7 @@ $M = {C_m} \cdot C_{Seasonal}(1 + 0.01 \cdot R\Delta t)(T_{avg} - T_m) \cdot \De
 
 where *M* is the snowmelt per time step \[$mm$\], *R* is rainfall (not snow!) intensity \[$\frac {mm}{day}$], and $\Delta t$ is the time interval \[$days$\]. $T_m$ has a value of 0 $^\circ C$, and $C_m$ is a degree-day factor \[$\frac{mm} {^\circ C \cdot day}$\]. However, it should be stressed that the value of $C_m$ can actually vary greatly both in space and time (e.g. see Martinec *et al*., 1998).
 
-Therefore, in practice this parameter is often treated as a calibration constant. A low value of C~m~ indicates slow snow melt. C~Seasonal~ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
+Therefore, in practice this parameter is often treated as a calibration constant. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 
 -   The solar radiation has an effect on the energy balance and varies with the time of the year.
 
@@ -126,9 +126,9 @@ grid cell. 3 elevation zones *A*, *B*, and *C* are defined with each zone occupy
 
 ![](media/image10.png)
 
-######Figure 2.4 Definition of sub-pixel elevation zones for snow
 
-accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone
+
+###### Figure 2.4 Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone
 
 $StD: Standard \  Deviation\  of \ the\  DEM$
 
@@ -172,7 +172,9 @@ In order account properly for land use dynamics, some conceptual changes have be
 
 ![](media/image14.jpg)
 
-######Figure 2.6 LISFLOOD land cover aggregation by modelling aggregated land use classes separately: Percentages of forest (dark green); water (blue), impervious surface (red), other classes (light green)
+
+
+###### Figure 2.6 LISFLOOD land cover aggregation by modelling aggregated land use classes separately: Percentages of forest (dark green); water (blue), impervious surface (red), other classes (light green)
 
 [:top:](#top)
 
