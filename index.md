@@ -111,110 +111,64 @@ At high altitudes, where the temperature never exceeds $1^\circ C$, the model ac
 
 ![](media/image8.png)
 
-***Figure 2.3** Sinus shaped ice melt coefficient as a function of days of year*
+######Figure 2.3 Sinus shaped ice melt coefficient as a function of days of year
 
 The amount of snowmelt and icemelt together can never exceed the actual snow cover that is present on the surface.
 
 For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level. This is shown in Figure 2.4.
 
-The division in elevation zones was changed from a uniform distribution
-in the previous LISFLOOD version to a normal distribution, which fits
-better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km
-grid cell. 3 elevation zones *A*, *B*, and *C* are defined with each
-zone occupying one third of the pixel surface. Assuming further that
-*T~avg~* is valid for the average pixel elevation, average temperature
-is extrapolated to the centroids of the lower (*A*) and upper (*C*)
-elevation zones, using a fixed temperature lapse rate, *L*, of 0.0065 °C
-per meter elevation difference. Snow, snowmelt and snow accumulation are
-subsequently modelled separately for each elevation zone, assuming that
-temperature can be approximated by the temperature at the centroid of
-each respective zone.
+The division in elevation zones was changed from a uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km
+grid cell. 3 elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of 0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
 
-![](media/media/image10.png){width="4.71875in" height="4.5in"}
+![](media/image10.png){width="4.71875in" height="4.5in"}
 
-***Figure 2.4** Definition of sub-pixel elevation zones for snow
-accumulation and melt modelling. Snowmelt and accumulation calculations
-in each zone are based on elevation (and derived temperature) in
-centroid of each zone*
+######Figure 2.4 Definition of sub-pixel elevation zones for snow
 
-*StD: Standard Deviation of the DEM*
+accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone*
 
-*quant: 0.9674 Quantile of the normal distribution: u~0,833~=0.9674*
+*$StD: Standard \  Deviation\  of \ the\  DEM$*
 
-*L temperature lapse rate.*
+*$quant: 0.9674 \ Quantile\  of\  the\  normal\  distribution:\  u_{0,833}=0.9674$
+
+*$L \ temperature\  lapse\  rate.$*
 
 [:top:](#top)
 
 Frost index soil
 ----------------
 
-When the soil surface is frozen, this affects the hydrological processes
-occurring near the soil surface. To estimate whether the soil surface is
-frozen or not, a frost index *F* is calculated. The equation is based on
-Molnau & Bissell (1983, cited in Maidment 1993), and adjusted for
-variable time steps. The rate at which the frost index changes is given
-by:
+When the soil surface is frozen, this affects the hydrological processes occurring near the soil surface. To estimate whether the soil surface is frozen or not, a frost index *F* is calculated. The equation is based on
+Molnau & Bissell (1983, cited in Maidment 1993), and adjusted for variable time steps. The rate at which the frost index changes is given by:
 
-\$$\\frac{{dF}}{{dt}} = - (1 - {A\_f})F - {T\_{av}} \\cdot {e\^{ - 0.04
-\\cdot K \\cdot {d\_s}/w{e\_s}}}\$$ (2-4)
+$\frac{dF}{dt} = - (1 - {A_f})\cdot F - {T_{av}} \cdot {e^{ - 0.04 \cdot K \cdot {d_s}/w \cdot {e_s}}}$ (2-4)
 
-*dF/dt* is expressed in \[°C day^-1^ day^-1^ \]. *A~f~* is a decay
-coefficient \[day^-1^\], *K* is a a snow depth reduction coefficient
-\[cm^-1^\], *d~s~* is the (pixel-average) depth of the snow cover
-(expressed as mm equivalent water depth), and *we~s~* is a parameter
-called snow water equivalent, which is the equivalent water depth water
-of a snow cover (Maidment, 1993). In LISFLOOD, *A~f~* and *K* are set to
-0.97 and 0.57 cm^-1^ respectively, and *we~s~* is taken as 0.1, assuming
-an average snow density of 100 kg/m^3^ (Maidment, 1993). The soil is
-considered frozen when the frost index rises above a critical threshold
-of 56. For each time step the value of *F* \[°C day^-1^\] is updated as:
+$\frac{dF}{dt}$ is expressed in $[\frac{\circ C}{day} \cdot \frac{1}{day}]$.  $A_f$ is a decay coefficient $[\frac{1}{day}]$, $K$ is a a snow depth reduction coefficient
 
-\$$F(t) = F(t - 1) + \\frac{{dF}}{{dt}}\\Delta t\$$ (2-5)
+$[\frac{1}{cm}]$, $d_s$ is the (pixel-average) depth of the snow cover (expressed as $mm$ equivalent water depth), and $w \cdot e_s$ is a parameter called snow water equivalent, which is the equivalent water depth water of a snow cover (Maidment, 1993). In LISFLOOD, $A_f$ and $K$ are set to 0.97 and 0.57 $[\frac{1}{cm}]$ respectively, and $w \cdot e_s$ is taken as 0.1, assuming an average snow density of 100 $\frac{kg}{m^3}$ (Maidment, 1993). The soil is considered frozen when the frost index rises above a critical threshold of 56. For each time step the value of $F$ $[\frac{\circ C}{ day}]$ is updated as:
 
-*F* is not allowed to become less than 0.
+$F(t) = F(t - 1) + \frac{dF}{dt}\Delta t$   (2-5)
 
-When the frost index rises above a threshold of 56, every soil process
-is frozen and transpiration, evaporation, infiltration and the outflow
-to the second soil layer and to upper groundwater layer is set to zero.
-Any rainfall is bypassing the soil and transformed into surface runoff
-till the frost index is equal or less than 56.
+$F$ is not allowed to become less than 0.
+
+When the frost index rises above a threshold of 56, every soil process is frozen and transpiration, evaporation, infiltration and the outflow to the second soil layer and to upper groundwater layer is set to zero.
+Any rainfall is bypassing the soil and transformed into surface runoff till the frost index is equal or less than 56.
 
 [:top:](#top)
 
 Adressing sub-grid variability in land cover
 --------------------------------------------
 
-In the previous versions of LISFLOOD a number of parameters are linked
-directly to land cover classes by using lookup tables. The spatially
-dominant value has been used to assign the corresponding grid parameter
-values. This implies that some of the sub-grid variability in land use,
-and consequently in the parameter of interest, is lost (figure 2.5)
+In the previous versions of LISFLOOD a number of parameters are linked directly to land cover classes by using lookup tables. The spatially dominant value has been used to assign the corresponding grid parameter values. This implies that some of the sub-grid variability in land use, and consequently in the parameter of interest, is lost (figure 2.5)
 
-![](media/media/image12.png){width="5.66875in" height="1.8125in"}
+![](media/image13.jpg)
 
-***Figure 2.5*** Land cover aggregation approach in previous versions of
-LISFLOOD
+######Figure 2.5 Land cover aggregation approach in previous versions of LISFLOOD
 
-In order account properly for land use dynamics, some conceptual changes
-have been made to render LISFLOOD more land-use sensitive. To account
-for the sub-grid variability in land use, we model the within-grid
-variability. In the modified version of the hydrological model, the
-spatial distribution and frequency of each class is defined as a
-percentage of the whole represented area of the new pixel. Combining
-land cover classes and modeling aggregated classes, is known as the
-concept of hydrological response units (HRU). The logic behind this
-approach is that the non-linear nature of the rainfall runoff processes
-on different land cover surfaces observed in reality will be better
-captured. This concept is also used in models such as SWAT (Arnold and
-Fohrer, 2005) and PREVAH (Viviroli et al., 2009). LISFLOOD has been
-transferred a HRU approach on sub-grid level, as shown in figure 2.6.
+In order account properly for land use dynamics, some conceptual changes have been made to render LISFLOOD more land-use sensitive. To account for the sub-grid variability in land use, we model the within-grid variability. In the modified version of the hydrological model, the spatial distribution and frequency of each class is defined as a percentage of the whole represented area of the new pixel. Combining land cover classes and modeling aggregated classes, is known as the concept of hydrological response units (HRU). The logic behind this approach is that the non-linear nature of the rainfall runoff processes on different land cover surfaces observed in reality will be better captured. This concept is also used in models such as SWAT (Arnold and Fohrer, 2005) and PREVAH (Viviroli et al., 2009). LISFLOOD has been transferred a HRU approach on sub-grid level, as shown in figure 2.6.
 
-![](media/media/image12.png){width="5.677777777777778in"
-height="3.025in"}
+![](media/image14.jpg)
 
-***Figure 2.6*** LISFLOOD land cover aggregation by modelling aggregated
-land use classes separately: Percentages of forest (dark green); water
-(blue), impervious surface (red), other classes (light green)
+######Figure 2.6 LISFLOOD land cover aggregation by modelling aggregated land use classes separately: Percentages of forest (dark green); water (blue), impervious surface (red), other classes (light green)
 
 [:top:](#top)
 
