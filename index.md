@@ -79,7 +79,7 @@ The meteorological conditions provide the driving forces behind the water balanc
 
 ###### Note that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates
 
-Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* \[$mm$\] by multiplying them with the time step, *∆t* (in days). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* \[mm\] in the following, unless stated otherwise. *ET0*, *EW0* and *ES0* can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
+Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, $\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following, unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
 
 [:top:](#top)
 
@@ -179,152 +179,86 @@ In order account properly for land use dynamics, some conceptual changes have be
 Soil model
 ----------
 
-If a part of a pixel is made up of built-up areas this will influence
-that pixel's water-balance. LISFLOOD's 'direct runoff fraction'
-parameter (*f~dr~*) defines the fraction of a pixel that is impervious.
+If a part of a pixel is made up of built-up areas this will influence that pixel's water-balance. LISFLOOD's 'direct runoff fraction's parameter ($f_{dr}$) defines the fraction of a pixel that is impervious.
 For impervious areas, LISFLOOD assumes that:
 
-1.  A depression storage is filled by precipitation and snowmelt and
-    emptied by evaporation
+1.  A depression storage is filled by precipitation and snowmelt and emptied by evaporation
 
-2.  Any water that is not filling the depression storage, reaches the
-    surface is added directly to surface runoff
+2.  Any water that is not filling the depression storage, reaches the surface is added directly to surface runoff
 
-3.  The storage capacity of the soil is zero (i.e. no soil moisture
-    storage in the direct runoff fraction)
+3.  The storage capacity of the soil is zero (i.e. no soil moisture storage in the direct runoff fraction)
 
 4.  There is no groundwater storage
 
-For open water (e.g. lakes, rivers) the water fraction parameter
-(f~water~) defines the fraction that is covered with water (large lakes
-that are in direct connection with major river channels can be modelled
-using LISFLOOD's lake option, which is described in Annex 5 of this
-manual). For water covered areas, LISFLOOD assumes that:
+For open water (e.g. lakes, rivers) the water fraction parameter $(f_{water})$ defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using LISFLOOD's lake option, which is described in Annex 5 of this manual). For water covered areas, LISFLOOD assumes that:
 
-1.  The loss of actual evaporation is equal to the potential evaporation
-    on open water
+1.  The loss of actual evaporation is equal to the potential evaporation on open water
 
-2.  Any water that is not evaporated, reaches the surface is added
-    directly to surface runoff
+2.  Any water that is not evaporated, reaches the surface is added directly to surface runoff
 
-3.  The storage capacity of the soil is zero (i.e. no soil moisture
-    storage in the water fraction)
+3.  The storage capacity of the soil is zero (i.e. no soil moisture storage in the water fraction)
 
 4.  There is no groundwater storage
 
-For the part of a pixel that is forest (f~forest~) or other land cover
-(f~other~=1-f~forest~-f~dr~-f~water~) the description of all soil- and
-groundwater-related processes below (evaporation, transpiration,
-infiltration, preferential flow, soil moisture redistribution and
-groundwater flow) are valid. While the modelling structure for forest
-and other classes is the same, the difference is the use of different
-map sets for leaf area index, soil and soil hydraulic properties.
-Because of the nonlinear nature of the rainfall runoff processes this
-should yield better results than running the model with average
-parameter values. Table 2 summarises the profiles of the four
-individually modelled categories of land cover classes
+For the part of a pixel that is forest $(f_{forest})$ or other land cover $(f_{other}=1-f_{forest}-f_{dr}-f_{water})$ the description of all soil- and groundwater-related processes below (evaporation, transpiration, infiltration, preferential flow, soil moisture redistribution and groundwater flow) are valid. While the modelling structure for forest and other classes is the same, the difference is the use of different map sets for leaf area index, soil and soil hydraulic properties. Because of the nonlinear nature of the rainfall runoff processes this should yield better results than running the model with average parameter values. Table 2 summarises the profiles of the four individually modelled categories of land cover classes
 
-**Table 2.1** S*ummary of hydrological properties of the four categories
-modelled individually in the modified version of LISFLOOD.*
+###### Table 2.1 Summary of hydrological properties of the four categories modelled individually in the modified version of LISFLOOD.
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Category**                                                                             **Evapotranspiration**                                           **Soil**                                                    **Runoff**
----------------------------------------------------------------------------------------- ---------------------------------------------------------------- ----------------------------------------------------------- ---------------------------------------------------------------------------------
-  Forest                                                                                   High level of evapo-transpiration (high Leaf area index);\       Large rooting depth                                         Low concentration time
-                                                                                           seasonally dependant                                                                                                         
 
-  Impervious surface                                                                       Not applicable                                                   Not applicable                                              Surface runoff but initial loss and depression storage, fast concentration time
 
-  Inland water                                                                             Maximum evaporation                                              Not applicable                                              Fast concentration time
+| Category                                                     | Evapotranspiration                                           | Soil                                                      | Runoff                                                       |
+| :----------------------------------------------------------- | :----------------------------------------------------------- | :-------------------------------------------------------- | :----------------------------------------------------------- |
+| Forest                                                       | High level of evapo-transpiration (high Leaf area index) seasonally dependant | Large rooting depth                                       | Low concentration time                                       |
+| Impervious surface                                           | Not applicable                                               | Not applicable                                            | Surface runoff but initial loss and depression storage, fast concentration time |
+| Inland water                                                 | Maximum evaporation                                          | Not applicable                                            | Fast concentration time                                      |
+| Other (agricultural areas, non-forested natural area, pervious surface of urban areas) | Evapotranspiration lower than for forest but still significant | Rooting depth lower than for forest but still significant | Medium concentration time                                    |
 
-  Other (agricultural areas, non-forested natural area, pervious surface of urban areas)   Evapotranspiration lower than for forest but still significant   Rooting depth lower than for forest but still significant   Medium concentration time
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-If you activate any of LISFLOOD's options for writing internal model
-fluxes to time series or maps (described in Chapter 8), the model will
-report the real fluxes, which are the fluxes multiplied by the
-corresponding fraction. Figure 2.7 illustrates this for
-evapotranspiration (evaporation and transpiration) which calculated
-differently for each of this four aggregated classes. The total sum of
-evapotranspiration for a pixel is calculated by adding up the fluxes for
-each class multiplied by the fraction of each class.
 
-![](media/media/image24.emf){width="6.120138888888889in"
-height="2.8194444444444446in"}
+If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in Chapter 8), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. Figure 2.7 illustrates this for evapotranspiration (evaporation and transpiration) which calculated
+differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
-***Figure 2.7** Simulation of aggregated land cover classes in LISFLOOD.
-In this example, evapotranspiration (ET) is simulated for each
-aggregated class separately (ET~fores~t, ET~dr~, ET~water~, ET~other~)*
+![](media/image24.png)
 
-As result of the soil model you get four different surface fluxes
-weighted by the corresponding fraction
-(f~dr~,f~water~,f~forest~,f~other~), respectively two fluxes for the
-upper and lower groundwater zone and for groundwater loss also weighted
-by the corresponding fraction (f~forest~,f~other~). However a lot of the
-internal flux or states (e.g. preferential flow for forested areas) can
-be written to disk as map or timeseries by activate LISFLOOD's options
-(described in Chapter 8).
+###### Figure 2.7 In order $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ 
+
+###### Simulation of aggregated land cover classes in LISFLOOD.
+
+In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in Chapter 8).
 
 [:top:](#top)
 
 Interception
 ------------
 
-Interception is estimated using the following storage-based equation
-(Aston, 1978, Merriam, 1960):
+Interception is estimated using the following storage-based equation (Aston, 1978, Merriam, 1960):
 
-\$$Int = {S\_{\\max }} \\cdot \[1 - \\exp ( - k \\cdot R\\Delta
-t/{S\_{\\max }})\]\$$ (2-6)
+$Int = S_{max} \cdot [1 - e ^{\frac{- k \cdot R \cdot \Delta t} {S_{max}}}]$ (2-6)
 
-where *Int* \[mm\] is the interception per time step, *S~max~* \[mm\] is
-the maximum interception, *R* is the rainfall intensity \[mm day^-1^\]
-and the factor *k* accounts for the density of the vegetation. *S~max~*
-is calculated using an empirical equation (Von Hoyningen-Huene, 1981):
+where $Int [mm]$ is the interception per time step, $S_{max} [mm]$ is the maximum interception, $R$ is the rainfall intensity $[\frac{mm}{day}]$ and the factor $k$ accounts for the density of the vegetation. $S_{max}$ is calculated using an empirical equation (Von Hoyningen-Huene, 1981):
 
-\$$\\begin{array}{l}
+$\begin{cases} S_{max} = 0.935 + 0.498 \cdot LAI - 0.00575 \cdot LAI^2 &[LAI \gt 0.1]\\ S_{max } = 0 & [LAI \le 0.1]\end{cases}$ (2-7)
 
-\\left\\{ \\begin{array}{l}
+where $LAI$ is the average Leaf Area Index \[m^2^ m^-2^\] of each model element (pixel). *k* is estimated as:
 
-{S\_{\\max }} = 0.935 + 0.498 \\cdot LAI - 0.00575 \\cdot LA{I\^2} & &
-\[LAI \> 0.1\]\\\\
+$k = 0.046 \cdot LAI$ (2-8)
 
-{S\_{\\max }} = 0 & & & & & & \[LAI \\le 0.1\]
-
-\\end{array} \\right.\\\\
-
-\\end{array}\$$ (2-7)
-
-where *LAI* is the average Leaf Area Index \[m^2^ m^-2^\] of each model
-element (pixel). *k* is estimated as:
-
-\$$k = 0.046 \\cdot LAI\$$ (2-8)
-
-The value of *Int* can never exceed the interception storage capacity,
-which is defined as the difference between *S~max~* and the accumulated
-amount of water that is stored as interception, *Int~cum~*.
+The value of $Int$ can never exceed the interception storage capacity, which is defined as the difference between $S_{max}$ and the accumulated amount of water that is stored as interception, $Int_{cum}$.
 
 [:top:](#top)
 
 Evaporation of intercepted water
 --------------------------------
 
-Evaporation of intercepted water, *EW~int~*, occurs at the potential
-evaporation rate from an open water surface, *EW0*. The *maximum*
-evaporation per time step is proportional to the fraction of vegetated
+Evaporation of intercepted water, *EW~int~*, occurs at the potential evaporation rate from an open water surface, *EW0*. The *maximum* evaporation per time step is proportional to the fraction of vegetated
 area in each pixel (Supit *et al.*,1994):
 
-\$$E{W\_{\\max }} = EW0 \\cdot \[1 - \\exp ( - {\\kappa \_{gb}} \\cdot
-LAI)\]\\Delta t\$$ (2-9)
+$EW_{max } = EW0 \cdot [1 - e^{- \kappa_{gb} \cdot LAI}] \cdot \Delta t$ (2-9)
 
-where *EW0* is the potential evaporation rate from an open water surface
-\[mm day^-1^\], and *EW~max~* is in \[mm\] per time step. Constant
-*κ~gb~* is the extinction coefficient for global solar radiation \[-\].
-Since evaporation is limited by the amount of water stored on the
-leaves, the actual amount of evaporation from the interception store
-equals:
+where $EW0$ is the potential evaporation rate from an open water surface $[\frac{mm}{day}]$, and $EW_{max}$ is in $[mm]$ per time step. Constant $\kappa_{gb}$ is the extinction coefficient for global solar radiation.
+Since evaporation is limited by the amount of water stored on the leaves, the actual amount of evaporation from the interception store equals:
 
-\$$E{W\_{{\\mathop{\\rm int}} }} = \\min (E{W\_{\\max }} \\cdot \\Delta
-t,In{t\_{cum}})\$$ (2-10)
+$EW_{int} = _{min}({EW_{max } \cdot \Delta t},{Int_{cum}})$ (2-10)
 
 where *EW~int~* is the actual evaporation from the interception store
 \[mm\] per time step, and *EW0* is the potential evaporation rate from
