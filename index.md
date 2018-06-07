@@ -305,9 +305,9 @@ Where $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day
 
 (reference) evapotranspiration rate and the potential evaporation rate of a specific crop. $k_{crop}$ is 1 for most vegetation types, except for some excessively transpiring crops like sugarcane or rice. Note that the energy that has been 'consumed' already for the evaporation of intercepted water is simply subtracted here in order to respect the overall energy balance. The actual transpiration rate is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
 
-$r_{WS} = \frac{{({w_1} - {w_{wp1}})}}{{({w_{crit1}} -{w_{wp1}})}}$ (2-15)
+$r_{WS} = \frac{w_1 - w_{wp1}}{w_{crit1} -w_{wp1}}$ (2-15)
 
-where $w_1$ is the amount of moisture in the upper soil layer $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The critical amount of soil moisture is calculated as:
+where $w_1​$ is the amount of moisture in the upper soil layer $[mm]​$, $w_{wp1} [mm]​$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]​$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The critical amount of soil moisture is calculated as:
 
 $w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}$ (2-16)
 
@@ -421,224 +421,119 @@ $w_1 = w_1 + INF_{act}$ (2-28)
 Soil moisture redistribution 
 -----------------------------
 
-The description of the moisture fluxes out of the subsoil (and also
-between the upper- and lower soil layer) is based on the simplifying
-assumption that the flow of soil moisture is entirely gravity-driven.
-Starting from Darcy's law for 1-D vertical flow:
+The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layer) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from Darcy's law for 1-D vertical flow:
 
-\$q = - K(\\theta )\[\\frac{{\\partial h(\\theta )}}{{\\partial z}} -
-1\]\$ (2-29)
+$q = - K(\theta ) \cdot [\frac{{\partial h(\theta )}}{{\partial z}} -1]$ (2-29)
 
-where *q* \[mm day^-1^\] is the flow rate out of the soil (e.g. upper
-soil layer, lower soil layer); *K(θ)* \[mm day^-1^\] is the hydraulic
-conductivity (as a function of the volumetric moisture content of the
-soil, *θ* \[mm^3^ mm^-3^\]) and \$\\partial h(\\theta )/\\partial z\$ is
-the matric potential gradient. If we assume a matric potential gradient
-of zero, the equation reduces to:
+where *q* \[mm day^-1^\] is the flow rate out of the soil (e.g. upper soil layer, lower soil layer); $K(\theta) [\frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [mm^3 \ mm^-3]$) and $\frac{\partial h\ (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
 
-\$q = K(\\theta )\$ (2-30)
+$q = K(\theta )$ (2-30)
 
-This implies a flow that is always in downward direction, at a rate that
-equals the conductivity of the soil. The relationship between hydraulic
-conductivity and soil moisture status is described by the Van Genuchten
-equation (van Genuchten, 1980), here re-written in terms of mm water
-slice, instead of volume fractions:
+This implies a flow that is always in downward direction, at a rate that equals the conductivity of the soil. The relationship between hydraulic conductivity and soil moisture status is described by the Van Genuchten equation (van Genuchten, 1980), here re-written in terms of mm water slice, instead of volume fractions:
 
-\$K(w) = {K\_s}{\\left( {\\frac{{w - {w\_r}}}{{{w\_s} - {w\_r}}}}
-\\right)\^{1/2}}{\\left\\{ {1 - {{\\left\[ {1 - {{\\left( {\\frac{{w -
-{w\_r}}}{{{w\_s} - {w\_r}}}} \\right)}\^{1/m}}} \\right\]}\^m}}
-\\right\\}\^2}\$ (2-31)
+$K(w) = K_s \cdot \sqrt{( \frac{w - w_r}{w_s - w_r})} \cdot \{ 1 - [ 1 - ( \frac{w -w_r}{w_s - w_r})^\frac{1}{m}]^m\}^2$ (2-31)
 
-where *K~s~* is the saturated conductivity of the soil \[mm day^-1^\],
-and *w*, *w~r~* and *w~s~* are the actual, residual and maximum amounts
-of moisture in the soil respectively (all in \[mm\]). Parameter *m* is
-calculated from the pore-size index, *λ* (which is related to soil
-texture):
+where $K_s$ is the saturated conductivity of the soil $[\frac{mm}{day}]$, and $w, w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $[mm]$). Parameter $m$ is calculated from the pore-size index, $\lambda$ (which is related to soil texture):
 
-\$m = \\frac{\\lambda }{{\\lambda + 1}}\$ (2-32)
+$m = \frac{\lambda }{\lambda + 1}$ (2-32)
 
-For large values of *Δt* (e.g. 1 day) the above equation often results
-in amounts of outflow that exceed the available soil moisture storage,
-i.e:
+For large values of *Δt* (e.g. 1 day) the above equation often results in amounts of outflow that exceed the available soil moisture storage, i.e:
 
-\$K(w)\\Delta t \> w - {w\_r}\$ (2-33)
+$K(w)\Delta t \gt {w - w_r}$ (2-33)
 
-In order to solve the soil moisture equations correctly an iterative
-procedure is used. At the beginning of each time step, the
-conductivities for both soil layers \[*K~1~(w~1~)*, *K~2~(w~2~)*\] are
-calculated using the Van Genuchten equation. Multiplying these values
-with the time step and dividing by the available moisture gives a
-Courant-type numerical stability indicator for each respective layer:
+In order to solve the soil moisture equations correctly an iterative procedure is used. At the beginning of each time step, the conductivities for both soil layers $[K_1(w_1), K_2(w_2)]$ are calculated using the Van Genuchten equation. Multiplying these values with the time step and dividing by the available moisture gives a Courant-type numerical stability indicator for each respective layer:
 
-\${C\_1} = \\frac{{{K\_1}({w\_1}) \\cdot \\Delta t}}{{{w\_1} -
-{w\_{r1}}}}\$ (2-34a)
+$C_1 = \frac{K_1(w_1) \cdot \Delta t}{w_1 - w_{r1}}$ (2-34a)
 
-\${C\_2} = \\frac{{{K\_2}({w\_2}) \\cdot \\Delta t}}{{{w\_2} -
-{w\_{r2}}}}\$ (2-34b)
+$C_2 = \frac{K_2(w_2) \cdot \Delta t}{w_2 - w_{r2}}$ (2-34b)
 
-A Courant number that is greater than 1 implies that the calculated
-outflow exceeds the available soil moisture, resulting in loss of mass
-balance. Since we need a stable solution for both soil layers, the
-'overall' Courant number for the soil moisture routine is the largest
-value out of *C~1~* and *C~2~*:
+A Courant number that is greater than 1 implies that the calculated outflow exceeds the available soil moisture, resulting in loss of mass balance. Since we need a stable solution for both soil layers, the
+'overall' Courant number for the soil moisture routine is the largest value out of $C_1$ and $C_2$:
 
-\${C\_{soil}} = \\max ({C\_1},{C\_2})\$ (2-35)
+$C_{soil} = max (C_1,C_2)$ (2-35)
 
-In principle, rounding *C~soil~* up to the nearest integer gives the
-number sub-steps needed for a stable solution. In practice, it is often
-preferable to use a critical Courant number that is lower than 1,
-because high values can result in unrealistic 'jumps' in the simulated
-soil moisture pattern when the soil is near saturation (even though mass
-balance is preserved). Hence, making the critical Courant number a
-user-defined value *C~crit~*, the number of sub-steps becomes:
+In principle, rounding $C_{soil}$ up to the nearest integer gives the number sub-steps needed for a stable solution. In practice, it is often preferable to use a critical Courant number that is lower than 1, because high values can result in unrealistic 'jumps' in the simulated soil moisture pattern when the soil is near saturation (even though mass balance is preserved). Hence, making the critical Courant number a
+user-defined value $C_{crit}, the number of sub-steps becomes:
 
-\$SubSteps = roundup(\\frac{{{C\_{soil}}}}{{{C\_{crit}}}})\$ (2-36)
+$SubSteps = roundup(\frac{C_{soil}}{C_{crit}})$ (2-36)
 
-and the corresponding sub-time-step, *Δ't*:
+and the corresponding sub-time-step, $\Delta 't$:
 
-\$\\Delta \'t = \\frac{{\\Delta t}}{{SubSteps}}\$ (2-37)
+$\Delta 't = \frac{\Delta t}{SubSteps}$ (2-37)
 
-In brief, the iterative procedure now involves the following steps.
-First, the number of sub-steps and the corresponding sub-time-step are
-computed as explained above. The amounts of soil moisture in the upper
-and lower layer are copied to temporary variables *w'~1~* and *w'~2~*.
-Two variables, *D~1,2~* (flow from upper to lower soil layer) and
-*D~2,gw~* (flow from lower soil layer to groundwater) are initialized
-(set to zero). Then, for each sub-step, the following sequence of
-calculations is performed:
+In brief, the iterative procedure now involves the following steps. First, the number of sub-steps and the corresponding sub-time-step are computed as explained above. The amounts of soil moisture in the upper
+and lower layer are copied to temporary variables $w'_1$ and $w'_2$. Two variables, $D_{1,2}$ (flow from upper to lower soil layer) and $D_{2,gw}$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
 
 1.  compute hydraulic conductivity for both layers
 
-2.  compute flux from upper to lower soil layer for this sub-step
-    (*D'~1,2~*, can never exceed storage capacity in lower layer):
+2.  compute flux from upper to lower soil layer for this sub-step ($D'_{1,2}$, can never exceed storage capacity in lower layer):
 
-\$D{\'\_{1,2}} = \\min \[{K\_1}(w{\'\_1})\\Delta t,w{\'\_{s2}} -
-w{\'\_2}\]\$ (2-38)
+$D'_{1,2} = min [K_1(w'_1)\Delta t,w'_{s2} -w'_2]$ (2-38)
 
-3.  compute flux from lower soil layer to groundwater for this sub-step
-    (*D'~2,gw~*, can never exceed available water in lower layer):
+3.  compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$, can never exceed available water in lower layer):
 
-\$D{\'\_{2,gw}} = \\min \[{K\_2}(w{\'\_2})\\Delta t,w{\'\_2} -
-w{\'\_{r2}}\]\$ (2-39)
+$D'_{2,gw} = min [K_2(w'_2)\Delta t,w'_2 -w'_{r2}]$ (2-39)
 
-4.  update *w'~1~* and *w'~2~*
+4.  update $w'_1$ and $w'_2$
 
-5.  add *D'~1,2~* to *D~1,2~*; add *D'~2,gw~* to *D~2,gw~*
+5.  add $D'_{1,2}$ to $D_{1,2}$; add $D'_{2,gw}$ to $D_{2,gw}
 
-If the soil is frozen (*F* \> critical threshold), both *D~1,2~* and
-*D~2,gw~* are set to zero. After the iteration loop, the amounts of soil
-moisture in both layers are updated as follows:
+If the soil is frozen (*F* \> critical threshold), both $D_{1,2} and $D_{2,gw} are set to zero. After the iteration loop, the amounts of soil moisture in both layers are updated as follows:
 
-\${w\_1} = {w\_1} - {D\_{1,2}}\$ (2-40)
+$w_1 = w_1 - D_{1,2}$ (2-40)
 
-\${w\_2} = {w\_2} + {D\_{1,2}} - {D\_{2,gw}}\$ (2-41)
+$w_2 = w_2 + D_{1,2} - D_{2,gw}$ (2-41)
+
+[🔝](#top)
 
 Groundwater
 -----------
 
-Groundwater storage and transport are modelled using two parallel linear
-reservoirs, similar to the approach used in the HBV-96 model (Lindström
-et al., 1997). The upper zone represents a quick runoff component, which
-includes fast groundwater and subsurface flow through macro-pores in the
-soil. The lower zone represents the slow groundwater component that
-generates the base flow. The outflow from the upper zone to the channel,
-*Q~uz~* \[mm\] equals:
+Groundwater storage and transport are modelled using two parallel linear reservoirs, similar to the approach used in the HBV-96 model (Lindström et al., 1997). The upper zone represents a quick runoff component, which includes fast groundwater and subsurface flow through macro-pores in the soil. The lower zone represents the slow groundwater component that generates the base flow. The outflow from the upper zone to the channel, $Q_{uz} [mm]$ equals:
 
-\${Q\_{uz}} = \\frac{1}{{{{\\rm{T}}\_{{\\rm{uz}}}}}} \\cdot UZ\\,\\Delta
-t\$ (2-42)
+$Q_{uz} = \frac{1}{T_{uz}} \cdot UZ \cdot \Delta t$ (2-42)
 
-where *T~uz~* is a reservoir constant \[days\] and *UZ* is the amount of
-water that is stored in the upper zone \[mm. Similarly, the outflow from
-the lower zone is given by:
+where $T_{uz}$ is a reservoir constant $[days]$ and $UZ$ is the amount of water that is stored in the upper zone $[mm]$. Similarly, the outflow from the lower zone is given by:
 
-\${Q\_{lz}} = \\frac{1}{{{{\\rm{T}}\_{{\\rm{lz}}}}}} \\cdot LZ\\;\\Delta
-t\$ (2-43)
+$Q_{lz} = \frac{1}{T_{lz}} \cdot LZ \cdot \Delta t$ (2-43)
 
-Here, *T~lz~* is again a reservoir constant \[days\], and *LZ* is the
-amount of water that is stored in the lower zone \[mm\]. The values of
-both *T~uz~* and *T~lz~* are obtained by calibration. The upper zone
-also provides the inflow into the lower zone. For each time step, a
-fixed amount of water percolates from the upper to the lower zone:
+Here, $T_{lz}$ is again a reservoir constant $[days]$, and $LZ$ is the amount of water that is stored in the lower zone $[mm]$. The values of both $T_{uz}$ and $T_{lz}$ are obtained by calibration. The upper zone also provides the inflow into the lower zone. For each time step, a fixed amount of water percolates from the upper to the lower zone:
 
-\${D\_{uz,lz}} = \\min (G{W\_{perc}} \\cdot \\Delta t,\\;UZ)\$ (2-44)
+$D_{uz,lz} = min (GW_{perc} \cdot \Delta t ,UZ)$ (2-44)
 
-Here, *GW~perc~* \[mm day^-1^\] is a user-defined value that can be used
-as a calibration constant. For many catchments it is quite reasonable to
-treat the lower groundwater zone as a system with a closed lower
-boundary (i.e. water is either stored, or added to the channel).
-However, in some cases the closed boundary assumption makes it
-impossible to obtain realistic simulations. Because of this, it is
-possible to percolate a fixed amount of water out of the lower zone, as
-a loss *D~loss~*:
+Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that can be used as a calibration constant. For many catchments it is quite reasonable to treat the lower groundwater zone as a system with a closed lower boundary (i.e. water is either stored, or added to the channel). However, in some cases the closed boundary assumption makes it impossible to obtain realistic simulations. Because of this, it is possible to percolate a fixed amount of water out of the lower zone, as a loss $D_{loss}$:
 
-\${D\_{loss}} = \\min ({f\_{loss}} \\cdot \\Delta t,\\;LZ)\$ (2-45)
+$D_{loss} = min(f_{loss} \cdot \Delta t,LZ)$ (2-45)
 
-In the previous version of LISFLOOD *D~loss~*, was calculated as a fixed
-fraction of Q~lz~, but this leads to a high dependency of D~loss~ from
-GW~perc~ and LZ. For example if either GW~perc~ or LZ is quite low the
-parameter *D~loss~* turns out to be meaningless.
+In the previous version of LISFLOOD $D_{loss}$, was calculated as a fixed fraction of $Q_{lz}$, but this leads to a high dependency of $D_{loss}$ from $GW_{perc}$ and $LZ$. For example if either $GW_{perc}$ or $LZ$ is quite low the parameter $D_{loss} turns out to be meaningless.
 
-The loss fraction, *f~loss~* \[-\], equals 0 for a completely closed
-lower boundary. If *f~loss~* is set to 1, all outflow from the lower
-zone is treated as a loss. Water that flows out of the lower zone
-through *D~loss~* is quite literally 'lost' forever. Physically, the
-loss term could represent water that is either lost to deep groundwater
-systems (that do not necessarily follow catchment boundaries), or even
-groundwater extraction wells. When using the model, it is suggested to
-use *f~oss~* with some care; start with a value of zero, and only use
-any other value if it is impossible to get satisfactory results by
-adjusting the other calibration parameters.
+The loss fraction, $f_{loss}$ \[-\], equals 0 for a completely closed lower boundary. If $f_{loss}$ is set to 1, all outflow from the lower zone is treated as a loss. Water that flows out of the lower zone through $D_{loss}$ is quite literally 'lost' forever. Physically, the loss term could represent water that is either lost to deep groundwater systems (that do not necessarily follow catchment boundaries), or even groundwater extraction wells. When using the model, it is suggested to use $f_{loss}$ with some care; start with a value of zero, and only use any other value if it is impossible to get satisfactory results by adjusting the other calibration parameters. At each time step, the amounts of water in the upper and lower zone are updated for the in- and outgoing fluxes, i.e.:
 
-At each time step, the amounts of water in the upper and lower zone are
-updated for the in- and outgoing fluxes, i.e.:
+$UZ_t = UZ_{t - 1} + D_{2,gw} - D_{uz,lz} - Q_{uz}$ (2-46)
 
-\$U{Z\_t} = U{Z\_{t - 1}} + {D\_{2,gw}} - D\_{uz,lz}\^{} - {Q\_{uz}}\$
-(2-46)
+$LZ_t = LZ_{t - 1} + D_{uz,lz} - Q_{lz} - D_{loss}$ (2-47)
 
-\$L{Z\_t} = L{Z\_{t - 1}} + D\_{uz,lz}\^{} - {Q\_{lz}} - {D\_{loss}}\$
-(2-47)
-
-Note that these equations are again valid for the permeable fraction of
-the pixel only: storage in the direct runoff fraction equals 0 for both
-*UZ* and *LZ*.
+Note that these equations are again valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
 Routing of surface runoff to channel
 ------------------------------------
 
-Surface runoff is routed to the nearest downstream channel using a
-4-point implicit finite-difference solution of the kinematic wave
-equations (Chow, 1988). The basic equations used are the equations of
+Surface runoff is routed to the nearest downstream channel using a 4-point implicit finite-difference  solution of the kinematic wave equations (Chow, 1988). The basic equations used are the equations of
 continuity and momentum. The continuity equation is:
 
-\$\\frac{{\\partial {Q\_{sr}}}}{{\\partial x}} + \\frac{{\\partial
-{A\_{sr}}}}{{\\partial t}} = {q\_{sr}}\$ (2-48)
+$\frac{\partial {Q_{sr}}}{\partial x} + \frac{\partial{A_{sr}}}{\partial t} = {q_{sr}}$ (2-48)
 
-where *Q~sr~* is the surface runoff \[m^3^ s^-1^\], *A~sr~* is the
-cross-sectional area of the flow \[m^2^\] and *q~sr~* is the amount of
-lateral inflow per unit flow length \[m^2^ s^-1^\]. The momentum
-equation is defined as:
+where $Q_{sr}$ is the surface runoff $[\frac{m^3}{ s}]$, $A_{sr}$  is the cross-sectional area of the flow $[m^2]$ and $q_{sr}$ is the amount of lateral inflow per unit flow length $[\frac{m^2}{s}]$. The momentum equation is defined as:
 
-\$\\rho {\\kern 1pt} g{A\_{sr}}({S\_0} - {S\_f}) = 0\$ (2-49)
+$\rho \cdot g \cdot A_{sr} \cdot (S_0 - S_f) = 0$ (2-49)
 
-where *ρ* is the density of the flow \[kg m^-3^\], *g* is the gravity
-acceleration \[m s^-2^\], *S~0~* is the topographical gradient and
-*S~f~* is the friction gradient. From the momentum equation it follows
-that *S~0~= S~f~*, which means that for the kinematic wave equations it
-is assumed that the water surface is parallel to the topographical
-surface. The continuity equation can also be written in the following
-finite-difference form (please note that for the sake of readability the
-'sr' subscripts are omitted here from *Q*, *A* and *q*):
+where $\rho$ is the density of the flow $[\frac{kg}{m^3}]$, $g$ is the gravity acceleration $[\frac{m}{s^2}]$, $S_0$ is the topographical gradient and $S_f$ is the friction gradient. From the momentum equation it follows that $S_0~= S_f$, which means that for the kinematic wave equations it is assumed that the water surface is parallel to the topographical surface. The continuity equation can also be written in the following finite-difference form (please note that for the sake of readability the 'sr' subscripts are omitted here from *Q*, *A* and *q*):
 
-\$\\frac{{Q\_{i + 1}\^{j + 1} - Q\_i\^{j + 1}}}{{\\Delta x}} +
-\\frac{{A\_{i + 1}\^{j + 1} - A\_{i + 1}\^j}}{{\\Delta t}} =
-\\frac{{q\_{i + 1}\^{j + 1} - q\_{i + 1}\^j}}{2}\$ (2-50)
+$\frac{Q_{i + 1}^{j + 1} - Q_i^{j + 1}}{\Delta x} +\frac{A_{i + 1}^{j + 1} - A_{i + 1}^j}{\Delta t} =\frac{q_{i + 1}^{j + 1} - q_{i + 1}^j}{2}$ (2-50)
 
-where *j* is a time index and *i* a space index (such that *i=1* for the
-most upstream cell, *i=2* for its downstream neighbour, etcetera). The
-momentum equation can also be expressed as (Chow et al., 1988):
+where *j* is a time index and *i* a space index (such that *i=1* for the most upstream cell, *i=2* for its downstream neighbour, etcetera). The momentum equation can also be expressed as (Chow et al., 1988):
 
-\${A\_{sr}} = {\\alpha \_{k,sr}} \\cdot {Q\_{sr}}\^{{\\beta \_k}}\$
-(2-51)
+$A_{sr} = \alpha_ {k,sr} \cdot Q_{sr}^{\beta _k}$ (2-51)
 
 Substituting the right-hand side of this expression in the
 finite-difference form of the continuity equation gives a nonlinear
