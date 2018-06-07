@@ -307,7 +307,7 @@ Where $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day
 
 $r_{WS} = \frac{w_1 - w_{wp1}}{w_{crit1} -w_{wp1}}$ (2-15)
 
-where $w_1​$ is the amount of moisture in the upper soil layer $[mm]​$, $w_{wp1} [mm]​$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]​$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The critical amount of soil moisture is calculated as:
+where $w_1$ is the amount of moisture in the upper soil layer $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The critical amount of soil moisture is calculated as:
 
 $w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}$ (2-16)
 
@@ -470,7 +470,7 @@ and lower layer are copied to temporary variables $w'_1$ and $w'_2$. Two variabl
 
 $D'_{1,2} = min [K_1(w'_1)\Delta t,w'_{s2} -w'_2]$ (2-38)
 
-3.  compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$, can never exceed available water in lower layer):
+3.  compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$), can never exceed available water in lower layer):
 
 $D'_{2,gw} = min [K_2(w'_2)\Delta t,w'_2 -w'_{r2}]$ (2-39)
 
@@ -505,7 +505,7 @@ Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that can be used as
 
 $D_{loss} = min(f_{loss} \cdot \Delta t,LZ)$ (2-45)
 
-In the previous version of LISFLOOD $D_{loss}$, was calculated as a fixed fraction of $Q_{lz}$, but this leads to a high dependency of $D_{loss}$ from $GW_{perc}$ and $LZ$. For example if either $GW_{perc}$ or $LZ$ is quite low the parameter $D_{loss} turns out to be meaningless.
+In the previous version of LISFLOOD $D_{loss}$, was calculated as a fixed fraction of $Q_{lz}$, but this leads to a high dependency of $D_{loss}$ from $GW_{perc}$ and $LZ$. For example if either $GW_{perc}$ or $LZ$ is quite low the parameter $D_{loss}$ turns out to be meaningless.
 
 The loss fraction, $f_{loss}$ \[-\], equals 0 for a completely closed lower boundary. If $f_{loss}$ is set to 1, all outflow from the lower zone is treated as a loss. Water that flows out of the lower zone through $D_{loss}$ is quite literally 'lost' forever. Physically, the loss term could represent water that is either lost to deep groundwater systems (that do not necessarily follow catchment boundaries), or even groundwater extraction wells. When using the model, it is suggested to use $f_{loss}$ with some care; start with a value of zero, and only use any other value if it is impossible to get satisfactory results by adjusting the other calibration parameters. At each time step, the amounts of water in the upper and lower zone are updated for the in- and outgoing fluxes, i.e.:
 
@@ -529,9 +529,9 @@ $\rho \cdot g \cdot A_{sr} \cdot (S_0 - S_f) = 0$ (2-49)
 
 where $\rho$ is the density of the flow $[\frac{kg}{m^3}]$, $g$ is the gravity acceleration $[\frac{m}{s^2}]$, $S_0$ is the topographical gradient and $S_f$ is the friction gradient. From the momentum equation it follows that $S_0~= S_f$, which means that for the kinematic wave equations it is assumed that the water surface is parallel to the topographical surface. The continuity equation can also be written in the following finite-difference form (please note that for the sake of readability the 'sr' subscripts are omitted here from *Q*, *A* and *q*):
 
-$\frac{Q_{i + 1}^{j + 1} - Q_i^{j + 1}}{\Delta x} +\frac{A_{i + 1}^{j + 1} - A_{i + 1}^j}{\Delta t} =\frac{q_{i + 1}^{j + 1} - q_{i + 1}^j}{2}$ (2-50)
+$\frac{Q_{i + 1}^{j + 1} - Q_i^{j + 1}}{\Delta x} +\frac{A_{i + 1}^{j + 1} - A_{i + 1}^j}{\Delta t} =\frac{q_{i + 1}^{j + 1} - q_{i + 1}^j}{2}​ (2-50)
 
-where *j* is a time index and *i* a space index (such that *i=1* for the most upstream cell, *i=2* for its downstream neighbour, etcetera). The momentum equation can also be expressed as (Chow et al., 1988):
+where *j* is a time index and *i* a space index (such that *i=1* for the most upstream cell, *i=2* for its downstream neighbor, etcetera). The momentum equation can also be expressed as (Chow et al., 1988):
 
 $A_{sr} = \alpha_ {k,sr} \cdot Q_{sr}^{\beta _k}$ (2-51)
 
