@@ -5155,8 +5155,7 @@ as:
 where *∆t* is the overall model time step \[s\]. The number of sub-steps
 is then given by:
 
-\$SubSteps = \\max
-(1,roundup(\\frac{{{C\_{dyn}}}}{{{C\_{dyn,crit}}}}))\$
+$SubSteps = \\max(1,roundup(\\frac{C_{dyn}}{{C_{dyn,crit}}}))$
 
 where *C~dyn,crit~* is the critical Courant number. The maximum value of
 the critical Courant number is 1; in practice it is safer to use a
