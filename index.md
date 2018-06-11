@@ -562,12 +562,9 @@ Recalling once more that the groundwater equations are valid for the pixel's per
 Channel routing
 ---------------
 
-Flow through the channel is simulated using the kinematic wave
-equations. The basic equations and the numerical solution are identical
-to those used for the surface runoff routing:
+Flow through the channel is simulated using the kinematic wave equations. The basic equations and the numerical solution are identical to those used for the surface runoff routing:
 
-\$\\frac{{\\partial {Q\_{ch}}}}{{\\partial x}} + \\frac{{\\partial
-{A\_{ch}}}}{{\\partial t}} = {q\_{ch}}\$ (2-55)
+\$\\frac{{\\partial {Q\_{ch}}}}{{\\partial x}} + \\frac{{\\partial {A\_{ch}}}}{{\\partial t}} = {q\_{ch}}\$ (2-55)
 
 where *Q~ch~* is the channel discharge \[m^3^ s^-1^\], *A~ch~* is the
 cross-sectional area of the flow \[m^2^\] and *q~ch~* is the amount of
@@ -580,12 +577,8 @@ where *S~0~* now equals the gradient of the channel bed, and *S~0~=
 S~f~*. As with the surface runoff, values for parameter *α~k,ch~* are
 estimated using Manning's equation:
 
-\${\\alpha \_{k,ch}} = {(\\frac{{n \\cdot
-{P\_{ch}}\^{{\\raise0.7ex\\hbox{\$2\$} \\!\\mathord{\\left/
+\${\\alpha \_{k,ch}} = {(\\frac{{n \\cdot {P\_{ch}}\^{{\\raise0.7ex\\hbox{\$2\$} \\!\\mathord{\\left/ {\\vphantom {2 3}}\\right.\\kern-\\nulldelimiterspace} \\!\\lower0.7ex\\hbox{\$3\$}}}}}{{\\sqrt {{S\_0}} }})\^{0.6}}\\quad
 
-{\\vphantom {2 3}}\\right.\\kern-\\nulldelimiterspace}
-
-\\!\\lower0.7ex\\hbox{\$3\$}}}}}{{\\sqrt {{S\_0}} }})\^{0.6}}\\quad
 ;\\quad {\\beta \_k} = 0.6\$ (2-57)
 
 At present, LISFLOOD uses values for *α~k,ch~* which are based on a
