@@ -4131,19 +4131,6 @@ From the Figure, it is easy to see that there can be three situations:
 1.  ***h~c~* \> *h~p~***: water flows out of the channel, into the
     polder. The flow rate, *q~c,p~*, is calculated using:
 
-> \$\\begin{array}{l}
->
-> {q\_{c,p}} = \\mu cb\\sqrt {2g} {h\_c}\^{{\\raise0.7ex\\hbox{\$3\$}
-> \\!\\mathord{\\left/
->
-> {\\vphantom {3 2}}\\right.\\kern-\\nulldelimiterspace}
->
-> \\!\\lower0.7ex\\hbox{\$2\$}}};\\\\
->
-> c = \\sqrt {1 - {{\\left\[ {\\frac{{{h\_p}}}{{{h\_c}}}}
-> \\right\]}\^{16}}}
->
-> \\end{array}\$ (A2.1)
 >
 > where *b* is the outflow width \[m\], *g* is the acceleration due to
 > gravity (9.81 m s^-2^) and *μ* is a weir constant which has a value of
@@ -4151,20 +4138,6 @@ From the Figure, it is easy to see that there can be three situations:
 
 2.  ***h~c~* \< *h~p~***: water flows out of the polder back into the
     channel. The flow rate, *q~p,c~*, is now calculated using:
-
-> \$\\begin{array}{l}
->
-> {q\_{p,c}} = \\mu cb\\sqrt {2g} {h\_p}\^{{\\raise0.7ex\\hbox{\$3\$}
-> \\!\\mathord{\\left/
->
-> {\\vphantom {3 2}}\\right.\\kern-\\nulldelimiterspace}
->
-> \\!\\lower0.7ex\\hbox{\$2\$}}};\\\\
->
-> c = \\sqrt {1 - {{\\left\[ {\\frac{{{h\_c}}}{{{h\_p}}}}
-> \\right\]}\^{16}}}
->
-> \\end{array}\$ (A2.2)
 
 3.  ***h~c~* = *h~p~***: no water flowing into either direction (note
     here that the minimum value of *h~c~* is zero). In this case both
