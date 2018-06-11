@@ -529,91 +529,35 @@ $\rho \cdot g \cdot A_{sr} \cdot (S_0 - S_f) = 0$ (2-49)
 
 where $\rho$ is the density of the flow $[\frac{kg}{m^3}]$, $g$ is the gravity acceleration $[\frac{m}{s^2}]$, $S_0$ is the topographical gradient and $S_f$ is the friction gradient. From the momentum equation it follows that $S_0~= S_f$, which means that for the kinematic wave equations it is assumed that the water surface is parallel to the topographical surface. The continuity equation can also be written in the following finite-difference form (please note that for the sake of readability the 'sr' subscripts are omitted here from *Q*, *A* and *q*):
 
-$\frac{Q_{i + 1}^{j + 1} - Q_i^{j + 1}}{\Delta x} +\frac{A_{i + 1}^{j + 1} - A_{i + 1}^j}{\Delta t} =\frac{q_{i + 1}^{j + 1} - q_{i + 1}^j}{2}​ (2-50)
+$\frac{Q_{i + 1}^{j + 1} - Q_i^{j + 1}}{\Delta x} +\frac{A_{i + 1}^{j + 1} - A_{i + 1}^j}{\Delta t} =\frac{q_{i + 1}^{j + 1} - q_{i + 1}^j}{2}$ (2-50)
 
 where *j* is a time index and *i* a space index (such that *i=1* for the most upstream cell, *i=2* for its downstream neighbor, etcetera). The momentum equation can also be expressed as (Chow et al., 1988):
 
 $A_{sr} = \alpha_ {k,sr} \cdot Q_{sr}^{\beta _k}$ (2-51)
 
-Substituting the right-hand side of this expression in the
-finite-difference form of the continuity equation gives a nonlinear
-implicit finite-difference solution of the kinematic wave:
+Substituting the right-hand side of this expression in the finite-difference form of the continuity equation gives a nonlinear implicit finite-difference solution of the kinematic wave:
 
-\$\\frac{{\\Delta t}}{{\\Delta x}}Q\_{i + 1}\^{j + 1} + {\\alpha
-\_k}{(Q\_{i + 1}\^{j + 1})\^{{\\beta \_k}}} = \\frac{{\\Delta
-t}}{{\\Delta x}}Q\_i\^{j + 1} + {\\alpha \_k}{(Q\_{i + 1}\^j)\^{{\\beta
-\_k}}} + \\Delta t(\\frac{{q\_{i + 1}\^{j + 1} + q\_{i + 1}\^j}}{2})\$
-(2-52)
+$\frac{\Delta t}{\Delta x}\cdot Q_{i + 1}^{j + 1} \alpha _k \cdot (Q_{i + 1}^{j + 1})^{\beta _k} = \frac{\Delta t}{\Delta x} \cdot Q_i^{j + 1} \alpha _k \cdot (Q_{i + 1}^j)^{\beta_k}\Delta t \cdot (\frac{q_{i + 1}^{j + 1} + q_{i + 1}^j}{2})$ (2-52)
 
-If *α~k,sr~* and *β~k~* are known, this non-linear equation can be
-solved for each pixel and during each time step using an iterative
-procedure. This numerical solution scheme is available as a built-in
-function in the PCRaster software. The coefficients *α~k,sr~* and *β~k~*
-are calculated by substituting Manning\'s equation in the right-hand
-side of Equation 2-51:
+If $α_{k,sr}$ and $β_k$ are known, this non-linear equation can be solved for each pixel and during each time step using an iterative procedure. This numerical solution scheme is available as a built-in function in the PCRaster software. The coefficients $α_{k,sr}$ and $β_k$ are calculated by substituting Manning's equation in the right-hand side of Equation 2-51:
 
-\${A\_{sr}} = {(\\frac{{n \\cdot {P\_{sr}}\^{{\\raise0.7ex\\hbox{\$2\$}
-\\!\\mathord{\\left/
+$A_{sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}}) \cdot Q_{sr}^{3/5}$ (2-53)
 
-{\\vphantom {2 3}}\\right.\\kern-\\nulldelimiterspace}
+where *n* is Manning\'s roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation 2-51 gives:
 
-\\!\\lower0.7ex\\hbox{\$3\$}}}}}{{\\sqrt {{S\_0}}
-}})\^{{\\raise0.7ex\\hbox{\$3\$} \\!\\mathord{\\left/
+$\alpha _{k,sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}})^{0.6}$ $; \beta_k=0.6$ (2-54)
 
-{\\vphantom {3 5}}\\right.\\kern-\\nulldelimiterspace}
-
-\\!\\lower0.7ex\\hbox{\$5\$}}}} \\cdot
-{Q\_{sr}}\^{{\\raise0.7ex\\hbox{\$3\$} \\!\\mathord{\\left/
-
-{\\vphantom {3 5}}\\right.\\kern-\\nulldelimiterspace}
-
-\\!\\lower0.7ex\\hbox{\$5\$}}}\$ (2-53)
-
-where *n* is Manning\'s roughness coefficient and *P~sr~* is the wetted
-perimeter of a cross-section of the surface flow. Substituting the
-right-hand side of this equation for *A~sr~* in equation 2-51 gives:
-
-\${\\alpha \_{k,sr}} = {(\\frac{{n \\cdot
-{P\_{sr}}\^{{\\raise0.7ex\\hbox{\$2\$} \\!\\mathord{\\left/
-
-{\\vphantom {2 3}}\\right.\\kern-\\nulldelimiterspace}
-
-\\!\\lower0.7ex\\hbox{\$3\$}}}}}{{\\sqrt {{S\_0}} }})\^{0.6}}\\quad
-;\\quad {\\beta \_k} = 0.6\$ (2-54)
-
-At present, LISFLOOD uses values for *α~k,sr~* which are based on a
-static (reference) flow depth, and a flow width that equals the pixel
-size, *Δx*. For each time step, all runoff that is generated (*R~s~*) is
-added as side-flow (*q~sr~*). For each flowpath, the routing stops at
-the first downstream pixel that is part of the channel network. In other
-words, the routine only routes the surface runoff *to* the nearest
-channel; no runoff *through* the channel network is simulated at this
-stage (runoff- and channel routing are completely separated).
+At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. For each time step, all runoff that is generated ($R_s$) is added as side-flow ($q_{sr}$). For each flowpath, the routing stops at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated).
 
 Routing of sub-surface runoff to channel
 ----------------------------------------
 
-All water that flows out of the upper- and lower groundwater zone is
-routed to the nearest downstream channel pixel within one time step.
-Recalling once more that the groundwater equations are valid for the
-pixel's permeable fraction only, the contribution of each pixel to the
-nearest channel is made up of (*f~forest+~f~other~)∙(Q~uz~* + *Q~lz~)*.
-Figure 2.12 illustrates the routing procedure: for each pixel that
-contains a river channel, its contributing pixels are defined by the
-drainage network. For every \'river pixel\' the groundwater outflow that
-is generated by its upstream pixels is simply summed. For instance,
-there are two flow paths that are contributing to the second \'river
-pixel\' from the left in Figure 2.12. Hence, the amount of water that is
-transported to this pixel equals the sum of the amounts of water
-produced by these flowpaths, q1 + q2. Note that, as with the surface
-runoff routing, no water is routed *through* the river network at this
-stage.
+All water that flows out of the upper- and lower groundwater zone is routed to the nearest downstream channel pixel within one time step.
+Recalling once more that the groundwater equations are valid for the pixel's permeable fraction only, the contribution of each pixel to the nearest channel is made up of $(f_{forest}+f_{other)} \cdot (Q_uz + Q_lz)$. Figure 2.12 illustrates the routing procedure: for each pixel that contains a river channel, its contributing pixels are defined by the drainage network. For every 'river pixel' the groundwater outflow that is generated by its upstream pixels is simply summed. For instance, there are two flow paths that are contributing to the second \'river pixel\' from the left in Figure 2.12. Hence, the amount of water that is transported to this pixel equals the sum of the amounts of water produced by these flowpaths, q1 + q2. Note that, as with the surface runoff routing, no water is routed *through* the river network at this stage.
 
-![ROUTING](media/media/image35.png){width="6.0in"
-height="3.1354166666666665in"}
+![ROUTING](media/image35.png)
 
-*Figure 2.12 Routing of groundwater to channel network. Groundwater flow
-is routed to the nearest 'channel' pixel.*
+###### Figure 2.12 Routing of groundwater to channel network. Groundwater flow is routed to the nearest 'channel' pixel.
 
 Channel routing
 ---------------
