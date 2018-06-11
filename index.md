@@ -529,7 +529,7 @@ where $Q_{sr}$ is the surface runoff $[\frac{m^3}{ s}]$, $A_{sr}$  is the cross-
 
 $\rho \cdot g \cdot A_{sr} \cdot (S_0 - S_f) = 0$ (2-49)
 
-where $\rho$ is the density of the flow $[\frac{kg}{m^3}]$, $g$ is the gravity acceleration $[\frac{m}{s^2}]$, $S_0$ is the topographical gradient and $S_f$ is the friction gradient. From the momentum equation it follows that $S_0~= S_f$, which means that for the kinematic wave equations it is assumed that the water surface is parallel to the topographical surface. The continuity equation can also be written in the following finite-difference form (please note that for the sake of readability the 'sr' subscripts are omitted here from *Q*, *A* and *q*):
+where $\rho​$ is the density of the flow $[\frac{kg}{m^3}]​$, $g​$ is the gravity acceleration $[\frac{m}{s^2}]​$, $S_0​$ is the topographical gradient and $S_f​$ is the friction gradient. From the momentum equation it follows that $S_0~= S_f​$, which means that for the kinematic wave equations it is assumed that the water surface is parallel to the topographical surface. The continuity equation can also be written in the following finite-difference form (please note that for the sake of readability the 'sr' subscripts are omitted here from *Q*, *A* and *q*):
 
 $\frac{Q_{i + 1}^{j + 1} - Q_i^{j + 1}}{\Delta x} +\frac{A_{i + 1}^{j + 1} - A_{i + 1}^j}{\Delta t} =\frac{q_{i + 1}^{j + 1} - q_{i + 1}^j}{2}$ (2-50)
 
