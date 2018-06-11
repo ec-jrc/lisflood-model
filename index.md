@@ -515,6 +515,8 @@ $LZ_t = LZ_{t - 1} + D_{uz,lz} - Q_{lz} - D_{loss}$ (2-47)
 
 Note that these equations are again valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
+[🔝](#top)
+
 Routing of surface runoff to channel
 ------------------------------------
 
@@ -549,6 +551,8 @@ $\alpha _{k,sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}})^{0.6}$ $; \beta_k=0.
 
 At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. For each time step, all runoff that is generated ($R_s$) is added as side-flow ($q_{sr}$). For each flowpath, the routing stops at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated).
 
+[🔝](#top)
+
 Routing of sub-surface runoff to channel
 ----------------------------------------
 
@@ -559,48 +563,30 @@ Recalling once more that the groundwater equations are valid for the pixel's per
 
 ###### Figure 2.12 Routing of groundwater to channel network. Groundwater flow is routed to the nearest 'channel' pixel.
 
+[🔝](#top)
+
 Channel routing
 ---------------
 
 Flow through the channel is simulated using the kinematic wave equations. The basic equations and the numerical solution are identical to those used for the surface runoff routing:
 
-\$\\frac{{\\partial {Q\_{ch}}}}{{\\partial x}} + \\frac{{\\partial {A\_{ch}}}}{{\\partial t}} = {q\_{ch}}\$ (2-55)
+$\frac{\partial Q_{ch}}{\partial x} \cdot \frac{\partial A_{ch}}{\partial t} = q_{ch}$ (2-55)
 
-where *Q~ch~* is the channel discharge \[m^3^ s^-1^\], *A~ch~* is the
-cross-sectional area of the flow \[m^2^\] and *q~ch~* is the amount of
-lateral inflow per unit flow length \[m^2^ s^-1^\]. The momentum
-equation then becomes:
+where $Q_{ch}$ is the channel discharge $[\frac{m^3}{s}]$, $A_{ch}$ is the cross-sectional area of the flow $[m^2]$ and $q_ch$ is the amount of lateral inflow per unit flow length $[\frac{m^2}{s}]$. The momentum equation then becomes:
 
-\$\\rho {\\kern 1pt} g{A\_{ch}}({S\_0} - {S\_f}) = 0\$ (2-56)
+$\rho \cdot gA_{ch} \cdot (S_0 - S_f) = 0$ (2-56)
 
-where *S~0~* now equals the gradient of the channel bed, and *S~0~=
-S~f~*. As with the surface runoff, values for parameter *α~k,ch~* are
-estimated using Manning's equation:
+where $S_0$ now equals the gradient of the channel bed, and $S_0=S_f$. As with the surface runoff, values for parameter $α_{k,ch} are estimated using Manning's equation:
 
-\${\\alpha \_{k,ch}} = {(\\frac{{n \\cdot {P\_{ch}}\^{{\\raise0.7ex\\hbox{\$2\$} \\!\\mathord{\\left/ {\\vphantom {2 3}}\\right.\\kern-\\nulldelimiterspace} \\!\\lower0.7ex\\hbox{\$3\$}}}}}{{\\sqrt {{S\_0}} }})\^{0.6}}\\quad
+$\alpha _{k,ch} = (\frac{n \cdot P_{ch}^{2/3}}{\sqrt{S_0}})^{0.6}; \beta _k=0.6$ (2-57)
 
-;\\quad {\\beta \_k} = 0.6\$ (2-57)
+At present, LISFLOOD uses values for $α_{k,ch}$ which are based on a static (reference) channel flow depth (half bankfull) and measured channel dimensions. The term $q_{ch}$ (sideflow) now represents the runoff that enters the channel per unit channel length:
 
-At present, LISFLOOD uses values for *α~k,ch~* which are based on a
-static (reference) channel flow depth (half bankfull) and measured
-channel dimensions. The term *q~ch~* (sideflow) now represents the
-runoff that enters the channel per unit channel length:
+$q_{ch} = \frac{\sum Q_{sr} + \sum Q_{uz} + \sum Q_{lz} + Q_{in} + Q_{res}}{L_{ch}} $ (2-58)
 
-\${q\_{ch}} = (\\sum {{Q\_{sr}} + \\sum {{Q\_{uz}} + \\sum {{Q\_{lz}} +
-{Q\_{in}} + {Q\_{res}})/{L\_{ch}}} } } \$ (2-58)
+Here, $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, outflow from the upper zone and outflow from the lower zone, respectively. $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the 'inflow hydrograph' option is activated (see Annex 2). $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the 'reservoir' option is activated (see Annex 1). $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$ and $Q_{res}$ are all expressed in [$m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. The kinematic wave channel routing can be run using a smaller time-step than the over simulation timestep, $\Delta t$, if needed.
 
-Here, *Q~sr~*, *Q~uz~* and *Q~lz~* denote the contributions of surface
-runoff, outflow from the upper zone and outflow from the lower zone,
-respectively. *Q~in~* is the inflow from an external inflow hydrograph;
-by default its value is 0, unless the 'inflow hydrograph' option is
-activated (see Annex 2). *Q~res~* is the water that flows out of a
-reservoir into the channel; by default its value is 0, unless the
-'reservoir' option is activated (see Annex 1). *Q~sr~*, *Q~uz~*,
-*Q~lz~*, *Q~in~* and *Q~res~* are all expressed in \[m^3^\] per time
-step. *L~ch~* is the channel length \[m\], which may exceed the pixel
-size (*Δx*) in case of meandering channels. The kinematic wave channel
-routing can be run using a smaller time-step than the over simulation
-timestep, *Δt*, if needed.
+[[🔝](#top)](#top)
 
 Special simulation options
 --------------------------
