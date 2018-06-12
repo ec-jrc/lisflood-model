@@ -4427,18 +4427,13 @@ steady-state situation the storage remains constant, so:
 
 Substituting all in- and outflow terms gives:
 
-\${I\_l} - E{W\_l} - A{(H - {H\_0})\^B} = 0\$
+$I_l - EW_l - A \cdot (H - H_0)^B = 0$
 
 where *I~l~* is the inflow into the lake and *EW~l~* the lake
 evaporation (both expressed in m^3^ s^-1^). Re-arranging gives the
 steady-state lake level:
 
-\${H\_{ss}} = {H\_0} + {\\left( {\\frac{{{I\_l} - E{W\_l}}}{A}}
-\\right)\^{{\\raise0.7ex\\hbox{\$1\$} \\!\\mathord{\\left/
-
-{\\vphantom {1 B}}\\right.\\kern-\\nulldelimiterspace}
-
-\\!\\lower0.7ex\\hbox{\$B\$}}}}\$
+$H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{1/B}$
 
 LISFLOOD calculates the steady-state lake level based on a user-defined
 average net inflow (=*I~l~* -- *EW~l~*). The average net inflow can be
