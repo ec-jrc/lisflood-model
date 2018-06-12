@@ -617,7 +617,6 @@ Features are:
 
  3. Installation of the LISFLOOD model
     ======================================
-[[🔝](#top)](#top)
 
 System requirements
 -------------------
@@ -4119,30 +4118,28 @@ channel to the polder area and vice versa are calculated by balancing
 out the water levels in the channel and in the polder, as shown in
 Figure A2.1.
 
-![polders](media/media/image43.png){width="5.770833333333333in"
-height="1.9166666666666667in"}
+![polders](media/image43.png)
 
-*Figure A2.1 Schematic overview of the simulation of polders.* pb *is
-the polder bottom level (above the channel bottom);* w~c~ *is the water
-level in the channel;* h~c~ *and* h~p~ *are the water levels above the
+*Figure A2.1 Schematic overview of the simulation of polders.* pb *is the polder bottom level (above the channel bottom);* w~c~ *is the water level in the channel;* h~c~ *and* h~p~ *are the water levels above the
 polder in- / outflow, respectively*
+
+
 
 From the Figure, it is easy to see that there can be three situations:
 
-1.  ***h~c~* \> *h~p~***: water flows out of the channel, into the
-    polder. The flow rate, *q~c,p~*, is calculated using:
+1.  ***h~c~* \> *h~p~***: water flows out of the channel, into the polder. The flow rate, *q~c,p~*, is calculated using:
 
+> $\begin{array}{|} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}$ (A2.1)
 >
-> where *b* is the outflow width \[m\], *g* is the acceleration due to
-> gravity (9.81 m s^-2^) and *μ* is a weir constant which has a value of
-> 0.49. Furthermore *q~c,p~* is in \[m^3^ s^-1^\].
+> where *b* is the outflow width \[m\], *g* is the acceleration due to gravity (9.81 m s^-2^) and *μ* is a weir constant which has a value of 0.49. Furthermore *q~c,p~* is in \[m^3^ s^-1^\].
 
 2.  ***h~c~* \< *h~p~***: water flows out of the polder back into the
     channel. The flow rate, *q~p,c~*, is now calculated using:
 
-3.  ***h~c~* = *h~p~***: no water flowing into either direction (note
-    here that the minimum value of *h~c~* is zero). In this case both
-    *q~c,p~* and *q~p,c~* are zero.
+> $\begin{array}{|} q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2} \\  c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}$ (A2.2)
+>
+
+3.  ***h~c~* = *h~p~***: no water flowing into either direction (note here that the minimum value of *h~c~* is zero). In this case both *q~c,p~* and *q~p,c~* are zero.
 
 Regulated and unregulated polders
 ---------------------------------
@@ -4436,7 +4433,12 @@ where *I~l~* is the inflow into the lake and *EW~l~* the lake
 evaporation (both expressed in m^3^ s^-1^). Re-arranging gives the
 steady-state lake level:
 
+\${H\_{ss}} = {H\_0} + {\\left( {\\frac{{{I\_l} - E{W\_l}}}{A}}
+\\right)\^{{\\raise0.7ex\\hbox{\$1\$} \\!\\mathord{\\left/
 
+{\\vphantom {1 B}}\\right.\\kern-\\nulldelimiterspace}
+
+\\!\\lower0.7ex\\hbox{\$B\$}}}}\$
 
 LISFLOOD calculates the steady-state lake level based on a user-defined
 average net inflow (=*I~l~* -- *EW~l~*). The average net inflow can be
@@ -5155,7 +5157,8 @@ as:
 where *∆t* is the overall model time step \[s\]. The number of sub-steps
 is then given by:
 
-$SubSteps = \\max(1,roundup(\\frac{C_{dyn}}{{C_{dyn,crit}}}))$
+\$SubSteps = \\max
+(1,roundup(\\frac{{{C\_{dyn}}}}{{{C\_{dyn,crit}}}}))\$
 
 where *C~dyn,crit~* is the critical Courant number. The maximum value of
 the critical Courant number is 1; in practice it is safer to use a
