@@ -423,9 +423,9 @@ Soil moisture redistribution
 
 The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layer) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from Darcy's law for 1-D vertical flow:
 
-$q = - K(\theta ) \cdot [\frac{{\partial h(\theta )}}{{\partial z}} -1]$ (2-29)
+$q = - K(\theta ) \cdot [\frac{\partial h(\theta )}{\partial z} -1]$ (2-29)
 
-where *q* \[mm day^-1^\] is the flow rate out of the soil (e.g. upper soil layer, lower soil layer); $K(\theta) [\frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [mm^3 \ mm^-3]$) and $\frac{\partial h\ (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
+where $q [\frac{mm}{day}]$ is the flow rate out of the soil (e.g. upper soil layer, lower soil layer); $K(\theta) [frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [\frac{mm^3}{ mm^3}]$ and $\frac{\partial h (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
 
 $q = K(\theta )$ (2-30)
 
