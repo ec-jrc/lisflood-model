@@ -5147,13 +5147,12 @@ the cross-sectional area \[m^2^\].
 The Courant number for the dynamic wave, *C~dyn~*, can now be computed
 as:
 
-\${C\_{dyn}} = \\frac{{(V + {c\_d})\\Delta t}}{{\\Delta x}}\$
+$C_{dyn} = \frac{(V + c_d)\Delta t}{\Delta x}$
 
 where *∆t* is the overall model time step \[s\]. The number of sub-steps
 is then given by:
 
-\$SubSteps = \\max
-(1,roundup(\\frac{{{C\_{dyn}}}}{{{C\_{dyn,crit}}}}))\$
+$SubSteps = \max (1,roundup(\frac{C_{dyn}}{C_{dyn,crit}}))$
 
 where *C~dyn,crit~* is the critical Courant number. The maximum value of
 the critical Courant number is 1; in practice it is safer to use a
