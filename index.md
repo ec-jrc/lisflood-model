@@ -425,7 +425,7 @@ The description of the moisture fluxes out of the subsoil (and also between the 
 
 $q = - K(\theta ) \cdot [\frac{\partial h(\theta )}{\partial z} -1]$ (2-29)
 
-where $q [\frac{mm}{day}]$ is the flow rate out of the soil (e.g. upper soil layer, lower soil layer); $K(\theta) [frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [\frac{mm^3}{ mm^3}]$ and $\frac{\partial h (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
+where $q [\frac{mm}{day}]$ is the flow rate out of the soil (e.g. upper soil layer, lower soil layer); $K(\theta) [\frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [\frac{mm^3}{ mm^3}]$ and $\frac{\partial h (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
 
 $q = K(\theta )$ (2-30)
 
@@ -591,12 +591,7 @@ Here, $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, 
 Special simulation options
 --------------------------
 
-The above model description covers the processes that are simulated in a
-'standard' LISFLOOD run. By default, special structures in the river
-channel e.g. lakes and regulated reservoirs are not taken into account.
-However, LISFLOOD has some optional features to model these structures.
-The description of these features can be found in a series of Annexes at
-the end of this manual.
+The above model description covers the processes that are simulated in a 'standard' LISFLOOD run. By default, special structures in the river channel e.g. lakes and regulated reservoirs are not taken into account. However, LISFLOOD has some optional features to model these structures. The description of these features can be found in a series of Annexes at the end of this manual.
 
 Features are:
 
@@ -615,21 +610,14 @@ Features are:
 
 -   Simulating water levels (Annex 9)
 
- 3. Installation of the LISFLOOD model
-    ======================================
+Installation of the LISFLOOD model
+======================================
 
 System requirements
 -------------------
 
-Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows
-systems. Either way, the model requires that a recent version of the
-PCRaster software is available, or at least PCRaster's 'pcrcalc'
-application and all associated libraries. LISFLOOD require 'pcrcalc'
-version November 30, 2009, or more recent. Older 'pcrcalc' versions will
-either not work at all, or they might produce erroneous results. Unless
-you are using a 'sealed' version of LISFLOOD (i.e. a version in which
-the source code is made unreadable), you will also need a licensed
-version of 'pcrcalc'. For details on how to install PCRaster we refer to
+Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless
+you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to
 the PCRaster documentation.
 
 Installation on Windows systems
@@ -637,103 +625,75 @@ Installation on Windows systems
 
 For Windows users the installation involves two steps:
 
-1.  Unzip the contents of 'lisflood\_win32.zip' to an empty folder on
-    your PC (e.g. 'lisflood')
+1.  Unzip the contents of 'lisflood\_win32.zip' to an empty folder on your PC (e.g. 'lisflood')
 
-2.  Open the file 'config.xml' in a text editor. This file contains the
-    full path to all files and applications that are used by LISFLOOD.
-    The items in the file are:
+2.  Open the file 'config.xml' in a text editor. This file contains the full path to all files and applications that are used by LISFLOOD. The items in the file are:
 
--   *Pcrcalc application* : this is the name of the pcrcalc application,
-    including the full path
+- *Pcrcalc application* : this is the name of the pcrcalc application, including the full path
 
--   *LISFLOOD Master Code* (optional). This item is usually omitted, and
-    LISFLOOD assumes that the master code is called 'lisflood.xml', and
-    that it is located in the root of the 'lisflood' directory (i.e. the
-    directory that contains 'lisflood.exe' and all libraries). If --for
-    whatever reason- you want to overrule this behaviour, you can add a
-    'mastercode' element, e.g.:
+- *LISFLOOD Master Code* (optional). This item is usually omitted, and LISFLOOD assumes that the master code is called 'lisflood.xml', and that it is located in the root of the 'lisflood' directory (i.e. the directory that contains 'lisflood.exe' and all libraries). If --for whatever reason- you want to overrule this behaviour, you can add a 'mastercode' element, e.g.:
 
-> **\<mastercode\>**d:\\Lisflood\\mastercode\\lisflood.xml**\</mastercode\>**
+    <mastercode\>d:\\Lisflood\\mastercode\\lisflood.xml<\mastercode>
 
-The configuration file should look something like this:
+    The configuration file should look something like this:
 
-+-------------------------------------------------------------------------+
-| \<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>                       |
-|                                                                         |
-| \<!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>             |
-|                                                                         |
-| \<!\-- !! This file MUST be in the same directory as lisflood.exe \--\> |
-|                                                                         |
-| \<!\-- (or lisflood) !!! \--\>                                          |
-|                                                                         |
-| **\<lfconfig\>**                                                        |
-|                                                                         |
-| \<!\-- location of pcrcalc application \--\>                            |
-|                                                                         |
-| **\<pcrcalcapp\>**C:\\pcraster\\apps\\pcrcalc.exe**\</pcrcalcapp\>**    |
-|                                                                         |
-| **\</lfconfig\>**                                                       |
-+-------------------------------------------------------------------------+
+```
+<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+<!-- Lisflood configuration file, JvdK, 8 July 2004 -->
+<!-- !! This file MUST be in the same directory as lisflood.exe -->
+<!-- (or lisflood) !!! -->
+<lfconfig>
+<!-- location of pcrcalc application -->
+<pcrcalcapp>C:\pcraster\apps\pcrcalc.exe</pcrcalcapp>
+</lfconfig>
+```
 
-The lisflood executable is a command-line application which can be
-called from the command prompt ('DOS' prompt). To make life easier you
-may include the full path to 'lisflood.exe' in the 'Path' environment
-variable. In Windows XP you can do this by selecting 'settings' from the
-'Start' menu; then go to 'control panel'/'system' and go to the
-'advanced' tab. Click on the 'environment variables' button. Finally,
-locate the 'Path' variable in the 'system variables' window and click on
-'Edit' (this requires local Administrator privileges).
+
+
+The lisflood executable is a command-line application which can be called from the command prompt ('DOS' prompt). To make life easier you may include the full path to 'lisflood.exe' in the 'Path' environment
+variable. In Windows XP you can do this by selecting 'settings' from the 'Start' menu; then go to 'control panel'/'system' and go to the 'advanced' tab. Click on the 'environment variables' button. Finally, locate the 'Path' variable in the 'system variables' window and click on 'Edit' (this requires local Administrator privileges).
+
+[[🔝](#top)](#top)
 
 Installation on Linux systems
 -----------------------------
 
-Under Linux LISFLOOD requires that the Python interpreter (version 2.5
-or more recent) is installed on the system. Most Linux distributions
-already have Python pre-installed. If needed you can download Python
+Under Linux LISFLOOD requires that the Python interpreter (version 2.7 or more recent) is installed on the system. Most Linux distributions already have Python pre-installed. If needed you can download Python
 free of any charge from the following location:
 
 *http://www.python.org/*
 
 The installation process is largely identical to the Windows procedure:
+
 unzip the contents of 'lisflood\_llinux.zip' to an empty directory.
-Check if the file 'lisflood' is executable. If not, make it executable
-using:
+Check if the file 'lisflood' is executable. If not, make it executable using:
 
 chmod 755 lisflood
 
-Then update the paths in the configuration file. The configuration file
-will look something like this:
+Then update the paths in the configuration file. The configuration file will look something like this:
 
-+-------------------------------------------------------------------------+
-| \<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>                       |
-|                                                                         |
-| \<!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>             |
-|                                                                         |
-| \<!\-- !! This file MUST be in the same directory as lisflood.exe \--\> |
-|                                                                         |
-| \<!\-- (or lisflood) !!! \--\>                                          |
-|                                                                         |
-| **\<lfconfig\>**                                                        |
-|                                                                         |
-| \<!\-- location of pcrcalc application \--\>                            |
-|                                                                         |
-| **\<pcrcalcapp\>/software/PCRaster/bin/pcrcalc\</pcrcalcapp\>**         |
-|                                                                         |
-| **\</lfconfig\>**                                                       |
-+-------------------------------------------------------------------------+
+
+`<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>`
+`<!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>`
+`<!\-- !! This file MUST be in the same directory as lisflood.exe \--\>`
+`<!\-- (or lisflood) !!! \--\>`
+`<lfconfig\>`
+`<!\-- location of pcrcalc application \--\>`
+`<pcrcalcapp\>/software/PCRaster/bin/pcrcalc\</pcrcalcapp\>`
+`</lfconfig\>`
+
+
+
+[[🔝](#top)](#top)
 
 Running the model
 -----------------
 
-Type 'lisflood' at the command prompt. You should see something like
-this:
+Type 'lisflood' at the command prompt. You should see something like this:
 
 LISFLOOD version March 24 2008
 
-Water balance and flood simulation model for large catchments
-
-\(C) Institute for Environment and Sustainability
+Water balance and flood simulation model for large catchments \(C) Institute for Environment and Sustainability
 
 Joint Research Centre of the European Commission
 
@@ -743,32 +703,24 @@ usage (1): lisflood \[switches\] \<InputFile\>
 
 usage (2): lisflood \--listoptions (show options only)
 
-InputFile : LISFLOOD input file (see documentation
-
-for description of format)
+InputFile : LISFLOOD input file (see documentation for description of format)
 
 switches:
 
 -s : keep temporary script after simulation
 
-You can run LISFLOOD by typing 'lisflood' followed by a
-specially-formatted settings file. The layout of this file is described
-in Chapters 4 and 5. Chapter 3 explains all other input files.
+You can run LISFLOOD by typing 'lisflood' followed by a specially-formatted settings file. The layout of this file is described in Chapters 4 and 5. Chapter 3 explains all other input files.
 
-[]{#_Toc84077416 .anchor}**4. Model setup: input files**
+[[🔝](#top)](#top)
 
-In the current version of LISFLOOD, all model input is provided as
-either maps (grid files in PCRaster format) or tables. This chapter
-describes all the data that are required to run the model. Files that
-are specific to *optional* LISFLOOD features (e.g. inflow hydrographs,
-reservoirs) are not listed here; they are described in the documentation
-for each option.
+## Model setup: input files
+
+In the current version of LISFLOOD, all model input is provided as either maps (grid files in PCRaster format) or tables. This chapter describes all the data that are required to run the model. Files that are specific to *optional* LISFLOOD features (e.g. inflow hydrographs, reservoirs) are not listed here; they are described in the documentation for each option.
 
 Input maps
 ----------
 
-PCRaster requires that all maps must have *identical* location
-attributes (number of rows, columns, cellsize, upper x and y coordinate!
+PCRaster requires that all maps must have *identical* location attributes (number of rows, columns, cellsize, upper x and y coordinate!
 
 All input maps roughly fall into any of the following six categories:
 
@@ -786,38 +738,19 @@ All input maps roughly fall into any of the following six categories:
 
 -   maps related to the development of vegetation over time
 
--   maps that define at which locations output is generated as time
-    series
+-   maps that define at which locations output is generated as time series
 
-All maps that are needed to run the model are listed in the table[^3] of
-Annex 12.
+All maps that are needed to run the model are listed in the table of Annex 12.
 
 ### Role of "mask" and "channels" maps 
 
-The mask map (i.e. "area.map") defines the model domain. In order to
-avoid unexpected results, **it is vital that all maps that are related
-to topography, land use and soil are defined (i.e. don't contain a
-missing value)** for each pixel that is "true" (has a Boolean 1 value)
-on the mask map. The same applies for all meteorological input and the
-Leaf Area Index maps. Similarly, all pixels that are "true" on the
-channels map must have some valid (non-missing) value on each of the
-channel parameter maps. Undefined pixels can lead to unexpected
-behaviour of the model, output that is full of missing values, loss of
-mass balance and possibly even model crashes. Some maps needs to have
-values in a defined range e.g. gradient.map has to be greater than 0.
+The mask map (i.e. "area.map") defines the model domain. In order to avoid unexpected results, **it is vital that all maps that are related to topography, land use and soil are defined** (i.e. don't contain a missing value) for each pixel that is "true" (has a Boolean 1 value) on the mask map. The same applies for all meteorological input and the Leaf Area Index maps. Similarly, all pixels that are "true" on the
+channels map must have some valid (non-missing) value on each of the channel parameter maps. Undefined pixels can lead to unexpected behaviour of the model, output that is full of missing values, loss of mass balance and possibly even model crashes. Some maps needs to have values in a defined range e.g. gradient.map has to be greater than 0.
 
 ### Map location attributes and distance units
 
-LISFLOOD needs to know the size properties of each grid cell (length,
-area) in order to calculate water *volumes* from meteorological forcing
-variables that are all defined as water *depths*. By default, LISFLOOD
-obtains this information from the location attributes of the input maps.
-This will only work if all maps are in an "equal area" (equiareal)
-projection, and the map co-ordinates (and cell size) are defined in
-meters. For datasets that use, for example, a latitude-longitude system,
-neither of these conditions is met. In such cases you can still run
-LISFLOOD if you provide two additional maps that contain the length and
-area of each grid cell:
+LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
+obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell:
 
 +-----------------------+-----------------------+-----------------------+
 | ***Table 4.1**        |
