@@ -637,7 +637,7 @@ For Windows users the installation involves two steps:
 
     The configuration file should look something like this:
 
-```
+```xml
 <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
 <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
 <!-- !! This file MUST be in the same directory as lisflood.exe -->
@@ -672,15 +672,13 @@ chmod 755 lisflood
 
 Then update the paths in the configuration file. The configuration file will look something like this:
 
+```
+<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>
+<!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>
+<!\-- !! This file MUST be in the same directory as lisflood.exe \--\>
+<!\-- (or lisflood) !!! \--\><lfconfig\><!\-- location of pcrcalc application \--\><pcrcalcapp\>/software/PCRaster/bin/pcrcalc\</pcrcalcapp\></lfconfig\>
 
-`<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>`
-`<!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>`
-`<!\-- !! This file MUST be in the same directory as lisflood.exe \--\>`
-`<!\-- (or lisflood) !!! \--\>`
-`<lfconfig\>`
-`<!\-- location of pcrcalc application \--\>`
-`<pcrcalcapp\>/software/PCRaster/bin/pcrcalc\</pcrcalcapp\>`
-`</lfconfig\>`
+```
 
 
 
@@ -752,26 +750,24 @@ channels map must have some valid (non-missing) value on each of the channel par
 LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
 obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell:
 
-+-----------------------+-----------------------+-----------------------+
 | ***Table 4.1**        |
 | Optional maps that    |
 | define grid size*     |
-+=======================+=======================+=======================+
-|                       |
-+-----------------------+-----------------------+-----------------------+
-| **Map**               | **Default name**      | **Description**       |
-+-----------------------+-----------------------+-----------------------+
+|-----------------------|-----------------------|----------------------|
+
+| **Map**               | **Default name**      | **Description**    |
+|-----------------------|-----------------------|----------------------|
 | PixelLengthUser       | pixleng.map           | Map with pixel length |
 |                       |                       |                       |
 |                       |                       | Unit: \[m\], *Range   |
 |                       |                       | of values: map \> 0*  |
-+-----------------------+-----------------------+-----------------------+
+|-----------------------|-----------------------|-----------------------|
 | PixelAreaUser         | pixarea.map           | Map with pixel area   |
 |                       |                       |                       |
-|                       |                       | *Unit:* \[m^2^\],     |
+|                       |                       | *Unit:* \[m^2^\],    |
 |                       |                       | *Range of values: map |
 |                       |                       | \> 0*                 |
-+-----------------------+-----------------------+-----------------------+
+|-----------------------|-----------------------|-----------------------|
 
 Both maps should be stored in the same directory where all other input
 maps are. The values on both maps may vary in space. A limitation is
