@@ -5898,7 +5898,7 @@ Calculation of pF
 A soil's pF is calculated as the logarithm of the capillary suction
 head, *h*:
 
-\$pF = {\\log \_{10}}(h)\$
+$pF = \log_{10}(h)$
 
 with *h* in \[cm\] (positive upwards). Values of pF are typically within
 the range 1.0 (very wet) to 5.0 (very dry). The relationship between
@@ -5906,8 +5906,7 @@ soil moisture status and capillary suction head is described by the Van
 Genuchten equation (here again re-written in terms of mm water slice,
 instead of volume fractions):
 
-\$h = \\frac{1}{\\alpha }{\\left\[ {{{\\left( {\\frac{{{w\_s} -
-{w\_r}}}{{w - {w\_r}}}} \\right)}\^{1/m}} - 1} \\right\]\^{1/n}}\$
+$h = \frac{1}{\alpha}[(\frac{w_s - w_r}{w - w_r} )^{1/m} - 1}]^{1/n}$
 
 where *h* is the suction head \[cm\], and *w*, *w~r~* and *w~s~* are the
 actual, residual and maximum amounts of moisture in the soil
