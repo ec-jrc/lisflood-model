@@ -32,19 +32,17 @@ A series of Annexes at the end of this document describe some optional features 
 
 
 
-# 
+# Step-by-step user guide
 
-Installation of the LISFLOOD model
-
-System requirements
--------------------
+## Step1 : System requirements
 
 Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless
 you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to
 the PCRaster documentation.
 
-Installation on Windows systems
--------------------------------
+## Step 2: Installation of the LISFLOOD model
+
+**On Windows systems**
 
 For Windows users the installation involves two steps:
 
@@ -80,11 +78,9 @@ variable. In Windows XP you can do this by selecting 'settings' from the 'Start'
 
 [[🔝](#top)](#top)
 
-Installation on Linux systems
------------------------------
+**On Linux systems**
 
-Under Linux LISFLOOD requires that the Python interpreter (version 2.7 or more recent) is installed on the system. Most Linux distributions already have Python pre-installed. If needed you can download Python
-free of any charge from the following location:
+Under Linux LISFLOOD requires that the Python interpreter (version 2.7 or more recent) is installed on the system. Most Linux distributions already have Python pre-installed. If needed you can download Python free of any charge from the following location:
 
 *http://www.python.org/*
 
