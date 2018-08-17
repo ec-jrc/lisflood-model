@@ -50,9 +50,9 @@ For Windows users the installation involves two steps:
 
 2.  Open the file 'config.xml' in a text editor. This file contains the full path to all files and applications that are used by LISFLOOD. The items in the file are:
 
-⋅⋅⋅  - *Pcrcalc application* : this is the name of the pcrcalc application, including the full path
+    - *Pcrcalc application* : this is the name of the pcrcalc application, including the full path
 
-⋅⋅⋅  - *LISFLOOD Master Code* (optional). This item is usually omitted, and LISFLOOD assumes that the master code is called 'lisflood.xml', and that it is located in the root of the 'lisflood' directory (i.e. the directory that contains  'lisflood.exe' and all libraries). If --for whatever reason- you want to overrule this behaviour, you can add a 'mastercode' element, e.g.:
+    - *LISFLOOD Master Code* (optional). This item is usually omitted, and LISFLOOD assumes that the master code is called 'lisflood.xml', and that it is located in the root of the 'lisflood' directory (i.e. the directory that contains  'lisflood.exe' and all libraries). If --for whatever reason- you want to overrule this behaviour, you can add a 'mastercode' element, e.g.:
 
     ```
     <mastercode\>d:\\Lisflood\\mastercode\\lisflood.xml<\mastercode>
@@ -60,16 +60,16 @@ For Windows users the installation involves two steps:
 
     The configuration file should look something like this:
 
-```xml
-<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
-<!-- Lisflood configuration file, JvdK, 8 July 2004 -->
-<!-- !! This file MUST be in the same directory as lisflood.exe -->
-<!-- (or lisflood) !!! -->
-<lfconfig>
-<!-- location of pcrcalc application -->
-<pcrcalcapp>C:\pcraster\apps\pcrcalc.exe</pcrcalcapp>
-</lfconfig>
-```
+    ```xml
+    <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+    <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
+    <!-- !! This file MUST be in the same directory as lisflood.exe -->
+    <!-- (or lisflood) !!! -->
+    <lfconfig>
+    <!-- location of pcrcalc application -->
+    <pcrcalcapp>C:\pcraster\apps\pcrcalc.exe</pcrcalcapp>
+    </lfconfig>
+    ```
 
 
 
