@@ -395,19 +395,40 @@ of the following categories:
 > </comment>
 > </textvar>
 
-__**Note**__
+> Example:
+>
+> \<textvar name=\"TabKSat1\" value=\"\$(PathTables)/ksat1.txt\"\>
+> \<comment\>
+> Saturated conductivity \[cm/day\]
+> \</comment\>
+> \</textvar\>
 
-> Taking -as an example- a prefix that equals "*pr*", the name of each
-> map in the stack starts with "*pr*", and ends with the number of the
-> time step. The name of each map is made up of a total of 11
-> characters: 8 characters, a dot and a 3-character suffix. For
-> instance:
+3.  **Stack of maps**
 
-  pr000000.007   : at time step 7
--------------- ----------------------
-  pr000035.260   : at time step 35260
+> Example:
+>
+> \<textvar name=\"PrecipitationMaps\"
+> value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>
+> \<comment\>
+> precipitation \[mm/day\]
+> \</comment\>
+> \</textvar\>
 
-> To avoid unexpected behaviour, do **not** use numbers in the prefix!
+
+
+__**Note:**__
+
+Taking -as an example- a prefix that equals "*pr*", the name of each
+map in the stack starts with "*pr*", and ends with the number of the
+time step. The name of each map is made up of a total of 11
+characters: 8 characters, a dot and a 3-character suffix. For
+instance:
+
+ - pr000000.007   : at time step 7
+ - pr000035.260   : at time step 35260
+
+To avoid unexpected behaviour, do **not** use numbers in the prefix!
+
 > For example:
 >
 > \<textvar name=\"PrecipitationMaps\"
