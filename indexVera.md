@@ -8,6 +8,7 @@ Both the program code and this manual have been carefully inspected before print
 
 
 # Introduction
+Some Markdown text with <span style="color:blue">some *blue* text</span>.
 <span style="color:red">Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential</span>
 The LISFLOOD model is a hydrological rainfall-runoff model that is capable of simulating the hydrological processes that occur in a catchment. LISFLOOD has been developed by the floods group of the Natural Hazards Project of the Joint Research Centre (JRC) of the European Commission. The specific development objective was to produce a tool that can be used in large and trans-national catchments for a variety of applications, including:
 
