@@ -94,13 +94,14 @@ The installation process is largely identical to the Windows procedure:
 2.  Check if the file 'lisflood' is executable. If not, make it executable using: "chmod 755 lisflood"
 3.  Then update the paths in the configuration file. The configuration file will look something like this:
 
-    ```
-    <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>
-    <!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>
-    <!\-- !! This file MUST be in the same directory as lisflood.exe \--\>
-    <!\-- (or lisflood) !!! \--\><lfconfig\><!\-- location of pcrcalc application \--\><pcrcalcapp\>/software/PCRaster/bin/pcrcalc\</pcrcalcapp\></lfconfig\>
-
-    ```
+      ```xml
+      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+      <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
+      <!-- !! This file MUST be in the same directory as lisflood.exe -->
+      <!-- (or lisflood) !!! \--\><lfconfig\><!\-- location of pcrcalc application -->
+      <pcrcalcapp>/software/PCRaster/bin/pcrcalc</pcrcalcapp>
+      </lfconfig>
+      ```
 
 
 [[🔝](#top)](#top)
@@ -188,7 +189,8 @@ example demonstrates the main principle (note that in the examples below
 the prolog element is left out, but you will never need to edit this
 anyway) :
 
-    ```
+```xml
+      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
     <lfsettings>                                                    
     <lfuser>                                                        
     <textvar name="PathMaps"                                           
@@ -204,6 +206,7 @@ anyway) :
     </textvar>                                                          
     </lfbinding>                                                    
     </lfsettings>                                                   
+
     ```
 
 In the example two input files (maps) are defined. Both maps are in the
@@ -223,8 +226,8 @@ the 'lfuser' element, without having to worry about anything in
 
 Now for a somewhat more realistic example:
 
- 
-   ?xml version=\"1.0\" encoding=\"UTF-8\"?\>                          
+```xml
+      <?xml version=\"1.0\" encoding=\"UTF-8\"?\>  
    <!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
    **\<lfsettings\>**                                                    
    **\<lfuser\>**                                                        
