@@ -128,16 +128,16 @@ and this makes it very easy add structure. For a LISFLOOD settings file,
 the basic structure looks like this:
 
 
-    >   **\<lfsettings\>** |  Start of settings element
-    >   **\<lfuser\>**     |  Start of element with **user-defined variables**
-    >   **\</lfuser\>**    |  End of element with user-defined variables
-    >   **\<lfoptions\>**  |  Start of element with **options**
-    >   **\</lfoptions\>** |  End of element with options
-    >   **\<lfbinding\>**  |  Start of element with 'binding' variables
-    >   **\</lfbinding\>** |  End of element with 'binding' variables
-    >   **\<prolog\>**     |  Start of prolog
-    >   **\</prolog\>**    |  End of prolog
-    >   **\<lfsettings\>** |  End of settings element
+>   **\<lfsettings\>**  Start of settings element
+>   **\<lfuser\>**      Start of element with **user-defined variables**
+>   **\</lfuser\>**     End of element with user-defined variables
+>   **\<lfoptions\>**   Start of element with **options**
+>   **\</lfoptions\>**  End of element with options
+>   **\<lfbinding\>**   Start of element with 'binding' variables
+>   **\</lfbinding\>**  End of element with 'binding' variables
+>   **\<prolog\>**      Start of prolog
+>   **\</prolog\>**     End of prolog
+    >   **\<lfsettings\>**  End of settings element
 
 From this you can see the following things:
 
