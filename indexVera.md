@@ -188,6 +188,7 @@ example demonstrates the main principle (note that in the examples below
 the prolog element is left out, but you will never need to edit this
 anyway) :
 
+```xml
 +-----------------------------------------------------------------------+
 | \<?xml version=\"1.0\" encoding=\"UTF-8\"?\>                          |
 |                                                                       |
@@ -222,6 +223,8 @@ anyway) :
 |                                                                       |
 | **\</lfsettings\>**                                                   |
 +-----------------------------------------------------------------------+
+
+```
 
 In the example two input files (maps) are defined. Both maps are in the
 same directory. Instead of entering the full file path for every map, we
