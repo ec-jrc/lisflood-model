@@ -155,10 +155,11 @@ From this you can see the following things:
 
 In brief, the main function of each element is:
 
-  *lfuser*      : definition of paths to all in- and output files, and main model parameters (calibration + time-related)
-------------- -----------------------------------------------------------------------------------------------------------
-  *lfbinding*   : definition of all individual in- and output files, and model parameters
-  *lfoptions*   : switches to turn specific components of the model on or off
+  *element*     | main function
+  ------------- | -----------------------------------------------------------------------------------------------------------
+  *lfuser*      | definition of paths to all in- and output files, and main model parameters (calibration + time-related)
+  *lfbinding*   | definition of all individual in- and output files, and model parameters
+  *lfoptions*   | switches to turn specific components of the model on or off
 
 The following sections explain the function of each element in more
 detail. This is mainly to illustrate the main concepts and how it all
