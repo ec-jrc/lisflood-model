@@ -188,25 +188,27 @@ example demonstrates the main principle (note that in the examples below
 the prolog element is left out, but you will never need to edit this
 anyway) :
 
-      ```xml
-      <?xml version="1.0" encoding="ISO-8859-1"?>  
-      <!DOCTYPE lfsettings SYSTEM "lisflood.dtd">                       
-      <lfsettings>                                                    
-      <lfuser>                                                        
-      <textvar name="PathMaps"                                           
-      value="//cllx01/floods2/knijfjo/test/maps">                        
-      </textvar>                                                          
-      </lfuser>                                                       
-      <lfoptions>                                                     
-      </lfoptions>                                                    
-      <lfbinding>                                                     
-      <textvar name="LandUse" value="\$(PathMaps)/landuse.map">       
-      </textvar>                                                          
-      <textvar name="SoilDepth" value="\$(PathMaps)/soildep.map">     
-      </textvar>                                                          
-      </lfbinding>                                                    
-      </lfsettings>                                                   
-      ```
+    ```
+    <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\>
+    <!\-- Lisflood configuration file, JvdK, 8 July 2004 \--\>
+    <!\-- !! This file MUST be in the same directory as lisflood.exe \--\>
+    <!DOCTYPE lfsettings SYSTEM "lisflood.dtd">                       
+    <lfsettings>                                                    
+    <lfuser>                                                        
+    <textvar name="PathMaps"                                           
+    value="//cllx01/floods2/knijfjo/test/maps">                        
+    </textvar>                                                          
+    </lfuser>                                                       
+    <lfoptions>                                                     
+    </lfoptions>                                                    
+    <lfbinding>                                                     
+    <textvar name="LandUse" value="\$(PathMaps)/landuse.map">       
+    </textvar>                                                          
+    <textvar name="SoilDepth" value="\$(PathMaps)/soildep.map">     
+    </textvar>                                                          
+    </lfbinding>                                                    
+    </lfsettings>                                                   
+    ```
 
 In the example two input files (maps) are defined. Both maps are in the
 same directory. Instead of entering the full file path for every map, we
