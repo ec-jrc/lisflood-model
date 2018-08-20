@@ -223,114 +223,78 @@ the 'lfuser' element, without having to worry about anything in
 
 Now for a somewhat more realistic example:
 
-    ```
+ 
+   ?xml version=\"1.0\" encoding=\"UTF-8\"?\>                          
+   <!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
+   **\<lfsettings\>**                                                    
+   **\<lfuser\>**                                                        
+   \<comment\>                                                           
 
- ?xml version=\"1.0\" encoding=\"UTF-8\"?\>                          
- <!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
- <lfsettings>**                                                    
-                                                                       
- **\<lfuser\>**                                                        
-                                                                       
- \<comment\>                                                           
-                                                                       
- \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
- *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
-                                                                       
- CALIBRATION PARAMETERS                                                
-                                                                       
- \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
- *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
-                                                                       
- \</comment\>                                                          
-                                                                       
- \<textvar name=\"UpperZoneTimeConstant\" value=\"10\"\>               
-                                                                       
- \<comment\>                                                           
-                                                                       
- Time constant for water in upper zone \[days\*mm\^GwAlpha\]           
-                                                                       
- \</comment\>                                                          
-                                                                       
- \</textvar\>                                                          
-                                                                       
- \<comment\>                                                           
-                                                                       
- \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
- *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
-                                                                       
- FILE PATHS                                                            
-                                                                       
- \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
- *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
-                                                                       
- \</comment\>                                                          
-                                                                       
- \<textvar name=\"PathMeteo\"                                          
- value=\"//cllx01/floods2/knijfjo/test/meteo\"\>                       
-                                                                       
- \<comment\>                                                           
-                                                                       
- Meteo path                                                            
-                                                                       
- \</comment\>                                                          
-                                                                       
- \</textvar\>                                                          
-                                                                       
- \<comment\>                                                           
-                                                                       
- \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
- *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
-                                                                       
- PREFIXES OF METEO VARIABLES                                           
-                                                                       
- \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
- *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
-                                                                       
- \</comment\>                                                          
-                                                                       
- \<textvar name=\"PrefixPrecipitation\" value=\"pr\"\>                 
-                                                                       
- \<comment\>                                                           
-                                                                       
- prefix precipitation maps                                             
-                                                                       
- \</comment\>                                                          
-                                                                       
- \</textvar\>                                                          
-                                                                       
- **\</lfuser\>**                                                       
-                                                                       
- **\<lfoptions\> \</lfoptions\>**                                      
-                                                                       
- **\<lfbinding\>**                                                     
-                                                                       
- \<textvar name=\"UpperZoneTimeConstant\"                              
- value=\"\$(UpperZoneTimeConstant)\"\>                                 
-                                                                       
- \<comment\>                                                           
-                                                                       
- Time constant for water in upper zone \[days\*mm\^GwAlpha\]           
-                                                                       
- \</comment\>                                                          
-                                                                       
- \</textvar\>                                                          
-                                                                       
- \<textvar name=\"PrecipitationMaps\"                                  
- value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>                     
-                                                                       
- \<comment\>                                                           
-                                                                       
- precipitation \[mm/day\]                                              
-                                                                       
- \</comment\>                                                          
-                                                                       
- \</textvar\>                                                          
-                                                                       
- **\</lfbinding\>**                                                    
-                                                                       
- **\</lfsettings\>**                                                   
-    ```
+   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
+   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
 
+   CALIBRATION PARAMETERS                                                
+
+   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
+   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+
+   \</comment\>                                                          
+   \<textvar name=\"UpperZoneTimeConstant\" value=\"10\"\>               
+   \<comment\>                                                           
+   Time constant for water in upper zone \[days\*mm\^GwAlpha\]           
+   \</comment\>                                                          
+   \</textvar\>                                                          
+   \<comment\>                                                           
+
+   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
+   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+
+   FILE PATHS                                                            
+
+   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
+   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+
+   \</comment\>                                                          
+   \<textvar name=\"PathMeteo\"                                          
+   value=\"//cllx01/floods2/knijfjo/test/meteo\"\>                       
+   \<comment\>                                                           
+   Meteo path                                                            
+   \</comment\>                                                          
+   \</textvar\>                                                          
+   \<comment\>                                                           
+
+   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
+   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+
+   PREFIXES OF METEO VARIABLES                                           
+
+   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
+   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+
+   \</comment\>                                                          
+   \<textvar name=\"PrefixPrecipitation\" value=\"pr\"\>                 
+   \<comment\>                                                           
+   prefix precipitation maps                                             
+   \</comment\>                                                          
+   \</textvar\>                                                          
+   **\</lfuser\>**                                                       
+   **\<lfoptions\> \</lfoptions\>**                                      
+   **\<lfbinding\>**                                                     
+   \<textvar name=\"UpperZoneTimeConstant\"                              
+   value=\"\$(UpperZoneTimeConstant)\"\>                                 
+   \<comment\>                                                           
+   Time constant for water in upper zone \[days\*mm\^GwAlpha\]           
+   \</comment\>                                                          
+   \</textvar\>                                                          
+   \<textvar name=\"PrecipitationMaps\"                                  
+   value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>                     
+   \<comment\>                                                           
+   precipitation \[mm/day\]                                              
+   \</comment\>                                                          
+   \</textvar\>                                                          
+   **\</lfbinding\>**                                                    
+   **\</lfsettings\>**                                                   
+ 
 From this example, note that *anything* can be defined with 'lfuser'
 variables, whether it be paths, file prefixes or parameter value. At
 first sight it might seem odd to define model parameter like
