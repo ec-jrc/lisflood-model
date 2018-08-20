@@ -230,10 +230,10 @@ Now for a somewhat more realistic example:
 
 ```xml
    <?xml version=\"1.0\" encoding=\"UTF-8\"?\>  
-   <!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
-   **\<lfsettings\>**                                                    
-   **\<lfuser\>**                                                        
-   \<comment\>                                                           
+   <!DOCTYPE lfsettings SYSTEM "lisflood.dtd">                       
+   <lfsettings>                                                    
+   <lfuser>                                                        
+   <comment>                                                           
 
    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
    *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
@@ -243,13 +243,13 @@ Now for a somewhat more realistic example:
    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
    *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
 
-   \</comment\>                                                          
-   \<textvar name=\"UpperZoneTimeConstant\" value=\"10\"\>               
-   \<comment\>                                                           
-   Time constant for water in upper zone \[days\*mm\^GwAlpha\]           
-   \</comment\>                                                          
-   \</textvar\>                                                          
-   \<comment\>                                                           
+   </comment>                                                          
+   <textvar name="UpperZoneTimeConstant" value="10">               
+   <comment>                                                           
+   Time constant for water in upper zone [days\*mm\^GwAlpha]           
+   </comment>                                                          
+   </textvar>                                                          
+   <comment>                                                           
 
    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
    *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
@@ -259,14 +259,14 @@ Now for a somewhat more realistic example:
    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
    *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
 
-   \</comment\>                                                          
-   \<textvar name=\"PathMeteo\"                                          
-   value=\"//cllx01/floods2/knijfjo/test/meteo\"\>                       
-   \<comment\>                                                           
+   </comment>                                                          
+   <textvar name="PathMeteo"                                          
+   value="//cllx01/floods2/knijfjo/test/meteo">                       
+   <comment>                                                           
    Meteo path                                                            
-   \</comment\>                                                          
-   \</textvar\>                                                          
-   \<comment\>                                                           
+   </comment>                                                          
+   </textvar>                                                          
+   <comment>                                                           
 
    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
    *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
@@ -276,31 +276,31 @@ Now for a somewhat more realistic example:
    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
    *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
 
-   \</comment\>                                                          
-   \<textvar name=\"PrefixPrecipitation\" value=\"pr\"\>                 
-   \<comment\>                                                           
+   </comment>                                                          
+   <textvar name="PrefixPrecipitation" value="pr">                 
+   <comment>                                                           
    prefix precipitation maps                                             
-   \</comment\>                                                          
-   \</textvar\>                                                          
-   **\</lfuser\>**                                                       
-   **\<lfoptions\> \</lfoptions\>**                                      
-   **\<lfbinding\>**                                                     
-   \<textvar name=\"UpperZoneTimeConstant\"                              
-   value=\"\$(UpperZoneTimeConstant)\"\>                                 
-   \<comment\>                                                           
-   Time constant for water in upper zone \[days\*mm\^GwAlpha\]           
-   \</comment\>                                                          
-   \</textvar\>                                                          
-   \<textvar name=\"PrecipitationMaps\"                                  
-   value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>                     
-   \<comment\>                                                           
-   precipitation \[mm/day\]                                              
-   \</comment\>                                                          
-   \</textvar\>                                                          
-   **\</lfbinding\>**                                                    
-   **\</lfsettings\>**                                                   
+   </comment>                                                          
+   </textvar>                                                          
+   </lfuser>                                                       
+   <lfoptions> </lfoptions>                                      
+   <lfbinding>                                                     
+   <textvar name="UpperZoneTimeConstant"                              
+   value="$(UpperZoneTimeConstant)">                                 
+   <comment>                                                           
+   Time constant for water in upper zone [days\*mm\^GwAlpha]           
+   </comment>                                                          
+   </textvar>                                                          
+   <textvar name="PrecipitationMaps"                                  
+   value="$(PathMeteo)/$(PrefixPrecipitation)">                     
+   <comment>                                                           
+   precipitation [mm/day]                                              
+   </comment>                                                          
+   </textvar>                                                          
+   </lfbinding>                                                    
+   </lfsettings>                                                   
 ```
- 
+
 From this example, note that *anything* can be defined with 'lfuser'
 variables, whether it be paths, file prefixes or parameter value. At
 first sight it might seem odd to define model parameter like
@@ -319,7 +319,7 @@ the 'lfuser' variables in a smart way, custom template settings files
 can be created for specific model applications (calibration, scenario
 modelling, operational flood forecasting). Typically, each of these
 applications requires its own input structure, and you can use the
-'lfuser' variables to define this structure. Also, note that the both
+'lfuser' variables to define this structure. Also, note that both
 the *name* and *value* of each variable must be wrapped in (single or
 double) quotes. Dedicated XML-editors like XmlSpy take care of this
 automatically, so you won't usually have to worry about this.
@@ -331,48 +331,35 @@ automatically, so you won't usually have to worry about this.
     these text variables within the 'lfuser' element. For example, the
     following 'lfuser' element is *wrong* and *will not work*:
 
-+-----------------------------------------------------------------------+
-| **\<lfuser\>**                                                        |
-|                                                                       |
-| \<textvar name=\"PathInit\"                                           |
-| value=\"//cllx01/floods2/knijfjo/test/init\"\>                        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Path to initial conditions maps                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"LZInit\" value=\"\$(PathInit)/lzInit.map)\"\>        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Initial lower zone storage                                            |
-|                                                                       |
-| \*\* USE OF USER VARIABLE WITHIN LFUSER                               |
-|                                                                       |
-| \*\* IS NOT ALLOWED, SO THIS EXAMPLE WILL NOT WORK!!                  |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| **\</lfuser\>**                                                       |
-+-----------------------------------------------------------------------+
+```xml
+  <lfuser>                                                        
+  <textvar name="PathInit"                                           
+  value="//cllx01/floods2/knijfjo/test/init">                        
+  <comment>                                                           
+   Path to initial conditions maps                                       
+  </comment>                                                          
+  </textvar>                                                          
+  <textvar name="LZInit" value="$(PathInit)/lzInit.map)">        
+  <comment>                                                           
+  Initial lower zone storage                                            
+  ** USE OF USER VARIABLE WITHIN LFUSER                               
+  ** IS NOT ALLOWED, SO THIS EXAMPLE WILL NOT WORK!!                  
+  </comment>                                                          
+  </textvar>                                                          
+  </lfuser>                                                       
+```
 
 2.  It *is* possible to define *everything* directly in the 'lfbinding'
     element without using any text variables at all! In that case the
     'lfuser' element can remain empty, even though it *has* to be
-    present (i.e. \<lfuser\> \</lfuser\>). In general this is not
+    present (i.e. <lfuser> </lfuser>). In general this is not
     recommended.
 
 3.  Within the *lfuser* and *lfbinding* elements, model variables are
     organised into *groups*. This is just to make navigation in an xml
     editor easier.
 
-### Variables in the lfbinding element
+#### Variables in the lfbinding element
 
 The variables that are defined in the 'lfbinding' element fall in either
 of the following categories:
