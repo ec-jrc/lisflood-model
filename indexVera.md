@@ -235,13 +235,11 @@ Now for a somewhat more realistic example:
    <lfuser>                                                        
    <comment>                                                           
 
-   **********************************\ 
-   ****************************               
+   **************************************************************               
 
    CALIBRATION PARAMETERS                                                
 
-   **********************************\ 
-   ****************************               
+   **************************************************************               
 
    </comment>                                                          
    <textvar name="UpperZoneTimeConstant" value="10">               
@@ -251,13 +249,11 @@ Now for a somewhat more realistic example:
    </textvar>                                                          
    <comment>                                                           
 
-   **********************************\ 
-   ****************************               
+   **************************************************************               
 
    FILE PATHS                                                            
 
-   **********************************\ 
-   ****************************               
+   **************************************************************               
 
    </comment>                                                          
    <textvar name="PathMeteo"                                          
@@ -268,13 +264,11 @@ Now for a somewhat more realistic example:
    </textvar>                                                          
    <comment>                                                           
 
-   **********************************\ 
-   ****************************               
+   **************************************************************               
 
    PREFIXES OF METEO VARIABLES                                           
 
-   **********************************\ 
-   ****************************               
+   **************************************************************               
 
    </comment>                                                          
    <textvar name="PrefixPrecipitation" value="pr">                 
@@ -368,32 +362,13 @@ of the following categories:
 
 > Example:
 >
-> <textvar name="LandUse" value="$(PathMaps)/landuse.map">\
-> <comment>\
+> \<textvar name=\"LandUse\" value=\"\$(PathMaps)/landuse.map\"\>\
+> \<comment\>\
 > Land Use Classes\
-> </comment>\
-> </textvar>\
+> \</comment\>\
+> \</textvar\>\
 
 2.  **Table**
-
-> Example:
->
-> <textvar name="TabKSat1" value="$(PathTables)/ksat1.txt">\
-> <comment>\
-> Saturated conductivity \[cm/day]\
-> </comment>\
-> </textvar>\
-
-3.  **Stack of maps**
-
-> Example:
->
-> <textvar name="PrecipitationMaps"
-> value="$(PathMeteo)\$(PrefixPrecipitation)">
-> <comment>
-> precipitation \[mm/day]
-> </comment>
-> </textvar>
 
 > Example:
 >
@@ -407,13 +382,12 @@ of the following categories:
 
 > Example:
 >
-> \<textvar name=\"PrecipitationMaps\"
-> value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>
-> \<comment\>
-> precipitation \[mm/day\]
-> \</comment\>
-> \</textvar\>
-
+> \<textvar name=\"PrecipitationMaps\"\
+> value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>\
+> \<comment\>\
+> precipitation \[mm/day\]\
+> \</comment\>\
+> \</textvar\>\
 
 
 __**Note:**__
@@ -423,64 +397,45 @@ map in the stack starts with "*pr*", and ends with the number of the
 time step. The name of each map is made up of a total of 11
 characters: 8 characters, a dot and a 3-character suffix. For
 instance:
-
  - pr000000.007   : at time step 7
  - pr000035.260   : at time step 35260
 
 To avoid unexpected behaviour, do **not** use numbers in the prefix!
 
-> For example:
+> Example:
 >
-> \<textvar name=\"PrecipitationMaps\"
->
-> value=\"\$(PathMeteo)/pr10 \"\>
->
-> \<comment\>
->
-> precipitation \[mm/day\]
->
-> \</comment\>
->
-> \</textvar\>
->
-> For the first time step this yields the following file name:
+> \<textvar name=\"PrecipitationMaps\"\
+> value=\"\$(PathMeteo)/pr10 \"\>\
+> \<comment\>\
+> precipitation \[mm/day\]\
+> \</comment\>\
+> \</textvar\>\
 
--------------- --
-  pr100000.001   
--------------- --
-
-> But this is actually interpreted as time step 100,000,001!
+For the first time step this yields the following file name: pr100000.001   
+But this is actually interpreted as time step 100,000,001!
 
 4.  **Time series file**
 
 > Example:
-
-\<textvar name=\"DisTS\" value=\"\$(PathOut)/dis.tss\"\>
-
-\<comment\>
-
-Reported discharge \[cu m/s\]
-
-\</comment\>
-
-\</textvar\>
+> 
+> \<textvar name=\"DisTS\" value=\"\$(PathOut)/dis.tss\"\>\
+> \<comment\>\
+> Reported discharge \[cu m/s\]\
+> \</comment\>\
+> \</textvar\>\
 
 5.  **Single parameter value**
 
 > Example:
 >
-> \<textvar name=\"UpperZoneTimeConstant\"
-> value=\"\$(UpperZoneTimeConstant)\"\>
->
-> \<comment\>
->
-> Time constant for water in upper zone \[days\]
->
-> \</comment\>
->
-> \</textvar\>
+> \<textvar name=\"UpperZoneTimeConstant\"\
+> value=\"\$(UpperZoneTimeConstant)\"\>\
+> \<comment\>\
+> Time constant for water in upper zone \[days\]\
+> \</comment\>\
+> \</textvar\>\
 
-### Variables in the lfuser element
+#### Variables in the lfuser element
 
 As said before the variables in the 'lfuser' elements are all text
 variables, and they are used simply to substitute text in the
