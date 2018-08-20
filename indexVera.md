@@ -176,7 +176,7 @@ detail. This is mainly to illustrate the main concepts and how it all
 fits together. A detailed description of all the variables that are
 relevant for setting up and running LISFLOOD is given in Chapter 6.
 
-#### lfuser and and lfbinding elements
+#### lfuser and lfbinding elements
 
 The 'lfbinding' element provides a very low-level way to define all
 model parameter values as well as all in- and output maps, time series
@@ -324,7 +324,7 @@ the *name* and *value* of each variable must be wrapped in (single or
 double) quotes. Dedicated XML-editors like XmlSpy take care of this
 automatically, so you won't usually have to worry about this.
 
-**[NOTES:]{.underline}**
+__**NOTES:**__
 
 1.  It is important to remember that the *only* function of the 'lfuser'
     element is to *define* text variables; you can not *use* any of
@@ -368,47 +368,34 @@ of the following categories:
 
 > Example:
 >
-> \<textvar name=\"LandUse\" value=\"\$(PathMaps)/landuse.map\"\>
->
-> \<comment\>
->
+> <textvar name="LandUse" value="$(PathMaps)/landuse.map">
+> <comment>
 > Land Use Classes
->
-> \</comment\>
->
-> \</textvar\>
+> </comment>
+> </textvar>
 
 2.  **Table**
 
 > Example:
 >
-> \<textvar name=\"TabKSat1\" value=\"\$(PathTables)/ksat1.txt\"\>
->
-> \<comment\>
->
-> Saturated conductivity \[cm/day\]
->
-> \</comment\>
->
-> \</textvar\>
+> <textvar name="TabKSat1" value="$(PathTables)/ksat1.txt">
+> <comment>
+> Saturated conductivity \[cm/day]
+> </comment>
+> </textvar>
 
 3.  **Stack of maps**
 
 > Example:
 >
-> \<textvar name=\"PrecipitationMaps\"
->
-> value=\"\$(PathMeteo)/\$(PrefixPrecipitation)\"\>
->
-> \<comment\>
->
-> precipitation \[mm/day\]
->
-> \</comment\>
->
-> \</textvar\>
+> <textvar name="PrecipitationMaps"
+> value="$(PathMeteo)\$(PrefixPrecipitation)">
+> <comment>
+> precipitation \[mm/day]
+> </comment>
+> </textvar>
 
-**[Note:]{.underline}**
+__**Note**__
 
 > Taking -as an example- a prefix that equals "*pr*", the name of each
 > map in the stack starts with "*pr*", and ends with the number of the
