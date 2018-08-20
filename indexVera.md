@@ -5,9 +5,6 @@
 ```R
   # Not sure that it should stay here or if we should put the Disclaimer in the overall description of the LISFLOOD documentation OR at the end of this document ... I don't like it very much at the beginning
   ```
-<dl>
-<font color="blue">I plan to make this text blue.</font>
-</dl>
 Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
 
@@ -191,25 +188,25 @@ example demonstrates the main principle (note that in the examples below
 the prolog element is left out, but you will never need to edit this
 anyway) :
 
-  ```xml
-   \<?xml version=\"1.0\" encoding=\"UTF-8\"?\>                          
-   \<!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
-   **\<lfsettings\>**                                                    
-   **\<lfuser\>**                                                        
-   \<textvar name=\"PathMaps\"                                           
-   value=\"//cllx01/floods2/knijfjo/test/maps\"\>                        
-   \</textvar\>                                                          
-   **\</lfuser\>**                                                       
-   **\<lfoptions\>**                                                     
-   **\</lfoptions\>**                                                    
-   **\<lfbinding\>**                                                     
-   \<textvar name=\"LandUse\" value=\"\$(PathMaps)/landuse.map\"\>       
-   \</textvar\>                                                          
-   \<textvar name=\"SoilDepth\" value=\"\$(PathMaps)/soildep.map\"\>     
-   \</textvar\>                                                          
-   **\</lfbinding\>**                                                    
-   **\</lfsettings\>**                                                   
-  ```
+      ```xml
+      \<?xml version=\"1.0\" encoding=\"UTF-8\"?\>                          
+      \<!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
+      **\<lfsettings\>**                                                    
+      **\<lfuser\>**                                                        
+      \<textvar name=\"PathMaps\"                                           
+      value=\"//cllx01/floods2/knijfjo/test/maps\"\>                        
+      \</textvar\>                                                          
+      **\</lfuser\>**                                                       
+      **\<lfoptions\>**                                                     
+      **\</lfoptions\>**                                                    
+      **\<lfbinding\>**                                                     
+      \<textvar name=\"LandUse\" value=\"\$(PathMaps)/landuse.map\"\>       
+      \</textvar\>                                                          
+      \<textvar name=\"SoilDepth\" value=\"\$(PathMaps)/soildep.map\"\>     
+      \</textvar\>                                                          
+      **\</lfbinding\>**                                                    
+      **\</lfsettings\>**                                                   
+      ```
 
 In the example two input files (maps) are defined. Both maps are in the
 same directory. Instead of entering the full file path for every map, we
