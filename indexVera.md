@@ -2,7 +2,9 @@
 ![](media/image2.png)
 
 ### Disclaimer
-<span style="color:red">Not sure that it should stay here or if we should put the Disclaimer in the overall description of the LISFLOOD documentation OR at the end of this document ... I don't like it very much at the beginning</span>
+```R
+  # Not sure that it should stay here or if we should put the Disclaimer in the overall description of the LISFLOOD documentation OR at the end of this document ... I don't like it very much at the beginning
+  ```
 Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
 
@@ -11,7 +13,6 @@ Both the program code and this manual have been carefully inspected before print
 ```R
   # Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential
   ```
-<span style="color:red">Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential</span>
 The LISFLOOD model is a hydrological rainfall-runoff model that is capable of simulating the hydrological processes that occur in a catchment. LISFLOOD has been developed by the floods group of the Natural Hazards Project of the Joint Research Centre (JRC) of the European Commission. The specific development objective was to produce a tool that can be used in large and trans-national catchments for a variety of applications, including:
 
 - Flood forecasting
@@ -26,7 +27,9 @@ Although a wide variety of existing hydrological models are available that are s
 The __LISFLOOD__ model is implemented in the PCRaster Environmental Modelling language Version 3.0.0 (Wesseling et al., 1996), wrapped in a Python based interface. PCRaster is a raster GIS environment that has its own high-level computer language, which allows the construction of iterative spatio-temporal environmental models. The Python wrapper of LISFLOOD enables the user to control the model inputs and outputs and the selection of the model modules. This approach combines the power, relative simplicity and maintainability of code written in the the PCRaster Environmental Modelling language and the flexibility of Python.
 LISFLOOD runs on any operating for which Python and PCRaster are available. Currently these include 32-bits Windows (e.g. Windows XP, Vista, 7) and a number of Linux distributions.
 
-<span style="color:red">Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential</span>
+```R
+  # Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential
+  ```
 This revised __User Manual__ documents LISFLOOD version December 1 2013, and replaces all previous documentation of the model (e.g. van der Knijff & de Roo, 2008; de Roo *et. al.*, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.
 Chapter 2 explains the theory behind the model, including all model equations and the changes to the previous version. The remaining chapters cover all practical aspects of working with LISFLOOD. Chapter 3 to 8 explains how to setup LISFLOOD, how to modify the settings and the outputs.
 A series of Annexes at the end of this document describe some optional features that can be activated  when running the model. Most model users will not need these features (which are disabled by default), and for the sake of clarity we therefore decided to keep their description out of the main text. The  current document does not cover the calculation of the potential evapo (transpi)ration rates that are  needed as input to the model. A separate pre-processor (LISVAP) exists that calculates these variables  from standard (gridded) meteorological observations. LISVAP is documented in a separate volume (van  der Knijff, 2006). 
@@ -160,20 +163,22 @@ In brief, the main function of each element is:
 
   *element*     | main function
   ------------- | -----------------------------------------------------------------------------------------------------------
-  *lfuser*      | definition of paths to all in- and output files, and main model parameters (calibration + time-related)
-  *lfbinding*   | definition of all individual in- and output files, and model parameters
-  *lfoptions*   | switches to turn specific components of the model on or off
+  *lfuser*      | definition of **paths** to all in- and output files, and main model parameters (calibration + time-related)
+  *lfbinding*   | definition of all **individual** in- and output **files**, and model **parameters**
+  *lfoptions*   | **switches** to turn specific components of the model on or off
 
 The following sections explain the function of each element in more
 detail. This is mainly to illustrate the main concepts and how it all
 fits together. A detailed description of all the variables that are
 relevant for setting up and running LISFLOOD is given in Chapter 6.
 
-### lfuser and and lfbinding elements
+#### lfuser and and lfbinding elements
 
 The 'lfbinding' element provides a very low-level way to define all
 model parameter values as well as all in- and output maps, time series
-and tables. The 'lfuser' element is used to define (user-defined) text
+and tables. 
+
+The 'lfuser' element is used to define (user-defined) text
 variables. These text variables can be used to substitute repeatedly
 used expressions in the binding element. This greatly reduces the amount
 of work that is needed to prepare the settings file. Each variable is
