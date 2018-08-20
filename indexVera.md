@@ -235,29 +235,29 @@ Now for a somewhat more realistic example:
    <lfuser>                                                        
    <comment>                                                           
 
-   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
-   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+   **********************************\ 
+   ****************************               
 
    CALIBRATION PARAMETERS                                                
 
-   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
-   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+   **********************************\ 
+   ****************************               
 
    </comment>                                                          
    <textvar name="UpperZoneTimeConstant" value="10">               
    <comment>                                                           
-   Time constant for water in upper zone [days\*mm\^GwAlpha]           
+   Time constant for water in upper zone [days*mm\^GwAlpha]           
    </comment>                                                          
    </textvar>                                                          
    <comment>                                                           
 
-   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
-   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+   **********************************\ 
+   ****************************               
 
    FILE PATHS                                                            
 
-   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
-   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+   **********************************\ 
+   ****************************               
 
    </comment>                                                          
    <textvar name="PathMeteo"                                          
@@ -268,13 +268,13 @@ Now for a somewhat more realistic example:
    </textvar>                                                          
    <comment>                                                           
 
-   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
-   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+   **********************************\ 
+   ****************************               
 
    PREFIXES OF METEO VARIABLES                                           
 
-   \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ 
-   *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               
+   **********************************\ 
+   ****************************               
 
    </comment>                                                          
    <textvar name="PrefixPrecipitation" value="pr">                 
@@ -368,21 +368,21 @@ of the following categories:
 
 > Example:
 >
-> <textvar name="LandUse" value="$(PathMaps)/landuse.map">
-> <comment>
-> Land Use Classes
-> </comment>
-> </textvar>
+> <textvar name="LandUse" value="$(PathMaps)/landuse.map">\
+> <comment>\
+> Land Use Classes\
+> </comment>\
+> </textvar>\
 
 2.  **Table**
 
 > Example:
 >
-> <textvar name="TabKSat1" value="$(PathTables)/ksat1.txt">
-> <comment>
-> Saturated conductivity \[cm/day]
-> </comment>
-> </textvar>
+> <textvar name="TabKSat1" value="$(PathTables)/ksat1.txt">\
+> <comment>\
+> Saturated conductivity \[cm/day]\
+> </comment>\
+> </textvar>\
 
 3.  **Stack of maps**
 
@@ -397,11 +397,11 @@ of the following categories:
 
 > Example:
 >
-> \<textvar name=\"TabKSat1\" value=\"\$(PathTables)/ksat1.txt\"\>
-> \<comment\>
-> Saturated conductivity \[cm/day\]
-> \</comment\>
-> \</textvar\>
+> \<textvar name=\"TabKSat1\" value=\"\$(PathTables)/ksat1.txt\"\>\
+> \<comment\>\
+> Saturated conductivity \[cm/day\]\
+> \</comment\>\
+> \</textvar\>\
 
 3.  **Stack of maps**
 
