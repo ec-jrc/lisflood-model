@@ -207,7 +207,7 @@ anyway) :
     </lfbinding>                                                    
     </lfsettings>                                                   
 
-    ```
+   ```
 
 In the example two input files (maps) are defined. Both maps are in the
 same directory. Instead of entering the full file path for every map, we
