@@ -134,16 +134,19 @@ works by putting information that goes into a (text) file between tags,
 and this makes it very easy add structure. For a LISFLOOD settings file,
 the basic structure looks like this:
 
-    \<lfsettings\>     Start of settings element
-       \<lfuser\>      Start of element with user-defined variables
-       \</lfuser\>     End of element with user-defined variables
-       \<lfoptions\>   Start of element with options
-       \</lfoptions\>  End of element with options
-       \<lfbinding\>   Start of element with 'binding' variables
-       \</lfbinding\>  End of element with 'binding' variables
-       \<prolog\>      Start of prolog
-       \</prolog\>     End of prolog
-    \<lfsettings\>     End of settings element
+```xml
+    <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+    \<lfsettings>     Start of settings element
+       \<lfuser>      Start of element with user-defined variables
+       \</lfuser>     End of element with user-defined variables
+       \<lfoptions>   Start of element with options
+       \</lfoptions>  End of element with options
+       \<lfbinding>   Start of element with 'binding' variables
+       \</lfbinding>  End of element with 'binding' variables
+       \<prolog>      Start of prolog
+       \</prolog>     End of prolog
+    \<lfsettings>     End of settings element
+```
 
 From this you can see the following things:
 
@@ -190,7 +193,7 @@ the prolog element is left out, but you will never need to edit this
 anyway) :
 
 ```xml
-      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+    <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
     <lfsettings>                                                    
     <lfuser>                                                        
     <textvar name="PathMaps"                                           
@@ -206,8 +209,7 @@ anyway) :
     </textvar>                                                          
     </lfbinding>                                                    
     </lfsettings>                                                   
-
-   ```
+```
 
 In the example two input files (maps) are defined. Both maps are in the
 same directory. Instead of entering the full file path for every map, we
@@ -227,7 +229,7 @@ the 'lfuser' element, without having to worry about anything in
 Now for a somewhat more realistic example:
 
 ```xml
-      <?xml version=\"1.0\" encoding=\"UTF-8\"?\>  
+   <?xml version=\"1.0\" encoding=\"UTF-8\"?\>  
    <!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\"\>                       
    **\<lfsettings\>**                                                    
    **\<lfuser\>**                                                        
@@ -297,6 +299,7 @@ Now for a somewhat more realistic example:
    \</textvar\>                                                          
    **\</lfbinding\>**                                                    
    **\</lfsettings\>**                                                   
+```
  
 From this example, note that *anything* can be defined with 'lfuser'
 variables, whether it be paths, file prefixes or parameter value. At
