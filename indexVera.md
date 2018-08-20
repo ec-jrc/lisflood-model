@@ -189,20 +189,20 @@ the prolog element is left out, but you will never need to edit this
 anyway) :
 
       ```xml
-      <?xml version=\"1.0\" encoding=\"UTF-8\"?>                          
-      <!DOCTYPE lfsettings SYSTEM \"lisflood.dtd\">                       
+      <?xml version="1.0" encoding="ISO-8859-1"?>  
+      <!DOCTYPE lfsettings SYSTEM "lisflood.dtd">                       
       <lfsettings>                                                    
       <lfuser>                                                        
-      <textvar name=\"PathMaps\"                                           
-      value=\"//cllx01/floods2/knijfjo/test/maps\">                        
+      <textvar name="PathMaps"                                           
+      value="//cllx01/floods2/knijfjo/test/maps">                        
       </textvar>                                                          
       </lfuser>                                                       
       <lfoptions>                                                     
       </lfoptions>                                                    
       <lfbinding>                                                     
-      <textvar name=\"LandUse\" value=\"\$(PathMaps)/landuse.map\">       
+      <textvar name="LandUse" value="\$(PathMaps)/landuse.map">       
       </textvar>                                                          
-      <textvar name=\"SoilDepth\" value=\"\$(PathMaps)/soildep.map\">     
+      <textvar name="SoilDepth" value="\$(PathMaps)/soildep.map">     
       </textvar>                                                          
       </lfbinding>                                                    
       </lfsettings>                                                   
