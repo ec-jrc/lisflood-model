@@ -645,12 +645,12 @@ e.g. pr000000.001. Even if you start the model from time step 500,
 this has to be set to the calendar day of the 001 map in your map
 stacks. Format can be 
   a) a number:
-    *Value="1" = 1^st^ January* 
-    *Value="151" = 1^st^ June*
+    *Value="1" = 1<sup>st</sup> January* 
+    *Value="151" = 1<sup>st</sup> June*
   Or b) a date (in different format):
-    *Value="01/01/1990" = 1^st^ January 1990* 
-    *Value="05.07.1990" = 5th June 1990*
-    *Value="15-11-1990" = 15^th^ November 1990*
+    *Value="01/01/1990" = 1<sup>st</sup> January 1990* 
+    *Value="05.07.1990" = 5<sup>th</sup> June 1990*
+    *Value="15-11-1990" = 15<sup>th</sup> November 1990*
 
 **DtSec** is the simulation time interval in seconds. It has a value of
 86400 for a daily time interval, 3600 for an hourly interval, etcetera
@@ -751,7 +751,7 @@ using any of these parameters as calibration constants.
 **CalEvaporation** is a multiplier that is applied to the potential
 evapo(transpi)ration input (**ET0**, **EW0** and **ES0**) [-]
 
-**LeafDrainageTimeConstant** (**T~int~** in Eq 2-11) is the time constant
+**LeafDrainageTimeConstant** (**T<sub>int</sub>** in Eq 2-11) is the time constant
 for the interception store [days]
 
 **kdf** is the average extinction for the diffuse radiation flux
@@ -760,7 +760,7 @@ for global radiation, **κ<sub>gb</sub>** ,which is used in Equations 2-9, 2-14
 and 2-19 [-]
 
 **AvWaterRateThreshold** defines a critical amount of water that is used
-as a threshold for resetting the variable **D~slr~** in Eq 2-20. Because
+as a threshold for resetting the variable **D<sub>slr</sub>** in Eq 2-20. Because
 the equation was originally developed for daily timesteps only, the
 threshold is currently defined (somewhat confusingly) as an equivalent
 **intensity** in [mm day^-1^]
@@ -852,10 +852,10 @@ this multiplier to some value greater than 1 can counteract for this
 **SnowSeasonAdj** is the range [mm C-1 d-1] of the seasonal variation
 of snow melt. SnowMeltCoef is the average value.
 
-**SnowMeltCoef** (**C~m~** in Eq 2-3) is the degree-day factor that
+**SnowMeltCoef** (**C<sub>m</sub>** in Eq 2-3) is the degree-day factor that
 controls the rate of snowmelt [mm °C^-1^ day^-1^]
 
-**TempMelt** (**T~m~** in Eq 2-3) is the average temperature above which
+**TempMelt** (**T<sub>m</sub>** in Eq 2-3) is the average temperature above which
 snow starts to melt [°C]
 
 **TempSnow** is the average temperature below which precipitation is
@@ -871,7 +871,7 @@ each pixel's elevation zones [°C m^-1^]
 **Kfrost** (**K** in Eq 2-4) is a snow depth reduction coefficient
 [cm^-1^]
 
-**SnowWaterEquivalent** (**we~s~** in Eq 2-4) is the equivalent water
+**SnowWaterEquivalent** (**we<sub>s</sub>** in Eq 2-4) is the equivalent water
 depth of a given snow cover, expressed as a fraction [-]
 
 **FrostIndexThreshold** is the critical value of the frost index (Eq
@@ -905,7 +905,7 @@ calibration constants, and both can be defined as single values or maps.
 **b\_Xinanjiang** (**b** in Eq 2-23) is the power in the infiltration
 equation [-]
 
-**PowerPrefFlow** (**c~pref~** in Eq 2-25) is the power in the
+**PowerPrefFlow** (**c<sub>pref</sub>** in Eq 2-25) is the power in the
 preferential flow equation [-]
 
 
@@ -953,17 +953,17 @@ can be defined as single values or maps.
 	</textvar>                                                          
 ```
 
-**UpperZoneTimeConstant** (**T~uz~** in Eq 2-42) is the time constant for
+**UpperZoneTimeConstant** (**T<sub>uz</sub>** in Eq 2-42) is the time constant for
 the upper groundwater zone [days]
 
-**LowerZoneTimeConstant** (**T~lz~** in Eq 2-43) is the time constant for
+**LowerZoneTimeConstant** (**T<sub>lz</sub>** in Eq 2-43) is the time constant for
 the lower groundwater zone [days]
 
-**GwPercValue** (**GW~perc~** in Eq 2-44) is the maximum rate of
+**GwPercValue** (**GW<sub>perc</sub>** in Eq 2-44) is the maximum rate of
 percolation going from the upper to the lower groundwater zone [mm
 day^-1^]
 
-**GwLoss** (**f~loss~** in Eq 2-45) is the maximum rate of percolation
+**GwLoss** (**f<sub>loss</sub>** in Eq 2-45) is the maximum rate of percolation
 from the lower groundwater zone (groundwater loss) zone [mm
 day^-1^]. A value of 0 (closed lower boundary) is recommended as a
 starting value.
@@ -1014,7 +1014,7 @@ should be kept at their default values.
 **CalChanMan** is a multiplier that is applied to the Manning's
 roughness maps of the channel system [-]
 
-**beta** is routing coefficient **β~k~** in Equations 2-51, 2-52, 2-54 and
+**beta** is routing coefficient **β<sub>k</sub>** in Equations 2-51, 2-52, 2-54 and
 2-57 [-]
 
 **OFDepRef** is a reference flow depth from which the flow velocity of
@@ -1049,7 +1049,7 @@ default value.
 	</textvar>                                                          
 ```
 
-**CourantCrit** (**C~crit~** in Eq 2-36) is the critical Courant number
+**CourantCrit** (**C<sub>crit</sub>** in Eq 2-36) is the critical Courant number
 which controls the numerical accuracy of the simulated soil moisture
 fluxes [-]. Any value between 0 and 1 can be used, but using values
 that are too high can lead to unrealistic "jumps" in the simulated
@@ -1381,7 +1381,7 @@ elevation zone **C** [mm]
 **UZInitValue** is the initial storage in the upper groundwater zone
 [mm]
 
-**DSLRInitValue** (**D~slr~** in Eq 2-20) is the initial number of days
+**DSLRInitValue** (**D<sub>slr</sub>** in Eq 2-20) is the initial number of days
 since the last rainfall event [days]
 
 **CumIntSealedInitValue** is the initial value of the depression storage
@@ -1391,7 +1391,7 @@ for the sealed part of a pixel [mm]
 [mm]. In order to avoid initialization problems it is possible to
 let the model calculate a 'steady state' storage that will usually
 minimize any initialization problems. This feature is described in
-detail in Chapter 7 of this User Manual. To activate it, set **the**
+detail in Chapter 7 of this User Manual. To activate it, set the
 lfoptions element InitLisflood to 1.
 
 **TotalCrossSectionAreaInitValue** is the initial cross-sectional area
@@ -1458,6 +1458,7 @@ CumIntForestInitValue, UZForestInitValue, DSLRForestInitValue,
 LZForestInitValue, ThetaForestInit1Value, ThetaForestInit2Value
 are the initial value for the forest part of a pixel
 
+[:top:](#top)
 
 
 
@@ -1509,43 +1510,33 @@ are the initial value for the forest part of a pixel
 
 
 
-## Step 4: Input maps and tables
-
-## Model setup: input files
+## Step 4: Input files (maps and tables)
 
 In the current version of LISFLOOD, all model input is provided as either maps (grid files in PCRaster format) or tables. This chapter describes all the data that are required to run the model. Files that are specific to *optional* LISFLOOD features (e.g. inflow hydrographs, reservoirs) are not listed here; they are described in the documentation for each option.
 
-Input maps
-----------
+### Input maps
 
 PCRaster requires that all maps must have *identical* location attributes (number of rows, columns, cellsize, upper x and y coordinate!
 
 All input maps roughly fall into any of the following six categories:
 
 -   maps related to topography
-
 -   maps related to land cover -- fraction of land cover
-
 -   maps related to land cover and soil
-
 -   maps related to soil texture (soil hydraulic properties)
-
 -   maps related to channel geometry
-
 -   maps related to the meteorological conditions
-
 -   maps related to the development of vegetation over time
-
 -   maps that define at which locations output is generated as time series
 
 All maps that are needed to run the model are listed in the table of Annex 12.
 
-### Role of "mask" and "channels" maps 
+#### Role of "mask" and "channels" maps 
 
 The mask map (i.e. "area.map") defines the model domain. In order to avoid unexpected results, **it is vital that all maps that are related to topography, land use and soil are defined** (i.e. don't contain a missing value) for each pixel that is "true" (has a Boolean 1 value) on the mask map. The same applies for all meteorological input and the Leaf Area Index maps. Similarly, all pixels that are "true" on the
 channels map must have some valid (non-missing) value on each of the channel parameter maps. Undefined pixels can lead to unexpected behaviour of the model, output that is full of missing values, loss of mass balance and possibly even model crashes. Some maps needs to have values in a defined range e.g. gradient.map has to be greater than 0.
 
-### Map location attributes and distance units
+#### Map location attributes and distance units
 
 LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
 obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell:
@@ -1568,7 +1559,7 @@ obtains this information from the location attributes of the input maps. This wi
 
 Both maps should be stored in the same directory where all other input maps are. The values on both maps may vary in space. A limitation is that a pixel is always represented as a square, so length and width are considered equal (no rectangles). In order to tell LISFLOOD to ignore the default location attributes and use the maps instead, you need to activate the special option "*gridSizeUserDefined*", which involves adding the following line to the LISFLOOD settings file:
 
-```
+```xml
 <setoption choice="1" name="gridSizeUserDefined" \>
 ```
 
@@ -1747,6 +1738,7 @@ pixel resolution. A number of automated procedures have been written
 that allow you to generate sub-sets of these for pre-defined areas
 (using either existing mask maps or co-ordinates of catchment outlets).
 
+[:top:](#top)
 
 
 
