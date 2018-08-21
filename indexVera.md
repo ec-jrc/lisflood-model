@@ -674,31 +674,29 @@ meteo and LAI maps.
 a succeeding model run) is written. You can define this parameter in the following ways:
 
   1) **At specific time steps**. If you like to have the state maps being written at certain time steps you can define those in a (comma separated) list. For example if you like to have the state maps for the time steps 10, 20 and 40, you need to write:
-
+```xml
     \<textvar name=\"ReportSteps\" value=\"10,20,40\"\
-
+```
 
   2) If you like to have the state maps for the **last time step** of a model run you can use the special
     'endtime' keyword, e.g.:
-
+```xml
     \<textvar name=\"ReportSteps\" value=\"endtime\"\
+```
 
   3) Alternatively, in some cases you may need the state maps **at regular intervals**. In that case you can use the following syntax:
-
+```xml
     \<textvar name=\"ReportSteps\" value=\"start+increment..end\"\
+```
 
     For instance, in the following example state maps are written every
     5^th^ time step, starting at time step 10, until the last time step:
 
+```xml
     \<textvar name=\"ReportSteps\" value=\"10+5..endtime\"\
+```
 
-
-
-
-
-
-Parameters related to evapo(transpi)ration and interception
------------------------------------------------------------
+### Parameters related to evapo(transpi)ration and interception
 
 The following parameters are all related to the simulation of
 evapo(transpi)ration and rainfall interception. Although they can all be
@@ -706,110 +704,72 @@ defined as either a single value or as a map, we recommend using the
 single values that are included in the template. We do not recommend
 using any of these parameters as calibration constants.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| PARAMETERS RELATED TO EVAPO(TRANSPI)RATION AND INTERCEPTION           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrScaling\" value=\"1\"\>                            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Multiplier applied to potential precipitation rates                   |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"CalEvaporation\" value=\"1\"\>                       |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Multiplier applied to potential evapo(transpi)ration rates            |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"LeafDrainageTimeConstant\" value=\"1\"\>             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Time constant for water in interception store \[days\]                |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"kdf\" value=\"0.72\"\>                               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Average extinction coefficient for the diffuse radiation flux         |
-|                                                                       |
-| varies with crop from 0.4 to 1.1 (Goudriaan (1977))                   |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"AvWaterRateThreshold\" value=\"5\"\>                 |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Critical amount of available water (expressed in \[mm/day\]!), above  |
-| which \'Days Since Last Rain\' parameter is set to 1                  |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SMaxSealed\" value=\"1.0\"\>                         |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| maximum depression storage for water on impervious surface            |
-|                                                                       |
-| which is not immediatly causing surface runoff \[mm\]                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	PARAMETERS RELATED TO EVAPO(TRANSPI)RATION AND INTERCEPTION           
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="PrScaling" value="1">                            
+	<comment>                                                           
+	Multiplier applied to potential precipitation rates                   
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="CalEvaporation" value="1">                       
+	<comment>                                                           
+	Multiplier applied to potential evapo(transpi)ration rates            
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="LeafDrainageTimeConstant" value="1">             
+	<comment>                                                           
+	Time constant for water in interception store [days]                
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="kdf" value="0.72">                               
+	<comment>                                                           
+	Average extinction coefficient for the diffuse radiation flux         
+	varies with crop from 0.4 to 1.1 (Goudriaan (1977))                   
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="AvWaterRateThreshold" value="5">                 
+	<comment>                                                           
+	Critical amount of available water (expressed in [mm/day]!), above  
+	which 'Days Since Last Rain' parameter is set to 1                  
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SMaxSealed" value="1.0">                         
+	<comment>                                                           
+	maximum depression storage for water on impervious surface            
+	which is not immediatly causing surface runoff [mm]                 
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> *PrScaling* is a multiplier that is applied to precipitation input
-> (pr) \[-\]
->
-> *CalEvaporation* is a multiplier that is applied to the potential
-> evapo(transpi)ration input (*ET0*, *EW0* and *ES0*) \[-\]
->
-> *LeafDrainageTimeConstant* (*T~int~* in Eq 2-11) is the time constant
-> for the interception store \[days\]
->
-> *kdf* is the average extinction for the diffuse radiation flux
-> (Goudriaan, 1977). it is used to calculate the extinction coefficient
-> for global radiation, *κ~gb~* ,which is used in Equations 2-9, 2-14
-> and 2-19 \[-\]
->
-> *AvWaterRateThreshold* defines a critical amount of water that is used
-> as a threshold for resetting the variable *D~slr~* in Eq 2-20. Because
-> the equation was originally developed for daily timesteps only, the
-> threshold is currently defined (somewhat confusingly) as an equivalent
-> *intensity* in \[mm day^-1^\]
->
-> *SMaxSealed* is the maximum depression storage on impervious surface
-> \[mm\]. This storage is emptied by evaporation (EW0).
+**PrScaling** is a multiplier that is applied to precipitation input
+(pr) [-]
 
-Parameters related to snow and frost
-------------------------------------
+**CalEvaporation** is a multiplier that is applied to the potential
+evapo(transpi)ration input (**ET0**, **EW0** and **ES0**) [-]
+
+**LeafDrainageTimeConstant** (**T~int~** in Eq 2-11) is the time constant
+for the interception store [days]
+
+**kdf** is the average extinction for the diffuse radiation flux
+(Goudriaan, 1977). it is used to calculate the extinction coefficient
+for global radiation, **κ~gb~** ,which is used in Equations 2-9, 2-14
+and 2-19 [-]
+
+**AvWaterRateThreshold** defines a critical amount of water that is used
+as a threshold for resetting the variable **D~slr~** in Eq 2-20. Because
+the equation was originally developed for daily timesteps only, the
+threshold is currently defined (somewhat confusingly) as an equivalent
+**intensity** in [mm day^-1^]
+
+**SMaxSealed** is the maximum depression storage on impervious surface
+[mm]. This storage is emptied by evaporation (EW0).
+
+
+### Parameters related to snow and frost
 
 The following parameters are all related to the simulation of snow
 accumulation, snowmelt and frost. All these parameters can be defined as
@@ -821,209 +781,135 @@ constant, but since snow observations are typically associated with
 large uncertainty bands, the calibration may effectively just be
 compensating for these input errors.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| SNOW AND FROST RELATED PARAMETERS                                     |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowFactor\" value=\"1\"\>                           |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Multiplier applied to precipitation that falls as snow                |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowSeasonAdj\" value=\"1.0\"\>                      |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| range \[mm C-1 d-1\] of the seasonal variation                        |
-|                                                                       |
-| SnowMeltCoef is the average value                                     |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowMeltCoef\" value=\"4.5\"\>                       |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Snowmelt coefficient \[mm/deg C /day\]                                |
-|                                                                       |
-| See also Martinec et al., 1998.                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"TempMelt\" value=\"0.0\"\>                           |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Average temperature at which snow melts                               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"TempSnow\" value=\"1.0\"\>                           |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Average temperature below which precipitation is snow                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"TemperatureLapseRate\" value=\"0.0065\"\>            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Temperature lapse rate with altitude \[deg C / m\]                    |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"Afrost\" value=\"0.97\"\>                            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Daily decay coefficient, (Handbook of Hydrology, p. 7.28)             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"Kfrost\" value=\"0.57\"\>                            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Snow depth reduction coefficient, \[cm-1\], (HH, p. 7.28)             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowWaterEquivalent\" value=\"0.45\"\>               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Snow water equivalent, (based on snow density of 450 kg/m3) (e.g.     |
-| Tarboton and Luce, 1996)                                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"FrostIndexThreshold\" value=\"56\"\>                 |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Degree Days Frost Threshold (stops infiltration, percolation and      |
-| capillary rise)                                                       |
-|                                                                       |
-| Molnau and Bissel found a value 56-85 for NW USA.                     |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	**************************************************************               
+	SNOW AND FROST RELATED PARAMETERS                                     	
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="SnowFactor" value="1">                           
+	<comment>                                                           
+	Multiplier applied to precipitation that falls as snow                
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SnowSeasonAdj" value="1.0">                      
+	<comment>                                                           
+	range [mm C-1 d-1] of the seasonal variation                        
+	SnowMeltCoef is the average value                                     
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SnowMeltCoef" value="4.5">                       
+	<comment>                                                           
+	Snowmelt coefficient [mm/deg C /day]                                
+	See also Martinec et al., 1998.                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="TempMelt" value="0.0">                           
+	<comment>                                                           
+	Average temperature at which snow melts                               
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="TempSnow" value="1.0">                           
+	<comment>                                                           
+	Average temperature below which precipitation is snow                 
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="TemperatureLapseRate" value="0.0065">            
+	<comment>                                                           
+	Temperature lapse rate with altitude [deg C / m]                    
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="Afrost" value="0.97">                            
+	<comment>                                                           
+	Daily decay coefficient, (Handbook of Hydrology, p. 7.28)             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="Kfrost" value="0.57">                            
+	<comment>                                                           
+	Snow depth reduction coefficient, [cm-1], (HH, p. 7.28)             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SnowWaterEquivalent" value="0.45">               
+	<comment>                                                           
+	Snow water equivalent, (based on snow density of 450 kg/m3) (e.g.     
+	Tarboton and Luce, 1996)                                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="FrostIndexThreshold" value="56">                 
+	<comment>                                                           
+	Degree Days Frost Threshold (stops infiltration, percolation and      
+	capillary rise)                                                       
+	Molnau and Bissel found a value 56-85 for NW USA.                     
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> *SnowFactor* is a multiplier that is applied to the rate of
-> precipitation in case the precipitation falls as snow. Since snow is
-> commonly underestimated in meteorological observation data, setting
-> this multiplier to some value greater than 1 can counteract for this
-> \[-\]
->
-> *SnowSeasonAdj* is the range \[mm C-1 d-1\] of the seasonal variation
-> of snow melt. SnowMeltCoef is the average value.
->
-> *SnowMeltCoef* (*C~m~* in Eq 2-3) is the degree-day factor that
-> controls the rate of snowmelt \[mm °C^-1^ day^-1^\]
->
-> *TempMelt* (*T~m~* in Eq 2-3) is the average temperature above which
-> snow starts to melt \[°C\]
->
-> *TempSnow* is the average temperature below which precipitation is
-> assumed to be snow \[°C\]
->
-> *TemperatureLapseRate* (*L* in Figure 2.2) is the temperature lapse
-> rate that is used to estimate average temperature at the centroid of
-> each pixel's elevation zones \[°C m^-1^\]
->
-> *Afrost* (*A* in Eq 2-4) is the frost index decay coefficient
-> \[day^-1^\]. It has a value in the range 0-1.
->
-> *Kfrost* (*K* in Eq 2-4) is a snow depth reduction coefficient
-> \[cm^-1^\]
->
-> *SnowWaterEquivalent* (*we~s~* in Eq 2-4) is the equivalent water
-> depth of a given snow cover, expressed as a fraction \[-\]
->
-> *FrostIndexThreshold* is the critical value of the frost index (Eq
-> 2-5) above which the soil is considered frozen \[°C day^-1^\]
+**SnowFactor** is a multiplier that is applied to the rate of
+precipitation in case the precipitation falls as snow. Since snow is
+commonly underestimated in meteorological observation data, setting
+this multiplier to some value greater than 1 can counteract for this
+[-]
 
-Infiltration parameters 
-------------------------
+**SnowSeasonAdj** is the range [mm C-1 d-1] of the seasonal variation
+of snow melt. SnowMeltCoef is the average value.
+
+**SnowMeltCoef** (**C~m~** in Eq 2-3) is the degree-day factor that
+controls the rate of snowmelt [mm °C^-1^ day^-1^]
+
+**TempMelt** (**T~m~** in Eq 2-3) is the average temperature above which
+snow starts to melt [°C]
+
+**TempSnow** is the average temperature below which precipitation is
+assumed to be snow [°C]
+
+**TemperatureLapseRate** (**L** in Figure 2.2) is the temperature lapse
+rate that is used to estimate average temperature at the centroid of
+each pixel's elevation zones [°C m^-1^]
+
+**Afrost** (**A** in Eq 2-4) is the frost index decay coefficient
+[day^-1^]. It has a value in the range 0-1.
+
+**Kfrost** (**K** in Eq 2-4) is a snow depth reduction coefficient
+[cm^-1^]
+
+**SnowWaterEquivalent** (**we~s~** in Eq 2-4) is the equivalent water
+depth of a given snow cover, expressed as a fraction [-]
+
+**FrostIndexThreshold** is the critical value of the frost index (Eq
+2-5) above which the soil is considered frozen [°C day^-1^]
+
+
+### Infiltration parameters
 
 The following two parameters control the simulation of infiltration and
 preferential flow. Both are empirical parameters that are treated as
 calibration constants, and both can be defined as single values or maps.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| INFILTRATION PARAMETERS                                               |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"b\_Xinanjiang\" value=\"0.1\"\>                      |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Power in Xinanjiang distribution function                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PowerPrefFlow\" value=\"3\"\>                        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Power that controls increase of proportion of preferential            |
-|                                                                       |
-| flow with increased soil moisture storage                             |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	INFILTRATION PARAMETERS                                               
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="b\_Xinanjiang" value="0.1">                      
+	<comment>                                                           
+	Power in Xinanjiang distribution function                             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PowerPrefFlow" value="3">                        
+	<comment>                                                           
+	Power that controls increase of proportion of preferential            
+	flow with increased soil moisture storage                             
+	</comment>                                                          	
+```
 
-> *b\_Xinanjiang* (*b* in Eq 2-23) is the power in the infiltration
-> equation \[-\]
->
-> *PowerPrefFlow* (*c~pref~* in Eq 2-25) is the power in the
-> preferential flow equation \[-\]
+**b\_Xinanjiang** (**b** in Eq 2-23) is the power in the infiltration
+equation [-]
 
-Groundwater parameters 
------------------------
+**PowerPrefFlow** (**c~pref~** in Eq 2-25) is the power in the
+preferential flow equation [-]
+
+
+### Groundwater parameters
 
 The following parameters control the simulation shallow and deeper
 groundwater. *GwLossFraction* should be kept at 0 unless prior
@@ -1032,88 +918,58 @@ catchment boundaries (or to deep groundwater systems). The other
 parameters are treated as calibration constants. All these parameters
 can be defined as single values or maps.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| GROUNDWATER RELATED PARAMETERS                                        |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"UpperZoneTimeConstant\" value=\"10\"\>               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Time constant for water in upper zone \[days\]                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"LowerZoneTimeConstant\" value=\"1000\"\>             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Time constant for water in lower zone \[days\]                        |
-|                                                                       |
-| This is the average time a water \'particle\' remains in the          |
-| reservoir                                                             |
-|                                                                       |
-| if we had a stationary system (average inflow=average outflow)        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"GwPercValue\" value=\"0.5\"\>                        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Maximum rate of percolation going from the Upper to the Lower         |
-|                                                                       |
-| response box \[mm/day\]                                               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"GwLoss\" value=\"0\"\>                               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Maximum rate of percolation from the Lower response box (groundwater  |
-| loss) \[mm/day\].                                                     |
-|                                                                       |
-| A value of 0 (closed lower boundary) is recommended as a starting     |
-| value                                                                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	GROUNDWATER RELATED PARAMETERS                                        
+	**************************************************************               
+	</comment>                                                          	
+	<textvar name="UpperZoneTimeConstant" value="10">               
+	<comment>                                                           
+	Time constant for water in upper zone [days]                        
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="LowerZoneTimeConstant" value="1000">             
+	<comment>                                                           
+	Time constant for water in lower zone [days]                        
+	This is the average time a water \'particle\' remains in the          
+	reservoir                                                             
+	if we had a stationary system (average inflow=average outflow)        
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="GwPercValue" value="0.5">                        
+	<comment>                                                           
+	Maximum rate of percolation going from the Upper to the Lower         
+	response box [mm/day]                                               
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="GwLoss" value="0">                               
+	<comment>                                                           
+	Maximum rate of percolation from the Lower response box (groundwater  
+	loss) [mm/day].                                                     
+	A value of 0 (closed lower boundary) is recommended as a starting     
+	value                                                                 
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> *UpperZoneTimeConstant* (*T~uz~* in Eq 2-42) is the time constant for
-> the upper groundwater zone \[days\]
->
-> *LowerZoneTimeConstant* (*T~lz~* in Eq 2-43) is the time constant for
-> the lower groundwater zone \[days\]
->
-> *GwPercValue* (*GW~perc~* in Eq 2-44) is the maximum rate of
-> percolation going from the upper to the lower groundwater zone \[mm
-> day^-1^\]
->
-> *GwLoss* (*f~loss~* in Eq 2-45) is the maximum rate of percolation
-> from the lower groundwater zone (groundwater loss) zone \[mm
-> day^-1^\]. A value of 0 (closed lower boundary) is recommended as a
-> starting value.
+**UpperZoneTimeConstant** (**T~uz~** in Eq 2-42) is the time constant for
+the upper groundwater zone [days]
 
-Routing parameters 
--------------------
+**LowerZoneTimeConstant** (**T~lz~** in Eq 2-43) is the time constant for
+the lower groundwater zone [days]
+
+**GwPercValue** (**GW~perc~** in Eq 2-44) is the maximum rate of
+percolation going from the upper to the lower groundwater zone [mm
+day^-1^]
+
+**GwLoss** (**f~loss~** in Eq 2-45) is the maximum rate of percolation
+from the lower groundwater zone (groundwater loss) zone [mm
+day^-1^]. A value of 0 (closed lower boundary) is recommended as a
+starting value.
+
+
+### Routing parameters 
 
 These parameters are all related to the routing of water in the channels
 as well as the routing of surface runoff. The multiplier *CalChanMan*
@@ -1121,131 +977,91 @@ can be used to fine-tune the timing of the channel routing, and it may
 be defined as either a single value or a map. All other parameters
 should be kept at their default values.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| ROUTING PARAMETERS                                                    |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"CalChanMan\" value=\"1\"\>                           |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Multiplier applied to Channel Manning\'s n                            |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"beta\" value=\"0.6\"\>                               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| kinematic wave parameter: 0.6 is for broad sheet flow                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"OFDepRef\" value=\"5\"\>                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Reference depth of overland flow \[mm\], used to compute              |
-|                                                                       |
-| overland flow Alpha for kin. wave                                     |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"GradMin\" value=\"0.001\"\>                          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Minimum slope gradient (for kin. wave: slope cannot be 0)             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ChanGradMin\" value=\"0.0001\"\>                     |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Minimum channel gradient (for kin. wave: slope cannot be 0)           |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	ROUTING PARAMETERS                                                    
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="CalChanMan" value="1">                           
+	<comment>                                                           
+	Multiplier applied to Channel Manning's n                            
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="beta" value="0.6">                               
+	<comment>                                                           
+	kinematic wave parameter: 0.6 is for broad sheet flow                 
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="OFDepRef" value="5">                             
+	<comment>                                                           
+	Reference depth of overland flow [mm], used to compute              
+	overland flow Alpha for kin. wave                                     
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="GradMin" value="0.001">                          
+	<comment>                                                           
+	Minimum slope gradient (for kin. wave: slope cannot be 0)             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ChanGradMin" value="0.0001">                     
+	<comment>                                                           
+	Minimum channel gradient (for kin. wave: slope cannot be 0)           
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> *CalChanMan* is a multiplier that is applied to the Manning's
-> roughness maps of the channel system \[-\]
->
-> *beta* is routing coefficient *β~k~* in Equations 2-51, 2-52, 2-54 and
-> 2-57 \[-\]
->
-> *OFDepRef* is a reference flow depth from which the flow velocity of
-> the surface runoff is calculated \[mm\]
->
-> *GradMin* is a lower limit for the slope gradient used in the
-> calculation of the surface runoff flow velocity \[m m^-1^\]
->
-> *ChanGradMin* is a lower limit for the channel gradient used in the
-> calculation of the channel flow velocity \[m m^-1^\]
+**CalChanMan** is a multiplier that is applied to the Manning's
+roughness maps of the channel system [-]
 
-Parameters related to numerics
-------------------------------
+**beta** is routing coefficient **β~k~** in Equations 2-51, 2-52, 2-54 and
+2-57 [-]
+
+**OFDepRef** is a reference flow depth from which the flow velocity of
+the surface runoff is calculated [mm]
+
+**GradMin** is a lower limit for the slope gradient used in the
+calculation of the surface runoff flow velocity [m m^-1^]
+
+**ChanGradMin** is a lower limit for the channel gradient used in the
+calculation of the channel flow velocity [m m^-1^]
+
+
+
+### Parameters related to numerics 
 
 This category only contains one parameter at the moment, which can only
 be a single value. We strongly recommend keeping this parameter at its
 default value.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| PARAMETERS RELATED TO NUMERICS                                        |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"CourantCrit\" value=\"0.4\"\>                        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Minimum value for Courant condition in soil moisture routine          |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	********************************** 
+	****************************               
+	PARAMETERS RELATED TO NUMERICS                                        
+	********************************** 
+	****************************               
+	</comment>                                                          
+	<textvar name="CourantCrit" value="0.4">                        
+	<comment>                                                           
+	Minimum value for Courant condition in soil moisture routine          
+	</comment>                                                          	
+	</textvar>                                                          
+```
 
-> *CourantCrit* (*C~crit~* in Eq 2-36) is the critical Courant number
-> which controls the numerical accuracy of the simulated soil moisture
-> fluxes \[-\]. Any value between 0 and 1 can be used, but using values
-> that are too high can lead to unrealistic "jumps" in the simulated
-> soil moisture, whereas very low values result in reduced computational
-> performance (because many iterations will be necessary to obtain the
-> required accuracy). Values above 1 should never be used, as they will
-> result in a loss of mass balance. In most cases the default value of
-> 0.4 results in sufficiently realistic simulations using just a few
-> iterations.
+**CourantCrit** (**C~crit~** in Eq 2-36) is the critical Courant number
+which controls the numerical accuracy of the simulated soil moisture
+fluxes [-]. Any value between 0 and 1 can be used, but using values
+that are too high can lead to unrealistic "jumps" in the simulated
+soil moisture, whereas very low values result in reduced computational
+performance (because many iterations will be necessary to obtain the
+required accuracy). Values above 1 should never be used, as they will
+result in a loss of mass balance. In most cases the default value of
+0.4 results in sufficiently realistic simulations using just a few
+iterations.
 
-File paths
-----------
+
+### File paths 
 
 Here you can specify where all the input files are located, and where
 output should be written. Note that you can use both forward and
@@ -1257,292 +1073,190 @@ most cases allows you to run the model directly without changing these
 settings (assuming that you execute LISFLOOD from the root directory of
 your catchment).
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| FILE PATHS                                                            |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathOut\" value=\"./out\"\>                          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Output path                                                           |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathInit\" value=\"./out\"\>                         |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Path of the initial value maps e.g. lzavin.map                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathMaps\" value=\"./maps\"\>                        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Maps path                                                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathSoilHyd\" value=\"./maps/soilhyd\"\>             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Maps instead tables for soil hydraulics path                          |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathMapsFraction\" value=\"./maps/fraction\"\>       |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Maps of fraction of land cover (forest, water, sealed,other)          |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar                                                            |
-|                                                                       |
-| \<textvar name=\"PathMapsTables\" value=\"./maps/table2map\"\>        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Maps which replaced tables e.g. CropCoeff                             |
-|                                                                       |
-| /comment\>                                                            |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathTables\" value=\"./tables\"\>                    |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Tables path                                                           |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathMeteo\" value=\"./meteo\"\>                      |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Meteo path                                                            |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathLAI\" value=\"./lai\"\>                          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Leaf Area Index maps path                                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PathWaterUse\" value=\"./wateruse\"\>                |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Water use maps path                                                   |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	FILE PATHS                                                            
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="PathOut" value="./out">                          
+	<comment>                                                           
+	Output path                                                           
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PathInit" value="./out">                         
+	<comment>                                                           
+	Path of the initial value maps e.g. lzavin.map                        
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PathMaps" value="./maps">                        
+	<comment>                                                           
+	Maps path                                                             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PathSoilHyd" value="./maps/soilhyd">             
+	<comment>                                                           
+	Maps instead tables for soil hydraulics path                          
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PathMapsFraction" value="./maps/fraction">       
+	<comment>                                                           
+	Maps of fraction of land cover (forest, water, sealed,other)          
+	</comment>                                                          
+	</textvar                                                            
+	<textvar name="PathMapsTables" value="./maps/table2map">        
+	<comment>                                                           
+	Maps which replaced tables e.g. CropCoeff                             
+	/comment>                                                            
+	</textvar>                                                          
+	<textvar name="PathTables" value="./tables">                    
+	<comment>                                                           
+	Tables path                                                           
+	</comment>                                                          	
+	</textvar>                                                          
+	<textvar name="PathMeteo" value="./meteo">                      
+	<comment>                                                           
+	Meteo path                                                            
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PathLAI" value="./lai">                          
+	<comment>                                                           
+	Leaf Area Index maps path                                             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PathWaterUse" value="./wateruse">                
+	<comment>                                                           
+	Water use maps path                                                   
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> *PathOut* is the directory where all output files are written. It must
-> be an existing directory (if not you will get an error message -- not
-> immediately but after 256 timesteps, when the time series are written
-> for the first time)
->
-> *PathInit* is the directory where the initial files are located, to
-> initialize a "warm" start. It can be also the PathOut directory
->
-> *PathMaps* is the directory where all input base maps are located
->
-> *PathSoilHyd* is the directory where the soil hydraulic property maps
-> are located
->
-> *PathMapsFraction* is the directory where the land cover fraction maps
-> are located
->
-> *PathMapsTables* is the directory where maps are located which were
-> calculated from lookup tables in the previous version (e.g. cropcoeff)
->
-> *PathTables* is the directory where all input tables are located
->
-> *PathMeteo* is the directory where all maps with meteorological input
-> are located (rain, evapo(transpi)ration, temperature)
->
-> *PathLAI* is the directory where you Leaf Area Index maps are located
->
-> *PathWaterUse* is the directory where water use maps are located
-> (optional)
+**PathOut** is the directory where all output files are written. It must
+be an existing directory (if not you will get an error message -- not
+immediately but after 256 timesteps, when the time series are written
+for the first time)
 
-Prefixes of meteo and vegetation related variables
---------------------------------------------------
+**PathInit** is the directory where the initial files are located, to
+initialize a "warm" start. It can be also the PathOut directory
+
+**PathMaps** is the directory where all input base maps are located
+
+**PathSoilHyd** is the directory where the soil hydraulic property maps
+are located
+
+**PathMapsFraction** is the directory where the land cover fraction maps
+are located
+
+**PathMapsTables** is the directory where maps are located which were
+calculated from lookup tables in the previous version (e.g. cropcoeff)
+
+**PathTables** is the directory where all input tables are located
+
+**PathMeteo** is the directory where all maps with meteorological input
+are located (rain, evapo(transpi)ration, temperature)
+
+**PathLAI** is the directory where you Leaf Area Index maps are located
+
+**PathWaterUse** is the directory where water use maps are located
+(optional)
+
+
+### Prefixes of meteo and vegetation related variables
 
 Here you can define the prefix that is used for each meteorological
 variable (and LAI and water use).
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| PREFIXES OF METEO AND VEGETATION RELATED VARIABLES                    |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixPrecipitation\" value=\"pr\"\>                 |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix precipitation maps                                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixTavg\" value=\"ta\"\>                          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix average temperature maps                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixE0\" value=\"e\"\>                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix E0 maps                                                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixES0\" value=\"es\"\>                           |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix ES0 maps                                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixET0\" value=\"et\"\>                           |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix ET0 maps                                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixLAI\" value=\"olai\"\>                         |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix LAI maps                                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixLAIForest\" value=\"flai\"\>                   |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix forest LAI maps                                                |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrefixWaterUse\" value=\"wuse\"\>                    |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| prefix water use maps                                                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	PREFIXES OF METEO AND VEGETATION RELATED VARIABLES                    
+	**************************************************************               
+	</comment>                                                          	
+	<textvar name="PrefixPrecipitation" value="pr">                 
+	<comment>                                                           
+	prefix precipitation maps                                             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixTavg" value="ta">                          
+	<comment>                                                           
+	prefix average temperature maps                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixE0" value="e">                             
+	<comment>                                                           
+	prefix E0 maps                                                        
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixES0" value="es">                           
+	<comment>                                                           
+	prefix ES0 maps                                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixET0" value="et">                           
+	<comment>                                                           
+	prefix ET0 maps                                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixLAI" value="olai">                         
+	<comment>                                                           
+	prefix LAI maps                                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixLAIForest" value="flai">                   
+	<comment>                                                           
+	prefix forest LAI maps                                                
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrefixWaterUse" value="wuse">                    
+	<comment>                                                           
+	prefix water use maps                                                 
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> Each variable is read as a stack of maps. The name of each map starts
-> with prefix, and ends with the number of the time step. All characters
-> in between are filled with zeroes. The name of each map is made up of
-> a total of 11 characters: 8 characters, a dot and a 3-character
-> suffix. For instance, using a prefix 'pr' we get:
+Each variable is read as a stack of maps. The name of each map starts
+with prefix, and ends with the number of the time step. All characters
+in between are filled with zeroes. The name of each map is made up of
+a total of 11 characters: 8 characters, a dot and a 3-character
+suffix. For instance, using a prefix 'pr' we get:
 
   pr000000.007   : at time step 7
--------------- ----------------------
   pr000035.260   : at time step 35260
 
 > To avoid unexpected behaviour, **never** use numbers in the prefix!
 > For example:
->
+
 > PrefixRain=pr10
->
+
 > For the first time step this yields the following file name:
 
--------------- --
-  pr100000.001   
--------------- --
+>   pr100000.001   
 
 > But this is actually interpreted as time step 100,000,001!
 > **Therefore, do not use numbers in the prefix!**
->
-> The corresponding part of the settings file is pretty
-> self-explanatory:
->
-> *PrefixPrecipitation* is the prefix of the precipitation maps
->
-> *PrefixTavg* is the prefix of the daily average temperature maps
->
-> *PrefixE0* is the prefix of the potential open-water evaporation maps
->
-> *PrefixES0* is the prefix of the potential bare-soil evaporation maps
->
-> *PrefixET0* is the prefix of the potential (reference)
-> evapotranspiration maps
->
-> *PrefixLAI* is the prefix of the Leaf Area Index maps
->
-> *PrefixLAIForest* is the prefix of the forest Leaf Area Index maps
->
-> *PrefixWaterUse* is the prefix of the water use maps (optional)
+
+The corresponding part of the settings file is pretty
+self-explanatory:
+
+**PrefixPrecipitation** is the prefix of the precipitation maps
+
+**PrefixTavg** is the prefix of the daily average temperature maps
+
+**PrefixE0** is the prefix of the potential open-water evaporation maps
+
+**PrefixES0** is the prefix of the potential bare-soil evaporation maps
+
+**PrefixET0** is the prefix of the potential (reference)
+evapotranspiration maps
+
+**PrefixLAI** is the prefix of the Leaf Area Index maps
+
+**PrefixLAIForest** is the prefix of the forest Leaf Area Index maps
+
+**PrefixWaterUse** is the prefix of the water use maps (optional)
+
+
+
 
 Initial conditions
 ------------------
