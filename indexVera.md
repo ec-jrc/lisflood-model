@@ -297,7 +297,7 @@ of the following categories:
 > \<comment\>\
 > Land Use Classes\
 > \</comment\>\
-> \</textvar\>\
+> \</textvar\>
 
 2.  **Table**
 
@@ -307,7 +307,7 @@ of the following categories:
 > \<comment\>\
 > Saturated conductivity \[cm/day\]\
 > \</comment\>\
-> \</textvar\>\
+> \</textvar\>
 
 3.  **Stack of maps**
 
@@ -318,7 +318,7 @@ of the following categories:
 > \<comment\>\
 > precipitation \[mm/day\]\
 > \</comment\>\
-> \</textvar\>\
+> \</textvar\>
 
 
 __**Note:**__
@@ -340,7 +340,7 @@ To avoid unexpected behaviour, do **not** use numbers in the prefix!
 > \<comment\>\
 > precipitation \[mm/day\]\
 > \</comment\>\
-> \</textvar\>\
+> \</textvar\>
 
 For the first time step this yields the following file name: pr100000.001   
 But this is actually interpreted as time step 100,000,001!
@@ -349,11 +349,12 @@ But this is actually interpreted as time step 100,000,001!
 
 > Example:
 > 
-> \<textvar name=\"DisTS\" value=\"\$(PathOut)/dis.tss\"\>\
+> \<textvar name=\"DisTS\"\ 
+> value=\"\$(PathOut)/dis.tss\"\>\
 > \<comment\>\
 > Reported discharge \[cu m/s\]\
 > \</comment\>\
-> \</textvar\>\
+> \</textvar\>
 
 5.  **Single parameter value**
 
@@ -364,7 +365,7 @@ But this is actually interpreted as time step 100,000,001!
 > \<comment\>\
 > Time constant for water in upper zone \[days\]\
 > \</comment\>\
-> \</textvar\>\
+> \</textvar\>
 
 [:top:](#top)
 
@@ -639,60 +640,62 @@ defined as single values.
 ```
 
 
+**CalendarDayStart** is the calendar day of the first map in a map stack
+e.g. pr000000.001. Even if you start the model from time step 500,
+this has to be set to the calendar day of the 001 map in your map
+stacks. Format can be 
+  a) a number:
+    *Value="1" = 1^st^ January* 
+    *Value="151" = 1^st^ June*
+  Or b) a date (in different format):
+    *Value="01/01/1990" = 1^st^ January 1990* 
+    *Value="05.07.1990" = 5th June 1990*
+    *Value="15-11-1990" = 15^th^ November 1990*
 
-> *CalendarDayStart* is the calendar day of the first map in a map stack
-> e.g. pr000000.001. Even if you start the model from time step 500,
-> this has to be set to the calendar day of the 001 map in your map
-> stacks.\
-> Format can be a number:
->
-> *Value="1" = 1^st^ January, Value="151" = 1^st^ June*
->
-> Or date (in different format):
->
-> *Value="01/01/1990" = 1^st^ January 1990, Value="05.07.1990" = 5th
-> June 1990,*
->
-> *Value="15-11-1990" = 15^th^ November 1990*
->
-> *DtSec* is the simulation time interval in seconds. It has a value of
-> 86400 for a daily time interval, 3600 for an hourly interval, etcetera
->
-> *DtSecChannel* is the simulation time interval used by the kinematic
-> wave channel routing (in seconds). Using a value that is smaller than
-> *DtSec* may result in a better simulation of the overall shape the
-> calculated hydrograph (at the expense of requiring more computing
-> time)
->
-> *StepStart* is the number of the first time step in your simulation.
-> It is normally set to 1. Other (larger) values can be used if you want
-> to run LISFLOOD for only a part of the time period for which you have
-> meteo and LAI maps.
->
-> *StepEnd* is the number of the last time step in your simulation.
->
-> *ReportSteps* defines the time step number(s) at which the model state
-> (i.e. all maps that you would need to define the initial conditions of
-> a succeeding model run) is written. You can define this parameter as a
-> (comma separated) list of time steps. For example:
->
-> \<textvar name=\"ReportSteps\" value=\"10,20,40\"\>
->
-> will result in state maps being written at time steps 10, 20 and 40.
-> For the *last* time step of a model run you can use the special
-> 'endtime' keyword, e.g.:
->
-> \<textvar name=\"ReportSteps\" value=\"endtime\"\>
->
-> Alternatively, in some cases you may need the state maps at regular
-> intervals. In that case you can use the following syntax:
->
-> \<textvar name=\"ReportSteps\" value=\"start+increment..end\"\>
->
-> For instance, in the following example state maps are written every
-> 5^th^ time step, starting at time step 10, until the last time step:
->
-> \<textvar name=\"ReportSteps\" value=\"10+5..endtime\"\>
+**DtSec** is the simulation time interval in seconds. It has a value of
+86400 for a daily time interval, 3600 for an hourly interval, etcetera
+
+**DtSecChannel** is the simulation time interval used by the kinematic
+wave channel routing (in seconds). Using a value that is smaller than
+
+**DtSec** may result in a better simulation of the overall shape the
+calculated hydrograph (at the expense of requiring more computing
+time)
+
+**StepStart** is the number of the first time step in your simulation.
+It is normally set to 1. Other (larger) values can be used if you want
+to run LISFLOOD for only a part of the time period for which you have
+meteo and LAI maps.
+
+**StepEnd** is the number of the last time step in your simulation.
+
+**ReportSteps** defines the time step number(s) at which the model state
+(i.e. all maps that you would need to define the initial conditions of
+a succeeding model run) is written. You can define this parameter in the following ways:
+
+  1) **At specific time steps**. If you like to have the state maps being written at certain time steps you can define those in a (comma separated) list. For example if you like to have the state maps for the time steps 10, 20 and 40, you need to write:
+
+    \<textvar name=\"ReportSteps\" value=\"10,20,40\"\
+
+
+  2) If you like to have the state maps for the **last time step** of a model run you can use the special
+    'endtime' keyword, e.g.:
+
+    \<textvar name=\"ReportSteps\" value=\"endtime\"\
+
+  3) Alternatively, in some cases you may need the state maps **at regular intervals**. In that case you can use the following syntax:
+
+    \<textvar name=\"ReportSteps\" value=\"start+increment..end\"\
+
+    For instance, in the following example state maps are written every
+    5^th^ time step, starting at time step 10, until the last time step:
+
+    \<textvar name=\"ReportSteps\" value=\"10+5..endtime\"\
+
+
+
+
+
 
 Parameters related to evapo(transpi)ration and interception
 -----------------------------------------------------------
