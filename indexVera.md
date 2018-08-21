@@ -36,78 +36,9 @@ A series of Annexes at the end of this document describe some optional features 
 
 [:top:](#top)
 
+# Explaining the essential files
 
-
-# Step-by-step user guide
-
-## Step1 : System requirements
-
-Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless
-you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to
-the PCRaster documentation.
-
-## Step 2: Installation of the LISFLOOD model
-
-### On Windows systems
-
-For Windows users the installation involves two steps:
-
-1.  Unzip the contents of 'lisflood\_win32.zip' to an empty folder on your PC (e.g. 'lisflood')
-
-2.  Open the file 'config.xml' in a text editor. This file contains the full path to all files and applications that are used by LISFLOOD. The items in the file are:
-
-    - *Pcrcalc application* : this is the name of the pcrcalc application, including the full path
-
-    - *LISFLOOD Master Code* (optional). This item is usually omitted, and LISFLOOD assumes that the master code is called 'lisflood.xml', and that it is located in the root of the 'lisflood' directory (i.e. the directory that contains  'lisflood.exe' and all libraries). If --for whatever reason- you want to overrule this behaviour, you can add a 'mastercode' element, e.g.:
-
-      ```
-      <mastercode\>d:\\Lisflood\\mastercode\\lisflood.xml<\mastercode>
-      ```
-
-      The configuration file should look something like this:
-
-      ```xml
-      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
-      <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
-      <!-- !! This file MUST be in the same directory as lisflood.exe -->
-      <!-- (or lisflood) !!! -->
-      <lfconfig>
-      <!-- location of pcrcalc application -->
-      <pcrcalcapp>C:\pcraster\apps\pcrcalc.exe</pcrcalcapp>
-      </lfconfig>
-      ```
-
-
-The lisflood executable is a command-line application which can be called from the command prompt ('DOS' prompt). To make life easier you may include the full path to 'lisflood.exe' in the 'Path' environment
-variable. In Windows XP you can do this by selecting 'settings' from the 'Start' menu; then go to 'control panel'/'system' and go to the 'advanced' tab. Click on the 'environment variables' button. Finally, locate the 'Path' variable in the 'system variables' window and click on 'Edit' (this requires local Administrator privileges).
-
-[[🔝](#top)](#top)
-
-
-### On Linux systems
-
-Under Linux LISFLOOD requires that the Python interpreter (version 2.7 or more recent) is installed on the system. Most Linux distributions already have Python pre-installed. If needed you can download Python free of any charge from *http://www.python.org/*
-
-The installation process is largely identical to the Windows procedure:
-
-1.  unzip the contents of 'lisflood\_llinux.zip' to an empty directory.
-2.  Check if the file 'lisflood' is executable. If not, make it executable using: "chmod 755 lisflood"
-3.  Then update the paths in the configuration file. The configuration file will look something like this:
-
-      ```xml
-      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
-      <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
-      <!-- !! This file MUST be in the same directory as lisflood.exe -->
-      <!-- (or lisflood) !!! \--\><lfconfig\><!\-- location of pcrcalc application -->
-      <pcrcalcapp>/software/PCRaster/bin/pcrcalc</pcrcalcapp>
-      </lfconfig>
-      ```
-
-
-[[🔝](#top)](#top)
-
-
-## Step 3: Understanding and preparing the Settings file
+## LISFLOOD settings file
 
 In LISFLOOD, all file and parameter specifications are defined in a
 settings file. The purpose of the settings file is to link variables and
@@ -484,55 +415,51 @@ You can view all options by running LISFLOOD with the *\--listoptions*
 flag. 
 For each option, the following information is listed:
 
-OptionName Choices DefaultValue
+**OptionName Choices DefaultValue**
 
-'OptionName' -as you might have guessed already- simply is the name of
-the option. 'Choices' indicates the possible values of the option, and
-'DefaultValue' describes the default behaviour. For instance, if you
-look at the reservoir option:
+- 'OptionName' -as you might have guessed already- simply is the name of
+the option. 
+- 'Choices' indicates the possible values of the option, and
+- 'DefaultValue' describes the default behaviour. 
 
-simulateReservoirs choices=(1,0) default=0
+For instance, if you look at the reservoir option:
 
-you see that the value of this option is either 0 (off) or 1 (on), and
+  simulateReservoirs choices=(1,0) default=0
+
+  - you see that the value of this option is either 0 (off) or 1 (on), and
 that the default value is 0 (off, i.e. do not simulate any reservoirs).
 
 The information on the reporting options is a little bit different (and
 slightly confusing). Looking at the option for reporting discharge maps:
 
-repDischargeMaps choices=(1) noDefault
+  repDischargeMaps choices=(1) noDefault
 
-By default, discharge maps are not reported, so you would expect
-something like "default=0". However, due to the way options are defined
-internally in the model, in this case we have no default value, which
-means it is switched off.[^4] Report options that are switched *on* by
-default look like this:
+  By default, discharge maps are not reported, so you would expect
+  something like "default=0". However, due to the way options are defined
+  internally in the model, in this case we have no default value, which
+  means it is switched off.[^4] Report options that are switched *on* by
+  default look like this:
 
-repStateMaps choices=(1) default=1
+  repStateMaps choices=(1) default=1
 
-To minimise the confusion, you should:
+  To minimise the confusion, you should:
+  1.  Ignore the "Choices" item
+  2.  Interpret "noDefault" as "default=0"
 
-1.  Ignore the "Choices" item
+  This is all a bit confusing, and the displaying of option information
+  may well change in future LISFLOOD versions.
 
-2.  Interpret "noDefault" as "default=0"
-
-This is all a bit confusing, and the displaying of option information
-may well change in future LISFLOOD versions.
-
-### Defining options
+##### Defining options
 
 Within the 'lfoptions' element of the settings file, each option is
 defined using a 'setoption' element, which has the attributes 'name' and
 'choice' (i.e. the actual value). For example:
 
-+----------------------------------------------+
-| **\<lfoptions\>**                            |
-|                                              |
-| \<setoption choice=\"1\" name=\"inflow\" /\> |
-|                                              |
-| **\</lfoptions\>**                           |
-+----------------------------------------------+
+> \<lfoptions\>\                            
+> \<setoption choice=\"1\" name=\"inflow\" /\>\ 
+> \</lfoptions\>\                           
 
-You are not obliged to use any options: if you leave the 'lfoptions'
+**You are not obliged to use any options**: if you leave the 'lfoptions'
 element empty, LISFLOOD will simply run using the default values (i.e.
 run model without optional modules; only report most basic output
 files). However, the 'lfoptions' element itself (i.e. \<lfoptions\>
@@ -552,300 +479,87 @@ files). However, the 'lfoptions' element itself (i.e. \<lfoptions\>
 
 
 
+# Step-by-step user guide
+
+## Step1 : System requirements
+
+Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless
+you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to
+the PCRaster documentation.
+
+## Step 2: Installation of the LISFLOOD model
+
+### On Windows systems
+
+For Windows users the installation involves two steps:
+
+1.  Unzip the contents of 'lisflood\_win32.zip' to an empty folder on your PC (e.g. 'lisflood')
+
+2.  Open the file 'config.xml' in a text editor. This file contains the full path to all files and applications that are used by LISFLOOD. The items in the file are:
+
+    - *Pcrcalc application* : this is the name of the pcrcalc application, including the full path
+
+    - *LISFLOOD Master Code* (optional). This item is usually omitted, and LISFLOOD assumes that the master code is called 'lisflood.xml', and that it is located in the root of the 'lisflood' directory (i.e. the directory that contains  'lisflood.exe' and all libraries). If --for whatever reason- you want to overrule this behaviour, you can add a 'mastercode' element, e.g.:
+
+      ```
+      <mastercode\>d:\\Lisflood\\mastercode\\lisflood.xml<\mastercode>
+      ```
+
+      The configuration file should look something like this:
+
+      ```xml
+      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+      <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
+      <!-- !! This file MUST be in the same directory as lisflood.exe -->
+      <!-- (or lisflood) !!! -->
+      <lfconfig>
+      <!-- location of pcrcalc application -->
+      <pcrcalcapp>C:\pcraster\apps\pcrcalc.exe</pcrcalcapp>
+      </lfconfig>
+      ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Step 6: Running the model
------------------
-
-Type 'lisflood' at the command prompt. You should see something like this:
-
-LISFLOOD version March 24 2008
-
-Water balance and flood simulation model for large catchments \(C) Institute for Environment and Sustainability
-
-Joint Research Centre of the European Commission
-
-TP261, I-21020 Ispra (Va), Italy
-
-usage (1): lisflood \[switches\] \<InputFile\>
-
-usage (2): lisflood \--listoptions (show options only)
-
-InputFile : LISFLOOD input file (see documentation for description of format)
-
-switches:
-
--s : keep temporary script after simulation
-
-You can run LISFLOOD by typing 'lisflood' followed by a specially-formatted settings file. The layout of this file is described in Chapters 4 and 5. Chapter 3 explains all other input files.
+The lisflood executable is a command-line application which can be called from the command prompt ('DOS' prompt). To make life easier you may include the full path to 'lisflood.exe' in the 'Path' environment
+variable. In Windows XP you can do this by selecting 'settings' from the 'Start' menu; then go to 'control panel'/'system' and go to the 'advanced' tab. Click on the 'environment variables' button. Finally, locate the 'Path' variable in the 'system variables' window and click on 'Edit' (this requires local Administrator privileges).
 
 [[🔝](#top)](#top)
 
-## Model setup: input files
 
-In the current version of LISFLOOD, all model input is provided as either maps (grid files in PCRaster format) or tables. This chapter describes all the data that are required to run the model. Files that are specific to *optional* LISFLOOD features (e.g. inflow hydrographs, reservoirs) are not listed here; they are described in the documentation for each option.
+### On Linux systems
 
-Input maps
-----------
+Under Linux LISFLOOD requires that the Python interpreter (version 2.7 or more recent) is installed on the system. Most Linux distributions already have Python pre-installed. If needed you can download Python free of any charge from *http://www.python.org/*
 
-PCRaster requires that all maps must have *identical* location attributes (number of rows, columns, cellsize, upper x and y coordinate!
+The installation process is largely identical to the Windows procedure:
 
-All input maps roughly fall into any of the following six categories:
+1.  unzip the contents of 'lisflood\_llinux.zip' to an empty directory.
+2.  Check if the file 'lisflood' is executable. If not, make it executable using: "chmod 755 lisflood"
+3.  Then update the paths in the configuration file. The configuration file will look something like this:
 
--   maps related to topography
+      ```xml
+      <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  
+      <!-- Lisflood configuration file, JvdK, 8 July 2004 -->
+      <!-- !! This file MUST be in the same directory as lisflood.exe -->
+      <!-- (or lisflood) !!! \--\><lfconfig\><!\-- location of pcrcalc application -->
+      <pcrcalcapp>/software/PCRaster/bin/pcrcalc</pcrcalcapp>
+      </lfconfig>
+      ```
 
--   maps related to land cover -- fraction of land cover
 
--   maps related to land cover and soil
+[[🔝](#top)](#top)
 
--   maps related to soil texture (soil hydraulic properties)
 
--   maps related to channel geometry
+## Step 3: Preparing the Settings file
 
--   maps related to the meteorological conditions
+```R
+  # Add more detail to all those steps!!
+  ```
 
--   maps related to the development of vegetation over time
+•	specify the file path
+•	time related specifications
+•	parameter options
+•	chose optional model routines (which ones are available; what they do; and how to “activate” them)
 
--   maps that define at which locations output is generated as time series
 
-All maps that are needed to run the model are listed in the table of Annex 12.
-
-### Role of "mask" and "channels" maps 
-
-The mask map (i.e. "area.map") defines the model domain. In order to avoid unexpected results, **it is vital that all maps that are related to topography, land use and soil are defined** (i.e. don't contain a missing value) for each pixel that is "true" (has a Boolean 1 value) on the mask map. The same applies for all meteorological input and the Leaf Area Index maps. Similarly, all pixels that are "true" on the
-channels map must have some valid (non-missing) value on each of the channel parameter maps. Undefined pixels can lead to unexpected behaviour of the model, output that is full of missing values, loss of mass balance and possibly even model crashes. Some maps needs to have values in a defined range e.g. gradient.map has to be greater than 0.
-
-### Map location attributes and distance units
-
-LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
-obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell:
-
-###### Table 4.1 Optional maps that define grid size
-
-| **Map**               | **Default name**      | **Description**    |
-|-----------------------|-----------------------|----------------------|
-| PixelLengthUser       | pixleng.map           | Map with pixel length |
-|                       |                       |                       |
-|                       |                       | Unit: \[m\], *Range   |
-|                       |                       | of values: map \> 0*  |
-|-----------------------|-----------------------|-----------------------|
-| PixelAreaUser         | pixarea.map           | Map with pixel area   |
-|                       |                       |                       |
-|                       |                       | *Unit:* \[m^2^\],    |
-|                       |                       | *Range of values: map |
-|                       |                       | \> 0*                 |
-|-----------------------|-----------------------|-----------------------|
-
-Both maps should be stored in the same directory where all other input maps are. The values on both maps may vary in space. A limitation is that a pixel is always represented as a square, so length and width are considered equal (no rectangles). In order to tell LISFLOOD to ignore the default location attributes and use the maps instead, you need to activate the special option "*gridSizeUserDefined*", which involves adding the following line to the LISFLOOD settings file:
-
-```
-<setoption choice="1" name="gridSizeUserDefined" \>
-```
-
-LISFLOOD settings files and the use of options are explained in detail in Chapter 5 of this document.
-
-### Naming of meteorological variable maps
-
-The meteorological forcing variables (and Leaf Area Index) are defined in *map stacks*. A *map stack* is simply a series of maps, where each map represents the value of a variable at an individual time step. The name of each map is made up of a total of 11 characters: 8 characters, a dot and a 3-character suffix. Each map name starts with a *prefix*, and ends with the time step number. All character positions in between are
-filled with zeros ("0"). Take for example a stack of precipitation maps. Table 4.1 shows that the default prefix for precipitation is "pr", which produces the following file names:
-
-```
-pr000000.007   : at time step 7
-...
-pr000035.260   : at time step 35260
-```
-
-LISFLOOD can handle two types of stacks. First, there are regular stacks, in which a map is defined for each time step. For instance, the following 10-step stack is a regular stack:
-
-```
-  t        map name
-  1        pr000000.001
-  2        pr000000.002
-  3        pr000000.003
-  4        pr000000.004
-  5        pr000000.005
-  6        pr000000.006
-  7        pr000000.007
-  8        pr000000.008
-  9        pr000000.009
-  10       pr000000.010
-```
-
-In addition to regular stacks, it is also possible to define sparse stacks. A *sparse* stack is a stack in which maps are not defined for all time steps, for instance:
-
-```
-1        pr000000.001
-2        -
-3        -
-4        pr000000.004
-5        -
-6        -
-7        pr000000.007
-8        -
-9        -
-10       -
-```
-
-Here, maps are defined only for time steps 1, 4 and 7. In this case, LISFLOOD will use the map values of *pr000000.001* during time steps 1, 2 and 3, those of *pr000000.004* during time steps 4, 5 and 6, and those
-of *pr000000.007* during time steps 7, 8, 9 and 10. Since both regular and sparse stacks can be combined within one single run, sparse stacks can be very useful to save disk space. For instance, LISFLOOD always needs the *average daily* temperature, even when the model is run on an hourly time step. So, instead of defining 24 identical maps for each hour, you can simply define 1 for the first hour of each day and leave out the rest, for instance:
-
-```
-1        ta000000.001
-2        -
-:        :
-:        :
-25       ta000000.025
-:        :
-:        :
-49       ta000000.049
-:        :
-```
-
-Similarly, potential evapo(transpi)ration is usually calculated on a daily basis. So for hourly model runs it is often convenient to define $E0, ES0$ and $ET0$ in sparse stacks as well. Leaf Area Index (*LAI*) is a variable that changes relatively slowly over time, and as a result it is usually advantageous to define *LAI* in a sparse map stack.
-
-
-
-Leaf area index maps 
----------------------
-
-Because Leaf area index maps follow a yearly circle, only a map stack of
-one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following
-a yearly circle e.g. water use). LAI is therefore defined as sparse map
-stack with a map every 10 days or a month, for example for a monthly
-changing LAI:
-
-
-| t      | map name     |
-|--------|--------------|
-| 1      | lai00000.001 |
-|--------|--------------|
-| 2      | lai00000.032 |
-|--------|--------------|
-| 3      | lai00000.060 |
-|--------|--------------|
-| 4      | lai00000.091 |
-|--------|--------------|
-| 5      | lai00000.121 |
-|--------|--------------|
-| 6      | lai00000.152 |
-|--------|--------------|
-| 7      | lai00000.182 |
-|--------|--------------|
-| 8      | lai00000.213 |
-|--------|--------------|
-| 9      | lai00000.244 |
-|--------|--------------|
-| 10     | lai00000.274 |
-|--------|--------------|
-| 11     | lai00000.305 |
-|--------|--------------|
-| 12     | lai00000.335 |
-
-
-After one year the first map is taken again for simulation. For example
-the simulation started on the 5^th^ March 2010 and the first LAI is
-lai00000.060. On the 1^st^ March 2011 the map lai00000.060 is taken
-again as LAI input. To let LISFLLOD know which map has to be used at
-which day a lookup table (LaiOfDay.txt) is necessary.
-
-Input tables
-------------
-
-In the previous version of LISFLOOD a number of model parameters are
-read through tables that are linked to the classes on the land use and
-soil (texture) maps. Those tables are replaced by maps (e.g. soil
-hydraulic property maps) in order to include the sub-grid variability of
-each parameter. Therefore only one table is used in the standard
-LISFLOOD setting (without lake or reservoir option)
-
-The following table gives an overview:
-
-+-----------------------+-----------------------+-----------------------+
-| ***Table 4.3**        |
-| LISFLOOD input        |
-| tables*               |
-+=======================+=======================+=======================+
-| **LAND USE**          |
-+-----------------------+-----------------------+-----------------------+
-| **Table**             | **Default name**      | **Description**       |
-+-----------------------+-----------------------+-----------------------+
-| Day of the year -\>   | LaiOfDay.txt          | Lookup table: Day of  |
-| LAI                   |                       | the year -\> LAI map  |
-+-----------------------+-----------------------+-----------------------+
-
-Organisation of input data
---------------------------
-
-It is up to the user how the input data are organised. However, it is
-advised to keep the base maps, meteorological maps and tables separated
-(i.e. store them in separate directories). For practical reasons the
-following input structure is suggested:
-
--   all base maps are in one directory (e.g. 'maps')
-
-    -   fraction maps in a subfolder (e.g. 'fraction')
-
-    -   soil hydraulic properties in a subfolder (e.g.'soilhyd')
-
-    -   land cover depending maps in a subfolder (e.g.'table2map')
-
--   all tables are in one directory (e.g. 'tables')
-
--   all meteorological input maps are in one directory (e.g. 'meteo')
-
--   a folder Leaf Area Index (e.g. 'lai')
-
-    -   all Leaf Area Index for forest in a subfolder (e.g.'forest')
-
-    -   all Leaf Area Index for other in a subfolder (e.g.'other')
-
--   all output goes to one directory (e.g. 'out')
-
-The following Figure illustrates this:
-
-![](media/media/image36.emf){width="5.802083333333333in"
-height="4.541666666666667in"}
-
-*Figure 4.1 Suggested file structure for LISFLOOD*
-
-Generating input base maps
---------------------------
-
-At the time of writing this document, complete sets of LISFLOOD base
-maps covering the whole of Europe have been compiled at 1- and 5-km
-pixel resolution. A number of automated procedures have been written
-that allow you to generate sub-sets of these for pre-defined areas
-(using either existing mask maps or co-ordinates of catchment outlets).
-
- 5. LISFLOOD setup: the settings file
-    =====================================
-
-
-6. Preparing the settings file
-  ==============================
 
 This chapter describes how to prepare your own settings file. Instead of
 writing the settings file completely from scratch, we suggest to use the
@@ -853,18 +567,12 @@ settings template that is provided with LISFLOOD as a starting point. In
 order to use the template, you should make sure the following
 requirements are met:
 
--   All input maps and tables are named according to default file names
-    (see Chapter 4 and Annex 12)
-
--   All base maps are in the right directories
-
--   All tables are in one directory
-
--   All meteo input is in one directory
-
--   All Leaf Area Index input is in the right directories
-
--   An (empty) directory where all model data can be written exists
+  -   All input maps and tables are named according to default file names (see Chapter 4 and Annex 12)
+  -   All base maps are in the right directories
+  -   All tables are in one directory
+  -   All meteo input is in one directory
+  -   All Leaf Area Index input is in the right directories
+  -   An (empty) directory where all model data can be written exists
 
 If this is all true, the settings file can be prepared very quickly by
 editing the items in the 'lfuser' element. The following is a detailed
@@ -879,99 +587,58 @@ parameters we will therefore provide some suggestions as to which
 parameters should be used for calibration, and which one are better left
 untouched.
 
-Time-related constants
-----------------------
+### Time-related constants
 
 The 'lfuser' section starts with a number of constants that are related
 to the simulation period and the time interval used. These are all
 defined as single values.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| TIME-RELATED CONSTANTS                                                |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"CalendarDayStart\" value=\"01/01/1990\"\>            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Calendar day of 1st day in model run                                  |
-|                                                                       |
-| Day of the year of first map (e.g. xx0.001) even if the model start   |
-| from map e.g. 500                                                     |
-|                                                                       |
-| e.g. 1st of January: 1; 1st of June 151 (or 152 in leap year)         |
-|                                                                       |
-| Needed to read out LAI tables correctly                               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"DtSec\" value=\"86400\"\>                            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| timestep \[seconds\]                                                  |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"DtSecChannel\" value=\"86400\"\>                     |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Sub time step used for kinematic wave channel routing \[seconds\]     |
-|                                                                       |
-| Within the model,the smallest out of DtSecChannel and DtSec is used   |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"StepStart\" value=\"1\"\>                            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Number of first time step in simulation                               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"StepEnd\" value=\"10\"\>                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Number of last time step in simulation                                |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ReportSteps\" value=\"endtime\"\>                    |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Time steps at which to write model state maps (i.e. only              |
-|                                                                       |
-| those maps that would be needed to define initial conditions          |
-|                                                                       |
-| for succeeding model run)                                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           	
+	**************************************************************               
+	TIME-RELATED CONSTANTS                                                
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="CalendarDayStart" value="01/01/1990">            
+	<comment>                                                           
+	Calendar day of 1st day in model run                                  
+	Day of the year of first map (e.g. xx0.001) even if the model start   
+	from map e.g. 500                                                     
+	e.g. 1st of January: 1; 1st of June 151 (or 152 in leap year)         
+	Needed to read out LAI tables correctly                               
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="DtSec" value="86400">                            
+	<comment>                                                           
+	timestep [seconds]                                                  
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="DtSecChannel" value="86400">                     
+	<comment>                                                           
+	Sub time step used for kinematic wave channel routing [seconds]     
+	Within the model,the smallest out of DtSecChannel and DtSec is used   
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="StepStart" value="1">                            
+	<comment>                                                           
+	Number of first time step in simulation                               
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="StepEnd" value="10">                             
+	<comment>                                                           
+	Number of last time step in simulation                                
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ReportSteps" value="endtime">                    
+	<comment>                                                           
+	Time steps at which to write model state maps (i.e. only              
+	those maps that would be needed to define initial conditions          
+	for succeeding model run)                                             
+	</comment>                                                          
+	</textvar>                                                          
+```
+
+
 
 > *CalendarDayStart* is the calendar day of the first map in a map stack
 > e.g. pr000000.001. Even if you start the model from time step 500,
@@ -2205,6 +1872,367 @@ define the state of the model at *t=(StepStart -1)*. As long as
 > *CumIntForestInitValue, UZForestInitValue, DSLRForestInitValue,*
 > *LZForestInitValue,* *ThetaForestInit1Value, ThetaForestInit2Value
 > are* the initial value for the forest part of a pixel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Step 4: Input maps and tables
+
+## Model setup: input files
+
+In the current version of LISFLOOD, all model input is provided as either maps (grid files in PCRaster format) or tables. This chapter describes all the data that are required to run the model. Files that are specific to *optional* LISFLOOD features (e.g. inflow hydrographs, reservoirs) are not listed here; they are described in the documentation for each option.
+
+Input maps
+----------
+
+PCRaster requires that all maps must have *identical* location attributes (number of rows, columns, cellsize, upper x and y coordinate!
+
+All input maps roughly fall into any of the following six categories:
+
+-   maps related to topography
+
+-   maps related to land cover -- fraction of land cover
+
+-   maps related to land cover and soil
+
+-   maps related to soil texture (soil hydraulic properties)
+
+-   maps related to channel geometry
+
+-   maps related to the meteorological conditions
+
+-   maps related to the development of vegetation over time
+
+-   maps that define at which locations output is generated as time series
+
+All maps that are needed to run the model are listed in the table of Annex 12.
+
+### Role of "mask" and "channels" maps 
+
+The mask map (i.e. "area.map") defines the model domain. In order to avoid unexpected results, **it is vital that all maps that are related to topography, land use and soil are defined** (i.e. don't contain a missing value) for each pixel that is "true" (has a Boolean 1 value) on the mask map. The same applies for all meteorological input and the Leaf Area Index maps. Similarly, all pixels that are "true" on the
+channels map must have some valid (non-missing) value on each of the channel parameter maps. Undefined pixels can lead to unexpected behaviour of the model, output that is full of missing values, loss of mass balance and possibly even model crashes. Some maps needs to have values in a defined range e.g. gradient.map has to be greater than 0.
+
+### Map location attributes and distance units
+
+LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
+obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell:
+
+###### Table 4.1 Optional maps that define grid size
+
+| **Map**               | **Default name**      | **Description**    |
+|-----------------------|-----------------------|----------------------|
+| PixelLengthUser       | pixleng.map           | Map with pixel length |
+|                       |                       |                       |
+|                       |                       | Unit: \[m\], *Range   |
+|                       |                       | of values: map \> 0*  |
+|-----------------------|-----------------------|-----------------------|
+| PixelAreaUser         | pixarea.map           | Map with pixel area   |
+|                       |                       |                       |
+|                       |                       | *Unit:* \[m^2^\],    |
+|                       |                       | *Range of values: map |
+|                       |                       | \> 0*                 |
+|-----------------------|-----------------------|-----------------------|
+
+Both maps should be stored in the same directory where all other input maps are. The values on both maps may vary in space. A limitation is that a pixel is always represented as a square, so length and width are considered equal (no rectangles). In order to tell LISFLOOD to ignore the default location attributes and use the maps instead, you need to activate the special option "*gridSizeUserDefined*", which involves adding the following line to the LISFLOOD settings file:
+
+```
+<setoption choice="1" name="gridSizeUserDefined" \>
+```
+
+LISFLOOD settings files and the use of options are explained in detail in Chapter 5 of this document.
+
+### Naming of meteorological variable maps
+
+The meteorological forcing variables (and Leaf Area Index) are defined in *map stacks*. A *map stack* is simply a series of maps, where each map represents the value of a variable at an individual time step. The name of each map is made up of a total of 11 characters: 8 characters, a dot and a 3-character suffix. Each map name starts with a *prefix*, and ends with the time step number. All character positions in between are
+filled with zeros ("0"). Take for example a stack of precipitation maps. Table 4.1 shows that the default prefix for precipitation is "pr", which produces the following file names:
+
+```
+pr000000.007   : at time step 7
+...
+pr000035.260   : at time step 35260
+```
+
+LISFLOOD can handle two types of stacks. First, there are regular stacks, in which a map is defined for each time step. For instance, the following 10-step stack is a regular stack:
+
+```
+  t        map name
+  1        pr000000.001
+  2        pr000000.002
+  3        pr000000.003
+  4        pr000000.004
+  5        pr000000.005
+  6        pr000000.006
+  7        pr000000.007
+  8        pr000000.008
+  9        pr000000.009
+  10       pr000000.010
+```
+
+In addition to regular stacks, it is also possible to define sparse stacks. A *sparse* stack is a stack in which maps are not defined for all time steps, for instance:
+
+```
+1        pr000000.001
+2        -
+3        -
+4        pr000000.004
+5        -
+6        -
+7        pr000000.007
+8        -
+9        -
+10       -
+```
+
+Here, maps are defined only for time steps 1, 4 and 7. In this case, LISFLOOD will use the map values of *pr000000.001* during time steps 1, 2 and 3, those of *pr000000.004* during time steps 4, 5 and 6, and those
+of *pr000000.007* during time steps 7, 8, 9 and 10. Since both regular and sparse stacks can be combined within one single run, sparse stacks can be very useful to save disk space. For instance, LISFLOOD always needs the *average daily* temperature, even when the model is run on an hourly time step. So, instead of defining 24 identical maps for each hour, you can simply define 1 for the first hour of each day and leave out the rest, for instance:
+
+```
+1        ta000000.001
+2        -
+:        :
+:        :
+25       ta000000.025
+:        :
+:        :
+49       ta000000.049
+:        :
+```
+
+Similarly, potential evapo(transpi)ration is usually calculated on a daily basis. So for hourly model runs it is often convenient to define $E0, ES0$ and $ET0$ in sparse stacks as well. Leaf Area Index (*LAI*) is a variable that changes relatively slowly over time, and as a result it is usually advantageous to define *LAI* in a sparse map stack.
+
+
+
+Leaf area index maps 
+---------------------
+
+Because Leaf area index maps follow a yearly circle, only a map stack of
+one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following
+a yearly circle e.g. water use). LAI is therefore defined as sparse map
+stack with a map every 10 days or a month, for example for a monthly
+changing LAI:
+
+
+| t      | map name     |
+|--------|--------------|
+| 1      | lai00000.001 |
+|--------|--------------|
+| 2      | lai00000.032 |
+|--------|--------------|
+| 3      | lai00000.060 |
+|--------|--------------|
+| 4      | lai00000.091 |
+|--------|--------------|
+| 5      | lai00000.121 |
+|--------|--------------|
+| 6      | lai00000.152 |
+|--------|--------------|
+| 7      | lai00000.182 |
+|--------|--------------|
+| 8      | lai00000.213 |
+|--------|--------------|
+| 9      | lai00000.244 |
+|--------|--------------|
+| 10     | lai00000.274 |
+|--------|--------------|
+| 11     | lai00000.305 |
+|--------|--------------|
+| 12     | lai00000.335 |
+
+
+After one year the first map is taken again for simulation. For example
+the simulation started on the 5^th^ March 2010 and the first LAI is
+lai00000.060. On the 1^st^ March 2011 the map lai00000.060 is taken
+again as LAI input. To let LISFLLOD know which map has to be used at
+which day a lookup table (LaiOfDay.txt) is necessary.
+
+Input tables
+------------
+
+In the previous version of LISFLOOD a number of model parameters are
+read through tables that are linked to the classes on the land use and
+soil (texture) maps. Those tables are replaced by maps (e.g. soil
+hydraulic property maps) in order to include the sub-grid variability of
+each parameter. Therefore only one table is used in the standard
+LISFLOOD setting (without lake or reservoir option)
+
+The following table gives an overview:
+
++-----------------------+-----------------------+-----------------------+
+| ***Table 4.3**        |
+| LISFLOOD input        |
+| tables*               |
++=======================+=======================+=======================+
+| **LAND USE**          |
++-----------------------+-----------------------+-----------------------+
+| **Table**             | **Default name**      | **Description**       |
++-----------------------+-----------------------+-----------------------+
+| Day of the year -\>   | LaiOfDay.txt          | Lookup table: Day of  |
+| LAI                   |                       | the year -\> LAI map  |
++-----------------------+-----------------------+-----------------------+
+
+Organisation of input data
+--------------------------
+
+It is up to the user how the input data are organised. However, it is
+advised to keep the base maps, meteorological maps and tables separated
+(i.e. store them in separate directories). For practical reasons the
+following input structure is suggested:
+
+-   all base maps are in one directory (e.g. 'maps')
+
+    -   fraction maps in a subfolder (e.g. 'fraction')
+
+    -   soil hydraulic properties in a subfolder (e.g.'soilhyd')
+
+    -   land cover depending maps in a subfolder (e.g.'table2map')
+
+-   all tables are in one directory (e.g. 'tables')
+
+-   all meteorological input maps are in one directory (e.g. 'meteo')
+
+-   a folder Leaf Area Index (e.g. 'lai')
+
+    -   all Leaf Area Index for forest in a subfolder (e.g.'forest')
+
+    -   all Leaf Area Index for other in a subfolder (e.g.'other')
+
+-   all output goes to one directory (e.g. 'out')
+
+The following Figure illustrates this:
+
+![](media/media/image36.emf){width="5.802083333333333in"
+height="4.541666666666667in"}
+
+*Figure 4.1 Suggested file structure for LISFLOOD*
+
+Generating input base maps
+--------------------------
+
+At the time of writing this document, complete sets of LISFLOOD base
+maps covering the whole of Europe have been compiled at 1- and 5-km
+pixel resolution. A number of automated procedures have been written
+that allow you to generate sub-sets of these for pre-defined areas
+(using either existing mask maps or co-ordinates of catchment outlets).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Step 6: Running the model
+-----------------
+
+Type 'lisflood' at the command prompt. You should see something like this:
+
+LISFLOOD version March 24 2008
+
+Water balance and flood simulation model for large catchments \(C) Institute for Environment and Sustainability
+
+Joint Research Centre of the European Commission
+
+TP261, I-21020 Ispra (Va), Italy
+
+usage (1): lisflood \[switches\] \<InputFile\>
+
+usage (2): lisflood \--listoptions (show options only)
+
+InputFile : LISFLOOD input file (see documentation for description of format)
+
+switches:
+
+-s : keep temporary script after simulation
+
+You can run LISFLOOD by typing 'lisflood' followed by a specially-formatted settings file. The layout of this file is described in Chapters 4 and 5. Chapter 3 explains all other input files.
+
+[[🔝](#top)](#top)
+
+
+ 5. LISFLOOD setup: the settings file
+    =====================================
+
+
+6. Preparing the settings file
+  ==============================
+
+
 
 Running the model
 -----------------
