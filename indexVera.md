@@ -1657,7 +1657,7 @@ The following table gives an overview:
 ##### Table x.x LISFLOOD input tables
 
 | **Table**             | **Default name**      | **Description**       |
-+----------------------------+-----------------------+--------------------------+
+|----------------------------|-----------------------|--------------------------|
 | Day of the year -\> <br> LAI    | LaiOfDay.txt          | Lookup table: Day of <br> the year -\> LAI map |
 
 
