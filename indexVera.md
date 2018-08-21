@@ -435,6 +435,8 @@ But this is actually interpreted as time step 100,000,001!
 > \</comment\>\
 > \</textvar\>\
 
+[:top:](#top)
+
 #### Variables in the lfuser element
 
 As said before the variables in the 'lfuser' elements are all text
@@ -443,59 +445,44 @@ variables, and they are used simply to substitute text in the
 same name for a text variable that is defined in the 'lfuser' element
 and a 'lfbinding' variable. For example:
 
-+-----------------------------------------------------------------------+
-| **\<lfuser\>**                                                        |
-|                                                                       |
-| \<textvar name=\"UpperZoneTimeConstant\" value=\"10\"\>               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Time constant for water in upper zone \[days\]                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| **\</lfuser\>**                                                       |
-|                                                                       |
-| **\<lfbinding\>**                                                     |
-|                                                                       |
-| \<textvar name=\"UpperZoneTimeConstant\"                              |
-| value=\"\$(UpperZoneTimeConstant)\"\>                                 |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Time constant for water in upper zone \[days\]                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| **\</lfbinding\>**                                                    |
-+-----------------------------------------------------------------------+
+> \<lfuser\>\                                                        
+> \<textvar name=\"UpperZoneTimeConstant\" value=\"10\"\>\               
+> \<comment\>\                                                           
+> Time constant for water in upper zone \[days\]\                        
+> \</comment\>\                                                          
+> \</textvar\>\                                                          
+> \</lfuser\>\                                                       
+> \<lfbinding\>\                                                     
+> \<textvar name=\"UpperZoneTimeConstant\"\                              
+> value=\"\$(UpperZoneTimeConstant)\"\>\                                 
+> \<comment\>\                                                           
+> Time constant for water in upper zone \[days\]\                        
+> \</comment\>\                                                          
+> \</textvar\>\                                                          
+> \</lfbinding\>                                                    
 
 In this case 'UpperZoneTimeConstant' in the 'lfuser' element (just a
 text variable) is something different from 'UpperZoneTimeConstant' in
 the 'lfbinding' element!
 
-### 
 
-### lfoption element
+#### lfoption element
 
 The 'lfoption' element effectively allows you to switch certain parts of
-the model on or off. Within LISFLOOD, there are two categories of
+the model on or off. Within LISFLOOD, there are **two categories** of
 options:
 
-1.  Options to activate the reporting of additional output maps and time
+1.  Options to activate the reporting of **additional output** maps and time
     series (e.g. soil moisture maps)
 
-2.  Options that activate special LISFLOOD features, such as inflow
+2.  Options that activate **special LISFLOOD modules**, such as inflow
     hydrographs and the simulation of reservoirs
 
-### Viewing available options
+##### Viewing available options
 
 You can view all options by running LISFLOOD with the *\--listoptions*
-flag. For each option, the following information is listed:
+flag. 
+For each option, the following information is listed:
 
 OptionName Choices DefaultValue
 
