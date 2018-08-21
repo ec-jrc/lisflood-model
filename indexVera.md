@@ -1223,16 +1223,16 @@ suffix. For instance, using a prefix 'pr' we get:
   pr000000.007   : at time step 7
   pr000035.260   : at time step 35260
 
-> To avoid unexpected behaviour, **never** use numbers in the prefix!
+> To avoid unexpected behaviour, **never** use numbers in the prefix!\
 > For example:
-
+>
 > PrefixRain=pr10
-
+>
 > For the first time step this yields the following file name:
-
+>
 >   pr100000.001   
-
-> But this is actually interpreted as time step 100,000,001!
+>
+> But this is actually interpreted as time step 100,000,001!\
 > **Therefore, do not use numbers in the prefix!**
 
 The corresponding part of the settings file is pretty
@@ -1258,8 +1258,7 @@ evapotranspiration maps
 
 
 
-Initial conditions
-------------------
+### Initial conditions
 
 As with the calibration parameters you can use both maps and single
 values to define the catchment conditions at the start of a simulation.
@@ -1269,6 +1268,7 @@ define the state of the model at *t=(StepStart -1)*. As long as
 *StepStart* equals 1 this corresponds to *t=0*, but for larger values of
 *StepStart* this is (obviously) not the case!
 
+```xml
 +-----------------------------------------------------------------------+
 | \<comment\>                                                           |
 |                                                                       |
@@ -1452,7 +1452,7 @@ define the state of the model at *t=(StepStart -1)*. As long as
 |                                                                       |
 | \</textvar\>                                                          |
 +-----------------------------------------------------------------------+
-
+```
 > *WaterDepthInitValue* is the initial amount of water on the soil
 > surface \[mm\]
 >
