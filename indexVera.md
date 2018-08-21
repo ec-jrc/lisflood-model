@@ -1543,19 +1543,19 @@ obtains this information from the location attributes of the input maps. This wi
 
 ###### Table 4.1 Optional maps that define grid size
 
-+-----------------------+-----------------------+----------------------+
-| **Map**               | **Default name**      | **Description**    |
-+-----------------------+-----------------------+----------------------+
++-----------------------+-----------------------+-----------------------+
+| **Map**               | **Default name**      | **Description**       |
++-----------------------+-----------------------+-----------------------+
 | PixelLengthUser       | pixleng.map           | Map with pixel length |
 |                       |                       |                       |
-|                       |                       | Unit: \[m\], *Range   |
-|                       |                       | of values: map \> 0*  |
+|                       |                       | Unit: \[m\], *Range*  |
+|                       |                       | *of values: map \> 0* |
 +-----------------------+-----------------------+-----------------------+
 | PixelAreaUser         | pixarea.map           | Map with pixel area   |
 |                       |                       |                       |
-|                       |                       | *Unit:* \[m^2^\],    |
-|                       |                       | *Range of values: map |
-|                       |                       | \> 0*                 |
+|                       |                       | *Unit:* \[m^2^\],     |
+|                       |                       | *Range of values: map*|
+|                       |                       | *\> 0*                |
 +-----------------------+-----------------------+-----------------------+
 
 
