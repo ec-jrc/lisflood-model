@@ -21,7 +21,6 @@ Both the program code and this manual have been carefully inspected before print
 | cells | * paragraphs    |
 | too   |                 |
 +-------+-----------------+
-
 # Introduction
 ```R
   # Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential
