@@ -1540,7 +1540,7 @@ channels map must have some valid (non-missing) value on each of the channel par
 LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
 obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell
 
-###### Table 4.1 Optional maps that define grid size
+##### Table x.x Optional maps that define grid size
 
 | **Map**               | **Default name**      | **Description**                         |
 |-----------------------|-----------------------|-----------------------------------------|
@@ -1555,7 +1555,7 @@ Both maps should be stored in the same directory where all other input maps are.
 
 LISFLOOD settings files and the use of options are explained in detail in Chapter 5 of this document.
 
-### Naming of meteorological variable maps
+#### Naming of meteorological variable maps
 
 The meteorological forcing variables (and Leaf Area Index) are defined in *map stacks*. A *map stack* is simply a series of maps, where each map represents the value of a variable at an individual time step. The name of each map is made up of a total of 11 characters: 8 characters, a dot and a 3-character suffix. Each map name starts with a *prefix*, and ends with the time step number. All character positions in between are
 filled with zeros ("0"). Take for example a stack of precipitation maps. Table 4.1 shows that the default prefix for precipitation is "pr", which produces the following file names:
@@ -1566,7 +1566,7 @@ pr000000.007   : at time step 7
 pr000035.260   : at time step 35260
 ```
 
-LISFLOOD can handle two types of stacks. First, there are regular stacks, in which a map is defined for each time step. For instance, the following 10-step stack is a regular stack:
+LISFLOOD can handle two types of stacks. First, there are **regular stacks**, in which a map is defined for each time step. For instance, the following 10-step stack is a regular stack:
 
 ```
   t        map name
@@ -1582,7 +1582,7 @@ LISFLOOD can handle two types of stacks. First, there are regular stacks, in whi
   10       pr000000.010
 ```
 
-In addition to regular stacks, it is also possible to define sparse stacks. A *sparse* stack is a stack in which maps are not defined for all time steps, for instance:
+In addition to regular stacks, it is also possible to define **sparse stacks**. A *sparse* stack is a stack in which maps are not defined for all time steps, for instance:
 
 ```
 1        pr000000.001
@@ -1597,8 +1597,8 @@ In addition to regular stacks, it is also possible to define sparse stacks. A *s
 10       -
 ```
 
-Here, maps are defined only for time steps 1, 4 and 7. In this case, LISFLOOD will use the map values of *pr000000.001* during time steps 1, 2 and 3, those of *pr000000.004* during time steps 4, 5 and 6, and those
-of *pr000000.007* during time steps 7, 8, 9 and 10. Since both regular and sparse stacks can be combined within one single run, sparse stacks can be very useful to save disk space. For instance, LISFLOOD always needs the *average daily* temperature, even when the model is run on an hourly time step. So, instead of defining 24 identical maps for each hour, you can simply define 1 for the first hour of each day and leave out the rest, for instance:
+Here, maps are defined only for time steps 1, 4 and 7. In this case, LISFLOOD will use the map values of *pr000000.001* during time steps 1, 2 and 3, those of *pr000000.004* during time steps 4, 5 and 6, and those of *pr000000.007* during time steps 7, 8, 9 and 10. 
+Since both regular and sparse stacks can be combined within one single run, sparse stacks can be very useful to save disk space. For instance, LISFLOOD always needs the *average daily* temperature, even when the model is run on an hourly time step. So, instead of defining 24 identical maps for each hour, you can simply define 1 for the first hour of each day and leave out the rest, for instance:
 
 ```
 1        ta000000.001
@@ -1616,51 +1616,34 @@ Similarly, potential evapo(transpi)ration is usually calculated on a daily basis
 
 
 
-Leaf area index maps 
----------------------
+#### Leaf area index maps 
 
-Because Leaf area index maps follow a yearly circle, only a map stack of
-one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following
-a yearly circle e.g. water use). LAI is therefore defined as sparse map
-stack with a map every 10 days or a month, for example for a monthly
-changing LAI:
+Because Leaf area index maps follow a yearly circle, only a map stack of one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following a yearly circle e.g. water use). LAI is therefore defined as sparse map stack with a map every 10 days or a month, for example for a monthly changing LAI:
 
 
 | t      | map name     |
 |--------|--------------|
 | 1      | lai00000.001 |
-|--------|--------------|
 | 2      | lai00000.032 |
-|--------|--------------|
 | 3      | lai00000.060 |
-|--------|--------------|
 | 4      | lai00000.091 |
-|--------|--------------|
 | 5      | lai00000.121 |
-|--------|--------------|
 | 6      | lai00000.152 |
-|--------|--------------|
 | 7      | lai00000.182 |
-|--------|--------------|
 | 8      | lai00000.213 |
-|--------|--------------|
 | 9      | lai00000.244 |
-|--------|--------------|
 | 10     | lai00000.274 |
-|--------|--------------|
 | 11     | lai00000.305 |
-|--------|--------------|
 | 12     | lai00000.335 |
 
 
 After one year the first map is taken again for simulation. For example
-the simulation started on the 5^th^ March 2010 and the first LAI is
-lai00000.060. On the 1^st^ March 2011 the map lai00000.060 is taken
+the simulation started on the 5<sup>th</sup> March 2010 and the first LAI is
+lai00000.060. On the 1<sup>th</sup> March 2011 the map lai00000.060 is taken
 again as LAI input. To let LISFLLOD know which map has to be used at
 which day a lookup table (LaiOfDay.txt) is necessary.
 
-Input tables
-------------
+### Input tables
 
 In the previous version of LISFLOOD a number of model parameters are
 read through tables that are linked to the classes on the land use and
@@ -1671,20 +1654,14 @@ LISFLOOD setting (without lake or reservoir option)
 
 The following table gives an overview:
 
-+-----------------------+-----------------------+-----------------------+
-| ***Table 4.3**        |
-| LISFLOOD input        |
-| tables*               |
-+=======================+=======================+=======================+
-| **LAND USE**          |
-+-----------------------+-----------------------+-----------------------+
-| **Table**             | **Default name**      | **Description**       |
-+-----------------------+-----------------------+-----------------------+
-| Day of the year -\>   | LaiOfDay.txt          | Lookup table: Day of  |
-| LAI                   |                       | the year -\> LAI map  |
-+-----------------------+-----------------------+-----------------------+
+##### Table x.x LISFLOOD input tables
 
-Organisation of input data
+| **Table**             | **Default name**      | **Description**       |
++----------------------------+-----------------------+--------------------------+
+| Day of the year -\> <br> LAI    | LaiOfDay.txt          | Lookup table: Day of <br> the year -\> LAI map |
+
+
+## Organisation of input data
 --------------------------
 
 It is up to the user how the input data are organised. However, it is
