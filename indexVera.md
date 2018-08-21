@@ -756,7 +756,7 @@ for the interception store [days]
 
 **kdf** is the average extinction for the diffuse radiation flux
 (Goudriaan, 1977). it is used to calculate the extinction coefficient
-for global radiation, **κ~gb~** ,which is used in Equations 2-9, 2-14
+for global radiation, **κ<sub>gb</sub>** ,which is used in Equations 2-9, 2-14
 and 2-19 [-]
 
 **AvWaterRateThreshold** defines a critical amount of water that is used
@@ -1256,8 +1256,6 @@ evapotranspiration maps
 **PrefixWaterUse** is the prefix of the water use maps (optional)
 
 
-
-
 ### Initial conditions
 
 As with the calibration parameters you can use both maps and single
@@ -1269,326 +1267,196 @@ define the state of the model at *t=(StepStart -1)*. As long as
 *StepStart* this is (obviously) not the case!
 
 ```xml
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| INITIAL CONDITIONS                                                    |
-|                                                                       |
-| (maps or single values)                                               |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"WaterDepthInitValue\" value=\"0\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial overland flow water depth \[mm\]                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowCoverAInitValue\" value=\"0\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial snow depth in snow zone A \[mm\]                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowCoverBInitValue\" value=\"0\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial snow depth in snow zone B \[mm\]                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"SnowCoverCInitValue\" value=\"0\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial snow depth in snow zone C \[mm\]                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"FrostIndexInitValue\" value=\"0\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial Frost Index value                                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"CumIntInitValue\" value=\"0\"\>                      |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| cumulative interception \[mm\]                                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"UZInitValue\" value=\"0\"\>                          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| water in upper store \[mm\]                                           |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"DSLRInitValue\" value=\"1\"\>                        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| days since last rainfall                                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"CumIntSealedInitValue\" value=\"0\"\>                |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| cumulative depression storage \[mm\]                                  |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| The following variables can also be initialized in the model          |
-|                                                                       |
-| internally. if you want this to happen set them to bogus value of     |
-| -9999                                                                 |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"LZInitValue\" value=\"-9999\"\>                      |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| water in lower store \[mm\]                                           |
-|                                                                       |
-| -9999: use steady-state storage                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"TotalCrossSectionAreaInitValue\" value=\"-9999\"\>   |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial cross-sectional area of flow in channel\[m2\]                 |
-|                                                                       |
-| -9999: use half bankfull                                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ThetaInit1Value\" value=\"-9999\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial soil moisture content layer 1                                 |
-|                                                                       |
-| -9999: use field capacity values                                      |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ThetaInit2Value\" value=\"-9999\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial soil moisture content layer 2                                 |
-|                                                                       |
-| -9999: use field capacity values                                      |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PrevDischarge\" value=\"-9999\"\>                    |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial discharge from previous run for lakes, reservoirs and         |
-| transmission loss                                                     |
-|                                                                       |
-| only needed for lakes reservoirs and transmission loss                |
-|                                                                       |
-| -9999: use discharge of half bankfull                                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+	<comment>                                                           
+	**************************************************************               
+	INITIAL CONDITIONS                                                    
+	(maps or single values)                                               
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="WaterDepthInitValue" value="0">                  	
+	<comment>                                                           
+	initial overland flow water depth [mm]                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SnowCoverAInitValue" value="0">                  
+	<comment>                                                           
+	initial snow depth in snow zone A [mm]                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SnowCoverBInitValue" value="0">                  
+	<comment>                                                           
+	initial snow depth in snow zone B [mm]                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="SnowCoverCInitValue" value="0">                  
+	<comment>                                                           
+	initial snow depth in snow zone C [mm]                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="FrostIndexInitValue" value="0">                  
+	<comment>                                                           
+	initial Frost Index value                                             
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="CumIntInitValue" value="0">                      
+	<comment>                                                           
+	cumulative interception [mm]                                        
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="UZInitValue" value="0">                          
+	<comment>                                                           
+	water in upper store [mm]                                           
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="DSLRInitValue" value="1">                        
+	<comment>                                                           
+	days since last rainfall                                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="CumIntSealedInitValue" value="0">                
+	<comment>                                                           
+	cumulative depression storage [mm]                                  
+	</comment>                                                          
+	</textvar>                                                          
+	<comment>                                                           
+	********************************** 
+	****************************               
+	The following variables can also be initialized in the model          
+	internally. if you want this to happen set them to bogus value of     
+	-9999                                                                 
+	********************************** 
+	****************************               
+	</comment>                                                          
+	<textvar name="LZInitValue" value="-9999">                      
+	<comment>                                                           
+	water in lower store [mm]                                           
+	-9999: use steady-state storage                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="TotalCrossSectionAreaInitValue" value="-9999">   
+	<comment>                                                           
+	initial cross-sectional area of flow in channel[m2]                 
+	-9999: use half bankfull                                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ThetaInit1Value" value="-9999">                  
+	<comment>                                                           
+	initial soil moisture content layer 1                                 
+	-9999: use field capacity values                                      
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ThetaInit2Value" value="-9999">                  
+	<comment>                                                           
+	initial soil moisture content layer 2                                 
+	-9999: use field capacity values                                      
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PrevDischarge" value="-9999">                    
+	<comment>                                                           
+	initial discharge from previous run for lakes, reservoirs and         
+	transmission loss                                                     
+	only needed for lakes reservoirs and transmission loss                
+	-9999: use discharge of half bankfull                                 
+	</comment>                                                          
+	</textvar>                                                          
 ```
-> *WaterDepthInitValue* is the initial amount of water on the soil
-> surface \[mm\]
->
-> *SnowCoverInitAValue* is the initial snow cover on the soil surface in
-> elevation zone *A* \[mm\]
->
-> *SnowCoverInitBValue* is the initial snow cover on the soil surface in
-> elevation zone *B* \[mm\]
->
-> *SnowCoverInitCValue* is the initial snow cover on the soil surface in
-> elevation zone *C* \[mm\]
->
-> *FrostIndexInitValue* (*F* in Eq 2-5) initial value of the frost index
-> \[°C day^-1^\]
->
-> *CumIntInitValue* is the initial interception storage \[mm\]
->
-> *UZInitValue* is the initial storage in the upper groundwater zone
-> \[mm\]
->
-> *DSLRInitValue* (*D~slr~* in Eq 2-20) is the initial number of days
-> since the last rainfall event \[days\]
->
-> *CumIntSealedInitValue* is the initial value of the depression storage
-> for the sealed part of a pixel \[mm\]
->
-> *LZInitValue* is the initial storage in the lower groundwater zone
-> \[mm\]. In order to avoid initialization problems it is possible to
-> let the model calculate a 'steady state' storage that will usually
-> minimize any initialization problems. This feature is described in
-> detail in Chapter 7 of this User Manual. To activate it, set *the*
-> lfoptions element InitLisflood to 1.
->
-> *TotalCrossSectionAreaInitValue* is the initial cross-sectional area
-> \[m^2^\] of the water in the river channels (a substitute for initial
-> discharge, which is directly dependent on this). A value of *-9999*
-> sets the initial amount of water in the channel to half bankfull.
->
-> *ThetaInit1Value* is the initial moisture content \[mm^3^ mm^-3^\] of
-> the upper soil layer. A value of -*9999* will set the initial soil
-> moisture content to field capacity.
->
-> *ThetaInit2Value* is the initial moisture content \[mm^3^ mm^-3^\] of
-> the lower soil layer. A value of -*9999* will set the initial soil
-> moisture content to field capacity
->
-> *PrevDischarge* is the initial discharge from previous run
-> \[m^3^s^-1^\] used for lakes, reservoirs and transmission loss (only
-> needed if option is on for lakes or reservoirs or transmission loss).
-> Note that PrevDischarge is discharge as an average over the time step
-> (a flux) . A value of *-9999* sets the initial amount of discharge to
-> equivalent of half bankfull.
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| INITIAL CONDITIONS FOREST                                             |
-|                                                                       |
-| (maps or single values)                                               |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"CumIntForestInitValue\" value=\"0\"\>                |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| cumulative interception \[mm\]                                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"UZForestInitValue\" value=\"0\"\>                    |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| water in upper store \[mm\]                                           |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"DSLRForestInitValue\" value=\"1\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| days since last rainfall                                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"LZForestInitValue\" value=\"-9999\"\>                |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| water in lower store \[mm\]                                           |
-|                                                                       |
-| -9999: use steady-state storage                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ThetaForestInit1Value\" value=\"-9999\"\>            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial soil moisture content layer 1                                 |
-|                                                                       |
-| -9999: use field capacity values                                      |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ThetaForestInit2Value\" value=\"-9999\"\>            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| initial soil moisture content layer 2                                 |
-|                                                                       |
-| -9999: use field capacity values                                      |
-|                                                                       |
-| \</comment\>                                                          |
-+-----------------------------------------------------------------------+
+**WaterDepthInitValue** is the initial amount of water on the soil
+surface [mm]
 
-> *CumIntForestInitValue, UZForestInitValue, DSLRForestInitValue,*
-> *LZForestInitValue,* *ThetaForestInit1Value, ThetaForestInit2Value
-> are* the initial value for the forest part of a pixel
+**SnowCoverInitAValue** is the initial snow cover on the soil surface in
+elevation zone **A** [mm]
+
+**SnowCoverInitBValue** is the initial snow cover on the soil surface in
+elevation zone **B** [mm]
+
+**SnowCoverInitCValue** is the initial snow cover on the soil surface in
+elevation zone **C** [mm]
+
+**FrostIndexInitValue** (**F** in Eq 2-5) initial value of the frost index
+[°C day^-1^]
+
+**CumIntInitValue** is the initial interception storage [mm]
+
+**UZInitValue** is the initial storage in the upper groundwater zone
+[mm]
+
+**DSLRInitValue** (**D~slr~** in Eq 2-20) is the initial number of days
+since the last rainfall event [days]
+
+**CumIntSealedInitValue** is the initial value of the depression storage
+for the sealed part of a pixel [mm]
+
+**LZInitValue** is the initial storage in the lower groundwater zone
+[mm]. In order to avoid initialization problems it is possible to
+let the model calculate a 'steady state' storage that will usually
+minimize any initialization problems. This feature is described in
+detail in Chapter 7 of this User Manual. To activate it, set **the**
+lfoptions element InitLisflood to 1.
+
+**TotalCrossSectionAreaInitValue** is the initial cross-sectional area
+[m^2^] of the water in the river channels (a substitute for initial
+discharge, which is directly dependent on this). A value of **-9999**
+sets the initial amount of water in the channel to half bankfull.
+
+**ThetaInit1Value** is the initial moisture content [mm^3^ mm^-3^] of
+the upper soil layer. A value of -**9999** will set the initial soil
+moisture content to field capacity.
+
+**ThetaInit2Value** is the initial moisture content [mm^3^ mm^-3^] of
+the lower soil layer. A value of -**9999** will set the initial soil
+moisture content to field capacity
+
+**PrevDischarge** is the initial discharge from previous run
+[m^3^s^-1^] used for lakes, reservoirs and transmission loss (only
+needed if option is on for lakes or reservoirs or transmission loss).
+Note that PrevDischarge is discharge as an average over the time step
+(a flux) . A value of **-9999** sets the initial amount of discharge to
+equivalent of half bankfull.
+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	INITIAL CONDITIONS FOREST                                             
+	(maps or single values)                                               
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="CumIntForestInitValue" value="0">                
+	<comment>                                                           
+	cumulative interception [mm]                                        
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="UZForestInitValue" value="0">                    
+	<comment>                                                           
+	water in upper store [mm]                                           
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="DSLRForestInitValue" value="1">                  
+	<comment>                                                           
+	days since last rainfall                                              
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="LZForestInitValue" value="-9999">                
+	<comment>                                                           
+	water in lower store [mm]                                           
+	-9999: use steady-state storage                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ThetaForestInit1Value" value="-9999">            
+	<comment>                                                           
+	initial soil moisture content layer 1                                 
+	-9999: use field capacity values                                      
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ThetaForestInit2Value" value="-9999">            
+	<comment>                                                           
+	initial soil moisture content layer 2                                 
+	-9999: use field capacity values                                      
+	</comment>                                                          
+```
+CumIntForestInitValue, UZForestInitValue, DSLRForestInitValue,
+LZForestInitValue, ThetaForestInit1Value, ThetaForestInit2Value
+are the initial value for the forest part of a pixel
 
 
 
