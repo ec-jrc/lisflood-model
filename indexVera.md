@@ -7,16 +7,10 @@
   ```
 Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
-+---------------+---------------+--------------------+
-| Fruit         | Price         | Advantages         |
-+===============+===============+====================+
-| Bananas       | $1.34         | - built-in wrapper |
-|               |               | - bright color     |
-+---------------+---------------+--------------------+
-| Oranges       | $2.10         | - cures scurvy     |
-|               |               | - tasty            |
-+---------------+---------------+--------------------+
-
+| Fruit         | Price                   | Advantages              |
+| ------------- | ----------------------- | ----------------------- |
+| Bananas       | first line<br>next line | first line<br>next line |
+| Bananas       | first line<br>next line | first line<br>next line |
 
 
 # Introduction
