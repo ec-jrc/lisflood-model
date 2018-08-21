@@ -1543,35 +1543,21 @@ obtains this information from the location attributes of the input maps. This wi
 
 ###### Table 4.1 Optional maps that define grid size
 
++-----------------------+-----------------------+----------------------+
 | **Map**               | **Default name**      | **Description**    |
-|-----------------------|-----------------------|----------------------|
++-----------------------+-----------------------+----------------------+
 | PixelLengthUser       | pixleng.map           | Map with pixel length |
 |                       |                       |                       |
 |                       |                       | Unit: \[m\], *Range   |
 |                       |                       | of values: map \> 0*  |
-|-----------------------|-----------------------|-----------------------|
++-----------------------+-----------------------+-----------------------+
 | PixelAreaUser         | pixarea.map           | Map with pixel area   |
 |                       |                       |                       |
 |                       |                       | *Unit:* \[m^2^\],    |
 |                       |                       | *Range of values: map |
 |                       |                       | \> 0*                 |
-|-----------------------|-----------------------|-----------------------|
++-----------------------+-----------------------+-----------------------+
 
-new table
-
-| **Map**               | **Default name**      | **Description**    |
-|-----------------------|-----------------------|----------------------|
-+ PixelLengthUser       + pixleng.map           + Map with pixel length +
-+                       +                       +                       +
-+                       +                       + Unit: \[m\], *Range   +
-+                       +                       + of values: map \> 0*  +
-|-----------------------|-----------------------|-----------------------|
-+ PixelAreaUser         + pixarea.map           + Map with pixel area   +
-+                       +                       +                       +
-+                       +                       + *Unit:* \[m^2^\],    +
-+                       +                       + *Range of values: map +
-+                       +                       + \> 0*                 +
-|-----------------------|-----------------------|-----------------------|
 
 Both maps should be stored in the same directory where all other input maps are. The values on both maps may vary in space. A limitation is that a pixel is always represented as a square, so length and width are considered equal (no rectangles). In order to tell LISFLOOD to ignore the default location attributes and use the maps instead, you need to activate the special option "*gridSizeUserDefined*", which involves adding the following line to the LISFLOOD settings file:
 
