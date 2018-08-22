@@ -2562,16 +2562,15 @@ Time series
 
 | **Settings variable**     | **File name**   | **Units**       | **Description** |
 | **RATE VARIABLES AT GAUGES**        |                                   
-| disTS           | dis.tss         | m<sup>3</sub> s<sup>-1</sub>      | **<sup>1,2</sub>** channel discharge      |
+| disTS           | dis.tss         | m<sup>3</sup> s<sup>-1</sup>      | **<sup>1,2</sup>** channel discharge      |
 | **NUMERICAL CHECKS**               |                 |                 |      |
-| WaterMassBalanc eTSS| mbError.tss     | m<sup>3</sub>            | **<sup>2</sub>** cumulative mass balance error |
-| MassBalanceMM\ TSS | mbErrorMm.tss   | mm              | **<sup>2</sub>** cumulative mass balance error, expressed as mm water slice (average over catchment)  |
-| NoSubStepsChan  | NoSubStepsChannel.tss | \-              | **<sup>2</sub>** number of sub-steps needed for channel routing |
-| StepsSoilTS     | steps.tss       | \-              | **<sup>2</sub>** number of sub-steps needed for gravity-based soil moisture routine |
+| WaterMassBalanc eTSS| mbError.tss     | m<sup>3</sup>            | **<sup>2</sup>** cumulative mass balance error |
+| MassBalanceMM\ TSS | mbErrorMm.tss   | mm              | **<sup>2</sup>** cumulative mass balance error, expressed as mm water slice (average over catchment)  |
+| NosupStepsChan  | NosupStepsChannel.tss | \-              | **<sup>2</sup>** number of sup-steps needed for channel routing |
+| StepsSoilTS     | steps.tss       | \-              | **<sup>2</sup>** number of sup-steps needed for gravity-based soil moisture routine |
 
-**<sup>1</sub>** Output only if option 'InitLisflood' = 1 (pre-run) /
-**<sup>2</sub>** Output only if option 'InitLisflood' = 0      
-
+**<sup>1</sup>** Output only if option 'InitLisflood' = 1 (pre-run) /
+**<sup>2</sup>** Output only if option 'InitLisflood' = 0      
 
 
 +-----------------+-----------------+-----------------+-----------------+
