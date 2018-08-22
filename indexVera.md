@@ -2199,9 +2199,9 @@ column of the table.
 **Table 8.2** LISFLOOD default state variable output maps. These maps can be used to define the initial conditions of another simulation*     
 
 | **File name**   | **Description** | **Units**       | **Domain**      |
-+-----------------+--------------------------------+-----------------+--------------------------+
+|-----------------+--------------------------------+-----------------+--------------------------|
 | **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood)   |
-+-----------------+--------------------------------+-----------------+--------------------------+
+|-----------------+--------------------------------+-----------------+--------------------------|
 | lzavin.map      | **<sup>1</sup>** average inflow to lower zone| mm timestep<sup>-1</sup> | other fraction  |
 | lzavin\_forest.map | **<sup>1</sup>** average inflow to lower zone (forest) | mm timestep<sup>-1</sup> | forest fraction |
 | **INITIAL CONDITION MAPS at defined time steps**[^8] (option *repStateMaps*) |
