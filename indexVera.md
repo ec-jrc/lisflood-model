@@ -1821,19 +1821,19 @@ setting the initial values of each of these variables to a special
 initialisation methods:
 
 **Table 7.1**: LISFLOOD special initialisation methods<sup>1<sup>*           |
-+===============================+===============================+===============================+
+|===============================|===============================|===============================|
 | **Variable**          | **Description**       | **Initialisation method**     |
-+-------------------------------+-------------------------------+-------------------------------+
+|-------------------------------|-------------------------------|-------------------------------|
 | ThetaInit1Value / <br> ThetaForestInit2Value    | initial soil moisture <br> content upper soil <br> layer (V/V)| set to soil moisture <br> content at field <br> capacity |
-+-------------------------------+-------------------------------+-------------------------------+
+|-------------------------------|-------------------------------|-------------------------------|
 | ThetaInit2Value / <br> ThetaForestInit2Value    | initial soil moisture <br> content lower soil <br> layer (V/V) | set to soil moisture <br> content at field <br> capacity |
-+-------------------------------+-------------------------------+-------------------------------+
+|-------------------------------|-------------------------------|-------------------------------|
 | LZInitValue / <br> LZForestInitValue       | initial water in <br> lower groundwater <br> zone (mm)    | set to steady-state <br> storage |
-+-------------------------------+-------------------------------+-------------------------------+
+|-------------------------------|-------------------------------|-------------------------------|
 | TotalCrossSectionArea <br> InitValue | initial cross-sectional <br> area of water in <br> channels              | set to half of <br> bankfull depth      |
-+-------------------------------+-------------------------------+-------------------------------+
+|-------------------------------|-------------------------------|-------------------------------|
 | PrevDischarge         | Initial discharge     | set to half of <br> bankfull depth       |
-+-------------------------------+-------------------------------+-------------------------------+
+|-------------------------------|-------------------------------|-------------------------------|
  *<sup>1<sup> These special initialisation methods are activated by setting the value of each respective variable to a 'bogus' value of "-9999"*     
 
 Note that the "-9999" 'bogus' value can *only* be used with the
