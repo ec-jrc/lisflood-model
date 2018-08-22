@@ -2452,6 +2452,48 @@ Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P.
  Annex 12: LISFLOOD input maps and tables
 =========================================
 
+| **Map**         | **Default name**[^20]       | **Units, range**        | **Description** |
+|-----------------|-----------------|-----------------|-------------------------------------|
+| **GENERAL**     |
+| MaskMap         | area.map        | U.: -  <br> R.: 0 or 1      | *Boolean* map that defines model boundaries |
+| **TOPOGRAPHY**  |
+| Ldd             | ldd.map         | U.: flow directions <br> R.: 1 ≤ map ≤ 9 | local drain direction map (with value <br> 1-9); this file contains flow directions from <br> each cell to its steepest downslope <br> neighbour. Ldd directions are coded according <br> to the following diagram: <br> ![ldd](media/media/image58.png) <br> {width="1.8229 166666666667in" <br> height="1.84375 in"} <br> This resembles the numeric key pad of your <br> PC's keyboard, except for the value 5, which <br> defines a cell without local drain direction <br> (pit). The pit cell at the end of the path is <br> the outlet point of a catchment. |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Maps
 ----
 
