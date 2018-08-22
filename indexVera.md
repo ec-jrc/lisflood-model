@@ -2561,6 +2561,7 @@ Time series
 **Table A13.1** LISFLOOD default output time series*  
 
 | **Settings variable**     | **File name**   | **Units**       | **Description** |
+|-------------------|-----------------|-----------------|--------------------------|
 | **RATE VARIABLES AT GAUGES**        |                                   
 | disTS           | dis.tss         | m<sup>3</sup> s<sup>-1</sup>      | **<sup>1,2</sup>** channel discharge      |
 | **NUMERICAL CHECKS**               |                 |                 |      |
@@ -2569,9 +2570,8 @@ Time series
 | NosupStepsChan  | NosupStepsChannel.tss | \-              | **<sup>2</sup>** number of sup-steps needed for channel routing |
 | StepsSoilTS     | steps.tss       | \-              | **<sup>2</sup>** number of sup-steps needed for gravity-based soil moisture routine |
 
-**<sup>1</sup>** Output only if option 'InitLisflood' = 1 (pre-run) /
+**<sup>1</sup>** Output only if option 'InitLisflood' = 1 (pre-run) \
 **<sup>2</sup>** Output only if option 'InitLisflood' = 0      
-
 
 +-----------------+-----------------+-----------------+-----------------+
 | ***Table        |
