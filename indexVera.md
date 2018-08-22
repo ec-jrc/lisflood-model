@@ -2165,19 +2165,21 @@ the simulation of reservoirs. The following table lists all the output
 time series that are reported by default (note that the file names can
 always be changed by the user, although this is not recommended):
 
- **Table x.x**: LISFLOOD default output time series*   
+**Table x.x**: LISFLOOD default output time series*   
 
 | **File name**       | **Units**             | **Description**         |
+|-----------------------|-----------------------|----------------------------------------------|
 | **RATE VARIABLES AT GAUGES**  |                       |                       |
-| dis.tss     | m^3^ s^-1^            | **^1,2^** channel discharge              |
+| dis.tss     | m^3^ s^-1^            | <sup>1,2<\sup> channel discharge              |
 | **NUMERICAL CHECKS**  |                       |                       |
-|  mbError.tss   | m^3^                  | **^2^** cumulative mass balance error          |
-| mbErrorMm.tss    | mm                    | **^2^** cumulative mass balance error, expressed as <br> mm water slice (average over catchment) |
-| NoSubStepsChannel.tss     | \-                    | **^2^** number of sub-steps needed for <br> channel routing |
-| steps.tss     | \-                    | **^2^** number of sub-steps needed for <br> gravity-based soil moisture routine |
+|  mbError.tss   | m^3^                  | <sup>2<\sup> cumulative mass balance error          |
+| mbErrorMm.tss    | mm                    | <sup>2<\sup> cumulative mass balance error, expressed as <br> mm water slice (average over catchment) |
+| NoSubStepsChannel.tss     | \-                    | <sup>2<\sup> number of sub-steps needed for <br> channel routing |
+| steps.tss     | \-                    | <sup>2<\sup> number of sub-steps needed for <br> gravity-based soil moisture routine |
 
 <sup>1<\sup> Output only if option 'InitLisflood' = 1 (pre-run) 
-<sup>1<\sup> Output only if option'InitLisflood' = 0
+<sup>2<\sup> Output only if option'InitLisflood' = 0
+  
 To speed up the pre-run and to prevent that results are taken from the
 pre-run, all additional output is disabled if option 'InitLisflood' = 1
 is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss,
