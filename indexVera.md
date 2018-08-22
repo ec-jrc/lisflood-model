@@ -1821,8 +1821,8 @@ setting the initial values of each of these variables to a special
 initialisation methods:
 
 **Table 7.1**: LISFLOOD special initialisation methods<sup>1<sup> 
-          
-|===============================|===============================|===============================|
+ 
+
 | **Variable**          | **Description**       | **Initialisation method**     |
 |-------------------------------|-------------------------------|-------------------------------|
 | ThetaInit1Value / <br> ThetaForestInit2Value    | initial soil moisture <br> content upper soil <br> layer (V/V)| set to soil moisture <br> content at field <br> capacity |
