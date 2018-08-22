@@ -1795,7 +1795,7 @@ An example
   the upper groundwater zone, the lower groundwater zone, and in the
   channel.
 
-### Setting up a LISFLOOD run (cold start)
+### Option1: Cold start (initial conditions unknown)
 
 When setting up a model run that includes a warm-up period, most of the
 internal state variables can be simply set to 0 at the start of the run.
@@ -1820,7 +1820,7 @@ setting the initial values of each of these variables to a special
 'bogus' value of *-9999*. Table 7.1 summarises these special
 initialisation methods:
 
-**Table 7.1**: LISFLOOD special initialisation methods<sup>1<sup> 
+**Table x.x**: LISFLOOD special initialisation methods<sup>1<sup> 
  
 | **Variable**          | **Description**       | **Initialisation method**     |
 |-------------------------------|-------------------------------|-------------------------------|
@@ -1830,15 +1830,18 @@ initialisation methods:
 | TotalCrossSectionArea <br> InitValue | initial cross-sectional area <br> of water in channels              | set to half of bankfull depth      |
 | PrevDischarge         | Initial discharge     | set to half of bankfull depth       |
  
-<sup>1<sup>: These special initialisation methods are activated by setting the value of each respective variable to a 'bogus' value of "-9999"*     
+<sup>1</sup>: These special initialisation methods are activated by setting the value of each respective variable to a 'bogus' value of "-9999"*     
 
 Note that the "-9999" 'bogus' value can *only* be used with the
-variables in Table 7.1; for all other variables they will produce
+variables in Table x.x; for all other variables they will produce
 nonsense results! The initialisation of the lower groundwater zone will
 be discussed in the next sections.
 
-Initialisation of the lower groundwater zone
---------------------------------------------
+#### Initialisation of the lower groundwater zone
+
+```R
+# should this section be moved into the hydorological model documentation??
+```
 
 Even though the use of a sufficiently long warm-up period usually
 results in a correct initialisation, a complicating factor is that the
@@ -1849,7 +1852,7 @@ instantly to LISFLOOD's meteorological forcing variables (precipitation,
 evapo(transpi)ration). As a result, relatively short warm-up periods are
 sufficient to initialise this storage component. At the other extreme,
 the response of the lower groundwater zone is generally very slow
-(especially for large values of *T~lz~*). Consequently, to avoid
+(especially for large values of *T<sub>lz</sub>*). Consequently, to avoid
 unrealistic trends in the simulations, very long warm-up periods may be
 needed. Figure 7.2 shows a typical example for an 8-year simulation, in
 which a decreasing trend in the lower groundwater zone is visible
@@ -1870,12 +1873,11 @@ run.
 ![](media/media/image38.emf){width="5.989583333333333in"
 height="3.7083333333333335in"}
 
-***Figure 7.2** 8-year simulation of lower zone storage. Note how the
+***Figure x.x** 8-year simulation of lower zone storage. Note how the
 influence of the initial storage persists throughout the simulation
 period. *
 
-Lower groundwater zone: steady state storage
---------------------------------------------
+#### Lower groundwater zone: steady state storage
 
 The response of the lower groundwater zone is defined by two simple
 equations. First, we have the inflow into the lower zone, which occurs
@@ -1890,23 +1892,23 @@ day^-1^\] equals:
 
 \${Q\_{lz}} = \\frac{1}{{{{\\rm{T}}\_{{\\rm{lz}}}}}} \\cdot LZ\$ (7-2)
 
-where *T~lz~* is a reservoir constant \[days\], and *LZ* is the amount
+where *T<sub>lz</sub>* is a reservoir constant \[days\], and *LZ* is the amount
 of water that is stored in the lower zone \[mm\].
 
-Now, let's do a simple numerical experiment: assuming that *D~uz,lz~* is
+Now, let's do a simple numerical experiment: assuming that *D<sub>uz,lz</sub>* is
 a constant value, we can take some arbitrary initial value for *LZ* and
 then simulate (e.g. in a spreadsheet) the development over *LZ* over
 time. Figure 7.3 shows the results of 2 such experiments. In the upper
 Figure, we start with a very high initial storage (1500 mm). The inflow
-rate is fairly small (0.2 mm/day), and *T~lz~* is quite small as well
+rate is fairly small (0.2 mm/day), and *T<sub>lz</sub>* is quite small as well
 (which means a relatively short residence time of the water in the lower
 zone). What is interesting here is that, over time, the storage evolves
 asymptotically towards a constant state. In the lower Figure, we start
 with a much smaller initial storage (50 mm), but the inflow rate is much
-higher here (1.5 mm/day) and so is *T~lz~* (1000 days). Here we see an
+higher here (1.5 mm/day) and so is *T<sub>lz</sub>* (1000 days). Here we see an
 upward trend, again towards a constant value. However, in this case the
 constant 'end' value is not reached within the simulation period, which
-is mainly because *T~lz~* is set to a value for which the response is
+is mainly because *T<sub>lz</sub>* is set to a value for which the response is
 very slow.
 
 At this point it should be clear that what you see in these graphs is
@@ -1947,7 +1949,7 @@ Solving this for *LZ* gives the steady state storage:
 
 We can check this for our numerical examples:
 
-  *T~lz~*   *I*   *LZ~ss~*
+  *T<sub>lz</sub>*   *I*   *LZ<sub>ss</sub>*
 --------- ----- ----------
   250       0.2   50
   1000      1.5   1500
@@ -1960,21 +1962,20 @@ Steady-state storage in practice
 An actual LISFLOOD simulation differs from the previous example in 2
 ways. First, in any real simulation the inflow into the lower zone is
 not constant, but varies in time. This is not really a problem, since
-*LZ~ss~* can be computed from the *average* recharge. However, this is
+*LZ<sub>ss</sub>* can be computed from the *average* recharge. However, this is
 something we do not know until the end of the simulation! Also, the
 inflow into the lower zone is controlled by the availability of water in
 the upper zone, which, in turn, depends on the supply of water from the
 soil. Hence, it is influenced by any calibration parameters that control
-behaviour of soil- and subsoil (e.g. *T~uz~*, *GW~perc~*, *b*, and so
+behaviour of soil- and subsoil (e.g. *T<sub>uz</sub>*, *GW<sub>perc</sub>*, *b*, and so
 on). This means that --when calibrating the model- the average recharge
 will be different for every parameter set. Note, however, that it will
-*always* be smaller than the value of *GW~perc~*, which is used as an
+*always* be smaller than the value of *GW<sub>perc</sub>*, which is used as an
 upper limit in the model.. Note that the pre-run procedures include a
 sufficiently long warm-up period.
 
-### 
 
-### Use pre-run to calculate average recharge
+#### Use pre-run to calculate average recharge
 
 Here, we first do a "pre-run" that is used to calculate the average
 inflow into the lower zone. This average inflow can be reported as a
@@ -1986,15 +1987,18 @@ steps:
 2.  Activate the "InitLisflood" option by setting it active in the
     'lfoptions' in the settings file:
 
-> \<setoption choice=\"1\" name=\"InitLisflood\"/\>
-
+```xml
+  <setoption choice="1" name="InitLisflood"/>
+```
 3.  Run the model for a longer period (if possible more than 3 years,
     best for the whole modelling period)
 
 4.  Go back to the LISFLOOD settings file, and set the InitLisflood
     inactive:
 
-> \<setoption choice=\"0\" name=\"InitLisflood\"/\>
+```xml
+  <setoption choice="0" name="InitLisflood"/>
+```
 
 5.  Run the model again using the modified settings file
 
@@ -2016,7 +2020,9 @@ The presence of any initialisation problems of the lower zone can be
 checked by adding the following line to the 'lfoptions' element of the
 settings file:
 
-> \<setoption name=\" repStateUpsGauges\" choice=\"1\"\>\</setoption\>
+```xml
+  <setoption name=" repStateUpsGauges" choice="1"> </setoption\>
+```
 
 This tells the model to write the values of all state variables
 (averages, upstream of contributing area to each gauge) to time series
@@ -2032,12 +2038,11 @@ this is related to trends in the meteorological input).
 ![initLZDemo](media/media/image40.png){width="5.770833333333333in"
 height="3.2395833333333335in"}
 
-***Figure 7.4** Initialisation of lower groundwater zone with and
+***Figure x.x** Initialisation of lower groundwater zone with and
 without using a pre-run. Note the strong decreasing trend in the
 simulation without pre-run. *
 
-Using a previous run (warm start)
----------------------------------
+### Option2: Warm start (Using a previous run)
 
 At the end of each model run, LISFLOOD writes maps of all internal state
 variables at the last time step. You can use these maps as the initial
@@ -2052,7 +2057,7 @@ In any case, you should be aware that values of some internal state
 variables of the model (especially lower zone storage) are very much
 dependent on the parameterisation used. Hence, suppose we have 'end
 maps' that were created using some parameterisation of the model (let's
-say parameter set *A*), then these maps should *not* be used as initial
+say parameter set *A*), then these maps should **not** be used as initial
 conditions for a model run with another parameterisation (parameter set
 *B*). If you decide to do this anyway, you are likely to encounter
 serious initialisation problems (but these may not be immediately
@@ -2069,8 +2074,7 @@ the (daily) pre-run and the 'event' run! This may seem awkward, but
 there is no way of getting around this (except from avoiding event-based
 calibration at all, which may be a good idea anyway).
 
-Summary of LISFLOOD initialisation procedure
---------------------------------------------
+### Summary of LISFLOOD initialisation procedure
 
 From the foregoing it is clear that the initialisation of LISFLOOD can
 be done in a number of ways. Figure 7.5 gives an overview. As already
@@ -2085,20 +2089,20 @@ into either of the following two categories:
     will introduce unwanted artefacts into your simulation results.
 
 2. The initial state of all state variables is unknown. In this case
-    > you should run the model with a sufficient pre-run (if possible
-    > more than 3 years, best for the whole modelling period) and
-    > InitLisflood=1. The average recharge map that is generated from
-    > the pre-run can subsequently be used as the average lower zone
-    > inflow estimate (*LZAvInflowEstimate*) in the actual simulation,
-    > which will avoid any initialisation problems of the lower
-    > groundwater zone
+    you should run the model with a sufficient pre-run (if possible
+    more than 3 years, best for the whole modelling period) and
+    InitLisflood=1. The average recharge map that is generated from
+    the pre-run can subsequently be used as the average lower zone
+    inflow estimate (*LZAvInflowEstimate*) in the actual simulation,
+    which will avoid any initialisation problems of the lower
+    groundwater zone
 
 3. Is it possible not to use the first year for further analysis of
-    > results, because this is the "warm-up" period for all the other
-    > variables like snow, vegetation, soil (see e.g. figure 7.1 for
-    > soil moisture)?\
-    > Then leave or set all the initial conditions to either 0,1 or
-    > -9999 and run the model with InitLisflood=0
+    results, because this is the "warm-up" period for all the other
+    variables like snow, vegetation, soil (see e.g. figure 7.1 for
+    soil moisture)?\
+    Then leave or set all the initial conditions to either 0,1 or
+    -9999 and run the model with InitLisflood=0
 
 4. If you want to include the first year of modelling into your
     analysis, you have to do a "warm-up" run (one year will usually do)
@@ -2113,48 +2117,8 @@ height="4.322916666666667in"}
 
 ***Figure 7.5** LISFLOOD initialisation flowchart *
 
-*\
-*
 
-
-### Launch LISFLOOD
-
-
-
------------------
-
-Type 'lisflood' at the command prompt. You should see something like this:
-
-LISFLOOD version March 24 2008
-
-Water balance and flood simulation model for large catchments \(C) Institute for Environment and Sustainability
-
-Joint Research Centre of the European Commission
-
-TP261, I-21020 Ispra (Va), Italy
-
-usage (1): lisflood \[switches\] \<InputFile\>
-
-usage (2): lisflood \--listoptions (show options only)
-
-InputFile : LISFLOOD input file (see documentation for description of format)
-
-switches:
-
--s : keep temporary script after simulation
-
-You can run LISFLOOD by typing 'lisflood' followed by a specially-formatted settings file. The layout of this file is described in Chapters 4 and 5. Chapter 3 explains all other input files.
-
-[[🔝](#top)](#top)
-
-
-
-
-
-
-
-Running the model
------------------
+### How to launch LISFLOOD
 
 To run the model, start up a command prompt (Windows) or a console
 window (Linux) and type 'lisflood' followed by the name of the settings
@@ -2188,15 +2152,9 @@ the source code (01/03/2013), the oldest PCRASTER version it works with
 
 
 
+## Step7: Model output 
 
-
-
-
- 8. Output generated by LISFLOOD
-    ================================
-
-Default LISFLOOD output
------------------------
+### Default LISFLOOD output
 
 LISFLOOD can generate a wide variety of output. Output is generated as
 either maps or time series (PCRaster format, which can be visualised
@@ -2207,51 +2165,19 @@ the simulation of reservoirs. The following table lists all the output
 time series that are reported by default (note that the file names can
 always be changed by the user, although this is not recommended):
 
-+-----------------------+-----------------------+-----------------------+
-| ***Table 8.1**        |
-| LISFLOOD default      |
-| output time series*   |
-+-----------------------+-----------------------+-----------------------+
-| **RATE VARIABLES AT   |                       |                       |
-| GAUGES**              |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **Description**       | **Units**             | **File name**         |
-+-----------------------+-----------------------+-----------------------+
-| **^1,2^** channel     | m^3^ s^-1^            | dis.tss               |
-| discharge             |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **NUMERICAL CHECKS**  |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **Description**       | **Units**             | **File name**         |
-+-----------------------+-----------------------+-----------------------+
-| **^2^** cumulative    | m^3^                  | mbError.tss           |
-| mass balance error    |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **^2^** cumulative    | mm                    | mbErrorMm.tss         |
-| mass balance error,   |                       |                       |
-| expressed as mm water |                       |                       |
-| slice (average over   |                       |                       |
-| catchment)            |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **^2^** number of     | \-                    | NoSubStepsChannel.tss |
-| sub-steps needed for  |                       |                       |
-| channel routing       |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **^2^** number of     | \-                    | steps.tss             |
-| sub-steps needed for  |                       |                       |
-| gravity-based soil    |                       |                       |
-| moisture routine      |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **^1^** Output only   |
-| if option             |
-| 'InitLisflood' = 1    |
-| (pre-run)             |
-|                       |
-| **^2^** Output only   |
-| if option             |
-| 'InitLisflood' = 0    |
-+-----------------------+-----------------------+-----------------------+
+ **Table x.x**: LISFLOOD default output time series*   
 
+| **File name**       | **Units**             | **Description**         |
+| **RATE VARIABLES AT GAUGES**  |                       |                       |
+| dis.tss     | m^3^ s^-1^            | **^1,2^** channel discharge              |
+| **NUMERICAL CHECKS**  |                       |                       |
+|  mbError.tss   | m^3^                  | **^2^** cumulative mass balance error          |
+| mbErrorMm.tss    | mm                    | **^2^** cumulative mass balance error, expressed as <br> mm water slice (average over catchment) |
+| NoSubStepsChannel.tss     | \-                    | **^2^** number of sub-steps needed for <br> channel routing |
+| steps.tss     | \-                    | **^2^** number of sub-steps needed for <br> gravity-based soil moisture routine |
+
+<sup>1<\sup> Output only if option 'InitLisflood' = 1 (pre-run) 
+<sup>1<\sup> Output only if option'InitLisflood' = 0
 To speed up the pre-run and to prevent that results are taken from the
 pre-run, all additional output is disabled if option 'InitLisflood' = 1
 is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss,
