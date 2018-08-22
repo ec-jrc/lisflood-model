@@ -2573,87 +2573,43 @@ Time series
 **<sup>1</sup>** Output only if option 'InitLisflood' = 1 (pre-run) \
 **<sup>2</sup>** Output only if option 'InitLisflood' = 0      
 
-+-----------------+-----------------+-----------------+-----------------+
-| ***Table        |
-| A13.2**         |
-| LISFLOOD        |
-| optional output |
-| time series     |
-| (*only          |
-| 'InitLisflood'  |
-| = 0)            |
-|                 |
-| *(continued on  |
-| next pages)*    |
-+-----------------+-----------------+-----------------+-----------------+
-| **STATE         |
-| VARIABLES AT    |
-| SITES (option   |
-| *repStateSites* |
-| )**[^22]        |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **Settings      | **Default       |
-|                 |                 | variable**      | name**          |
-+-----------------+-----------------+-----------------+-----------------+
-| depth of water  | mm              | WaterDepthTS    | wDepth.tss      |
-| on soil surface |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| depth of snow   | mm              | SnowCoverTS     | snowCover.tss   |
-| cover on soil   |                 |                 |                 |
-| surface         |                 |                 |                 |
-| (pixel-average) |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| depth of        | mm              | CumInterception | cumInt.tss      |
-| interception    |                 | TS              |                 |
-| storage         |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| soil moisture   | mm^3^ / mm^3^   | Theta1TS        | thTop.tss       |
-| content upper   |                 |                 |                 |
-| layer           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| soil moisture   | mm^3^ / mm^3^   | Theta2TS        | thSub.tss       |
-| content lower   |                 |                 |                 |
-| layer           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| storage in      | mm              | UZTS            | uz.tss          |
-| upper           |                 |                 |                 |
-| groundwater     |                 |                 |                 |
-| zone            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| storage in      | mm              | LZTS            | lz.tss          |
-| lower           |                 |                 |                 |
-| groundwater     |                 |                 |                 |
-| zone            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| number of days  | days            | DSLRTS          | dslr.tss        |
-| since last rain |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| frost index     | °C days^-1^     | FrostIndexTS    | frost.tss       |
-+-----------------+-----------------+-----------------+-----------------+
+**Table A13.2** LISFLOOD optional output time series (*only 'InitLisflood' = 0)   
 
---------------------------------------------------------------------------------------- ------------- ----------------------- -------------------
-  ***Table A13.2** LISFLOOD optional output time series (continued from previous page)*                                         
-  **RATE VARIABLES AT SITES (option *repRateSites*)**[^23]                                                                      
-  **Description**                                                                         **Units**     **Settings variable**   **Default name**
-  rain (excluding snow)                                                                   mm/timestep   RainTS                  rain.tss
-  Snow                                                                                    mm/timestep   SnowTS                  snow.tss
-  snow melt                                                                               mm/timestep   SnowmeltTS              snowMelt.tss
-  actual evaporation                                                                      mm/timestep   ESActTS                 esAct.tss
-  actual transpiration                                                                    mm/timestep   TaTS                    tAct.tss
-  rainfall interception                                                                   mm/timestep   InterceptionTS          interception.tss
-  evaporation of intercepted water                                                        mm/timestep   EWIntTS                 ewIntAct.tss
-  leaf drainage                                                                           mm/timestep   LeafDrainageTS          leafDrainage.tss
-  infiltration                                                                            mm/timestep   InfiltrationTS          infiltration.tss
-  preferential (bypass) flow                                                              mm/timestep   PrefFlowTS              prefFlow.tss
-  percolation upper to lower soil layer                                                   mm/timestep   PercolationTS           dTopToSub.tss
-  percolation lower soil layer to subsoil                                                 mm/timestep   SeepSubToGWTS           dSubToUz.tss
-  surface runoff                                                                          mm/timestep   SurfaceRunoffTS         surfaceRunoff.tss
-  outflow from upper zone                                                                 mm/timestep   UZOutflowTS             qUz.tss
-  outflow from lower zone                                                                 mm/timestep   LZOutflowTS             qLz.tss
-  total runoff                                                                            mm/timestep   TotalRunoffTS           totalRunoff.tss
-  percolation from upper to lower zone                                                    mm/timestep   GwPercUZLZTS            percUZLZ.tss
-  loss from lower zone                                                                    mm/timestep   GwLossTS                loss.tss
---------------------------------------------------------------------------------------- ------------- ----------------------- -------------------
+| **Settings variable**     | **File name**       | **Units**       | **Description** |
+|-----------------|-------------------|-----------------|--------------------------|
+| **STATE VARIABLES AT  SITES (option *repStateSites*)**[^22]        |
+| WaterDepthTS    | wDepth.tss      | mm              | depth of water on soil surface |
+| SnowCoverTS     | snowCover.tss   | mm              | depth of snow cover on soil surface (pixel-average) |
+| CumInterception TS| cumInt.tss      | mm              | depth of interception storage|
+| Theta1TS        | thTop.tss       | mm<sup>3</sup> / mm<sup>3</sup>   | soil moisture content upper layer |
+| Theta2TS        | thSub.tss       | mm<sup>3</sup> / mm<sup>3</sup>   | soil moisture content lower layer |
+| UZTS            | uz.tss          | mm              | storage in upper groundwater zone |
+| LZTS            | lz.tss          | mm              | storage in lower groundwater zone |
+| DSLRTS          | dslr.tss        | days            | number of days since last rain |
+| FrostIndexTS    | frost.tss       | °C days<sup>-1</sup>     | frost index     |
+| RainTS          | rain.tss         | mm/timestep | rain (excluding snow)                  |
+| SnowTS          | snow.tss         | mm/timestep | Snow                                   |
+| SnowmeltTS      | snowMelt.tss     | mm/timestep | snow melt                              |
+| ESActTS         | esAct.tss        | mm/timestep | actual evaporation                     |
+| TaTS            | tAct.tss         | mm/timestep | actual transpiration                   |
+| InterceptionTS  | interception.tss | mm/timestep | rainfall interception                  |
+| EWIntTS         | ewIntAct.tss     | mm/timestep | evaporation of intercepted water       |
+| LeafDrainageTS  | leafDrainage.tss | mm/timestep | leaf drainage                          |
+| InfiltrationTS  | infiltration.tss | mm/timestep | infiltration                           |
+| PrefFlowTS      | prefFlow.tss     | mm/timestep | preferential (bypass) flow             |
+| PercolationTS   | dTopToSub.tss    | mm/timestep | percolation upper to lower soil layer  |
+| SeepSubToGWTS   | dSubToUz.tss     | mm/timestep | percolation lower soil layer to subsoil|
+| SurfaceRunoffTS | surfaceRunoff.tss| mm/timestep | surface runoff                         |
+| UZOutflowTS     | qUz.tss          | mm/timestep | outflow from upper zone                |
+| LZOutflowTS     | qLz.tss          | mm/timestep | outflow from lower zone                |
+| TotalRunoffTS   | totalRunoff.tss  | mm/timestep | total runoff                           |
+| GwPercUZLZTS    | percUZLZ.tss     | mm/timestep | percolation from upper to lower zone   |
+| GwLossTS        | loss.tss         | mm/timestep | loss from lower zone                   |
+
+
+
+
+
 
 +-----------------+-----------------+-----------------+-----------------+
 | TIME SERIES,    |
