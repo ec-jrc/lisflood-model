@@ -1820,7 +1820,8 @@ setting the initial values of each of these variables to a special
 'bogus' value of *-9999*. Table 7.1 summarises these special
 initialisation methods:
 
-**Table 7.1**: LISFLOOD special initialisation methods<sup>1<sup>*           |
+**Table 7.1**: LISFLOOD special initialisation methods<sup>1<sup> 
+          
 |===============================|===============================|===============================|
 | **Variable**          | **Description**       | **Initialisation method**     |
 |-------------------------------|-------------------------------|-------------------------------|
@@ -1834,7 +1835,8 @@ initialisation methods:
 |-------------------------------|-------------------------------|-------------------------------|
 | PrevDischarge         | Initial discharge     | set to half of <br> bankfull depth       |
 |-------------------------------|-------------------------------|-------------------------------|
- *<sup>1<sup> These special initialisation methods are activated by setting the value of each respective variable to a 'bogus' value of "-9999"*     
+ 
+ <sup>1<sup> These special initialisation methods are activated by setting the value of each respective variable to a 'bogus' value of "-9999"*     
 
 Note that the "-9999" 'bogus' value can *only* be used with the
 variables in Table 7.1; for all other variables they will produce
