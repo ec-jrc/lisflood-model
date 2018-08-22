@@ -2448,6 +2448,9 @@ Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P.
 (ed.), Computer Models of Watershed Hydrology, pp. 215-232.
 
 
+# LISFLOOD input maps and tables
+
+## Maps
 
 **Table A12.1** LISFLOOD input maps (continued on next pages)*
 
@@ -2517,127 +2520,14 @@ Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P.
 
 **Table A12.2** Optional maps that define grid size*     
 
-| **Map**         | **Default       | **Units,        | **Description** |
-|                 | name**          | range**         |                 |
+| **Map**         | **Default name**       | **Units, range**        | **Description** |
 |-----------------|-----------------|-----------------|-------------------------------------|
 | PixelLengthUser | pixleng.map     | U.: \[m\]  <br> R.: map \> 0 | Map with pixel length |
 | PixelAreaUser   | pixarea.map     | U.: \[m\]  <br> R.: map \> 0 | Map with pixel area |
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maps
-----
-
-**Table A12.1** LISFLOOD input maps (continued on next pages)*
-
-| **Map**         | **Default name**[^20]       | **Units, range**        | **Description** |
-|-----------------|-----------------|-----------------|-------------------------------------|
-| **GENERAL**     |
-| MaskMap         | area.map        | U.: -  <br> R.: 0 or 1      | *Boolean* map that defines model boundaries |
-| **TOPOGRAPHY**  |
-| Ldd             | ldd.map         | U.: flow directions <br> R.: 1 ≤ map ≤ 9 | local drain direction map (with value <br> 1-9); this file contains flow directions <br> from each cell to its steepest <br> downslope neighbour. Ldd directions are <br> coded according  to the following <br> diagram:  ![ldd](media/media/image58.png) <br> {width="1.8229 166666666667in" <br> height="1.84375 in"} <br> This resembles the numeric key pad of <br> your PC's keyboard, except for the <br> value 5, which defines a cell without <br> local drain direction  (pit). The pit cell at <br> the end of the path is the outlet point <br> of a catchment. |
-| Grad            | gradient.map    | U.: \[m m<sup>-1</sup>\] <br> R.: map \> 0 <br> **!!!**| Slope gradient  |
-| Elevation Stdev | elvstd.map      | U.: \[m\]\ <dev> R.: map ≥ 0 | Standard deviation of elevation       |
-| **LAND USE -- fraction maps**   ||  |
-| Fraction of water    | fracwater.map   | U.: \[-\] <dev> R.: 0 ≤ map ≤ 1       | Fraction of inland water for each cell. <br> Values range from 0 (no water at all) <br> to 1 (pixel is 100% water)   |
-| Fraction of sealed surface | fracsealed.map  | U.: \[-] <br> R.: 0 ≤ map ≤ 1 | Fraction of impermeable surface for <br> each cell. Values range from 0 (100% <br> permeable surface -- no urban at all) <br> to 1 (100% impermeable surface).    |
-| Fraction of forest | fracforest.map  | U.:\[-\] <br> R.: 0 ≤ map ≤ 1 | Forest fraction for each cell. Values <br> range from 0 (no forest at all) to 1 <br> (pixel is 100% forest)|
-| Fraction of other land cover | fracother.map   | U.: \[\] <br> R.: 0 ≤ map ≤ 1 | Other (agricultural areas, non-forested <br> natural area, pervious surface of urban <br> areas) fraction for each cell.          |
-| **LAND COVER depending <br> maps** | |       |
-| Crop coef. for forest  | cropcoef\_\forest.map     | U.: \[-\] <br> R.: 0.8≤ map ≤ 1.2 | Crop coefficient for forest |
-| Crop coef. for other | cropcoef\_\other.map     | U.: \[-\] <br> R.: 0.8≤ map ≤ 1.2 | Crop coefficient for other |
-| Crop group number <br> for forest| crgrnum\_\forest.map      | U.: \[-\] <br> R.: 1 ≤ map ≤ 5      | Crop group number for forest|
-| Crop group number <br> for forest | crgrnum\_\other.map      | U.: \[-\] <br> R.: 1 ≤ map ≤ 5 | Crop group number for other |
-| Manning for forest | mannings\_\forest.map     | U.: \[-\] <br> R.: 0.2≤ map ≤ 0.4 | Manning's roughness for forest      |
-| Manning for other | mannings\_\other.map     | U.: \[-\] <br> R.: 0.01≤ map ≤0.3 | Manning's roughness for other |
-| Soil depth for forest for layer1 | soildep1\_\forest.map | U.: \[mm\] <br> R.: map ≥ 50 | Forest soil depth for soil layer 1 <br> (rooting depth) |
-| Soil depth for other for layer2 | soildep1\_\other.map     | U.: \[mm\] <br> R.: map ≥ 50 | Other soil depth for soil layer 1 <br> (rooting depth)     |
-| Soil depth for forest for layer2 | Soildep2\_\forest.map     | U.: \[mm\] <br> R.: map ≥ 50 | Forest soil depth for soil layer 2 |
-| Soil depth for other for layer2 | Soildep2\_\other.map     | U.: \[mm\] <br> R.: map ≥ 50| Other soil depth for soil layer 2 |
-| **SOIL HYDRAULIC PROPERTIES <br> (depending on soil texture)** |
-| ThetaSat1 for forest  | thetas1\_\forest.map      | U.: \[-\] <br> R.: 0 \< map \<1     | Saturated volumetric soil moisture <br> content layer 1 |
-| ThetaSat1 for other  | thetas1\_\other.map      | U.: \[-\] <br> R.: 0 \< map \<1 | Saturated volumetric soil moisture <br> content layer 1      |
-| ThetaSat2 for forest and other | thetas2.map     | U.: \[-\] <br> R.: 0 \< map \<1 | Saturated volumetric soil moisture <br> content layer 2  |
-| ThetaRes1 for forest  | thetar1\_\forest.map | U.: \[-\] <br> R.: 0 \< map \<1 | Residual volumetric soil moisture <br> content layer 1 |
-| ThetaRes1 for other  | thetar1\_\other.map      | U.: \[-\] <br> R.: 0 \< map \<1 | Residual volumetric soil moisture <br> content layer 1 |
-| ThetaRes2 for forest and other | thetar2.map     | U.: \[-\] <br> R.: 0 \< map \<1 | Residual volumetric soil moisture <br> content layer 2 |
-| Lambda1 for forest | lambda1\_\forest.map | U.: \[-\] <br> R.: 0 \< map \<1 | Pore size index (λ) layer 1 |
-| Lambda1 for other | lambda1\_\other.map | U.: \[-\] <br> R.: 0 \< map \<1 | Pore size index (λ) layer 1 |
-| Lambda2 for forest and other | lambda2.map     | U.: \[-\] <br> R.: 0 \< map \<1 | Pore size index (λ) layer 2 |
-| GenuAlpha1 for forest | alpha1\_\forest.map | U.: \[-\] <br> R.: 0 \< map \<1 | Van Genuchten parameter α layer 1 |
-| GenuAlpha1 for other | alpha1\_\other.map | U.: \[-\] <br> R.: 0 \< map \<1 | Van Genuchten parameter α layer 1 |
-| GenuAlpha2 for forest and other| alpha2.map | U.: \[-\] <br> R.: 0 \< map \<1 | Van Genuchten parameter α layer 2 |
-| Sat1 for forest | ksat1\_\forest.map | U.: \[cm  day<sup>-1</sup>\] <br> R.: 1 ≤ map ≤100 | Saturated conductivity layer 1 |
-| Sat1 for other  | ksat1\_\other.map | U.: \[cm  day<sup>-1</sup>\] <br> R.: 1 ≤ map ≤100 | Saturated conductivity layer 1 |
-| Sat2 for forest and other | ksat2.map | U.: \[cm  day<sup>-1</sup>\] <br> R.: 1 ≤ map ≤100 | Saturated conductivity layer 2 |
-| **CHANNEL GEOMETRY**      |
-| Channels        | chan.map        | U.: \[-\] <br> R.: 0 or 1 | Map with Boolean 1 for all channel pixels, and Boolean 0 for all other pixels on MaskMap |
-| ChanGrad        | changrad.map    | U.: \[m m<sup>-1</sup>\] <br> R.: map \> 0 <br> **!!!** | Channel gradient |
-| ChanMan         | chanman.map     | U.: \[-\] <br> R.: map \> 0 | Manning's roughness coefficient for <br> channels |
-| ChanLength      | chanleng.map    | U.: \[m\] <br> R.: map \> 0 | Channel length (can exceed grid size, to account for <br> meandering rivers) |
-| ChanBottomWidth | chanbw.map      | U.: \[m\] <br> R.: map \> 0 | Channel bottom width |
-| ChanSdXdY       | chans.map       | U.: \[m m<sup>-1</sup>\] <br> R.: map ≥ 0 | Channel side slope **Important:** defined as <br> horizontal divided by vertical distance <br> (dx/dy); this may be confusing because slope <br> is usually defined the other way round <br> (i.e. dy/dx)! |
-| ChanDepth\Threshold | chanbnkf.map    | U.: \[m\] <br> R.: map \> 0| Bankfull channel depth |
-| **METEOROLOGICAL VARIABLES**     |
-| **Map**         | **Default       | **Units,        | **Description** |
-|                 | prefix**        | range**         |                 |
-| PrecipitationMaps  | pr              | U.: \[mm day<sup>-1</sup>\] <br> R.: map ≥ 0        | Precipitation rate  |
-| TavgMaps        | ta              | U.: \[°C\] <br> R.:-50 ≤ map ≤50    | Average *daily* temperature |
-| E0Maps          | e               | U.: \[mm day<sup>-1</sup>\] <br> R.: map ≥ 0 | Daily potential evaporation rate, free <br> water surface |
-| ES0Maps         | es              | U.: \[mm day<sup>-1</sup>\] <br> R.: map ≥ 0 | Daily potential evaporation rate, bare soil |
-| ET0Maps         | et              | U.: \[mm day<sup>-1</sup>\] <br> R.: map ≥ 0 | Daily potential evapotranspiration rate, <br>reference crop |
-| **DEVELOPMENT OF VEGETATION OVER TIME**     |
-| LAIMaps for forest | lai\_forest     | U.: \[m<sup>2</sup> m<sup>-2</sup>\] <br> R.: map ≥ 0 | Pixel-average Leaf Area Index for forest  |
-| LAIMaps for other | lai\_other  | U.: \[m<sup>2</sup> m<sup>-2</sup>\] <br> R.: map ≥ 0 | Pixel-average Leaf Area Index for other  |
-| **DEFINITION OF INPUT/OUTPUT TIMESERIES**    |
-| **Map**         | **Default       | **Units,        | **Description** |
-|                 | name**          | range**         |                 |
-| Gauges          | outlets.map     | U.: \[-\] <br> R.: For each station an <br> individual number | Nominal map with locations at which discharge <br> timeseries are reported (usually correspond to <br> gauging stations) |
-| Sites           | sites.map       | U.: \[-\] <br> R.: For each station an <br> individual number | Nominal map with locations (individual pixels or <br> areas) at which timeseries of intermediate state and rate <br> variables are reported (soil moisture, infiltration, <br> snow, etcetera) |
-
-
-**Table A12.2** Optional maps that define grid size*     
-
-| **Map**         | **Default name**      | **Units, range**       | **Description** |
-|-----------------|-----------------|-----------------|-------------------------------------|
-| PixelLengthUser | pixleng.map     | U.: \[m\] <br> R.: map \> 0 | Map with pixel length |
-| PixelAreaUser   | pixarea.map     | U.: \[m\] <br> R.: map \> 0 | Map with pixel area |
-
-
-
-
 ### Tables
-------
 
 In the previous version of LISFLOOD a number of model parameters are
 read through tables that are linked to the classes on the land use and
@@ -2648,11 +2538,19 @@ LISFLOOD setting
 
 The following table gives an overview:
 
-  ***Table A12.3** LISFLOOD input tables*                      
+
+```R
+# Looks strange to me
+```
+
+**Table A12.3** LISFLOOD input table*                      
 ----------------------------------------- ------------------ -------------------------------------------
   **LAND USE**                                                 
   **Table**                                 **Default name**   **Description**
   Day of the year -\> LAI                   LaiOfDay.txt       Lookup table: Day of the year -\> LAI map
+
+
+
 
 Annex 13: LISFLOOD output
 =========================
@@ -2660,63 +2558,21 @@ Annex 13: LISFLOOD output
 Time series
 -----------
 
-+-----------------+-----------------+-----------------+-----------------+
-| ***Table        |
-| A13.1**         |
-| LISFLOOD        |
-| default output  |
-| time series*    |
-+-----------------+-----------------+-----------------+-----------------+
-| **RATE          |
-| VARIABLES AT    |
-| GAUGES**        |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **Settings      | **File name**   |
-|                 |                 | variable**      |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^1,2^**       | m^3^ s^-1^      | disTS           | dis.tss         |
-| channel         |                 |                 |                 |
-| discharge       |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **NUMERICAL     |                 |                 |                 |
-| CHECKS**        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       |                 | **File name**   |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^**         | m^3^            | WaterMassBalanc | mbError.tss     |
-| cumulative mass |                 | eTSS            |                 |
-| balance error   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^**         | mm              | MassBalanceMM\  | mbErrorMm.tss   |
-| cumulative mass |                 | TSS             |                 |
-| balance error,  |                 |                 |                 |
-| expressed as mm |                 |                 |                 |
-| water slice     |                 |                 |                 |
-| (average over   |                 |                 |                 |
-| catchment)      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** number  | \-              | NoSubStepsChan  | NoSubStepsChann |
-| of sub-steps    |                 |                 | el.tss          |
-| needed for      |                 |                 |                 |
-| channel routing |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** number  | \-              | StepsSoilTS     | steps.tss       |
-| of sub-steps    |                 |                 |                 |
-| needed for      |                 |                 |                 |
-| gravity-based   |                 |                 |                 |
-| soil moisture   |                 |                 |                 |
-| routine         |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^1^** Output  |
-| only if option  |
-| 'InitLisflood'  |
-| = 1 (pre-run)   |
-|                 |
-| **^2^** Output  |
-| only if option  |
-| 'InitLisflood'  |
-| = 0             |
-+-----------------+-----------------+-----------------+-----------------+
+**Table A13.1** LISFLOOD default output time series*  
+
+| **Settings variable**     | **File name**   | **Units**       | **Description** |
+| **RATE VARIABLES AT GAUGES**        |                                   
+| disTS           | dis.tss         | m<sup>3</sub> s<sup>-1</sub>      | **<sup>1,2</sub>** channel discharge      |
+| **NUMERICAL CHECKS**               |                 |                 |      |
+| WaterMassBalanc eTSS| mbError.tss     | m<sup>3</sub>            | **<sup>2</sub>** cumulative mass balance error |
+| MassBalanceMM\ TSS | mbErrorMm.tss   | mm              | **<sup>2</sub>** cumulative mass balance error, expressed as mm water slice (average over catchment)  |
+| NoSubStepsChan  | NoSubStepsChannel.tss | \-              | **<sup>2</sub>** number of sub-steps needed for channel routing |
+| StepsSoilTS     | steps.tss       | \-              | **<sup>2</sub>** number of sub-steps needed for gravity-based soil moisture routine |
+
+**<sup>1</sub>** Output only if option 'InitLisflood' = 1 (pre-run) /
+**<sup>2</sub>** Output only if option 'InitLisflood' = 0      
+
+
 
 +-----------------+-----------------+-----------------+-----------------+
 | ***Table        |
