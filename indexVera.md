@@ -2199,12 +2199,11 @@ column of the table.
 **Table 8.2** LISFLOOD default state variable output maps. These maps can be used to define the initial conditions of another simulation*     
 
 | **File name**   | **Description** | **Units**       | **Domain**      |
-|-----------------+--------------------------------+-----------------+--------------------------|
-| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood)   |
-|-----------------+--------------------------------+-----------------+--------------------------|
+|-----------------|--------------------------------|-----------------|--------------------------|
+| **AVERAGE RECHARGE MAP <br> (for lower groundwater zone)** <br> (option InitLisflood)   |
 | lzavin.map      | **<sup>1</sup>** average inflow to lower zone| mm timestep<sup>-1</sup> | other fraction  |
 | lzavin\_forest.map | **<sup>1</sup>** average inflow to lower zone (forest) | mm timestep<sup>-1</sup> | forest fraction |
-| **INITIAL CONDITION MAPS at defined time steps**[^8] (option *repStateMaps*) |
+| **INITIAL CONDITION MAPS <br> at defined time steps**[<sup>8</sup>] <br> (option *repStateMaps*) |
 | wdepth00.xxx    | **<sup>2</sup>** waterdepth        | mm              | whole pixel     |
 | chcro000.xxx    | **<sup>2</sup>** channel cross-sectional area | m<sup>2</sup>            | channel         |
 | dslr0000.xxx    | **<sup>2</sup>** days since last rain variable    | days            | other pixel     |
