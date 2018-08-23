@@ -2683,12 +2683,13 @@ Annex 13: LISFLOOD output
 
 
 
+
 **Table A13.4** *LISFLOOD optional output maps (*only 'InitLisflood' = 0)        |
 
 | **Description** | **Option**  | **Units**   | **Settings variable** | **Prefix**  |
 |-------------|-------------|-------------|-------------|-------------|
 | **DISCHARGE AND WATER LEVEL**     |
-| discharge   | repDischargeMaps | m<sub>3</sub>s<sub>-1</sub>   | DischargeMaps | dis         |
+| discharge   | repDischargeMaps | m<sup>3</sup>s<sup>-1</sup>   | DischargeMaps | dis         |
 | water level | repWaterLevelMaps | m (above channel bottom)   | WaterLevelMaps | wl          |
 | **METEOROLOGICAL INPUT VARIABLES** |
 | precipitation | repPrecipitationMaps | mm          | PrecipitationMaps | pr          |
@@ -2700,12 +2701,12 @@ Annex 13: LISFLOOD output
 | depth of water on soil surface | repWaterDepthMaps | mm          | WaterDepthMaps | wdep        |
 | depth of snow cover on soil surface | repSnowCoverMaps | mm          | SnowCoverMaps | scov        |
 | depth of interception storage | repCumInterceptionMaps | mm          | CumInterceptionMaps <br> CumInterceptionForestMaps | cumi <br> <br> cumF       |
-| soil moisture content upper layer | repTheta1Maps | mm<sub>3</sub> /mm<sub>3</sub>      | Theta1Maps <br> Theta1ForestMaps | thtop <br> <br> thFt      |
-| soil moisture content lower layer | repTheta2Maps | mm<sub>3</sub> /mm<sub>3</sub>      | Theta1Maps <br> Theta1ForestMaps | thsub <br> <br> thFs      |
+| soil moisture content upper layer | repTheta1Maps | mm<sup>3</sup> /mm<sup>3</sup>      | Theta1Maps <br> Theta1ForestMaps | thtop <br> <br> thFt      |
+| soil moisture content lower layer | repTheta2Maps | mm<sup>3</sup> /mm<sup>3</sup>      | Theta1Maps <br> Theta1ForestMaps | thsub <br> <br> thFs      |
 | storage in upper groundwater zone | repUZMaps   | mm          | UZMaps <br> UZForestMaps     | uz <br> <br> uzF        |
 | storage in lower groundwater zone | repLZMaps   | mm          | LZMaps <br> LZForestMaps     | lz <br> <br> lzF        |
 | number of days since last rain  | repDSLRMaps | days        | DSLRMaps <br> DSLRForestMaps   | dslr <br> <br> dslF       |
-| frost index | repFrostIndexMaps | °C days<sub>-1</sub> | FrostIndexMaps | frost       |
+| frost index | repFrostIndexMaps | °C days<sup>-1</sup> | FrostIndexMaps | frost       |
 | **RATE VARIABLES** [^31]       |
 | rain (excluding snow) | repRainMaps | mm/timestep | RainMaps    | rain        |
 | snow        | repSnowMaps | mm/timestep | SnowMaps    | snow        |
