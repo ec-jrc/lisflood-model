@@ -2555,8 +2555,8 @@ The following table gives an overview:
 Annex 13: LISFLOOD output
 =========================
 
-Time series
------------
+## Time series
+
 
 **Table A13.1** LISFLOOD default output time series*  
 
@@ -2605,187 +2605,50 @@ Time series
 | TotalRunoffTS   | totalRunoff.tss  | mm/timestep | total runoff                           |
 | GwPercUZLZTS    | percUZLZ.tss     | mm/timestep | percolation from upper to lower zone   |
 | GwLossTS        | loss.tss         | mm/timestep | loss from lower zone                   |
+| **METEOROLOGICAL INPUT VARIABLES (option *repMeteoUpsGauges*)**  |
+| PrecipitationAv UpsTS| precipUps.tss   | mm/timestep     | precipitation   |
+| ETRefAvUpsTS    | etUps.tss       | mm/timestep     | potential reference evapotranspiration      |
+| ESRefAvUpsTS    | esUps.tss       | mm/timestep     | potential evaporation from soil       |
+| EWRefAvUpsTS    | ewUps.tss       | mm/timestep     | potential open water evaporation |
+| TavgAvUpsTS     | tAvgUps.tss     | °C              | average daily temperature  |
+| **STATE VARIABLES (option *repStateUpsGauges*)**        |                                    
+| WaterDepthAvUpsTS | wdepthUps.tss   | mm              | depth of water on soil surface |
+| SnowCoverAvUpsTS | snowCoverUps.tss | mm              | depth of snow   |
+| CumInterceptionAvUpsTS | cumInterceptionUps.tss | mm              | depth of interception storage       |
+| Theta1AvUpsTS   | thTopUps.tss    | mm<sup>3</sup> / mm<sup>3</sup>   | soil moisture upper layer  |
+| Theta2AvUpsTS   | thSubUps.tss    | mm<sup>3</sup> / mm<sup>3</sup>   | soil moisture lower layer   |
+| UZAvUpsTS       | uzUps.tss       | mm              | groundwater upper zone  |
+| LZAvUpsTS       | lzUps.tss       | mm              | groundwater lower zone    |
+| DSLRAvUpsTS     | dslrUps.tss     | Days            | number of days since last rain |
+| FrostIndexAvUpsTS | frostUps.tss    | °C days<sup>-1</sup>     | frost index     |
+| **RATE VARIABLES (option *repRateUpsGauges*)** |                                    
+| RainAvUpsTS     | rainUps.tss     | mm/timestep     | rain (excluding snow)|
+| SnowAvUpsTS     | snowUps.tss     | mm/timestep     | snow            |
+| SnowmeltAvUpsTS | snowMeltUps.tss | mm/timestep     | snow melt       |
+| ESActAvUpsTS    | esActUps.tss    | mm/timestep     | actual evaporation         |
+| TaAvUpsTS       | tActUps.tss     | mm/timestep     | actual transpiration |
+| InterceptionAvUpsTS | interceptionUps.tss  | mm/timestep     | rainfall interception |
+| EWIntAvUpsTS    | ewIntActUps.tss | mm/timestep     | evaporation of intercepted water |
+| LeafDrainageAvUpsTS | leafDrainageUps.tss | mm/timestep     | leaf drainage   |
+| InfiltrationAvUpsTS | infiltrationUps.tss | mm/timestep     | infiltration    |
+| PrefFlowAvUpsTS | prefFlowUps.tss | mm/timestep     | preferential (bypass) flow |
+| PercolationAvUpsTS | dTopToSubUps.tss | mm/timestep     | percolation upper to lower soil layer    |
+| SeepSubToGWAvUpsTS | dSubToUzUps.tss | mm/timestep     | percolation lower soil layer to subsoil |
+| SurfaceRunoffAvUpsTS | surfaceRunoffUps.tss | mm/timestep     | surface runoff  |
+| UZOutflowAvUpsTS | qUzUps.tss      | mm/timestep     | outflow from upper zone|
+| LZOutflowAvUpsTS | qLzUps.tss      | mm/timestep     | outflow from lower zone   |
+| TotalRunoffAvUpsTS | totalRunoffUps.tss | mm/timestep     | total runoff    |
+| GwPercUZLZAvUpsTS | percUZLZUps.tss | mm/timestep     | percolation upper to lower zone |
+| GwLossTS        | lossUps.tss     | mm/timestep     | loss from lower zone |
+| **WATER LEVEL IN CHANNEL (option *repWaterLevelTs*)** |                                    
+| WaterLevelTS        | waterLevel.tss     | m (above channel bottom)     | water level in channel |
+| **OUTPUT RELATED TO LOWER ZONE INITIALISATION (option *repLZAvInflowSites* and *repLZAvInflowUpsGauges*)** |                                    
+| LZAvInflowTS        | lzAvIn.tss     | mm day^-1^     | average inflow into lower zone |
+| LZAvInflowAvUpsTS        | lzAvInUps.tss     | mm day^-1^     | average inflow into lower zone |
 
 
 
-
-
-
-+-----------------+-----------------+-----------------+-----------------+
-| TIME SERIES,    |
-| AVERAGE         |
-| UPSTREAM OF     |
-| GAUGES          |
-+-----------------+-----------------+-----------------+-----------------+
-| **METEOROLOGICA |
-| L               |
-| INPUT VARIABLES |
-| (option         |
-| *repMeteoUpsGau |
-| ges*)**         |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **Settings      | **Default       |
-|                 |                 | variable**      | name**          |
-+-----------------+-----------------+-----------------+-----------------+
-| precipitation   | mm/timestep     | PrecipitationAv | precipUps.tss   |
-|                 |                 | UpsTS           |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| potential       | mm/timestep     | ETRefAvUpsTS    | etUps.tss       |
-| reference       |                 |                 |                 |
-| evapotranspirat |                 |                 |                 |
-| ion             |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| potential       | mm/timestep     | ESRefAvUpsTS    | esUps.tss       |
-| evaporation     |                 |                 |                 |
-| from soil       |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| potential open  | mm/timestep     | EWRefAvUpsTS    | ewUps.tss       |
-| water           |                 |                 |                 |
-| evaporation     |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| average daily   | °C              | TavgAvUpsTS     | tAvgUps.tss     |
-| temperature     |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| ***Table        |
-| A13.2**         |
-| LISFLOOD        |
-| optional output |
-| time series     |
-| (continued from |
-| previous page)* |
-+-----------------+-----------------+-----------------+-----------------+
-| **STATE         |
-| VARIABLES       |
-| (option         |
-| *repStateUpsGau |
-| ges*)**         |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **Settings      | **Default       |
-|                 |                 | variable**      | name**          |
-+-----------------+-----------------+-----------------+-----------------+
-| depth of water  | mm              | WaterDepthAvUps | wdepthUps.tss   |
-| on soil surface |                 | TS              |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| depth of snow   | mm              | SnowCoverAvUpsT | snowCoverUps.ts |
-| cover on        |                 | S               | s               |
-+-----------------+-----------------+-----------------+-----------------+
-| depth of        | mm              | CumInterception | cumInterception |
-| interception    |                 | AvUpsTS         | Ups.tss         |
-| storage         |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| soil moisture   | mm^3^ / mm^3^   | Theta1AvUpsTS   | thTopUps.tss    |
-| upper layer     |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| soil moisture   | mm^3^ / mm^3^   | Theta2AvUpsTS   | thSubUps.tss    |
-| lower layer     |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| groundwater     | mm              | UZAvUpsTS       | uzUps.tss       |
-| upper zone      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| groundwater     | mm              | LZAvUpsTS       | lzUps.tss       |
-| lower zone      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| number of days  | Days            | DSLRAvUpsTS     | dslrUps.tss     |
-| since last rain |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| frost index     | °C days^-1^     | FrostIndexAvUps | frostUps.tss    |
-|                 |                 | TS              |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| ***Table        |
-| A13.2**         |
-| LISFLOOD        |
-| optional output |
-| time series     |
-| (continued from |
-| previous page)* |
-+-----------------+-----------------+-----------------+-----------------+
-| **RATE          |
-| VARIABLES       |
-| (option         |
-| *repRateUpsGaug |
-| es*)**          |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **Settings      | **Default       |
-|                 |                 | variable**      | name**          |
-+-----------------+-----------------+-----------------+-----------------+
-| rain (excluding | mm/timestep     | RainAvUpsTS     | rainUps.tss     |
-| snow)           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| snow            | mm/timestep     | SnowAvUpsTS     | snowUps.tss     |
-+-----------------+-----------------+-----------------+-----------------+
-| snow melt       | mm/timestep     | SnowmeltAvUpsTS | snowMeltUps.tss |
-+-----------------+-----------------+-----------------+-----------------+
-| actual          | mm/timestep     | ESActAvUpsTS    | esActUps.tss    |
-| evaporation     |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| actual          | mm/timestep     | TaAvUpsTS       | tActUps.tss     |
-| transpiration   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| rainfall        | mm/timestep     | InterceptionAvU | interceptionUps |
-| interception    |                 | psTS            | .tss            |
-+-----------------+-----------------+-----------------+-----------------+
-| evaporation of  | mm/timestep     | EWIntAvUpsTS    | ewIntActUps.tss |
-| intercepted     |                 |                 |                 |
-| water           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| leaf drainage   | mm/timestep     | LeafDrainageAvU | leafDrainageUps |
-|                 |                 | psTS            | .tss            |
-+-----------------+-----------------+-----------------+-----------------+
-| infiltration    | mm/timestep     | InfiltrationAvU | infiltrationUps |
-|                 |                 | psTS            | .tss            |
-+-----------------+-----------------+-----------------+-----------------+
-| preferential    | mm/timestep     | PrefFlowAvUpsTS | prefFlowUps.tss |
-| (bypass) flow   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| percolation     | mm/timestep     | PercolationAvUp | dTopToSubUps.ts |
-| upper to lower  |                 | sTS             | s               |
-|                 |                 |                 |                 |
-| soil layer      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| percolation     | mm/timestep     | SeepSubToGWAvUp | dSubToUzUps.tss |
-| lower soil      |                 | sTS             |                 |
-| layer           |                 |                 |                 |
-|                 |                 |                 |                 |
-| to subsoil      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| surface runoff  | mm/timestep     | SurfaceRunoffAv | surfaceRunoffUp |
-|                 |                 | UpsTS           | s.tss           |
-+-----------------+-----------------+-----------------+-----------------+
-| outflow from    | mm/timestep     | UZOutflowAvUpsT | qUzUps.tss      |
-| upper zone      |                 | S               |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| outflow from    | mm/timestep     | LZOutflowAvUpsT | qLzUps.tss      |
-| lower zone      |                 | S               |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| total runoff    | mm/timestep     | TotalRunoffAvUp | totalRunoffUps. |
-|                 |                 | sTS             | tss             |
-+-----------------+-----------------+-----------------+-----------------+
-| percolation     | mm/timestep     | GwPercUZLZAvUps | percUZLZUps.tss |
-| upper to lower  |                 | TS              |                 |
-| zone            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| loss from lower | mm/timestep     | GwLossTS        | lossUps.tss     |
-| zone            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-
-------------------------------------------------------- -------------------------- ----------------------- ------------------
-  **WATER LEVEL IN CHANNEL (option *repWaterLevelTs*)**                                                      
-  **Description**                                         **Units**                  **Settings variable**   **Default name**
-  water level in channel                                  m (above channel bottom)   WaterLevelTS            waterLevel.tss
-------------------------------------------------------- -------------------------- ----------------------- ------------------
-
-Finally, some additional output options exist that don't fit in any of
-the above categories.
-
-------------------------------------------------- ------------------------ ------------ ----------------------- ------------------
-  **OUTPUT RELATED TO LOWER ZONE INITIALISATION**                                                                 
-  **Description**                                   **Option**                            **Settings variable**   **Default name**
-  average inflow into lower zone                    repLZAvInflowSites       mm day^-1^   LZAvInflowTS            lzAvIn.tss
-  average inflow into lower zone                    repLZAvInflowUpsGauges   mm day^-1^   LZAvInflowAvUpsTS       lzAvInUps.tss
-------------------------------------------------- ------------------------ ------------ ----------------------- ------------------
-
- Maps
------
+ ## Maps
 
 +-----------------+-----------------+-----------------+-----------------+
 | ***Table        |
