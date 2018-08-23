@@ -1066,15 +1066,15 @@ $O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd}) ; F \gt L_f$
 
 with:
 
-  S         : Reservoir storage capacity $[m^3]$
+  S         : Reservoir storage capacity $[m<sup>3</sup>]$
   F         : Reservoir fill (fraction, 1 at total storage capacity) \[-\]
-  L~c~      : Conservative storage limit \[-\]
-  L~n~      : Normal storage limit \[-\]
-  L~f~      : Flood storage limit \[-\]
-  O~min~    : Minimum outflow \[m^3^ s^-1^\]
-  O~norm~   : Normal outflow \[m^3^ s^-1^\]
-  O~nd~     : Non-damaging outflow \[m^3^ s^-1^\]
-  I~res~    : Reservoir inflow \[m^3^ s^-1^\]
+  L<sub>c</sub>      : Conservative storage limit \[-\]
+  L<sub>n</sub>      : Normal storage limit \[-\]
+  L<sub>f</sub>      : Flood storage limit \[-\]
+  O<sub>min</sub>    : Minimum outflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  O<sub>norm</sub>   : Normal outflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  O<sub>nd</sub>     : Non-damaging outflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  I<sub>res</sub>    : Reservoir inflow \[m<sup>3</sup> s<sup>-1</sup>\]
 
 In order to prevent numerical problems, the reservoir outflow is
 calculated using a user-defined time interval (or *Δt*, if it is smaller
@@ -1094,53 +1094,19 @@ all (if not, the reservoir will gradually empty during a model run!).
 The management of the reservoirs is described by 7 tables. The following
 table lists all required input:
 
-+-------------+-------------+-------------+-------------+-------------+
-| ***Table    |
-| A1.1**      |
-| Input       |
-| requirement |
-| s           |
-| reservoir   |
-| routine*    |
-+-------------+-------------+-------------+-------------+-------------+
-| **Maps**    | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| ReservoirSi | res.map     | reservoir   | \-          | nominal     |
-| tes         |             | locations   |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-|             |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| **Tables**  | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabTotStora | rtstor.txt  | reservoir   | m^3^        |             |
-| ge          |             | storage     |             |             |
-|             |             | capacity    |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabConserva | rclim.txt   | conservativ | \-          | fraction of |
-| tiveStorage |             | e           |             |             |
-| Limit       |             | storage     |             | storage     |
-|             |             | limit       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabNormalSt | rnlim.txt   | normal      | \-          | capacity    |
-| orageLimit  |             | storage     |             |             |
-|             |             | limit       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabFloodSto | rflim.txt   | flood       | \-          |             |
-| rageLimit   |             | storage     |             |             |
-|             |             | limit       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabMinOutfl | rminq.txt   | minimum     | m^3^/s      |             |
-| owQ         |             | outflow     |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabNormalOu | rnormq.txt  | normal      | m^3^/s      |             |
-| tflowQ      |             | outflow     |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabNonDamag | rndq.txt    | non-damagin | m^3^/s      |             |
-| ingOutflowQ |             | g           |             |             |
-|             |             | outflow     |             |             |
-+-------------+-------------+-------------+-------------+-------------+
+**Table A1.1** Input requirements reservoir  routine*
+
+| **Maps**    | **Default name**   | **Description** | **Units**   | **Remarks** |
+|-------------|-------------|-------------|-------------|-------------|
+| ReservoirSites | res.map     | reservoir locations  | \-          | nominal     |
+| TabTotStorage | rtstor.txt  | reservoir storage capacity  | m<sup>3</sup>        |             |
+| TabConservativeStorageLimit | rclim.txt   | conservative storage limit | \-          | fraction of storage |
+| TabNormalSt orageLimit| rnlim.txt   | normal storage limit     | \-          | capacity    |
+| TabFloodStorageLimit | rflim.txt   | flood storage limit      | \-          |             |
+| TabMinOutflowQ | rminq.txt   | minimum outflow    | m<sup>3</sup>/s      |             |
+| TabNormalOutflowQ | rnormq.txt  | normal outflow     | m<sup>3</sup>/s      |             |
+| TabNonDamagingOutflowQ | rndq.txt    | non-damaging outflow | m<sup>3</sup>/s      |             |
+
 
 When you create the map with the reservoir sites, pay special attention
 to the following: if a reservoir is on the most downstream cell (i.e.
@@ -1175,49 +1141,28 @@ simulated reservoir outflow shows large oscillations.
 and 1). So we add this to the 'lfuser' element (if it is not there
 already):
 
-+-----------------------------------------------------------------------+
-| \<group\>                                                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| RESERVOIR OPTION                                                      |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"DtSecReservoirs\" value=\"14400\"\>                  |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Sub time step used for reservoir simulation \[s\]. Within the model,  |
-|                                                                       |
-| the smallest out of DtSecReservoirs and DtSec is used.                |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ReservoirInitialFillValue\" value=\"-9999\"\>        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Initial reservoir fill fraction                                       |
-|                                                                       |
-| -9999 sets initial fill to normal storage limit                       |
-|                                                                       |
-| if you\'re not using the reservoir option, enter some bogus value     |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \</group\>                                                            |
-+-----------------------------------------------------------------------+
+```xml
+	<group>                                                             
+	<comment>                                                           
+	**************************************************************               
+	RESERVOIR OPTION                                                      
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="DtSecReservoirs" value="14400">                  
+	<comment>                                                           
+	Sub time step used for reservoir simulation [s]. Within the model,  
+	the smallest out of DtSecReservoirs and DtSec is used.                
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ReservoirInitialFillValue" value="-9999">        
+	<comment>                                                           
+	Initial reservoir fill fraction                                       	
+	-9999 sets initial fill to normal storage limit                       
+	if you're not using the reservoir option, enter some bogus value     
+	</comment>                                                          
+	</textvar>                                                          
+	</group>                                                            
+```
 
 The value -9999 tells the model to set the initial reservoir fill to the
 normal storage limit. Note that this value is completely arbitrary.
@@ -1249,16 +1194,16 @@ Reservoir output files
 The reservoir routine produces 3 additional time series and one map, as
 listed in the following table:
 
----------------------------------------------- ------------------ --------------------------------------- ----------- -------------
-  ***Table A1.2** Output of reservoir routine*                                                                          
-  **Maps**                                       **Default name**   **Description**                         **Units**   **Remarks**
-  ReservoirFillState                             rsfilxxx.xxx       reservoir fill at last time step[^10]   \-          
-                                                                                                                        
-  **Time series**                                **Default name**   **Description**                         **Units**   **Remarks**
-  ReservoirInflowTS                              qresin.tss         inflow into reservoirs                  m^3^/s      
-  ReservoirOutflowTS                             qresout.tss        outflow out of reservoirs               m^3^/s      
-  ReservoirFillTS                                resfill.tss        reservoir fill                          \-          
----------------------------------------------- ------------------ --------------------------------------- ----------- -------------
+**Table A1.2** Output of reservoir routine*                                                                          
+
+|  **Maps**            |     **Default name** |  **Description**                       |  **Units**  | **Remarks** |
+|----------------------|----------------------|----------------------------------------|-------------|-------------|
+|  ReservoirFillState  |     rsfilxxx.xxx     |  reservoir fill at last time step[^10] |  \-         |             |
+|----------------------|----------------------|----------------------------------------|-------------|-------------|
+|  **Time series**     |     **Default name** |  **Description**                       |  **Units**  | **Remarks** |
+|  ReservoirInflowTS   |     qresin.tss       |  inflow into reservoirs                |  m^3^/s     |             |
+|  ReservoirOutflowTS  |     qresout.tss      |  outflow out of reservoirs             |  m^3^/s     |             |
+|  ReservoirFillTS     |     resfill.tss      |  reservoir fill                        |  \-         |             |
 
 Note that you can use the map with the reservoir fill at the last time
 step to define the initial conditions of a succeeding simulation, e.g.:
@@ -1357,60 +1302,18 @@ where the dynamic wave is used. Furthermore, the properties of each
 polder are described using a number of tables. All required input is
 listed in the following table:
 
-+-------------+-------------+-------------+-------------+-------------+
-| ***Table    |
-| A2.1**      |
-| Input       |
-| requirement |
-| s           |
-| polder      |
-| routine*    |
-+-------------+-------------+-------------+-------------+-------------+
-| **Maps**    | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| PolderSites | polders.map | polder      | \-          | nominal     |
-|             |             | locations   |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-|             |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| **Tables**  | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabPolderAr | poldarea.tx | polder area | m^2^        |             |
-| ea          | t           |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabPolderOF | poldofw.txt | polder in-  | m           |             |
-| Width       |             | and outflow |             |             |
-|             |             | width       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabPolderTo | poldcap.txt | polder      | m^3^        |             |
-| talCapacity |             | storage     |             |             |
-|             |             | capacity    |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabPolderBo | poldblevel. | Bottom      | m           |             |
-| ttomLevel   | txt         | level of    |             |             |
-|             |             | polder,     |             |             |
-|             |             | measured    |             |             |
-|             |             | from        |             |             |
-|             |             | channel     |             |             |
-|             |             | bottom      |             |             |
-|             |             | level (see  |             |             |
-|             |             | also Figure |             |             |
-|             |             | A4.1)       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabPolderOp | poldtopen.t | Time at     | time        |             |
-| eningTime   | xt          | which       |             |             |
-|             |             | polder is   | step        |             |
-|             |             | opened      |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabPolderRe | poldtreleas | Time at     | time        |             |
-| leaseTime   | e.txt       | which water |             |             |
-|             |             | stored in   | step        |             |
-|             |             | polder is   |             |             |
-|             |             | released    |             |             |
-|             |             | again       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
+**Table A2.1** Input requirements polder routine* 
+
+| **Maps**    | **Defaultname**   | **Description** | **Units**   | **Remarks** |
+|-------------|-------------|-------------|-------------|-------------|
+| PolderSites | polders.map | polder locations     | \-          | nominal     |
+| **Tables**  | **Defaultname**   | **Description** | **Units**   | **Remarks** |
+| TabPolderArea | poldarea.txt | polder area | m<sup>2</sup>        |             |
+| TabPolderOFWidth | poldofw.txt | polder in- and outflow width  | m           |             |
+| TabPolderTotalCapacity | poldcap.txt | polder storage capacity     | m<sup>3</sup>        |             |
+| TabPolderBottomLevel | poldblevel.txt | Bottom level of polder, measured from channel bottom level (see also Figure A4.1)     | m           |             |
+| TabPolderOpeningTime | poldtopen.txt | Time at which polder is opened    | time step       |             |
+| TabPolderReleaseTime | poldtrelease.txt | Time at which water stored in polder is released again     | time step       |             |
 
 Note that the polder opening- and release times are both defined a *time
 step* numbers (*not* days or hours!!). For *unregulated* polders, set
