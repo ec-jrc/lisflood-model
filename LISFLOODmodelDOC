@@ -69,7 +69,7 @@ The meteorological conditions provide the driving forces behind the water balanc
 
 
 
-| Code      | Description                                        | Unit               |
+| **Code**      | **Description**                                        | **Unit**               |
 | --------- | -------------------------------------------------- | ------------------ |
 | $P$       | Precipitation                                      | $[\frac{mm}{day}]$ |
 | $ET0$     | Potential (reference) evapotranspiration rate      | $[\frac{mm}{day}]$ |
