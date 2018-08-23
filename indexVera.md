@@ -2577,7 +2577,7 @@ Annex 13: LISFLOOD output
 
 | **Settings variable**     | **File name**       | **Units**       | **Description** |
 |-----------------|-------------------|-----------------|--------------------------|
-| **STATE VARIABLES AT  SITES (option *repStateSites*)**[^22]        |
+| **STATE VARIABLES AT  SITES <br> (option *repStateSites*)**[^22]        |
 | WaterDepthTS    | wDepth.tss      | mm              | depth of water on soil surface |
 | SnowCoverTS     | snowCover.tss   | mm              | depth of snow cover on soil surface (pixel-average) |
 | CumInterception TS| cumInt.tss      | mm              | depth of interception storage|
@@ -2605,13 +2605,13 @@ Annex 13: LISFLOOD output
 | TotalRunoffTS   | totalRunoff.tss  | mm/timestep | total runoff                           |
 | GwPercUZLZTS    | percUZLZ.tss     | mm/timestep | percolation from upper to lower zone   |
 | GwLossTS        | loss.tss         | mm/timestep | loss from lower zone                   |
-| **METEOROLOGICAL INPUT VARIABLES (option *repMeteoUpsGauges*)**  |
+| **METEOROLOGICAL INPUT VARIABLES <br> (option *repMeteoUpsGauges*)**  |
 | PrecipitationAv UpsTS| precipUps.tss   | mm/timestep     | precipitation   |
 | ETRefAvUpsTS    | etUps.tss       | mm/timestep     | potential reference evapotranspiration      |
 | ESRefAvUpsTS    | esUps.tss       | mm/timestep     | potential evaporation from soil       |
 | EWRefAvUpsTS    | ewUps.tss       | mm/timestep     | potential open water evaporation |
 | TavgAvUpsTS     | tAvgUps.tss     | °C              | average daily temperature  |
-| **STATE VARIABLES (option *repStateUpsGauges*)**        |                                    
+| **STATE VARIABLES <br> (option *repStateUpsGauges*)**        |                                    
 | WaterDepthAvUpsTS | wdepthUps.tss   | mm              | depth of water on soil surface |
 | SnowCoverAvUpsTS | snowCoverUps.tss | mm              | depth of snow   |
 | CumInterceptionAvUpsTS | cumInterceptionUps.tss | mm              | depth of interception storage       |
@@ -2621,7 +2621,7 @@ Annex 13: LISFLOOD output
 | LZAvUpsTS       | lzUps.tss       | mm              | groundwater lower zone    |
 | DSLRAvUpsTS     | dslrUps.tss     | Days            | number of days since last rain |
 | FrostIndexAvUpsTS | frostUps.tss    | °C days<sup>-1</sup>     | frost index     |
-| **RATE VARIABLES (option *repRateUpsGauges*)** |                                    
+| **RATE VARIABLES <br> (option *repRateUpsGauges*)** |                                    
 | RainAvUpsTS     | rainUps.tss     | mm/timestep     | rain (excluding snow)|
 | SnowAvUpsTS     | snowUps.tss     | mm/timestep     | snow            |
 | SnowmeltAvUpsTS | snowMeltUps.tss | mm/timestep     | snow melt       |
@@ -2640,132 +2640,48 @@ Annex 13: LISFLOOD output
 | TotalRunoffAvUpsTS | totalRunoffUps.tss | mm/timestep     | total runoff    |
 | GwPercUZLZAvUpsTS | percUZLZUps.tss | mm/timestep     | percolation upper to lower zone |
 | GwLossTS        | lossUps.tss     | mm/timestep     | loss from lower zone |
-| **WATER LEVEL IN CHANNEL (option *repWaterLevelTs*)** |                                    
+| **WATER LEVEL IN CHANNEL <br> (option *repWaterLevelTs*)** |                                    
 | WaterLevelTS        | waterLevel.tss     | m (above channel bottom)     | water level in channel |
-| **OUTPUT RELATED TO LOWER ZONE INITIALISATION (option *repLZAvInflowSites* and *repLZAvInflowUpsGauges*)** |                                    
-| LZAvInflowTS        | lzAvIn.tss     | mm day^-1^     | average inflow into lower zone |
-| LZAvInflowAvUpsTS        | lzAvInUps.tss     | mm day^-1^     | average inflow into lower zone |
+| **OUTPUT RELATED TO LOWER ZONE INITIALISATION <br> (option *repLZAvInflowSites* and *repLZAvInflowUpsGauges*)** |                                    
+| LZAvInflowTS        | lzAvIn.tss     | mm day<sup>-1</sup>     | average inflow into lower zone |
+| LZAvInflowAvUpsTS        | lzAvInUps.tss     | mm day<sup>-1</sup>     | average inflow into lower zone |
 
 
 
  ## Maps
 
-+-----------------+-----------------+-----------------+-----------------+
-| ***Table        |
-| A13.3**         |
-| LISFLOOD        |
-| default output  |
-| maps*           |
-+-----------------+-----------------+-----------------+-----------------+
-| **AVERAGE       |
-| RECHARGE MAP    |
-| (for lower      |
-| groundwater     |
-| zone)** (option |
-| InitLisflood)   |
-+-----------------+-----------------+-----------------+-----------------+
+**Table A13.3** LISFLOOD default output maps*           |
+
 | **Description** | **Units**       | **File name**   | **Domain**      |
-+-----------------+-----------------+-----------------+-----------------+
-| **^1^** average | mm day^-1^      | lzavin.map      | other fraction  |
-| inflow to lower |                 |                 |                 |
-| zone            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^1^** average | mm day^-1^      | lzavin\_forest. | forest fraction |
-| inflow to lower |                 | map             |                 |
-| zone (forest)   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **INITIAL       |
-| CONDITION MAPS  |
-| at defined time |
-| steps**[^26]    |
-| (option         |
-| *repStateMaps*) |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **File          | **Domain**      |
-|                 |                 | name**[^27]     |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^**         | mm              | wdepth00.xxx    | whole pixel     |
-| waterdepth      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** channel | m^2^            | chcro000.xxx    | channel         |
-| cross-sectional |                 |                 |                 |
-| area            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** days    | days            | dslr0000.xxx    | other pixel     |
-| since last rain |                 |                 |                 |
-| variable        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** snow    | mm              | scova000.xxx    | snow zone A     |
-| cover zone *A*  |                 |                 | (1/3^rd^ pixel) |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** snow    | mm              | scovb000.xxx    | snow zone B     |
-| cover zone *B*  |                 |                 | (1/3^rd^ pixel) |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** snow    | mm              | scovc000.xxx    | snow zone C     |
-| cover zone *C*  |                 |                 | (1/3^rd^ pixel) |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** frost   | °C days^-1^     | frost000.xxx    | other pixel     |
-| index           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^**         | mm              | cumi0000.xxx    | other pixel     |
-| cumulative      |                 |                 |                 |
-| interception    |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** soil    | mm^3^/mm^3^     | thtop000.xxx    | other fraction  |
-| moisture upper  |                 |                 |                 |
-| layer           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** soil    | mm^3^/mm^3^     | thsub000.xxx    | other fraction  |
-| moisture lower  |                 |                 |                 |
-| layer           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** water   | mm              | lz000000.xxx    | other fraction  |
-| in lower zone   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** water   | mm              | uz000000.xxx    | other fraction  |
-| in upper zone   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** days    | days            | dslF0000.xxx    | forest pixel    |
-| since last rain |                 |                 |                 |
-| variable        |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^**         | mm              | cumF0000.xxx    | forest pixel    |
-| cumulative      |                 |                 |                 |
-| interception    |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** soil    | mm^3^/mm^3^     | thFt0000.xxx    | forest fraction |
-| moisture upper  |                 |                 |                 |
-| layer (forest)  |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** soil    | mm^3^/mm^3^     | thFs0000.xxx    | forest fraction |
-| moisture lower  |                 |                 |                 |
-| layer (forest)  |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** water   | mm              | lzF00000.xxx    | forest fraction |
-| in lower zone   |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** water   | mm              | uzF00000.xxx    | forest fraction |
-| in upper zone   |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^2^** water   | mm              | cseal000.xxx    | sealed fraction |
-| in depression   |                 |                 |                 |
-| storage         |                 |                 |                 |
-| (sealed)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **^1^** Output  |
-| only if option  |
-| 'InitLisflood'  |
-| = 1 (pre-run)   |
-|                 |
-| **^2^** Output  |
-| only if option  |
-| 'InitLisflood'  |
-| = 0             |
-+-----------------+-----------------+-----------------+-----------------+
+|----------------------|-----------------|------------------|-------------------|
+| **AVERAGE RECHARGE MAP (for lower groundwater zone)** <br> (option InitLisflood)   |
+| **<sup>1</sup>** average inflow to lower zone | mm day<sup>-1</sup>      | lzavin.map      | other fraction  |
+| **<sup>1</sup>** average inflow to lower zone (forest) | mm day<sup>-1</sup>      | lzavin\_forest.map | forest fraction |
+| **INITIAL CONDITION MAPS at defined time steps**[^26] <br> (option *repStateMaps*) |
+| **<sup>2</sup>** waterdepth| mm      | wdepth00.xxx    | whole pixel     |
+| **<sup>2</sup>** channel cross-sectional area | m<sup>2</sup>   | chcro000.xxx    | channel         |
+| **<sup>2</sup>** days since last rain variable | days     | dslr0000.xxx    | other pixel     |
+| **<sup>2</sup>** snow cover zone *A* | mm    | scova000.xxx    | snow zone A (1/3<sup>rd</sup> pixel) |
+| **<sup>2</sup>** snow cover zone *B*| mm    | scovb000.xxx    | snow zone B (1/3<sup>rd</sup> pixel) |
+| **<sup>2</sup>** snow cover zone *C* | mm    | scovc000.xxx    | snow zone C (1/3<sup>rd</sup> pixel) |
+| **<sup>2</sup>** frost index | °C days<sup>-1</sup>     | frost000.xxx    | other pixel     |
+| **<sup>2</sup>** cumulative interception | mm    | cumi0000.xxx    | other pixel     |
+| **<sup>2</sup>** soil moisture upper layer | mm<sup>3</sup>/mm<sup>3</sup>     | thtop000.xxx    | other fraction  |
+| **<sup>2</sup>** soil moisture lower layer| mm<sup>3</sup>/mm<sup>3</sup>     | thsub000.xxx    | other fraction  |
+| **<sup>2</sup>** water in lower zone | mm    | lz000000.xxx    | other fraction  |
+| **<sup>2</sup>** water in upper zone | mm   | uz000000.xxx    | other fraction  |
+| **<sup>2</sup>** days since last rain variable (forest) | days    | dslF0000.xxx    | forest pixel    |
+| **<sup>2</sup>** cumulative interception (forest)  | mm   | cumF0000.xxx    | forest pixel    |
+| **<sup>2</sup>** soil moisture upper layer (forest) | mm<sup>3</sup>/mm<sup>3</sup>     | thFt0000.xxx    | forest fraction |
+| **<sup>2</sup>** soil moisture lower layer (forest) | mm<sup>3</sup>/mm<sup>3</sup>     | thFs0000.xxx    | forest fraction |
+| **<sup>2</sup>** water in lower zone (forest)  | mm    | lzF00000.xxx    | forest fraction |
+| **<sup>2</sup>** water in upper zone (forest) | mm    | uzF00000.xxx    | forest fraction |
+| **<sup>2</sup>** water in depression storage (sealed)  | mm   | cseal000.xxx    | sealed fraction |
+
+**<sup>1</sup>** Output only if option 'InitLisflood' = 1 (pre-run) \  
+**<sup>2</sup>** Output only if option 'InitLisflood' = 0  
+
+
 
 +-------------+-------------+-------------+-------------+-------------+
 | **\         |
