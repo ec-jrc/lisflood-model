@@ -2683,200 +2683,48 @@ Annex 13: LISFLOOD output
 
 
 
-+-------------+-------------+-------------+-------------+-------------+
-| **\         |
-| *Table      |
-| A13.4***    |
-| *LISFLOOD   |
-| optional    |
-| output maps |
-| (*only      |
-| 'InitLisflo |
-| od'         |
-| = 0)        |
-|             |
-| *(continued |
-| on next     |
-| page)*      |
-+-------------+-------------+-------------+-------------+-------------+
-| **DISCHARGE |
-| AND WATER   |
-| LEVEL**     |
-+-------------+-------------+-------------+-------------+-------------+
-| **Descripti | **Option**  | **Units**   | **Settings  | **Prefix**  |
-| on**        |             |             | variable**  |             |
-+-------------+-------------+-------------+-------------+-------------+
-| discharge   | repDischarg | m^3^s^-1^   | DischargeMa | dis         |
-|             | eMaps       |             | ps          |             |
-+-------------+-------------+-------------+-------------+-------------+
-| water level | repWaterLev | m (above    | WaterLevelM | wl          |
-|             | elMaps      | channel     | aps         |             |
-|             |             | bottom)     |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| **METEOROLO |
-| GICAL       |
-| INPUT       |
-| VARIABLES** |
-+-------------+-------------+-------------+-------------+-------------+
-| **Descripti | **Option**  |             | **Settings  | **Prefix**  |
-| on**        |             |             | variable**  |             |
-+-------------+-------------+-------------+-------------+-------------+
-| precipitati | repPrecipit | mm          | Precipitati | pr          |
-| on          | ationMaps   |             | onMaps      |             |
-+-------------+-------------+-------------+-------------+-------------+
-| potential   | repETRefMap | mm          | ETRefMaps   | et          |
-| reference   | s           |             |             |             |
-| evapotransp |             |             |             |             |
-| iration     |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| potential   | repESRefMap | mm          | ESRefMaps   | es          |
-| evaporation | s           |             |             |             |
-| from soil   |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| potential   | repEWRefMap | mm          | EWRefMaps   | ew          |
-| open water  | s           |             |             |             |
-| evaporation |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| average     | repTavgMaps | mm          | TavgMaps    | tav         |
-| daily       |             |             |             |             |
-| temperature |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| **STATE     |
-| VARIABLES** |
-| [^30]       |
-+-------------+-------------+-------------+-------------+-------------+
-| **Descripti | **Option**  |             | **Settings  | **Prefix**  |
-| on**        |             |             | variable**  |             |
-+-------------+-------------+-------------+-------------+-------------+
-| depth of    | repWaterDep | mm          | WaterDepthM | wdep        |
-| water on    | thMaps      |             | aps         |             |
-| soil        |             |             |             |             |
-| surface     |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| depth of    | repSnowCove | mm          | SnowCoverMa | scov        |
-| snow cover  | rMaps       |             | ps          |             |
-| on soil     |             |             |             |             |
-| surface     |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| depth of    | repCumInter | mm          | CumIntercep | cumi        |
-| interceptio | ceptionMaps |             | tionMaps    |             |
-| n           |             |             |             | cumF        |
-| storage     |             |             | CumIntercep |             |
-|             |             |             | tionForestM |             |
-|             |             |             | aps         |             |
-+-------------+-------------+-------------+-------------+-------------+
-| soil        | repTheta1Ma | mm^3^       | Theta1Maps  | thtop       |
-| moisture    | ps          | /mm^3^      |             |             |
-| content     |             |             | Theta1Fores | thFt        |
-| upper layer |             |             | tMaps       |             |
-+-------------+-------------+-------------+-------------+-------------+
-| soil        | repTheta2Ma | mm^3^       | Theta2Maps  | thsub       |
-| moisture    | ps          | /mm^3^      |             |             |
-| content     |             |             | Theta2Fores | thFs        |
-| lower layer |             |             | tMaps       |             |
-+-------------+-------------+-------------+-------------+-------------+
-| storage in  | repUZMaps   | mm          | UZMaps      | uz          |
-| upper       |             |             |             |             |
-| groundwater |             |             | UZForestMap | uzF         |
-| zone        |             |             | s           |             |
-+-------------+-------------+-------------+-------------+-------------+
-| storage in  | repLZMaps   | mm          | LZMaps      | lz          |
-| lower       |             |             |             |             |
-| groundwater |             |             | LZForestMap | lzF         |
-| zone        |             |             | s           |             |
-+-------------+-------------+-------------+-------------+-------------+
-| number of   | repDSLRMaps | days        | DSLRMaps    | dslr        |
-| days since  |             |             |             |             |
-| last rain   |             |             | DSLRForestM | dslF        |
-|             |             |             | aps         |             |
-+-------------+-------------+-------------+-------------+-------------+
-| frost index | repFrostInd | °C days^-1^ | FrostIndexM | frost       |
-|             | exMaps      |             | aps         |             |
-+-------------+-------------+-------------+-------------+-------------+
-| **RATE      |
-| VARIABLES** |
-| [^31]       |
-+-------------+-------------+-------------+-------------+-------------+
-| **Descripti | **Option**  |             | **Settings  | **Prefix**  |
-| on**        |             |             | variable**  |             |
-+-------------+-------------+-------------+-------------+-------------+
-| rain        | repRainMaps | mm/timestep | RainMaps    | rain        |
-| (excluding  |             |             |             |             |
-| snow)       |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
+**Table A13.4** *LISFLOOD optional output maps (*only 'InitLisflood' = 0)        |
+
+| **Description** | **Option**  | **Units**   | **Settings variable** | **Prefix**  |
+|-------------|-------------|-------------|-------------|-------------|
+| **DISCHARGE AND WATER LEVEL**     |
+| discharge   | repDischargeMaps | m<sub>3</sub>s<sub>-1</sub>   | DischargeMaps | dis         |
+| water level | repWaterLevelMaps | m (above channel bottom)   | WaterLevelMaps | wl          |
+| **METEOROLOGICAL INPUT VARIABLES** |
+| precipitation | repPrecipitationMaps | mm          | PrecipitationMaps | pr          |
+| potential reference evapotranspiration| repETRefMaps | mm          | ETRefMaps   | et          |
+| potential evaporation from soil  | repESRefMaps | mm          | ESRefMaps   | es          |
+| potential open water evaporation   | repEWRefMaps | mm          | EWRefMaps   | ew          |
+| average daily temperature | repTavgMaps | mm          | TavgMaps    | tav         |
+| **STATE VARIABLES** [^30]       |
+| depth of water on soil surface | repWaterDepthMaps | mm          | WaterDepthMaps | wdep        |
+| depth of snow cover on soil surface | repSnowCoverMaps | mm          | SnowCoverMaps | scov        |
+| depth of interception storage | repCumInterceptionMaps | mm          | CumInterceptionMaps <br> CumInterceptionForestMaps | cumi <br> <br> cumF       |
+| soil moisture content upper layer | repTheta1Maps | mm<sub>3</sub> /mm<sub>3</sub>      | Theta1Maps <br> Theta1ForestMaps | thtop <br> <br> thFt      |
+| soil moisture content lower layer | repTheta2Maps | mm<sub>3</sub> /mm<sub>3</sub>      | Theta1Maps <br> Theta1ForestMaps | thsub <br> <br> thFs      |
+| storage in upper groundwater zone | repUZMaps   | mm          | UZMaps <br> UZForestMaps     | uz <br> <br> uzF        |
+| storage in lower groundwater zone | repLZMaps   | mm          | LZMaps <br> LZForestMaps     | lz <br> <br> lzF        |
+| number of days since last rain  | repDSLRMaps | days        | DSLRMaps <br> DSLRForestMaps   | dslr <br> <br> dslF       |
+| frost index | repFrostIndexMaps | °C days<sub>-1</sub> | FrostIndexMaps | frost       |
+| **RATE VARIABLES** [^31]       |
+| rain (excluding snow) | repRainMaps | mm/timestep | RainMaps    | rain        |
 | snow        | repSnowMaps | mm/timestep | SnowMaps    | snow        |
-+-------------+-------------+-------------+-------------+-------------+
-| snow melt   | repSnowMelt | mm/timestep | SnowMeltMap | smelt       |
-|             | Maps        |             | s           |             |
-+-------------+-------------+-------------+-------------+-------------+
-| actual      | repESActMap | mm/timestep | ESActMaps   | esact       |
-| evaporation | s           |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| actual      | repTaMaps   | mm/timestep | TaMaps      | tact        |
-| transpirati |             |             |             |             |
-| on          |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| rainfall    | repIntercep | mm/timestep | Interceptio | int         |
-| interceptio | tionMaps    |             | nMaps       |             |
-| n           |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| evaporation | repEWIntMap | mm/timestep | EWIntMaps   | ewint       |
-| of          | s           |             |             |             |
-| intercepted |             |             |             |             |
-| water       |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| leaf        | repLeafDrai | mm/timestep | LeafDrainag | ldra        |
-| drainage    | nageMaps    |             | eMaps       |             |
-+-------------+-------------+-------------+-------------+-------------+
-| infiltratio | repInfiltra | mm/timestep | Infiltratio | inf         |
-| n           | tionMaps    |             | nMaps       |             |
-+-------------+-------------+-------------+-------------+-------------+
-| preferentia | repPrefFlow | mm/timestep | PrefFlowMap | pflow       |
-| l           | Maps        |             | s           |             |
-| (bypass)    |             |             |             |             |
-| flow        |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| percolation | repPercolat | mm/timestep | Percolation | to2su       |
-| upper to    | ionMaps     |             | Maps        |             |
-| lower soil  |             |             |             |             |
-| layer       |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| ***Table    |
-| 12.4**      |
-| LISFLOOD    |
-| optional    |
-| output maps |
-| (continued  |
-| from        |
-| previous    |
-| page)*      |
-+-------------+-------------+-------------+-------------+-------------+
-| percolation | repSeepSubT | mm/timestep | SeepSubToGW | su2gw       |
-| lower soil  | oGWMaps     |             | Maps        |             |
-| layer to    |             |             |             |             |
-| subsoil     |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| surface     | repSurfaceR | mm/timestep | SurfaceRuno | srun        |
-| runoff      | unoffMaps   |             | ffMaps      |             |
-+-------------+-------------+-------------+-------------+-------------+
-| outflow     | repUZOutflo | mm/timestep | UZOutflowMa | quz         |
-| from upper  | wMaps       |             | ps          |             |
-| zone        |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| outflow     | repLZOutflo | mm/timestep | LZOutflowMa | qlz         |
-| from lower  | wMaps       |             | ps          |             |
-| zone        |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| total       | repTotalRun | mm/timestep | TotalRunoff | trun        |
-| runoff      | offMaps     |             | Maps        |             |
-+-------------+-------------+-------------+-------------+-------------+
-| percolation | repGwPercUZ | mm/timestep | GwPercUZLZM | uz2lz       |
-| upper to    | LZMaps      |             | aps         |             |
-| lower zone  |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| loss from   | rep         | mm/timestep | GwLossMaps  | loss        |
-| lower zone  | GwLossMaps  |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
+| snow melt   | repSnowMeltMaps | mm/timestep | SnowMeltMaps | smelt       |
+| actual evaporation      | repESActMaps | mm/timestep | ESActMaps   | esact       |
+| actual transpiration     | repTaMaps   | mm/timestep | TaMaps      | tact        |
+| rainfall interception   | repInterceptionMaps | mm/timestep | InterceptionMaps | int         |
+| evaporation of intercepted water | repEWIntMaps | mm/timestep | EWIntMaps   | ewint       |
+| leaf drainage       | repLeafDrainageMaps | mm/timestep | LeafDrainageMaps | ldra        |
+| infiltration | repInfiltrationMaps | mm/timestep | InfiltrationMaps | inf         |
+| preferential (bypass) flow | repPrefFlowMaps | mm/timestep | PrefFlowMaps | pflow       |
+| percolation upper to lower soil layer | repPercolationMaps | mm/timestep | PercolationMaps | to2su       |
+| percolation lower soil layer to subsoil | repSeepSubToGWMaps | mm/timestep | SeepSubToGWMaps | su2gw       |
+| surface runoff | repSurfaceRunoffMaps | mm/timestep | SurfaceRunoffMaps | srun        |
+| outflow from upper zone | repUZOutflowMaps | mm/timestep | UZOutflowMaps | quz         |
+| outflow from lower zone | repLZOutflowMaps | mm/timestep | LZOutflowMaps | qlz         |
+| total runoff      | repTotalRunoffMaps | mm/timestep | TotalRunoffMaps | trun        |
+| percolation upper to lower zone | repGwPercUZLZMaps | mm/timestep | GwPercUZLZMaps | uz2lz       |
+| loss from lower zone  | repGwLossMaps         | mm/timestep | GwLossMaps  | loss        |
 
 Index
 =====
