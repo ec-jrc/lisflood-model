@@ -263,7 +263,7 @@ Since evaporation is limited by the amount of water stored on the leaves, the ac
 
 $EW_{int} = _{min}({EW_{max } \cdot \Delta t},{Int_{cum}})$ (2-10)
 
-where *EW~int~* is the actual evaporation from the interception store $[mm]$ per time step, and $EW0$ is the potential evaporation rate from an open water surface $[\frac{mm}{day}]$ It is assumed that on average all water in the interception store $Int_{cum}$ will have evaporated or fallen to the soil surface as leaf drainage within one day. Leaf drainage is therefore modelled as a linear reservoir with a time constant (or residence time) of one day, i.e:
+where *EW<sub>int</sub>* is the actual evaporation from the interception store $[mm]$ per time step, and $EW0$ is the potential evaporation rate from an open water surface $[\frac{mm}{day}]$ It is assumed that on average all water in the interception store $Int_{cum}$ will have evaporated or fallen to the soil surface as leaf drainage within one day. Leaf drainage is therefore modelled as a linear reservoir with a time constant (or residence time) of one day, i.e:
 
 $D_{int} = \frac{1}{T_{int}} \cdot Int_{cum} \cdot \Delta t$ (2-11)
 
@@ -618,402 +618,161 @@ Features are:
 Default LISFLOOD output
 -----------------------
 
-LISFLOOD can generate a wide variety of output. Output is generated as
-either maps or time series (PCRaster format, which can be visualised
-with PCRaster's 'aguila' application). Reporting of output files can be
-switched on and off using options in the LISFLOOD settings file. Also, a
-number of output files are specific to other optional modules, such as
-the simulation of reservoirs. The following table lists all the output
-time series that are reported by default (note that the file names can
-always be changed by the user, although this is not recommended):
+LISFLOOD can generate a wide variety of output. Output is generated as either maps or time series (PCRaster format, which can be visualised with PCRaster's 'aguila' application). Reporting of output files can be switched on and off using options in the LISFLOOD settings file. Also, a number of output files are specific to other optional modules, such as the simulation of reservoirs. The following table lists all the output time series that are reported by default (note that the file names can always be changed by the user, although this is not recommended):
 
-+-----------------------+-----------------------+-----------------------+
-| ***Table 8.1**        |
-| LISFLOOD default      |
-| output time series*   |
-+-----------------------+-----------------------+-----------------------+
-| **RATE VARIABLES AT   |                       |                       |
-| GAUGES**              |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **Description**       | **Units**             | **File name**         |
-+-----------------------+-----------------------+-----------------------+
-| **<sup>1,2</sup>** channel     | m<sup>3</sup> s<sup>-1</sup>            | dis.tss               |
-| discharge             |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **NUMERICAL CHECKS**  |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **Description**       | **Units**             | **File name**         |
-+-----------------------+-----------------------+-----------------------+
-| **<sup>2</sup>** cumulative    | m<sup>3</sup>                  | mbError.tss           |
-| mass balance error    |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **<sup>2</sup>** cumulative    | mm                    | mbErrorMm.tss         |
-| mass balance error,   |                       |                       |
-| expressed as mm water |                       |                       |
-| slice (average over   |                       |                       |
-| catchment)            |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **<sup>2</sup>** number of     | \-                    | NoSubStepsChannel.tss |
-| sub-steps needed for  |                       |                       |
-| channel routing       |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **<sup>2</sup>** number of     | \-                    | steps.tss             |
-| sub-steps needed for  |                       |                       |
-| gravity-based soil    |                       |                       |
-| moisture routine      |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-| **<sup>1</sup>** Output only   |
-| if option             |
-| 'InitLisflood' = 1    |
-| (pre-run)             |
-|                       |
-| **<sup>2</sup>** Output only   |
-| if option             |
-| 'InitLisflood' = 0    |
-+-----------------------+-----------------------+-----------------------+
+*Table 8.1 LISFLOOD default output time series*  
 
-To speed up the pre-run and to prevent that results are taken from the
-pre-run, all additional output is disabled if option 'InitLisflood' = 1
-is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss,
-lzavin.map, lzavin\_forest.map* and some other initial maps if
-additional option like e.g. the double kinematic wave is chosen.
+| Description                                                  | Units                        | File name             |
+| ------------------------------------------------------------ | ---------------------------- | --------------------- |
+| **RATE VARIABLES AT GAUGES**                                 |                              |                       |
+| <sup>1,2</sup> channel discharge                             | m<sup>3</sup> s<sup>-1</sup> | dis.tss               |
+| NUMERICAL CHECKS                                             |                              |                       |
+| <sup>2</sup> cumulative mass balance error                   | m<sup>3</sup>                | mbError.tss           |
+| <sup>2</sup> cumulative mass balance error, expressed as mm water slice (average over catchment) | mm                           | mbErrorMm.tss         |
+| <sup>2</sup> number of sub-steps needed for channel routing  | -                            | NoSubStepsChannel.tss |
+| <sup>2</sup> number of sub-steps needed for gravity-based soil moisture routine | -                            | steps.tss             |
 
-In addition to these time series, by default LISFLOOD reports maps of
-all state variables at the last timestep of a simulation[^5]. These maps
-can be used to define the initial conditions of a succeeding simulation.
-For instance, you can do a 1-year simulation on a daily time step, and
-use the 'end maps' of this simulation to simulate a flood event using an
-hourly time step. Table 8.2 and Annex 13 list all these maps. Note that
-some state variables are valid for the whole pixel, whereas others are
-only valid for a sub-domain of each pixel. This is indicated in the last
-column of the table.
+<sup>1</sup> Output only if option  'InitLisflood' = 1  (pre-run)  
+<sup>2</sup> Output only if option  'InitLisflood' = 0  
 
-+-----------------+-----------------+-----------------+-----------------+
-| ***Table 8.2**  |
-| LISFLOOD        |
-| default state   |
-| variable output |
-| maps. These     |
-| maps can be     |
-| used to define  |
-| the initial     |
-| conditions of   |
-| another         |
-| simulation*     |
-+-----------------+-----------------+-----------------+-----------------+
-| **AVERAGE       |
-| RECHARGE MAP    |
-| (for lower      |
-| groundwater     |
-| zone)** (option |
-| InitLisflood)   |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **File name**   | **Domain**      |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>1</sup>** average | mm timestep<sup>-1</sup> | lzavin.map      | other fraction  |
-| inflow to lower |                 |                 |                 |
-| zone            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>1</sup>** average | mm timestep<sup>-1</sup> | lzavin\_forest. | forest fraction |
-| inflow to lower |                 | map             |                 |
-| zone (forest)   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **INITIAL       |
-| CONDITION MAPS  |
-| at defined time |
-| steps**[^8]     |
-| (option         |
-| *repStateMaps*) |
-+-----------------+-----------------+-----------------+-----------------+
-| **Description** | **Units**       | **File          | **Domain**      |
-|                 |                 | name**[^9]      |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>**         | mm              | wdepth00.xxx    | whole pixel     |
-| waterdepth      |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** channel | m<sup>2</sup>            | chcro000.xxx    | channel         |
-| cross-sectional |                 |                 |                 |
-| area            |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** days    | days            | dslr0000.xxx    | other pixel     |
-| since last rain |                 |                 |                 |
-| variable        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** snow    | mm              | scova000.xxx    | snow zone A     |
-| cover zone *A*  |                 |                 | (1/3<sup>rd</sup> pixel) |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** snow    | mm              | scovb000.xxx    | snow zone B     |
-| cover zone *B*  |                 |                 | (1/3<sup>rd</sup> pixel) |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** snow    | mm              | scovc000.xxx    | snow zone C     |
-| cover zone *C*  |                 |                 | (1/3<sup>rd</sup> pixel) |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** frost   | °C days<sup>-1</sup>     | frost000.xxx    | other pixel     |
-| index           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>**         | mm              | cumi0000.xxx    | other pixel     |
-| cumulative      |                 |                 |                 |
-| interception    |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** soil    | mm<sup>3</sup> mm<sup>-3</sup>    | thtop000.xxx    | other fraction  |
-| moisture upper  |                 |                 |                 |
-| layer           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** soil    | mm<sup>3</sup> mm<sup>-3</sup>    | thsub000.xxx    | other fraction  |
-| moisture lower  |                 |                 |                 |
-| layer           |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** water   | mm              | lz000000.xxx    | other fraction  |
-| in lower zone   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** water   | mm              | uz000000.xxx    | other fraction  |
-| in upper zone   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** days    | days            | dslF0000.xxx    | forest pixel    |
-| since last rain |                 |                 |                 |
-| variable        |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>**         | mm              | cumF0000.xxx    | forest pixel    |
-| cumulative      |                 |                 |                 |
-| interception    |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** soil    | mm<sup>3</sup> mm<sup>-3</sup>    | thFt0000.xxx    | forest fraction |
-| moisture upper  |                 |                 |                 |
-| layer (forest)  |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** soil    | mm<sup>3</sup> mm<sup>-3</sup>    | thFs0000.xxx    | forest fraction |
-| moisture lower  |                 |                 |                 |
-| layer (forest)  |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** water   | mm              | lzF00000.xxx    | forest fraction |
-| in lower zone   |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** water   | mm              | uzF00000.xxx    | forest fraction |
-| in upper zone   |                 |                 |                 |
-| (forest)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>2</sup>** water   | mm              | cseal000.xxx    | sealed fraction |
-| in depression   |                 |                 |                 |
-| storage         |                 |                 |                 |
-| (sealed)        |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **<sup>1</sup>** Output  |
-| only if option  |
-| 'InitLisflood'  |
-| = 1 (pre-run)   |
-|                 |
-| **<sup>2</sup>** Output  |
-| only if option  |
-| 'InitLisflood'  |
-| = 0             |
-+-----------------+-----------------+-----------------+-----------------+
+To speed up the pre-run and to prevent that results are taken from the pre-run, all additional output is disabled if option 'InitLisflood' = 1 is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss, lzavin.map, lzavin\_forest.map* and some other initial maps if additional option like e.g. the double kinematic wave is chosen.
 
-Additional output
------------------
+In addition to these time series, by default LISFLOOD reports maps of all state variables at the last timestep of a simulation[^5]. These maps can be used to define the initial conditions of a succeeding simulation. For instance, you can do a 1-year simulation on a daily time step, and use the 'end maps' of this simulation to simulate a flood event using an hourly time step. Table 8.2 and Annex 13 list all these maps. Note that some state variables are valid for the whole pixel, whereas others are only valid for a sub-domain of each pixel. This is indicated in the last column of the table.
 
-Apart from the default output, the model can --optionally- generate some
-additional time series and maps. Roughly this additional output falls in
-either of the following categories:
+*Table 8.2 LISFLOOD default state variable output maps. These maps can be used to define the initial conditions of another simulation*  
+
+| Description                                                  | Units                          | File name         | Domain                                     |
+| ------------------------------------------------------------ | ------------------------------ | ----------------- | ------------------------------------------ |
+| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood) |                                |                   |                                            |
+| <sup>1</sup> average inflow to lower zone                    | mm timestep<sup>-1</sup>       | lzavin.map        | other fraction                             |
+| <sup>1</sup> average inflow to lower zone (forest)           | mm timestep<sup>-1</sup>       | lzavin_forest.map | forest fraction                            |
+| **INITIAL CONDITION MAPS at defined time steps**8 (option repStateMaps) |                                |                   |                                            |
+| <sup>2</sup> waterdepth                                      | mm                             | wdepth00.xxx      | whole pixel                                |
+| <sup>2</sup> channel cross-sectional area                    | m<sup>2</sup>                  | chcro000.xxx      | channel                                    |
+| <sup>2</sup> days since last rain variable                   | days                           | dslr0000.xxx      | other pixel                                |
+| <sup>2</sup> snow cover zone A                               | mm                             | scova000.xxx      | snow zone A <br> (1/3<sup>rd</sup> pixel)  |
+| <sup>2</sup> snow cover zone B                               | mm                             | scovb000.xxx      | snow zone B <br> (1/3<sup>rd</sup> pixel)  |
+| <sup>2</sup> snow cover zone C                               | mm                             | scovc000.xxx      | snow zone C  <br> (1/3<sup>rd</sup> pixel) |
+| <sup>2</sup> frost index                                     | °C days<sup>-1</sup>           | frost000.xxx      | other pixel                                |
+| <sup>2</sup> cumulative interception                         | mm                             | cumi0000.xxx      | other pixel                                |
+| <sup>2</sup> soil moisture upper layer                       | mm<sup>3</sup> mm<sup>-3</sup> | thtop000.xxx      | other fraction                             |
+| <sup>2</sup> soil moisture lower layer                       | mm<sup>3</sup> mm<sup>-3</sup> | thsub000.xxx      | other fraction                             |
+| <sup>2</sup> water in lower zone                             | mm                             | lz000000.xxx      | other fraction                             |
+| <sup>2</sup> water in upper zone                             | mm                             | uz000000.xxx      | other fraction                             |
+| <sup>2</sup> days since last rain variable (forest)          | days                           | dslF0000.xxx      | forest pixel                               |
+| <sup>2</sup> cumulative interception (forest)                | mm                             | cumF0000.xxx      | forest pixel                               |
+| <sup>2</sup> soil moisture upper layer (forest)              | mm<sup>3</sup> mm<sup>-3</sup> | thFt0000.xxx      | forest fraction                            |
+| <sup>2</sup> soil moisture lower layer (forest)              | mm<sup>3</sup> mm<sup>-3</sup> | thFs0000.xxx      | forest fraction                            |
+| <sup>2</sup> water in lower zone (forest)                    | mm                             | lzF00000.xxx      | forest fraction                            |
+| <sup>2</sup> water in upper zone (forest)                    | mm                             | uzF00000.xxx      | forest fraction                            |
+| <sup>2</sup> water in depression storage (sealed)            | mm                             | cseal000.xxx      | sealed fraction                            |
+
+<sup>1</sup> Output only if option 'InitLisflood' = 1 (pre-run) 
+<sup>2</sup> Output only if option 'InitLisflood' = 0 
+
+
+
+## Additional output
+
+Apart from the default output, the model can --optionally- generate some additional time series and maps. Roughly this additional output falls in either of the following categories:
 
 **Time series**
 
-1.  Time series with values of model state variables at user-defined
-    locations (sites); reporting of these time series can be activated
-    using the option *repStateSites=1.* Note that 'sites' can be either
-    individual pixels or larger areas (e.g. catchments, administrative
-    areas, and so on). In case of larger areas the model reports the
-    average value for each respective area.
+1.  Time series with values of model state variables at user-defined locations (sites); reporting of these time series can be activated using the option *repStateSites=1.* Note that 'sites' can be either individual pixels or larger areas (e.g. catchments, administrative areas, and so on). In case of larger areas the model reports the average value for each respective area.
 
-2.  Time series with values of model rate variables at user-defined
-    locations (sites); reporting of these time series can be activated
-    using the option *repRateSites=1*
+2.  Time series with values of model rate variables at user-defined locations (sites); reporting of these time series can be activated using the option *repRateSites=1*
 
-3.  Time series with values of meteorological input variables, averaged
-    over the area upstream of each gauge location; reporting of these
-    time series can be activated using the option *repMeteoUpsGauges=1*
+3.  Time series with values of meteorological input variables, averaged over the area upstream of each gauge location; reporting of these time series can be activated using the option *repMeteoUpsGauges=1*
 
-4.  Time series with values of model state variables, averaged over area
-    upstream of each gauge location; reporting of these time series can
-    be activated using the option *repStateUpsGauges=1*
+4.  Time series with values of model state variables, averaged over area upstream of each gauge location; reporting of these time series can be activated using the option *repStateUpsGauges=1*
 
-5.  Time series with values of model rate variables, averaged over area
-    upstream of each gauge location; reporting of these time series can
-    be activated using the option *repRateUpsGauges=1*
+5.  Time series with values of model rate variables, averaged over area upstream of each gauge location; reporting of these time series can be activated using the option *repRateUpsGauges=1*
 
-6.  Time series that are specific to other options (e.g. simulation of
-    reservoirs).
+6.  Time series that are specific to other options (e.g. simulation of reservoirs).
 
 **Maps**
 
-1.  Maps of discharge at each time step; reporting of these maps can be
-    activated using the option *repDischargeMaps=1*
+1.  Maps of discharge at each time step; reporting of these maps can be activated using the option *repDischargeMaps=1*
 
 2.  Maps with values of driving meteorological values at each time step
 
 3.  Maps with values of model rate variables at each time step
 
-4.  Maps that are specific to other options (e.g. simulation of
-    reservoirs).
+4.  Maps that are specific to other options (e.g. simulation of reservoirs).
 
-In addition, some additional maps and time series may be reported for
-debugging purposes. In general these are not of any interest to the
-LISFLOOD user, so they remain undocumented here.
+In addition, some additional maps and time series may be reported for debugging purposes. In general these are not of any interest to the LISFLOOD user, so they remain undocumented here.
 
-Note that the options *repStateUpsGauges*, *repRateUpsGauges* and
-*repDischargeMaps* tend to slow down the execution of the model quite
-dramatically. For applications of the model where performance is
-critical (e.g. automated calibration runs), we advise to keep them
-switched off, if possible. The additional time series are listed in the
-Annex 13. Note again the domains for which variables are valid: all
-*rate variables* are reported as pixel-average values. Soil moisture and
-groundwater storage are reported for the permeable fraction of each
-pixel only. The reported snow cover is the average of the snow depths in
-snow zones A, B and C.
+Note that the options *repStateUpsGauges*, *repRateUpsGauges* and *repDischargeMaps* tend to slow down the execution of the model quite dramatically. For applications of the model where performance is critical (e.g. automated calibration runs), we advise to keep them switched off, if possible. The additional time series are listed in the Annex 13. Note again the domains for which variables are valid: all *rate variables* are reported as pixel-average values. Soil moisture and groundwater storage are reported for the permeable fraction of each pixel only. The reported snow cover is the average of the snow depths in snow zones A, B and C.
 
-By default, the names of the reported discharge maps start with the
-prefix '*dis*' and end with the time step number (the naming conventions
-are identical to the ones used for the input maps with meteorological
-variables, which is explained in Chapter 4). Annex 13 summarises all
-options to report additional output maps. The previous remarks related
-to the domains for which the state variable values are valid also apply
-to the maps listed in Annex 13.
+By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in Chapter 4). Annex 13 summarises all options to report additional output maps. The previous remarks related to the domains for which the state variable values are valid also apply to the maps listed in Annex 13.
 
  References
 ===========
 
-Anderson, 2006Anderson, E., 2006. *Snow Accumulation and Ablation Model
--- SNOW-17*. Technical report.
+Anderson, E., 2006. *Snow Accumulation and Ablation Model -- SNOW-17*. Technical report.
 
-Aston, A.R., 1979. Rainfall interception by eight small trees. Journal
-of Hydrology 42, 383-396.
+Aston, A.R., 1979. Rainfall interception by eight small trees. Journal of Hydrology 42, 383-396.
 
-Bódis, 2009Bódis, K., 2009. *Development of a data set for continental
-hydrologic modelling*. Technical Report EUR 24087 EN JRC Catalogue
-number: LB-NA-24087-EN-C, Institute for Environment and Sustainability,
-Joint Research Centre of the European Commission Land Management and
-Natural Hazards Unit Action FLOOD. Input layers related to topography,
-channel geometry, land cover and soil characteristics of European and
-African river basins.
+Bódis, K., 2009. *Development of a data set for continental hydrologic modelling*. Technical Report EUR 24087 EN JRC Catalogue number: LB-NA-24087-EN-C, Institute for Environment and Sustainability, Joint Research Centre of the European Commission Land Management and Natural Hazards Unit Action FLOOD. Input layers related to topography, channel geometry, land cover and soil characteristics of European and African river basins.
 
-Chow, V.T., Maidment, D.R., Mays, L.M., 1988. Applied Hydrology,
-McGraw-Hill, Singapore, 572 pp.
+Chow, V.T., Maidment, D.R., Mays, L.M., 1988. Applied Hydrology, McGraw-Hill, Singapore, 572 pp.
 
-De Roo, A., Thielen, J., Gouweleeuw, B., 2003. LISFLOOD, a Distributed
-Water-Balance, Flood Simulation, and Flood Inundation Model, User Manual
-version 1.2. Internal report, Joint Research Center of the European
-Communities, Ispra, Italy, 74 pp.
+De Roo, A., Thielen, J., Gouweleeuw, B., 2003. LISFLOOD, a Distributed Water-Balance, Flood Simulation, and Flood Inundation Model, User Manual version 1.2. Internal report, Joint Research Center of the European Communities, Ispra, Italy, 74 pp.
 
-Fröhlich, W., 1996. Wasserstandsvorhersage mit dem Prgramm ELBA.
-Wasserwirtschaft Wassertechnik, ISSN: 0043-0986, Nr. 7, 1996, 34-37.
+Fröhlich, W., 1996. Wasserstandsvorhersage mit dem Prgramm ELBA. Wasserwirtschaft Wassertechnik, ISSN: 0043-0986, Nr. 7, 1996, 34-37.
 
-Goudriaan, J., 1977. Crop micrometeorology: a simulation study.
-Simulation Monographs. Pudoc, Wageningen.
+Goudriaan, J., 1977. Crop micrometeorology: a simulation study. Simulation Monographs. Pudoc, Wageningen.
 
-Hock, 2003Hock, R., 2003. Temperature index melt modelling in mountain
-areas. *Journal of Hydrology*, 282(1-4), 104--115.
+Hock, 2003Hock, R., 2003. Temperature index melt modelling in mountain areas. *Journal of Hydrology*, 282(1-4), 104--115.
 
-Lindström, G., Johansson, B., Persson, M., Gardelin, M., Bergström, S.,
-1997. Development and test of the distributed HBV-96 hydrological model.
-     Journal of Hydrology 201, 272-288.
+Lindström, G., Johansson, B., Persson, M., Gardelin, M., Bergström, S., Development and test of the distributed HBV-96 hydrological model. Journal of Hydrology 201, 272-288
 
 Maidment, D.R. (ed.), 1993. Handbook of Hydrology, McGraw-Hill.
 
-Martinec, J., Rango, A., Roberts, R.T., 1998. Snowmelt Runoff Model
-(SRM) User\'s Manual (Updated Edition 1998, Version 4.0). Geographica
-Bernensia, Department of Geography - University of Bern, 1999. 84pp.
+Martinec, J., Rango, A., Roberts, R.T., 1998. Snowmelt Runoff Model (SRM) User\'s Manual (Updated Edition 1998, Version 4.0). Geographica Bernensia, Department of Geography - University of Bern, 1999. 84pp.
 
-Merriam, R.A., 1960. A note on the interception loss equation. Journal
-of Geophysical Research 65, 3850-3851.
+Merriam, R.A., 1960. A note on the interception loss equation. Journal of Geophysical Research 65, 3850-3851.
 
-Molnau, M., Bissell, V.C., 1983. A continuous frozen ground index for
-flood forecasting. In: Proceedings 51^st^ Annual Meeting Western Snow
-Conference, 109-119.
+Molnau, M., Bissell, V.C., 1983. A continuous frozen ground index for flood forecasting. In: Proceedings 51^st^ Annual Meeting Western Snow Conference, 109-119.
 
-Rao, C.X. and Maurer, E.P., 1996. A simplified model for predicting
-daily transmission losses in a stream channel. Water Resources Bulletin,
-Vol. 31, No. 6., 1139-1146.
+Rao, C.X. and Maurer, E.P., 1996. A simplified model for predicting daily transmission losses in a stream channel. Water Resources Bulletin, Vol. 31, No. 6., 1139-1146.
 
-Speers, D.D. , Versteeg, J.D., 1979. Runoff forecasting for reservoir
-operations -- the past and the future. In: Proceedings 52^nd^ Western
-Snow Conference, 149-156.
+Speers, D.D. , Versteeg, J.D., 1979. Runoff forecasting for reservoir operations -- the past and the future. In: Proceedings 52^nd^ Western Snow Conference, 149-156.
 
-Stroosnijder, L., 1982. Simulation of the soil water balance. In:
-Penning de Vries, F.W.T., Van Laar, H.H. (eds), Simulation of Plant
-Growth and Crop Production, Simulation Monographs, Pudoc, Wageningen,
-pp. 175-193.
+Stroosnijder, L., 1982. Simulation of the soil water balance. In: Penning de Vries, F.W.T., Van Laar, H.H. (eds), Simulation of Plant Growth and Crop Production, Simulation Monographs, Pudoc, Wageningen, pp. 175-193.
 
-Stroosnijder, L., 1987. Soil evaporation: test of a practical approach
-under semi-arid conditions. Netherlands Journal of Agricultural Science
-35, 417-426.
+Stroosnijder, L., 1987. Soil evaporation: test of a practical approach under semi-arid conditions. Netherlands Journal of Agricultural Science 35, 417-426.
 
-Supit I., A.A. Hooijer, C.A. van Diepen (eds.), 1994. System Description
-of the WOFOST 6.0 Crop Simulation Model Implemented in CGMS. Volume 1:
-Theory and Algorithms. EUR 15956, Office for Official Publications of
-the European Communities, Luxembourg.
+Supit I., A.A. Hooijer, C.A. van Diepen (eds.), 1994. System Description of the WOFOST 6.0 Crop Simulation Model Implemented in CGMS. Volume 1: Theory and Algorithms. EUR 15956, Office for Official Publications of the European Communities, Luxembourg.
 
-Supit, I. , van der Goot, E. (eds.), 2003. Updated System Description of
-the WOFOST Crop Growth Simulation Model as Implemented in the Crop
-Growth Monitoring System Applied by the European Commission, Treemail,
-Heelsum, The Netherlands, 120 pp.
+Supit, I. , van der Goot, E. (eds.), 2003. Updated System Description of the WOFOST Crop Growth Simulation Model as Implemented in the Crop Growth Monitoring System Applied by the European Commission, Treemail, Heelsum, The Netherlands, 120 pp.
 
-Todini, E., 1996. The ARNO rainfall----runoff model. Journal of
-Hydrology 175, 339-382.
+Todini, E., 1996. The ARNO rainfall----runoff model. Journal of Hydrology 175, 339-382.
 
-Van Der Knijff, J., De Roo, A., 2006. LISFLOOD -- Distributed Water
-Balance and Flood Simulation Model, User Manual. EUR 22166 EN, Office
-for Official Publications of the European Communities, Luxembourg, 88
+Van Der Knijff, J., De Roo, A., 2006. LISFLOOD -- Distributed Water Balance and Flood Simulation Model, User Manual. EUR 22166 EN, Office for Official Publications of the European Communities, Luxembourg, 88
 pp.
 
-Van der Knijff, J., 2008. LISVAP-- Evaporation Pre-Processor for the
-LISFLOOD Water Balance and Flood Simulation Model, Revised User Manual.
-EUR 22639 EN/2, Office for Official Publications of the European
-Communities, Luxembourg, 31 pp.
+Van der Knijff, J., 2008. LISVAP-- Evaporation Pre-Processor for the LISFLOOD Water Balance and Flood Simulation Model, Revised User Manual. EUR 22639 EN/2, Office for Official Publications of the European Communities, Luxembourg, 31 pp.
 
-Van Der Knijff, J., De Roo, A., 2008. LISFLOOD -- Distributed Water
-Balance and Flood Simulation Model, Revised User Manual. EUR 22166 EN/2,
-Office for Official Publications of the European Communities,
-Luxembourg, 109 pp.
+Van Der Knijff, J., De Roo, A., 2008. LISFLOOD -- Distributed Water Balance and Flood Simulation Model, Revised User Manual. EUR 22166 EN/2, Office for Official Publications of the European Communities, Luxembourg, 109 pp.
 
-van der Knijff, J. M., Younis, J. and de Roo, A. P. J.: LISFLOOD: A
-GIS-based distributed model for river basin scale water balance and
-flood simulation, Int. J. Geogr. Inf. Sci., 24(2), 189--212, 2010.
+van der Knijff, J. M., Younis, J. and de Roo, A. P. J.: LISFLOOD: A GIS-based distributed model for river basin scale water balance and flood simulation, Int. J. Geogr. Inf. Sci., 24(2), 189--212, 2010.
 
-Van Genuchten, M.Th., 1980. A closed-form equation for predicting the
-hydraulic conductivity of unsaturated soils. Soil Science Society of
-America Journal 44, 892-898.
+Van Genuchten, M.Th., 1980. A closed-form equation for predicting the hydraulic conductivity of unsaturated soils. Soil Science Society of America Journal 44, 892-898.
 
-Viviroli et al., 2009Viviroli, D., Zappa, M., Gurtz, J., & Weingartner,
-R., 2009. An introduction to the hydrological modelling system PREVAH
-and its pre- and post-processing-tools. *Environmental Modelling &
-Software*, 24(10), 1209--1222.
+Viviroli et al., 2009Viviroli, D., Zappa, M., Gurtz, J., & Weingartner, R., 2009. An introduction to the hydrological modelling system PREVAH and its pre- and post-processing-tools. *Environmental Modelling & Software*, 24(10), 1209--1222.
 
-Vogt et al., 2007Vogt, J., Soille, P., de Jager, A., Rimaviciute, E.,
-Mehl, W., Foisneau, S., Bodis, K., Dusart, M., Parachini, M., Hasstrup,
-P.,2007. *A pan-European River and Catchment Database*. JRC Reference
-Report EUR 22920 EN, Institute for Environment and Sustainability, Joint
-Research Centre of the European Commission.
+Vogt et al., 2007Vogt, J., Soille, P., de Jager, A., Rimaviciute, E., Mehl, W., Foisneau, S., Bodis, K., Dusart, M., Parachini, M., Hasstrup, P.,2007. *A pan-European River and Catchment Database*. JRC Reference Report EUR 22920 EN, Institute for Environment and Sustainability, Joint Research Centre of the European Commission.
 
-Von Hoyningen-Huene, J., 1981. Die Interzeption des Niederschlags in
-landwirtschaftlichen Pflanzenbeständen (Rainfall interception in
-agricultural plant stands). In: Arbeitsbericht Deutscher Verband für
-Wasserwirtschaft und Kulturbau, DVWK, Braunschweig, p.63.
+Von Hoyningen-Huene, J., 1981. Die Interzeption des Niederschlags in landwirtschaftlichen Pflanzenbeständen (Rainfall interception in agricultural plant stands). In: Arbeitsbericht Deutscher Verband für Wasserwirtschaft und Kulturbau, DVWK, Braunschweig, p.63.
 
-Wesseling, C.G., Karssenberg, D., Burrough, P.A. , Van Deursen, W.P.A.,
-1996. Integrating dynamic environmental models in GIS: The development
-     of a Dynamic Modelling language. Transactions in GIS 1, 40-48.
+Wesseling, C.G., Karssenberg, D., Burrough, P.A. , Van Deursen, W.P.A., Integrating dynamic environmental models in GIS: The developmentof a Dynamic Modelling language. Transactions in GIS 1, 40-48
 
-World Meteorological Organization, 1986. Intercomparison of models of
-snowmelt runoff. Operational Hydrology Report No. 23.
+World Meteorological Organization, 1986. Intercomparison of models of snowmelt runoff. Operational Hydrology Report No. 23.
 
-Young, G.J. (ed), 1985. Techniques for prediction of runoff from
-glacierized areas. IAHS Publication 149, Institute of Hydrology,
-Wallingford.
+Young, G.J. (ed), 1985. Techniques for prediction of runoff from glacierized areas. IAHS Publication 149, Institute of Hydrology, Wallingford.
 
-Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P.
-(ed.), Computer Models of Watershed Hydrology, pp. 215-232.
+Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P. (ed.), Computer Models of Watershed Hydrology, pp. 215-232.
 
 Annex 1: Simulation of reservoirs
 =================================
@@ -1030,25 +789,7 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 Description of the reservoir routine 
 -------------------------------------
 
-Reservoirs are simulated as points in the channel network. The inflow
-into each reservoir equals the channel flow upstream of the reservoir.
-The outflow behaviour is described by a number of parameters. First,
-each reservoir has a total storage capacity *S* \[m<sup>3</sup>\]. The relative
-filling of a reservoir, *F*, is a fraction between 0 and 1. There are
-three 'special' filling levels. First, each reservoir has a 'dead
-storage' fraction, since reservoirs never empty completely. The
-corresponding filling fraction is the 'conservative storage limit',
-*L<sub>c</sub>*. For safety reasons a reservoir is never filled to the full
-storage capacity. The 'flood storage limit' (*L<sub>f</sub>*) represents this
-maximum allowed storage fraction. The buffering capacity of a reservoir
-is the storage available between the 'flood storage limit' and the
-'normal storage limit' (*L<sub>n</sub>*). Three additional parameters define the
-way the outflow of a reservoir is regulated. For e.g. ecological reasons
-each reservoir has a 'minimum outflow' (*O<sub>min</sub>*, \[m<sup>3</sup> s<sup>-1</sup>\]). For
-high discharge situations, the 'non-damaging outflow' (*O<sub>nd</sub>*, \[m<sup>3</sup>
-s<sup>-1</sup>\]) is the maximum possible outflow that will not cause problems
-downstream. The 'normal outflow' (*O<sub>norm</sub>*, \[m<sup>3</sup> s<sup>-1</sup>\]) is valid
-once the reservoir reaches its 'normal storage' filling level.
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity *S* \[m<sup>3</sup>\]. The relative filling of a reservoir, *F*, is a fraction between 0 and 1. There are three 'special' filling levels. First, each reservoir has a 'dead storage' fraction, since reservoirs never empty completely. The corresponding filling fraction is the 'conservative storage limit', *L<sub>c</sub>*. For safety reasons a reservoir is never filled to the full storage capacity. The 'flood storage limit' (*L<sub>f</sub>*) represents this maximum allowed storage fraction. The buffering capacity of a reservoir is the storage available between the 'flood storage limit' and the 'normal storage limit' (*L<sub>n</sub>*). Three additional parameters define the way the outflow of a reservoir is regulated. For e.g. ecological reasons each reservoir has a 'minimum outflow' (*O<sub>min</sub>*, \[m<sup>3</sup> s<sup>-1</sup>\]). For high discharge situations, the 'non-damaging outflow' (*O<sub>nd</sub>*, \[m<sup>3</sup> s<sup>-1</sup>\]) is the maximum possible outflow that will not cause problems downstream. The 'normal outflow' (*O<sub>norm</sub>*, \[m<sup>3</sup> s<sup>-1</sup>\]) is valid once the reservoir reaches its 'normal storage' filling level.
 
 Depending on the relative filling of the reservoir, outflow ($O_{res},[\frac{m^3}{s}]$) is calculated as:
 
@@ -1062,33 +803,22 @@ $O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd}) ; F \gt L_f$
 
 with:
 
-  S         : Reservoir storage capacity $[m<sup>3</sup>]$
-  F         : Reservoir fill (fraction, 1 at total storage capacity) \[-\]
-  L<sub>c</sub>      : Conservative storage limit \[-\]
-  L<sub>n</sub>      : Normal storage limit \[-\]
-  L<sub>f</sub>      : Flood storage limit \[-\]
-  O<sub>min</sub>    : Minimum outflow \[m<sup>3</sup> s<sup>-1</sup>\]
-  O<sub>norm</sub>   : Normal outflow \[m<sup>3</sup> s<sup>-1</sup>\]
-  O<sub>nd</sub>     : Non-damaging outflow \[m<sup>3</sup> s<sup>-1</sup>\]
-  I<sub>res</sub>    : Reservoir inflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  	S         : Reservoir storage capacity $[m<sup>3</sup>]$
+ 	 F         : Reservoir fill (fraction, 1 at total storage capacity) \[-\]
+ 	 L<sub>c</sub>      : Conservative storage limit \[-\]
+  	L<sub>n</sub>      : Normal storage limit \[-\]
+ 	 L<sub>f</sub>      : Flood storage limit \[-\]
+  	O<sub>min</sub>    : Minimum outflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  	O<sub>norm</sub>   : Normal outflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  	O<sub>nd</sub>     : Non-damaging outflow \[m<sup>3</sup> s<sup>-1</sup>\]
+  	I<sub>res</sub>    : Reservoir inflow \[m<sup>3</sup> s<sup>-1</sup>\]
 
-In order to prevent numerical problems, the reservoir outflow is
-calculated using a user-defined time interval (or *Δt*, if it is smaller
-than this value).
+In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value).
 
 Preparation of input data 
 --------------------------
 
-For the simulation of reservoirs a number of addition input files are
-necessary. First, the locations of the reservoirs are defined on a
-(nominal) map called '*res.map*'. It is important that all reservoirs
-are located on a channel pixel (you can verify this by displaying the
-reservoirs map on top of the channel map). Also, since each reservoir
-receives its inflow from its upstream neighbouring channel pixel, you
-may want to check if each reservoir has any upstream channel pixels at
-all (if not, the reservoir will gradually empty during a model run!).
-The management of the reservoirs is described by 7 tables. The following
-table lists all required input:
+For the simulation of reservoirs a number of addition input files are necessary. First, the locations of the reservoirs are defined on a (nominal) map called '*res.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each reservoir receives its inflow from its upstream neighbouring channel pixel, you may want to check if each reservoir has any upstream channel pixels at all (if not, the reservoir will gradually empty during a model run!). The management of the reservoirs is described by 7 tables. The following table lists all required input:
 
 **Table A1.1** Input requirements reservoir  routine*
 
@@ -1104,20 +834,12 @@ table lists all required input:
 | TabNonDamagingOutflowQ | rndq.txt    | non-damaging outflow | m<sup>3</sup>/s      |             |
 
 
-When you create the map with the reservoir sites, pay special attention
-to the following: if a reservoir is on the most downstream cell (i.e.
-the outflow point, see Figure A1.1), the reservoir routine may produce
-erroneous output. In particular, the mass balance errors cannot be
-calculated correctly in that case. The same applies if you simulate only
-a sub-catchment of a larger map (by selecting the subcatchment in the
-mask map). This situation can usually be avoided by extending the mask
-map by one cell in downstream direction.
+When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outflow point, see Figure A1.1), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
 ![reservoirPlacementNew](media/media/image42.png){width="4.75in"
 height="2.125in"}
 
-*Figure A1.1 Placement of the reservoirs: reservoirs on the outflow
-point (left) result in erroneous behavior of the reservoir routine.*
+*Figure A1.1* Placement of the reservoirs: reservoirs on the outflow point (left) result in erroneous behavior of the reservoir routine.
 
 Preparation of settings file
 ----------------------------
@@ -1147,19 +869,14 @@ All in- and output files need to be defined in the settings file. If you are usi
 	</group>                                                            
 ```
 
-The value -9999 tells the model to set the initial reservoir fill to the
-normal storage limit. Note that this value is completely arbitrary.
-However, if no other information is available this may be a reasonable
+The value -9999 tells the model to set the initial reservoir fill to the normal storage limit. Note that this value is completely arbitrary. However, if no other information is available this may be a reasonable
 starting point.
 
-Finally, you have to tell LISFLOOD that you want to simulate reservoirs!
-To do this, add the following statement to the 'lfoptions' element:
+Finally, you have to tell LISFLOOD that you want to simulate reservoirs! To do this, add the following statement to the 'lfoptions' element:
 
 \<setoption name=\"simulateReservoirs\" choice=\"1\" /\>
 
-Now you are ready to run the model. If you want to compare the model
-results both with and without the inclusion of reservoirs, you can
-switch off the simulation of reservoirs either by:
+Now you are ready to run the model. If you want to compare the model results both with and without the inclusion of reservoirs, you can switch off the simulation of reservoirs either by:
 
 1.  Removing the 'simulateReservoirs' statement from the 'lfoptions
     element, or
@@ -1167,32 +884,33 @@ switch off the simulation of reservoirs either by:
 2.  changing it into \<setoption name=\"simulateReservoirs\"
     choice=\"0\" /\>
 
-Both have exactly the same effect. You don't need to change anything in
-either 'lfuser' or 'lfbinding'; all file definitions here are simply
-ignored during the execution of the model.
+Both have exactly the same effect. You don't need to change anything in either 'lfuser' or 'lfbinding'; all file definitions here are simply ignored during the execution of the model.
 
 Reservoir output files
 ----------------------
 
-The reservoir routine produces 3 additional time series and one map, as
-listed in the following table:
+The reservoir routine produces 3 additional time series and one map, as listed in the following table:
 
-**Table A1.2** Output of reservoir routine*                                                                          
+**Table A1.2** Output of reservoir routine*                    
 
-| **Maps**               | **Default name**       | **Description**                          | **Units**       | **Remarks**   |
-| ---------------------- | ---------------------- | ---------------------------------------- | --------------- | ------------- |
-| ReservoirFillState     | rsfilxxx.xxx           | reservoir fill at last time step[^10]    | \-              |               |
-| ---------------------- | ---------------------- | ---------------------------------------- | -------------   | ------------- |
-| **Time series**        | **Default name**       | **Description**                          | **Units**       | **Remarks**   |
-| ReservoirInflowTS      | qresin.tss             | inflow into reservoirs                   | m<sup>3</sup>/s |               |
-| ReservoirOutflowTS     | qresout.tss            | outflow out of reservoirs                | m<sup>3</sup>/s |               |
-| ReservoirFillTS        | resfill.tss            | reservoir fill                           | \-              |               |
+| **Maps / Time series** | **Default name** | **Description**                       | **Units**       | **Remarks** |
+| ---------------------- | ---------------- | ------------------------------------- | --------------- | ----------- |
+| ReservoirFillState     | rsfilxxx.xxx     | reservoir fill at last time step[^10] | \-              |             |
+| ReservoirInflowTS      | qresin.tss       | inflow into reservoirs                | m<sup>3</sup>/s |             |
+| ReservoirOutflowTS     | qresout.tss      | outflow out of reservoirs             | m<sup>3</sup>/s |             |
+| ReservoirFillTS        | resfill.tss      | reservoir fill                        | \-              |             |
 
-Note that you can use the map with the reservoir fill at the last time
-step to define the initial conditions of a succeeding simulation, e.g.:
+​                                                      
 
-\<textvar name=\"ReservoirInitialFillValue\"
-value=\"/mycatchment/rsfil000.730\"\>
+Note that you can use the map with the reservoir fill at the last time step to define the initial conditions of a succeeding simulation, e.g.:
+
+```xml
+	<textvar name="ReservoirInitialFillValue" value="/mycatchment/rsfil000.730">
+```
+
+
+
+
 
 Annex 2: Polder option 
 =======================
@@ -1200,30 +918,22 @@ Annex 2: Polder option
 Introduction
 ------------
 
-This annex describes the LISFLOOD polder routine, and how it is used.
-The simulation of polders is *optional*, and it can be activated by
-adding the following line to the 'lfoptions' element:
+This annex describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"simulatePolders\" choice=\"1\" /\>
+```xml
+	<setoption name="simulatePolders" choice="1" />
+```
 
-Polders can be simulated on channel pixels where dynamic wave routing is
-used. The routine does *not* work for channel stretches where the
-kinematic wave is used!
+Polders can be simulated on channel pixels where dynamic wave routing is used. The routine does *not* work for channel stretches where the kinematic wave is used!
 
 Description of the polder routine 
 ----------------------------------
 
-Polders are simulated as points in the channel network. The polder
-routine is adapted from Förster et. al (2004), and based on the weir
-equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the
-channel to the polder area and vice versa are calculated by balancing
-out the water levels in the channel and in the polder, as shown in
-Figure A2.1.
+Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), and based on the weir equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in Figure A2.1.
 
 ![polders](media/image43.png)
 
-*Figure A2.1 Schematic overview of the simulation of polders.* pb *is the polder bottom level (above the channel bottom);* w<sub>c</sub> *is the water level in the channel;* h<sub>c</sub> *and* h<sub>p</sub> *are the water levels above the
-polder in- / outflow, respectively*
+*Figure A2.1 Schematic overview of the simulation of polders.* pb *is the polder bottom level (above the channel bottom);* w<sub>c</sub> *is the water level in the channel;* h<sub>c</sub> *and* h<sub>p</sub> *are the water levels above the polder in- / outflow, respectively*
 
 
 
@@ -1246,42 +956,17 @@ From the Figure, it is easy to see that there can be three situations:
 Regulated and unregulated polders
 ---------------------------------
 
-The above equations are valid for *unregulated* polders. It is also
-possible to simulated *regulated* polders, which is illustrated in
-Figure A2.2. Regulated polders are opened at a user-defined time
-(typically during the rising limb of a flood peak). The polder closes
-automatically once it is full. Subsequently, the polder is opened again
-to release the stored water back into the channel, which also occurs at
-a user-defined time. The opening- and release times for each polder are
-defined in two lookup tables (see Table 2.1). In order to simulate the
-polders in *unregulated* mode these times should both be set to a bogus
-value of -9999. *Only* if *both* opening- and release time are set to
-some other value, LISFLOOD will simulate a polder in regulated mode.
-Since LISFLOOD only supports *one* single regulated open-close-release
-cycle per simulation, you should use regulated mode *only* for single
-flood events. For continuous simulations (e.g. long-tem waterbalance
-runs) you should only run the polders in unregulated mode.
+The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in Figure A2.2. Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table 2.1). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
 
 ![poldersRegulated](media/media/image44.png){width="5.395833333333333in"
 height="3.3958333333333335in"}
 
-*Figure A2.2 Simulation of a regulated polder. Polder is closed
-(inactive) until user-defined opening time, after which it fills up to
-its capacity (flow rate according to Eq A2.1). Water stays in polder
-until user-defined release time, after which water is released back to
-the channel (flow rate according to Eq A2.2). *
+*Figure A2.2 Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq A2.1). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq A2.2). *
 
 Preparation of input data 
 --------------------------
 
-The locations of the reservoirs are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations
-before running the model (you can do this by displaying the reservoirs
-map on top of the channel map). The current implementation of the polder
-routine may result in numerical instabilities for kinematic wave pixels,
-so for the moment it is recommended to define polders *only* on channels
-where the dynamic wave is used. Furthermore, the properties of each
-polder are described using a number of tables. All required input is
-listed in the following table:
+The locations of the reservoirs are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations before running the model (you can do this by displaying the reservoirs map on top of the channel map). The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used. Furthermore, the properties of each polder are described using a number of tables. All required input is listed in the following table:
 
 **Table A2.1** Input requirements polder routine* 
 
@@ -1296,122 +981,83 @@ listed in the following table:
 | TabPolderOpeningTime | poldtopen.txt | Time at which polder is opened    | time step       |             |
 | TabPolderReleaseTime | poldtrelease.txt | Time at which water stored in polder is released again     | time step       |             |
 
-Note that the polder opening- and release times are both defined a *time
-step* numbers (*not* days or hours!!). For *unregulated* polders, set
-both parameters to a bogus value of -9999, i.e.:
+Note that the polder opening- and release times are both defined a *time step* numbers (*not* days or hours!!). For *unregulated* polders, set both parameters to a bogus value of -9999, i.e.:
 
-+----------+
-| 10 -9999 |
-|          |
-| 15 -9999 |
-|          |
-| 16 -9999 |
-|          |
-| 17 -9999 |
-+----------+
+```xml
+10 -9999
+15 -9999
+16 -9999 
+17 -9999
+```
+
+
 
 Preparation of settings file
 ----------------------------
 
-All in- and output files need to be defined in the settings file. If you
-are using a default LISFLOOD settings template, all file definitions are
-already defined in the 'lfbinding' element. Just make sure that the map
-with the polder locations is in the "maps" directory, and all tables in
-the 'tables" directory. If this is the case, you only have to specify
-the initial reservoir water level in the polders.
-*PolderInitialLevelValue* is defined in the 'lfuser' element of the
-settings file, and it can be either a map or a value. The value of the
-weir constant *μ* is also defined here, although you should not change
-its default value. So we add this to the 'lfuser' element (if it is not
-there already):
+All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the polder locations is in the "maps" directory, and all tables in the 'tables" directory. If this is the case, you only have to specify the initial reservoir water level in the polders. *PolderInitialLevelValue* is defined in the 'lfuser' element of the settings file, and it can be either a map or a value. The value of the weir constant *μ* is also defined here, although you should not change its default value. So we add this to the 'lfuser' element (if it is not there already):
 
-+-----------------------------------------------------------------------+
-| \<group\>                                                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| POLDER OPTION                                                         |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"mu\" value=\"0.49\"\>                                |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Weir constant \[-\] (Do not change!)                                  |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"PolderInitialLevelValue\" value=\"0\"\>              |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Initial water level in polder \[m\]                                   |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \</group\>                                                            |
-+-----------------------------------------------------------------------+
+```xml
+	<group>                                                             
+	<comment>                                                           
+	**************************************************************               
+	POLDER OPTION                                                         
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="mu" value="0.49">                                
+	<comment>                                                           		
+	Weir constant [-] (Do not change!)                                  
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="PolderInitialLevelValue" value="0">              
+	<comment>                                                           
+	Initial water level in polder [m]                                   
+	</comment>                                                          
+	</textvar>                                                          
+	</group>                                                            
+```
 
-To switch on the polder routine, add the following line to the
-'lfoptions' element:
+To switch on the polder routine, add the following line to the 'lfoptions' element:
 
-\<setoption name=\"simulatePolders\" choice=\"1\" /\>
+```xml
+	<setoption name="simulatePolders" choice="1" />
+```
 
-Now you are ready to run the model. If you want to compare the model
-results both with and without the inclusion of polders, you can switch
-off the simulation of polders either by:
+Now you are ready to run the model. If you want to compare the model results both with and without the inclusion of polders, you can switch off the simulation of polders either by:
 
-3.  Removing the 'simulatePolders' statement from the 'lfoptions
-    element, or
+3.  Removing the 'simulatePolders' statement from the 'lfoptions element, or
 
-4.  changing it into \<setoption name=\"simulatePolders\" choice=\"0\"
-    /\>
+4.  changing it into \<setoption name=\"simulatePolders\" choice=\"0\" /\>
 
-Both have exactly the same effect. You don't need to change anything in
-either 'lfuser' or 'lfbinding'; all file definitions here are simply
-ignored during the execution of the model.
+Both have exactly the same effect. You don't need to change anything in either 'lfuser' or 'lfbinding'; all file definitions here are simply ignored during the execution of the model.
 
 Polder output files
 -------------------
 
-The polder routine produces 2 additional time series and one map (or
-stack of maps, depending on the value of LISFLOOD variable
-*ReportSteps*), as listed in the following table:
+The polder routine produces 2 additional time series and one map (or stack of maps, depending on the value of LISFLOOD variable *ReportSteps*), as listed in the following table:
 
-------------------------------------------- ------------------ ------------------------------------------------------------------------------------------------------------------ ----------- -------------
-  ***Table A2.2** Output of polder routine*                                                                                                                                                     
-  **Maps**                                    **Default name**   **Description**                                                                                                    **Units**   **Remarks**
-  PolderLevelState                            hpolxxxx.xxx       water level in polder at last time step[^11]                                                                       m           
-                                                                                                                                                                                                
-  **Time series**                             **Default name**   **Description**                                                                                                    **Units**   **Remarks**
-  PolderLevelTS                               hPolder.tss        water level in polder (at polder locations)                                                                        m           
-  PolderFluxTS                                qPolder.tss        Flux into and out of polder (positive for flow from channel to polder, negative for flow from polder to channel)   m<sup>3</sup>/s      
-------------------------------------------- ------------------ ------------------------------------------------------------------------------------------------------------------ ----------- -------------
 
-Note that you can use the map with the polder level at the last time
-step to define the initial conditions of a succeeding simulation, e.g.:
 
-\<textvar name=\"PolderInitialLevelValue\"
-value=\"/mycatchment/hpol0000.730\"\>
+**Table A2.2** Output of polder routine
+
+| **Maps / Time series** | Default name | Description                                                  | Units           |
+| ---------------------- | ------------ | ------------------------------------------------------------ | --------------- |
+| PolderLevelState       | hpolxxxx.xxx | water level in polder at last time step11                    | m               |
+| PolderLevelTS          | hPolder.tss  | water level in polder (at polder locations)                  | m               |
+| PolderFluxTS           | qPolder.tss  | Flux into and out of polder (positive for flow from channel to polder, negative for flow from polder to channel) | m<sup>3</sup>/s |
+
+Note that you can use the map with the polder level at the last time step to define the initial conditions of a succeeding simulation, e.g.:
+
+```xml
+	<textvar name="PolderInitialLevelValue" value="/mycatchment/hpol0000.730">
+```
+
+
 
 Limitations
 -----------
 
-For the moment, polders can be simulated on channel pixels where dynamic
-wave routing is used. For channels where the kinematic wave is used, the
-routine will not work and may lead to numerical instabilities or even
-model crashes. This limitation may be resolved in future model versions.
+For the moment, polders can be simulated on channel pixels where dynamic wave routing is used. For channels where the kinematic wave is used, the routine will not work and may lead to numerical instabilities or even model crashes. This limitation may be resolved in future model versions.
 
 Annex 3: Simulation of lakes
 ============================
@@ -1419,470 +1065,305 @@ Annex 3: Simulation of lakes
 Introduction
 ------------
 
-This annex describes the LISFLOOD lake routine, and how it is used. The
-simulation of lakes is *optional*, and it can be activated by adding the
-following line to the 'lfoptions' element:
+This annex describes the LISFLOOD lake routine, and how it is used. The simulation of lakes is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"simulateLakes\" choice=\"1\" /\>
+```xml 
+	<setoption name="simulateLakes" choice="1" />
+```
 
-Lakes can be simulated on channel pixels where kinematic wave routing is
-used. The routine does *not* work for channel stretches where the
-dynamic wave is used!
+ Lakes can be simulated on channel pixels where kinematic wave routing is used. The routine does *not* work for channel stretches where the dynamic wave is used!
 
 Description of the lake routine 
 --------------------------------
 
-Lakes are simulated as points in the channel network. Figure A3.1 shows
-all computed in- and outgoing fluxes. Lake inflow equals the channel
-flow upstream of the lake location. The flow out of the lake is computed
-using the following rating curve (e.g. Maidment, 1992):
+Lakes are simulated as points in the channel network. Figure A3.1 shows all computed in- and outgoing fluxes. Lake inflow equals the channel flow upstream of the lake location. The flow out of the lake is computed using the following rating curve (e.g. Maidment, 1992):
 
-\${O\_{lake}} = A{(H - {H\_0})\^B}\$
+​	\${O\_{lake}} = A{(H - {H\_0})\^B}\$
 
-  O<sub>lake</sub>   : Lake outflow rate \[m<sup>3</sup> s<sup>-1</sup>\]
---------- ---------------------------------------------------
-  H         : Water level in lake \[m\]
-  H<sub>0</sub>      : Water level at which lake outflow is zero \[m\]
-  A, B      : Constants \[-\]
+with:
+
+  	O<sub>lake</sub>   : Lake outflow rate \[m<sup>3</sup> s<sup>-1</sup>\]
+
+ 	 H         : Water level in lake \[m\]
+
+  	H<sub>0</sub>      : Water level at which lake outflow is zero \[m\]
+  	A, B      : Constants \[-\]
 
 ![lakes](media/media/image45.png){width="5.375in"
 height="3.5104166666666665in"}
 
-*Figure A3.1 Schematic overview of the simulation of lakes.* H<sub>0</sub> *is
-the water level at which the outflow is zero;* H *is the water level in
-the lake and* EW *is the evaporation from the lake*
+Figure A3.1 Schematic overview of the simulation of lakes.* H<sub>0</sub> *is the water level at which the outflow is zero;* H *is the water level in the lake and* EW *is the evaporation from the lake*
 
-Both *H* and *H<sub>0</sub>* can be defined relative to an arbitrary reference
-level. Since the outflow is a function of the *difference* between both
-levels, the actual value of this reference level doesn't matter if *H*
-\> *H<sub>0</sub>*. However, it is advised to define both *H* and *H<sub>0</sub>* relative
-to the *average bottom level* of the lake. This will result in more
-realistic simulations during severe drought spells, when the water level
-drops below *H<sub>0</sub>* (in which case lake outflow ceases). The value of
-constant *A* can be approximated by the width of the lake outlet in
-meters, and *B* is within the range 1.5-2 (reference?). Lake evaporation
-occurs at the potential evaporation rate of an open water surface.
+Both *H* and *H<sub>0</sub>* can be defined relative to an arbitrary reference level. Since the outflow is a function of the *difference* between both levels, the actual value of this reference level doesn't matter if *H*
+\> *H<sub>0</sub>*. However, it is advised to define both *H* and *H<sub>0</sub>* relative to the *average bottom level* of the lake. This will result in more realistic simulations during severe drought spells, when the water level drops below *H<sub>0</sub>* (in which case lake outflow ceases). The value of constant *A* can be approximated by the width of the lake outlet in meters, and *B* is within the range 1.5-2 (reference?). Lake evaporation occurs at the potential evaporation rate of an open water surface.
 
 Initialisation of the lake routine
 ----------------------------------
 
-Because lakes (especially large ones) tend to produce a relatively slow
-response over time, it is important to make sure that the initial lake
-level is set to a more or less sensible value. Just as is the case with
-the initialisation of the lower groundwater zone, LISFLOOD has a special
-option that will compute a steady-state lake level and use this as the
-initial value. The steady-state level is computed from the water balance
-of the lake. If *V<sub>l</sub>* is the total lake volume \[m<sup>3</sup>\], the rate of
-change of *V<sub>l</sub>* at any moment is given by the continuity equation:
+Because lakes (especially large ones) tend to produce a relatively slow response over time, it is important to make sure that the initial lake level is set to a more or less sensible value. Just as is the case with the initialisation of the lower groundwater zone, LISFLOOD has a special option that will compute a steady-state lake level and use this as the initial value. The steady-state level is computed from the water balance
+of the lake. If *V<sub>l</sub>* is the total lake volume \[m<sup>3</sup>\], the rate of change of *V<sub>l</sub>* at any moment is given by the continuity equation:
 
-\$\\frac{{d{V\_l}}}{{dt}} = I(t) - O(t)\$
+​	\$\\frac{{d{V\_l}}}{{dt}} = I(t) - O(t)\$
 
-where *I* and *O* are the in- and outflow rates, respectively. For a
-steady-state situation the storage remains constant, so:
+where *I* and *O* are the in- and outflow rates, respectively. For a steady-state situation the storage remains constant, so:
 
-\$\\frac{{d{V\_l}}}{{dt}} = 0\\quad \\Leftrightarrow \\quad I(t) - O(t)
-= 0\$
+​	\$\\frac{{d{V\_l}}}{{dt}} = 0\\quad \\Leftrightarrow \\quad I(t) - O(t) = 0\$
 
 Substituting all in- and outflow terms gives:
 
-$I_l - EW_l - A \cdot (H - H_0)^B = 0$
+​	$I_l - EW_l - A \cdot (H - H_0)^B = 0$
 
-where *I<sub>l</sub>* is the inflow into the lake and *EW<sub>l</sub>* the lake
-evaporation (both expressed in m<sup>3</sup> s<sup>-1</sup>). Re-arranging gives the
-steady-state lake level:
+where *I<sub>l</sub>* is the inflow into the lake and *EW<sub>l</sub>* the lake evaporation (both expressed in m<sup>3</sup> s<sup>-1</sup>). Re-arranging gives the steady-state lake level:
 
-$H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{1/B}$
+​	$H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{1/B}$
 
-LISFLOOD calculates the steady-state lake level based on a user-defined
-average net inflow (=*I<sub>l</sub>* -- *EW<sub>l</sub>*). The average net inflow can be
-estimated using measured discharge and evaporation records. If measured
-discharge is available just *downstream* of the lake (i.e. the
-*outflow*), the (long-term) average outflow can be used as the net
-inflow estimate (since, for a steady state situation, inflow equals
-outflow). If only inflow is available, all average inflows should be
-summed, and the average lake evaporation should be subtracted from this
-figure. Table A3.1 gives a worked example. Be aware that the calculation
-can be less straightforward for very large lakes with multiple inlets
-(which are not well represented by the current point approach anyway).
+LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow (=*I<sub>l</sub>* -- *EW<sub>l</sub>*). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure. Table A3.1 gives a worked example. Be aware that the calculation can be less straightforward for very large lakes with multiple inlets (which are not well represented by the current point approach anyway).
 
-+-----------------------------------------------------------------------+
-| **Table A3.1: Calculation of average net lake inflow **               |
-|                                                                       |
-| *Lake characteristics*                                                |
-|                                                                       |
-| lake area: 215•10^6^ m<sup>2</sup>                                             |
-|                                                                       |
-| mean annual discharge downstream of lake: 293 m<sup>3</sup> s<sup>-1</sup>              |
-|                                                                       |
-| mean annual discharge upstream of lake: 300 m<sup>3</sup> s<sup>-1</sup>                |
-|                                                                       |
-| mean annual evaporation: 1100 mm yr<sup>-1</sup>                               |
-|                                                                       |
-| *Calculation of average net inflow*                                   |
-|                                                                       |
-| **METHOD 1: USING AVERAGE OUTFLOW**                                   |
-|                                                                       |
-| assuming lake is in quasi steady-state:                               |
-|                                                                       |
-| > average net inflow = average net outflow = [293 m<sup>3</sup>                |
-| > s<sup>-1</sup>]{.underline}                                                  |
-|                                                                       |
-| **METHOD 2: USING AVERAGE INFLOW AND EVAPORATION**                    |
-|                                                                       |
-| Only use this method if no outflow data are available                 |
-|                                                                       |
-| 1.  **Express lake evaporation in m<sup>3</sup> s<sup>-1</sup>:**                       |
-|                                                                       |
-| > 1100 mm yr<sup>-1</sup> / 1000 = 1.1 m yr<sup>-1</sup>                                |
-| >                                                                     |
-| > 1.1 m yr<sup>-1</sup> x 215•10^6^ m<sup>2</sup> = 2.37•10^8^ m<sup>3</sup> yr<sup>-1</sup>              |
-| >                                                                     |
-| > 2.37•10^8^ m<sup>3</sup> yr<sup>-1</sup> / (365 days x 86400 seconds) = [7.5 m<sup>3</sup>     |
-| > s<sup>-1</sup>]{.underline}                                                  |
-|                                                                       |
-| 2.  **Compute net inflow:**                                           |
-|                                                                       |
-| > net inflow = 300 m<sup>3</sup> s<sup>-1</sup> -- 7.5 m<sup>3</sup> s<sup>-1</sup> = [292.5 m<sup>3</sup>         |
-| > s<sup>-1</sup>]{.underline}                                                  |
-+-----------------------------------------------------------------------+
+
+
+### Calculation of average net lake inflow                
+**Lake characteristics** 
+- lake area: 215•10^6^ m<sup>2</sup                                            
+- mean annual discharge downstream of lake: 293 m<sup>3</sups<sup>-1</sup             
+- mean annual discharge upstream of lake: 300 m<sup>3</sups<sup>-1</sup               
+
+- mean annual evaporation: 1100 mm yr<sup>-1</sup 
+                               
+**METHOD 1: USING AVERAGE OUTFLOW**                                   
+Assuming lake is in quasi steady-state:                               
+	average net inflow = average net outflow = [293 m<sup>3</sup> s<sup>-1</sup>]{.underline}                                                  
+
+**METHOD 2: USING AVERAGE INFLOW AND EVAPORATION**                    
+Only use this method if no outflow data are available                 
+
+1. Express lake evaporation in m<sup>3</sups<sup>-1</sup>:                       
+   1100 mm yr<sup>-1</sup/ 1000 = 1.1 m yr<sup>-1</sup                               
+   1.1 m yr<sup>-1</supx 215•10^6^ m<sup>2</sup= 2.37•10^8^ m<sup>3</supyr<sup>-1</sup             
+   2.37•10^8^ m<sup>3</supyr<sup>-1</sup/ (365 days x 86400 seconds) = <u>7.5 m<sup>3</sup    
+   s<sup>-1</sup></u>   
+
+2.  Compute net inflow:                                           
+    net inflow = 300 m<sup>3</sups<sup>-1</sup-- 7.5 m<sup>3</sups<sup>-1</sup= <u>292.5 m<sup>3</sup> s<sup>-1</sup></u>
 
 Preparation of input data 
 --------------------------
 
-The lake locations defined on a (nominal) map called '*lakes.map*'. It
-is important that all reservoirs are located on a channel pixel (you can
-verify this by displaying the reservoirs map on top of the channel map).
-Also, since each lake receives its inflow from its upstream neighbouring
-channel pixel, you may want to check if each lake has any upstream
-channel pixels at all (if not, the lake will just gradually empty during
-a model run!). The lake characteristics are described by 4 tables. Table
-3.2 lists all required input.
+The lake locations defined on a (nominal) map called '*lakes.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each lake receives its inflow from its upstream neighbouring channel pixel, you may want to check if each lake has any upstream channel pixels at all (if not, the lake will just gradually empty during a model run!). The lake characteristics are described by 4 tables. Table 3.2 lists all required input.
 
-When you create the map with the lake locations, pay special attention
-to the following: if a lake is located on the most downstream cell (i.e.
-the outflow point, see Figure A3.2), the lake routine may produce
-erroneous output. In particular, the mass balance errors cannot be
-calculated correctly in that case. The same applies if you simulate only
-a sub-catchment of a larger map (by selecting the subcatchment in the
-mask map). This situation can usually be avoided by extending the mask
-map by one cell in downstream direction.
+When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure A3.2), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
--------------------------------------------------- ------------------ ------------------------------------------- ----------- ---------------------------------------
-  ***Table A3.2** Input requirements lake routine*                                                                              
-  **Maps**                                           **Default name**   **Description**                             **Units**   **Remarks**
-  LakeSites                                          lakes.map          lake locations                              \-          nominal
-                                                                                                                                
-  **Tables**                                         **Default name**   **Description**                             **Units**   **Remarks**
-  TabLakeArea                                        lakearea.txt       lake surface area                           m<sup>2</sup>        
-  TabLakeH0                                          lakeh0.txt         water level at which lake outflow is zero   m           relative to average lake bottom level
-  TabLakeA                                           lakea.txt          lake parameter A                            \-          ≈ outlet width in meters
-  TabLakeB                                           lakeb.txt          lake parameter B                            \-          1.5-2
--------------------------------------------------- ------------------ ------------------------------------------- ----------- ---------------------------------------
+Table A3.2 Input requirements lake routine                                                                              
+
+| **Maps**    | **Default name** | **Description**                          |               | **Units**                             | **Remarks** |
+| ----------- | ---------------- | ---------------------------------------- | ------------- | ------------------------------------- | ----------- |
+| LakeSites   | lakes.map        | lake locations                           | -             | nominal                               |             |
+| **Tables**  |                  |                                          |               |                                       |             |
+| TabLakeArea | lakearea.txt     | lake surface area                        | m<sup>2</sup> |                                       |             |
+| TabLakeH0   | lakeh0.txt       | water level at which lake outflowis zero | m             | relative to average lake bottom level |             |
+| TabLakeA    | lakea.txt        | lake parameter A                         | -             | ≈ outlet width in meters              |             |
+| TabLakeB    | lakeb.txt        | lake parameter B                         | -             | 1.5-2                                 |             |
+
+
 
 ![reservoirPlacementNew](media/media/image42.png){width="4.75in"
 height="2.125in"}
 
-*Figure A3.2 Placement of the lakes: lakes on the outflow point (left)
-result in erroneous behavior of the lake routine.*
+*Figure A3.2* Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.
 
 Preparation of settings file
 ----------------------------
 
-All in- and output files need to be defined in the settings file. If you
-are using a default LISFLOOD settings template, all file definitions are
-already defined in the 'lfbinding' element. Just make sure that the map
-with the lake locations is in the "maps" directory, and all tables in
-the 'tables" directory. If this is the case, you only have to specify
-the initial lake level and --if you are using the steady-state option-
-the mean net lake inflow (make this a map if you're simulating multiple
-lakes simultaneously). Both can be set in the 'lfuser' element.
-*LakeInitialLevelValue* can be either a map or a single value. Setting
-*LakeInitialLevelValue* to *-9999* will cause LISFLOOD to calculate the
-steady-state level. So we add this to the 'lfuser' element (if it is not
-there already):
+All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the lake locations is in the "maps" directory, and all tables in the 'tables" directory. If this is the case, you only have to specify the initial lake level and --if you are using the steady-state option- the mean net lake inflow (make this a map if you're simulating multiple lakes simultaneously). Both can be set in the 'lfuser' element. *LakeInitialLevelValue* can be either a map or a single value. Setting *LakeInitialLevelValue* to *-9999* will cause LISFLOOD to calculate the steady-state level. So we add this to the 'lfuser' element (if it is not there already):
 
-+-----------------------------------------------------------------------+
-| \<group\>                                                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| LAKE OPTION                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"LakeInitialLevelValue\" value=\"-9999\"\>            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Initial lake level \[m\]                                              |
-|                                                                       |
-| -9999 sets initial value to steady-state level                        |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"LakeAvNetInflowEstimate\" value=\"292.5\"\>          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Estimate of average net inflow into lake (=inflow -- evaporation)     |
-| \[cu m / s\]                                                          |
-|                                                                       |
-| Used to calculated steady-state lake level in case                    |
-| LakeInitialLevelValue                                                 |
-|                                                                       |
-| is set to -9999                                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \</group\>                                                            |
-+-----------------------------------------------------------------------+
+```xml
+	<group>                                                             	
+	<comment>                                                           	
+	**************************************************************               	
+	LAKE OPTION                                                           	
+	**************************************************************               	
+	</comment>                                                          	
+	<textvar name="LakeInitialLevelValue" value="-9999">            	
+	<comment>                                                           	
+	Initial lake level [m]                                              	
+	-9999 sets initial value to steady-state level                        	
+	</comment>                                                          	
+	</textvar>                                                          	
+	<textvar name="LakeAvNetInflowEstimate" value="292.5">          	
+	<comment>                                                           			
+	Estimate of average net inflow into lake (=inflow -- evaporation)     	
+	[cu m / s]                                                          	
+	Used to calculated steady-state lake level in case                    	
+	LakeInitialLevelValue                                                 	
+	is set to -9999                                                       	
+	</comment>                                                          	
+	</textvar>                                                          	
+	</group>                                                            	
+```
 
-Finally, you have to tell LISFLOOD that you want to simulate lakes! To
-do this, add the following statement to the 'lfoptions' element:
 
-\<setoption name=\"simulateLakes\" choice=\"1\" /\>
 
-Now you are ready to run the model. If you want to compare the model
-results both with and without the inclusion of lakes, you can switch off
-the simulation of lakes either by:
+Finally, you have to tell LISFLOOD that you want to simulate lakes! To do this, add the following statement to the 'lfoptions' element:
 
-5.  Removing the 'simulateLakes' statement from the 'lfoptions element,
-    or
+```xml
+<setoption name="simulateLakes" choice="1" />
+```
 
-6.  changing it into \<setoption name=\"simulateLakes\" choice=\"0\" /\>
 
-Both have exactly the same effect. You don't need to change anything in
-either 'lfuser' or 'lfbinding'; all file definitions here are simply
-ignored during the execution of the model.
+
+Now you are ready to run the model. If you want to compare the model results both with and without the inclusion of lakes, you can switch off the simulation of lakes either by:
+
+- Removing the 'simulateLakes' statement from the 'lfoptions element, or
+- changing it into \<setoption name=\"simulateLakes\" choice=\"0\" /\>
+
+Both have exactly the same effect. You don't need to change anything in either 'lfuser' or 'lfbinding'; all file definitions here are simply ignored during the execution of the model.
 
 Lake output files
 -----------------
 
-The lake routine produces 4 additional time series and one map (or
-stack), as listed in the following table:
+The lake routine produces 4 additional time series and one map (or stack), as listed in the following table:
 
------------------------------------------ ------------------ ----------------------------------- ----------- -------------
-  ***Table A3.3** Output of lake routine*                                                                      
-  **Maps**                                  **Default name**   **Description**                     **Units**   **Remarks**
-  LakeLevelState                            lakhxxxx.xxx       lake level at last time step[^12]   m           
-                                                                                                               
-  **Time series**                           **Default name**   **Description**                     **Units**   **Remarks**
-  LakeInflowTS                              qLakeIn.tss        inflow into lakes                   m<sup>3</sup>/s      
-  LakeOutflowTS                             qLakeOut.tss       flow out of lakes                   m<sup>3</sup>/s      
-  LakeEWTS                                  EWLake.tss         lake evaporation                    mm          
-  LakeLevelTS                               hLake.tss          lake level                          m           
------------------------------------------ ------------------ ----------------------------------- ----------- -------------
+**Table A3.3** Output of lake routine 
 
-Note that you can use the map with the lake level at the last time step
-to define the initial conditions of a succeeding simulation, e.g.:
+| Maps            | Default name | Description                    | Units           |
+| --------------- | ------------ | ------------------------------ | --------------- |
+| LakeLevelState  | lakhxxxx.xxx | lake level at last time step12 | m               |
+| **Time series** |              |                                |                 |
+| LakeInflowTS    | qLakeIn.tss  | inflow into lakes              | m<sup>3</sup>/s |
+| LakeOutflowTS   | qLakeOut.tss | flow out of lakes              | m<sup>3</sup>/s |
+| LakeEWTS        | EWLake.tss   | lake evaporation               | mm              |
+| LakeLevelTS     | hLake.tss    | lake level                     | m               |
 
-\<textvar name=\"LakeInitialLevelValue\"
-value=\"/mycatchment/lakh0000.730\"\>
+Note that you can use the map with the lake level at the last time step to define the initial conditions of a succeeding simulation, e.g.:
 
-[]{#_Toc353538887 .anchor}**Annex 4: Inflow hydrograph option**
+\<textvar name=\"LakeInitialLevelValue\" value=\"/mycatchment/lakh0000.730\"\>
+
+[]{#_Toc353538887 .anchor}
+
+# **Annex 4: Inflow hydrograph option**
 
 Introduction
 ------------
 
-This annex describes the LISFLOOD inflow hydrograph routine, and how it
-is used. Inflow hydrographs are *optional*, and can be activated by
-adding the following line to the 'lfoptions' element:
+This annex describes the LISFLOOD inflow hydrograph routine, and how it is used. Inflow hydrographs are *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"inflow\" choice=\"1\" /\>
+```xml
+	<setoption name="inflow" choice="1" />
+```
+
+
 
 Description of the inflow hydrograph routine
 --------------------------------------------
 
-When using the inflow hydrograph option, time series of discharge
-\[m<sup>3</sup>/s\] are added at some user-defined location(s) on the channel
-network. The inflow is added as side-flow in the channel routing
-equations (this works for both kinematic and dynamic wave). *Negative*
-inflows (i.e. outflows) are also possible, but large outflow rates may
-sometimes result in numerical problems in the routing equations. If you
-use a negative inflow rate, we advise to carefully inspect the model
-output for any signs of numerical problems (i.e. strange oscillations in
-simulated discharge, generation of missing values). Also check the mass
-balance time series after your simulation (numerical problems often
-result in unusually large mass balance errors).
+When using the inflow hydrograph option, time series of discharge \[m<sup>3</sup>/s\] are added at some user-defined location(s) on the channel network. The inflow is added as side-flow in the channel routing equations (this works for both kinematic and dynamic wave). *Negative* inflows (i.e. outflows) are also possible, but large outflow rates may sometimes result in numerical problems in the routing equations. If you use a negative inflow rate, we advise to carefully inspect the model output for any signs of numerical problems (i.e. strange oscillations in simulated discharge, generation of missing values). Also check the mass balance time series after your simulation (numerical problems often result in unusually large mass balance errors).
 
 Using inflow hydrographs 
 -------------------------
 
-The table below lists the input requirements for the inflow hydrograph
-option. All you need is a map that defines where you want to add the
-inflow, and a time series with the corresponding inflow rates.
+The table below lists the input requirements for the inflow hydrograph option. All you need is a map that defines where you want to add the inflow, and a time series with the corresponding inflow rates.
 
---------------------------------------------------------------- ------------------ ---------------------------------- ----------- -------------
-  ***Table A4.1** Input requirements inflow hydrograph routine*                                                                     
-  **Maps**                                                        **Default name**   **Description**                    **Units**   **Remarks**
-  InflowPoints                                                    \-                 locations for inflow hydrographs   \-          nominal
-                                                                                                                                    
-  **Time series**                                                 **Default name**   **Description**                    **Units**   **Remarks**
-  QInTS                                                           \-                 inflow hydrograph(s)               m<sup>3</sup>/s      
---------------------------------------------------------------- ------------------ ---------------------------------- ----------- -------------
+*Table A4.1 Input requirements inflow hydrograph routine*                                                                     
 
-Using the inflow hydrograph option involves four steps:
+| Maps         | Default name | Description                      | Units           | Remarks |
+| ------------ | ------------ | -------------------------------- | --------------- | ------- |
+| InflowPoints | -            | locations for inflow hydrographs | -               | nominal |
+| Time series  |              |                                  |                 |         |
+| QInTS        | -            | inflow hydrograph(s)             | m<sup>3</sup>/s |         |
 
-1.  Create a (nominal) PCRaster map with unique identifiers that point
-    to the location(s) where you want to insert the inflow hydrograph(s)
 
-2.  Save the inflow hydrograph(s) in PCRaster time series format; inflow
-    hydrographs need to be given in \[m<sup>3</sup> s<sup>-1</sup>\]
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **IMPORTANT**: PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the *InflowPoints* map; the second series to unique identifier 2, and so on. So, even if your *InflowPoints* map only contains (as an example) identifiers 3 and 4, you *still need to include the columns for identifiers 1 and 2*!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at *t=1*, even if you set *StepStart* to some higher value. For more info on time series files please have a look at the PCRaster documentation.
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Using the inflow hydrograph option involves **four steps**:
 
-3.  Make sure that the names of the map and time series are defined in
-    the settings file
+1. Create a (nominal) PCRaster map with unique identifiers that point to the location(s) where you want to insert the inflow hydrograph(s)
+2. Save the inflow hydrograph(s) in PCRaster time series format; inflow hydrographs need to be given in [m<sup>3</sup> s<sup>-1</sup>]
 
-In the 'lfuser' element (replace the file paths/names by the ones you
-want to use):
+  > IMPORTANT: PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the InflowPoints map; the second series to unique identifier 2, and so on. So, even if your InflowPoints map only contains (as an example) identifiers 3 and 4, you still need to include the columns for identifiers 1 and 2!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at t=1, even if you set StepStart to some higher value. For more info on time series files please have a look at the PCRaster documentation.
 
-+-----------------------------------------------------------------------+
-| \<group\>                                                             |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| INFLOW HYDROGRAPH (OPTIONAL)                                          |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"InflowPoints\"                                       |
-|                                                                       |
-| value=\"/floods2/yourhomedir/yourcatchment/maps/inlets.map\"\>        |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| OPTIONAL: nominal map with locations of (measured)                    |
-|                                                                       |
-| inflow hydrographs \[cu m / s\]                                       |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"QInTS\"                                              |
-|                                                                       |
-| value=\"/floods2/yourhomedir/yourcatchment/inflow/inflow.tss\"\>      |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| OPTIONAL: observed or simulated input hydrographs as                  |
-|                                                                       |
-| time series \[cu m / s\]                                              |
-|                                                                       |
-| Note that identifiers in time series correspond to                    |
-|                                                                       |
-| InflowPoints map (also optional)                                      |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \</group\>                                                            |
-+-----------------------------------------------------------------------+
+3. Make sure that the names of the map and time series are defined in the settings file
 
-4.  Activate the inflow hydrograph option
+In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
-Add the following line to the 'lfoptions' element:
+```xml
+	<group>                                                             
+	<comment>                                                           
+	**************************************************************               
+	INFLOW HYDROGRAPH (OPTIONAL)                                          
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="InflowPoints"                                       
+	value="/floods2/yourhomedir/yourcatchment/maps/inlets.map">        
+	<comment>                                                           
+	OPTIONAL: nominal map with locations of (measured)                    
+	inflow hydrographs [cu m / s]                                       
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="QInTS"                                              
+	value="/floods2/yourhomedir/yourcatchment/inflow/inflow.tss">      
+	<comment>                                                           
+	OPTIONAL: observed or simulated input hydrographs as                  
+	time series [cu m / s]                                              
+	Note that identifiers in time series correspond to                    
+	InflowPoints map (also optional)                                      
+	</comment>                                                          
+	</textvar>                                                          
+	</group>                                                            
+```
 
-\<setoption name=\"inflow\" choice=\"1\" /\>
+4.  Activate the inflow hydrograph option by adding the following line to the 'lfoptions' element:
+
+```xml
+	<setoption name="inflow" choice="1" />
+```
 
 Now you are ready to run the model with the inflow hydrograph.
 
 Substituting subcatchments with measured inflow hydrographs
 -----------------------------------------------------------
 
-One of the most common uses of the inflow hydrograph option is this:
-suppose we have a catchment where we only want to simulate the
-downstream part. If measured time series of discharge are available for
-the upstream catchment(s), we can use these to represent the inflow into
-the more downstream part. Figure A4.1 shows an example, where we have
-measured discharge of subcatchment *A* (just before it enters the main
-river). In this case it is important to pay special attention to two
-issues.
+One of the most common uses of the inflow hydrograph option is this: suppose we have a catchment where we only want to simulate the downstream part. If measured time series of discharge are available for the upstream catchment(s), we can use these to represent the inflow into the more downstream part. Figure A4.1 shows an example, where we have measured discharge of subcatchment *A* (just before it enters the main river). In this case it is important to pay special attention to two issues.
 
 ### Exclude subcatchments from MaskMap 
 
-First, make sure that subcatchment *A* is *excluded* (i.e. have
-boolean(0) or missing value) on LISFLOOD's *MaskMap* (which defines
-which pixels are included in the calculations and which are not). If you
-include it, LISFLOOD will first *simulate* discharge coming out of
-subcatchment *A*, and then *add* the (measured) inflow on top of it! Of
-course this doesn't make any sense, so always be careful which areas are
-included in your simulation and which are not.
+First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or missing value) on LISFLOOD's *MaskMap* (which defines which pixels are included in the calculations and which are not). If you include it, LISFLOOD will first *simulate* discharge coming out of subcatchment *A*, and then *add* the (measured) inflow on top of it! Of course this doesn't make any sense, so always be careful which areas are included in your simulation and which are not.
 
 ![](media/media/image46.emf){width="6.0in" height="4.333333333333333in"}
 
-*Figure A4.1 Using the inflow hydrograph using measured discharge of
-subcatchment A. MaskMap must have boolean(0) (or missing value) for
-subcatchment A, see text for explanation.*
+*Figure A4.1 Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text for explanation.*
 
 ### Make sure your inflow points are where you need them
 
-If you already have all gauge locations on a PCRaster map, these mostly
-cannot be used directly as inflow hydrograph locations. The reason is
-simple: suppose --in our previous example-- we know the outflow point of
-subcatchment *A*. This point is the most downstream point within that
-subcatchment. However, the flow out of subcatchment *A* is actually
-added to the main river one cell downstream! Also, if we exclude
-subcatchment *A* from our simulation (as explained in the foregoing),
-this means we also exclude the outflow point of that subcatchment.
-Because of this, *inflow* points into the main river are usually located
-one pixel downstream of the *outflow* points of the corresponding
-subcatchment. If you already have a (nominal) map of of your
-subcatchments, a PCRaster script exists that automatically calculates
-the corresponding out- and inflow points.
+If you already have all gauge locations on a PCRaster map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
+one pixel downstream of the *outflow* points of the corresponding subcatchment. If you already have a (nominal) map of of your subcatchments, a PCRaster script exists that automatically calculates the corresponding out- and inflow points.
 
-[]{#_Toc353538894 .anchor}**Annex 5: Double kinematic wave option**
+[]{#_Toc353538894 .anchor}
+
+# **Annex 5: Double kinematic wave option**
 
 Introduction
 ------------
 
-This annex describes the LISFLOOD double kinematic wave routine, and how
-it is used. Double kinematic wave routing is *optional*, and can be
-activated by adding the following line to the 'lfoptions' element:
+This annex describes the LISFLOOD double kinematic wave routine, and how it is used. Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"SplitRouting\" choice=\"1\" /\>
+```xml
+	<setoption name="SplitRouting" choice="1" />
+```
+
+
 
 Background
 ----------
 
-The flow routing is done by the kinematic wave approach. Therefore two
-equations have to be solved:
+The flow routing is done by the kinematic wave approach. Therefore two equations have to be solved:
 
-\$\\frac{{\\partial Q}}{{\\partial x}} + \\frac{{\\partial
-A}}{{\\partial t}} = q\$ \$\\rho {\\kern 1pt} gA({S\_0} - {S\_f}) = 0\$
+\$\\frac{{\\partial Q}}{{\\partial x}} + \\frac{{\\partial A}}{{\\partial t}} = q\$ \$\\rho {\\kern 1pt} gA({S\_0} - {S\_f}) = 0\$
 where \$A = \\alpha \\cdot {Q\^\\beta }\$
 
-continuity equation momentum equation as expressed by Chow et al. 1988
-
-Which decreasing inflow the peaks of the resulting outflow will be later
-in time (see figure A5.1 for a simple kinematic wave calculation). The
-wave propagation slows down because of more friction on the boundaries.
+continuity equation momentum equation as expressed by Chow et al. 1988. Which decreasing inflow the peaks of the resulting outflow will be later in time (see figure A5.1 for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
 
 ![](media/media/image47.emf){width="5.864583333333333in"
 height="2.75in"}
 
-**Figure A5.1** Simulated outflow for different amount of inflow\
-wave propagation gets slower
+**Figure A5.1** Simulated outflow for different amount of inflow wave propagation gets slower
 
 This is realistic if your channel looks like in figure A5.2:
 
@@ -1890,8 +1371,7 @@ This is realistic if your channel looks like in figure A5.2:
 height="1.5270833333333333in"}![](media/media/image49.emf){width="1.9465277777777779in"
 height="1.45in"}
 
-**Figure A5.2** Schematic cross section of a channel with different
-water level
+**Figure A5.2** Schematic cross section of a channel with different water level
 
 But a natural channel looks more like this:
 
@@ -1900,22 +1380,16 @@ height="1.617361111111111in"}
 
 **Figure A5.3** Schematic cross section of a natural channel
 
-Which means, opposite to the kinematic wave theory, the wave propagation
-gets slower as the discharge is increasing, because friction is going up
-on floodplains with shrubs, trees, bridges. Some of the water is even
-stored in the floodplains (e.g. retention areas, seepage retention). As
-a result of this, a single kinematic wave cannot cover these different
-characteristics of floods and floodplains.
+Which means, opposite to the kinematic wave theory, the wave propagation gets slower as the discharge is increasing, because friction is going up on floodplains with shrubs, trees, bridges. Some of the water is even stored in the floodplains (e.g. retention areas, seepage retention). As a result of this, a single kinematic wave cannot cover these different characteristics of floods and floodplains.
 
 Double kinematic wave approach
 ------------------------------
 
-The double kinematic approach splits up the channel in two parts (see
-figure A5.4):
+The double kinematic approach splits up the channel in two parts (see figure A5.4):
 
-1\. bankful routing
+​	1\. bankful routing
 
-2\. over bankful routing
+​	2\. over bankful routing
 
 ![](media/media/image54.emf){width="3.142361111111111in"
 height="1.3833333333333333in"}![](media/media/image55.emf){width="1.95in"
@@ -1923,260 +1397,153 @@ height="1.375in"}
 
 F**igure A5.4** Channel is split in a bankful and over bankful routing
 
-Similar methods are used since the 1970s e.g. as multiple linear or non
-linear storage cascade (Chow, 1988). The former forecasting model for
-the River Elbe (ELBA) used a three stages approach depending on
-discharge (Fröhlich, 1996).
+Similar methods are used since the 1970s e.g. as multiple linear or non linear storage cascade (Chow, 1988). The former forecasting model for the River Elbe (ELBA) used a three stages approach depending on discharge (Fröhlich, 1996).
 
 Using double kinematic wave 
 ----------------------------
 
-No additional maps or tables are needed for initializing the double
-kinematic wave. A normal run ('InitLisflood'=0) requires an additional
-map derived from the prerun ('InitLisflood'=1). A 'warm' start (using
-initial values from a previous run) requires two additional maps with
-state variables for the second (over 'bankful' routing).
+No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). A 'warm' start (using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
 
-+-------------+-------------+-------------+-------------+-------------+
-| ***Table    |
-| A5.1**      |
-| Input/outpu |
-| t           |
-| double      |
-| kinematic   |
-| wave*       |
-+-------------+-------------+-------------+-------------+-------------+
-| **Maps**    | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| Average     | avgdis.map  | Average     | m<sup>3</sup>/s      | Produced by |
-| discharge   |             | discharge   |             | prerun      |
-+-------------+-------------+-------------+-------------+-------------+
-| CrossSectio | ch2cr000.xx | channel     | m<sup>2</sup>        | Produced by |
-| n2Area\     | x           | crosssectio |             | option      |
-| InitValue   |             | n           |             |             |
-|             |             | for 2nd     |             | 'repStateMa |
-|             |             | routing     |             | ps'         |
-|             |             | channel     |             | or          |
-|             |             |             |             |             |
-|             |             |             |             | 'repEndMaps |
-|             |             |             |             | '           |
-+-------------+-------------+-------------+-------------+-------------+
-| PrevSideflo | chside00.xx | sideflow    | mm          |             |
-| wInitValue  | x           | into the    |             |             |
-|             |             | channel     |             |             |
-+-------------+-------------+-------------+-------------+-------------+
+***Table A5.1**  Input/output double kinematic wave*   
 
-Using the double kinematic wave approach option involves three steps:
+| Maps                       | Default name | Description                                  | Units           | Remarks                                           |
+| -------------------------- | ------------ | -------------------------------------------- | --------------- | ------------------------------------------------- |
+| Average discharge          | avgdis.map   | Average discharge                            | m<sup>3</sup>/s | Produced by prerun                                |
+| CrossSection2AreaInitValue | ch2cr000.xxx | channel crosssection for 2nd routing channel | m<sup>2</sup>   | Produced by option 'repStateMaps' or 'repEndMaps' |
+| PrevSideflowInitValue      | chside00.xxx | sideflow into the channel                    | mm              |                                                   |
 
-1.  In the 'lfuser' element (replace the file paths/names by the ones
-    you want to use):
 
-+------------------------------------------------------------------------+
-| \</textvar\>                                                           |
-|                                                                        |
-| \<textvar name=\"CalChanMan2\" value=\"8.5\"\>                         |
-|                                                                        |
-| \<comment\>                                                            |
-|                                                                        |
-| Channel Manning\'s n for second line of routing                        |
-|                                                                        |
-| \</comment\>                                                           |
-|                                                                        |
-| \</textvar\>                                                           |
-|                                                                        |
-| \<textvar name=\"QSplitMult\" value=\"2.0\"\>                          |
-|                                                                        |
-| \<comment\>                                                            |
-|                                                                        |
-| Multiplier applied to average Q to split into a second line of routing |
-|                                                                        |
-| \</comment\>                                                           |
-|                                                                        |
-| \</textvar\>                                                           |
-+------------------------------------------------------------------------+
 
-> *CalChanMan2* is a multiplier that is applied to the Manning's
-> roughness maps of the over bankful routing \[-\]
->
-> *QSplitMult* is a factor to the average discharge to determine the
-> bankful discharge. The average discharge map is produced in the
-> initial run (the initial run is already needed to get the groundwater
-> storage) . Standard is set to 2.0 (assuming over bankful discharge
-> starts at 2.0·average discharge).
+Using the double kinematic wave approach option involves **three steps**:
 
-2.  Activate the transmission loss option
+1.  In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
-Add the following line to the 'lfoptions' element:
+```xml
+	</textvar>                                                           
+	<textvar name="CalChanMan2" value="8.5">                         
+	<comment>                                                            
+	Channel Manning's n for second line of routing                        
+	</comment>                                                           
+	</textvar>                                                           
+	<textvar name="QSplitMult" value="2.0">                          
+	<comment>                                                            
+	Multiplier applied to average Q to split into a second line of routing 
+	</comment>                                                           
+	</textvar>                                                           
+```
 
-\<setoption name=\"SplitRouting\" choice=\"1\" /\>
+*CalChanMan2* is a multiplier that is applied to the Manning's roughness maps of the over bankful routing [-]
+
+*QSplitMult* is a factor to the average discharge to determine the bankful discharge. The average discharge map is produced in the initial run (the initial run is already needed to get the groundwater storage). Standard is set to 2.0 (assuming over bankful discharge starts at 2.0·average discharge).
+
+2.  Activate the transmission loss option by adding the following line to the 'lfoptions' element:
+
+```xml
+	<setoption name="SplitRouting" choice="1" />
+```
 
 3. Run LISFLOOD first with
 
-    \<setoption name=\"InitLisflood\" choice=\"1\" /\>
+```xml
+	<setoption name="InitLisflood" choice="1" />
+```
 
-and it will produce a map of average discharge \[m<sup>3</sup>/s\] in the initial
-folder. This map is used together with the QSplitMult factor to set the
-value for the second line of routing to start.
+and it will produce a map of average discharge \[m<sup>3</sup>/s\] in the initial folder. This map is used together with the QSplitMult factor to set the value for the second line of routing to start.
 
 For a 'warm start' these initial values are needed (see also table A5.1)
 
-+-----------------------------------------------------------------+
-| \<textvar name=\"CrossSection2AreaInitValue\" value=\"-9999\"\> |
-|                                                                 |
-| \<comment\>                                                     |
-|                                                                 |
-| initial channel crosssection for 2nd routing channel            |
-|                                                                 |
-| -9999: use 0                                                    |
-|                                                                 |
-| \</comment\>                                                    |
-|                                                                 |
-| \</textvar\>                                                    |
-|                                                                 |
-| \<textvar name=\"PrevSideflowInitValue\" value=\"-9999\"\>      |
-|                                                                 |
-| \<comment\>                                                     |
-|                                                                 |
-| initial sideflow for 2nd routing channel                        |
-|                                                                 |
-| -9999: use 0                                                    |
-|                                                                 |
-| \</comment\>                                                    |
-|                                                                 |
-| \</textvar\>                                                    |
-+-----------------------------------------------------------------+
+```xml
+	<textvar name="CrossSection2AreaInitValue" value="-9999"> 
+	<comment>                                                     
+	initial channel crosssection for 2nd routing channel            
+	-9999: use 0                                                    
+	</comment>                                                    
+	</textvar>                                                    
+	<textvar name="PrevSideflowInitValue" value="-9999">      
+	<comment>                                                     
+	initial sideflow for 2nd routing channel                        
+	-9999: use 0                                                    
+	</comment>                                                    
+	</textvar>                                                    
+```
 
-> *CrossSection2AreaInitValue* is the initial cross-sectional area
-> \[m<sup>2</sup>\] of the water in the river channels (a substitute for initial
-> discharge, which is directly dependent on this). A value of *-9999*
-> sets the initial amount of water in the channel to 0.
->
-> *PrevSideflowInitValue* is the initial inflow from each pixel to the
-> channel \[mm\]. A value of *-9999* sets the initial amount of sideflow
-> to the channel to 0.
+*CrossSection2AreaInitValue* is the initial cross-sectional area [m<sup>2</sup>] of the water in the river channels (a substitute for initial discharge, which is directly dependent on this). A value of -9999 sets the initial amount of water in the channel to 0.
 
-Automatic change of the number of sub steps (optional)
-------------------------------------------------------
+*PrevSideflowInitValue* is the initial inflow from each pixel to the channel [mm]. A value of -9999 sets the initial amount of sideflow to the channel to 0.
+
+## Automatic change of the number of sub steps (optional)
 
 For the new method the kinematic wave has to be applied two times.
 
-The calculation of kinematic wave is the most time consuming part in a
-LISFLOOD run (in general but also depending on the catchment). The use
-of the double kinematic wave makes it necessary to calculate the
-kinematic wave two times and increasing the computing time. To
-counteract this, an option is put in place to change automatically the
-number of sub steps for channel routing.
+The calculation of kinematic wave is the most time consuming part in a LISFLOOD run (in general but also depending on the catchment). The use of the double kinematic wave makes it necessary to calculate the
+kinematic wave two times and increasing the computing time. To counteract this, an option is put in place to change automatically the number of sub steps for channel routing.
 
-Double kinematic wave routing is *optional*, and can be activated by
-adding the following line to the 'lfoptions' element:
+Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"VarNoSubStepChannel\" choice=\"1\" /\>
+```xml
+	<setoption name="VarNoSubStepChannel" choice="1" />
+```
 
-This will calculate the number of sub steps for the kinematic wave
-according to the discharge. Less number of steps for low and average
-flow condition, more sub steps for flooding condition because the higher
-velocity of water.
+This will calculate the number of sub steps for the kinematic wave according to the discharge. Less number of steps for low and average flow condition, more sub steps for flooding condition because the higher velocity of water.
 
-Activating this option needs to be done before the prerun
-('InitLisflood'=1) because the maximum celerity of wave propagation
-(chanckinmax.map) is created as another initial map and used in the
-'normal' runs.
+Activating this option needs to be done before the prerun ('InitLisflood'=1) because the maximum celerity of wave propagation (chanckinmax.map) is created as another initial map and used in the 'normal' runs.
 
-The minimum and maximum number of sub steps can be set in the settings
-file:
+The minimum and maximum number of sub steps can be set in the settings file:
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| Variable Channel NoSubStepChannel                                     |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"UpLimit\" value=\"1.0E+9\"\>                         |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Upstream area do be included in max. celerity                         |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"MinNoStep\" value=\"5\"\>                            |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| minimum number of sub steps for channel                               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ChanA\" value=\"30\"\>                               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| max. NoSubStepsChannel = ChanA-ChanB                                  |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"ChanB\" value=\"10\"\>                               |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| For calculating the min. No. of substeps                              |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	Variable Channel NoSubStepChannel                                     
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="UpLimit" value="1.0E+9">                         
+	<comment>                                                           
+	Upstream area do be included in max. celerity                         
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="MinNoStep" value="5">                            
+	<comment>                                                           
+	minimum number of sub steps for channel                               
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ChanA" value="30">                               
+	<comment>                                                           
+	max. NoSubStepsChannel = ChanA-ChanB                                  
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="ChanB" value="10">                               
+	<comment>                                                           
+	For calculating the min. No. of substeps                              
+	</comment>                                                          
+	</textvar>                                                          
+```
 
-> *UpLimit* is the minimum upstream area do be included in the
-> calculation of the maximum celerity of wave propagation \[m<sup>2</sup>\]
->
-> *MinNoStep* is the absolute minimum number of sub steps for channel
-> routing \[-\]
->
-> *ChanA* for calculating the maximum number of sub steps for channel
-> routing \[-\]
->
-> *ChanB* for calculating the minimum number of sub steps for channel
-> routing \[-\]
 
-[]{#_Toc353538900 .anchor}**Annex 6: Dynamic wave option**
+
+*UpLimit* is the minimum upstream area do be included in the calculation of the maximum celerity of wave propagation [m<sup>2</sup>]
+*MinNoStep* is the absolute minimum number of sub steps for channel routing [-]
+*ChanA* for calculating the maximum number of sub steps for channel routing [-]
+*ChanB* for calculating the minimum number of sub steps for channelrouting [-]
+
+[]{#_Toc353538900 .anchor}
+
+# **Annex 6: Dynamic wave option**
 
 Introduction
 ------------
 
-This annex describes the LISFLOOD dynamic wave routine, and how it is
-used. The current implementation of the dynamic wave function in
-PCRaster is not a complete dynamic wave formulation according to the
-summary of the Saint Venant equations as discussed in Chow (1988). The
-implementation currently consists of the friction force term, the
-gravity force term and the pressure force term and should therefore be
-correctly characterised as a diffusion wave formulation. The equations
-are solved as an explicit, finite forward difference scheme. A
-straightforward iteration using an Euler solution scheme is used to
-solve these equations. Dynamic wave routing is *optional*, and can be
-activated by adding the following line to the 'lfoptions' element:
+This annex describes the LISFLOOD dynamic wave routine, and how it is used. The current implementation of the dynamic wave function in PCRaster is not a complete dynamic wave formulation according to the summary of the Saint Venant equations as discussed in Chow (1988). The implementation currently consists of the friction force term, the gravity force term and the pressure force term and should therefore be correctly characterised as a diffusion wave formulation. The equations are solved as an explicit, finite forward difference scheme. A straightforward iteration using an Euler solution scheme is used to solve these equations. Dynamic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"dynamicWave\" choice=\"1\" /\>
+```xml
+	<setoption name="dynamicWave" choice="1" />
+```
+
+
 
 Time step selection
 -------------------
 
-The current dynamic wave implementation requires that all equations are
-solved using a time step that is much smaller (order of magnitude:
-seconds-minutes) than the typical overall time step used by LISFLOOD
+The current dynamic wave implementation requires that all equations are solved using a time step that is much smaller (order of magnitude: seconds-minutes) than the typical overall time step used by LISFLOOD
 (order of magnitude: hours-day). More specifically, during one (sub)
 time step no water should be allowed to travel more than 1 cell
 downstream, i.e.:
