@@ -1544,215 +1544,114 @@ Time step selection
 -------------------
 
 The current dynamic wave implementation requires that all equations are solved using a time step that is much smaller (order of magnitude: seconds-minutes) than the typical overall time step used by LISFLOOD
-(order of magnitude: hours-day). More specifically, during one (sub)
-time step no water should be allowed to travel more than 1 cell
-downstream, i.e.:
+(order of magnitude: hours-day). More specifically, during one (sub) time step no water should be allowed to travel more than 1 cell downstream, i.e.:
 
 \$\\Delta \'{t\_{dyn}} \\le \\frac{{\\Delta x}}{{V + {c\_d}}}\$
 
-where *∆'t<sub>dyn</sub>* is the sub-step for the dynamic wave \[seconds\], *∆x*
-is the length of one channel element (pixel) \[m\], *V* is the flow
-velocity \[m s<sup>-1</sup>\] and *c<sub>d</sub>* is dynamic wave celerity \[m s<sup>-1</sup>\].
+where *∆'t<sub>dyn</sub>* is the sub-step for the dynamic wave \[seconds\], *∆x* is the length of one channel element (pixel) \[m\], *V* is the flow velocity \[m s<sup>-1</sup>\] and *c<sub>d</sub>* is dynamic wave celerity \[m s<sup>-1</sup>\]. 
+
 The dynamic wave celerity can be calculated as (Chow, 1988):
 
 \${c\_d} = \\sqrt {gy} \$
 
-where *g* is the acceleration by gravity \[m s<sup>-2</sup>\] and *y* is the
-depth of flow \[m\]. For a cross-section of a regular geometric shape,
-*y* can be calculated from the channel dimensions. Since the current
-dynamic wave routine uses irregularly shaped cross-section data, we
-simply assume than *y* equals the water level above the channel bed. The
-flow velocity is simply:
+where *g* is the acceleration by gravity \[m s<sup>-2</sup>\] and *y* is the depth of flow \[m\]. For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. The flow velocity is simply:
 
 \$V = {Q\_{ch}}/A\$
 
-where *Q<sub>ch</sub>* is the discharge in the channel \[m<sup>3</sup> s<sup>-1</sup>\], and *A*
-the cross-sectional area \[m<sup>2</sup>\].
+where *Q<sub>ch</sub>* is the discharge in the channel \[m<sup>3</sup> s<sup>-1</sup>\], and *A* the cross-sectional area \[m<sup>2</sup>\].
 
-The Courant number for the dynamic wave, *C<sub>dyn</sub>*, can now be computed
-as:
+The Courant number for the dynamic wave, *C<sub>dyn</sub>*, can now be computed as:
 
 $C_{dyn} = \frac{(V + c_d)\Delta t}{\Delta x}$
 
-where *∆t* is the overall model time step \[s\]. The number of sub-steps
-is then given by:
+where *∆t* is the overall model time step \[s\]. The number of sub-steps is then given by:
 
 $SubSteps = \max (1,roundup(\frac{C_{dyn}}{C_{dyn,crit}}))$
 
-where *C<sub>dyn,crit</sub>* is the critical Courant number. The maximum value of
-the critical Courant number is 1; in practice it is safer to use a
-somewhat smaller value (although if you make it too small the model
-becomes excessively slow). It is recommended to stick to the default
-value (0.4) that is used the settings file template.
+where *C<sub>dyn,crit</sub>* is the critical Courant number. The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
 
 Input data 
 -----------
 
-A number of addition input files are necessary to use the dynamic wave
-option. First, the channel stretches for which the dynamic wave is to be
-used are defined on a Boolean map. Next, a cross-section identifier map
-is needed that links the (dynamic wave) channel pixels to the
-cross-section table (see further on). A channel bottom level map
-describes the bottom level of the channel (relative to sea level).
-Finally, a cross-section table describes the relationship between water
-height (*H*), channel cross-sectional area (*A*) and wetted perimeter
-(*P*) for a succession of *H* levels.
+A number of addition input files are necessary to use the dynamic wave option. First, the channel stretches for which the dynamic wave is to be used are defined on a Boolean map. Next, a cross-section identifier map is needed that links the (dynamic wave) channel pixels to the cross-section table (see further on). A channel bottom level map describes the bottom level of the channel (relative to sea level). Finally, a cross-section table describes the relationship between water height (*H*), channel cross-sectional area (*A*) and wetted perimeter (*P*) for a succession of *H* levels.
 
 The following table lists all required input:
 
-+-------------+-------------+-------------+-------------+-------------+
-| ***Table    |
-| A6.1**      |
-| Input       |
-| requirement |
-| s           |
-| dynamic     |
-| wave        |
-| routine*    |
-+-------------+-------------+-------------+-------------+-------------+
-| **Maps**    | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| ChannelsDyn | chandyn.map | dynamic     | \-          | Boolean     |
-| amic        |             | wave        |             |             |
-|             |             | channels    |             |             |
-|             |             | (1,0)       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| ChanCrossSe | chanxsect.m | channel     | \-          | nominal     |
-| ctions      | ap          | cross       |             |             |
-|             |             | section IDs |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| ChanBottomL | chblevel.ma | channel     | \[m\]       |             |
-| evel        | p           | bottom      |             |             |
-|             |             | level       |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-|             |             |             |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| **Tables**  | **Default   | **Descripti | **Units**   | **Remarks** |
-|             | name**      | on**        |             |             |
-+-------------+-------------+-------------+-------------+-------------+
-| TabCrossSec | chanxsect.t | cross       | H:\[m\]     |             |
-| tions       | xt          | section     |             |             |
-|             |             | parameter   | A:\[m<sup>2</sup>\]  |             |
-|             |             | table       |             |             |
-|             |             | (H,A,P)     | P:\[m\]     |             |
-+-------------+-------------+-------------+-------------+-------------+
+***Table A6.1**  Input requirements dynamic wave routine* 
+
+| Maps              | Default name  | Description                           | Units                                   | Remarks |
+| ----------------- | ------------- | ------------------------------------- | --------------------------------------- | ------- |
+| ChannelsDynamic   | chandyn.map   | dynamic wave channels (1,0)           | -                                       | Boolean |
+| ChanCrossSections | chanxsect.map | channel cross section IDs             | -                                       | nominal |
+| ChanBottomLevel   | chblevel.map  | channel bottom level                  | [m]                                     |         |
+| **Tables**        |               |                                       |                                         |         |
+| TabCrossSections  | chanxsect.txt | cross section parameter table (H,A,P) | H:[m] <br> A:[m<sup>2</sup>] <br> P:[m] |         |
+
+
 
 Layout of the cross-section parameter table
 -------------------------------------------
 
-The cross-section parameter table is a text file that contains --for
-each cross-section- a sequence of water levels (*H*) with their
-corresponding cross-sectional area (*A*) and wetted perimeter (*P*). The
-format of each line is as follows:
+The cross-section parameter table is a text file that contains --for each cross-section- a sequence of water levels (*H*) with their corresponding cross-sectional area (*A*) and wetted perimeter (*P*). The format of each line is as follows:
 
 > ID H A P
 
 As an example:
 
+```xml
 +---------------------------------+
 | ID H A P                        |
-|                                 |
 | 167 0 0 0                       |
-|                                 |
 | 167 1.507 103.044 114.183       |
-|                                 |
 | 167 3.015 362.28 302.652        |
-|                                 |
 | 167 4.522 902.288 448.206       |
-|                                 |
 | 167 6.03 1709.097 600.382       |
-|                                 |
 | 167 6.217 1821.849 609.433      |
-|                                 |
 | 167 6.591 2049.726 615.835      |
-|                                 |
 | 167 6.778 2164.351 618.012      |
-|                                 |
 | 167 6.965 2279.355 620.14       |
-|                                 |
 | 167 7.152 2395.037 626.183      |
-|                                 |
 | 167 7.526 2629.098 631.759      |
-|                                 |
 | 167 7.713 2746.569 634.07       |
-|                                 |
 | 167 7.9 2864.589 636.93         |
-|                                 |
 | 167 307.9 192201.4874 5225.1652 |
-+=================================+
-|                                 |
 +---------------------------------+
+```
 
-Note here that the first *H*-level is always 0, for which *A* and *P*
-are (of course) 0 as well. For the last line for each cross-section it
-is recommended to use some very (i.e. unrealistically) high *H*-level.
-The reason for doing this is that the dynamic wave routine will crash if
-during a simulation a water level (or cross-sectional area) is simulated
-which is beyond the range of the table. This can occur due to a number
-of reasons (e.g. if the measured cross-section is incomplete, or during
-calibration of the model). To estimate the corresponding values of *A*
-and *P* one could for example calculate *dA/dH* and *dP/dH* over the
-last two 'real' (i.e. measured) *H*-levels, and extrapolate the results
-to a very high *H*-level.
 
-The number of H/A/P combinations that are used for each cross section is
-user-defined. LISFLOOD automatically interpolates in between the table
-values.
+
+Note here that the first *H*-level is always 0, for which *A* and *P* are (of course) 0 as well. For the last line for each cross-section it is recommended to use some very (i.e. unrealistically) high *H*-level. The reason for doing this is that the dynamic wave routine will crash if during a simulation a water level (or cross-sectional area) is simulated which is beyond the range of the table. This can occur due to a number of reasons (e.g. if the measured cross-section is incomplete, or during calibration of the model). To estimate the corresponding values of *A* and *P* one could for example calculate *dA/dH* and *dP/dH* over the last two 'real' (i.e. measured) *H*-levels, and extrapolate the results to a very high *H*-level.
+
+The number of H/A/P combinations that are used for each cross section is user-defined. LISFLOOD automatically interpolates in between the table values.
 
 Using the dynamic wave
 ----------------------
 
-The 'lfuser' element contains two parameters that can be set by the
-user: *CourantDynamicCrit* (which should always be smaller than 1) and a
-parameter called *DynWaveConstantHeadBoundary*, which defines the
-boundary condition at the most downstream cell. All remaining
-dynamic-wave related input is defined in the 'lfbinding' element, and
-doesn't require any changes from the user (provided that all default
-names are used, all maps are in the standard 'maps' directory and the
-profile table is in the 'tables' directory). In 'lfuser' this will look
-like this:
+The 'lfuser' element contains two parameters that can be set by the user: *CourantDynamicCrit* (which should always be smaller than 1) and a parameter called *DynWaveConstantHeadBoundary*, which defines the boundary condition at the most downstream cell. All remaining dynamic-wave related input is defined in the 'lfbinding' element, and doesn't require any changes from the user (provided that all default names are used, all maps are in the standard 'maps' directory and the profile table is in the 'tables' directory). In 'lfuser' this will look like this:
 
-+-----------------------------------------------------------------------+
-| \<comment\>                                                           |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| DYNAMIC WAVE OPTION                                                   |
-|                                                                       |
-| \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\ |
-| *\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*               |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \<textvar name=\"CourantDynamicCrit\" value=\"0.5\"\>                 |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Critical Courant number for dynamic wave                              |
-|                                                                       |
-| value between 0-1 (smaller values result in greater numerical         |
-| accuracy,                                                             |
-|                                                                       |
-| but also increase computational time)                                 |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-|                                                                       |
-| \<textvar name=\"DynWaveConstantHeadBoundary\" value=\"0\"\>          |
-|                                                                       |
-| \<comment\>                                                           |
-|                                                                       |
-| Constant head \[m\] at most downstream pixel (relative to altitude    |
-|                                                                       |
-| at most downstream pixel)                                             |
-|                                                                       |
-| \</comment\>                                                          |
-|                                                                       |
-| \</textvar\>                                                          |
-+-----------------------------------------------------------------------+
+```xml
+	<comment>                                                           
+	**************************************************************               
+	DYNAMIC WAVE OPTION                                                   
+	**************************************************************               
+	</comment>                                                          
+	<textvar name="CourantDynamicCrit" value="0.5">                 
+	<comment>                                                           
+	Critical Courant number for dynamic wave                              
+	value between 0-1 (smaller values result in greater numerical         
+	accuracy,                                                             
+	but also increase computational time)                                 
+	</comment>                                                          
+	</textvar>                                                          
+	<textvar name="DynWaveConstantHeadBoundary" value="0">          
+	<comment>                                                           
+	Constant head [m] at most downstream pixel (relative to altitude    
+	at most downstream pixel)                                             
+	</comment>                                                          
+	</textvar>                                                          
+```
+
+
 
 Annex 7: Using the transmission loss option
 ===========================================
@@ -1760,16 +1659,9 @@ Annex 7: Using the transmission loss option
 Introduction
 ------------
 
-This annex describes the LISFLOOD transmission loss routine, and how it
-is used.
+This annex describes the LISFLOOD transmission loss routine, and how it is used.
 
-The term 'transmission loss' originate from electronic or communication
-science and stands for: "The loss of power or voltage of a transmitted
-wave or current in passing along a transmission line or path or through
-a circuit device". In river systems, particularly in semi-arid and arid
-region a similar effect can be observed: The loss of water along channel
-reaches mainly especially during low and average flow periods. Main
-reasons for this loss might be:
+The term 'transmission loss' originate from electronic or communication science and stands for: "The loss of power or voltage of a transmitted wave or current in passing along a transmission line or path or through a circuit device". In river systems, particularly in semi-arid and arid region a similar effect can be observed: The loss of water along channel reaches mainly especially during low and average flow periods. Main reasons for this loss might be:
 
 -   Evaporation of water inside the channel reach
 
@@ -1777,50 +1669,37 @@ reasons for this loss might be:
 
 -   Leaching to lower groundwater zones
 
-A simplified approach to model this effect has been chosen from Rao and
-Maurer (1996), without the need of additional data and with only three
-parameters, making calibration relatively simple.
+A simplified approach to model this effect has been chosen from Rao and Maurer (1996), without the need of additional data and with only three parameters, making calibration relatively simple.
 
-Transmission loss is *optional*, and can be activated by adding the
-following line to the 'lfoptions' element:
+Transmission loss is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"TransLoss\" choice=\"1\" /\>
+```xml
+	<setoption name="TransLoss" choice="1" />
+```
+
+
 
 Description of the transmission loss approach
 ---------------------------------------------
 
-The approach by Rao and Maurer 1996 builds a one-parameter relationship
-between the seepage ofa channel with the depth of flow. A power
-relationship is then utilized for the stage-discharge relationship,
-which is coupled with the seepage relationship.
+The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage ofa channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
-> \$Outflow = {\\left( {Inflo{w\^{\\frac{1}{{TransPower}}}} - TransSub}
-> \\right)\^{TransPower}}\$
->
-> with: Outflow: discharge at the outflow
->
-> Inflow: discharge at the Inflow (upstream)
->
-> TransPower: Parameter given by the rating curve
->
-> TransSub: Parameter which is to calibrate
+$Outflow = {\left( {Inflo{w\^{\frac{1}{{TransPower}}}} - TransSub} \right)\^{TransPower}}$
 
-As a main difference to the Rao and Maurer 1996, the TransPower
-parameter is not calculated by using a rating curve but is estimated
-(calibrated) as the parameter TransSub. Transmission loss takes place
-where the channel gets bigger with more influence of river-aquifer
-interaction and also with more river-floodplain interaction. Therefore a
-minimum upstream area is defined where transmission loss starts to get
-important.
+with: 
+	Outflow: discharge at the outflow
+	Inflow: discharge at the Inflow (upstream)
+	TransPower: Parameter given by the rating curve
+	TransSub: Parameter which is to calibrate
+
+As a main difference to the Rao and Maurer 1996, the TransPower parameter is not calculated by using a rating curve but is estimated (calibrated) as the parameter TransSub. Transmission loss takes place where the channel gets bigger with more influence of river-aquifer interaction and also with more river-floodplain interaction. Therefore a minimum upstream area is defined where transmission loss starts to get important.
 
 Using transmission loss 
 ------------------------
 
-No additional maps or tables are needed. Using the transmission loss
-option involves two steps:
+No additional maps or tables are needed. Using the transmission loss option involves two steps:
 
-1.  In the 'lfuser' element (replace the file paths/names by the ones
-    you want to use):
+1.  In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
 +-----------------------------------------------------------------------+
 | \<group\>                                                             |
