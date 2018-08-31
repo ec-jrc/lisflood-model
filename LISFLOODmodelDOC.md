@@ -3,9 +3,17 @@
 ![](media/image2.png)
 
 # Disclaimer NEW
+```
+<div style="text-align: justify"> Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user. </div>
+```
+
+
+
 Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
-
+```
+<p style='text-align: justify;'> Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user. </p>
+```
 
 ## Introduction
 The LISFLOOD model is a hydrological rainfall-runoff model that is capable of simulating the hydrological processes that occur in a catchment. LISFLOOD has been developed by the floods group of the Natural Hazards Project of the Joint Research Centre (JRC) of the European Commission. The specific development objective was to produce a tool that can be used in large and trans-national catchments for a variety of applications, including:
@@ -54,7 +62,11 @@ processes is described in more detail in the following.
 
 ![](media/image6.jpg)
 
-###### Figure 2.1 Overview of the LISFLOOD model. P = precipitation; Int = interception; EW<sub>int</sub> = evaporation of interceptedwater; D<sub>int</sub> = leaf drainage; ES<sub>a</sub> = evaporation from soil surface; T<sub>a</sub> = transpiration (water uptake by plant roots); INF<sub>act</sub> = infiltration; R<sub>s</sub> = surface runoff; D<sub>1,2</sub> = drainage from top- to subsoil; D<sub>2,gw</sub> = drainage from subsoil to upper groundwater zone; D<sub>pref,gw</sub> = preferential flow to upper groundwater zone; D<sub>uz,lz</sub> = drainage from upper- to lower groundwater zone; Q<sub>uz</sub> = outflow from upper groundwater zone; Q<sub>l</sub> = outflow from lower groundwater zone; D<sub>loss</sub> = loss from lower groundwater zone. Note that snowmelt is not included in the Figure (even though it is simulated by the model).* 
+###### Figure 2.1 Overview of the LISFLOOD model. 
+###### $P = precipitation;$ $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water; $ $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots); $ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone; $ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone;$ $ Q_l = outflow \ from \ lower \ groundwater \ zone;  $ $D_{loss} = loss \ from \ lower \ groundwater zone.$
+
+###### Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
+
 ###### 
 
 
