@@ -64,11 +64,11 @@ processes is described in more detail in the following.
 
 ![](media/image6.jpg)
 
-**_Figure 1:_** Overview 
 
-[]: media/image6.jpg	"test caption"
 
-of the LISFLOOD model.
+[media/image6.jpg]: media/image6.jpg	"test caption"
+
+**_Figure 1:_** Overview  of the LISFLOOD model.
 
 $P = precipitation;$ $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water; $ $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots); $ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone; $ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone;$ $ Q_l = outflow \ from \ lower \ groundwater \ zone;  $ $D_{loss} = loss \ from \ lower \ groundwater zone.$
 
