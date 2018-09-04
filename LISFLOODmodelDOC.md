@@ -83,7 +83,7 @@ _**Figure:** Land cover aggregation approach in previous versions of LISFLOOD.
 
 In order to account properly for land use dynamics, some conceptual changes have been made to render LISFLOOD more land-use sensitive. To account for the sub-grid variability in land use, we model the within-grid variability. In the modified version of the hydrological model, the spatial distribution and frequency of each class is defined as a percentage of the whole represented area of the new pixel. Combining land cover classes and modeling aggregated classes, is known as the concept of hydrological response units (HRU). The logic behind this approach is that the non-linear nature of the rainfall runoff processes on different land cover surfaces observed in reality will be better captured. This concept is also used in models such as SWAT (Arnold and Fohrer, 2005) and PREVAH (Viviroli et al., 2009). LISFLOOD has been transferred a HRU approach on sub-grid level, as shown here:
 
-![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image14.jpg)
+![](media/image14.jpg)
 
 
 
@@ -125,7 +125,7 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 
 If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in **Chapter XXXXXXXXXXXXXXXXXX**), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
-![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image24.png)
+![](media/image24.png)
 
 ***Figure 2.7***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
 
@@ -313,7 +313,7 @@ The **actual transpiration** $T_a$ is now calculated as:
 $$
 T_a = r_{WS} \cdot T_{max }
 $$
- 
+
 
 with $T_a$ and $T_{max}$ in $[mm]$.
 
@@ -927,7 +927,6 @@ From the Figure, it is easy to see that there can be three situations:
     
 3.  $h_c = h_p$: no water flowing into either direction (note here that the minimum value of $h_c$ is zero). In this case both $q_{c,p}$ and  $q_{p,c}$ are zero.
 
-    
 
 **Regulated and unregulated polders**
 
@@ -1133,7 +1132,6 @@ Here a worked example. Be aware that the calculation can be less straightforward
 >
 >    $\frac{2.37•10^8 \frac{m^3}{yr}}{365\ days\ \cdot\ 86400 seconds} = 7.5 \frac{m^3}{s}$   
 >
->    
 >
 > 2.  Compute net inflow:                                           
 >     net inflow = $300 \frac{m^3}{s}\ - 7.5\ \frac{m^3}{s}= 292.5\ \frac{m^3}{s}$
