@@ -2087,7 +2087,7 @@ $$
 with $h$ in \[cm\] (positive upwards). Values of pF are typically within the range 1.0 (very wet) to 5.0 (very dry). The relationship between soil moisture status and capillary suction head is described by the Van Genuchten equation (here again re-written in terms of mm water slice, instead of volume fractions):
 
 $$
-h = \frac{1}{\alpha}[(\frac{w_s - w_r}{w - w_r} )^{{1/m} - 1}]^{1/n}
+
 $$
 where *h* is the suction head $[cm]$, and *w*, $w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $mm$). Parameter *α* is related to soil texture. Parameters *m* and *n* are calculated from the pore-size index, *λ* (which is related to soil texture as well):
 
