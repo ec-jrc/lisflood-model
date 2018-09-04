@@ -1,6 +1,6 @@
 
 
-![](./media/image2.png)
+![](https://ec-jrc.github.io/lisflood_manual/media/image2.png)
 
 
 
