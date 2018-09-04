@@ -1,6 +1,6 @@
 
 
-![](media\image2.png)
+![](./media/image2.png)
 
 
 
