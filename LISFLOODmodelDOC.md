@@ -77,7 +77,7 @@ processes is described in more detail in this technical documentation.
 
 In LISFLOOD a number of parameters are linked directly to land cover classes. In the past, this was done through lookup tables. The spatially dominant value has been used to assign the corresponding grid parameter values. This implies that some of the sub-grid variability in land use, and consequently in the parameter of interest, is lost (see Figure below).
 
-![](../media/image13.jpg)
+![](media/image13.jpg)
 
 _**Figure:** Land cover aggregation approach in previous versions of LISFLOOD.
 
