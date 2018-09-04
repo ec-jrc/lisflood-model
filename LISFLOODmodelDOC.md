@@ -37,7 +37,7 @@ LISFLOOD runs on any operating for which Python and PCRaster are available. Curr
 ## About this User Manual
 
 This revised User Manual documents LISFLOOD version December 1 2013, and replaces all previous documentation of the model (e.g. van der Knijff & de Roo, 2008; de Roo *et. al.*, 2003). The scope of this document is to give model users all the information that is needed for successfully using LISFLOOD.
-Chapter 2 explains the theory behind the model, including all model equations and the changes to the previous version. The remaining chapters cover all practical aspects of working with LISFLOOD. Chapter 3 to 8 explains how to setup LISFLOOD, how to modify the settings and the outputs.
+**Chapter XXXXX** explains the theory behind the model, including all model equations and the changes to the previous version. The remaining chapters cover all practical aspects of working with LISFLOOD. **Chapter xxxx to xxxx** explains how to setup LISFLOOD, how to modify the settings and the outputs.
 A series of Annexes at the end of this document describe some optional features that can be activated  when running the model. Most model users will not need these features (which are disabled by default), and for the sake of clarity we therefore decided to keep their description out of the main text. The  current document does not cover the calculation of the potential evapo (transpi)ration rates that are  needed as input to the model. A separate pre-processor (LISVAP) exists that calculates these variables  from standard (gridded) meteorological observations. LISVAP is documented in a separate volume (van  der Knijff, 2006). 
 
 [:top:](#top)
@@ -49,7 +49,7 @@ Introduction
 
 ### Overview
 
-Figure 2.1 gives an overview of the structure of the LISFLOOD model.
+The figure below gives an overview of the structure of the LISFLOOD model.
 
 -   a 2-layer soil water balance sub-model
 
@@ -60,15 +60,13 @@ Figure 2.1 gives an overview of the structure of the LISFLOOD model.
 -   a sub-model for the routing of channel flow (not shown in the Figure)
 
 The processes that are simulated by the model include snow melt (not shown in the Figure), infiltration, interception of rainfall, leaf drainage, evaporation and water uptake by vegetation, surface runoff, preferential flow (bypass of soil layer), exchange of soil moisture between the two soil layers and drainage to the groundwater, sub-surface and groundwater flow, and flow through river channels. Each of these
-processes is described in more detail in the following.
+processes is described in more detail in this technical documentation.
 
 ![](media/image6.jpg)
 
-**_Figure 1:_** Overview  of the LISFLOOD model.
 
-$P = precipitation;$ $Int = interception;$   $EW_{int} = evaporation\  of\  intercepted\ water; $ $D_{int} = leaf\  drainage;$ $ES_a = evaporation \ from \ soil \ surface;$ $T_a = transpiration \ (water \ uptake \ by \ plant \ roots); $ $INF_{act} = infiltration; $ $R_s = surface \ runoff;$ $D_{1,2} = drainage \ from \ top- to \ subsoil;$ $D_{2,gw} = drainage \ from \ subsoil \ to \ upper \ groundwater \ zone;$ $D_{pref,gw} = preferential \ flow \ to \ upper \ groundwater \ zone; $ $D_{uz,lz} = drainage \ from \ upper- \ to \ lower \ groundwater \ zone; $ $Q_{uz} = outflow \ from \ upper \ groundwater \ zone;$ $ Q_l = outflow \ from \ lower \ groundwater \ zone;  $ $D_{loss} = loss \ from \ lower \ groundwater zone.$
 
-Note that snowmelt is not included in the Figure (even though it is simulated by the model).*
+**Figure 1:** Overview  of the LISFLOOD model. $P$: precipitation; $Int$:  interception; $EW_{int}$: evaporation  of  intercepted water; $D_{int}$: leaf  drainage; $ES_a$: evaporation from soil surface; $T_a$: transpiration (water uptake by plant roots); $INF_{act}$: infiltration; $R_s$: surface runoff; $D_{1,2}$: drainage from top- to subsoil; $D_{2,gw}$: drainage from subsoil to upper groundwater zone; $D_{pref,gw}$: preferential flow to upper groundwater zone; $D_{uz,lz}$: drainage from upper- to lower groundwater zone; $Q_{uz}$: outflow from upper groundwater zone; $Q_l$: outflow from lower groundwater zone; $ D_{loss}$: loss from lower groundwater zone.
 
 
 [:top:](#top)
@@ -77,19 +75,19 @@ Note that snowmelt is not included in the Figure (even though it is simulated by
 
 ### Addressing sub-grid variability in land cover
 
-In the previous versions of LISFLOOD a number of parameters are linked directly to land cover classes by using lookup tables. The spatially dominant value has been used to assign the corresponding grid parameter values. This implies that some of the sub-grid variability in land use, and consequently in the parameter of interest, is lost (figure 2.5)
+In LISFLOOD a number of parameters are linked directly to land cover classes. In the past, this was done through lookup tables. The spatially dominant value has been used to assign the corresponding grid parameter values. This implies that some of the sub-grid variability in land use, and consequently in the parameter of interest, is lost (see Figure below).
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image13.jpg)
 
-Figure 2.5 Land cover aggregation approach in previous versions of LISFLOOD
+_**Figure:** Land cover aggregation approach in previous versions of LISFLOOD.
 
-In order account properly for land use dynamics, some conceptual changes have been made to render LISFLOOD more land-use sensitive. To account for the sub-grid variability in land use, we model the within-grid variability. In the modified version of the hydrological model, the spatial distribution and frequency of each class is defined as a percentage of the whole represented area of the new pixel. Combining land cover classes and modeling aggregated classes, is known as the concept of hydrological response units (HRU). The logic behind this approach is that the non-linear nature of the rainfall runoff processes on different land cover surfaces observed in reality will be better captured. This concept is also used in models such as SWAT (Arnold and Fohrer, 2005) and PREVAH (Viviroli et al., 2009). LISFLOOD has been transferred a HRU approach on sub-grid level, as shown in figure 2.6.
+In order to account properly for land use dynamics, some conceptual changes have been made to render LISFLOOD more land-use sensitive. To account for the sub-grid variability in land use, we model the within-grid variability. In the modified version of the hydrological model, the spatial distribution and frequency of each class is defined as a percentage of the whole represented area of the new pixel. Combining land cover classes and modeling aggregated classes, is known as the concept of hydrological response units (HRU). The logic behind this approach is that the non-linear nature of the rainfall runoff processes on different land cover surfaces observed in reality will be better captured. This concept is also used in models such as SWAT (Arnold and Fohrer, 2005) and PREVAH (Viviroli et al., 2009). LISFLOOD has been transferred a HRU approach on sub-grid level, as shown here:
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image14.jpg)
 
 
 
-**_Figure 2_** LISFLOOD land cover aggregation by modelling aggregated land use classes separately: Percentages of forest (dark green); water (blue), impervious surface (red), other classes (light green)
+**_Figure:_** *LISFLOOD land cover aggregation by modelling aggregated land use classes separately: Percentages of forest (dark green); water (blue), impervious surface (red), other classes (light green).*
 
 [🔝](#top)
 
@@ -98,41 +96,42 @@ In order account properly for land use dynamics, some conceptual changes have be
 ### Soil model
 
 If a part of a pixel is made up of built-up areas this will influence that pixel's water-balance. LISFLOOD's 'direct runoff fraction's parameter ($f_{dr}$) defines the fraction of a pixel that is impervious.
-For impervious areas, LISFLOOD assumes that:
+**For impervious areas**, LISFLOOD assumes that:
 
 1. A depression storage is filled by precipitation and snowmelt and emptied by evaporation
 2. Any water that is not filling the depression storage, reaches the surface is added directly to surface runoff
 3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the direct runoff fraction)
 4. There is no groundwater storage
 
-For open water (e.g. lakes, rivers) the water fraction parameter $(f_{water})$ defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using LISFLOOD's lake option, which is described in Annex 5 of this manual). For water covered areas, LISFLOOD assumes that:
+​For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using LISFLOOD's lake option, which is described in **Section XXXXXXXXXXXXXXXX**). **For water covered areas**, LISFLOOD assumes that:
 
 1. The loss of actual evaporation is equal to the potential evaporation on open water
 2. Any water that is not evaporated, reaches the surface is added directly to surface runoff
 3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the water fraction)
 4. There is no groundwater storage
 
-For the part of a pixel that is forest $(f_{forest})$ or other land cover $(f_{other}=1-f_{forest}-f_{dr}-f_{water})$ the description of all soil- and groundwater-related processes below (evaporation, transpiration, infiltration, preferential flow, soil moisture redistribution and groundwater flow) are valid. While the modelling structure for forest and other classes is the same, the difference is the use of different map sets for leaf area index, soil and soil hydraulic properties. Because of the nonlinear nature of the rainfall runoff processes this should yield better results than running the model with average parameter values. Table 2 summarises the profiles of the four individually modelled categories of land cover classes
+**For** the part of a pixel that is **forest** $(f_{forest})$ **or other land cover** $(f_{other}=1-f_{forest}-f_{dr}-f_{water})$ the description of all soil- and groundwater-related processes below (evaporation, transpiration, infiltration, preferential flow, soil moisture redistribution and groundwater flow) are valid. While the modelling structure for forest and other classes is the same, the difference is the use of different map sets for leaf area index, soil and soil hydraulic properties. Because of the nonlinear nature of the rainfall runoff processes this should yield better results than running the model with average parameter values. The table below summarises the profiles of the four individually modelled categories of land cover classes.
 
-Table 2.1 Summary of hydrological properties of the four categories modelled individually in the modified version of LISFLOOD.
+***Table:*** *Summary of hydrological properties of the four categories modelled individually in the modified version of LISFLOOD.*
 
 | Category                                                     | Evapotranspiration                                           | Soil                                                      | Runoff                                                       |
 | :----------------------------------------------------------- | :----------------------------------------------------------- | :-------------------------------------------------------- | :----------------------------------------------------------- |
-| Forest                                                       | High level of evapo-transpiration (high Leaf area index) seasonally dependant | Large rooting depth                                       | Low concentration time                                       |
+| Forest                                                       | High level of evapo-transpiration (high Leaf area index) seasonally dependent | Large rooting depth                                       | Low concentration time                                       |
 | Impervious surface                                           | Not applicable                                               | Not applicable                                            | Surface runoff but initial loss and depression storage, fast concentration time |
 | Inland water                                                 | Maximum evaporation                                          | Not applicable                                            | Fast concentration time                                      |
 | Other (agricultural areas, non-forested natural area, pervious surface of urban areas) | Evapotranspiration lower than for forest but still significant | Rooting depth lower than for forest but still significant | Medium concentration time                                    |
 
 
 
-If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in Chapter 8), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. Figure 2.7 illustrates this for evapotranspiration (evaporation and transpiration) which calculated
-differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
+If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in **Chapter XXXXXXXXXXXXXXXXXX**), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image24.png)
 
-Figure 2.7  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ simulation of aggregated land cover classes in LISFLOOD.
+***Figure 2.7***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
 
-In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in Chapter 8).
+
+
+In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in **Chapter XXXXXXXXXXXXXXX**).
 
 [🔝](#top)
 
@@ -154,11 +153,11 @@ The meteorological conditions provide the driving forces behind the water balanc
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
-> **Note** that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below *Tm*  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates
+> **Note** that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below $T_m$  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates
 
 
 
-Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, $\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following, unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate volume (van der Knijff, 2006).
+Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, $\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following, unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate manual.
 
 [:top:](#top)
 
@@ -184,36 +183,28 @@ Therefore, in practice this parameter is often treated as a calibration constant
 -   The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in
     the amount of net solar radiation
 
-Figure 2.2 shows an example where a mean value of: 3.0 $\frac{mm} {^\circ C \cdot day}$  is used. The value of $C_m$ is reduced by 0.5 at $21^{st}$ December and a 0.5 is added on the $21^{st}$ June. In between a sinus function is applied
+The following Figure shows an example where a mean value of: 3.0 $\frac{mm} {^\circ C \cdot day}$  is used. The value of $C_m$ is reduced by 0.5 at $21^{st}$ December and a 0.5 is added on the $21^{st}$ June. In between a sinus function is applied
 
 ![](media/image7.jpg)
 
-Figure 2.2 Sinus shaped snow melt coefficient ($C_m$) as a function of days of year
+***Figure:*** *Sinus shaped snow melt coefficient* ($C_m$) *as a function of days of year.*
 
-At high altitudes, where the temperature never exceeds $1^\circ C$, the model accumulates snow without any reduction because of melting loss. In these altitudes runoff from glacier melt is an important part. The snow will accumulate and converted into firn. Then firn is converted to ice and transported to the lower regions. This can take decades or even hundred years. In the ablation area the ice is melted. In LISFLOOD this process is emulated by melting the snow in higher altitudes on an annual basis over summer. A sinus function is used to start ice melting in summer, starting on the 15 June and ending on the 15 September (see fig 2.3) and using the temperature of zone B (see fig 2.3.)
+At high altitudes, where the temperature never exceeds $1^\circ C$, the model accumulates snow without any reduction because of melting loss. In these altitudes runoff from glacier melt is an important part. The snow will accumulate and converted into firn. Then firn is converted to ice and transported to the lower regions. This can take decades or even hundred years. In the ablation area the ice is melted. In LISFLOOD this process is emulated by melting the snow in higher altitudes on an annual basis over summer. A sinus function is used to start ice melting in summer (from 15 June till 15 September) using the temperature of zone B:
 
 ![](media/image8.png)
 
-Figure 2.3 Sinus shaped ice melt coefficient as a function of days of year
+***Figure:*** *Sinus shaped ice melt coefficient as a function of days of year.*
 
-The amount of snowmelt and icemelt together can never exceed the actual snow cover that is present on the surface.
+The amount of snowmelt and ice melt together can never exceed the actual snow cover that is present on the surface.
 
-For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level. This is shown in Figure 2.4.
+For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level. This is shown in Figure below.
 
 The division in elevation zones was changed from a uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km
-grid cell. 3 elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
+grid cell. Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
 
 ![](media/image10.png)
 
-
-
-Figure 2.4 Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone
-
-$StD$: Standard \  Deviation\  of \ the\  DEM
-
-$quant: 0.9674 \ Quantile\  of\  the\  normal\  distribution:\  u_{0,833}=0.9674$
-
-$L \ temperature\  lapse\  rate.$
+***Figure:*** *Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone.*
 
 [:top:](#top)
 
@@ -229,11 +220,11 @@ where $ES0​$ is the potential evaporation rate from bare soil surface $[\frac{
 $$
 ES_a = ES_{max } \cdot (\sqrt{D_{slr}} - \sqrt{D_{slr} - 1} )
 $$
-The variable *D<sub>slr</sub>* represents the number of days since the last rain event. Its value accumulates over time: if the amount of water that is available for infiltration ($W_{av}$) remains below a critical threshold
+The variable $D_{slr}$ represents the number of days since the last rain event. Its value accumulates over time: if the amount of water that is available for infiltration ($W_{av}$) remains below a critical threshold
 it increases by an amount of $\Delta t [days]$ for each time step. It is reset to 1 only if the critical amount of water is exceeded (In the LISFLOOD settings file this critical amount is currently expressed as an *intensity* $[\frac{mm}{day}]$. This is because the equation was originally designed for a daily time step only. Because the current implementation will likely lead to *DSLR* being reset too frequently, the exact formulation may change
 in future versions (e.g. by keeping track of the accumulated available water of the last 24 hours)).  
 
-The actual soil evaporation is always the smallest value out of the result of the equation above and the available amount of moisture in the soil,i.e.:
+The actual soil evaporation is always the smallest value out of the result of the equation above and the available amount of moisture in the soil, i.e.:
 $$
 ES_a = \min (ES_a,w_1 - w_{res1})
 $$
@@ -257,7 +248,7 @@ Since evaporation is limited by the amount of water stored on the leaves, the ac
 $$
 EW_{int} = _{min}({EW_{max } \cdot \Delta t},{Int_{cum}})
 $$
-where *EW<sub>int</sub>* is the actual evaporation from the interception store $[mm]$ per time step, and $EW0$ is the potential evaporation rate from an open water surface $[\frac{mm}{day}]$ It is assumed that on average all water in the interception store $Int_{cum}$ will have evaporated or fallen to the soil surface as leaf drainage within one day. Leaf drainage is therefore modelled as a linear reservoir with a time constant (or residence time) of one day, i.e:
+where $EW_{int}$ is the actual evaporation from the interception store $[mm]$ per time step, and $EW0$ is the potential evaporation rate from an open water surface $[\frac{mm}{day}]$ It is assumed that on average all water in the interception store $Int_{cum}$ will have evaporated or fallen to the soil surface as leaf drainage within one day. Leaf drainage is therefore modelled as a linear reservoir with a time constant (or residence time) of one day, i.e:
 $$
 D_{int} = \frac{1}{T_{int}} \cdot Int_{cum} \cdot \Delta t
 $$
@@ -279,7 +270,7 @@ where $Int [mm]$ is the interception per time step, $S_{max} [mm]$ is the maximu
 $$
 \begin{cases} S_{max} = 0.935 + 0.498 \cdot LAI - 0.00575 \cdot LAI^2 &[LAI \gt 0.1]\\ S_{max } = 0 & [LAI \le 0.1]\end{cases}
 $$
-where $LAI$ is the average Leaf Area Index \[m<sup>2</sup> m<sup>-2</sup>\] of each model element (pixel). *k* is estimated as:
+where $LAI$ is the average Leaf Area Index $[\frac{m^2}{ m^{2}}]$ of each model element (pixel). $k$ is estimated as:
 $$
 k = 0.046 \cdot LAI
 $$
@@ -292,21 +283,23 @@ The value of $Int$ can never exceed the interception storage capacity, which is 
 ### Water uptake by plant roots and transpiration
 
 Water uptake and transpiration by vegetation and direct evaporation from the soil surface are modelled as two separate processes. The approach used here is largely based on Supit *et al*. (1994) and Supit & Van Der
-Goot (2000). The maximum transpiration per time step \[mm\] is given by:
+Goot (2000). The **maximum transpiration** per time step \[mm\] is given by:
 $$
 T_{max } = k_{crop} \cdot ET0 \cdot [1 - e^{( - \kappa_{gb} \cdot LAI)}] \cdot \Delta t - EW_{int}
 $$
-Where $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day}]$, Constant $κ_{gb}$ is the extinction coefficient for global solar radiation \[-\] and $k_{crop}$ is a crop coefficient, a ration between the potential
+Where $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day}]$, constant $κ_{gb}$ is the extinction coefficient for global solar radiation \[-\] and $k_{crop}$ is a crop coefficient, a ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop. $k_{crop}$ is 1 for most vegetation types, except for some excessively transpiring crops like sugarcane or rice. 
 
-(reference) evapotranspiration rate and the potential evaporation rate of a specific crop. $k_{crop}$ is 1 for most vegetation types, except for some excessively transpiring crops like sugarcane or rice. Note that the energy that has been 'consumed' already for the evaporation of intercepted water is simply subtracted here in order to respect the overall energy balance. The actual transpiration rate is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
+> Note that the energy that has been 'consumed' already for the evaporation of intercepted water is simply subtracted here in order to respect the overall energy balance. 
+
+The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
 $$
 r_{WS} = \frac{w_1 - w_{wp1}}{w_{crit1} -w_{wp1}}
 $$
- where $w_1$ is the amount of moisture in the upper soil layer $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The critical amount of soil moisture is calculated as:
+where $w_1$ is the amount of moisture in the upper soil layer $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The **critical amount of soil moisture** is calculated as:
 $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
-where $w_{fc1} [mm]​$ is the amount of soil moisture at field capacity and $p​$ is the soil water depletion fraction. $R_{WS}​$ varies between 0 and 1: negative values and values greater than 1 are truncated to 0 and 1, respectively. $p​$ represents the fraction of soil moisture between $w_{fc1}​$ and $w_{wp1}​$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate. The procedure to estimate *p* is described in detail in Supit & Van Der Goot (2003). Figure 2.8 further illustrates the relation between $R_{WS}, w,w_{crit}, w_{fc}, w_{wp}​$.
+where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity and $p$ is the soil water depletion fraction. $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate. The procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003). The following Figure illustrates the relation between $R_{WS}, w,w_{crit}, w_{fc}, w_{wp}$:
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image26.png)
 
@@ -314,9 +307,9 @@ where $w_{fc1} [mm]​$ is the amount of soil moisture at field capacity and $p�
 
   
 
-Figure 2.8 Reduction of transpiration in case of water stress. $R_{ws}$ decreases linearly to zero between $w_{crit}$ and $w_{wp}$.
+***Figure:*** *Reduction of transpiration in case of water stress.* $r_{ws}$ *decreases linearly to zero between* $w_{crit}$ *and* $w_{wp}$.
 
-The actual transpiration *T<sub>a</sub>* is now calculated as:
+The **actual transpiration** $T_a$ is now calculated as:
 $$
 T_a = r_{WS} \cdot T_{max }
 $$
@@ -324,7 +317,7 @@ $$
 
 with $T_a$ and $T_{max}$ in $[mm]$.
 
-Transpiration is set to zero when the soil is frozen (i.e. when frost index *F* exceeds its critical threshold). The amount of moisture in the upper soil layer is updated after the transpiration calculations:
+Transpiration is set to zero when the soil is frozen (i.e. when frost index *F* exceeds its critical threshold). The amount of **moisture in the upper soil layer** is updated after the transpiration calculations:
 $$
 w_1 = w_1 - T_a
 $$
@@ -341,13 +334,12 @@ Molnau & Bissell (1983, cited in Maidment 1993), and adjusted for variable time 
 $$
 \frac{dF}{dt} = - (1 - {A_f})\cdot F - {T_{av}} \cdot {e^{ - 0.04 \cdot K \cdot {d_s}/w \cdot {e_s}}}
 $$
-$\frac{dF}{dt}$ is expressed in $[\frac{\circ C}{day} \cdot \frac{1}{day}]$.  $A_f$ is a decay coefficient $[\frac{1}{day}]$, $K$ is a a snow depth reduction coefficient
-
-$[\frac{1}{cm}]$, $d_s$ is the (pixel-average) depth of the snow cover (expressed as $mm$ equivalent water depth), and $w \cdot e_s$ is a parameter called snow water equivalent, which is the equivalent water depth water of a snow cover (Maidment, 1993). In LISFLOOD, $A_f$ and $K$ are set to 0.97 and 0.57 $[\frac{1}{cm}]$ respectively, and $w \cdot e_s$ is taken as 0.1, assuming an average snow density of 100 $\frac{kg}{m^3}$ (Maidment, 1993). The soil is considered frozen when the frost index rises above a critical threshold of 56. For each time step the value of $F$ $[\frac{\circ C}{ day}]$ is updated as:
+$\frac{dF}{dt}$ is expressed in $[\frac{\circ C}{day} \cdot \frac{1}{day}]$.  $A_f$ is a decay coefficient $[\frac{1}{day}]$, $K$ is a a snow depth reduction coefficient $[\frac{1}{cm}]$, $d_s$ is the (pixel-average) depth of the snow cover (expressed as $mm$ equivalent water depth), and $w \cdot e_s$ is a parameter called snow water equivalent, which is the equivalent water depth water of a snow cover (Maidment, 1993). In LISFLOOD, $A_f$ and $K$ are set to 0.97 and 0.57 $[\frac{1}{cm}]$ respectively, and $w \cdot e_s$ is taken as 0.1, assuming an average snow density of 100 $\frac{kg}{m^3}$ (Maidment, 1993). The soil is considered frozen when the frost index rises above a critical threshold of 56. For each time step the value of $F$ $[\frac{\circ C}{ day}]$ is updated as:
 $$
 F(t) = F(t - 1) + \frac{dF}{dt}\Delta t
 $$
-  $F$ is not allowed to become less than 0.
+
+>  Note: $F$ is not allowed to become less than 0.
 
 When the frost index rises above a threshold of 56, every soil process is frozen and transpiration, evaporation, infiltration and the outflow to the second soil layer and to upper groundwater layer is set to zero.
 Any rainfall is bypassing the soil and transformed into surface runoff till the frost index is equal or less than 56.
@@ -364,17 +356,17 @@ W_{av} = R \cdot \Delta t + M + D_{int} - Int
 $$
 where:
 
-$R$: Rainfall $[\frac{mm}{day}]$
-$M$: Snow melt $[mm]$
-$D_{int}$: Leaf drainage $[mm]$
-$Int$: Interception $[mm]$
-$\Delta t$: time step $[days]$
+  $R$: 		Rainfall $[\frac{mm}{day}]$
+  $M$: 	Snow melt $[mm]$
+  $D_{int}$: 	Leaf drainage $[mm]$
+  $Int$: 	Interception $[mm]$
+  $\Delta t$: 	time step $[days]$
 
 Since no infiltration can take place in each pixel's 'direct runoff fraction', direct runoff is calculated as:
 $$
 R_d = f_{dr} \cdot W_{av}
 $$
-where $R_d$ is in $[mm]$ per time step. Note here that $W_{av}$ is valid for the permeable fraction only, whereas $R_d$ is valid for the direct runoff fraction.
+where $R_d$ is in $mm$ per time step. Note here that $W_{av}$ is valid for the permeable fraction only, whereas $R_d$ is valid for the direct runoff fraction.
 
 [🔝](#top)
 
@@ -390,16 +382,18 @@ where $w_{s1}$ and $w_1$ are the maximum and actual amounts of moisture in the u
 $$
 INF_{pot}= \frac{w_{s1}}{b + 1} - \frac{w_{s1}}{b +1} \cdot [1 - (1 - A_s)^{\frac{b + 1}{b}}]
 $$
-Note that the shape parameter *b* is related to the heterogeneity within each grid cell. For a totally homogeneous grid cell *b* approaches zero, which reduces the above equations to a simple 'overflowing bucket' model. Before any water is draining from the soil to the groundwater zone the soil has to be completely filled up. See also red line in figure 2.9: e.g. a soil of 60% soil moisture has 40% potential
-infiltration capacity. A b value of 1.0 is comparable to a leaking bucket. See black line in figure 2.9: e.g. a soil of 60% soil moisture has only 10% potential infiltration capacity while 30% is draining directly to groundwater. Increasing b even further than 1 is comparable to a sieve (see figure 2.10). Most of the water is going directly to groundwater and the potential infiltration capacity is going toward 0.
+Note that the shape parameter *b* is related to the heterogeneity within each grid cell. For a totally homogeneous grid cell *b* approaches zero, which reduces the above equations to a simple 'overflowing bucket' model. Before any water is draining from the soil to the groundwater zone the soil has to be completely filled up. See also red line in the Figure below: e.g. a soil of 60% soil moisture has 40% potential
+infiltration capacity. A $b$ value of 1.0 (see black line) is comparable to a leaking bucket : e.g. a soil of 60% soil moisture has only 10% potential infiltration capacity while 30% is draining directly to groundwater. 
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image27.png)
 
-Figure 2.9 Soil moisture and potential infiltration capacity relation
+***Figure:*** *Soil moisture and potential infiltration capacity relation.*
+
+Increasing $b$ even further than 1 is comparable to a sieve (see figure below). Most of the water is going directly to groundwater and the potential infiltration capacity is going toward 0.
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image28.png)
 
-Figure 2.10 Analogy picture of increasing Xinanjiang empirical shape parameter b
+***Figure:*** *Analogy picture of increasing Xinanjiang empirical shape parameter* $b$.
 
 [🔝](#top)
 
@@ -459,8 +453,8 @@ A Courant number that is greater than 1 implies that the calculated outflow exce
 $$
 C_{soil} = max (C_1,C_2)
 $$
-In principle, rounding $C_{soil}​$ up to the nearest integer gives the number sub-steps needed for a stable solution. In practice, it is often preferable to use a critical Courant number that is lower than 1, because high values can result in unrealistic 'jumps' in the simulated soil moisture pattern when the soil is near saturation (even though mass balance is preserved). Hence, making the critical Courant number a
-user-defined value $C_{crit}, the number of sub-steps becomes:
+In principle, rounding $C_{soil}$ up to the nearest integer gives the number sub-steps needed for a stable solution. In practice, it is often preferable to use a critical Courant number that is lower than 1, because high values can result in unrealistic 'jumps' in the simulated soil moisture pattern when the soil is near saturation (even though mass balance is preserved). Hence, making the critical Courant number a
+user-defined value $C_{crit}$, the number of sub-steps becomes:
 $$
 SubSteps = roundup(\frac{C_{soil}}{C_{crit}})
 $$
@@ -474,22 +468,20 @@ and lower layer are copied to temporary variables $w'_1$ and $w'_2$. Two variabl
 1. compute hydraulic conductivity for both layers
 
 2. compute flux from upper to lower soil layer for this sub-step ($D'_{1,2}$, can never exceed storage capacity in lower layer):
-
-   ```
-   $D'_{1,2} = min [K_1(w'_1)\Delta t,w'_{s2} -w'_2]$ (2-38)
-   ```
+   $$
+   D'_{1,2} = min [K_1(w'_1)\Delta t,w'_{s2} -w'_2]
+   $$
 
 3. compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$), can never exceed available water in lower layer):
-
-   ```
-   $D'_{2,gw} = min [K_2(w'_2)\Delta t,w'_2 -w'_{r2}]$ (2-39)
-   ```
+   $$
+   D'_{2,gw} = min [K_2(w'_2)\Delta t,w'_2 -w'_{r2}]
+   $$
 
 4. update $w'_1$ and $w'_2$
 
-5. add $D'_{1,2}$ to $D_{1,2}$; add $D'_{2,gw}$ to $D_{2,gw}
+5. add $D'_{1,2}$ to $D_{1,2}$; add $D'_{2,gw}$ to $D_{2,gw}$
 
-If the soil is frozen (*F* \> critical threshold), both $D_{1,2} and $D_{2,gw} are set to zero. After the iteration loop, the amounts of soil moisture in both layers are updated as follows:
+If the soil is frozen (*F* \> critical threshold), both $D_{1,2}$ and $D_{2,gw}$ are set to zero. After the iteration loop, the amounts of soil moisture in both layers are updated as follows:
 $$
 w_1 = w_1 - D_{1,2}
 $$
@@ -503,18 +495,18 @@ $$
 ### Preferential bypass flow
 
 For the simulation of preferential bypass flow --i.e. flow that bypasses the soil matrix and drains directly to the groundwater- no generally accepted equations exist. Because ignoring preferential flow completely
-will lead to unrealistic model behaviour during extreme rainfall conditions, a very simple approach is used in LISFLOOD. During each time step, a fraction of the water that is available for infiltration is added to the groundwater directly (i.e. without first entering the soil matrix). It is assumed that this fraction is a power function of the relative saturation of the topsoil, which results in an equation that is somewhat similar to the excess soil water equation used in the HBV model (e.g. Lindström *et al*., 1997):
+will lead to unrealistic model behavior during extreme rainfall conditions, a very simple approach is used in LISFLOOD. During each time step, a fraction of the water that is available for infiltration is added to the groundwater directly (i.e. without first entering the soil matrix). It is assumed that this fraction is a power function of the relative saturation of the topsoil, which results in an equation that is somewhat similar to the excess soil water equation used in the HBV model (e.g. Lindström *et al*., 1997):
 $$
 D_{pref,gw} =W_{av} \cdot (\frac{w_1}{w_{s1}})^{c_{pref}}
 $$
 where $D_{pref,gw}$ is the amount of preferential flow per time step $[mm]$, $W_{av}$ is the amount of water that is available for infiltration, and $c_{pref}$ is an empirical shape parameter. $f_{dr}$ is the 'direct runoff fraction' \[-\], which is the fraction of each pixel that is made up by urban area and open water bodies (i.e. preferential
 flow is only simulated in the permeable fraction of each pixel) . The equation results in a preferential flow component that becomes increasingly important as the soil gets wetter.
 
-Figure 2.11 shows with $c_{pref} = 0$ (red line) every available water for infiltration is converted into preferential flow and bypassing the soil. $c_pref = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
+The Figure below shows with $c_{pref} = 0$ (red line) every available water for infiltration is converted into preferential flow and bypassing the soil. $c_{pref} = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
 
 ![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image34.png)
 
-Figure 2.11 Soil moisture and preferential flow relation
+***Figure:*** *Soil moisture and preferential flow relation.*
 
 [🔝](#top)
 
@@ -530,11 +522,11 @@ where $T_{uz}$ is a reservoir constant $[days]$ and $UZ$ is the amount of water 
 $$
 Q_{lz} = \frac{1}{T_{lz}} \cdot LZ \cdot \Delta t
 $$
-Here, $T_{lz}​$ is again a reservoir constant $[days]​$, and $LZ​$ is the amount of water that is stored in the lower zone $[mm]​$. The values of both $T_{uz}​$ and $T_{lz}​$ are obtained by calibration. The upper zone also provides the inflow into the lower zone. For each time step, a fixed amount of water percolates from the upper to the lower zone:
+Here, $T_{lz}$ is again a reservoir constant $[days]$, and $LZ$ is the amount of water that is stored in the lower zone $[mm]$. The values of both $T_{uz}$ and $T_{lz}$ are obtained by calibration. The upper zone also provides the inflow into the lower zone. For each time step, a fixed amount of water percolates from the upper to the lower zone:
 $$
 D_{uz,lz} = min (GW_{perc} \cdot \Delta t ,UZ)
 $$
-Here, $GW_{perc} \ [\frac{mm}{day}]​$ is a user-defined value that can be used as a calibration constant. For many catchments it is quite reasonable to treat the lower groundwater zone as a system with a closed lower boundary (i.e. water is either stored, or added to the channel). However, in some cases the closed boundary assumption makes it impossible to obtain realistic simulations. Because of this, it is possible to percolate a fixed amount of water out of the lower zone, as a loss $D_{loss}​$:
+Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that can be used as a calibration constant. For many catchments it is quite reasonable to treat the lower groundwater zone as a system with a closed lower boundary (i.e. water is either stored, or added to the channel). However, in some cases the closed boundary assumption makes it impossible to obtain realistic simulations. Because of this, it is possible to percolate a fixed amount of water out of the lower zone, as a loss $D_{loss}$:
 $$
 D_{loss} = min(f_{loss} \cdot \Delta t,LZ)
 $$
@@ -580,15 +572,15 @@ Substituting the right-hand side of this expression in the finite-difference for
 $$
 \frac{\Delta t}{\Delta x}\cdot Q_{i + 1}^{j + 1} \alpha _k \cdot (Q_{i + 1}^{j + 1})^{\beta _k} = \frac{\Delta t}{\Delta x} \cdot Q_i^{j + 1} \alpha _k \cdot (Q_{i + 1}^j)^{\beta_k}\Delta t \cdot (\frac{q_{i + 1}^{j + 1} + q_{i + 1}^j}{2})
 $$
-If $α_{k,sr}​$ and $β_k​$ are known, this non-linear equation can be solved for each pixel and during each time step using an iterative procedure. This numerical solution scheme is available as a built-in function in the PCRaster software. The coefficients $α_{k,sr}​$ and $β_k​$ are calculated by substituting Manning's equation in the right-hand side of Equation 2-51:
+If $α_{k,sr}$ and $β_k$ are known, this non-linear equation can be solved for each pixel and during each time step using an iterative procedure. This numerical solution scheme is available as a built-in function in the PCRaster software. The coefficients $α_{k,sr}$ and $β_k$ are calculated by substituting Manning's equation in the right-hand side of Equation:
 $$
 A_{sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}}) \cdot Q_{sr}^{3/5}
 $$
-where *n* is Manning\'s roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation 2-51 gives:
+where *n* is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation gives:
 $$
 \alpha _{k,sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}})^{0.6} ; \beta_k=0.6
 $$
-At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. For each time step, all runoff that is generated ($R_s$) is added as side-flow ($q_{sr}$). For each flowpath, the routing stops at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated).
+At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. For each time step, all runoff that is generated ($R_s$) is added as side-flow ($q_{sr}$). For each flowpath, the routing stops at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated). 
 
 [🔝](#top)
 
@@ -597,11 +589,11 @@ At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (re
 ### Routing of sub-surface runoff to channel
 
 All water that flows out of the upper- and lower groundwater zone is routed to the nearest downstream channel pixel within one time step.
-Recalling once more that the groundwater equations are valid for the pixel's permeable fraction only, the contribution of each pixel to the nearest channel is made up of $(f_{forest}+f_{other)} \cdot (Q_uz + Q_lz)$. Figure 2.12 illustrates the routing procedure: for each pixel that contains a river channel, its contributing pixels are defined by the drainage network. For every 'river pixel' the groundwater outflow that is generated by its upstream pixels is simply summed. For instance, there are two flow paths that are contributing to the second \'river pixel\' from the left in Figure 2.12. Hence, the amount of water that is transported to this pixel equals the sum of the amounts of water produced by these flowpaths, q1 + q2. Note that, as with the surface runoff routing, no water is routed *through* the river network at this stage.
+Recalling once more that the groundwater equations are valid for the pixel's permeable fraction only, the contribution of each pixel to the nearest channel is made up of $(f_{forest}+f_{other)} \cdot (Q_uz + Q_lz)$. Figure 2.12 illustrates the routing procedure: for each pixel that contains a river channel, its contributing pixels are defined by the drainage network. For every 'river pixel' the groundwater outflow that is generated by its upstream pixels is simply summed. For instance, there are two flow paths that are contributing to the second \'river pixel\' from the left in Figure below. Hence, the amount of water that is transported to this pixel equals the sum of the amounts of water produced by these flowpaths, q1 + q2. Note that, as with the surface runoff routing, no water is routed *through* the river network at this stage.
 
 ![ROUTING](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image35.png)
 
-Figure 2.12 Routing of groundwater to channel network. Groundwater flow is routed to the nearest 'channel' pixel.
+***Figure:*** *Routing of groundwater to channel network. Groundwater flow is routed to the nearest 'channel' pixel.*
 
 [🔝](#top)
 
@@ -617,7 +609,7 @@ where $Q_{ch}$ is the channel discharge $[\frac{m^3}{s}]$, $A_{ch}$ is the cross
 $$
 \rho \cdot gA_{ch} \cdot (S_0 - S_f) = 0
 $$
-where $S_0$ now equals the gradient of the channel bed, and $S_0=S_f$. As with the surface runoff, values for parameter $α_{k,ch} are estimated using Manning's equation:
+where $S_0$ now equals the gradient of the channel bed, and $S_0=S_f$. As with the surface runoff, values for parameter $α_{k,ch}$ are estimated using Manning's equation:
 $$
 \alpha _{k,ch} = (\frac{n \cdot P_{ch}^{2/3}}{\sqrt{S_0}})^{0.6}; \beta _k=0.6
 $$
@@ -625,7 +617,7 @@ At present, LISFLOOD uses values for $α_{k,ch}$ which are based on a static (re
 $$
 q_{ch} = \frac{\sum Q_{sr} + \sum Q_{uz} + \sum Q_{lz} + Q_{in} + Q_{res}}{L_{ch}}
 $$
-Here, $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, outflow from the upper zone and outflow from the lower zone, respectively. $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the 'inflow hydrograph' option is activated (see Annex 2). $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the 'reservoir' option is activated (see Annex 1). $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$ and $Q_{res}$ are all expressed in [$m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. The kinematic wave channel routing can be run using a smaller time-step than the over simulation timestep, $\Delta t$, if needed.
+Here, $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, outflow from the upper zone and outflow from the lower zone, respectively. $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the 'inflow hydrograph' option is activated (see Annex 2). $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the 'reservoir' option is activated (see **Section XXXXX**). $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$ and $Q_{res}$ are all expressed in [$m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. The kinematic wave channel routing can be run using a smaller time-step than the over simulation timestep, $\Delta t$, if needed.
 
 [[🔝](#top)](#top)
 
@@ -645,22 +637,25 @@ The above model description covers the processes that are simulated in a 'standa
 
 Features are:
 
-- Including reservoirs, polder, lakes (Annex 1-3)
-- including inflow hydrographs (Annex 4)
-- using a double kinematic wave approach for channel routing (Annex 5)
-- using the diffusion wave approach instead of kinematic wave for
-  channel routing (Annex 6)
-- Including transmission loss (Annex 7)
-- Using water use maps (Annex 8)
-- Simulating water levels (Annex 9)
+- Including reservoirs, polder, lakes
+- including inflow hydrographs
+- using a double kinematic wave approach for channel routing
+- using the diffusion wave approach instead of kinematic wave for channel routing
+- Including transmission loss
+- Using water use maps
+- Simulating water levels
 
 [🔝](#top)
 
-As explained in Chapter 5, the 'lfoptions' element gives you additional control over what LISFLOOD is doing. Using options it is possible to switch certain parts of the model on or off. This way you can tell the model exactly which output files are reported and which ones aren't. Also, they can be used to activate a number of additional model features, such as the simulation of reservoirs and inflow hydrographs.
+As explained in **Chapter XXXXX**, the 'lfoptions' element gives you additional control over what LISFLOOD is doing. Using options it is possible to switch certain parts of the model on or off. This way you can tell the model exactly which output files are reported and which ones aren't. Also, they can be used to activate a number of additional model features, such as the simulation of reservoirs and inflow hydrographs.
 
-The table below lists all currently implemented options and their corresponding defaults. All currently implemented options are switches (1= on, 0=off). You can set as many options as you want (or none at all). Table 10.1 lists all currently implemented options[^13]. Note that each option generally requires additional items in the settings file. For instance, using the inflow hydrograph option requires an input map and time series, which have to be specified in the settings file. If you want to report discharge maps at each time step, you will first have to specify under which name they will be written. The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. The use of the *output* options is described in detail in Chapter 8.
+The table below lists all currently implemented options and their corresponding defaults. All currently implemented options are switches (1= on, 0=off). You can set as many options as you want (or none at all). The Table below lists all currently implemented options[^13]. 
 
-*Table A11.1 LISFLOOD options*                                                                                                                                                                                                                                                                                                         
+>  Note that each option generally requires additional items in the settings file. For instance, using the inflow hydrograph option requires an input map and time series, which have to be specified in the settings file. If you want to report discharge maps at each time step, you will first have to specify under which name they will be written. The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. 
+
+The use of the *output* options is described in detail in **Chapter XXXXX**.
+
+***Table:*** *LISFLOOD options.*                                                                                                                                                                                                                                                                                                         
 
 | Option                                                       | Description                                                  | Default |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- |
@@ -692,7 +687,7 @@ The table below lists all currently implemented options and their corresponding 
 | repWaterLevelMaps[^17]                                       | Report maps of water level in channel (for each time step)   | 0       |
 | **OUTPUT, MAPS, STATE VARIABLES (all, at selected time steps)** |                                                              |         |
 | repStateMaps                                                 | Report maps of model state variables (as defined by "ReportSteps" variable) | 1       |
-| repEndMaps18                                                 | Report maps of model state variables (at last time step)     | 0       |
+| repEndMaps[^18]                                              | Report maps of model state variables (at last time step)     | 0       |
 | **OUTPUT, MAPS, STATE VARIABLES**                            |                                                              |         |
 | repDSLRMaps                                                  | Report maps of days since last rain (for each time step)     | 0       |
 | repFrostIndexMaps                                            | Report maps of frost index (for each time step)              | 0       |
@@ -745,7 +740,9 @@ Simulation of reservoirs
 
 This annex describes the LISFLOOD reservoirs routine, and how it is used. The simulation of reservoirs is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
-\<setoption name=\"simulateReservoirs\" choice=\"1\" /\>
+```xml
+	<setoption name="simulateReservoirs" choice="1" />
+```
 
 Reservoirs can be simulated on channel pixels where kinematic wave routing is used. The routine does *not* work for channel stretches where the dynamic wave is used!
 
@@ -753,7 +750,7 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 
 **Description of the reservoir routine** 
 
-Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity *S* \[m^3\]. The relative filling of a reservoir, *F*, is a fraction between 0 and 1. There are three 'special' filling levels. First, each reservoir has a 'dead storage' fraction, since reservoirs never empty completely. The corresponding filling fraction is the 'conservative storage limit', *L<sub>c</sub>*. For safety reasons a reservoir is never filled to the full storage capacity. The 'flood storage limit' (*L<sub>f</sub>*) represents this maximum allowed storage fraction. The buffering capacity of a reservoir is the storage available between the 'flood storage limit' and the 'normal storage limit' (*L<sub>n</sub>*). Three additional parameters define the way the outflow of a reservoir is regulated. For e.g. ecological reasons each reservoir has a 'minimum outflow' (*O<sub>min</sub>*, \[m^3 s<sup>-1</sup>\]). For high discharge situations, the 'non-damaging outflow' (*O<sub>nd</sub>*, \[m^3 s<sup>-1</sup>\]) is the maximum possible outflow that will not cause problems downstream. The 'normal outflow' (*O<sub>norm</sub>*, \[m^3 s<sup>-1</sup>\]) is valid once the reservoir reaches its 'normal storage' filling level.
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity $S\ [m^3]$. The relative filling of a reservoir, $F$, is a fraction between 0 and 1. There are three 'special' filling levels. First, each reservoir has a 'dead storage' fraction, since reservoirs never empty completely. The corresponding filling fraction is the 'conservative storage limit', $L_c$. For safety reasons a reservoir is never filled to the full storage capacity. The 'flood storage limit' $L_f$ represents this maximum allowed storage fraction. The buffering capacity of a reservoir is the storage available between the 'flood storage limit' and the 'normal storage limit' ($L_n$). Three additional parameters define the way the outflow of a reservoir is regulated. For e.g. ecological reasons each reservoir has a 'minimum outflow' ($O_{min}$, $[\frac{m^3} {s}]$). For high discharge situations, the 'non-damaging outflow' ($O_{nd}$, $[\frac{m^3} {s}]$) is the maximum possible outflow that will not cause problems downstream. The 'normal outflow' ($O_{norm}$, $[\frac{m^3} {s}]$) is valid once the reservoir reaches its 'normal storage' filling level.
 
 Depending on the relative filling of the reservoir, outflow ($O_{res},[\frac{m^3}{s}]$) is calculated as:
 
@@ -775,15 +772,15 @@ $$
 
 with:
 
-  	S         : Reservoir storage capacity $[m^3]$
- 	 F         : Reservoir fill (fraction, 1 at total storage capacity) \[-\]
- 	 L<sub>c</sub>      : Conservative storage limit \[-\]
-  	L<sub>n</sub>      : Normal storage limit \[-\]
- 	 L<sub>f</sub>      : Flood storage limit \[-\]
-  	O<sub>min</sub>    : Minimum outflow \[m^3 s<sup>-1</sup>\]
-  	O<sub>norm</sub>   : Normal outflow \[m^3 s<sup>-1</sup>\]
-  	O<sub>nd</sub>     : Non-damaging outflow \[m^3 s<sup>-1</sup>\]
-  	I<sub>res</sub>    : Reservoir inflow \[m^3 s<sup>-1</sup>\]
+   $S$:		Reservoir storage capacity $[m^3]$
+   $F$:		Reservoir fill (fraction, 1 at total storage capacity) \[-\]
+   $L_c$:	Conservative storage limit \[-\]
+   $L_n$:	Normal storage limit \[-\]
+   $L_f$:	Flood storage limit \[-\]
+   $O_{min}$:	Minimum outflow $[\frac{m^3} {s}]$
+   $O_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
+   $O_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
+   $I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
 
 In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value).
 
@@ -793,26 +790,26 @@ In order to prevent numerical problems, the reservoir outflow is calculated usin
 
 For the simulation of reservoirs a number of addition input files are necessary. First, the locations of the reservoirs are defined on a (nominal) map called '*res.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each reservoir receives its inflow from its upstream neighbouring channel pixel, you may want to check if each reservoir has any upstream channel pixels at all (if not, the reservoir will gradually empty during a model run!). The management of the reservoirs is described by 7 tables. The following table lists all required input:
 
-**Table A1.1** Input requirements reservoir  routine*
+***Table:*** *Input requirements reservoir routine.*
 
 | **Maps**    | **Default name**   | **Description** | **Units**   | **Remarks** |
 |-------------|-------------|-------------|-------------|-------------|
 | ReservoirSites | res.map     | reservoir locations  | \-          | nominal     |
-| TabTotStorage | rtstor.txt  | reservoir storage capacity  | m^3        |             |
+| TabTotStorage | rtstor.txt  | reservoir storage capacity  | $[m^3]$ |             |
 | TabConservativeStorageLimit | rclim.txt   | conservative storage limit | \-          | fraction of storage |
 | TabNormalSt orageLimit| rnlim.txt   | normal storage limit     | \-          | capacity    |
 | TabFloodStorageLimit | rflim.txt   | flood storage limit      | \-          |             |
-| TabMinOutflowQ | rminq.txt   | minimum outflow    | m^3/s      |             |
-| TabNormalOutflowQ | rnormq.txt  | normal outflow     | m^3/s      |             |
-| TabNonDamagingOutflowQ | rndq.txt    | non-damaging outflow | m^3/s      |             |
+| TabMinOutflowQ | rminq.txt   | minimum outflow    | $[m^3]$ |             |
+| TabNormalOutflowQ | rnormq.txt  | normal outflow     | $[m^3]$ |             |
+| TabNonDamagingOutflowQ | rndq.txt    | non-damaging outflow | $[m^3]$ |             |
 
 
-When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outflow point, see Figure A1.1), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
+When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outflow point, see Figure below), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
 ![reservoirPlacementNew](media/media/image42.png){width="4.75in"
 height="2.125in"}
 
-*Figure A1.1* Placement of the reservoirs: reservoirs on the outflow point (left) result in erroneous behavior of the reservoir routine.
+***Figure:*** *Placement of the reservoirs: reservoirs on the outflow point (left) result in erroneous behavior of the reservoir routine.*
 
 
 
@@ -848,15 +845,14 @@ starting point.
 
 Finally, you have to tell LISFLOOD that you want to simulate reservoirs! To do this, add the following statement to the 'lfoptions' element:
 
-\<setoption name=\"simulateReservoirs\" choice=\"1\" /\>
+```xml
+	<setoption name="simulateReservoirs" choice="1" />
+```
 
 Now you are ready to run the model. If you want to compare the model results both with and without the inclusion of reservoirs, you can switch off the simulation of reservoirs either by:
 
-1.  Removing the 'simulateReservoirs' statement from the 'lfoptions
-    element, or
-
-2.  changing it into \<setoption name=\"simulateReservoirs\"
-    choice=\"0\" /\>
+1.  Removing the 'simulateReservoirs' statement from the 'lfoptions element, or
+2.  changing it into \<setoption name="simulateReservoirs" choice="0" /\> 
 
 Both have exactly the same effect. You don't need to change anything in either 'lfuser' or 'lfbinding'; all file definitions here are simply ignored during the execution of the model.
 
@@ -866,14 +862,14 @@ Both have exactly the same effect. You don't need to change anything in either '
 
 The reservoir routine produces 3 additional time series and one map, as listed in the following table:
 
-**Table A1.2** Output of reservoir routine*                    
+***Table:***  *Output of reservoir routine.*                    
 
-| **Maps / Time series** | **Default name** | **Description**                       | **Units** | **Remarks** |
-| ---------------------- | ---------------- | ------------------------------------- | --------- | ----------- |
-| ReservoirFillState     | rsfilxxx.xxx     | reservoir fill at last time step[^10] | \-        |             |
-| ReservoirInflowTS      | qresin.tss       | inflow into reservoirs                | m^3/s     |             |
-| ReservoirOutflowTS     | qresout.tss      | outflow out of reservoirs             | m^3/s     |             |
-| ReservoirFillTS        | resfill.tss      | reservoir fill                        | \-        |             |
+| **Maps / Time series** | **Default name** | **Description**                       | **Units**       | **Remarks** |
+| ---------------------- | ---------------- | ------------------------------------- | --------------- | ----------- |
+| ReservoirFillState     | rsfilxxx.xxx     | reservoir fill at last time step[^10] | \-              |             |
+| ReservoirInflowTS      | qresin.tss       | inflow into reservoirs                | $\frac{m^3}{s}$ |             |
+| ReservoirOutflowTS     | qresout.tss      | outflow out of reservoirs             | $\frac{m^3}{s}$ |             |
+| ReservoirFillTS        | resfill.tss      | reservoir fill                        | \-              |             |
 
 ​                                                      
 
@@ -904,44 +900,43 @@ Polders can be simulated on channel pixels where dynamic wave routing is used. T
 
 **Description of the polder routine** 
 
-Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), and based on the weir equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in Figure A2.1.
+Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), and based on the weir equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in the following Figure:
 
 ![polders](media/image43.png)
 
-*Figure A2.1 Schematic overview of the simulation of polders.* pb *is the polder bottom level (above the channel bottom);* w<sub>c</sub> *is the water level in the channel;* h<sub>c</sub> *and* h<sub>p</sub> *are the water levels above the polder in- / outflow, respectively*
+***Figure:*** *Schematic overview of the simulation of polders.* $p_b$ *is the polder bottom level (above the channel bottom);* $w_c$ *is the water level in the channel;* $h_c$ *and* $h_p$ *are the water levels above the polder in- / outflow, respectively*
 
 
 
 From the Figure, it is easy to see that there can be three situations:
 
-1.  ***h<sub>c</sub>* \> *h<sub>p</sub>***: water flows out of the channel, into the polder. The flow rate, *q<sub>c,p</sub>*, is calculated using:
+1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$, is calculated using:
 
     $$
     \begin{array}{|} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}
     $$
-    where b is the outflow width [m], g is the acceleration due to gravity (9.81 m s<sup>-2</sup>) and μ is a weir constant which has a value of 0.49. Furthermore q<sub>c,p</sub> is in [m^3 s<sup>-1</sup>].
+    where $b$ is the outflow width $[m]$, $g$ is the acceleration due to gravity ($9.81\ \frac{m}{s^2}$) and $\mu$ is a weir constant which has a value of 0.49. Furthermore  is $q_{c,p}$ in $\frac{m}{s}$.
 
 
 
-2.  ***h<sub>c</sub>* \< *h<sub>p</sub>***: water flows out of the polder back into the
-    channel. The flow rate, *q<sub>p,c</sub>*, is now calculated using:
+2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ is now calculated using:
 
     $$
     \begin{array}{|} q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2} \\  c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}
     $$
     
-3.  ***h<sub>c</sub>* = *h<sub>p</sub>***: no water flowing into either direction (note here that the minimum value of *h<sub>c</sub>* is zero). In this case both *q<sub>c,p</sub>* and *q<sub>p,c</sub>* are zero.
+3.  $h_c = h_p$: no water flowing into either direction (note here that the minimum value of $h_c$ is zero). In this case both $q_{c,p}$ and  $q_{p,c}$ are zero.
 
     
 
 **Regulated and unregulated polders**
 
-The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in Figure A2.2. Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table 2.1). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
+The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table of the next Section). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
 
 ![poldersRegulated](media/media/image44.png){width="5.395833333333333in"
 height="3.3958333333333335in"}
 
-*Figure A2.2 Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq A2.1). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq A2.2). *
+***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq XXXX). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq XXXX).*
 
 
 
@@ -949,18 +944,18 @@ height="3.3958333333333335in"}
 
 The locations of the reservoirs are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations before running the model (you can do this by displaying the reservoirs map on top of the channel map). The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used. Furthermore, the properties of each polder are described using a number of tables. All required input is listed in the following table:
 
-**Table A2.1** Input requirements polder routine* 
+**Table:** *Input requirements polder routine.* 
 
 | **Maps**    | **Defaultname**   | **Description** | **Units**   | **Remarks** |
 |-------------|-------------|-------------|-------------|-------------|
 | PolderSites | polders.map | polder locations     | \-          | nominal     |
 | **Tables**  | **Defaultname**   | **Description** | **Units**   | **Remarks** |
-| TabPolderArea | poldarea.txt | polder area | m<sup>2</sup>        |             |
-| TabPolderOFWidth | poldofw.txt | polder in- and outflow width  | m           |             |
-| TabPolderTotalCapacity | poldcap.txt | polder storage capacity     | m^3        |             |
-| TabPolderBottomLevel | poldblevel.txt | Bottom level of polder, measured from channel bottom level (see also Figure A4.1)     | m           |             |
-| TabPolderOpeningTime | poldtopen.txt | Time at which polder is opened    | time step       |             |
-| TabPolderReleaseTime | poldtrelease.txt | Time at which water stored in polder is released again     | time step       |             |
+| TabPolderArea | poldarea.txt | polder area | $m^2$  |             |
+| TabPolderOFWidth | poldofw.txt | polder in- and outflow width  | $m$     |             |
+| TabPolderTotalCapacity | poldcap.txt | polder storage capacity     | $m^3$ |             |
+| TabPolderBottomLevel | poldblevel.txt | Bottom level of polder, measured from channel bottom level (see also Figure A4.1)     | $m$      |             |
+| TabPolderOpeningTime | poldtopen.txt | Time at which polder is opened    | $time step$ |             |
+| TabPolderReleaseTime | poldtrelease.txt | Time at which water stored in polder is released again     | $time step$ |             |
 
 Note that the polder opening- and release times are both defined a *time step* numbers (*not* days or hours!!). For *unregulated* polders, set both parameters to a bogus value of -9999, i.e.:
 
@@ -1005,9 +1000,8 @@ To switch on the polder routine, add the following line to the 'lfoptions' eleme
 
 Now you are ready to run the model. If you want to compare the model results both with and without the inclusion of polders, you can switch off the simulation of polders either by:
 
-3.  Removing the 'simulatePolders' statement from the 'lfoptions element, or
-
-4.  changing it into \<setoption name=\"simulatePolders\" choice=\"0\" /\>
+1. Removing the 'simulatePolders' statement from the 'lfoptions element, or
+2. changing it into \<setoption name=\"simulatePolders\" choice=\"0\" /\>
 
 Both have exactly the same effect. You don't need to change anything in either 'lfuser' or 'lfbinding'; all file definitions here are simply ignored during the execution of the model.
 
@@ -1017,13 +1011,13 @@ Both have exactly the same effect. You don't need to change anything in either '
 
 The polder routine produces 2 additional time series and one map (or stack of maps, depending on the value of LISFLOOD variable *ReportSteps*), as listed in the following table:
 
-**Table A2.2** Output of polder routine
+**Table:** *Output of polder routine.*
 
-| **Maps / Time series** | Default name | Description                                                  | Units |
-| ---------------------- | ------------ | ------------------------------------------------------------ | ----- |
-| PolderLevelState       | hpolxxxx.xxx | water level in polder at last time step11                    | m     |
-| PolderLevelTS          | hPolder.tss  | water level in polder (at polder locations)                  | m     |
-| PolderFluxTS           | qPolder.tss  | Flux into and out of polder (positive for flow from channel to polder, negative for flow from polder to channel) | m^3/s |
+| **Maps / Time series** | Default name | Description                                                  | Units           |
+| ---------------------- | ------------ | ------------------------------------------------------------ | --------------- |
+| PolderLevelState       | hpolxxxx.xxx | water level in polder at last time step11                    | $m$             |
+| PolderLevelTS          | hPolder.tss  | water level in polder (at polder locations)                  | $m$             |
+| PolderFluxTS           | qPolder.tss  | Flux into and out of polder (positive for flow from channel to polder, negative for flow from polder to channel) | $\frac{m^3}{s}$ |
 
 Note that you can use the map with the polder level at the last time step to define the initial conditions of a succeeding simulation, e.g.:
 
@@ -1058,34 +1052,36 @@ This annex describes the LISFLOOD lake routine, and how it is used. The simulati
 
 **Description of the lake routine** 
 
-Lakes are simulated as points in the channel network. Figure A3.1 shows all computed in- and outgoing fluxes. Lake inflow equals the channel flow upstream of the lake location. The flow out of the lake is computed using the following rating curve (e.g. Maidment, 1992):
+Lakes are simulated as points in the channel network. The Figure below shows all computed in- and outgoing fluxes. Lake inflow equals the channel flow upstream of the lake location. The flow out of the lake is computed using the following rating curve (e.g. Maidment, 1992):
 
 $$
 O_{lake} = A{(H - {H_0})^B}
 $$
 with:
 
-  	O<sub>lake</sub>   : Lake outflow rate \[m^3 s<sup>-1</sup>\]
+   $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
 
- 	 H         : Water level in lake \[m\]
+   $H$:	 Water level in lake $[m]$
 
-  	H<sub>0</sub>      : Water level at which lake outflow is zero \[m\]
-  	A, B      : Constants \[-\]
+   $H_0$:	Water level at which lake outflow is zero $[m]$
+
+   $A, B$:	Constants \[-\]
+
+
 
 ![lakes](media/media/image45.png){width="5.375in"
 height="3.5104166666666665in"}
 
-Figure A3.1 Schematic overview of the simulation of lakes.* H<sub>0</sub> *is the water level at which the outflow is zero;* H *is the water level in the lake and* EW *is the evaporation from the lake*
+***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
 
-Both *H* and *H<sub>0</sub>* can be defined relative to an arbitrary reference level. Since the outflow is a function of the *difference* between both levels, the actual value of this reference level doesn't matter if *H*
-\> *H<sub>0</sub>*. However, it is advised to define both *H* and *H<sub>0</sub>* relative to the *average bottom level* of the lake. This will result in more realistic simulations during severe drought spells, when the water level drops below *H<sub>0</sub>* (in which case lake outflow ceases). The value of constant *A* can be approximated by the width of the lake outlet in meters, and *B* is within the range 1.5-2 (reference?). Lake evaporation occurs at the potential evaporation rate of an open water surface.
+Both *H* and $H_0$ can be defined relative to an arbitrary reference level. Since the outflow is a function of the *difference* between both levels, the actual value of this reference level doesn't matter if $H > H_0$. However, it is advised to define both *H* and $H_0$ relative to the *average bottom level* of the lake. This will result in more realistic simulations during severe drought spells, when the water level drops below $H_0$ (in which case lake outflow ceases). The value of constant *A* can be approximated by the width of the lake outlet in meters, and *B* is within the range 1.5-2 (reference?). Lake evaporation occurs at the potential evaporation rate of an open water surface.
 
 
 
 **Initialisation of the lake routine**
 
 Because lakes (especially large ones) tend to produce a relatively slow response over time, it is important to make sure that the initial lake level is set to a more or less sensible value. Just as is the case with the initialisation of the lower groundwater zone, LISFLOOD has a special option that will compute a steady-state lake level and use this as the initial value. The steady-state level is computed from the water balance
-of the lake. If *V<sub>l</sub>* is the total lake volume \[m^3\], the rate of change of *V<sub>l</sub>* at any moment is given by the continuity equation:
+of the lake. If $V_l$ is the total lake volume $[m^3]$, the rate of change of $V_l$ at any moment is given by the continuity equation:
 
 $$
 \frac{{d{V_l}}}{{dt}} = I(t) - O(t)
@@ -1100,65 +1096,74 @@ Substituting all in- and outflow terms gives:
 $$
 I_l - EW_l - A \cdot (H - H_0)^B = 0
 $$
-where *I<sub>l</sub>* is the inflow into the lake and *EW<sub>l</sub>* the lake evaporation (both expressed in m^3 s<sup>-1</sup>). Re-arranging gives the steady-state lake level:
+where $I_l$ is the inflow into the lake and $EW_l$ the lake evaporation (both expressed in $\frac{m^3} {s}$). Re-arranging gives the steady-state lake level:
 
 $$
 H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{1/B}
 $$
-LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow (=*I<sub>l</sub>* -- *EW<sub>l</sub>*). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure. Table A3.1 gives a worked example. Be aware that the calculation can be less straightforward for very large lakes with multiple inlets (which are not well represented by the current point approach anyway).
+LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow ($=I_l - EW_l$). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
+
+Here a worked example. Be aware that the calculation can be less straightforward for very large lakes with multiple inlets (which are not well represented by the current point approach anyway):
 
 
 
-**Calculation of average net lake inflow**
-
-<u>Lake characteristics</u> 
-- lake area: 215•10^6^ m<sup>2</sup                                            
-- mean annual discharge downstream of lake: 293 m<sup>3</sups<sup>-1</sup             
-- mean annual discharge upstream of lake: 300 m<sup>3</sups<sup>-1</sup               
-
-- mean annual evaporation: 1100 mm yr<sup>-1</sup 
-                               
-<u>METHOD 1: USING AVERAGE OUTFLOW</u>                                   
-Assuming lake is in quasi steady-state:                               
-	average net inflow = average net outflow = [293 m^3 s<sup>-1</sup>]{.underline}                                                  
-
-<u>METHOD 2: USING AVERAGE INFLOW AND EVAPORATION</u>                    
-Only use this method if no outflow data are available                 
-
-1. Express lake evaporation in m<sup>3</sups<sup>-1</sup>:                       
-   1100 mm yr<sup>-1</sup/ 1000 = 1.1 m yr<sup>-1</sup                               
-   1.1 m yr<sup>-1</supx 215•10^6^ m<sup>2</sup= 2.37•10^8^ m<sup>3</supyr<sup>-1</sup             
-   2.37•10^8^ m<sup>3</supyr<sup>-1</sup/ (365 days x 86400 seconds) = <u>7.5 m<sup>3</sup    
-   s<sup>-1</sup></u>   
-
-2.  Compute net inflow:                                           
-    net inflow = 300 m<sup>3</sups<sup>-1</sup-- 7.5 m<sup>3</sups<sup>-1</sup= <u>292.5 m^3 s<sup>-1</sup></u>
+> **Calculation of average net lake inflow**
+>
+> <u>Lake characteristics</u> 
+> - lake area: $215•10^6\ m^2$                                            
+> - mean annual discharge downstream of lake: $293\ \frac{m^3}{s}$             
+> - mean annual discharge upstream of lake: $300\ \frac{m^3}{s}$               
+> - mean annual evaporation: $1100\ \frac{mm}{yr}$ 
+>                                
+> <u>METHOD 1: USING AVERAGE OUTFLOW</u>                                   
+> Assuming lake is in quasi steady-state:                               
+> 	average net inflow = average net outflow = <u>$293 m^3 s^{-1}$</u>                                                  
+>
+> <u>METHOD 2: USING AVERAGE INFLOW AND EVAPORATION</u>                    
+> Only use this method if no outflow data are available                 
+>
+> 1. Express lake evaporation in $m^3 s^{-1}$:                       
+>
+>    $\frac{1100 \frac{mm}{yr}}{1000} = 1.1\ \frac{m}{yr}$           
+>
+>    ​                    
+>    $1.1\ \frac{m}{yr} \cdot 215 • 10^{6} m^2 = 2.37•10^8 \frac{m^3}{yr}$     
+>
+>    ​        
+>
+>    $\frac{2.37•10^8 \frac{m^3}{yr}}{365\ days\ \cdot\ 86400 seconds} = 7.5 \frac{m^3}{s}$   
+>
+>    
+>
+> 2.  Compute net inflow:                                           
+>     net inflow = $300 \frac{m^3}{s}\ - 7.5\ \frac{m^3}{s}= 292.5\ \frac{m^3}{s}$
+>
 
 
 
 **Preparation of input data** 
 
-The lake locations defined on a (nominal) map called '*lakes.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each lake receives its inflow from its upstream neighbouring channel pixel, you may want to check if each lake has any upstream channel pixels at all (if not, the lake will just gradually empty during a model run!). The lake characteristics are described by 4 tables. Table 3.2 lists all required input.
+The lake locations defined on a (nominal) map called '*lakes.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each lake receives its inflow from its upstream neighbouring channel pixel, you may want to check if each lake has any upstream channel pixels at all (if not, the lake will just gradually empty during a model run!). The lake characteristics are described by 4 tables. The following Table lists all required input:
 
-When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure A3.2), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
+***Table:***  *Input requirements lake routine.*                                                                              
 
-Table A3.2 Input requirements lake routine                                                                              
-
-| **Maps**    | **Default name** | **Description**                          |               | **Units**                             | **Remarks** |
-| ----------- | ---------------- | ---------------------------------------- | ------------- | ------------------------------------- | ----------- |
-| LakeSites   | lakes.map        | lake locations                           | -             | nominal                               |             |
-| **Tables**  |                  |                                          |               |                                       |             |
-| TabLakeArea | lakearea.txt     | lake surface area                        | m<sup>2</sup> |                                       |             |
-| TabLakeH0   | lakeh0.txt       | water level at which lake outflowis zero | m             | relative to average lake bottom level |             |
-| TabLakeA    | lakea.txt        | lake parameter A                         | -             | ≈ outlet width in meters              |             |
-| TabLakeB    | lakeb.txt        | lake parameter B                         | -             | 1.5-2                                 |             |
+| **Maps**    | **Default name** | **Description**                          | **Units** | **Remarks**                           |
+| ----------- | ---------------- | ---------------------------------------- | --------- | ------------------------------------- |
+| LakeSites   | lakes.map        | lake locations                           | -         | nominal                               |
+| **Tables**  |                  |                                          |           |                                       |
+| TabLakeArea | lakearea.txt     | lake surface area                        | $m^2$     |                                       |
+| TabLakeH0   | lakeh0.txt       | water level at which lake outflowis zero | $m$       | relative to average lake bottom level |
+| TabLakeA    | lakea.txt        | lake parameter A                         | -         | ≈ outlet width in meters              |
+| TabLakeB    | lakeb.txt        | lake parameter B                         | -         | 1.5-2                                 |
 
 
+
+>  Note: When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
 ![reservoirPlacementNew](media/media/image42.png){width="4.75in"
 height="2.125in"}
 
-*Figure A3.2* Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.
+***Figure:***  *Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
 
 
 
@@ -1204,7 +1209,7 @@ Finally, you have to tell LISFLOOD that you want to simulate lakes! To do this, 
 Now you are ready to run the model. If you want to compare the model results both with and without the inclusion of lakes, you can switch off the simulation of lakes either by:
 
 - Removing the 'simulateLakes' statement from the 'lfoptions element, or
-- changing it into \<setoption name=\"simulateLakes\" choice=\"0\" /\>
+- changing it into \<setoption name="simulateLakes" choice="0" /\>
 
 Both have exactly the same effect. You don't need to change anything in either 'lfuser' or 'lfbinding'; all file definitions here are simply ignored during the execution of the model.
 
@@ -1214,20 +1219,24 @@ Both have exactly the same effect. You don't need to change anything in either '
 
 The lake routine produces 4 additional time series and one map (or stack), as listed in the following table:
 
-**Table A3.3** Output of lake routine 
+**Table:**  *Output of lake routine.*
 
-| Maps            | Default name | Description                    | Units |
-| --------------- | ------------ | ------------------------------ | ----- |
-| LakeLevelState  | lakhxxxx.xxx | lake level at last time step12 | m     |
-| **Time series** |              |                                |       |
-| LakeInflowTS    | qLakeIn.tss  | inflow into lakes              | m^3/s |
-| LakeOutflowTS   | qLakeOut.tss | flow out of lakes              | m^3/s |
-| LakeEWTS        | EWLake.tss   | lake evaporation               | mm    |
-| LakeLevelTS     | hLake.tss    | lake level                     | m     |
+| Maps            | Default name | Description                    | Units           |
+| --------------- | ------------ | ------------------------------ | --------------- |
+| LakeLevelState  | lakhxxxx.xxx | lake level at last time step12 | $m$             |
+| **Time series** |              |                                |                 |
+| LakeInflowTS    | qLakeIn.tss  | inflow into lakes              | $\frac{m^3}{s}$ |
+| LakeOutflowTS   | qLakeOut.tss | flow out of lakes              | $\frac{m^3}{s}$ |
+| LakeEWTS        | EWLake.tss   | lake evaporation               | $mm$            |
+| LakeLevelTS     | hLake.tss    | lake level                     | $m$             |
 
 Note that you can use the map with the lake level at the last time step to define the initial conditions of a succeeding simulation, e.g.:
 
-\<textvar name=\"LakeInitialLevelValue\" value=\"/mycatchment/lakh0000.730\"\>
+```xml
+<textvar name="LakeInitialLevelValue" value="/mycatchment/lakh0000.730">
+```
+
+
 
 []{#_Toc353538887 .anchor}
 
@@ -1249,7 +1258,7 @@ This annex describes the LISFLOOD inflow hydrograph routine, and how it is used.
 
 **Description of the inflow hydrograph routine**
 
-When using the inflow hydrograph option, time series of discharge \[m^3/s\] are added at some user-defined location(s) on the channel network. The inflow is added as side-flow in the channel routing equations (this works for both kinematic and dynamic wave). *Negative* inflows (i.e. outflows) are also possible, but large outflow rates may sometimes result in numerical problems in the routing equations. If you use a negative inflow rate, we advise to carefully inspect the model output for any signs of numerical problems (i.e. strange oscillations in simulated discharge, generation of missing values). Also check the mass balance time series after your simulation (numerical problems often result in unusually large mass balance errors).
+When using the inflow hydrograph option, time series of discharge $[\frac{m^3}{s}]$ are added at some user-defined location(s) on the channel network. The inflow is added as side-flow in the channel routing equations (this works for both kinematic and dynamic wave). *Negative* inflows (i.e. outflows) are also possible, but large outflow rates may sometimes result in numerical problems in the routing equations. If you use a negative inflow rate, we advise to carefully inspect the model output for any signs of numerical problems (i.e. strange oscillations in simulated discharge, generation of missing values). Also check the mass balance time series after your simulation (numerical problems often result in unusually large mass balance errors).
 
 
 
@@ -1257,20 +1266,20 @@ When using the inflow hydrograph option, time series of discharge \[m^3/s\] are 
 
 The table below lists the input requirements for the inflow hydrograph option. All you need is a map that defines where you want to add the inflow, and a time series with the corresponding inflow rates.
 
-*Table A4.1 Input requirements inflow hydrograph routine*                                                                     
+***Table:*** *Input requirements inflow hydrograph routine.*                                                                     
 
-| Maps         | Default name | Description                      | Units | Remarks |
-| ------------ | ------------ | -------------------------------- | ----- | ------- |
-| InflowPoints | -            | locations for inflow hydrographs | -     | nominal |
-| Time series  |              |                                  |       |         |
-| QInTS        | -            | inflow hydrograph(s)             | m^3/s |         |
+| Maps         | Default name | Description                      | Units           | Remarks |
+| ------------ | ------------ | -------------------------------- | --------------- | ------- |
+| InflowPoints | -            | locations for inflow hydrographs | -               | nominal |
+| Time series  |              |                                  |                 |         |
+| QInTS        | -            | inflow hydrograph(s)             | $\frac{m^3}{s}$ |         |
 
 
 
 Using the inflow hydrograph option involves **four steps**:
 
 1. Create a (nominal) PCRaster map with unique identifiers that point to the location(s) where you want to insert the inflow hydrograph(s)
-2. Save the inflow hydrograph(s) in PCRaster time series format; inflow hydrographs need to be given in [m^3 s<sup>-1</sup>]
+2. Save the inflow hydrograph(s) in PCRaster time series format; inflow hydrographs need to be given in $[\frac{m^3}{s}]$
 
   > IMPORTANT: PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the InflowPoints map; the second series to unique identifier 2, and so on. So, even if your InflowPoints map only contains (as an example) identifiers 3 and 4, you still need to include the columns for identifiers 1 and 2!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at t=1, even if you set StepStart to some higher value. For more info on time series files please have a look at the PCRaster documentation.
 
@@ -1316,17 +1325,23 @@ Now you are ready to run the model with the inflow hydrograph.
 
 **Substituting subcatchments with measured inflow hydrographs**
 
-One of the most common uses of the inflow hydrograph option is this: suppose we have a catchment where we only want to simulate the downstream part. If measured time series of discharge are available for the upstream catchment(s), we can use these to represent the inflow into the more downstream part. Figure A4.1 shows an example, where we have measured discharge of subcatchment *A* (just before it enters the main river). In this case it is important to pay special attention to two issues.
+One of the most common uses of the inflow hydrograph option is this: suppose we have a catchment where we only want to simulate the downstream part. If measured time series of discharge are available for the upstream catchment(s), we can use these to represent the inflow into the more downstream part. The Figure below shows an example, where we have measured discharge of subcatchment *A* (just before it enters the main river). 
 
-1) <u>Exclude subcatchments from MaskMap</u>
 
-First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or missing value) on LISFLOOD's *MaskMap* (which defines which pixels are included in the calculations and which are not). If you include it, LISFLOOD will first *simulate* discharge coming out of subcatchment *A*, and then *add* the (measured) inflow on top of it! Of course this doesn't make any sense, so always be careful which areas are included in your simulation and which are not.
 
 ![](media/media/image46.emf){width="6.0in" height="4.333333333333333in"}
 
-*Figure A4.1 Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text for explanation.*
+***Figure:*** *Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text below for explanation.*
 
-2) <u>Make sure your inflow points are where you need them</u>
+
+
+In this case it is important to pay special attention to two issues:
+
+1. <u>Exclude subcatchments from MaskMap</u>
+
+First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or missing value) on LISFLOOD's *MaskMap* (which defines which pixels are included in the calculations and which are not). If you include it, LISFLOOD will first *simulate* discharge coming out of subcatchment *A*, and then *add* the (measured) inflow on top of it! Of course this doesn't make any sense, so always be careful which areas are included in your simulation and which are not.
+
+2. <u>Make sure your inflow points are where you need them</u>
 
 If you already have all gauge locations on a PCRaster map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
 one pixel downstream of the *outflow* points of the corresponding subcatchment. If you already have a (nominal) map of of your subcatchments, a PCRaster script exists that automatically calculates the corresponding out- and inflow points.
@@ -1355,29 +1370,29 @@ $$
 \frac{{\partial Q}}{{\partial x}} + \frac{{\partial A}}{{\partial t}} = q \rho {\kern 1pt} gA({S_0} - {S_f}) = 0
 $$
 
-where \$A = \alpha \\cdot {Q\^\\beta }\$
+where $A = \alpha \cdot {Q^{\beta} }$
 
-continuity equation momentum equation as expressed by Chow et al. 1988. Which decreasing inflow the peaks of the resulting outflow will be later in time (see figure A5.1 for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
+continuity equation momentum equation as expressed by Chow et al. 1988. Which decreasing inflow the peaks of the resulting outflow will be later in time (see Figure below for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
 
 ![](media/media/image47.emf){width="5.864583333333333in"
 height="2.75in"}
 
-**Figure A5.1** Simulated outflow for different amount of inflow wave propagation gets slower
+***Figure:*** *Simulated outflow for different amount of inflow wave propagation gets slower.*
 
-This is realistic if your channel looks like in figure A5.2:
+This is realistic if your channel looks like this:
 
 ![](media/media/image48.emf){width="2.05in"
 height="1.5270833333333333in"}![](media/media/image49.emf){width="1.9465277777777779in"
 height="1.45in"}
 
-**Figure A5.2** Schematic cross section of a channel with different water level
+***Figure:*** *Schematic cross section of a channel with different water level.*
 
 But a natural channel looks more like this:
 
 ![](media/media/image50.emf){width="4.033333333333333in"
 height="1.617361111111111in"}
 
-**Figure A5.3** Schematic cross section of a natural channel
+***Figure:*** *Schematic cross section of a natural channel.*
 
 Which means, opposite to the kinematic wave theory, the wave propagation gets slower as the discharge is increasing, because friction is going up on floodplains with shrubs, trees, bridges. Some of the water is even stored in the floodplains (e.g. retention areas, seepage retention). As a result of this, a single kinematic wave cannot cover these different characteristics of floods and floodplains.
 
@@ -1385,7 +1400,7 @@ Which means, opposite to the kinematic wave theory, the wave propagation gets sl
 
 **Double kinematic wave approach**
 
-The double kinematic approach splits up the channel in two parts (see figure A5.4):
+The double kinematic approach splits up the channel in two parts (see figure below):
 
 ​	1\. bankful routing
 
@@ -1395,7 +1410,7 @@ The double kinematic approach splits up the channel in two parts (see figure A5.
 height="1.3833333333333333in"}![](media/media/image55.emf){width="1.95in"
 height="1.375in"}
 
-F**igure A5.4** Channel is split in a bankful and over bankful routing
+***Figure:*** *Channel is split in a bankful and over bankful routing*
 
 Similar methods are used since the 1970s e.g. as multiple linear or non linear storage cascade (Chow, 1988). The former forecasting model for the River Elbe (ELBA) used a three stages approach depending on discharge (Fröhlich, 1996).
 
@@ -1405,13 +1420,13 @@ Similar methods are used since the 1970s e.g. as multiple linear or non linear s
 
 No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). A 'warm' start (using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
 
-***Table A5.1**  Input/output double kinematic wave*   
+***Table:***  *Input/output double kinematic wave.*   
 
-| Maps                       | Default name | Description                                  | Units         | Remarks                                           |
-| -------------------------- | ------------ | -------------------------------------------- | ------------- | ------------------------------------------------- |
-| Average discharge          | avgdis.map   | Average discharge                            | m^3/s         | Produced by prerun                                |
-| CrossSection2AreaInitValue | ch2cr000.xxx | channel crosssection for 2nd routing channel | m<sup>2</sup> | Produced by option 'repStateMaps' or 'repEndMaps' |
-| PrevSideflowInitValue      | chside00.xxx | sideflow into the channel                    | mm            |                                                   |
+| Maps                       | Default name | Description                                  | Units           | Remarks                                           |
+| -------------------------- | ------------ | -------------------------------------------- | --------------- | ------------------------------------------------- |
+| Average discharge          | avgdis.map   | Average discharge                            | $\frac{m^3}{s}$ | Produced by prerun                                |
+| CrossSection2AreaInitValue | ch2cr000.xxx | channel crosssection for 2nd routing channel | $m^2$           | Produced by option 'repStateMaps' or 'repEndMaps' |
+| PrevSideflowInitValue      | chside00.xxx | sideflow into the channel                    | $mm$            |                                                   |
 
 
 
@@ -1449,7 +1464,7 @@ Using the double kinematic wave approach option involves **three steps**:
 	<setoption name="InitLisflood" choice="1" />
 ```
 
-and it will produce a map of average discharge \[m^3/s\] in the initial folder. This map is used together with the QSplitMult factor to set the value for the second line of routing to start.
+and it will produce a map of average discharge $[\frac{m^3}{s}]$ in the initial folder. This map is used together with the QSplitMult factor to set the value for the second line of routing to start.
 
 For a 'warm start' these initial values are needed (see also table A5.1)
 
@@ -1468,7 +1483,7 @@ For a 'warm start' these initial values are needed (see also table A5.1)
 	</textvar>                                                    
 ```
 
-**CrossSection2AreaInitValue** is the initial cross-sectional area [m<sup>2</sup>] of the water in the river channels (a substitute for initial discharge, which is directly dependent on this). A value of -9999 sets the initial amount of water in the channel to 0.
+**CrossSection2AreaInitValue** is the initial cross-sectional area $[m^2]$ of the water in the river channels (a substitute for initial discharge, which is directly dependent on this). A value of -9999 sets the initial amount of water in the channel to 0.
 
 **PrevSideflowInitValue** is the initial inflow from each pixel to the channel [mm]. A value of -9999 sets the initial amount of sideflow to the channel to 0.
 
@@ -1521,11 +1536,12 @@ The minimum and maximum number of sub steps can be set in the settings file:
 	</textvar>                                                          
 ```
 
+***UpLimit*** is the minimum upstream area do be included in the calculation of the maximum celerity of wave propagation $[m^2]$
 
-
-***UpLimit*** is the minimum upstream area do be included in the calculation of the maximum celerity of wave propagation [m<sup>2</sup>]
 ***MinNoStep*** is the absolute minimum number of sub steps for channel routing [-]
+
 ***ChanA*** for calculating the maximum number of sub steps for channel routing [-]
+
 ***ChanB*** for calculating the minimum number of sub steps for channelrouting [-]
 
 []{#_Toc353538900 .anchor}
@@ -1554,21 +1570,21 @@ The current dynamic wave implementation requires that all equations are solved u
 $$
 \Delta '{t_{dyn}} \le \frac{{\Delta x}}{{V + {c_d}}}
 $$
-where *∆'t<sub>dyn</sub>* is the sub-step for the dynamic wave \[seconds\], *∆x* is the length of one channel element (pixel) \[m\], *V* is the flow velocity \[m s<sup>-1</sup>\] and *c<sub>d</sub>* is dynamic wave celerity \[m s<sup>-1</sup>\]. 
+where $\Delta't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, *∆x* is the length of one channel element (pixel) $[m]$, *V* is the flow velocity $[\frac{m}{s}]$ and $c_d$ is dynamic wave celerity $[\frac{m}{s}]$. 
 
 The dynamic wave celerity can be calculated as (Chow, 1988):
 
 $$
 {c_d} = \sqrt {gy}
 $$
-where *g* is the acceleration by gravity \[m s<sup>-2</sup>\] and *y* is the depth of flow \[m\]. For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. The flow velocity is simply:
+where *g* is the acceleration by gravity $[\frac{m}{s^{2}}]$ and *y* is the depth of flow $[m]$. For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. The flow velocity is simply:
 
 $$
 V = {Q_{ch}}/A
 $$
-where *Q<sub>ch</sub>* is the discharge in the channel \[m^3 s<sup>-1</sup>\], and *A* the cross-sectional area \[m<sup>2</sup>\].
+where $Q_{ch}$ is the discharge in the channel $[\frac{m^3}{s}]$, and *A* the cross-sectional area $[m^2]$.
 
-The Courant number for the dynamic wave, *C<sub>dyn</sub>*, can now be computed as:
+The Courant number for the dynamic wave, $C_{dyn}$, can now be computed as:
 
 $$
 C_{dyn} = \frac{(V + c_d)\Delta t}{\Delta x}
@@ -1578,7 +1594,7 @@ where *∆t* is the overall model time step \[s\]. The number of sub-steps is th
 $$
 SubSteps = \max (1,roundup(\frac{C_{dyn}}{C_{dyn,crit}}))
 $$
-where *C<sub>dyn,crit</sub>* is the critical Courant number. The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
+where $C_{dyn,crit}$ is the critical Courant number. The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
 
 
 
@@ -1588,15 +1604,15 @@ A number of addition input files are necessary to use the dynamic wave option. F
 
 The following table lists all required input:
 
-***Table A6.1**  Input requirements dynamic wave routine* 
+***Table:***  *Input requirements dynamic wave routine* 
 
-| Maps              | Default name  | Description                           | Units                                   | Remarks |
-| ----------------- | ------------- | ------------------------------------- | --------------------------------------- | ------- |
-| ChannelsDynamic   | chandyn.map   | dynamic wave channels (1,0)           | -                                       | Boolean |
-| ChanCrossSections | chanxsect.map | channel cross section IDs             | -                                       | nominal |
-| ChanBottomLevel   | chblevel.map  | channel bottom level                  | [m]                                     |         |
-| **Tables**        |               |                                       |                                         |         |
-| TabCrossSections  | chanxsect.txt | cross section parameter table (H,A,P) | H:[m] <br> A:[m<sup>2</sup>] <br> P:[m] |         |
+| Maps              | Default name  | Description                           | Units                            | Remarks |
+| ----------------- | ------------- | ------------------------------------- | -------------------------------- | ------- |
+| ChannelsDynamic   | chandyn.map   | dynamic wave channels (1,0)           | -                                | Boolean |
+| ChanCrossSections | chanxsect.map | channel cross section IDs             | -                                | nominal |
+| ChanBottomLevel   | chblevel.map  | channel bottom level                  | $m$                              |         |
+| **Tables**        |               |                                       |                                  |         |
+| TabCrossSections  | chanxsect.txt | cross section parameter table (H,A,P) | H: $m$ <br> A: $m^2$ <br> P: $m$ |         |
 
 
 
@@ -1693,18 +1709,18 @@ Transmission loss is *optional*, and can be activated by adding the following li
 
 **Description of the transmission loss approach**
 
-The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage ofa channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
+The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage of a channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
 $$
 Outflow = {\left( {Inflo{w^{\frac{1}{{TransPower}}}} - TransSub} \right)^{TransPower}}
 $$
 with: 
-	Outflow: discharge at the outflow
-	Inflow: discharge at the Inflow (upstream)
-	TransPower: Parameter given by the rating curve
-	TransSub: Parameter which is to calibrate
+   $Outflow$:		discharge at the outflow
+   $Inflow$:		discharge at the Inflow (upstream)
+   $TransPower$: 	Parameter given by the rating curve
+   $TransSub$:		Parameter which is to calibrate
 
-As a main difference to the Rao and Maurer 1996, the TransPower parameter is not calculated by using a rating curve but is estimated (calibrated) as the parameter TransSub. Transmission loss takes place where the channel gets bigger with more influence of river-aquifer interaction and also with more river-floodplain interaction. Therefore a minimum upstream area is defined where transmission loss starts to get important.
+As a main difference to the Rao and Maurer 1996, the $TransPower$ parameter is not calculated by using a rating curve but is estimated (calibrated) as the parameter $TransSub$. Transmission loss takes place where the channel gets bigger with more influence of river-aquifer interaction and also with more river-floodplain interaction. Therefore a minimum upstream area is defined where transmission loss starts to get important.
 
 
 
@@ -1749,7 +1765,7 @@ No additional maps or tables are needed. Using the transmission loss option invo
 
 **TransPower** is the power transmission loss parameter. Standard is set to 2.0 and the range should be between 1.3 and 2.0 (higher values lead to more loss) 
 
-**TransArea** is the downstream area which is taken into account for transmission loss. Standard is 5.0E+10 km<sup>2</sup> and range should be 1.0E+10 km2 to 1.0E+11 km<sup>2</sup> (higher values lead to less loss as less area is taken into account)
+**TransArea** is the downstream area which is taken into account for transmission loss. Standard is $5.0E+10 km^2$ and range should be $1.0E+10 km^2$ to $1.0E+11 km^2$ (higher values lead to less loss as less area is taken into account)
 
 
 
@@ -1769,11 +1785,11 @@ Now you are ready to run the model with the transmission loss option
 
 The transmission option can produce an additional time series as listed in the following table:
 
-*Table A7.3 Output of transmission loss routine -- Average upstream of gauges*                                                           
+***Table:*** *Output of transmission loss routine -- Average upstream of gauges.*                                                           
 
 | Time series    | Default name       | Description                      | Units |
 | -------------- | ------------------ | -------------------------------- | ----- |
-| TransLossAvUps | TransLossAvUps.tss | Transmission loss in the channel | mm    |
+| TransLossAvUps | TransLossAvUps.tss | Transmission loss in the channel | $mm$  |
 
 [🔝](#top)
 
@@ -1800,38 +1816,38 @@ The water is withdrawn only from discharge in the river network but not from soi
 
 -   For each single day a total demand of withdrawal water is loaded from a sparse stack of maps
 
--   Water use is taken from the discharge in the river network. First the water use is taken from the same grid cell (see figure A8.1 -- pixel No. 1)
+-   Water use is taken from the discharge in the river network. First the water use is taken from the same grid cell (see figure below -- pixel No. 1)
 
--   If the amount of water withdrawal is larger than the water available in this grid cell water is taken from downstream moving along the local drain direction. This is done by implementing a loop substracting the remaining water from the next downstream cell till all the water for water use is taken or a predefined number of iteration is reached (see figure A8.1 -- pixel No. 2 to 5)
+-   If the amount of water withdrawal is larger than the water available in this grid cell water is taken from downstream moving along the local drain direction. This is done by implementing a loop substracting the remaining water from the next downstream cell till all the water for water use is taken or a predefined number of iteration is reached (see figure below -- pixel No. 2 to 5)
 
 ![](media/media/image56.emf){width="4.0869564741907265in"
 height="2.134514435695538in"}
 
-**Figure A8.1** Water withdrawal assessing demand and availability along the flow path
+***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
 
 In the settings.xml you can define:
 
 -   the percentage of water that must remain in a grid cell and is not withdrawn by water use (WUsePercRemain)
 
--   the maximum number of loops (= distance to the water demand cell). For example in figure 8.1: maxNoWateruse = 5
+-   the maximum number of loops (= distance to the water demand cell). For example in figure above: maxNoWateruse = 5
 
 
 
 **Preparation of input data** 
 
-Table A8.1 gives an overview about the maps and table needed for the water use option.
+The following Table gives an overview about the maps and table needed for the water use option.
 
-*Table A8.1 Input requirements water use*                                                                                            
+***Table:*** *Input requirements water use.*                                                                                            
 
-| Maps                           | Default name   | Description                                             | Units |
-| ------------------------------ | -------------- | ------------------------------------------------------- | ----- |
-| Yearly stack of water use maps | wuse0000.xxx   | Total water withdrawal                                  | m^3/s |
-| Table                          |                |                                                         |       |
-| WUseofDay                      | WUseofDays.txt | Assignment of day of the year to map stack of water use | -     |
+| Maps                           | Default name   | Description                                             | Units           |
+| ------------------------------ | -------------- | ------------------------------------------------------- | --------------- |
+| Yearly stack of water use maps | wuse0000.xxx   | Total water withdrawal                                  | $\frac{m^3}{s}$ |
+| Table                          |                |                                                         |                 |
+| WUseofDay                      | WUseofDays.txt | Assignment of day of the year to map stack of water use | -               |
 
 
 
-A sparse map stack of one year of total water withdrawal \[m^3/s\] with a map every 10 days or a month is needed. Because it is assumed that water use follows a yearly circle, this map stack is used again and again for the following years. For example:
+A sparse map stack of one year of total water withdrawal $[\frac{m^3}{s}]$ with a map every 10 days or a month is needed. Because it is assumed that water use follows a yearly circle, this map stack is used again and again for the following years. For example:
 
 ```xml
 	 t   map name 
@@ -1929,9 +1945,9 @@ All in- and output files need to be defined in the settings file. If you are usi
 
 ***PrefixWaterUse*** is the prefix of the water use maps
 
-***WaterUseMaps*** is the path and prefix of the reported water use [m^3/s] as a result of demand and availability
+***WaterUseMaps*** is the path and prefix of the reported water use $[\frac{m^3}{s}]$ as a result of demand and availability
 
-***WaterUseTS*** are time series of upstream water use [m^3/s] at gauging stations
+***WaterUseTS*** are time series of upstream water use $[\frac{m^3}{s}]$ at gauging stations
 
 ***StepsWaterUseTS*** is the number of loops needed for water use [-]
 
@@ -1951,16 +1967,16 @@ Finally, you have to tell LISFLOOD that you want to simulate water use. To do th
 
 **Water use output files**
 
-The water use routine can produce 2 additional time series and one map (or stack), as listed in the following table:
+The water use routine can produce 2 additional time series and one map (or stack), as listed in the following Table:
 
- *Table A8.3 Output of water use routine*     
+ ***Table:*** *Output of water use routine.*     
 
-| Maps            | Default name      | Option          | Units |
-| --------------- | ----------------- | --------------- | ----- |
-| WaterUseMaps    | wusexxxx.xxx      | repwateruseMaps | m^3/s |
-| **Time series** |                   |                 |       |
-| Number of loops | stepsWaterUse.tss |                 | -     |
-| WaterUseTS      | wateruseUps.tss   | repwateruseTS   | m^3/s |
+| Maps            | Default name      | Option          | Units           |
+| --------------- | ----------------- | --------------- | --------------- |
+| WaterUseMaps    | wusexxxx.xxx      | repwateruseMaps | $\frac{m^3}{s}$ |
+| **Time series** |                   |                 |                 |
+| Number of loops | stepsWaterUse.tss |                 | -               |
+| WaterUseTS      | wateruseUps.tss   | repwateruseTS   | $\frac{m^3}{s}$ |
 
 [🔝](#top)
 
@@ -1985,12 +2001,12 @@ If the option is switched on, water levels are calculated for channel pixels whe
 
 **Calculation of water levels**
 
-For channel stretches that are simulated using the dynamic wave, the water level in the channel is simply the difference between the channel head and the channel bottom level. For kinematic wave stretches, only approximate water levels can be estimated from the cross-sectional (wetted) channel area, *A<sub>ch</sub>* for each time step. Since the channel cross-section is described as a trapezoid, water levels follow directly from *A<sub>ch</sub>* , channel bottom width, side slope and bankfull level. If *A<sub>ch</sub>* exceeds the bankfull cross-sectional area (*A<sub>bf</sub>*), the surplus is distributed evenly over the (rectangular) floodplain, and the depth of water on the floodplain is added to the (bankfull) channel depth. Figure A9.1 below further illustrates the cross-section geometry. All water levels are relative to channel bottom level (*z<sub>bot</sub>* in the Figure).
+For channel stretches that are simulated using the dynamic wave, the water level in the channel is simply the difference between the channel head and the channel bottom level. For kinematic wave stretches, only approximate water levels can be estimated from the cross-sectional (wetted) channel area, $A_{ch}$ for each time step. Since the channel cross-section is described as a trapezoid, water levels follow directly from $A_{ch}$ , channel bottom width, side slope and bankfull level. If $A_{ch}$ exceeds the bankfull cross-sectional area ($A_{bf}$), the surplus is distributed evenly over the (rectangular) floodplain, and the depth of water on the floodplain is added to the (bankfull) channel depth. The Figure below further illustrates the cross-section geometry. All water levels are relative to channel bottom level ($z_{bot}$ in the Figure).
 
 ![chanDims](media/media/image57.png){width="5.770833333333333in"
 height="2.1145833333333335in"}
 
-*Figure A9.1 Geometry of channel cross-section in kinematic wave routing.* With W<sub>b</sub>*: channel bottom width;* W<sub>u</sub>*: channel upper width;* z<sub>bot</sub>*: channel bottom level;* z<sub>fp</sub>*: floodplain bottom level;* s*: channel side slope;* W<sub>fp</sub>*: floodplain width;* A<sub>bf</sub>*: channel cross-sectional area at bankfull;* A<sub>fp</sub>*: floodplain cross-sectional area;* D<sub>bf</sub>*:* *bankfull channel depth,* D<sub>fp</sub>*: depth of water on the floodplain*
+***Figure:*** *Geometry of channel cross-section in kinematic wave routing. With* $W_b$: *channel bottom width;* $W_u$: *channel upper width;* $z_{bot}$: *channel bottom level;* $z_{fp}$: *floodplain bottom level;* $s$: *channel side slope;* $W_{fp}$: *floodplain width;* $A_{bf}$: *channel cross-sectional area at bankfull;* $A_{fp}$: *floodplain cross-sectional area;* $D_{bf}$: *bankfull channel depth,* $D_{fp}$*: *depth of water on the floodplain.*
 
 In order to calculate water levels, LISFLOOD needs a map with the with of the floodplain in \[m\], which is defined by 'lfbinding' variable *FloodPlainWidth* (the default name of this map is *chanfpln.map*).
 
@@ -2063,17 +2079,17 @@ Using this option does *not* influence the actual model results in any way, and 
 
 **Calculation of pF**
 
-A soil's pF is calculated as the logarithm of the capillary suction head, *h*:
+A soil's $pF$ is calculated as the logarithm of the capillary suction head, *h*:
 
 $$
 pF = \log_{10}(h)
 $$
-with *h* in \[cm\] (positive upwards). Values of pF are typically within the range 1.0 (very wet) to 5.0 (very dry). The relationship between soil moisture status and capillary suction head is described by the Van Genuchten equation (here again re-written in terms of mm water slice, instead of volume fractions):
+with $h$ in \[cm\] (positive upwards). Values of pF are typically within the range 1.0 (very wet) to 5.0 (very dry). The relationship between soil moisture status and capillary suction head is described by the Van Genuchten equation (here again re-written in terms of mm water slice, instead of volume fractions):
 
 $$
 h = \frac{1}{\alpha}[(\frac{w_s - w_r}{w - w_r} )^{{1/m} - 1}]^{1/n}
 $$
-where *h* is the suction head \[cm\], and *w*, *w<sub>r</sub>* and *w<sub>s</sub>* are the actual, residual and maximum amounts of moisture in the soil respectively (all in \[mm\]). Parameter *α* is related to soil texture. Parameters *m* and *n* are calculated from the pore-size index, *λ* (which is related to soil texture as well):
+where *h* is the suction head $[cm]$, and *w*, $w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $mm$). Parameter *α* is related to soil texture. Parameters *m* and *n* are calculated from the pore-size index, *λ* (which is related to soil texture as well):
 
 $$
 m = \frac{\lambda }{{\lambda + 1}}
@@ -2110,7 +2126,7 @@ In either case, the reporting options should be used *in addition* to the 'simul
 
 **Preparation of settings file**
 
-The naming of the reported time series and maps is defined in the settings file. Tables A7.1 and A7.2 list the settings variables default output names. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
+The naming of the reported time series and maps is defined in the settings file. **Tables XXXXX and XXXXXX** list the settings variables default output names. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
 
 Time series:
 
@@ -2161,7 +2177,7 @@ Map stacks:
 	</textvar>                                             
 ```
 
-*Table A10.1 pF map output*                                             
+***Table:*** *pF map output*                                             
 
 | Description    | Option name | Settings variable | Default prefix |
 | -------------- | ----------- | ----------------- | -------------- |
@@ -2170,7 +2186,7 @@ Map stacks:
 
   
 
-*Table A10.2 pF timeseries output*                                                 
+***Table:***  *pF timeseries output*                                                 
 
 | Description                                                | Settings variable | Default name |
 | ---------------------------------------------------------- | ----------------- | ------------ |
@@ -2197,7 +2213,7 @@ Maps
 
 
 
-***Table A12.1** LISFLOOD input maps *
+***Table:*** *LISFLOOD input maps.*
 
 | Map                                                       | Default name[^20]   | Units, range                                           | Description                                                  |
 | --------------------------------------------------------- | ------------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
@@ -2205,13 +2221,13 @@ Maps
 | MaskMap                                                   | area.map            | Unit: - <br> Range: 0 or 1                             | Boolean map that defines model boundaries                    |
 | **TOPOGRAPHY**                                            |                     |                                                        |                                                              |
 | Ldd                                                       | ldd.map             | U.: flow directions <br> R.: 1 ≤ map ≤ 9               | local drain direction map (with value 1-9); this file contains flow directions from each cell to its steepest downslope neighbour. Ldd directions are coded according to the following diagram: <br> ![ldd](media/media/image58.png){width="1.8229166666666667in" height="1.84375in"} <br> This resembles the numeric key pad of your PC's keyboard, except for the value 5, which defines a cell without local drain direction (pit). The pit cell at the end of the path is the outlet point of a catchment. |
-| Grad                                                      | gradient.map        | U.: [m m<sup>-1</sup>] <br> R.: map > 0 <br> !!!       | Slope gradient                                               |
-| Elevation Stdev                                           | elvstd.map          | U.: [m] <br> R.: map ≥ 0                               | Standard deviation of elevation                              |
+| Grad                                                      | gradient.map        | U.: $\frac{m}{m}$  <br> R.: map > 0 <br> !!!           | Slope gradient                                               |
+| Elevation Stdev                                           | elvstd.map          | U.: $m$ <br> R.: map ≥ 0                               | Standard deviation of elevation                              |
 | **LAND USE -- fraction maps**                             |                     |                                                        |                                                              |
 | Fraction of water                                         | fracwater.map       | U.: [-] <br> R.: 0 ≤ map ≤ 1                           | Fraction of inland water for each cell. Values range from 0 (no water at all) to 1 (pixel is 100% water) |
 | Fraction of sealed surface                                | fracsealed.map      | U.: [-] <br> R.: 0 ≤ map ≤ 1                           | Fraction of impermeable surface for each cell. Values range from 0 (100% permeable surface -- no urban at all) to 1 (100% impermeable surface). |
 | Fraction of forest                                        | fracforest.map      | U.:[-] <br> R.: 0 ≤ map ≤ 1                            | Forest fraction for each cell. Values range from 0 (no forest at all) to 1 (pixel is 100% forest) |
-| Fraction of other land cover                              | fracother.map       | U.: [] <br> R.: 0 ≤ map ≤ 1                            | Other (agricultural areas, non-forested natural area, pervious surface of urban areas) fraction for each cell. |
+| Fraction of other land cover                              | fracother.map       | U.: [-] <br> R.: 0 ≤ map ≤ 1                           | Other (agricultural areas, non-forested natural area, pervious surface of urban areas) fraction for each cell. |
 | **LAND COVER depending maps**                             |                     |                                                        |                                                              |
 | Crop coef. for forest                                     | cropcoef_forest.map | U.: [-] <br> R.: 0.8≤ map ≤ 1.2                        | Crop coefficient for forest                                  |
 | Crop coef. for other                                      | cropcoef_other.map  | U.: [-] <br> R.: 0.8≤ map ≤ 1.2                        | Crop coefficient for other                                   |
@@ -2219,10 +2235,10 @@ Maps
 | Crop group number for forest                              | crgrnum_other.map   | U.: [-] <br> R.: 1 ≤ map ≤ 5                           | Crop group number for other                                  |
 | Manning for forest                                        | mannings_forest.map | U.: [-] <br> R.: 0.2≤ map ≤ 0.4                        | Manning's roughness for forest                               |
 | Manning for other                                         | mannings_other.map  | U.: [-] <br> R.: 0.01≤ map ≤0.3                        | Manning's roughness for other                                |
-| Soil depth for forest for layer1                          | soildep1_forest.map | U.: [mm] <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1 (rooting depth)           |
-| Soil depth for other for layer1                           | soildep1_other.map  | U.: [mm] <br> R.: map ≥ 50                             | Other soil depth for soil layer 1 (rooting depth)            |
-| Soil depth for forest for layer2                          | Soildep2_forest.map | U.: [mm] <br> R.: map ≥ 50                             | Forest soil depth for soil layer 2                           |
-| Soil depth for other for layer2                           | Soildep2_other.map  | U.: [mm] <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 2                       |
+| Soil depth for forest for layer1                          | soildep1_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1 (rooting depth)           |
+| Soil depth for other for layer1                           | soildep1_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil depth for soil layer 1 (rooting depth)            |
+| Soil depth for forest for layer2                          | Soildep2_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 2                           |
+| Soil depth for other for layer2                           | Soildep2_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 2                       |
 | **SOIL HYDRAULIC PROPERTIES (depending on soil texture)** |                     |                                                        |                                                              |
 | ThetaSat1 for forest                                      | thetas1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1           |
 | ThetaSat1 for other                                       | thetas1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1           |
@@ -2236,38 +2252,38 @@ Maps
 | GenuAlpha1 for forest                                     | alpha1_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1                            |
 | GenuAlpha1 for other                                      | alpha1_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1                            |
 | GenuAlpha2 for forest and other                           | alpha2.map          | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 2                            |
-| Sat1 for forest                                           | ksat1_forest.map    | U.: [cm day<sup>-1</sup>] <br> R.: 1 ≤ map ≤ 100       | Saturated conductivity layer 1                               |
-| Sat1 for other                                            | ksat1_other.map     | U.: [cm day<sup>-1</sup>] <br> R.: 1 ≤ map ≤ 100       | Saturated conductivity layer 1                               |
-| Sat2 for forest and other                                 | ksat2.map           | U.: [cm day<sup>-1</sup>] <br> R.: 1 ≤ map ≤ 100       | Saturated conductivity layer 2                               |
+| Sat1 for forest                                           | ksat1_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1                               |
+| Sat1 for other                                            | ksat1_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1                               |
+| Sat2 for forest and other                                 | ksat2.map           | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 2                               |
 | **CHANNEL GEOMETRY**                                      |                     |                                                        |                                                              |
 | Channels                                                  | chan.map            | U.: [-] <br> R.: 0 or 1                                | Map with Boolean 1 for all channel pixels, and Boolean 0 for all other pixels on MaskMap |
-| ChanGrad                                                  | changrad.map        | U.: [m m<sup>-1</sup>] <br> R.: map > 0  <br> !!!      | Channel gradient                                             |
+| ChanGrad                                                  | changrad.map        | U.: $\frac{m} {m}$ <br> R.: map > 0  <br> !!!          | Channel gradient                                             |
 | ChanMan                                                   | chanman.map         | U.: [-] <br> R.: map > 0                               | Manning's roughness coefficient for channels                 |
-| ChanLength                                                | chanleng.map        | U.: [m] <br> R.: map > 0                               | Channel length (can exceed grid size, to account for meandering rivers) |
-| ChanBottomWidth                                           | chanbw.map          | U.: [m] <br> R.: map > 0                               | Channel bottom width                                         |
-| ChanSdXdY                                                 | chans.map           | U.: [m m<sup>-1</sup>] <br> R.: map ≥ 0                | Channel side slope Important: defined as horizontal divided by vertical distance (dx/dy); this may be confusing because slope is usually defined the other way round (i.e. dy/dx)! |
-| ChanDepthThreshold                                        | chanbnkf.map        | U.: [m] <br> R.: map > 0                               | Bankfull channel depth                                       |
+| ChanLength                                                | chanleng.map        | U.: $m$ <br> R.: map > 0                               | Channel length (can exceed grid size, to account for meandering rivers) |
+| ChanBottomWidth                                           | chanbw.map          | U.: $m$ <br> R.: map > 0                               | Channel bottom width                                         |
+| ChanSdXdY                                                 | chans.map           | U.: $\frac{m} {m}$ <br> R.: map ≥ 0                    | Channel side slope Important: defined as horizontal divided by vertical distance (dx/dy); this may be confusing because slope is usually defined the other way round (i.e. dy/dx)! |
+| ChanDepthThreshold                                        | chanbnkf.map        | U.: $m$ <br> R.: map > 0                               | Bankfull channel depth                                       |
 | **METEOROLOGICAL VARIABLES**                              |                     |                                                        |                                                              |
-| PrecipitationMaps                                         | pr                  | U.: [mm day<sup>-1</sup>] <br> R.: map ≥ 0             | Precipitation rate                                           |
-| TavgMaps                                                  | ta                  | U.: [°C] <br> R.:-50 ≤map ≤ +50                        | Average daily temperature                                    |
-| E0Maps                                                    | e                   | U.: [mm day<sup>-1</sup>] <br> R.: map ≥ 0             | Daily potential evaporation rate, free water surface         |
-| ES0Maps                                                   | es                  | U.: [mm day<sup>-1</sup>] <br> R.: map ≥ 0             | Daily potential evaporation rate, bare soil                  |
-| ET0Maps                                                   | et                  | U.: [mm day<sup>-1</sup>] <br> R.: map ≥ 0             | Daily potential evapotranspiration rate, reference crop      |
+| PrecipitationMaps                                         | pr                  | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Precipitation rate                                           |
+| TavgMaps                                                  | ta                  | U.: $°C$ <br> R.:-50 ≤map ≤ +50                        | Average daily temperature                                    |
+| E0Maps                                                    | e                   | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Daily potential evaporation rate, free water surface         |
+| ES0Maps                                                   | es                  | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Daily potential evaporation rate, bare soil                  |
+| ET0Maps                                                   | et                  | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Daily potential evapotranspiration rate, reference crop      |
 | **DEVELOPMENT OF VEGETATION OVER TIME**                   |                     |                                                        |                                                              |
-| LAIMaps for forest                                        | lai_forest          | U.: [m<sup>2</sup> m<sup>-2</sup>] <br> R.: map ≥ 0    | Pixel-average Leaf Area Index for forest                     |
-| LAIMaps for other                                         | lai_other           | U.: [m<sup>2</sup> m<sup>-2</sup>] <br> R.: map ≥ 0    | Pixel-average Leaf Area Index for other                      |
+| LAIMaps for forest                                        | lai_forest          | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for forest                     |
+| LAIMaps for other                                         | lai_other           | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for other                      |
 | **DEFINITION OF INPUT/OUTPUT TIMESERIES**                 |                     |                                                        |                                                              |
 | Gauges                                                    | outlets.map         | U.: [-] <br> R.: For each station an individual number | Nominal map with locations at which discharge timeseries are reported (usually correspond to gauging stations) |
 | Sites                                                     | sites.map           | U.: [-] <br> R.: For each station an individual number | Nominal map with locations (individual pixels or areas) at which timeseries of intermediate state and rate variables are reported (soil moisture, infiltration, snow, etcetera) |
 
 
 
-***Table A12.2** Optional maps that define grid size* 
+***Table:*** *Optional maps that define grid size.* 
 
 | Map             | Default name | Units, range             | Description           |
 | --------------- | ------------ | ------------------------ | --------------------- |
-| PixelLengthUser | pixleng.map  | U.: [m] <br> R.: map > 0 | Map with pixel length |
-| PixelAreaUser   | pixarea.map  | U.: [m] <br> R.: map > 0 | Map with pixel area   |
+| PixelLengthUser | pixleng.map  | U.: $m$ <br> R.: map > 0 | Map with pixel length |
+| PixelAreaUser   | pixarea.map  | U.: $m$ <br> R.: map > 0 | Map with pixel area   |
 
 
 
@@ -2276,7 +2292,7 @@ Tables
 
 In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one default table is used in the standard LISFLOOD setting. The following table gives an overview:
 
-*Table A12.3 LISFLOOD input tables*                      
+***Table:*** *LISFLOOD input tables.*                      
 
 | Table                  | Default name | Description                              |
 | ---------------------- | ------------ | ---------------------------------------- |
@@ -2293,55 +2309,55 @@ In the previous version of LISFLOOD a number of model parameters are read throug
 
 LISFLOOD can generate a wide variety of output. Output is generated as either maps or time series (PCRaster format, which can be visualised with PCRaster's 'aguila' application). Reporting of output files can be switched on and off using options in the LISFLOOD settings file. Also, a number of output files are specific to other optional modules, such as the simulation of reservoirs. The following table lists all the output time series that are reported by default (note that the file names can always be changed by the user, although this is not recommended):
 
-*Table 8.1 LISFLOOD default output time series*  
+***Table:*** *LISFLOOD default output time series.*  
 
-| Description                                                  | Units              | File name             |
-| ------------------------------------------------------------ | ------------------ | --------------------- |
-| **RATE VARIABLES AT GAUGES**                                 |                    |                       |
-| <sup>1,2</sup> channel discharge                             | m^3 s<sup>-1</sup> | dis.tss               |
-| NUMERICAL CHECKS                                             |                    |                       |
-| <sup>2</sup> cumulative mass balance error                   | m^3                | mbError.tss           |
-| <sup>2</sup> cumulative mass balance error, expressed as mm water slice (average over catchment) | mm                 | mbErrorMm.tss         |
-| <sup>2</sup> number of sub-steps needed for channel routing  | -                  | NoSubStepsChannel.tss |
-| <sup>2</sup> number of sub-steps needed for gravity-based soil moisture routine | -                  | steps.tss             |
+| Description                                                  | Units            | File name             |
+| ------------------------------------------------------------ | ---------------- | --------------------- |
+| **RATE VARIABLES AT GAUGES**                                 |                  |                       |
+| $^{1,2}$ channel discharge                                   | $\frac{m^3} {s}$ | dis.tss               |
+| NUMERICAL CHECKS                                             |                  |                       |
+| $^2$ cumulative mass balance error                           | $m^3$            | mbError.tss           |
+| $^2$ cumulative mass balance error, expressed as mm water slice (average over catchment) | $mm$             | mbErrorMm.tss         |
+| $^2$ number of sub-steps needed for channel routing          | -                | NoSubStepsChannel.tss |
+| $^2$ number of sub-steps needed for gravity-based soil moisture routine | -                | steps.tss             |
 
-<sup>1</sup> Output only if option  'InitLisflood' = 1  (pre-run)  
-<sup>2</sup> Output only if option  'InitLisflood' = 0  
+$^1$ Output only if option  'InitLisflood' = 1  (pre-run)  
+$^2$ Output only if option  'InitLisflood' = 0  
 
 To speed up the pre-run and to prevent that results are taken from the pre-run, all additional output is disabled if option 'InitLisflood' = 1 is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss, lzavin.map, lzavin\_forest.map* and some other initial maps if additional option like e.g. the double kinematic wave is chosen.
 
 In addition to these time series, by default LISFLOOD reports maps of all state variables at the last timestep of a simulation[^5]. These maps can be used to define the initial conditions of a succeeding simulation. For instance, you can do a 1-year simulation on a daily time step, and use the 'end maps' of this simulation to simulate a flood event using an hourly time step. Table 8.2 and Annex 13 list all these maps. Note that some state variables are valid for the whole pixel, whereas others are only valid for a sub-domain of each pixel. This is indicated in the last column of the table.
 
-*Table 8.2 LISFLOOD default state variable output maps. These maps can be used to define the initial conditions of another simulation*  
+***Table:*** *LISFLOOD default state variable output maps. These maps can be used to define the initial conditions of another simulation.*  
 
-| Description                                                  | Units                    | File name         | Domain                                     |
-| ------------------------------------------------------------ | ------------------------ | ----------------- | ------------------------------------------ |
-| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood) |                          |                   |                                            |
-| <sup>1</sup> average inflow to lower zone                    | mm timestep<sup>-1</sup> | lzavin.map        | other fraction                             |
-| <sup>1</sup> average inflow to lower zone (forest)           | mm timestep<sup>-1</sup> | lzavin_forest.map | forest fraction                            |
-| **INITIAL CONDITION MAPS at defined time steps**8 (option repStateMaps) |                          |                   |                                            |
-| <sup>2</sup> waterdepth                                      | mm                       | wdepth00.xxx      | whole pixel                                |
-| <sup>2</sup> channel cross-sectional area                    | m<sup>2</sup>            | chcro000.xxx      | channel                                    |
-| <sup>2</sup> days since last rain variable                   | days                     | dslr0000.xxx      | other pixel                                |
-| <sup>2</sup> snow cover zone A                               | mm                       | scova000.xxx      | snow zone A <br> (1/3<sup>rd</sup> pixel)  |
-| <sup>2</sup> snow cover zone B                               | mm                       | scovb000.xxx      | snow zone B <br> (1/3<sup>rd</sup> pixel)  |
-| <sup>2</sup> snow cover zone C                               | mm                       | scovc000.xxx      | snow zone C  <br> (1/3<sup>rd</sup> pixel) |
-| <sup>2</sup> frost index                                     | °C days<sup>-1</sup>     | frost000.xxx      | other pixel                                |
-| <sup>2</sup> cumulative interception                         | mm                       | cumi0000.xxx      | other pixel                                |
-| <sup>2</sup> soil moisture upper layer                       | mm^3 mm<sup>-3</sup>     | thtop000.xxx      | other fraction                             |
-| <sup>2</sup> soil moisture lower layer                       | mm^3 mm<sup>-3</sup>     | thsub000.xxx      | other fraction                             |
-| <sup>2</sup> water in lower zone                             | mm                       | lz000000.xxx      | other fraction                             |
-| <sup>2</sup> water in upper zone                             | mm                       | uz000000.xxx      | other fraction                             |
-| <sup>2</sup> days since last rain variable (forest)          | days                     | dslF0000.xxx      | forest pixel                               |
-| <sup>2</sup> cumulative interception (forest)                | mm                       | cumF0000.xxx      | forest pixel                               |
-| <sup>2</sup> soil moisture upper layer (forest)              | mm^3 mm<sup>-3</sup>     | thFt0000.xxx      | forest fraction                            |
-| <sup>2</sup> soil moisture lower layer (forest)              | mm^3 mm<sup>-3</sup>     | thFs0000.xxx      | forest fraction                            |
-| <sup>2</sup> water in lower zone (forest)                    | mm                       | lzF00000.xxx      | forest fraction                            |
-| <sup>2</sup> water in upper zone (forest)                    | mm                       | uzF00000.xxx      | forest fraction                            |
-| <sup>2</sup> water in depression storage (sealed)            | mm                       | cseal000.xxx      | sealed fraction                            |
+| Description                                                  | Units                   | File name         | Domain                               |
+| ------------------------------------------------------------ | ----------------------- | ----------------- | ------------------------------------ |
+| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood) |                         |                   |                                      |
+| $^1$ average inflow to lower zone                            | $\frac{mm}{  timestep}$ | lzavin.map        | other fraction                       |
+| $^1$ average inflow to lower zone (forest)                   | $\frac{mm}{  timestep}$ | lzavin_forest.map | forest fraction                      |
+| **INITIAL CONDITION MAPS at defined time steps**[^8] (option repStateMaps) |                         |                   |                                      |
+| $^2$ waterdepth                                              | $mm$                    | wdepth00.xxx      | whole pixel                          |
+| $^2$ channel cross-sectional area                            | $m^2$                   | chcro000.xxx      | channel                              |
+| $^2$ days since last rain variable                           | $days$                  | dslr0000.xxx      | other pixel                          |
+| $^2$ snow cover zone A                                       | $mm$                    | scova000.xxx      | snow zone A <br> ($1/3^{rd}$ pixel)  |
+| $^2$ snow cover zone B                                       | $mm$                    | scovb000.xxx      | snow zone B <br> ($1/3^{rd}$ pixel)  |
+| $^2$ snow cover zone C                                       | $mm$                    | scovc000.xxx      | snow zone C  <br> $(1/3^{rd}$ pixel) |
+| $^2$ frost index                                             | $\frac{°C}{days}$       | frost000.xxx      | other pixel                          |
+| $^2$ cumulative interception                                 | $mm$                    | cumi0000.xxx      | other pixel                          |
+| $^2$ soil moisture upper layer                               | $\frac{mm^3}{mm^3}$     | thtop000.xxx      | other fraction                       |
+| $^2$ soil moisture lower layer                               | $\frac{mm^3}{mm^3}$     | thsub000.xxx      | other fraction                       |
+| $^2$ water in lower zone                                     | $mm$                    | lz000000.xxx      | other fraction                       |
+| $^2$ water in upper zone                                     | $mm$                    | uz000000.xxx      | other fraction                       |
+| $^2$ days since last rain variable (forest)                  | $days$                  | dslF0000.xxx      | forest pixel                         |
+| $^2$ cumulative interception (forest)                        | $mm$                    | cumF0000.xxx      | forest pixel                         |
+| $^2$ soil moisture upper layer (forest)                      | $\frac{mm^3}{mm^3}$     | thFt0000.xxx      | forest fraction                      |
+| $^2$ soil moisture lower layer (forest)                      | $\frac{mm^3}{mm^3}$     | thFs0000.xxx      | forest fraction                      |
+| $^2$ water in lower zone (forest)                            | $mm$                    | lzF00000.xxx      | forest fraction                      |
+| $^2$ water in upper zone (forest)                            | $mm$                    | uzF00000.xxx      | forest fraction                      |
+| $^2$ water in depression storage (sealed)                    | $mm$                    | cseal000.xxx      | sealed fraction                      |
 
-<sup>1</sup> Output only if option 'InitLisflood' = 1 (pre-run) 
-<sup>2</sup> Output only if option 'InitLisflood' = 0 
+$^1$ Output only if option 'InitLisflood' = 1 (pre-run) 
+$^2$ Output only if option 'InitLisflood' = 0 
 
 [🔝](#top)
 
@@ -2367,181 +2383,181 @@ Apart from the default output, the model can --optionally- generate some additio
 
 In addition, some additional maps and time series may be reported for debugging purposes. In general these are not of any interest to the LISFLOOD user, so they remain undocumented here.
 
-Note that the options *repStateUpsGauges*, *repRateUpsGauges* and *repDischargeMaps* tend to slow down the execution of the model quite dramatically. For applications of the model where performance is critical (e.g. automated calibration runs), we advise to keep them switched off, if possible. The additional time series are listed in the Annex 13. Note again the domains for which variables are valid: all *rate variables* are reported as pixel-average values. Soil moisture and groundwater storage are reported for the permeable fraction of each pixel only. The reported snow cover is the average of the snow depths in snow zones A, B and C.
+Note that the options *repStateUpsGauges*, *repRateUpsGauges* and *repDischargeMaps* tend to slow down the execution of the model quite dramatically. For applications of the model where performance is critical (e.g. automated calibration runs), we advise to keep them switched off, if possible. The additional time series are listed in **Section XXXXX**. Note again the domains for which variables are valid: all *rate variables* are reported as pixel-average values. Soil moisture and groundwater storage are reported for the permeable fraction of each pixel only. The reported snow cover is the average of the snow depths in snow zones A, B and C.
 
-By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in Chapter 4). Annex 13 summarises all options to report additional output maps. The previous remarks related to the domains for which the state variable values are valid also apply to the maps listed in Annex 13.
+By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in **Chapter XXXXX**). **Chapter XXX** summarises all options to report additional output maps. The previous remarks related to the domains for which the state variable values are valid also apply to the maps listed in Annex 13.
 
 ## Time series
 
-***Table A13.1** LISFLOOD default output time series*
+***Table:*** *LISFLOOD default output time series.*
 
-| Description                                                  | Units              | Settings variable   | File name**           |
-| ------------------------------------------------------------ | ------------------ | ------------------- | --------------------- |
-| **RATE VARIABLES AT GAUGES**                                 |                    |                     |                       |
-| <sup>1,2</sup> channel discharge                             | m^3 s<sup>-1</sup> | disTS               | dis.tss               |
-| **NUMERICAL CHECKS**                                         |                    |                     |                       |
-| <sup>2</sup> cumulative mass balance error                   | m^3                | WaterMassBalanceTSS | mbError.tss           |
-| <sup>2</sup> cumulative mass balance error, expressed as mm water slice (average over catchment) | mm                 | MassBalanceMMTSS    | mbErrorMm.tss         |
-| <sup>2</sup> number of sub-steps needed for channel routing  | -                  | NoSubStepsChan      | NoSubStepsChannel.tss |
-| <sup>2</sup> number of sub-steps needed for gravity-based soil moisture routine | -                  | StepsSoilTS         | steps.tss             |
+| Description                                                  | Units           | Settings variable   | File name**           |
+| ------------------------------------------------------------ | --------------- | ------------------- | --------------------- |
+| **RATE VARIABLES AT GAUGES**                                 |                 |                     |                       |
+| $^{1,2}$ channel discharge                                   | $\frac{m^3}{s}$ | disTS               | dis.tss               |
+| **NUMERICAL CHECKS**                                         |                 |                     |                       |
+| $^2$ cumulative mass balance error                           | $m^3$           | WaterMassBalanceTSS | mbError.tss           |
+| $^2$ cumulative mass balance error, expressed as mm water slice (average over catchment) | $mm$            | MassBalanceMMTSS    | mbErrorMm.tss         |
+| $^2$ number of sub-steps needed for channel routing          | -               | NoSubStepsChan      | NoSubStepsChannel.tss |
+| $^2$ number of sub-steps needed for gravity-based soil moisture routine | -               | StepsSoilTS         | steps.tss             |
 
-<sup>1</sup> Output only if option 'InitLisflood' = 1 (pre-run) 
-<sup>2</sup> Output only if option 'InitLisflood' = 0 
+$^1$ Output only if option 'InitLisflood' = 1 (pre-run) 
+$^2$ Output only if option 'InitLisflood' = 0 
 
 
 
-***Table A13.2** LISFLOOD optional output time series (*only 'InitLisflood' = 0)  
+***Table:***  *LISFLOOD optional output time series (only 'InitLisflood' = 0).*  
 
-| Description                                                  | Units                    | Settings variable      | Default name           |
-| ------------------------------------------------------------ | ------------------------ | ---------------------- | ---------------------- |
-| **STATE VARIABLES AT SITES (option repStateSites)**22        |                          |                        |                        |
-| depth of water on soil surface                               | mm                       | WaterDepthTS           | wDepth.tss             |
-| depth of snow cover on soil surface (pixel-average)          | mm                       | SnowCoverTS            | snowCover.tss          |
-| depth of interception storage                                | mm                       | CumInterceptionTS      | cumInt.tss             |
-| soil moisture content upper layer                            | mm^3 / mm^3              | Theta1TS               | thTop.tss              |
-| soil moisture content lower layer                            | mm^3 / mm^3              | Theta2TS               | thSub.tss              |
-| storage in upper groundwater zone                            | mm                       | UZTS                   | uz.tss                 |
-| storage in lower groundwater zone                            | mm                       | LZTS                   | lz.tss                 |
-| number of days since last rain                               | days                     | DSLRTS                 | dslr.tss               |
-| frost index                                                  | °C days<sup>-1</sup>     | FrostIndexTS           | frost.tss              |
-| **RATE VARIABLES AT SITES (option repRateSites)**23          |                          |                        |                        |
-| rain (excluding snow)                                        | mm/timestep              | RainTS                 | rain.tss               |
-| Snow                                                         | mm/timestep              | SnowTS                 | snow.tss               |
-| snow melt                                                    | mm/timestep              | SnowmeltTS             | snowMelt.tss           |
-| actual evaporation                                           | mm/timestep              | ESActTS                | esAct.tss              |
-| actual transpiration                                         | mm/timestep              | TaTS                   | tAct.tss               |
-| rainfall interception                                        | mm/timestep              | InterceptionTS         | interception.tss       |
-| evaporation of intercepted water                             | mm/timestep              | EWIntTS                | ewIntAct.tss           |
-| leaf drainage                                                | mm/timestep              | LeafDrainageTS         | leafDrainage.tss       |
-| infiltration                                                 | mm/timestep              | InfiltrationTS         | infiltration.tss       |
-| preferential (bypass) flow                                   | mm/timestep              | PrefFlowTS             | prefFlow.tss           |
-| percolation upper to lower soil layer                        | mm/timestep              | PercolationTS          | dTopToSub.tss          |
-| percolation lower soil layer to subsoil                      | mm/timestep              | SeepSubToGWTS          | dSubToUz.tss           |
-| surface runoff                                               | mm/timestep              | SurfaceRunoffTS        | surfaceRunoff.tss      |
-| outflow from upper zone                                      | mm/timestep              | UZOutflowTS            | qUz.tss                |
-| outflow from lower zone                                      | mm/timestep              | LZOutflowTS            | qLz.tss                |
-| total runoff                                                 | mm/timestep              | TotalRunoffTS          | totalRunoff.tss        |
-| percolation from upper to lower zone                         | mm/timestep              | GwPercUZLZTS           | percUZLZ.tss           |
-| loss from lower zone                                         | mm/timestep              | GwLossTS               | loss.tss               |
-| **TIME SERIES, AVERAGE UPSTREAM OF GAUGES**                  |                          |                        |                        |
-| **METEOROLOGICAL INPUT VARIABLES (option *repMeteoUpsGauges*)** |                          |                        |                        |
-| precipitation                                                | mm/timestep              | PrecipitationAvUpsTS   | precipUps.tss          |
-| potential reference evapotranspiration                       | mm/timestep              | ETRefAvUpsTS           | etUps.tss              |
-| potential evaporation from soil                              | mm/timestep              | ESRefAvUpsTS           | esUps.tss              |
-| potential open water evaporation                             | mm/timestep              | EWRefAvUpsTS           | ewUps.tss              |
-| average daily temperature                                    | °C                       | TavgAvUpsTS            | tAvgUps.tss            |
-| **STATE VARIABLES (option *repStateUpsGauges*)**             |                          |                        |                        |
-| depth of water on soil surface                               | mm                       | WaterDepthAvUpsTS      | wdepthUps.tss          |
-| depth of snow cover on                                       | mm                       | SnowCoverAvUpsTS       | snowCoverUps.tss       |
-| depth of interception storage                                | mm                       | CumInterceptionAvUpsTS | cumInterceptionUps.tss |
-| soil moisture upper layer                                    | mm^3 / mm^3              | Theta1AvUpsTS          | thTopUps.tss           |
-| soil moisture lower layer                                    | mm^3 / mm^3              | Theta2AvUpsTS          | thSubUps.tss           |
-| groundwater upper zone                                       | mm                       | UZAvUpsTS              | uzUps.tss              |
-| groundwater lower zone                                       | mm                       | LZAvUpsTS              | lzUps.tss              |
-| number of days since last rain                               | Days                     | DSLRAvUpsTS            | dslrUps.tss            |
-| frost index                                                  | °C days<sup>-1</sup>     | FrostIndexAvUpsTS      | frostUps.tss           |
-| **RATE VARIABLES (option *repRateUpsGauges*)**               |                          |                        |                        |
-| rain (excluding snow)                                        | mm/timestep              | RainAvUpsTS            | rainUps.tss            |
-| snow                                                         | mm/timestep              | SnowAvUpsTS            | snowUps.tss            |
-| snow melt                                                    | mm/timestep              | SnowmeltAvUpsTS        | snowMeltUps.tss        |
-| actual evaporation                                           | mm/timestep              | ESActAvUpsTS           | esActUps.tss           |
-| actual transpiration                                         | mm/timestep              | TaAvUpsTS              | tActUps.tss            |
-| rainfall interception                                        | mm/timestep              | InterceptionAvUpsTS    | interceptionUps.tss    |
-| evaporation of intercepted water                             | mm/timestep              | EWIntAvUpsTS           | ewIntActUps.tss        |
-| leaf drainage                                                | mm/timestep              | LeafDrainageAvUpsTS    | leafDrainageUps.tss    |
-| infiltration                                                 | mm/timestep              | InfiltrationAvUpsTS    | infiltrationUps.tss    |
-| preferential (bypass) flow                                   | mm/timestep              | PrefFlowAvUpsTS        | prefFlowUps.tss        |
-| percolation upper to lower soil layer                        | mm/timestep              | PercolationAvUpsTS     | dTopToSubUps.tss       |
-| percolation lower soil layer to subsoil                      | mm/timestep              | SeepSubToGWAvUpsTS     | dSubToUzUps.tss        |
-| surface runoff                                               | mm/timestep              | SurfaceRunoffAvUpsTS   | surfaceRunoffUps.tss   |
-| outflow from upper zone                                      | mm/timestep              | UZOutflowAvUpsTS       | qUzUps.tss             |
-| outflow from lower zone                                      | mm/timestep              | LZOutflowAvUpsTS       | qLzUps.tss             |
-| total runoff                                                 | mm/timestep              | TotalRunoffAvUpsTS     | totalRunoffUps.tss     |
-| percolation upper to lower zone                              | mm/timestep              | GwPercUZLZAvUpsTS      | percUZLZUps.tss        |
-| loss from lower zone                                         | mm/timestep              | GwLossTS               | lossUps.tss            |
-| **WATER LEVEL IN CHANNEL (option repWaterLevelTs)**          |                          |                        |                        |
-| water level in channel                                       | m (above channel bottom) | WaterLevelTS           | waterLevel.tss         |
-| **OUTPUT RELATED TO LOWER ZONE INITIALISATION (option repLZAvInflowSites and repLZAvInflowUpsGauges) |                          |                        |                        |
-| average inflow into lower zone                               | mm day<sup>-1</sup>      | LZAvInflowTS           | lzAvIn.tss             |
-| average inflow into lower zone                               | mm day<sup>-1</sup>      | LZAvInflowAvUpsTS      | lzAvInUps.tss          |
+| Description                                                  | Units                      | Settings variable      | Default name           |
+| ------------------------------------------------------------ | -------------------------- | ---------------------- | ---------------------- |
+| **STATE VARIABLES AT SITES (option repStateSites)**[^22]     |                            |                        |                        |
+| depth of water on soil surface                               | $mm$                       | WaterDepthTS           | wDepth.tss             |
+| depth of snow cover on soil surface (pixel-average)          | $mm$                       | SnowCoverTS            | snowCover.tss          |
+| depth of interception storage                                | $mm$                       | CumInterceptionTS      | cumInt.tss             |
+| soil moisture content upper layer                            | $\frac{mm^3}{mm^3}$        | Theta1TS               | thTop.tss              |
+| soil moisture content lower layer                            | $\frac{mm^3}{mm^3}$        | Theta2TS               | thSub.tss              |
+| storage in upper groundwater zone                            | $mm$                       | UZTS                   | uz.tss                 |
+| storage in lower groundwater zone                            | $mm$                       | LZTS                   | lz.tss                 |
+| number of days since last rain                               | $days$                     | DSLRTS                 | dslr.tss               |
+| frost index                                                  | $\frac{°C}{days}$          | FrostIndexTS           | frost.tss              |
+| **RATE VARIABLES AT SITES (option repRateSites)**[^23]       |                            |                        |                        |
+| rain (excluding snow)                                        | $\frac{mm}{timestep}$      | RainTS                 | rain.tss               |
+| Snow                                                         | $\frac{mm}{timestep}$      | SnowTS                 | snow.tss               |
+| snow melt                                                    | $\frac{mm}{timestep}$      | SnowmeltTS             | snowMelt.tss           |
+| actual evaporation                                           | $\frac{mm}{timestep}$      | ESActTS                | esAct.tss              |
+| actual transpiration                                         | $\frac{mm}{timestep}$      | TaTS                   | tAct.tss               |
+| rainfall interception                                        | $\frac{mm}{timestep}$      | InterceptionTS         | interception.tss       |
+| evaporation of intercepted water                             | $\frac{mm}{timestep}$      | EWIntTS                | ewIntAct.tss           |
+| leaf drainage                                                | $\frac{mm}{timestep}$      | LeafDrainageTS         | leafDrainage.tss       |
+| infiltration                                                 | $\frac{mm}{timestep}$      | InfiltrationTS         | infiltration.tss       |
+| preferential (bypass) flow                                   | $\frac{mm}{timestep}$      | PrefFlowTS             | prefFlow.tss           |
+| percolation upper to lower soil layer                        | $\frac{mm}{timestep}$      | PercolationTS          | dTopToSub.tss          |
+| percolation lower soil layer to subsoil                      | $\frac{mm}{timestep}$      | SeepSubToGWTS          | dSubToUz.tss           |
+| surface runoff                                               | $\frac{mm}{timestep}$      | SurfaceRunoffTS        | surfaceRunoff.tss      |
+| outflow from upper zone                                      | $\frac{mm}{timestep}$      | UZOutflowTS            | qUz.tss                |
+| outflow from lower zone                                      | $\frac{mm}{timestep}$      | LZOutflowTS            | qLz.tss                |
+| total runoff                                                 | $\frac{mm}{timestep}$      | TotalRunoffTS          | totalRunoff.tss        |
+| percolation from upper to lower zone                         | $\frac{mm}{timestep}$      | GwPercUZLZTS           | percUZLZ.tss           |
+| loss from lower zone                                         | $\frac{mm}{timestep}$      | GwLossTS               | loss.tss               |
+| **TIME SERIES, AVERAGE UPSTREAM OF GAUGES**                  |                            |                        |                        |
+| **METEOROLOGICAL INPUT VARIABLES (option *repMeteoUpsGauges*)** |                            |                        |                        |
+| precipitation                                                | $\frac{mm}{timestep}$      | PrecipitationAvUpsTS   | precipUps.tss          |
+| potential reference evapotranspiration                       | $\frac{mm}{timestep}$      | ETRefAvUpsTS           | etUps.tss              |
+| potential evaporation from soil                              | $\frac{mm}{timestep}$      | ESRefAvUpsTS           | esUps.tss              |
+| potential open water evaporation                             | $\frac{mm}{timestep}$      | EWRefAvUpsTS           | ewUps.tss              |
+| average daily temperature                                    | $°C$                       | TavgAvUpsTS            | tAvgUps.tss            |
+| **STATE VARIABLES (option *repStateUpsGauges*)**             |                            |                        |                        |
+| depth of water on soil surface                               | $mm$                       | WaterDepthAvUpsTS      | wdepthUps.tss          |
+| depth of snow cover on                                       | $mm$                       | SnowCoverAvUpsTS       | snowCoverUps.tss       |
+| depth of interception storage                                | $mm$                       | CumInterceptionAvUpsTS | cumInterceptionUps.tss |
+| soil moisture upper layer                                    | $\frac{mm^3}{mm^3}$        | Theta1AvUpsTS          | thTopUps.tss           |
+| soil moisture lower layer                                    | $\frac{mm^3}{mm^3}$        | Theta2AvUpsTS          | thSubUps.tss           |
+| groundwater upper zone                                       | $mm$                       | UZAvUpsTS              | uzUps.tss              |
+| groundwater lower zone                                       | $mm$                       | LZAvUpsTS              | lzUps.tss              |
+| number of days since last rain                               | $days$                     | DSLRAvUpsTS            | dslrUps.tss            |
+| frost index                                                  | $\frac{°C}{days}$          | FrostIndexAvUpsTS      | frostUps.tss           |
+| **RATE VARIABLES (option *repRateUpsGauges*)**               |                            |                        |                        |
+| rain (excluding snow)                                        | $\frac{mm}{timestep}$      | RainAvUpsTS            | rainUps.tss            |
+| snow                                                         | $\frac{mm}{timestep}$      | SnowAvUpsTS            | snowUps.tss            |
+| snow melt                                                    | $\frac{mm}{timestep}$      | SnowmeltAvUpsTS        | snowMeltUps.tss        |
+| actual evaporation                                           | $\frac{mm}{timestep}$      | ESActAvUpsTS           | esActUps.tss           |
+| actual transpiration                                         | $\frac{mm}{timestep}$      | TaAvUpsTS              | tActUps.tss            |
+| rainfall interception                                        | $\frac{mm}{timestep}$      | InterceptionAvUpsTS    | interceptionUps.tss    |
+| evaporation of intercepted water                             | $\frac{mm}{timestep}$      | EWIntAvUpsTS           | ewIntActUps.tss        |
+| leaf drainage                                                | $\frac{mm}{timestep}$      | LeafDrainageAvUpsTS    | leafDrainageUps.tss    |
+| infiltration                                                 | $\frac{mm}{timestep}$      | InfiltrationAvUpsTS    | infiltrationUps.tss    |
+| preferential (bypass) flow                                   | $\frac{mm}{timestep}$      | PrefFlowAvUpsTS        | prefFlowUps.tss        |
+| percolation upper to lower soil layer                        | $\frac{mm}{timestep}$      | PercolationAvUpsTS     | dTopToSubUps.tss       |
+| percolation lower soil layer to subsoil                      | $\frac{mm}{timestep}$      | SeepSubToGWAvUpsTS     | dSubToUzUps.tss        |
+| surface runoff                                               | $\frac{mm}{timestep}$      | SurfaceRunoffAvUpsTS   | surfaceRunoffUps.tss   |
+| outflow from upper zone                                      | $\frac{mm}{timestep}$      | UZOutflowAvUpsTS       | qUzUps.tss             |
+| outflow from lower zone                                      | $\frac{mm}{timestep}$      | LZOutflowAvUpsTS       | qLzUps.tss             |
+| total runoff                                                 | $\frac{mm}{timestep}$      | TotalRunoffAvUpsTS     | totalRunoffUps.tss     |
+| percolation upper to lower zone                              | $\frac{mm}{timestep}$      | GwPercUZLZAvUpsTS      | percUZLZUps.tss        |
+| loss from lower zone                                         | $\frac{mm}{timestep}$      | GwLossTS               | lossUps.tss            |
+| **WATER LEVEL IN CHANNEL (option repWaterLevelTs)**          |                            |                        |                        |
+| water level in channel                                       | $m$ (above channel bottom) | WaterLevelTS           | waterLevel.tss         |
+| **OUTPUT RELATED TO LOWER ZONE INITIALISATION (option repLZAvInflowSites and repLZAvInflowUpsGauges) |                            |                        |                        |
+| average inflow into lower zone                               | $\frac{mm^3}{day}$         | LZAvInflowTS           | lzAvIn.tss             |
+| average inflow into lower zone                               | $\frac{mm^3}{day}$         | LZAvInflowAvUpsTS      | lzAvInUps.tss          |
 
 ##  Maps
 
-***Table A13.3** LISFLOOD default output maps*          
+***Table:*** *LISFLOOD default output maps.*          
 
-| Description                                                  | Units                | File name         | Domain                               |
-| ------------------------------------------------------------ | -------------------- | ----------------- | ------------------------------------ |
-| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood) |                      |                   |                                      |
-| <sup>1</sup> average inflow to lower zone                    | mm day<sup>-1</sup>  | lzavin.map        | other fraction                       |
-| <sup>1</sup> average inflow to lower zone (forest)           | mm day<sup>-1</sup>  | lzavin_forest.map | forest fraction                      |
-| **INITIAL CONDITION MAPS at defined time steps**26 (option repStateMaps) |                      |                   |                                      |
-| <sup>2</sup> waterdepth                                      | mm                   | wdepth00.xxx      | whole pixel                          |
-| <sup>2</sup> channel cross-sectional area                    | m<sup>2</sup>        | chcro000.xxx      | channel                              |
-| <sup>2</sup> days since last rain variable                   | days                 | dslr0000.xxx      | other pixel                          |
-| <sup>2</sup> snow cover zone A                               | mm                   | scova000.xxx      | snow zone A (1/3<sup>rd</sup> pixel) |
-| <sup>2</sup> snow cover zone B                               | mm                   | scovb000.xxx      | snow zone B (1/3<sup>rd</sup> pixel) |
-| <sup>2</sup> snow cover zone C                               | mm                   | scovc000.xxx      | snow zone C (1/3<sup>rd</sup> pixel) |
-| <sup>2</sup> frost index                                     | °C days<sup>-1</sup> | frost000.xxx      | other pixel                          |
-| <sup>2</sup> cumulative interception                         | mm                   | cumi0000.xxx      | other pixel                          |
-| <sup>2</sup> soil moisture upper layer                       | mm^3/mm^3            | thtop000.xxx      | other fraction                       |
-| <sup>2</sup> soil moisture lower layer                       | mm^3/mm^3            | thsub000.xxx      | other fraction                       |
-| <sup>2</sup> water in lower zone                             | mm                   | lz000000.xxx      | other fraction                       |
-| <sup>2</sup> water in upper zone                             | mm                   | uz000000.xxx      | other fraction                       |
-| <sup>2</sup> days since last rain variable (forest)          | days                 | dslF0000.xxx      | forest pixel                         |
-| <sup>2</sup> cumulative interception (forest)                | mm                   | cumF0000.xxx      | forest pixel                         |
-| <sup>2</sup> soil moisture upper layer (forest)              | mm^3/mm^3            | thFt0000.xxx      | forest fraction                      |
-| <sup>2</sup> soil moisture lower layer (forest)              | mm^3/mm^3            | thFs0000.xxx      | forest fraction                      |
-| <sup>2</sup> water in lower zone (forest)                    | mm                   | lzF00000.xxx      | forest fraction                      |
-| <sup>2</sup> water in upper zone (forest)                    | mm                   | uzF00000.xxx      | forest fraction                      |
-| <sup>2</sup> water in depression storage (sealed)            | mm                   | cseal000.xxx      | sealed fraction                      |
+| Description                                                  | Units               | File name         | Domain                               |
+| ------------------------------------------------------------ | ------------------- | ----------------- | ------------------------------------ |
+| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood) |                     |                   |                                      |
+| $^1$ average inflow to lower zone                            | $\frac{mm^3}{day}$  | lzavin.map        | other fraction                       |
+| $^1$ average inflow to lower zone (forest)                   | $\frac{mm^3}{day}$  | lzavin_forest.map | forest fraction                      |
+| **INITIAL CONDITION MAPS at defined time steps**26 (option repStateMaps) |                     |                   |                                      |
+| $^2$ waterdepth                                              | $mm$                | wdepth00.xxx      | whole pixel                          |
+| $^2$ channel cross-sectional area                            | $m^2$               | chcro000.xxx      | channel                              |
+| $^2$ days since last rain variable                           | $days$              | dslr0000.xxx      | other pixel                          |
+| $^2$ snow cover zone A                                       | $mm$                | scova000.xxx      | snow zone A (1/3<sup>rd</sup> pixel) |
+| $^2$ snow cover zone B                                       | $mm$                | scovb000.xxx      | snow zone B (1/3<sup>rd</sup> pixel) |
+| $^2$ snow cover zone C                                       | $mm$                | scovc000.xxx      | snow zone C (1/3<sup>rd</sup> pixel) |
+| $^2$ frost index                                             | $\frac{°C}{days}$   | frost000.xxx      | other pixel                          |
+| $^2$ cumulative interception                                 | $mm$                | cumi0000.xxx      | other pixel                          |
+| $^2$ soil moisture upper layer                               | $\frac{mm^3}{mm^3}$ | thtop000.xxx      | other fraction                       |
+| $^2$ soil moisture lower layer                               | $\frac{mm^3}{mm^3}$ | thsub000.xxx      | other fraction                       |
+| $^2$ water in lower zone                                     | $mm$                | lz000000.xxx      | other fraction                       |
+| $^2$ water in upper zone                                     | $mm$                | uz000000.xxx      | other fraction                       |
+| $^2$ days since last rain variable (forest)                  | $days$              | dslF0000.xxx      | forest pixel                         |
+| $^2$ cumulative interception (forest)                        | $mm$                | cumF0000.xxx      | forest pixel                         |
+| $^2$ soil moisture upper layer (forest)                      | $\frac{mm^3}{mm^3}$ | thFt0000.xxx      | forest fraction                      |
+| $^2$ soil moisture lower layer (forest)                      | $\frac{mm^3}{mm^3}$ | thFs0000.xxx      | forest fraction                      |
+| $^2$ water in lower zone (forest)                            | $mm$                | lzF00000.xxx      | forest fraction                      |
+| $^2$ water in upper zone (forest)                            | $mm$                | uzF00000.xxx      | forest fraction                      |
+| $^2$ water in depression storage (sealed)                    | $mm$                | cseal000.xxx      | sealed fraction                      |
 
-<sup>1</sup> Output only if option 'InitLisflood' = 1 (pre-run)
-<sup>2</sup> Output only if option 'InitLisflood' = 0 
+$^1$ Output only if option 'InitLisflood' = 1 (pre-run)
+$^2$ Output only if option 'InitLisflood' = 0 
 
 
 
-***Table A13.4*** *LISFLOOD optional output maps (*only 'InitLisflood' = 0) 
+***Table:*** *LISFLOOD optional output maps (only 'InitLisflood' = 0) .*
 
-| Description                             | Option**               | Units                    | Settings variable                                  | Prefix**        |
-| --------------------------------------- | ---------------------- | ------------------------ | -------------------------------------------------- | --------------- |
-| **DISCHARGE AND WATER LEVEL**           |                        |                          |                                                    |                 |
-| discharge                               | repDischargeMaps       | m^3s<sup>-1</sup>        | DischargeMaps                                      | dis             |
-| water level                             | repWaterLevelMaps      | m (above channel bottom) | WaterLevelMaps                                     | wl              |
-| **METEOROLO GICAL INPUT VARIABLES**     |                        |                          |                                                    |                 |
-| precipitation                           | repPrecipitationMaps   | mm                       | PrecipitationMaps                                  | pr              |
-| potential reference evapotranspiration  | repETRefMaps           | mm                       | ETRefMaps                                          | et              |
-| potential evaporation from soil         | repESRefMaps           | mm                       | ESRefMaps                                          | es              |
-| potential open water evaporation        | repEWRefMaps           | mm                       | EWRefMaps                                          | ew              |
-| average daily temperature               | repTavgMaps            | mm                       | TavgMaps                                           | tav             |
-| **STATEVARIABLES**30                    |                        |                          |                                                    |                 |
-| depth of water on soil surface          | repWaterDepthMaps      | mm                       | WaterDepthMaps                                     | wdep            |
-| depth of snow cover on soil surface     | repSnowCoverMaps       | mm                       | SnowCoverMaps                                      | scov            |
-| depth of interception storage           | repCumInterceptionMaps | mm                       | CumInterceptionMaps <br> CumInterceptionForestMaps | cumi  <br> cumF |
-| soil moisture content upper layer       | repTheta1Maps          | mm^3 /mm^3               | Theta1Maps <br> Theta1ForestMaps                   | thtop <br> thFt |
-| soil moisture content lower layer       | repTheta2Maps          | mm^3 /mm^3               | Theta2Maps <br> Theta2ForestMaps                   | thsub <br> thFs |
-| storage in upper groundwater zone       | repUZMaps              | mm                       | UZMaps <br> UZForestMaps                           | uz <br> uzF     |
-| storage in lower groundwater zone       | repLZMaps              | mm                       | LZMaps <br> LZForestMaps                           | lz <br> lzF     |
-| number of days since last rain          | repDSLRMaps            | days                     | DSLRMaps <br> DSLRForestMaps                       | dslr <br> dslF  |
-| frost index                             | repFrostIndexMaps      | °C days<sup>-1</sup>     | FrostIndexMaps                                     | frost           |
-| **RATE VARIABLES**31                    |                        |                          |                                                    |                 |
-| rain (excluding snow)                   | repRainMaps            | mm/timestep              | RainMaps                                           | rain            |
-| snow                                    | repSnowMaps            | mm/timestep              | SnowMaps                                           | snow            |
-| snow melt                               | repSnowMeltMaps        | mm/timestep              | SnowMeltMaps                                       | smelt           |
-| actual evaporation                      | repESActMaps           | mm/timestep              | ESActMaps                                          | esact           |
-| actual transpiration                    | repTaMaps              | mm/timestep              | TaMaps                                             | tact            |
-| rainfall interception                   | repInterceptionMaps    | mm/timestep              | InterceptionMaps                                   | int             |
-| evaporation of intercepted water        | repEWIntMaps           | mm/timestep              | EWIntMaps                                          | ewint           |
-| leaf drainage                           | repLeafDrainageMaps    | mm/timestep              | LeafDrainageMaps                                   | ldra            |
-| infiltration                            | repInfiltrationMaps    | mm/timestep              | InfiltrationMaps                                   | inf             |
-| preferential (bypass) flow              | repPrefFlowMaps        | mm/timestep              | PrefFlowMaps                                       | pflow           |
-| percolation upper to lower soil layer   | repPercolationMaps     | mm/timestep              | PercolationMaps                                    | to2su           |
-| percolation lower soil layer to subsoil | repSeepSubToGWMaps     | mm/timestep              | SeepSubToGWMaps                                    | su2gw           |
-| surface runoff                          | repSurfaceRunoffMaps   | mm/timestep              | SurfaceRunoffMaps                                  | srun            |
-| outflow from upper zone                 | repUZOutflowMaps       | mm/timestep              | UZOutflowMaps                                      | quz             |
-| outflow from lower zone                 | repLZOutflowMaps       | mm/timestep              | LZOutflowMaps                                      | qlz             |
-| total runoff                            | repTotalRunoffMaps     | mm/timestep              | TotalRunoffMaps                                    | trun            |
-| percolation upper to lower zone         | repGwPercUZLZMaps      | mm/timestep              | GwPercUZLZMaps                                     | uz2lz           |
-| loss from lower zone                    | repGwLossMaps          | mm/timestep              | GwLossMaps                                         | loss            |
+| Description                             | Option                 | Units                      | Settings variable                                  | Prefix          |
+| --------------------------------------- | ---------------------- | -------------------------- | -------------------------------------------------- | --------------- |
+| **DISCHARGE AND WATER LEVEL**           |                        |                            |                                                    |                 |
+| discharge                               | repDischargeMaps       | $\frac{m^3}{s}$            | DischargeMaps                                      | dis             |
+| water level                             | repWaterLevelMaps      | $m$ (above channel bottom) | WaterLevelMaps                                     | wl              |
+| **METEOROLO GICAL INPUT VARIABLES**     |                        |                            |                                                    |                 |
+| precipitation                           | repPrecipitationMaps   | $mm$                       | PrecipitationMaps                                  | pr              |
+| potential reference evapotranspiration  | repETRefMaps           | $mm$                       | ETRefMaps                                          | et              |
+| potential evaporation from soil         | repESRefMaps           | $mm$                       | ESRefMaps                                          | es              |
+| potential open water evaporation        | repEWRefMaps           | $mm$                       | EWRefMaps                                          | ew              |
+| average daily temperature               | repTavgMaps            | $mm$                       | TavgMaps                                           | tav             |
+| **STATEVARIABLES**[^30]                 |                        |                            |                                                    |                 |
+| depth of water on soil surface          | repWaterDepthMaps      | $mm$                       | WaterDepthMaps                                     | wdep            |
+| depth of snow cover on soil surface     | repSnowCoverMaps       | $mm$                       | SnowCoverMaps                                      | scov            |
+| depth of interception storage           | repCumInterceptionMaps | $mm$                       | CumInterceptionMaps <br> CumInterceptionForestMaps | cumi  <br> cumF |
+| soil moisture content upper layer       | repTheta1Maps          | $\frac{mm^3}{mm^3}$        | Theta1Maps <br> Theta1ForestMaps                   | thtop <br> thFt |
+| soil moisture content lower layer       | repTheta2Maps          | $\frac{mm^3}{mm^3}$        | Theta2Maps <br> Theta2ForestMaps                   | thsub <br> thFs |
+| storage in upper groundwater zone       | repUZMaps              | $mm$                       | UZMaps <br> UZForestMaps                           | uz <br> uzF     |
+| storage in lower groundwater zone       | repLZMaps              | $mm$                       | LZMaps <br> LZForestMaps                           | lz <br> lzF     |
+| number of days since last rain          | repDSLRMaps            | $days$                     | DSLRMaps <br> DSLRForestMaps                       | dslr <br> dslF  |
+| frost index                             | repFrostIndexMaps      | $\frac{°C}{days}$          | FrostIndexMaps                                     | frost           |
+| **RATE VARIABLES**[^31]                 |                        |                            |                                                    |                 |
+| rain (excluding snow)                   | repRainMaps            | $\frac{mm}{timestep}$      | RainMaps                                           | rain            |
+| snow                                    | repSnowMaps            | $\frac{mm}{timestep}$      | SnowMaps                                           | snow            |
+| snow melt                               | repSnowMeltMaps        | $\frac{mm}{timestep}$      | SnowMeltMaps                                       | smelt           |
+| actual evaporation                      | repESActMaps           | $\frac{mm}{timestep}$      | ESActMaps                                          | esact           |
+| actual transpiration                    | repTaMaps              | $\frac{mm}{timestep}$      | TaMaps                                             | tact            |
+| rainfall interception                   | repInterceptionMaps    | $\frac{mm}{timestep}$      | InterceptionMaps                                   | int             |
+| evaporation of intercepted water        | repEWIntMaps           | $\frac{mm}{timestep}$      | EWIntMaps                                          | ewint           |
+| leaf drainage                           | repLeafDrainageMaps    | $\frac{mm}{timestep}$      | LeafDrainageMaps                                   | ldra            |
+| infiltration                            | repInfiltrationMaps    | $\frac{mm}{timestep}$      | InfiltrationMaps                                   | inf             |
+| preferential (bypass) flow              | repPrefFlowMaps        | $\frac{mm}{timestep}$      | PrefFlowMaps                                       | pflow           |
+| percolation upper to lower soil layer   | repPercolationMaps     | $\frac{mm}{timestep}$      | PercolationMaps                                    | to2su           |
+| percolation lower soil layer to subsoil | repSeepSubToGWMaps     | $\frac{mm}{timestep}$      | SeepSubToGWMaps                                    | su2gw           |
+| surface runoff                          | repSurfaceRunoffMaps   | $\frac{mm}{timestep}$      | SurfaceRunoffMaps                                  | srun            |
+| outflow from upper zone                 | repUZOutflowMaps       | $\frac{mm}{timestep}$      | UZOutflowMaps                                      | quz             |
+| outflow from lower zone                 | repLZOutflowMaps       | $\frac{mm}{timestep}$      | LZOutflowMaps                                      | qlz             |
+| total runoff                            | repTotalRunoffMaps     | $\frac{mm}{timestep}$      | TotalRunoffMaps                                    | trun            |
+| percolation upper to lower zone         | repGwPercUZLZMaps      | $\frac{mm}{timestep}$      | GwPercUZLZMaps                                     | uz2lz           |
+| loss from lower zone                    | repGwLossMaps          | $\frac{mm}{timestep}$      | GwLossMaps                                         | loss            |
 
 [🔝](#top)
 
@@ -2664,7 +2680,7 @@ height="1.476388888888889in"}z
     simulated snowmelt rates.
 
 [^2]: In the LISFLOOD settings file this critical amount is currently
-    expressed as an *intensity* \[mm day<sup>-1</sup>\]. This is because the
+    expressed as an *intensity* \[mm day^{-1}\]. This is because the
     equation was originally designed for a daily time step only. Because
     the current implementation will likely lead to *DSLR* being reset
     too frequently, the exact formulation may change in future versions
@@ -2801,3 +2817,5 @@ height="1.476388888888889in"}z
     first part)
 
 [🔝](#top)
+
+[Disclaimer]: 
