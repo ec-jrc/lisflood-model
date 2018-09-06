@@ -616,9 +616,7 @@ Installation of the LISFLOOD model
 System requirements
 -------------------
 
-Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless
-you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to
-the PCRaster documentation.
+Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to the PCRaster documentation.
 
 Installation on Windows systems
 -------------------------------
@@ -756,17 +754,8 @@ obtains this information from the location attributes of the input maps. This wi
 
 | **Map**               | **Default name**      | **Description**    |
 |-----------------------|-----------------------|----------------------|
-| PixelLengthUser       | pixleng.map           | Map with pixel length |
-|                       |                       |                       |
-|                       |                       | Unit: \[m\], *Range   |
-|                       |                       | of values: map \> 0*  |
-|-----------------------|-----------------------|-----------------------|
-| PixelAreaUser         | pixarea.map           | Map with pixel area   |
-|                       |                       |                       |
-|                       |                       | *Unit:* \[m^2^\],    |
-|                       |                       | *Range of values: map |
-|                       |                       | \> 0*                 |
-|-----------------------|-----------------------|-----------------------|
+| PixelLengthUser       | pixleng.map           | Map with pixel length, Unit: [$m$], Range of values: map \> 0 |
+| PixelAreaUser         | pixarea.map           | Map with pixel area, Unit: [$m^2$], Range of values: map>0 |
 
 Both maps should be stored in the same directory where all other input maps are. The values on both maps may vary in space. A limitation is that a pixel is always represented as a square, so length and width are considered equal (no rectangles). In order to tell LISFLOOD to ignore the default location attributes and use the maps instead, you need to activate the special option "*gridSizeUserDefined*", which involves adding the following line to the LISFLOOD settings file:
 
@@ -840,70 +829,53 @@ Similarly, potential evapo(transpi)ration is usually calculated on a daily basis
 Leaf area index maps 
 ---------------------
 
-Because Leaf area index maps follow a yearly circle, only a map stack of
-one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following
-a yearly circle e.g. water use). LAI is therefore defined as sparse map
-stack with a map every 10 days or a month, for example for a monthly
-changing LAI:
+Because Leaf area index maps follow a yearly circle, only a map stack of one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following a yearly circle e.g. water use). LAI is therefore defined as sparse map stack with a map every 10 days or a month, for example for a monthly changing LAI:
 
 
-| t      | map name     |
-|--------|--------------|
-| 1      | lai00000.001 |
-|--------|--------------|
-| 2      | lai00000.032 |
-|--------|--------------|
-| 3      | lai00000.060 |
-|--------|--------------|
-| 4      | lai00000.091 |
-|--------|--------------|
-| 5      | lai00000.121 |
-|--------|--------------|
-| 6      | lai00000.152 |
-|--------|--------------|
-| 7      | lai00000.182 |
-|--------|--------------|
-| 8      | lai00000.213 |
-|--------|--------------|
-| 9      | lai00000.244 |
-|--------|--------------|
-| 10     | lai00000.274 |
-|--------|--------------|
-| 11     | lai00000.305 |
-|--------|--------------|
-| 12     | lai00000.335 |
+| t    | map name     |
+| ---- | ------------ |
+| 1    | lai00000.001 |
+| 2    | lai00000.032 |
+| 3    | lai00000.060 |
+| 4    | lai00000.091 |
+| 5    | lai00000.121 |
+| 6    | lai00000.152 |
+| 7    | lai00000.182 |
+| 8    | lai00000.213 |
+| 9    | lai00000.244 |
+| 10   | lai00000.274 |
+| 11   | lai00000.305 |
+| 12   | lai00000.335 |
 
 
-After one year the first map is taken again for simulation. For example
-the simulation started on the 5^th^ March 2010 and the first LAI is
-lai00000.060. On the 1^st^ March 2011 the map lai00000.060 is taken
-again as LAI input. To let LISFLLOD know which map has to be used at
-which day a lookup table (LaiOfDay.txt) is necessary.
+After one year the first map is taken again for simulation. For example the simulation started on the $5^{th}$ March 2010 and the first LAI is lai00000.060. On the $1^{st}$ March 2011 the map lai00000.060 is taken
+again as LAI input. To let LISFLLOD know which map has to be used at which day a lookup table (LaiOfDay.txt) is necessary.
 
 Input tables
 ------------
-
-In the previous version of LISFLOOD a number of model parameters are
-read through tables that are linked to the classes on the land use and
-soil (texture) maps. Those tables are replaced by maps (e.g. soil
-hydraulic property maps) in order to include the sub-grid variability of
-each parameter. Therefore only one table is used in the standard
-LISFLOOD setting (without lake or reservoir option)
-
+In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one table is used in the standard LISFLOOD setting (without lake or reservoir option) 
 The following table gives an overview:
 
-+-----------------------+-----------------------+-----------------------+
-| ***Table 4.3**        |
-| LISFLOOD input        |
-| tables*               |
-+=======================+=======================+=======================+
-| **LAND USE**          |
-+-----------------------+-----------------------+-----------------------+
+
+
+| **Table 4.3** <br />LISFLOOD input tab;es |              |             |
+| ----------------------------------------- | ------------ | ----------- |
+| LAND USE                                  |              |             |
+| Table                                     | Default name | Description |
+| Day of the year ->                        | LaiOfDay.txt |             |
+|                                           |              |             |
+
+|												|
+|        													|
+| tables*  
+
+
+| **LAND USE**          |						|						|
 | **Table**             | **Default name**      | **Description**       |
-+-----------------------+-----------------------+-----------------------+
-| Day of the year -\>   | LaiOfDay.txt          | Lookup table: Day of  |
+|    |         | Lookup table: Day of  |
 | LAI                   |                       | the year -\> LAI map  |
-+-----------------------+-----------------------+-----------------------+
+
+
 
 Organisation of input data
 --------------------------
