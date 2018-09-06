@@ -1,16 +1,12 @@
 
 
-![](media/image2.png)
+![](https://ec-jrc.github.io/lisflood_manual/media/image2.png)
 
 
 
 [TOC]
 
 
-
-# Disclaimer 
-
-Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
 
 
@@ -62,7 +58,7 @@ The figure below gives an overview of the structure of the LISFLOOD model.
 The processes that are simulated by the model include snow melt (not shown in the Figure), infiltration, interception of rainfall, leaf drainage, evaporation and water uptake by vegetation, surface runoff, preferential flow (bypass of soil layer), exchange of soil moisture between the two soil layers and drainage to the groundwater, sub-surface and groundwater flow, and flow through river channels. Each of these
 processes is described in more detail in this technical documentation.
 
-![](media/image6.jpg)
+![](https://ec-jrc.github.io/lisflood_manual/media/image6.jpg)
 
 
 
@@ -185,13 +181,13 @@ Therefore, in practice this parameter is often treated as a calibration constant
 
 The following Figure shows an example where a mean value of: 3.0 $\frac{mm} {^\circ C \cdot day}$  is used. The value of $C_m$ is reduced by 0.5 at $21^{st}$ December and a 0.5 is added on the $21^{st}$ June. In between a sinus function is applied
 
-![](media/image7.jpg)
+![](https://ec-jrc.github.io/lisflood_manual/media/image7.jpg)
 
 ***Figure:*** *Sinus shaped snow melt coefficient* ($C_m$) *as a function of days of year.*
 
 At high altitudes, where the temperature never exceeds $1^\circ C$, the model accumulates snow without any reduction because of melting loss. In these altitudes runoff from glacier melt is an important part. The snow will accumulate and converted into firn. Then firn is converted to ice and transported to the lower regions. This can take decades or even hundred years. In the ablation area the ice is melted. In LISFLOOD this process is emulated by melting the snow in higher altitudes on an annual basis over summer. A sinus function is used to start ice melting in summer (from 15 June till 15 September) using the temperature of zone B:
 
-![](media/image8.png)
+![](https://ec-jrc.github.io/lisflood_manual/media/image8.png)
 
 ***Figure:*** *Sinus shaped ice melt coefficient as a function of days of year.*
 
@@ -202,7 +198,7 @@ For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow
 The division in elevation zones was changed from a uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km
 grid cell. Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
 
-![](media/image10.png)
+![](https://ec-jrc.github.io/lisflood_manual/media/image10.png)
 
 ***Figure:*** *Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone.*
 
@@ -806,8 +802,7 @@ For the simulation of reservoirs a number of addition input files are necessary.
 
 When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outflow point, see Figure below), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
-![reservoirPlacementNew](media/media/image42.png){width="4.75in"
-height="2.125in"}
+![reservoirPlacementNew](https://ec-jrc.github.io/lisflood_manual/media/image42.png){:height="203px" width="456px"} 
 
 ***Figure:*** *Placement of the reservoirs: reservoirs on the outflow point (left) result in erroneous behavior of the reservoir routine.*
 
@@ -902,7 +897,7 @@ Polders can be simulated on channel pixels where dynamic wave routing is used. T
 
 Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), and based on the weir equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in the following Figure:
 
-![polders](media/image43.png)
+![polders](https://ec-jrc.github.io/lisflood_manual/media/image43.png)
 
 ***Figure:*** *Schematic overview of the simulation of polders.* $p_b$ *is the polder bottom level (above the channel bottom);* $w_c$ *is the water level in the channel;* $h_c$ *and* $h_p$ *are the water levels above the polder in- / outflow, respectively*
 
@@ -933,8 +928,13 @@ From the Figure, it is easy to see that there can be three situations:
 
 The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table of the next Section). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
 
-![poldersRegulated](media/media/image44.png){width="5.395833333333333in"
-height="3.3958333333333335in"}
+```
+<img src="Assets/icon.png" width="200">
+```
+
+
+
+![poldersRegulated](https://ec-jrc.github.io/lisflood_manual/media/image44.png=200x200)
 
 ***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq XXXX). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq XXXX).*
 
@@ -1069,7 +1069,7 @@ with:
 
 
 
-![lakes](media/media/image45.png){width="5.375in"
+![lakes](https://ec-jrc.github.io/lisflood_manual/media/image45.png){width="5.375in"
 height="3.5104166666666665in"}
 
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
@@ -1160,7 +1160,7 @@ The lake locations defined on a (nominal) map called '*lakes.map*'. It is import
 
 >  Note: When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
-![reservoirPlacementNew](media/media/image42.png){width="4.75in"
+![reservoirPlacementNew](https://ec-jrc.github.io/lisflood_manual/media/image42.png){width="4.75in"
 height="2.125in"}
 
 ***Figure:***  *Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
@@ -1329,7 +1329,7 @@ One of the most common uses of the inflow hydrograph option is this: suppose we 
 
 
 
-![](media/media/image46.emf){width="6.0in" height="4.333333333333333in"}
+![](https://ec-jrc.github.io/lisflood_manual/media/image46.png){width="6.0in" height="4.333333333333333in"}
 
 ***Figure:*** *Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text below for explanation.*
 
@@ -1374,22 +1374,22 @@ where $A = \alpha \cdot {Q^{\beta} }$
 
 continuity equation momentum equation as expressed by Chow et al. 1988. Which decreasing inflow the peaks of the resulting outflow will be later in time (see Figure below for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
 
-![](media/media/image47.emf){width="5.864583333333333in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image47.png){width="5.864583333333333in"
 height="2.75in"}
 
 ***Figure:*** *Simulated outflow for different amount of inflow wave propagation gets slower.*
 
 This is realistic if your channel looks like this:
 
-![](media/media/image48.emf){width="2.05in"
-height="1.5270833333333333in"}![](media/media/image49.emf){width="1.9465277777777779in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image48.png){width="2.05in"
+height="1.5270833333333333in"}![](https://ec-jrc.github.io/lisflood_manual/media/image49.png){width="1.9465277777777779in"
 height="1.45in"}
 
 ***Figure:*** *Schematic cross section of a channel with different water level.*
 
 But a natural channel looks more like this:
 
-![](media/media/image50.emf){width="4.033333333333333in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image50.png){width="4.033333333333333in"
 height="1.617361111111111in"}
 
 ***Figure:*** *Schematic cross section of a natural channel.*
@@ -1406,8 +1406,8 @@ The double kinematic approach splits up the channel in two parts (see figure bel
 
 ​	2\. over bankful routing
 
-![](media/media/image54.emf){width="3.142361111111111in"
-height="1.3833333333333333in"}![](media/media/image55.emf){width="1.95in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image54.png){width="3.142361111111111in"
+height="1.3833333333333333in"}![](https://ec-jrc.github.io/lisflood_manual/media/image55.png){width="1.95in"
 height="1.375in"}
 
 ***Figure:*** *Channel is split in a bankful and over bankful routing*
@@ -1820,7 +1820,7 @@ The water is withdrawn only from discharge in the river network but not from soi
 
 -   If the amount of water withdrawal is larger than the water available in this grid cell water is taken from downstream moving along the local drain direction. This is done by implementing a loop substracting the remaining water from the next downstream cell till all the water for water use is taken or a predefined number of iteration is reached (see figure below -- pixel No. 2 to 5)
 
-![](media/media/image56.emf){width="4.0869564741907265in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image56.png){width="4.0869564741907265in"
 height="2.134514435695538in"}
 
 ***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
@@ -2003,7 +2003,7 @@ If the option is switched on, water levels are calculated for channel pixels whe
 
 For channel stretches that are simulated using the dynamic wave, the water level in the channel is simply the difference between the channel head and the channel bottom level. For kinematic wave stretches, only approximate water levels can be estimated from the cross-sectional (wetted) channel area, $A_{ch}$ for each time step. Since the channel cross-section is described as a trapezoid, water levels follow directly from $A_{ch}$ , channel bottom width, side slope and bankfull level. If $A_{ch}$ exceeds the bankfull cross-sectional area ($A_{bf}$), the surplus is distributed evenly over the (rectangular) floodplain, and the depth of water on the floodplain is added to the (bankfull) channel depth. The Figure below further illustrates the cross-section geometry. All water levels are relative to channel bottom level ($z_{bot}$ in the Figure).
 
-![chanDims](media/media/image57.png){width="5.770833333333333in"
+![chanDims](https://ec-jrc.github.io/lisflood_manual/media/image57.png){width="5.770833333333333in"
 height="2.1145833333333335in"}
 
 ***Figure:*** *Geometry of channel cross-section in kinematic wave routing. With* $W_b$: *channel bottom width;* $W_u$: *channel upper width;* $z_{bot}$: *channel bottom level;* $z_{fp}$: *floodplain bottom level;* $s$: *channel side slope;* $W_{fp}$: *floodplain width;* $A_{bf}$: *channel cross-sectional area at bankfull;* $A_{fp}$: *floodplain cross-sectional area;* $D_{bf}$: *bankfull channel depth,* $D_{fp}$*: *depth of water on the floodplain.*
@@ -2220,7 +2220,7 @@ Maps
 | **GENERAL**                                               |                     |                                                        |                                                              |
 | MaskMap                                                   | area.map            | Unit: - <br> Range: 0 or 1                             | Boolean map that defines model boundaries                    |
 | **TOPOGRAPHY**                                            |                     |                                                        |                                                              |
-| Ldd                                                       | ldd.map             | U.: flow directions <br> R.: 1 ≤ map ≤ 9               | local drain direction map (with value 1-9); this file contains flow directions from each cell to its steepest downslope neighbour. Ldd directions are coded according to the following diagram: <br> ![ldd](media/media/image58.png){width="1.8229166666666667in" height="1.84375in"} <br> This resembles the numeric key pad of your PC's keyboard, except for the value 5, which defines a cell without local drain direction (pit). The pit cell at the end of the path is the outlet point of a catchment. |
+| Ldd                                                       | ldd.map             | U.: flow directions <br> R.: 1 ≤ map ≤ 9               | local drain direction map (with value 1-9); this file contains flow directions from each cell to its steepest downslope neighbour. Ldd directions are coded according to the following diagram: <br> ![ldd](https://ec-jrc.github.io/lisflood_manual/media/image58.png){width="1.8229166666666667in" height="1.84375in"} <br> This resembles the numeric key pad of your PC's keyboard, except for the value 5, which defines a cell without local drain direction (pit). The pit cell at the end of the path is the outlet point of a catchment. |
 | Grad                                                      | gradient.map        | U.: $\frac{m}{m}$  <br> R.: map > 0 <br> !!!           | Slope gradient                                               |
 | Elevation Stdev                                           | elvstd.map          | U.: $m$ <br> R.: map ≥ 0                               | Standard deviation of elevation                              |
 | **LAND USE -- fraction maps**                             |                     |                                                        |                                                              |
@@ -2663,9 +2663,9 @@ variability, 9temperature lapse rate, 7TemperatureLapseRate, 50TempMelt,
 fraction, 10water levels, 119Water uptake by plant roots, 14water use,
 115Xinanjiang model, 17
 
-![](media/media/image59.jpeg){width="1.3152777777777778in"
-height="1.0847222222222221in"}![](media/media/image60.png){width="1.5930555555555554in"
-height="0.7534722222222222in"}![](media/media/image61.png){width="8.266666666666667in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image59.jpeg){width="1.3152777777777778in"
+height="1.0847222222222221in"}![](https://ec-jrc.github.io/lisflood_manual/media/image60.png){width="1.5930555555555554in"
+height="0.7534722222222222in"}![](https://ec-jrc.github.io/lisflood_manual/media/image61.png){width="8.266666666666667in"
 height="1.476388888888889in"}z
 
 [^1]: Note that the model needs *daily* average temperature values, even
