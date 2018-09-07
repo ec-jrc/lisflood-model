@@ -1375,10 +1375,10 @@ It is up to the user how the input data are organised. However, it is advised to
 
 The following Figure illustrates this:
 
-![](media/image36.emf){width="5.802083333333333in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image36.png){width="5.802083333333333in"
 height="4.541666666666667in"}
 
-*Figure 4.1 Suggested file structure for LISFLOOD*
+***Figure:*** *Suggested file structure for LISFLOOD*
 
 ### Generating input base maps
 
@@ -1402,7 +1402,7 @@ An example
 
 To better understand the impact of the initial model state on simulation  results, let's start with a simple example. The Figure below shows 3 LISFLOOD simulations of soil moisture for the upper soil layer. In the first simulation, it was assumed that the soil is initially completely saturated. In the second one, the soil was assumed to be completely dry (i.e. at residual moisture content). Finally, a third simulation was done where the initial soil moisture content was assumed to be in between these two extremes.
 
-  ![](media/media/image37.emf){width="5.625in"
+  ![](https://ec-jrc.github.io/lisflood_manual/media/image37.png){width="5.625in"
   height="3.6979166666666665in"}
 
   ***Figure 7.1** Simulation of soil moisture in upper soil layer for a soil that is initially at saturation (s), at residual moisture content (r) and in between (\[s+r\]/2) *
@@ -1440,7 +1440,7 @@ Note that the "-9999" 'bogus' value can *only* be used with the variables in Tab
 Even though the use of a sufficiently long warm-up period usually results in a correct initialisation, a complicating factor is that the time needed to initialise any storage component of the model is dependent on the average residence time of the water in it. For example, the moisture content of the upper soil layer tends to respond almost instantly to LISFLOOD's meteorological forcing variables (precipitation, evapo(transpi)ration). As a result, relatively short warm-up periods are sufficient to initialise this storage component. At the other extreme, the response of the lower groundwater zone is generally very slow (especially for large values of $T_{lz}$). Consequently, to avoid unrealistic trends in the simulations, very long warm-up periods may be needed. The Figure below shows a typical example for an 8-year simulation, in
 which a decreasing trend in the lower groundwater zone is visible throughout the whole simulation period. Because the amount of water in the lower zone is directly proportional to the baseflow in the channel, this will obviously lead to an unrealistic long-term simulation of baseflow. Assuming the long-term climatic input is more or less constant, the baseflow (and thus the storage in the lower zone) should be free of any long-term trends (although some seasonal variation is normal). In order to avoid the need for excessive warm-up periods, LISFLOOD is capable of calculating a 'steady-state' storage amount for the lower groundwater zone. This *steady state* storage is very effective for reducing the lower zone's warm-up time. In the next sections the concept of *steady state* is first explained, and it is shown how it can be used to speed up the initialisation of a LISFLOOD run.
 
-![](media/media/image38.emf){width="5.989583333333333in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image38.png){width="5.989583333333333in"
 height="3.7083333333333335in"}
 
 ***Figure:*** *8-year simulation of lower zone storage. Note how the influence of the initial storage persists throughout the simulation period.*
@@ -1472,7 +1472,7 @@ where $I$ is the (time dependent) inflow (i.e. groundwater recharge) and $O$ is 
 $$
 \frac{{dLZ}}{{dt}} = 0 \quad \Leftrightarrow \quad I(t) - O(t) =0
 $$
-![](media/media/image39.emf){width="5.447916666666667in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image39.png){width="5.447916666666667in"
 height="7.40625in"}
 
 ***Figure:*** *Two 10-year simulations of lower zone storage with constant inflow. Upper Figure: high initial storage, storage approaches steady-state storage (dashed) after about 1500 days. Lower Figure: low initial storage, storage doesn't reach steady-state within 10 years.*
@@ -1535,10 +1535,10 @@ The presence of any initialisation problems of the lower zone can be checked by 
 
 This tells the model to write the values of all state variables (averages, upstream of contributing area to each gauge) to time series files. The default name of the lower zone time series is 'lzUps.tss'. Figure below shows an example of an 8-year simulation that was done both without (dashed line) and with a pre-run. The simulation without the pre-run shows a steady decreasing trend throughout the 8-year period, whereas the simulation for which the pre-run was used doesn't show this long-term trend (although in this specific case a modest increasing trend is visible throughout the first 6 years of the simulation, but this is related to trends in the meteorological input).
 
-![initLZDemo](media/media/image40.png){width="5.770833333333333in"
+![initLZDemo](https://ec-jrc.github.io/lisflood_manual/media/image40.png){width="5.770833333333333in"
 height="3.2395833333333335in"}
 
-***Figure x.x** Initialisation of lower groundwater zone with and without using a pre-run. Note the strong decreasing trend in the simulation without pre-run. *
+***Figure:*** *Initialisation of lower groundwater zone with and without using a pre-run. Note the strong decreasing trend in the simulation without pre-run. *
 
 ### Option2: Warm start (Using a previous run)
 
@@ -1559,7 +1559,7 @@ From the foregoing it is clear that the initialisation of LISFLOOD can be done i
 
 4. If you want to include the first year of modelling into your analysis, you have to do a "warm-up" run (one year will usually do) to initialize all the initial conditions. You have to set option repEndMaps=1 to report end maps. Best possible solution is to use the year before the actual modelling period. Second best is to use any one year period to set up the initial conditions. After that you will have the 'end' maps and you can proceed with 1. again
 
-![](media/media/image41.emf){width="5.760416666666667in"
+![](https://ec-jrc.github.io/lisflood_manual/media/image41.png){width="5.760416666666667in"
 height="4.322916666666667in"}
 
 ***Figure:*** *LISFLOOD initialisation flowchart.*
