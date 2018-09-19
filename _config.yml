@@ -275,6 +275,8 @@ defaults:
       - title: "Vera?"
         text: "I think it can work"
       - title: "Veeeraaa?"
-        text: "OMG!! It really works"    
-
+        text: "OMG!! It really works"
+      - title: "Veeeeeeraaaaaaaa? (with annoying voice)"
+        text: "maybe reducing the space between titles?"
+        text: "or skipping titles and using paragraphs"        
 theme: jekyll-theme-minimal
