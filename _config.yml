@@ -270,12 +270,11 @@ defaults:
       share: false
       related: false
       sidebar:
-        #nav: "docs"
-        - title: "Vera"
-        text: "Hey Vera , a line."
-        - title: "Vera?"
-        text: "Have you seen these lines?"
-        - title: "Veeraaa?"
-        text: "I think this is a menu"
+      - title: "Title"
+        image: http://placehold.it/350x250
+        image_alt: "image"
+        text: "Some text here."
+      - title: "Another Title"
+        text: "More text here."
 
 theme: jekyll-theme-minimal
