@@ -274,5 +274,7 @@ defaults:
         text: "Is this a side line?"
       - title: "Vera?"
         text: "I think it can work"
+      - title: "Veeeraaa?"
+        text: "OMG!! It really works"    
 
 theme: jekyll-theme-minimal
