@@ -272,10 +272,10 @@ defaults:
       sidebar:
         #nav: "docs"
         - title: "Vera"
-          text: "Hey Vera , a line."
+        text: "Hey Vera , a line."
         - title: "Vera?"
-          text: "Have you seen these lines?"
+        text: "Have you seen these lines?"
         - title: "Veeraaa?"
-          text: "I think this is a menu"
+        text: "I think this is a menu"
 
 theme: jekyll-theme-minimal
