@@ -271,9 +271,11 @@ defaults:
       related: false
       sidebar:
         #nav: "docs"
-        - title: "Title"
-          text: "Some text here."
-        - title: "Another Title"
-          text: "More text here."
+        - title: "Vera"
+          text: "Hey Vera , a line."
+        - title: "Vera?"
+          text: "Have you seen these lines?"
+        - title: "Veeraaa?"
+          text: "I think this is a menu"
 
 theme: jekyll-theme-minimal
