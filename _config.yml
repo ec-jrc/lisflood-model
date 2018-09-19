@@ -270,10 +270,10 @@ defaults:
       share: false
       related: false
       sidebar:
-        nav: "docs"
+        #nav: "docs"
         - title: "Title"
-        text: "Some text here."
+          text: "Some text here."
         - title: "Another Title"
-        text: "More text here."
+          text: "More text here."
 
 theme: jekyll-theme-minimal
