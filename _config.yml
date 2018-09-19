@@ -270,11 +270,9 @@ defaults:
       share: false
       related: false
       sidebar:
-      - title: "Title"
-        image: http://placehold.it/350x250
-        image_alt: "image"
-        text: "Some text here."
-      - title: "Another Title"
-        text: "More text here."
+      - title: "Vera"
+        text: "Is this a side line?"
+      - title: "Vera?"
+        text: "I think it can work"
 
 theme: jekyll-theme-minimal
