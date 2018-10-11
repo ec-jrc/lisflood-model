@@ -271,7 +271,7 @@ defaults:
       related: false
       sidebar:
       
-      - title: "Vera":[Introduction]
+      - title: "Vera"
         text: "Is this a side line?"
         url: [Introduction]
       - title: "Vera?"
