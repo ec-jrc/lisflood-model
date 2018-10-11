@@ -270,7 +270,7 @@ defaults:
       share: false
       related: false
       sidebar:
-      - title: "Vera"
+      - title: "Vera":[Introduction]
         text: "Is this a side line?"
       - title: "Vera?"
         text: "I think it can work"
