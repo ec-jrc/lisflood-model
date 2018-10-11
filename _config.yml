@@ -273,7 +273,7 @@ defaults:
       
       - title: "Vera"
         text: "Is this a side line?"
-        url: [Introduction]
+        url: \index.md\
       - title: "Vera?"
         text: "I think it can work"
       - title: "Veeeraaa?"
