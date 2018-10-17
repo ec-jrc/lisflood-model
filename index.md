@@ -9,7 +9,7 @@
 
 
 
-# Disclaimer
+## Disclaimer
 
 ```R
   # Not sure that it should stay here or if we should put the Disclaimer in the overall description of the LISFLOOD documentation OR at the end of this document ... I don't like it very much at the beginning
@@ -17,7 +17,7 @@
 Both the program code and this manual have been carefully inspected before printing. However, no  warranties, either expressed or implied, are made concerning the accuracy, completeness, reliability, usability, performance, or fitness for any particular purpose of the information contained in this manual, to the software described in this manual, and to other material supplied in connection therewith. The material  is provided \"as is\". The entire risk as to its quality and performance is with the user.
 
 
-# Introduction
+## Introduction
 ```R
   # Needs to be revised. A link to the "LISFLOOD model description" (separate document) is essential
 ```
@@ -30,7 +30,7 @@ Although a wide variety of existing hydrological models are available that are s
 
 [:top:](#top)
 
-# About LISFLOOD and this user guide
+## About LISFLOOD and this user guide
 
 The __LISFLOOD__ model is implemented in the PCRaster Environmental Modelling language Version 3.0.0 (Wesseling et al., 1996), wrapped in a Python based interface. PCRaster is a raster GIS environment that has its own high-level computer language, which allows the construction of iterative spatio-temporal environmental models. The Python wrapper of LISFLOOD enables the user to control the model inputs and outputs and the selection of the model modules. This approach combines the power, relative simplicity and maintainability of code written in the the PCRaster Environmental Modelling language and the flexibility of Python.
 LISFLOOD runs on any operating for which Python and PCRaster are available. Currently these include 32-bits Windows (e.g. Windows XP, Vista, 7) and a number of Linux distributions.
@@ -44,15 +44,15 @@ A series of Annexes at the end of this document describe some optional features 
 
 [:top:](#top)
 
-# Explaining the essential files
+## Explaining the essential files
 
-## LISFLOOD settings file
+### LISFLOOD settings file
 
 In LISFLOOD, all file and parameter specifications are defined in a settings file. The purpose of the settings file is to link variables and parameters in the model to in- and output files (maps, time series, tables) and numerical values. In addition, the settings file can be used to specify several *options*. The settings file has a special (XML) structure. In the next sections the general layout of the settings file is explained. Although the file layout is not particularly complex, a basic understanding of the general principles explained here is essential for doing any successful model runs.
 
 The settings file has an XML ('E**x**tensible **M**arkup **L**anguage') structure. You can edit it using any text editor (e.g. Notepad, Editpad, Emacs, vi). Alternatively, you can also use a dedicated XML editor such as XMLSpy.
 
-### Layout of the settings file
+#### Layout of the settings file
 
 A LISFLOOD settings file is made up of 4 elements, each of which has a specific function. The general structure of the file is described using XML-tags. XML stands for 'E**x**tensible **M**arkup **L**anguage', and it is really nothing more than a way to describe data in a file. It works by putting information that goes into a (text) file between tags, and this makes it very easy add structure. For a LISFLOOD settings file, the basic structure looks like this:
 
@@ -90,7 +90,7 @@ In brief, the main function of each element is:
 
 The following sections explain the function of each element in more detail. This is mainly to illustrate the main concepts and how it all fits together. A detailed description of all the variables that are relevant for setting up and running LISFLOOD is given in **Chapter XXX**.
 
-#### lfuser and lfbinding elements
+##### lfuser and lfbinding elements
 
 The 'lfbinding' element provides a very low-level way to define all model parameter values as well as all in- and output maps, time series and tables. 
 
@@ -209,7 +209,7 @@ __**NOTES:**__
 
 3.  Within the *lfuser* and *lfbinding* elements, model variables are organised into *groups*. This is just to make navigation in an xml editor easier.
 
-#### Variables in the lfbinding element
+##### Variables in the lfbinding element
 
 The variables that are defined in the 'lfbinding' element fall in either of the following categories:
 
@@ -290,7 +290,7 @@ Time constant for water in upper zone [days]\
 
 [:top:](#top)
 
-#### Variables in the lfuser element
+##### Variables in the lfuser element
 
 As said before the variables in the 'lfuser' elements are all text variables, and they are used simply to substitute text in the 'lfbinding' element. In practice it is sometimes convenient to use the same name for a text variable that is defined in the 'lfuser' element and a 'lfbinding' variable. For example:
 
@@ -317,7 +317,7 @@ Time constant for water in upper zone [days]\
 In this case 'UpperZoneTimeConstant' in the 'lfuser' element (just a text variable) is something different from 'UpperZoneTimeConstant' in the 'lfbinding' element!
 
 
-#### lfoption element
+##### lfoption element
 
 The 'lfoption' element effectively allows you to switch certain parts of the model on or off. Within LISFLOOD, there are **two categories** of options:
 
@@ -367,20 +367,17 @@ Within the 'lfoptions' element of the settings file, each option is defined usin
 
 
 
+## Step-by-step user guide
 
-
-
-# Step-by-step user guide
-
-## Step1 : System requirements
+### Step1 : System requirements
 
 Currently LISFLOOD is available on both 64-bit Linux and 32-bit Windows systems. Either way, the model requires that a recent version of the PCRaster software is available, or at least PCRaster's 'pcrcalc' application and all associated libraries. LISFLOOD require 'pcrcalc' version November 30, 2009, or more recent. Older 'pcrcalc' versions will either not work at all, or they might produce erroneous results. Unless
 you are using a 'sealed' version of LISFLOOD (i.e. a version in which the source code is made unreadable), you will also need a licensed version of 'pcrcalc'. For details on how to install PCRaster we refer to
 the PCRaster documentation.
 
-## Step 2: Installation of the LISFLOOD model
+### Step 2: Installation of the LISFLOOD model
 
-### On Windows systems
+#### On Windows systems
 
 For Windows users the installation involves two steps:
 
@@ -416,7 +413,7 @@ variable. In Windows XP you can do this by selecting 'settings' from the 'Start'
 [[🔝](#top)](#top)
 
 
-### On Linux systems
+#### On Linux systems
 
 Under Linux LISFLOOD requires that the Python interpreter (version 2.7 or more recent) is installed on the system. Most Linux distributions already have Python pre-installed. If needed you can download Python free of any charge from *http://www.python.org/*
 
@@ -439,7 +436,7 @@ The installation process is largely identical to the Windows procedure:
 [[🔝](#top)](#top)
 
 
-## Step 3: Preparing the Settings file
+### Step 3: Preparing the Settings file
 
 ```R
   # Add more detail to all those steps!!
@@ -464,7 +461,7 @@ order to use the template, you should make sure the following requirements are m
 
 If this is all true, the settings file can be prepared very quickly by editing the items in the 'lfuser' element. The following is a detailed description of the different sections of the 'lfuser' element. The present LISFLOOD version contains process-related parameters (not taking into account the parameters that are defined through the maps). These are all defined in the 'lfuser' element, and default values are given for each of them. Even though *any* of these parameters can be treated as calibration constants, doing so for *all* of them would lead to serious over-parameterisation problems. In the description of these parameters we will therefore provide some suggestions as to which parameters should be used for calibration, and which one are better left untouched.
 
-### Time-related constants
+#### Time-related constants
 
 The 'lfuser' section starts with a number of constants that are related to the simulation period and the time interval used. These are all defined as single values.
 
@@ -560,7 +557,7 @@ The 'lfuser' section starts with a number of constants that are related to the s
     \<textvar name="ReportSteps" value="10+5..endtime"\
 ```
 
-### Parameters related to evapo(transpi)ration and interception
+#### Parameters related to evapo(transpi)ration and interception
 
 The following parameters are all related to the simulation of evapo(transpi)ration and rainfall interception. Although they can all be defined as either a single value or as a map, we recommend using the single values that are included in the template. We do not recommend using any of these parameters as calibration constants.
 
@@ -618,7 +615,7 @@ The following parameters are all related to the simulation of evapo(transpi)rati
 **SMaxSealed** is the maximum depression storage on impervious surface $[mm]$. This storage is emptied by evaporation (EW0).
 
 
-### Parameters related to snow and frost
+#### Parameters related to snow and frost
 
 The following parameters are all related to the simulation of snow accumulation, snowmelt and frost. All these parameters can be defined as either single values or maps. We recommend to start out by leaving them all at their default values. If prior data suggest major under- or overcatch problems in the observed snowfall, *SnowFactor* can be adjusted accordingly. *SnowMeltCoef* may be used as a calibration constant, but since snow observations are typically associated with large uncertainty bands, the calibration may effectively just be compensating for these input errors.
 
@@ -705,7 +702,7 @@ The following parameters are all related to the simulation of snow accumulation,
 **FrostIndexThreshold** is the critical value of the frost index (Eq 2-5) above which the soil is considered frozen $[\frac{°C}{day}]$
 
 
-### Infiltration parameters
+#### Infiltration parameters
 
 The following two parameters control the simulation of infiltration and preferential flow. Both are empirical parameters that are treated as calibration constants, and both can be defined as single values or maps.
 
@@ -732,7 +729,7 @@ The following two parameters control the simulation of infiltration and preferen
 **PowerPrefFlow** ($c_{pref}$ in Eq 2-25) is the power in the preferential flow equation [-]
 
 
-### Groundwater parameters
+#### Groundwater parameters
 
 The following parameters control the simulation shallow and deeper groundwater. *GwLossFraction* should be kept at 0 unless prior information clearly indicates that groundwater is lost beyond the catchment boundaries (or to deep groundwater systems). The other parameters are treated as calibration constants. All these parameters can be defined as single values or maps.
 
@@ -780,7 +777,7 @@ The following parameters control the simulation shallow and deeper groundwater. 
 **GwLoss** ($f_{loss}$ in Eq 2-45) is the maximum rate of percolation from the lower groundwater zone (groundwater loss) zone $[\frac{mm}{day}]$. A value of 0 (closed lower boundary) is recommended as a starting value.
 
 
-### Routing parameters 
+#### Routing parameters 
 
 These parameters are all related to the routing of water in the channels as well as the routing of surface runoff. The multiplier *CalChanMan* can be used to fine-tune the timing of the channel routing, and it may be defined as either a single value or a map. All other parameters should be kept at their default values.
 
@@ -830,7 +827,7 @@ These parameters are all related to the routing of water in the channels as well
 
 
 
-### Parameters related to numerics 
+#### Parameters related to numerics 
 
 This category only contains one parameter at the moment, which can only be a single value. We strongly recommend keeping this parameter at its default value.
 
@@ -852,7 +849,7 @@ This category only contains one parameter at the moment, which can only be a sin
 **CourantCrit** ($C_{crit}$ in Eq 2-36) is the critical Courant number which controls the numerical accuracy of the simulated soil moisture fluxes [-]. Any value between 0 and 1 can be used, but using values that are too high can lead to unrealistic "jumps" in the simulated soil moisture, whereas very low values result in reduced computational performance (because many iterations will be necessary to obtain the required accuracy). Values above 1 should never be used, as they will result in a loss of mass balance. In most cases the default value of 0.4 results in sufficiently realistic simulations using just a few iterations.
 
 
-### File paths 
+#### File paths 
 
 Here you can specify where all the input files are located, and where output should be written. Note that you can use both forward and backward slashes on both Windows and Linux-based systems without any problem (when LISFLOOD reads the settings file it automatically formats these paths according to the conventions used by the operating system used). The default settings template contains relative paths, which in most cases allows you to run the model directly without changing these settings (assuming that you execute LISFLOOD from the root directory of your catchment).
 
@@ -933,7 +930,7 @@ Here you can specify where all the input files are located, and where output sho
 **PathWaterUse** is the directory where water use maps are located (optional)
 
 
-### Prefixes of meteo and vegetation related variables
+#### Prefixes of meteo and vegetation related variables
 
 Here you can define the prefix that is used for each meteorological variable (and LAI and water use).
 
@@ -1021,7 +1018,7 @@ The corresponding part of the settings file is pretty self-explanatory:
 **PrefixWaterUse** is the prefix of the water use maps (optional)
 
 
-### Initial conditions
+#### Initial conditions
 
 As with the calibration parameters you can use both maps and single values to define the catchment conditions at the start of a simulation. Note that a couple of variables can be initialized internally in the
 model (explained below). Also, be aware that the initial conditions define the state of the model at *t=(StepStart -1)*. As long as *StepStart* equals 1 this corresponds to *t=0*, but for larger values of *StepStart* this is (obviously) not the case!
@@ -1192,7 +1189,7 @@ model (explained below). Also, be aware that the initial conditions define the s
 CumIntForestInitValue, UZForestInitValue, DSLRForestInitValue, LZForestInitValue, ThetaForestInit1Value, ThetaForestInit2Value are the initial value for the forest part of a pixel
 
 
-### Using options
+#### Using options
 
 As explained in **Chapter XXXX**, the 'lfoptions' element gives you additional control over what LISFLOOD is doing. Using options it is possible to switch certain parts of the model on or off. This way you can tell the model exactly which output files are reported and which ones aren't. Also, they can be used to activate a number of additional model features, such as the simulation of reservoirs and inflow hydrographs.
 
@@ -1209,11 +1206,11 @@ Within the 'lfoptions' element of the settings file, each option is defined usin
 
 
 
-## Step 4: Input files (maps and tables)
+### Step 4: Input files (maps and tables)
 
 In the current version of LISFLOOD, all model input is provided as either maps (grid files in PCRaster format) or tables. This chapter describes all the data that are required to run the model. Files that are specific to *optional* LISFLOOD features (e.g. inflow hydrographs, reservoirs) are not listed here; they are described in the documentation for each option.
 
-### Input maps
+#### Input maps
 
 PCRaster requires that all maps must have *identical* location attributes (number of rows, columns, cellsize, upper x and y coordinate!
 
@@ -1230,17 +1227,17 @@ All input maps roughly fall into any of the following six categories:
 
 All maps that are needed to run the model are listed in the table of Annex 12.
 
-#### Role of "mask" and "channels" maps 
+##### Role of "mask" and "channels" maps 
 
 The mask map (i.e. "area.map") defines the model domain. In order to avoid unexpected results, **it is vital that all maps that are related to topography, land use and soil are defined** (i.e. don't contain a missing value) for each pixel that is "true" (has a Boolean 1 value) on the mask map. The same applies for all meteorological input and the Leaf Area Index maps. Similarly, all pixels that are "true" on the
 channels map must have some valid (non-missing) value on each of the channel parameter maps. Undefined pixels can lead to unexpected behaviour of the model, output that is full of missing values, loss of mass balance and possibly even model crashes. Some maps needs to have values in a defined range e.g. gradient.map has to be greater than 0.
 
-#### Map location attributes and distance units
+##### Map location attributes and distance units
 
 LISFLOOD needs to know the size properties of each grid cell (length, area) in order to calculate water *volumes* from meteorological forcing variables that are all defined as water *depths*. By default, LISFLOOD
 obtains this information from the location attributes of the input maps. This will only work if all maps are in an "equal area" (equiareal) projection, and the map co-ordinates (and cell size) are defined in meters. For datasets that use, for example, a latitude-longitude system, neither of these conditions is met. In such cases you can still run LISFLOOD if you provide two additional maps that contain the length and area of each grid cell
 
-##### Table x.x Optional maps that define grid size
+###### Table x.x Optional maps that define grid size
 
 | **Map**         | **Default name** | **Description**                                              |
 | --------------- | ---------------- | ------------------------------------------------------------ |
@@ -1255,7 +1252,7 @@ Both maps should be stored in the same directory where all other input maps are.
 
 LISFLOOD settings files and the use of options are explained in detail in **Chapter XXXX** of this document.
 
-#### Naming of meteorological variable maps
+##### Naming of meteorological variable maps
 
 The meteorological forcing variables (and Leaf Area Index) are defined in *map stacks*. A *map stack* is simply a series of maps, where each map represents the value of a variable at an individual time step. The name of each map is made up of a total of 11 characters: 8 characters, a dot and a 3-character suffix. Each map name starts with a *prefix*, and ends with the time step number. All character positions in between are
 filled with zeros ("0"). Take for example a stack of precipitation maps. Table 4.1 shows that the default prefix for precipitation is "pr", which produces the following file names:
@@ -1316,7 +1313,7 @@ Similarly, potential evapo(transpi)ration is usually calculated on a daily basis
 
 
 
-#### Leaf area index maps 
+##### Leaf area index maps 
 
 Because Leaf area index maps follow a yearly circle, only a map stack of one year is necessary which is then used again and again for the  following years (this approach can be used for all input maps following a yearly circle e.g. water use). LAI is therefore defined as sparse map stack with a map every 10 days or a month, for example for a monthly changing LAI:
 
@@ -1338,20 +1335,20 @@ Because Leaf area index maps follow a yearly circle, only a map stack of one yea
 
 After one year the first map is taken again for simulation. For example the simulation started on the $5^{th}$ March 2010 and the first LAI is lai00000.060. On the  $1^{th}$March 2011 the map lai00000.060 is taken again as LAI input. To let LISFLLOD know which map has to be used at which day a lookup table (LaiOfDay.txt) is necessary.
 
-### Input tables
+#### Input tables
 
 In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one table is used in the standard LISFLOOD setting (without lake or reservoir option)
 
 The following table gives an overview:
 
-##### Table x.x LISFLOOD input tables
+###### Table x.x LISFLOOD input tables
 
 | **Table**             | **Default name**      | **Description**       |
 |----------------------------|-----------------------|--------------------------|
 | Day of the year -\> LAI    | LaiOfDay.txt          | Lookup table: Day of the year -\> LAI map |
 
 
-### Organisation of input data
+#### Organisation of input data
 
 It is up to the user how the input data are organised. However, it is advised to keep the base maps, meteorological maps and tables separated (i.e. store them in separate directories). For practical reasons the **following input structure is suggested**:
 
@@ -1382,14 +1379,14 @@ height="4.541666666666667in"}
 
 ***Figure:*** *Suggested file structure for LISFLOOD*
 
-### Generating input base maps
+#### Generating input base maps
 
 At the time of writing this document, complete sets of LISFLOOD base maps covering the whole of Europe have been compiled at 1- and 5-km pixel resolution. A number of automated procedures have been written that allow you to generate sub-sets of these for pre-defined areas (using either existing mask maps or co-ordinates of catchment outlets).
 
 [:top:](#top)
 
 
-## Step 6: Running the model: Initialisation of LISFLOOD
+### Step 6: Running the model: Initialisation of LISFLOOD
 
 Just as any other hydrological model, LISFLOOD needs to have some estimate of the initial state (i.e. amount of water stored) of its internal state variables. Two situations can occur:
 
@@ -1413,7 +1410,7 @@ What is clear from the Figure is that the initial amount of moisture in the soil
 
 In theory, this behaviour provides a convenient and simple way to initialise a model such as LISFLOOD. Suppose we want to do a simulation of the year 1995. We obviously don't know the state of the soil at the   beginning of that year. However, we can get around this by starting the simulation a bit earlier than 1995, say one year. In that case we use the year 1994 as a *warm-up* period, assuming that by the start of 1995  the influence of the initial conditions (i.e. 1-1-1994) is negligible. The very same technique can be applied to initialise LISFLOOD's other state variables, such as the amounts of water in the lower soil layer, the upper groundwater zone, the lower groundwater zone, and in the channel.
 
-### Option1: Cold start (initial conditions unknown)
+#### Option1: Cold start (initial conditions unknown)
 
 When setting up a model run that includes a warm-up period, most of the internal state variables can be simply set to 0 at the start of the run. This applies to the initial amount of water on the soil surface (*WaterDepthInitValue*), snow cover (*SnowCoverInitValue*), frost index (*FrostIndexInitValue*), interception storage (*CumIntInitValue*), and storage in the upper groundwater zone (*UZInitValue*). The initial value of the 'days since last rainfall event' (*DSLRInitValue*) is typically set to 1.
 
@@ -1433,7 +1430,7 @@ $^1$ These special initialisation methods are activated by setting the value of 
 
 Note that the "-9999" 'bogus' value can *only* be used with the variables in Table x.x; for all other variables they will produce nonsense results! The initialisation of the lower groundwater zone will be discussed in the next sections.
 
-#### Initialisation of the lower groundwater zone
+##### Initialisation of the lower groundwater zone
 
 ```R
 # should this section be moved into the hydorological model documentation??
@@ -1447,7 +1444,7 @@ height="3.7083333333333335in"}
 
 ***Figure:*** *8-year simulation of lower zone storage. Note how the influence of the initial storage persists throughout the simulation period.*
 
-#### Lower groundwater zone: steady state storage
+##### Lower groundwater zone: steady state storage
 
 The response of the lower groundwater zone is defined by two simple equations. First, we have the inflow into the lower zone, which occurs at the following rate \[mm day^-1^\]:
 
@@ -1504,7 +1501,7 @@ Steady-state storage in practice
 An actual LISFLOOD simulation differs from the previous example in 2 ways. First, in any real simulation the inflow into the lower zone is not constant, but varies in time. This is not really a problem, since $LZ_{ss}$ can be computed from the *average* recharge. However, this is something we do not know until the end of the simulation! Also, the inflow into the lower zone is controlled by the availability of water in the upper zone, which, in turn, depends on the supply of water from the soil. Hence, it is influenced by any calibration parameters that control behaviour of soil- and subsoil (e.g. $T_{uz}$, $GW_{perc}$, $b$, and so on). This means that --when calibrating the model- the average recharge will be different for every parameter set. Note, however, that it will *always* be smaller than the value of $GW_{perc}$, which is used as an upper limit in the model. Note that the pre-run procedures include a sufficiently long warm-up period.
 
 
-#### Use pre-run to calculate average recharge
+##### Use pre-run to calculate average recharge
 
 Here, we first do a "pre-run" that is used to calculate the average inflow into the lower zone. This average inflow can be reported as a map, which is then used in the actual run. This involves the following steps:
 
@@ -1527,7 +1524,7 @@ Here, we first do a "pre-run" that is used to calculate the average inflow into 
 
 In this case, the initial state of $LZ$ is computed for the correct average inflow, and the simulated storage in the lower zone throughout the simulation shouldl not show any systematic (long-term) trends. The obvious price to pay for this is that the pre-run increase the computational load. However the pre-run will use a simplified routing to decrease the computational run-time. As long as the simulation period for the actual run and the pre-run are identical, the procedure gives a 100% guarantee that the development of the lower zone storage will be free of any systematic bias. Since the computed recharge values are dependent on the model parameterisation used, in a calibration setting the whole procedure must be repeated for each parameter set!
 
-### Checking the lower zone initialisation 
+#### Checking the lower zone initialisation 
 
 The presence of any initialisation problems of the lower zone can be checked by adding the following line to the 'lfoptions' element of the settings file:
 
@@ -1542,13 +1539,13 @@ height="3.2395833333333335in"}
 
 ***Figure:*** *Initialisation of lower groundwater zone with and without using a pre-run. Note the strong decreasing trend in the simulation without pre-run. *
 
-### Option2: Warm start (Using a previous run)
+#### Option2: Warm start (Using a previous run)
 
 At the end of each model run, LISFLOOD writes maps of all internal state variables at the last time step. You can use these maps as the initial conditions for a succeeding simulation. This is particularly useful if you are simulating individual flood events on a small time interval (e.g. hourly). For instance, to estimate the initial conditions just before the flood you can do a 'pre-run' on a *daily* time interval for the year before the flood. You can then use the 'end maps' as the initial conditions for the hourly simulation.
 
 In any case, you should be aware that values of some internal state variables of the model (especially lower zone storage) are very much dependent on the parameterisation used. Hence, suppose we have 'end maps' that were created using some parameterisation of the model (let's say parameter set *A*), then these maps should **not** be used as initial conditions for a model run with another parameterisation (parameter set *B*). If you decide to do this anyway, you are likely to encounter serious initialisation problems (but these may not be immediately visible in the output!). If you do this while calibrating the model (i.e. parameter set *B* is the calibration set), this will render the calibration exercise pretty much useless (since the output is the result of a mix of different parameter sets). However, for *FrostIndexInitValue* and *DSLRInitValue* it is perfectly safe to use the 'end maps', since the values of these maps do not depend on any calibration parameters (that is, only if you do not calibrate on any of the frost-related parameters!). If you need to calibrate for individual events (i.e.hourly), you should apply *each* parameterisation on *both * the (daily) pre-run and the 'event' run! This may seem awkward, but there is no way of getting around this (except from avoiding event-based calibration at all, which may be a good idea anyway).
 
-### Summary of LISFLOOD initialisation procedure
+#### Summary of LISFLOOD initialisation procedure
 
 From the foregoing it is clear that the initialisation of LISFLOOD can be done in a number of ways. The Figure below provides an overview. As already stated in the introduction section, any LISFLOOD simulation will fall into either of the following two categories:
 
@@ -1602,9 +1599,9 @@ The LISFLOOD version "March 01 2013 PCR2009W2M095" indicates the date of the sou
 
 
 
-## Step7: Model output 
+### Step7: Model output 
 
-### Default LISFLOOD output
+#### Default LISFLOOD output
 
 LISFLOOD can generate a wide variety of output. Output is generated as either maps or time series (PCRaster format, which can be visualised with PCRaster's 'aguila' application). Reporting of output files can be switched on and off using options in the LISFLOOD settings file. Also, a number of output files are specific to other optional modules, such as the simulation of reservoirs. The following table lists all the output time series that are reported by default (note that the file names can always be changed by the user, although this is not recommended):
 
@@ -1658,7 +1655,7 @@ In addition to these time series, by default LISFLOOD reports maps of all state 
 $^1$ Output only if option 'InitLisflood' = 1 (pre-run) \
 $^2$ Output only if option 'InitLisflood' = 0  
 
-### Additional output
+#### Additional output
 
 Apart from the default output, the model can --optionally- generate some additional time series and maps. Roughly this additional output falls in either of the following categories:
 
@@ -1779,9 +1776,9 @@ Young, G.J. (ed), 1985. Techniques for prediction of runoff from glacierized are
 Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P. (ed.), Computer Models of Watershed Hydrology, pp. 215-232.
 
 
-# LISFLOOD input maps and tables
+## LISFLOOD input maps and tables
 
-## Maps
+### Maps
 
 ***Table:*** *LISFLOOD input maps.*
 
@@ -1858,7 +1855,7 @@ Zhao, R.J., Liu, X.R., 1995. The Xinanjiang model. In: Singh, V.P. (ed.), Comput
 
 
 
-### Tables
+#### Tables
 
 In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one default table is used in the standard LISFLOOD setting
 
@@ -1881,7 +1878,7 @@ The following table gives an overview:
 Annex 13: LISFLOOD output
 =========================
 
-## Time series
+### Time series
 
 
 ***Table:*** *LISFLOOD default output time series*.  
@@ -1974,7 +1971,7 @@ $^2$ Output only if option 'InitLisflood' = 0
 
 
 
- ## Maps
+ ### Maps
 
 **Table A13.3** LISFLOOD default output maps*           |
 
