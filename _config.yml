@@ -275,13 +275,41 @@ defaults:
       - title: "Disclaimer"
         text: "Disclaimer"
         url: 0_disclaimer
-      - title: "Vera?"
-        text: "I think it can work"
+      - title: "References"
+        text: "References"
         url: 0_references
-      - title: "Veeeraaa?"
-        text: "OMG!! It really works"
+      - title: "Introduction"
+        text: "Introduction to LISFLOOD"
         url: 1_introduction_LISFLOOD
-      - title: "Veeeeeeraaaaaaaa? (with annoying voice)"
-        text: "maybe reducing the space between titles? <br> \n or skipping titles and using paragraphs"
-        url: 2_ESSENTIAL_settings_file
+      - title: "User Manual"
+        text: "Introduction to User Manual"
+        url: 1_introduction_usermanual
+      - title: "Settings File"
+        text: "Settings File: The Essential"
+        url: 2_ESSENTIAL_setting-file
+      - title: "Step 1: Systen Requirements"
+        text: "System Requirements"
+        url: 3_Step1_system-requirements
+      - title: "Step 2: Installation"
+        text: "Installation"
+        url: 3_step2_installation
+      - title: "Step 3: Preparing settings file"
+        text: "Preparing settings file"
+        url: 3_step3+preparing-setting-file
+      - title: "Step 4: Preparing Input files"
+        text: "Preparing input files"
+        url: 3_step4_preparing-input-files
+      - title: "Step 5: Model Initialisation"
+        text: "Model initialisation"
+        url: 3_step5_model-initialisation
+      - title: "Step 5: Model Output"
+        text: "Model Output"
+        url: 3_step6_model-output
+      - title: "Annex: Input Files"
+        text: "Annex: Input Files"
+        url: 4_annex_input-files
+      - title: "Annex: Output Files"
+        text: "Output Files"
+        url: 4_annex_output-files
+
 theme: jekyll-theme-minimal
