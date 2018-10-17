@@ -9,7 +9,7 @@
 
 
 
-### Disclaimer
+# Disclaimer
 
 ```R
   # Not sure that it should stay here or if we should put the Disclaimer in the overall description of the LISFLOOD documentation OR at the end of this document ... I don't like it very much at the beginning
@@ -44,7 +44,7 @@ A series of Annexes at the end of this document describe some optional features 
 
 [:top:](#top)
 
-### Explaining the essential files
+# Explaining the essential files
 
 ## LISFLOOD settings file
 
