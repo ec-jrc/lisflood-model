@@ -272,8 +272,8 @@ defaults:
       related: false
       sidebar:
       
-      - title: "Vera"
-        text: "Is this a side line?"
+      - title: "Disclaimer"
+        text: "Disclaimer"
         url: 0_disclaimer
       - title: "Vera?"
         text: "I think it can work"
