@@ -12,7 +12,7 @@
         {% endif %}
         alt="{% if s.image_alt %}{{ s.image_alt }}{% endif %}">
       {% endif %}
-      {% if s.title %}<h3>{{ s.title }} testsidebar</h3>{% endif %}
+    {% if s.title %}<a href="{{ s.url|relative_url }}"><h3>{{ s.title }}</h3></a>{% endif %}
       {% if s.text %}{{ s.text | markdownify }} text{% endif %}
     {% endfor %}
     {% if page.sidebar.nav %}
