@@ -278,11 +278,13 @@ defaults:
           url: 1_introduction_LISFLOOD
         - title: "About this user guide"
           url: 1_introduction_usermanual
-      - section_title: "Essential before getting started"
+
+- section_title: "Essential before getting started"
         items:
         - title: "LISFLOOD settings file"
           url: 2_ESSENTIAL_setting-file
-      - section_title: "Step-by-step user guide"
+
+- section_title: "Step-by-step user guide"
         items:
         - title: "Step 1: System requirements"
           url: 3_Step1_system-requirements
@@ -299,15 +301,17 @@ defaults:
         - title: "Step 7: model output"
           url:  	3_step6_model-output
 
+      - section_title: "Annex"
+        items:
+        - title: "LISFLOOD input files"
+          url: 4_annex_input-files
+        - title: "LISFLOOD output files"
+          url: 4_annex_output-files
 
-      - section_title: "References"
+      - section_title: "Not to forget"
         items:
         - title: "References"
           url: 0_references
-
-
-      - section_title: "Disclaimer"
-        items:
         - title: "Disclaimer"
           url: 0_disclaimer
 
