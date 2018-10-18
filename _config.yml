@@ -274,10 +274,10 @@ defaults:
       
       - section_title: "Disclaimer"
         items:
-          - title: "Subdisclaimer 1"
-            url: 0_disclaimer
-          - title: "Subdisclaimer 2"
-            url: 1_disclaimer
+        - title: "Subdisclaimer 1"
+          url: 0_disclaimer
+        - title: "Subdisclaimer 2"
+          url: 1_disclaimer
       - section_title: "Introduction"
         items:
         - title: "LISFLOOD"
