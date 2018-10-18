@@ -279,12 +279,12 @@ defaults:
         - title: "About this user guide"
           url: 1_introduction_usermanual
 
-- section_title: "Essential before getting started"
+      - section_title: "Essential before getting started"
         items:
         - title: "LISFLOOD settings file"
           url: 2_ESSENTIAL_setting-file
 
-- section_title: "Step-by-step user guide"
+      - section_title: "Step-by-step user guide"
         items:
         - title: "Step 1: System requirements"
           url: 3_Step1_system-requirements
