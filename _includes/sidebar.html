@@ -2,22 +2,44 @@
   <div class="sidebar sticky">
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
   {% if page.sidebar %}
-    {% for s in page.sidebar %}
-      {% if s.image %}
-        <img src=
-        {% if s.image contains "://" %}
-          "{{ s.image }}"
-        {% else %}
-          "{{ s.image | relative_url }}"
-        {% endif %}
-        alt="{% if s.image_alt %}{{ s.image_alt }}{% endif %}">
-      {% endif %}
-    {% if s.title %}<a href="{{ s.url|relative_url }}"><h3>{{ s.title }}</h3></a>{% endif %}
-      {% if s.text %}{{ s.text | markdownify }} {% endif %}
-    {% endfor %}
-    {% if page.sidebar.nav %}
-      {% include nav_list nav=page.sidebar.nav %}
+    <nav class="nav__list">
+      <input id="ac-toc" name="accordion-toc" type="checkbox" />
+      <label for="ac-toc">Toggle menu</label>
+      <ul class="nav__items">
+        {% for s in page.sidebar %}
+        <li>
+           <span class="nav__sub-title">{{ s.section_title}}</span>
+           <ul>
+             {% for i in s.items %}
+                 <li><a href="{{ i.url|relative_url }}" class="">{{ i.title }}</a></li>
+             {% endfor %}
+           </ul>
+        </li>
+        {% endfor %}
+      </ul>
+     </nav>
     {% endif %}
-  {% endif %}
   </div>
 {% endif %}
+
+    <!--{% for s in page.sidebar %}-->
+    <!---->
+      <!--{% if s.image %}-->
+        <!--<img src=-->
+        <!--{% if s.image contains "://" %}-->
+          <!--"{{ s.image }}"-->
+        <!--{% else %}-->
+          <!--"{{ s.image | relative_url }}"-->
+        <!--{% endif %}-->
+        <!--alt="{% if s.image_alt %}{{ s.image_alt }}{% endif %}"-->
+        <!--&gt;-->
+      <!--{% endif %}-->
+    <!--{% if s.title %}<a href="{{ s.url|relative_url }}"><h3>{{ s.title }}</h3></a>{% endif %}-->
+      <!--{% if s.text %}{{ s.text | markdownify }} {% endif %}-->
+    <!--{% endfor %}-->
+    <!--{% if page.sidebar.nav %}-->
+      <!--{% include nav_list nav=page.sidebar.nav %}-->
+    <!--{% endif %}-->
+  <!--{% endif %}-->
+
+<!--{% endif %}-->
