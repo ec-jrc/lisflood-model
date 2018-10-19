@@ -8,9 +8,38 @@ In any case, you should be aware that values of some **internal state variables 
 ## What you need to do
 1. Copy the output maps of the initialisation run (found in folder "out") into the folder "init"
 
-2. xxx
+2. Replace in the LISFLOOD settings file the 'bogus' values of -9999 for *LZAvInflowMap* and *AvgDis* with the actual map: 
 
-3. xxx
+```xml
+**************************************************************
+INITIAL CONDITIONS FOR THE WATER BALANCE MODEL
+(can be either maps or single values)
+**************************************************************
+</comment>
+
+<textvar name="LZAvInflowMap" value="$(PathInit)/lzavin.map">
+<comment>
+$(PathInit)/lzavin.map
+Reported map of average percolation rate from upper to
+lower groundwater zone (reported for end of simulation)
+</comment>
+</textvar>
+
+<textvar name="AvgDis" value="$(PathInit)/avgdis.map">
+<comment>
+$(PathInit)/avgdis.map
+CHANNEL split routing in two lines
+Average discharge map [m3/s]
+</comment>
+</textvar>
+```
+
+3. Switch of the initialisation option in the LISFLOOD settings file
+
+```xml
+<setoption choice="0" name="InitLisflood"/>
+```
+
 
 4. launch LISFLOOD
 
