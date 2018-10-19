@@ -1,12 +1,10 @@
-# Explaining the essential files
-
-## LISFLOOD settings file
+# LISFLOOD settings file
 
 In LISFLOOD, all file and parameter specifications are defined in a settings file. The purpose of the settings file is to link variables and parameters in the model to in- and output files (maps, time series, tables) and numerical values. In addition, the settings file can be used to specify several *options*. The settings file has a special (XML) structure. In the next sections the general layout of the settings file is explained. Although the file layout is not particularly complex, a basic understanding of the general principles explained here is essential for doing any successful model runs.
 
 The settings file has an XML ('E**x**tensible **M**arkup **L**anguage') structure. You can edit it using any text editor (e.g. Notepad, Editpad, Emacs, vi). Alternatively, you can also use a dedicated XML editor such as XMLSpy.
 
-### Layout of the settings file
+## Layout of the settings file
 
 A LISFLOOD settings file is made up of 4 elements, each of which has a specific function. The general structure of the file is described using XML-tags. XML stands for 'E**x**tensible **M**arkup **L**anguage', and it is really nothing more than a way to describe data in a file. It works by putting information that goes into a (text) file between tags, and this makes it very easy add structure. For a LISFLOOD settings file, the basic structure looks like this:
 
@@ -44,7 +42,7 @@ In brief, the main function of each element is:
 
 The following sections explain the function of each element in more detail. This is mainly to illustrate the main concepts and how it all fits together. A detailed description of all the variables that are relevant for setting up and running LISFLOOD is given in **Chapter XXX**.
 
-#### lfuser and lfbinding elements
+### lfuser and lfbinding elements
 
 The 'lfbinding' element provides a very low-level way to define all model parameter values as well as all in- and output maps, time series and tables. 
 
@@ -163,7 +161,7 @@ __**NOTES:**__
 
 3.  Within the *lfuser* and *lfbinding* elements, model variables are organised into *groups*. This is just to make navigation in an xml editor easier.
 
-#### Variables in the lfbinding element
+### Variables in the lfbinding element
 
 The variables that are defined in the 'lfbinding' element fall in either of the following categories:
 
@@ -244,7 +242,7 @@ Time constant for water in upper zone [days]\
 
 [:top:](#top)
 
-#### Variables in the lfuser element
+### Variables in the lfuser element
 
 As said before the variables in the 'lfuser' elements are all text variables, and they are used simply to substitute text in the 'lfbinding' element. In practice it is sometimes convenient to use the same name for a text variable that is defined in the 'lfuser' element and a 'lfbinding' variable. For example:
 
@@ -266,12 +264,10 @@ Time constant for water in upper zone [days]\
 </lfbinding>
 ```
 
-​                                              
 
 In this case 'UpperZoneTimeConstant' in the 'lfuser' element (just a text variable) is something different from 'UpperZoneTimeConstant' in the 'lfbinding' element!
 
-
-#### lfoption element
+### lfoption element
 
 The 'lfoption' element effectively allows you to switch certain parts of the model on or off. Within LISFLOOD, there are **two categories** of options:
 
