@@ -5,7 +5,7 @@ Just as any other hydrological model, LISFLOOD needs to know the initial state (
 In this subsection we will first demonstrate the effect of the model's initial state on the results of a simulation, explain the  stedy-state sorage in practice and then explain you in detail how to initialize LISFLOOD.
 
 
-# The impact of the model's initial state on simulation results 
+## The impact of the model's initial state on simulation results 
 
 To better understand the impact of the initial model state on the results of a simulation, let's start with a simple example. The Figure below shows 3 LISFLOOD simulations of soil moisture for the upper soil layer. In the first simulation, it was assumed that the soil is initially completely saturated. In the second one, the soil was assumed to be completely dry (i.e. at residual moisture content). Finally, a third simulation was done where the initial soil moisture content was assumed to be in between these two extremes.
 
@@ -114,27 +114,3 @@ This tells the model to write the values of all state variables (averages, upstr
 height="3.2395833333333335in"}
 
 ***Figure:*** *Initialisation of lower groundwater zone with and without using a pre-run. Note the strong decreasing trend in the simulation without pre-run. *
-
-
-
-### Summary of LISFLOOD initialisation procedure
-
-From the foregoing it is clear that the initialisation of LISFLOOD can be done in a number of ways. The Figure below provides an overview. As already stated in the introduction section, any LISFLOOD simulation will fall into either of the following two categories:
-
-1. The initial state of all state variables is known and defined by the end state of a previous run. In this case you can use the 'end' maps of the previous run's state variables as the initial conditions of you current run. Note that this requires that both simulations are run using exactly the same parameter set! Mixing parameter sets here will introduce unwanted artefacts into your simulation results.
-
-2. The initial state of all state variables is unknown. In this case you should run the model with a sufficient pre-run (if possible more than 3 years, best for the whole modelling period) and InitLisflood=1. The average recharge map that is generated from the pre-run can subsequently be used as the average lower zone inflow estimate (*LZAvInflowEstimate*) in the actual simulation, which will avoid any initialisation problems of the lower groundwater zone
-
-3. Is it possible not to use the first year for further analysis of results, because this is the "warm-up" period for all the other variables like snow, vegetation, soil (see e.g. **figure 7.1** for soil moisture)?\
-    Then leave or set all the initial conditions to either 0,1 or -9999 and run the model with InitLisflood=0
-
-4. If you want to include the first year of modelling into your analysis, you have to do a "warm-up" run (one year will usually do) to initialize all the initial conditions. You have to set option repEndMaps=1 to report end maps. Best possible solution is to use the year before the actual modelling period. Second best is to use any one year period to set up the initial conditions. After that you will have the 'end' maps and you can proceed with 1. again
-
-![](https://ec-jrc.github.io/lisflood_manual/media/image41.png){width="5.760416666666667in"
-height="4.322916666666667in"}
-
-***Figure:*** *LISFLOOD initialisation flowchart.*
-
-
-### How to launch LISFLOOD
-
