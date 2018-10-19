@@ -1,5 +1,5 @@
-References
-===========
+[//]: # (References)
+
 
 Anderson, 2006Anderson, E., 2006. *Snow Accumulation and Ablation Model -- SNOW-17*. Technical report.
 
