@@ -1,7 +1,6 @@
-Annex 13: LISFLOOD output
-=========================
+[//]: # (LISFLOOD output files)
 
-## Time series
+# Time series
 
 
 ***Table:*** *LISFLOOD default output time series*.  
@@ -94,7 +93,7 @@ $^2$ Output only if option 'InitLisflood' = 0
 
 
 
- ## Maps
+ # Maps
 
 **Table A13.3** LISFLOOD default output maps*           |
 
@@ -126,7 +125,6 @@ $^2$ Output only if option 'InitLisflood' = 0
 
 $^1$ Output only if option 'InitLisflood' = 1 (pre-run) \  
 $^2$ Output only if option 'InitLisflood' = 0  
-
 
 
 
