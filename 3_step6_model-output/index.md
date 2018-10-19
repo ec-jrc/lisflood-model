@@ -1,6 +1,6 @@
-## Step7: Model output 
+[//]: # (Step7: Model output) 
 
-### Default LISFLOOD output
+# Default LISFLOOD output
 
 LISFLOOD can generate a wide variety of output. Output is generated as either maps or time series (PCRaster format, which can be visualised with PCRaster's 'aguila' application). Reporting of output files can be switched on and off using options in the LISFLOOD settings file. Also, a number of output files are specific to other optional modules, such as the simulation of reservoirs. The following table lists all the output time series that are reported by default (note that the file names can always be changed by the user, although this is not recommended):
 
@@ -54,7 +54,7 @@ In addition to these time series, by default LISFLOOD reports maps of all state 
 $^1$ Output only if option 'InitLisflood' = 1 (pre-run) \
 $^2$ Output only if option 'InitLisflood' = 0  
 
-### Additional output
+# Additional output
 
 Apart from the default output, the model can --optionally- generate some additional time series and maps. Roughly this additional output falls in either of the following categories:
 
