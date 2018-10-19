@@ -297,7 +297,7 @@ defaults:
         - title: "Step 5: Initialisation of LISFLOOD"
           url: 3_step5_model-initialisation
         - title: "Step 6: Running LISFLOOD"
-          url: 3_step5_model-initialisation
+          url: 3_step6_running-LISFLOOD
         - title: "Step 7: model output"
           url:  	3_step6_model-output
 
