@@ -1,6 +1,6 @@
-# LISFLOOD input maps and tables
+[//]: # (LISFLOOD input maps and tables)
 
-## Maps
+# Input maps
 
 ***Table:*** *LISFLOOD input maps.*
 
@@ -77,7 +77,7 @@
 
 
 
-### Tables
+# Input tables
 
 In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one default table is used in the standard LISFLOOD setting
 
