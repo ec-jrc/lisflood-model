@@ -1,7 +1,7 @@
 Simulation of lakes
 ----------------------------
 
-**Introduction**
+## Introduction
 
 This annex describes the LISFLOOD lake routine, and how it is used. The simulation of lakes is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
@@ -13,7 +13,7 @@ This annex describes the LISFLOOD lake routine, and how it is used. The simulati
 
 
 
-**Description of the lake routine** 
+## Description of the lake routine
 
 Lakes are simulated as points in the channel network. The Figure below shows all computed in- and outgoing fluxes. Lake inflow equals the channel flow upstream of the lake location. The flow out of the lake is computed using the following rating curve (e.g. Maidment, 1992):
 
@@ -41,7 +41,7 @@ Both *H* and $H_0$ can be defined relative to an arbitrary reference level. Sinc
 
 
 
-**Initialisation of the lake routine**
+## Initialisation of the lake routine
 
 Because lakes (especially large ones) tend to produce a relatively slow response over time, it is important to make sure that the initial lake level is set to a more or less sensible value. Just as is the case with the initialisation of the lower groundwater zone, LISFLOOD has a special option that will compute a steady-state lake level and use this as the initial value. The steady-state level is computed from the water balance
 of the lake. If $V_l$ is the total lake volume $[m^3]$, the rate of change of $V_l$ at any moment is given by the continuity equation:
@@ -103,7 +103,7 @@ Here a worked example. Be aware that the calculation can be less straightforward
 
 
 
-**Preparation of input data** 
+## Preparation of input data
 
 The lake locations defined on a (nominal) map called '*lakes.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each lake receives its inflow from its upstream neighbouring channel pixel, you may want to check if each lake has any upstream channel pixels at all (if not, the lake will just gradually empty during a model run!). The lake characteristics are described by 4 tables. The following Table lists all required input:
 
@@ -129,7 +129,7 @@ height="2.125in"}
 
 
 
-**Preparation of settings file**
+## Preparation of settings file
 
 All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the lake locations is in the "maps" directory, and all tables in the 'tables" directory. If this is the case, you only have to specify the initial lake level and --if you are using the steady-state option- the mean net lake inflow (make this a map if you're simulating multiple lakes simultaneously). Both can be set in the 'lfuser' element. *LakeInitialLevelValue* can be either a map or a single value. Setting *LakeInitialLevelValue* to *-9999* will cause LISFLOOD to calculate the steady-state level. So we add this to the 'lfuser' element (if it is not there already):
 
@@ -177,7 +177,7 @@ Both have exactly the same effect. You don't need to change anything in either '
 
 
 
-**Lake output files**
+## Lake output files
 
 The lake routine produces 4 additional time series and one map (or stack), as listed in the following table:
 
