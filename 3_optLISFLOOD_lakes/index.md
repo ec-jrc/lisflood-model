@@ -1,5 +1,5 @@
-Simulation of lakes
-----------------------------
+# Simulation of lakes
+
 
 ## Introduction
 
