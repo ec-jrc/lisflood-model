@@ -102,7 +102,7 @@ analytics:
 author:
   name             : "JRC D2,E1"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Index"
+  bio              : "index"
   location         : ""
   email            :
   uri              :
