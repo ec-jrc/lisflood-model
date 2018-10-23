@@ -20,8 +20,8 @@ Lakes are simulated as points in the channel network. The Figure below shows all
 $$
 O_{lake} = A{(H - {H_0})^B}
 $$
-\
-with:
+
+<br\> with:
 
    $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
 
