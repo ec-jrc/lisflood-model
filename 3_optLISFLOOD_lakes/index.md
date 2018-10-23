@@ -32,9 +32,7 @@ with:
    $A, B$:	Constants \[-\]
 
 
-![](media/image24.png)
-![lakes](https://ec-jrc.github.io/lisflood-model/media/image45.png){width="5.375in"
-height="3.5104166666666665in"}
+![lakes](https://ec-jrc.github.io/lisflood-model/media/image45.png)
 
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
 
@@ -124,8 +122,7 @@ The lake locations defined on a (nominal) map called '*lakes.map*'. It is import
 
 >  Note: When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
-![reservoirPlacementNew](https://ec-jrc.github.io/lisflood-model/media/image42.png){width="4.75in"
-height="2.125in"}
+![reservoirPlacementNew](https://ec-jrc.github.io/lisflood-model/media/image42.png)
 
 ***Figure:***  *Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
 
