@@ -32,7 +32,7 @@ $$
    $A, B$:	Constants \[-\]
 
 
-
+![](media/image24.png)
 ![lakes](https://ec-jrc.github.io/lisflood-model/media/image45.png){width="5.375in"
 height="3.5104166666666665in"}
 
