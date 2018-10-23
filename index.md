@@ -127,7 +127,7 @@ If you activate any of LISFLOOD's options for writing internal model fluxes to t
 
 ![](media/image24.png)
 
-***Figure 2.7***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
+***Figure***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
 
 
 
