@@ -20,6 +20,7 @@ Lakes are simulated as points in the channel network. The Figure below shows all
 $$
 O_{lake} = A{(H - {H_0})^B}
 $$
+
 with:
 
    $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
@@ -32,7 +33,7 @@ with:
 
 
 
-![lakes](https://ec-jrc.github.io/lisflood_manual/media/image45.png){width="5.375in"
+![lakes](https://ec-jrc.github.io/lisflood_model/media/image45.png){width="5.375in"
 height="3.5104166666666665in"}
 
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
@@ -49,22 +50,23 @@ of the lake. If $V_l$ is the total lake volume $[m^3]$, the rate of change of $V
 $$
 \frac{{d{V_l}}}{{dt}} = I(t) - O(t)
 $$
+<br>
 where *I* and *O* are the in- and outflow rates, respectively. For a steady-state situation the storage remains constant, so:
 
 $$
 \frac{{d{V_l}}}{{dt}} = 0\quad \Leftrightarrow \quad I(t) - O(t) = 0
 $$
-Substituting all in- and outflow terms gives:
+<br> Substituting all in- and outflow terms gives:
 
 $$
 I_l - EW_l - A \cdot (H - H_0)^B = 0
 $$
-where $I_l$ is the inflow into the lake and $EW_l$ the lake evaporation (both expressed in $\frac{m^3} {s}$). Re-arranging gives the steady-state lake level:
+<br> where $I_l$ is the inflow into the lake and $EW_l$ the lake evaporation (both expressed in $\frac{m^3} {s}$). Re-arranging gives the steady-state lake level:
 
 $$
 H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{1/B}
 $$
-LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow ($=I_l - EW_l$). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
+<br> LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow ($=I_l - EW_l$). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
 
 Here a worked example. Be aware that the calculation can be less straightforward for very large lakes with multiple inlets (which are not well represented by the current point approach anyway):
 
@@ -122,7 +124,7 @@ The lake locations defined on a (nominal) map called '*lakes.map*'. It is import
 
 >  Note: When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
-![reservoirPlacementNew](https://ec-jrc.github.io/lisflood_manual/media/image42.png){width="4.75in"
+![reservoirPlacementNew](https://ec-jrc.github.io/lisflood_model/media/image42.png){width="4.75in"
 height="2.125in"}
 
 ***Figure:***  *Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
@@ -197,10 +199,6 @@ Note that you can use the map with the lake level at the last time step to defin
 ```xml
 <textvar name="LakeInitialLevelValue" value="/mycatchment/lakh0000.730">
 ```
-
-
-
-[]{#_Toc353538887 .anchor}
 
 [🔝](#top)
 
