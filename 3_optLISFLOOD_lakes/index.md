@@ -9,7 +9,7 @@ This annex describes the LISFLOOD lake routine, and how it is used. The simulati
 	<setoption name="simulateLakes" choice="1" />
 ```
 
- Lakes can be simulated on channel pixels where kinematic wave routing is used. The routine does *not* work for channel stretches where the dynamic wave is used!
+Lakes can be simulated on channel pixels where kinematic wave routing is used. The routine does *not* work for channel stretches where the dynamic wave is used!
 
 
 
@@ -20,7 +20,7 @@ Lakes are simulated as points in the channel network. The Figure below shows all
 $$
 O_{lake} = A{(H - {H_0})^B}
 $$
-
+\
 with:
 
    $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
