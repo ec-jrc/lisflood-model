@@ -21,7 +21,7 @@ $$
 O_{lake} = A{(H - {H_0})^B}
 $$
 
-<br\> with:
+with:
 
    $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
 
