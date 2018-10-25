@@ -1,11 +1,8 @@
-# Optional LISFLOOD processes
-
-## Overview
+# Overview
 
 ```R
 # currently this overview is copy-pasted together. It needs "cleaning up"!
 ```
-
 
 
 The above model description covers the processes that are simulated in a 'standard' LISFLOOD run. By default, special structures in the river channel e.g. lakes and regulated reservoirs are not taken into account. However, LISFLOOD has some optional features to model these structures. The description of these features can be found in a series of Annexes at the end of this manual.
@@ -20,7 +17,6 @@ Features are:
 - Using water use maps
 - Simulating water levels
 
-[🔝](#top)
 
 As explained in **Chapter XXXXX**, the 'lfoptions' element gives you additional control over what LISFLOOD is doing. Using options it is possible to switch certain parts of the model on or off. This way you can tell the model exactly which output files are reported and which ones aren't. Also, they can be used to activate a number of additional model features, such as the simulation of reservoirs and inflow hydrographs.
 
