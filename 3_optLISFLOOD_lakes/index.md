@@ -32,7 +32,7 @@ with:
    $A, B$:	Constants \[-\]
 
 
-![lakes](https://ec-jrc.github.io/lisflood-model/media/image45.png)
+![](../media/image45.png)
 
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
 
@@ -40,7 +40,7 @@ Both *H* and $H_0$ can be defined relative to an arbitrary reference level. Sinc
 
 
 
-## Initialisation of the lake routine
+### Initialisation of the lake routine
 
 Because lakes (especially large ones) tend to produce a relatively slow response over time, it is important to make sure that the initial lake level is set to a more or less sensible value. Just as is the case with the initialisation of the lower groundwater zone, LISFLOOD has a special option that will compute a steady-state lake level and use this as the initial value. The steady-state level is computed from the water balance
 of the lake. If $V_l$ is the total lake volume $[m^3]$, the rate of change of $V_l$ at any moment is given by the continuity equation:
@@ -70,36 +70,33 @@ Here a worked example. Be aware that the calculation can be less straightforward
 
 
 
-> **Calculation of average net lake inflow**
->
-> <u>Lake characteristics</u> 
-> - lake area: $215•10^6\ m^2$                                            
-> - mean annual discharge downstream of lake: $293\ \frac{m^3}{s}$             
-> - mean annual discharge upstream of lake: $300\ \frac{m^3}{s}$               
-> - mean annual evaporation: $1100\ \frac{mm}{yr}$ 
->                                
-> <u>METHOD 1: USING AVERAGE OUTFLOW</u>                                   
-> Assuming lake is in quasi steady-state:                               
-> 	average net inflow = average net outflow = <u>$293 m^3 s^{-1}$</u>                                                  
->
-> <u>METHOD 2: USING AVERAGE INFLOW AND EVAPORATION</u>                    
-> Only use this method if no outflow data are available                 
->
-> 1. Express lake evaporation in $m^3 s^{-1}$:                       
->
->    $\frac{1100 \frac{mm}{yr}}{1000} = 1.1\ \frac{m}{yr}$           
->
->    ​                    
->    $1.1\ \frac{m}{yr} \cdot 215 • 10^{6} m^2 = 2.37•10^8 \frac{m^3}{yr}$     
->
->    ​        
->
->    $\frac{2.37•10^8 \frac{m^3}{yr}}{365\ days\ \cdot\ 86400 seconds} = 7.5 \frac{m^3}{s}$   
->
->
-> 2.  Compute net inflow:                                           
->     net inflow = $300 \frac{m^3}{s}\ - 7.5\ \frac{m^3}{s}= 292.5\ \frac{m^3}{s}$
->
+### Calculation of average net lake inflow
+
+ <u>Lake characteristics</u> 
+ - lake area: $215•10^6\ m^2$                                            
+ - mean annual discharge downstream of lake: $293\ \frac{m^3}{s}$             
+ - mean annual discharge upstream of lake: $300\ \frac{m^3}{s}$               
+ - mean annual evaporation: $1100\ \frac{mm}{yr}$ 
+                                
+ <u>METHOD 1: USING AVERAGE OUTFLOW</u>                                   
+ Assuming lake is in quasi steady-state:                               
+ 	average net inflow = average net outflow = <u>$293 m^3 s^{-1}$</u>                                                  
+
+ <u>METHOD 2: USING AVERAGE INFLOW AND EVAPORATION</u>                    
+ Only use this method if no outflow data are available                 
+
+ 1. Express lake evaporation in $m^3 s^{-1}$:                       
+
+    $\frac{1100 \frac{mm}{yr}}{1000} = 1.1\ \frac{m}{yr}$           
+
+    $1.1\ \frac{m}{yr} \cdot 215 • 10^{6} m^2 = 2.37•10^8 \frac{m^3}{yr}$     
+
+    $\frac{2.37•10^8 \frac{m^3}{yr}}{365\ days\ \cdot\ 86400 seconds} = 7.5 \frac{m^3}{s}$   
+
+
+ 2.  Compute net inflow:                                           
+     net inflow = $300 \frac{m^3}{s}\ - 7.5\ \frac{m^3}{s}= 292.5\ \frac{m^3}{s}$
+
 
 
 
@@ -122,7 +119,7 @@ The lake locations defined on a (nominal) map called '*lakes.map*'. It is import
 
 >  Note: When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
-![reservoirPlacementNew](https://ec-jrc.github.io/lisflood-model/media/image42.png)
+![](../media/image42.png)
 
 ***Figure:***  *Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
 
