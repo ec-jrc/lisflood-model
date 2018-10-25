@@ -283,6 +283,8 @@ defaults:
         items:
         - title: "Overview"
           url: 2_stdLISFLOOD_overview
+        - title: "Addressing sub-grid variability"
+          url: 2_stdLISFLOOD_subgrid-variability
         - title: "Soil model"
           url:  	2_stdLISFLOOD_soil-model
         - title: "Atmospheric processes"
@@ -291,8 +293,6 @@ defaults:
           url: 2_stdLISFLOOD_vertical-processes
         - title: "Routing or horizontal flow processes"
           url: 2_stdLISFLOOD_horizontal-processes
-        - title: "Addressing sub-grid variability"
-          url: 2_stdLISFLOOD_subgrid-variability
 
 
       - section_title: "Optional LISFLOOD processes"
