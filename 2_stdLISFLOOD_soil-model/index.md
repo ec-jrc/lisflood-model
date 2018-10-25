@@ -8,7 +8,7 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the direct runoff fraction)
 4. There is no groundwater storage
 
-​For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using LISFLOOD's lake option, which is described in **Section XXXXXXXXXXXXXXXX**). **For water covered areas**, LISFLOOD assumes that:
+For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using LISFLOOD's lake option, which is described in **Section XXXXXXXXXXXXXXXX**). **For water covered areas**, LISFLOOD assumes that:
 
 1. The loss of actual evaporation is equal to the potential evaporation on open water
 2. Any water that is not evaporated, reaches the surface is added directly to surface runoff
@@ -30,7 +30,6 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 
 If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in **Chapter XXXXXXXXXXXXXXXXXX**), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
-![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image24.png)
 ![](../media/image24.png)
 
 ***Figure 2.7***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
