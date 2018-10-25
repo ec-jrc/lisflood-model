@@ -1,7 +1,7 @@
-Simulation and reporting of water levels
--------------------------------------------------
+# Simulation and reporting of water levels
 
-**Introduction**
+
+## Introduction
 
 Within LISFLOOD it is possible to simulate and report water levels in the channel. The simulation of water levels is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
@@ -15,12 +15,11 @@ If the option is switched on, water levels are calculated for channel pixels whe
 
 
 
-**Calculation of water levels**
+## Calculation of water levels
 
 For channel stretches that are simulated using the dynamic wave, the water level in the channel is simply the difference between the channel head and the channel bottom level. For kinematic wave stretches, only approximate water levels can be estimated from the cross-sectional (wetted) channel area, $A_{ch}$ for each time step. Since the channel cross-section is described as a trapezoid, water levels follow directly from $A_{ch}$ , channel bottom width, side slope and bankfull level. If $A_{ch}$ exceeds the bankfull cross-sectional area ($A_{bf}$), the surplus is distributed evenly over the (rectangular) floodplain, and the depth of water on the floodplain is added to the (bankfull) channel depth. The Figure below further illustrates the cross-section geometry. All water levels are relative to channel bottom level ($z_{bot}$ in the Figure).
 
-![chanDims](https://ec-jrc.github.io/lisflood_manual/media/image57.png){width="5.770833333333333in"
-height="2.1145833333333335in"}
+![](../media/image57.png)
 
 ***Figure:*** *Geometry of channel cross-section in kinematic wave routing. With* $W_b$: *channel bottom width;* $W_u$: *channel upper width;* $z_{bot}$: *channel bottom level;* $z_{fp}$: *floodplain bottom level;* $s$: *channel side slope;* $W_{fp}$: *floodplain width;* $A_{bf}$: *channel cross-sectional area at bankfull;* $A_{fp}$: *floodplain cross-sectional area;* $D_{bf}$: *bankfull channel depth,* $D_{fp}$*: *depth of water on the floodplain.*
 
@@ -28,7 +27,7 @@ In order to calculate water levels, LISFLOOD needs a map with the with of the fl
 
 
 
-**Reporting of water levels**
+## Reporting of water levels
 
 Water levels can be reported as time series (at the gauge locations that are also used for reporting discharge), or as maps.
 
@@ -48,7 +47,7 @@ In either case, the reporting options should be used *in addition* to the 'simul
 
 
 
-**Preparation of settings file**
+## Preparation of settings file
 
 The naming of the reported water level time series and maps is defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
 
