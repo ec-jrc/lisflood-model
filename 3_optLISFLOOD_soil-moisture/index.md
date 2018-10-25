@@ -1,7 +1,6 @@
-Simulation and reporting of soil moisture as pF values
-----------------------------------------------------------------
+# Simulation and reporting of soil moisture as pF values
 
-**Introduction**
+## Introduction
 
 LISFLOOD offers the possibility to calculate pF values from the moisture content of both soil layers. The calculation of pF values is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
@@ -15,7 +14,7 @@ Using this option does *not* influence the actual model results in any way, and 
 
 
 
-**Calculation of pF**
+## Calculation of pF
 
 A soil's $pF$ is calculated as the logarithm of the capillary suction head, *h*:
 
@@ -41,7 +40,7 @@ If the soil contains no moisture at all (*w*=0), *h* is set to a fixed (arbitrar
 
 
 
-**Reporting of pF**
+## Reporting of pF
 
 pF can be reported as time series (at the locations defined on the "sites" map or as average values upstream each gauge location), or as maps. To generate time series at the "sites", add the following line to the 'lfoptions' element of your settings file:
 
@@ -62,7 +61,7 @@ In either case, the reporting options should be used *in addition* to the 'simul
 
 
 
-**Preparation of settings file**
+## Preparation of settings file
 
 The naming of the reported time series and maps is defined in the settings file. **Tables XXXXX and XXXXXX** list the settings variables default output names. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
 
