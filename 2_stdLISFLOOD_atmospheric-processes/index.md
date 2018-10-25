@@ -13,7 +13,7 @@ The meteorological conditions provide the driving forces behind the water balanc
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
-> **Note** that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below $T_m$  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates.
+> **Note** that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data <span style="color:red"> **Cinzia is that still correct??**</span>. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below $T_m$  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates.
 
 
 Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, $\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following, unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate manual. <span style="color:red"> Insert link to LISVAP manual once it is produced</span>
@@ -39,9 +39,15 @@ Speers *et al.* (1979) developed an extension of this equation which accounts fo
 $$
 M = {C_m} \cdot C_{Seasonal}(1 + 0.01 \cdot R\Delta t)(T_{avg} - T_m) \cdot \Delta t
 $$
-where *M* is the snowmelt per time step \[$mm$\], *R* is rainfall (not snow!) intensity \[$\frac {mm}{day}$], and $\Delta t$ is the time interval \[$days$\]. $T_m$ has a value of 0 $^\circ C$, and $C_m$ is a degree-day factor \[$\frac{mm} {^\circ C \cdot day}$\]. However, it should be stressed that the value of $C_m$ can actually vary greatly both in space and time (e.g. see Martinec *et al*., 1998).
 
-Therefore, in practice this parameter is often treated as a calibration constant. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
+where 
+   *M* is the snowmelt per time step \[$mm$\], 
+   *R* is rainfall (not snow!) intensity \[$\frac {mm}{day}$], and 
+   $\Delta t$ is the time interval \[$days$\]. 
+   $T_m$ has a value of 0 $^\circ C$, and 
+   $C_m$ is a degree-day factor \[$\frac{mm} {^\circ C \cdot day}$\]. 
+
+However, it should be stressed that the value of $C_m$ can actually vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __in practice this parameter is often treated as a calibration constant__. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 
 -   The solar radiation has an effect on the energy balance and varies with the time of the year.
 
