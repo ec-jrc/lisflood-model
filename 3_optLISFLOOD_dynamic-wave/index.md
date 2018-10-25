@@ -1,6 +1,6 @@
-## Dynamic wave option
+# Dynamic wave option
 
-**Introduction**
+## Introduction
 
 This annex describes the LISFLOOD dynamic wave routine, and how it is used. The current implementation of the dynamic wave function in PCRaster is not a complete dynamic wave formulation according to the summary of the Saint Venant equations as discussed in Chow (1988). The implementation currently consists of the friction force term, the gravity force term and the pressure force term and should therefore be correctly characterised as a diffusion wave formulation. The equations are solved as an explicit, finite forward difference scheme. A straightforward iteration using an Euler solution scheme is used to solve these equations. Dynamic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
@@ -10,7 +10,7 @@ This annex describes the LISFLOOD dynamic wave routine, and how it is used. The 
 
 
 
-**Time step selection**
+## Time step selection
 
 The current dynamic wave implementation requires that all equations are solved using a time step that is much smaller (order of magnitude: seconds-minutes) than the typical overall time step used by LISFLOOD
 (order of magnitude: hours-day). More specifically, during one (sub) time step no water should be allowed to travel more than 1 cell downstream, i.e.:
@@ -46,7 +46,7 @@ where $C_{dyn,crit}$ is the critical Courant number. The maximum value of the cr
 
 
 
-**Input data** 
+## Input data
 
 A number of addition input files are necessary to use the dynamic wave option. First, the channel stretches for which the dynamic wave is to be used are defined on a Boolean map. Next, a cross-section identifier map is needed that links the (dynamic wave) channel pixels to the cross-section table (see further on). A channel bottom level map describes the bottom level of the channel (relative to sea level). Finally, a cross-section table describes the relationship between water height (*H*), channel cross-sectional area (*A*) and wetted perimeter (*P*) for a succession of *H* levels.
 
@@ -64,7 +64,7 @@ The following table lists all required input:
 
 
 
-**Layout of the cross-section parameter table**
+## Layout of the cross-section parameter table
 
 The cross-section parameter table is a text file that contains --for each cross-section- a sequence of water levels (*H*) with their corresponding cross-sectional area (*A*) and wetted perimeter (*P*). The format of each line is as follows:
 
@@ -100,7 +100,7 @@ The number of H/A/P combinations that are used for each cross section is user-de
 
 
 
-**Using the dynamic wave**
+## Using the dynamic wave
 
 The 'lfuser' element contains two parameters that can be set by the user: *CourantDynamicCrit* (which should always be smaller than 1) and a parameter called *DynWaveConstantHeadBoundary*, which defines the boundary condition at the most downstream cell. All remaining dynamic-wave related input is defined in the 'lfbinding' element, and doesn't require any changes from the user (provided that all default names are used, all maps are in the standard 'maps' directory and the profile table is in the 'tables' directory). In 'lfuser' this will look like this:
 
