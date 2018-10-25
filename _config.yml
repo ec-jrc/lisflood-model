@@ -285,8 +285,6 @@ defaults:
           url: 2_stdLISFLOOD_overview
         - title: "Addressing sub-grid variability"
           url: 2_stdLISFLOOD_subgrid-variability
-        - title: "Soil model"
-          url:  	2_stdLISFLOOD_soil-model
         - title: "Atmospheric processes"
           url:  	2_stdLISFLOOD_atmospheric-processes
         - title: "Drainage or vertical processes"
