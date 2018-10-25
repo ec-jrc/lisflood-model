@@ -1,6 +1,6 @@
-## Drainage (vertical flow processes)
+# Drainage (vertical flow processes)
 
-### Frost index soil
+## Frost index soil
 
 When the soil surface is frozen, this affects the hydrological processes occurring near the soil surface. To estimate whether the soil surface is frozen or not, a frost index *F* is calculated. The equation is based on
 Molnau & Bissell (1983, cited in Maidment 1993), and adjusted for variable time steps. The rate at which the frost index changes is given by:
@@ -17,11 +17,10 @@ $$
 When the frost index rises above a threshold of 56, every soil process is frozen and transpiration, evaporation, infiltration and the outflow to the second soil layer and to upper groundwater layer is set to zero.
 Any rainfall is bypassing the soil and transformed into surface runoff till the frost index is equal or less than 56.
 
-[🔝](#top)
 
 
 
-### Water available for infiltration and direct runoff
+## Water available for infiltration and direct runoff
 
 In the permeable fraction of each pixel $(1- f_{dr})$, the amount of water that is available for infiltration, $W_{av}$ $[mm]$ equals (Supit *et al.*,1994):
 $$
@@ -41,11 +40,10 @@ R_d = f_{dr} \cdot W_{av}
 $$
 where $R_d$ is in $mm$ per time step. Note here that $W_{av}$ is valid for the permeable fraction only, whereas $R_d$ is valid for the direct runoff fraction.
 
-[🔝](#top)
 
 
 
-### Infiltration capacity
+## Infiltration capacity
 
 The infiltration capacity of the soil is estimated using the widely-used Xinanjiang (also known as VIC/ARNO) model (e.g. Zhao & Lui, 1995; Todini, 1996). This approach assumes that the fraction of a grid cell that is contributing to surface runoff (read: saturated) is related to the total amount of soil moisture, and that this relationship can be described through a non-linear distribution function. For any grid cell, if $w_1$ is the total moisture storage in the upper soil layer and $w_s1$ is the maximum storage, the corresponding saturated fraction $A_s$ is approximated by the following distribution function:
 $$
@@ -58,21 +56,20 @@ $$
 Note that the shape parameter *b* is related to the heterogeneity within each grid cell. For a totally homogeneous grid cell *b* approaches zero, which reduces the above equations to a simple 'overflowing bucket' model. Before any water is draining from the soil to the groundwater zone the soil has to be completely filled up. See also red line in the Figure below: e.g. a soil of 60% soil moisture has 40% potential
 infiltration capacity. A $b$ value of 1.0 (see black line) is comparable to a leaking bucket : e.g. a soil of 60% soil moisture has only 10% potential infiltration capacity while 30% is draining directly to groundwater. 
 
-![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image27.png)
+![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image27.png)
 
 ***Figure:*** *Soil moisture and potential infiltration capacity relation.*
 
 Increasing $b$ even further than 1 is comparable to a sieve (see figure below). Most of the water is going directly to groundwater and the potential infiltration capacity is going toward 0.
 
-![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image28.png)
+![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image28.png)
 
 ***Figure:*** *Analogy picture of increasing Xinanjiang empirical shape parameter* $b$.
 
-[🔝](#top)
 
 
 
-### Actual infiltration and surface runoff
+## Actual infiltration and surface runoff
 
 The actual infiltration $INF_{act} \  [mm]$ is now calculated as:
 $$
@@ -86,11 +83,10 @@ where $R_d$ is the direct runoff (generated in the pixel's 'direct runoff fracti
 $$
 w_1 = w_1 + INF_{act}
 $$
-[🔝](#top)
 
 
 
-### Soil moisture redistribution 
+## Soil moisture redistribution 
 
 The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layer) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from Darcy's law for 1-D vertical flow:
 $$
@@ -163,9 +159,8 @@ $$
 w_2 = w_2 + D_{1,2} - D_{2,gw}
 $$
 
-[🔝](#top)
 
-### Preferential bypass flow
+## Preferential bypass flow
 
 For the simulation of preferential bypass flow --i.e. flow that bypasses the soil matrix and drains directly to the groundwater- no generally accepted equations exist. Because ignoring preferential flow completely
 will lead to unrealistic model behavior during extreme rainfall conditions, a very simple approach is used in LISFLOOD. During each time step, a fraction of the water that is available for infiltration is added to the groundwater directly (i.e. without first entering the soil matrix). It is assumed that this fraction is a power function of the relative saturation of the topsoil, which results in an equation that is somewhat similar to the excess soil water equation used in the HBV model (e.g. Lindström *et al*., 1997):
@@ -177,15 +172,14 @@ flow is only simulated in the permeable fraction of each pixel) . The equation r
 
 The Figure below shows with $c_{pref} = 0$ (red line) every available water for infiltration is converted into preferential flow and bypassing the soil. $c_{pref} = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
 
-![](E:/DEV/GitHubDesktop/GitHubRepo/lisflood_manual/media/image34.png)
+![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image34.png)
 
 ***Figure:*** *Soil moisture and preferential flow relation.*
 
-[🔝](#top)
 
 
 
-### Groundwater
+## Groundwater
 
 Groundwater storage and transport are modelled using two parallel linear reservoirs, similar to the approach used in the HBV-96 model (Lindström et al., 1997). The upper zone represents a quick runoff component, which includes fast groundwater and subsurface flow through macro-pores in the soil. The lower zone represents the slow groundwater component that generates the base flow. The outflow from the upper zone to the channel, $Q_{uz} [mm]$ equals:
 $$
