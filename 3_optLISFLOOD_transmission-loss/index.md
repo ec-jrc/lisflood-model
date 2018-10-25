@@ -1,7 +1,7 @@
-Transmission loss option
--------------------------------------------
+# Transmission loss option
 
-**Introduction**
+
+## Introduction
 
 This annex describes the LISFLOOD transmission loss routine, and how it is used.
 
@@ -23,7 +23,7 @@ Transmission loss is *optional*, and can be activated by adding the following li
 
 
 
-**Description of the transmission loss approach**
+## Description of the transmission loss approach
 
 The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage of a channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
@@ -40,7 +40,7 @@ As a main difference to the Rao and Maurer 1996, the $TransPower$ parameter is n
 
 
 
-**Using transmission loss** 
+## Using transmission loss 
 
 No additional maps or tables are needed. Using the transmission loss option involves two steps:
 
@@ -97,7 +97,7 @@ Now you are ready to run the model with the transmission loss option
 
 
 
-**Transmission loss output file**
+## Transmission loss output file
 
 The transmission option can produce an additional time series as listed in the following table:
 
