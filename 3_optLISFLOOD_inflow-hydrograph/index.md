@@ -1,6 +1,6 @@
-## Inflow hydrograph option
+# Inflow hydrograph option
 
-**Introduction**
+## Introduction
 
 This annex describes the LISFLOOD inflow hydrograph routine, and how it is used. Inflow hydrographs are *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
@@ -10,13 +10,13 @@ This annex describes the LISFLOOD inflow hydrograph routine, and how it is used.
 
 
 
-**Description of the inflow hydrograph routine**
+## Description of the inflow hydrograph routine
 
 When using the inflow hydrograph option, time series of discharge $[\frac{m^3}{s}]$ are added at some user-defined location(s) on the channel network. The inflow is added as side-flow in the channel routing equations (this works for both kinematic and dynamic wave). *Negative* inflows (i.e. outflows) are also possible, but large outflow rates may sometimes result in numerical problems in the routing equations. If you use a negative inflow rate, we advise to carefully inspect the model output for any signs of numerical problems (i.e. strange oscillations in simulated discharge, generation of missing values). Also check the mass balance time series after your simulation (numerical problems often result in unusually large mass balance errors).
 
 
 
-**Using inflow hydrographs** 
+## Using inflow hydrographs 
 
 The table below lists the input requirements for the inflow hydrograph option. All you need is a map that defines where you want to add the inflow, and a time series with the corresponding inflow rates.
 
@@ -77,13 +77,13 @@ Now you are ready to run the model with the inflow hydrograph.
 
 
 
-**Substituting subcatchments with measured inflow hydrographs**
+## Substituting subcatchments with measured inflow hydrographs
 
 One of the most common uses of the inflow hydrograph option is this: suppose we have a catchment where we only want to simulate the downstream part. If measured time series of discharge are available for the upstream catchment(s), we can use these to represent the inflow into the more downstream part. The Figure below shows an example, where we have measured discharge of subcatchment *A* (just before it enters the main river). 
 
 
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image46.png){width="6.0in" height="4.333333333333333in"}
+![](../media/image46.png)
 
 ***Figure:*** *Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text below for explanation.*
 
@@ -100,6 +100,3 @@ First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or mi
 If you already have all gauge locations on a PCRaster map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
 one pixel downstream of the *outflow* points of the corresponding subcatchment. If you already have a (nominal) map of of your subcatchments, a PCRaster script exists that automatically calculates the corresponding out- and inflow points.
 
-[]{#_Toc353538894 .anchor}
-
-[🔝](#top)
