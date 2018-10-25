@@ -283,14 +283,19 @@ defaults:
 
       - section_title: "Standard LISFLOOD processes"
         items:
-        - title: "Introduction"
-          url: 2_stdLISFLOOD_introduction
+        - title: "Overview"
+          url: 2_stdLISFLOOD_overview
+        - title: "Soil model"
+          url:  	2_stdLISFLOOD_soil-model
         - title: "Atmospheric processes"
           url:  	2_stdLISFLOOD_atmospheric-processes
         - title: "Drainage or vertical processes"
           url: 2_stdLISFLOOD_vertical-processes
         - title: "Routing or horizontal flow processes"
           url: 2_stdLISFLOOD_horizontal-processes
+        - title: "Addressing sub-grid variability"
+          url: 2_stdLISFLOOD_subgrid-variability
+
 
       - section_title: "Optional LISFLOOD processes"
         items:
