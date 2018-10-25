@@ -56,13 +56,13 @@ $$
 Note that the shape parameter *b* is related to the heterogeneity within each grid cell. For a totally homogeneous grid cell *b* approaches zero, which reduces the above equations to a simple 'overflowing bucket' model. Before any water is draining from the soil to the groundwater zone the soil has to be completely filled up. See also red line in the Figure below: e.g. a soil of 60% soil moisture has 40% potential
 infiltration capacity. A $b$ value of 1.0 (see black line) is comparable to a leaking bucket : e.g. a soil of 60% soil moisture has only 10% potential infiltration capacity while 30% is draining directly to groundwater. 
 
-![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image27.png)
+![](../media/image27.png)
 
 ***Figure:*** *Soil moisture and potential infiltration capacity relation.*
 
 Increasing $b$ even further than 1 is comparable to a sieve (see figure below). Most of the water is going directly to groundwater and the potential infiltration capacity is going toward 0.
 
-![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image28.png)
+![](../media/image28.png)
 
 ***Figure:*** *Analogy picture of increasing Xinanjiang empirical shape parameter* $b$.
 
@@ -172,7 +172,7 @@ flow is only simulated in the permeable fraction of each pixel) . The equation r
 
 The Figure below shows with $c_{pref} = 0$ (red line) every available water for infiltration is converted into preferential flow and bypassing the soil. $c_{pref} = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
 
-![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image34.png)
+![](../media/image34.png)
 
 ***Figure:*** *Soil moisture and preferential flow relation.*
 
@@ -197,7 +197,7 @@ Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that can be used as
 $$
 D_{loss} = min(f_{loss} \cdot \Delta t,LZ)
 $$
-In the previous version of LISFLOOD $D_{loss}​$, was calculated as a fixed fraction of $Q_{lz}​$, but this leads to a high dependency of $D_{loss}​$ from $GW_{perc}​$ and $LZ​$. For example if either $GW_{perc}​$ or $LZ​$ is quite low the parameter $D_{loss}​$ turns out to be meaningless.
+In the previous version of LISFLOOD $D_{loss}$, was calculated as a fixed fraction of $Q_{lz}$, but this leads to a high dependency of $D_{loss}$ from $GW_{perc}$ and $LZ$. For example if either $GW_{perc}$ or $LZ$ is quite low the parameter $D_{loss}$ turns out to be meaningless.
 
 The loss fraction, $f_{loss}$ \[-\], equals 0 for a completely closed lower boundary. If $f_{loss}$ is set to 1, all outflow from the lower zone is treated as a loss. Water that flows out of the lower zone through $D_{loss}$ is quite literally 'lost' forever. Physically, the loss term could represent water that is either lost to deep groundwater systems (that do not necessarily follow catchment boundaries), or even groundwater extraction wells. When using the model, it is suggested to use $f_{loss}$ with some care; start with a value of zero, and only use any other value if it is impossible to get satisfactory results by adjusting the other calibration parameters. At each time step, the amounts of water in the upper and lower zone are updated for the in- and outgoing fluxes, i.e.:
 $$
@@ -208,7 +208,7 @@ $$
 LZ_t = LZ_{t - 1} + D_{uz,lz} - Q_{lz} - D_{loss}
 $$
 
-Note that these equations are again valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ​$ and $LZ​$.
+Note that these equations are again valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
 [🔝](#top)
 
