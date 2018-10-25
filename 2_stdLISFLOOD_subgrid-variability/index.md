@@ -19,6 +19,7 @@ In order to account properly for land use dynamics, some conceptual changes have
 ## Soil model
 
 If a part of a pixel is made up of built-up areas this will influence that pixel's water-balance. LISFLOOD's 'direct runoff fraction's parameter ($f_{dr}$) defines the fraction of a pixel that is impervious.
+
 **For impervious areas**, LISFLOOD assumes that:
 1. A depression storage is filled by precipitation and snowmelt and emptied by evaporation
 2. Any water that is not filling the depression storage, reaches the surface is added directly to surface runoff
