@@ -1,7 +1,6 @@
-Including water use
-----------------------------
+# Including water use
 
-**Introduction**
+## Introduction
 
 This annex describes the LISFLOOD water use routine, and how it is used.
 
@@ -13,7 +12,7 @@ The water use routine can be used to assess the effect of water withdrawal from 
 
 
 
-**Calculation of water use**
+## Calculation of water use
 
 The water is withdrawn only from discharge in the river network but not from soil, groundwater or directly from precipitation.
 
@@ -23,8 +22,7 @@ The water is withdrawn only from discharge in the river network but not from soi
 
 -   If the amount of water withdrawal is larger than the water available in this grid cell water is taken from downstream moving along the local drain direction. This is done by implementing a loop substracting the remaining water from the next downstream cell till all the water for water use is taken or a predefined number of iteration is reached (see figure below -- pixel No. 2 to 5)
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image56.png){width="4.0869564741907265in"
-height="2.134514435695538in"}
+![](../media/image56.png)
 
 ***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
 
@@ -36,7 +34,7 @@ In the settings.xml you can define:
 
 
 
-**Preparation of input data** 
+## Preparation of input data
 
 The following Table gives an overview about the maps and table needed for the water use option.
 
@@ -90,7 +88,7 @@ To assign each day of simulation the right map a lookup table (WUseOfDay.txt) is
 
 
 
-**Preparation of settings file**
+## Preparation of settings file
 
 All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
 
@@ -168,7 +166,7 @@ Finally, you have to tell LISFLOOD that you want to simulate water use. To do th
 
 
 
-**Water use output files**
+## Water use output files
 
 The water use routine can produce 2 additional time series and one map (or stack), as listed in the following Table:
 
