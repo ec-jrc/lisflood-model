@@ -274,8 +274,6 @@ defaults:
       
       - section_title: "Introduction"
         items:
-        - title: "General"
-          url: 1_introduction_general
         - title: "About LISFLOOD"
           url: 1_introduction_LISFLOOD
         - title: "About this model documentation"
