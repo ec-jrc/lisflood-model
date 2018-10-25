@@ -1,6 +1,6 @@
-## Double kinematic wave option
+# Double kinematic wave option
 
-**Introduction**
+## Introduction
 
 This annex describes the LISFLOOD double kinematic wave routine, and how it is used. Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
@@ -10,7 +10,7 @@ This annex describes the LISFLOOD double kinematic wave routine, and how it is u
 
 
 
-**Background**
+## Background
 
 The flow routing is done by the kinematic wave approach. Therefore two equations have to be solved:
 
@@ -22,23 +22,19 @@ where $A = \alpha \cdot {Q^{\beta} }$
 
 continuity equation momentum equation as expressed by Chow et al. 1988. Which decreasing inflow the peaks of the resulting outflow will be later in time (see Figure below for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image47.png){width="5.864583333333333in"
-height="2.75in"}
+![](../media/image47.png)
 
 ***Figure:*** *Simulated outflow for different amount of inflow wave propagation gets slower.*
 
 This is realistic if your channel looks like this:
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image48.png){width="2.05in"
-height="1.5270833333333333in"}![](https://ec-jrc.github.io/lisflood_manual/media/image49.png){width="1.9465277777777779in"
-height="1.45in"}
+![](../media/image48.png) ![](../media/image49.png)
 
 ***Figure:*** *Schematic cross section of a channel with different water level.*
 
 But a natural channel looks more like this:
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image50.png){width="4.033333333333333in"
-height="1.617361111111111in"}
+![](../media/image50.png)
 
 ***Figure:*** *Schematic cross section of a natural channel.*
 
@@ -46,7 +42,7 @@ Which means, opposite to the kinematic wave theory, the wave propagation gets sl
 
 
 
-**Double kinematic wave approach**
+## Double kinematic wave approach
 
 The double kinematic approach splits up the channel in two parts (see figure below):
 
@@ -64,7 +60,7 @@ Similar methods are used since the 1970s e.g. as multiple linear or non linear s
 
 
 
-**Using double kinematic wave** 
+## Using double kinematic wave 
 
 No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). A 'warm' start (using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
 
@@ -137,7 +133,7 @@ For a 'warm start' these initial values are needed (see also table A5.1)
 
 
 
-**Automatic change of the number of sub steps (optional)**
+## Automatic change of the number of sub steps (optional)
 
 For the new method the kinematic wave has to be applied two times.
 
@@ -192,7 +188,6 @@ The minimum and maximum number of sub steps can be set in the settings file:
 
 ***ChanB*** for calculating the minimum number of sub steps for channelrouting [-]
 
-[]{#_Toc353538900 .anchor}
 
 [🔝](#top)
 
