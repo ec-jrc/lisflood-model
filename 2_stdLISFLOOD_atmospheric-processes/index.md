@@ -1,9 +1,8 @@
-## Atmospheric processes and data 
+# Atmospheric processes and data 
 
-### Treatment of meteorological input variables
+## Treatment of meteorological input variables
 
 The meteorological conditions provide the driving forces behind the water balance. LISFLOOD uses the following meteorological input variables:
-
 
 
 | **Code**      | **Description**                                        | **Unit**               |
@@ -17,12 +16,10 @@ The meteorological conditions provide the driving forces behind the water balanc
 > **Note** that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. This is because even on a day on which the average temperature is below $T_m$  (no snowmelt), the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates
 
 
-
 Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, $\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following, unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a separate manual.
 
-[:top:](#top)
 
-### Rain and snow
+## Rain and snow
 
 If the average temperature is below 1°C, all precipitation is assumed to be snow. A snow correction factor is used to correct for undercatch of snow precipitation. Unlike rain, snow accumulates on the soil surface 
 until it melts. The rate of snowmelt is estimated using a simple degree-day factor method. Degree-day factor type snow melt models usually take the following form (e.g. see WMO, 1986):
@@ -52,7 +49,7 @@ The following Figure shows an example where a mean value of: 3.0 $\frac{mm} {^\c
 
 At high altitudes, where the temperature never exceeds $1^\circ C$, the model accumulates snow without any reduction because of melting loss. In these altitudes runoff from glacier melt is an important part. The snow will accumulate and converted into firn. Then firn is converted to ice and transported to the lower regions. This can take decades or even hundred years. In the ablation area the ice is melted. In LISFLOOD this process is emulated by melting the snow in higher altitudes on an annual basis over summer. A sinus function is used to start ice melting in summer (from 15 June till 15 September) using the temperature of zone B:
 
-![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image8.jpg)
+![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image8.png)
 
 ***Figure:*** *Sinus shaped ice melt coefficient as a function of days of year.*
 
@@ -63,15 +60,14 @@ For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow
 The division in elevation zones was changed from a uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km
 grid cell. Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
 
-![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image10.jpg)
+![](https://github.com/ec-jrc/lisflood-model/blob/master/media/image10.png)
 
 ***Figure:*** *Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone.*
 
-[:top:](#top)
 
 
 
-### Direct evaporation from the soil surface
+## Direct evaporation from the soil surface
 
 The maximum amount of evaporation from the soil surface equals the maximum evaporation from a shaded soil surface, $ES_{max} [mm]$, which is computed as:
 $$
@@ -93,11 +89,10 @@ where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1}
 $$
 w_1 = w_1 - ES_a
 $$
-[🔝](#top)
 
 
 
-### Evaporation of intercepted water
+## Evaporation of intercepted water
 
 Evaporation of intercepted water, $EW_{int}$, occurs at the potential evaporation rate from an open water surface, $EW0$. The *maximum* evaporation per time step is proportional to the fraction of vegetated
 area in each pixel (Supit *et al.*,1994):
@@ -115,11 +110,10 @@ D_{int} = \frac{1}{T_{int}} \cdot Int_{cum} \cdot \Delta t
 $$
 where $D_{int}$ is the amount of leaf drainage per time step $[mm]$ and $T_{int}$ is a time constant for the interception store $[days]$, which is set to 1 day.
 
-[🔝](#top)
 
 
 
-### Interception
+## Interception
 
 Interception is estimated using the following storage-based equation (Aston, 1978, Merriam, 1960):
 $$
@@ -137,11 +131,10 @@ k = 0.046 \cdot LAI
 $$
 The value of $Int$ can never exceed the interception storage capacity, which is defined as the difference between $S_{max}$ and the accumulated amount of water that is stored as interception, $Int_{cum}$.
 
-[🔝](#top)
 
 
 
-### Water uptake by plant roots and transpiration
+## Water uptake by plant roots and transpiration
 
 Water uptake and transpiration by vegetation and direct evaporation from the soil surface are modelled as two separate processes. The approach used here is largely based on Supit *et al*. (1994) and Supit & Van Der
 Goot (2000). The **maximum transpiration** per time step \[mm\] is given by:
