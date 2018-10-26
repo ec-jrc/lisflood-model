@@ -1,6 +1,6 @@
 ## Routing of surface runoff to channel
 
-Surface runoff is routed to the nearest downstream channel using a 4-point implicit finite-difference  solution of the kinematic wave equations (Chow, 1988). The basic equations used are the equations of
+**Surface runoff is routed to the nearest downstream channel using a 4-point implicit finite-difference  solution of the kinematic wave equations** (Chow, 1988). The basic equations used are the equations of
 continuity and momentum. The continuity equation is:
 
 $$
@@ -45,3 +45,4 @@ $$
 
 At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. For each time step, all runoff that is generated ($R_s$) is added as side-flow ($q_{sr}$). For each flowpath, the routing stops at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated). 
 
+[🔝](#top)
