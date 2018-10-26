@@ -1,6 +1,6 @@
 ## Soil moisture redistribution 
 
-The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layer) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from Darcy's law for 1-D vertical flow:
+The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layer) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from **Darcy's law for 1-D vertical flow rate**:
 
 $$
 q = - K(\theta ) \cdot [\frac{\partial h(\theta )}{\partial z} -1]
@@ -12,13 +12,13 @@ $$
 q = K(\theta )
 $$
 
-This implies a flow that is always in downward direction, at a rate that equals the conductivity of the soil. The relationship between hydraulic conductivity and soil moisture status is described by the Van Genuchten equation (van Genuchten, 1980), here re-written in terms of mm water slice, instead of volume fractions:
+This implies a flow that is always in downward direction, at a rate that equals the conductivity of the soil. The relationship between hydraulic conductivity and soil moisture status is described by the **Van Genuchten equation** (van Genuchten, 1980), here re-written in terms of mm water slice, instead of volume fractions:
 
 $$
 K(w) = K_s \cdot \sqrt{( \frac{w - w_r}{w_s - w_r})} \cdot \{ 1 - [ 1 - ( \frac{w -w_r}{w_s - w_r})^\frac{1}{m}]^m\}^2
 $$
 
-where $K_s$ is the saturated conductivity of the soil $[\frac{mm}{day}]$, and $w, w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $[mm]$). Parameter $m$ is calculated from the pore-size index, $\lambda$ (which is related to soil texture):
+where $K_s$ is the **saturated conductivity** of the soil $[\frac{mm}{day}]$, and $w, w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $[mm]$). Parameter $m$ is calculated from the pore-size index, $\lambda$ (which is related to soil texture):
 
 $$
 m = \frac{\lambda }{\lambda + 1}
@@ -41,7 +41,7 @@ C_2 = \frac{K_2(w_2) \cdot \Delta t}{w_2 - w_{r2}}
 $$
 
 A Courant number that is greater than 1 implies that the calculated outflow exceeds the available soil moisture, resulting in loss of mass balance. Since we need a stable solution for both soil layers, the
-'overall' Courant number for the soil moisture routine is the largest value out of $C_1$ and $C_2$:
+**'overall' Courant number** for the soil moisture routine is the largest value out of $C_1$ and $C_2$:
 
 $$
 C_{soil} = max (C_1,C_2)
@@ -77,7 +77,7 @@ and lower layer are copied to temporary variables $w'_1$ and $w'_2$. Two variabl
 
 4. update $w'_1$ and $w'_2$
 
-5. add $D'_{1,2}$ to $D_{1,2}$; add $D'_{2,gw}$ to $D_{2,gw}$
+5. add $$D'_{1,2}$$ to $$D_{1,2}$$; add $$D'_{2,gw}$$ to $$D_{2,gw}$$
 
 If the soil is frozen (*F* \> critical threshold), both $D_{1,2}$ and $D_{2,gw}$ are set to zero. After the iteration loop, the amounts of soil moisture in both layers are updated as follows:
 
