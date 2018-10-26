@@ -61,7 +61,7 @@ $$
 $$
 
 In brief, the iterative procedure now involves the following steps. First, the number of sub-steps and the corresponding sub-time-step are computed as explained above. The amounts of soil moisture in the upper
-and lower layer are copied to temporary variables $w'_1$ and $w'_2$. Two variables, $D_{1,2}$ (flow from upper to lower soil layer) and $D_{2,gw}$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
+and lower layer are copied to temporary variables $$w'_1$$ and $$w'_2$$. Two variables, $$D_{1,2}$$ (flow from upper to lower soil layer) and $$D_{2,gw}$$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
 
 1. compute hydraulic conductivity for both layers
 
