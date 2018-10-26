@@ -1,6 +1,6 @@
 ## Water available for infiltration and direct runoff
 
-In the permeable fraction of each pixel $(1- f_{dr})$, the amount of water that is available for infiltration, $W_{av}$ $[mm]$ equals (Supit *et al.*,1994):
+In the permeable fraction of each pixel $(1- f_{dr})$, the **amount of water** that is **available for infiltration**, $W_{av}$ $[mm]$ equals (Supit *et al.*,1994):
 
 $$
 W_{av} = R \cdot \Delta t + M + D_{int} - Int
@@ -14,7 +14,7 @@ where:
   $Int$: 	Interception $[mm]$
   $\Delta t$: 	time step $[days]$
 
-Since no infiltration can take place in each pixel's 'direct runoff fraction', direct runoff is calculated as:
+Since no infiltration can take place in each pixel's 'direct runoff fraction', **direct runoff** is calculated as:
 
 $$
 R_d = f_{dr} \cdot W_{av}
