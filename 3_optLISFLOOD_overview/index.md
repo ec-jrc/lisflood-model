@@ -5,26 +5,25 @@
 ```
 
 
-The above model description covers the processes that are simulated in a 'standard' LISFLOOD run. By default, special structures in the river channel e.g. lakes and regulated reservoirs are not taken into account. However, LISFLOOD has some optional features to model these structures. The description of these features can be found in a series of Annexes at the end of this manual.
-
-Features are:
-
-- Including reservoirs, polder, lakes
-- including inflow hydrographs
-- using a double kinematic wave approach for channel routing
-- using the diffusion wave approach instead of kinematic wave for channel routing
-- Including transmission loss
-- Using water use maps
-- Simulating water levels
+The model description under 'STANDARD LISFLOOD PROCESSES' covers the processes that are simulated in a 'standard' LISFLOOD run. However, many mudules have been developed to include all kind of additional features, such as e.g.:
 
 
-As explained in **Chapter XXXXX**, the 'lfoptions' element gives you additional control over what LISFLOOD is doing. Using options it is possible to switch certain parts of the model on or off. This way you can tell the model exactly which output files are reported and which ones aren't. Also, they can be used to activate a number of additional model features, such as the simulation of reservoirs and inflow hydrographs.
+- Including: [reservoirs](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_reservoirs/), [polder](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_polder/), 
+[lakes](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_lakes/), 
+[inflow hydrographs](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_inflow-hydrograph/) and [transmission losses](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_transmission-loss/)
+- chosing among different routing routines: [kinematic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_kinematic-wave/) or [dynamic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_dynamic-wave/)
+- Simulating [water levels](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-levels/), [water use](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-use/) and [soil moisture](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_soil-moisture/)
+- reporting all kind of additional output files (see Table below) (<span style="color:red"> **Actually the output option and so many others are still missing. We have to make the check that all options are described!**</span>.)
 
-The table below lists all currently implemented options and their corresponding defaults. All currently implemented options are switches (1= on, 0=off). You can set as many options as you want (or none at all). The Table below lists all currently implemented options[^13]. 
+The table below lists all currently implemented options and their corresponding defaults. All currently implemented options are switches (1= on, 0=off). You can set as many options as you want (or none at all). 
 
->  Note that each option generally requires additional items in the settings file. For instance, using the inflow hydrograph option requires an input map and time series, which have to be specified in the settings file. If you want to report discharge maps at each time step, you will first have to specify under which name they will be written. The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. 
+In the LISFLOOD settings file (<span style="color:red"> **INSERT LINK TO SETTINGS FILE HERE**</span>.) the 'lfoptions' element gives you additional control over what LISFLOOD is doing. Using options it is possible to switch certain options of the model on or off. This way you can tell the model exactly which output files are reported and which ones aren't. Also, they can be used to activate a number of additional model features, such as the simulation of reservoirs and inflow hydrographs.
 
-The use of the *output* options is described in detail in **Chapter XXXXX**.
+
+
+<u>Note</u> that each option generally requires additional items in the settings file. For instance, using the inflow hydrograph option requires an input map and time series, which have to be specified in the settings file. If you want to report discharge maps at each time step, you will first have to specify under which name they will be written. The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. 
+
+The use of the *output* options is described in detail in .
 
 ***Table:*** *LISFLOOD options.*                                                                                                                                                                                                                                                                                                         
 
