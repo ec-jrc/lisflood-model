@@ -1,6 +1,6 @@
 ## Channel routing
 
-Flow through the channel is simulated using the kinematic wave equations. The basic equations and the numerical solution are identical to those used for the surface runoff routing:
+Flow through the channel is simulated using the **kinematic wave equations**. The basic equations and the numerical solution are identical to those used for the surface runoff routing:
 
 $$
 \frac{\partial Q_{ch}}{\partial x} \cdot \frac{\partial A_{ch}}{\partial t} = q_{ch}
@@ -18,12 +18,12 @@ $$
 \alpha _{k,ch} = (\frac{n \cdot P_{ch}^{2/3}}{\sqrt{S_0}})^{0.6}; \beta _k=0.6
 $$
 
-At present, LISFLOOD uses values for $α_{k,ch}$ which are based on a static (reference) channel flow depth (half bankfull) and measured channel dimensions. The term $q_{ch}$ (sideflow) now represents the runoff that enters the channel per unit channel length:
+At present, LISFLOOD uses values for $α_{k,ch}$ which are based on a static (reference) channel flow depth (half bankfull) and measured channel dimensions. The term $q_{ch}$ (**sideflow**) now represents the runoff that enters the channel per unit channel length:
 
 $$
 q_{ch} = \frac{\sum Q_{sr} + \sum Q_{uz} + \sum Q_{lz} + Q_{in} + Q_{res}}{L_{ch}}
 $$
 
-Here, $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, outflow from the upper zone and outflow from the lower zone, respectively. $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the 'inflow hydrograph' option is activated (see Annex 2). $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the 'reservoir' option is activated (see **Section XXXXX**). $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$ and $Q_{res}$ are all expressed in [$m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. The kinematic wave channel routing can be run using a smaller time-step than the over simulation timestep, $\Delta t$, if needed.
+Here, $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, outflow from the upper zone and outflow from the lower zone, respectively. $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the ['inflow hydrograph' option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_inflow-hydrograph/) is activated. $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the 'reservoir' option is activated (see **Section XXXXX**). $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$ and $Q_{res}$ are all expressed in [$m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. The kinematic wave channel routing can be run using a smaller time-step than the over simulation timestep, $\Delta t$, if needed.
 
 [[🔝](#top)](#top)
