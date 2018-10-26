@@ -283,7 +283,7 @@ defaults:
         items:
         - title: "Overview"
           url: 2_stdLISFLOOD_overview
-        - title: "Rain and snow"
+        - title: "Snow"
           url: 2_stdLISFLOOD_rain-snow
         - title: "direct evaporation from the soil surface"
           url:  	 	2_stdLISFLOOD_soil-evaporation
