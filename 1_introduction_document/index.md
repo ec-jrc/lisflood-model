@@ -6,4 +6,5 @@ This document is **not a LISFLOOD user guide!** A LISFLOOD user guide can be fou
 
 In order to ease the set-up of your own catchment we have created another Github repository called lisflood-utilities that contains all kind of useful tools that should help you preparing your own set-up. Each tool is documented and will explain you how to use it.
 
-Lastly, we also share with you two other tools: 1) LISVAP, our tool to calculate the evapotranspiration and 2) our calibration tool that we are developed. They can be found including user documentation in their respective repositories:  **INSERT NAMES HERE**.
+Lastly, we also share with you two other tools: 1) LISVAP, our tool to calculate the evapotranspiration and 2) our calibration tool that we are developed. They can be found including user documentation in their respective repositories: 
+<span style="color:red"> **INSERT NAMES HERE**</span>.
