@@ -283,15 +283,36 @@ defaults:
         items:
         - title: "Overview"
           url: 2_stdLISFLOOD_overview
-        - title: "Addressing sub-grid variability"
-          url: 2_stdLISFLOOD_subgrid-variability
-        - title: "Atmospheric processes"
-          url:  	2_stdLISFLOOD_atmospheric-processes
-        - title: "Drainage or vertical processes"
-          url: 2_stdLISFLOOD_vertical-processes
-        - title: "Routing or horizontal flow processes"
-          url: 2_stdLISFLOOD_horizontal-processes
-
+        - title: "Rain and snow"
+          url: 2_stdLISFLOOD_rain-snow
+        - title: "direct evaporation from the soil surface"
+          url:  	 	2_stdLISFLOOD_soil-evaporation
+        - title: "Evaporation of interceted water"
+          url:  	2_stdLISFLOOD_evaporation-intercepted-water 	
+        - title: "Interception"
+          url: 2_stdLISFLOOD_interception
+        - title: "Water uptake by plant roots and transpiration"
+          url: 2_stdLISFLOOD_plant-water-uptake
+        - title: "Frost index"
+          url: 2_stdLISFLOOD_fronst-index
+        - title: "water available for infiltration and direct runoff"
+          url:  	2_stdLISFLOOD_H20-for-Qdir-infiltration
+        - title: "infiltration capacity"
+          url:  	2_stdLISFLOOD_infiltration
+        - title: "actual infiltration and surface runoff"
+          url:  	2_stdLISFLOOD_actual-infiltration-and-surface
+        - title: "Soil moisture redistribution"
+          url: 2_stdLISFLOOD_soilmoisture-redistribution
+        - title: "Preferential bypass flow"
+          url: 2_stdLISFLOOD_preferential-bypass
+        - title: "Groundwater"
+          url: 2_stdLISFLOOD_groundwater
+        - title: "surface runoff routing"
+          url:  	2_stdLISFLOOD_surface-runnoff-routing
+        - title: "sub-surface runoff routing"
+          url: 2_stdLISFLOOD_subsurface-runoff
+        - title: "channel routing"
+          url: 2_stdLISFLOOD_channel-routing
 
       - section_title: "Optional LISFLOOD processes"
         items:
