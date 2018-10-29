@@ -54,7 +54,7 @@ The above equations are valid for *unregulated* polders. It is also possible to 
 
 ![](../media/image44.png)
 
-***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq XXXX). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq XXXX).*
+***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to <span style="color:red"> Eq XXXX </span>). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to <span style="color:red"> Eq XXXX </span>).*
 
 Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table below). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
 
@@ -136,7 +136,7 @@ The polder routine produces 2 additional time series and one map (or stack of ma
 
 | **Maps / Time series** | Default name | Description                                                  | Units           |
 | ---------------------- | ------------ | ------------------------------------------------------------ | --------------- |
-| PolderLevelState       | hpolxxxx.xxx | water level in polder at last time step11                    | $m$             |
+| PolderLevelState       | hpolxxxx.xxx | water level in polder at last time step                    | $m$             |
 | PolderLevelTS          | hPolder.tss  | water level in polder (at polder locations)                  | $m$             |
 | PolderFluxTS           | qPolder.tss  | Flux into and out of polder (positive for flow from channel to polder, negative for flow from polder to channel) | $\frac{m^3}{s}$ |
 
@@ -151,6 +151,7 @@ Note that you can use the map with the polder level at the last time step to def
 ## Limitations
 
 For the moment, polders can be simulated on channel pixels where dynamic wave routing is used. For channels where the kinematic wave is used, the routine will not work and may lead to numerical instabilities or even model crashes. This limitation may be resolved in future model versions.
+<span style="color:red"> Has that been fixed in the meantime? </span>
 
 [🔝](#top)
 
