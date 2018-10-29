@@ -2,7 +2,7 @@
 
 ## Introduction
 
-LISFLOOD offers the possibility to calculate pF values from the moisture content of both soil layers. The calculation of pF values is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
+LISFLOOD offers the possibility to calculate pF values from the moisture content of both soil layers. The calculation of pF values is *optional*, and it can be activated by adding the following line to the 'lfoptions' element in the LISFLOOD settings file (<span style="color:red"> add link </span>):
 
 ```xml
 	<setoption name="simulatePF" choice="1" /> 
@@ -10,7 +10,7 @@ LISFLOOD offers the possibility to calculate pF values from the moisture content
 
 
 
-Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report pF time series or maps. The actual *reporting* of the computed pF values (as time series or maps) can be activated using separate options (which are discussed further on).
+Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report pF time series or maps. The actual *reporting* of the computed pF values (as time series or maps) can be activated using separate options (which are discussed further down).
 
 
 
@@ -21,22 +21,24 @@ A soil's $pF$ is calculated as the logarithm of the capillary suction head, *h*:
 $$
 pF = \log_{10}(h)
 $$
+
 with $h$ in \[cm\] (positive upwards). Values of pF are typically within the range 1.0 (very wet) to 5.0 (very dry). The relationship between soil moisture status and capillary suction head is described by the Van Genuchten equation (here again re-written in terms of mm water slice, instead of volume fractions):
 
 $$
+h = \frac{1}{\alpha}[(\frac{w_s - w_r}{w - w_r} )^{{1/m} - 1}]^{1/n}
+$$
+
+where *h* is the suction head $[cm]$, and $w$, $w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $mm$). Parameter $α$ is related to soil texture. Parameters $m$ and $n$ are calculated from the pore-size index, $λ$ (which is related to soil texture as well):
 
 $$
-where *h* is the suction head $[cm]$, and *w*, $w_r$ and $w_s$ are the actual, residual and maximum amounts of moisture in the soil respectively (all in $mm$). Parameter *α* is related to soil texture. Parameters *m* and *n* are calculated from the pore-size index, *λ* (which is related to soil texture as well):
-
-$$
-m = \frac{\lambda }{{\lambda + 1}}
+m = \frac{\lambda }{\lambda + 1}
 $$
 
 $$
 n = \lambda + 1
 $$
 
-If the soil contains no moisture at all (*w*=0), *h* is set to a fixed (arbitrary) value of 1∙10^7^ cm.
+If the soil contains no moisture at all (*w*=0), *h* is set to a fixed (arbitrary) value of $1∙10^7$ cm.
 
 
 
@@ -63,7 +65,7 @@ In either case, the reporting options should be used *in addition* to the 'simul
 
 ## Preparation of settings file
 
-The naming of the reported time series and maps is defined in the settings file. **Tables XXXXX and XXXXXX** list the settings variables default output names. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
+The naming of the reported time series and maps is defined in the settings file. The two Tables at the end of this page list the settings variables default output names. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
 
 Time series:
 
