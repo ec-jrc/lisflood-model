@@ -3,15 +3,15 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD transmission loss routine, and how it is used.
+This page describes the LISFLOOD transmission loss routine, and how it is used.
 
-The term 'transmission loss' originate from electronic or communication science and stands for: "The loss of power or voltage of a transmitted wave or current in passing along a transmission line or path or through a circuit device". In river systems, particularly in semi-arid and arid region a similar effect can be observed: The loss of water along channel reaches mainly especially during low and average flow periods. Main reasons for this loss might be:
+The term 'transmission loss' originate from electronic or communication science and stands for: "The loss of power or voltage of a transmitted wave or current in passing along a transmission line or path or through a circuit device". In river systems, particularly in semi-arid and arid region a similar effect can be observed: The loss of water along river channel especially during low and average flow periods. Main reasons for this loss might be:
 
 -   Evaporation of water inside the channel reach
 
 -   Use of water for domestic, industrial or agricultural use
 
--   Leaching to lower groundwater zones
+-   Infiltration to lower groundwater zones
 
 A simplified approach to model this effect has been chosen from Rao and Maurer (1996), without the need of additional data and with only three parameters, making calibration relatively simple.
 
@@ -28,8 +28,9 @@ Transmission loss is *optional*, and can be activated by adding the following li
 The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage of a channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
 $$
-Outflow = {\left( {Inflo{w^{\frac{1}{{TransPower}}}} - TransSub} \right)^{TransPower}}
+Outflow = {\left( {Inflo{w^\frac{1}{TransPower}}} - TransSub} \right)^{TransPower}
 $$
+
 with: 
    $Outflow$:		discharge at the outflow
    $Inflow$:		discharge at the Inflow (upstream)
