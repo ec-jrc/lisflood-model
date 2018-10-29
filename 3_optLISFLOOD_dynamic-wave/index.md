@@ -21,31 +21,46 @@ $$
 $$
 
 where 
-$\Delta't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, *∆x* is the length of one channel element (pixel) $[m]$, *V* is the flow velocity $[\frac{m}{s}]$ and $c_d$ is dynamic wave celerity $[\frac{m}{s}]$. 
+    <br> $\Delta't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, 
+    <br> *∆x* is the length of one channel element (pixel) $[m]$, 
+    <br> *V* is the flow velocity $[\frac{m}{s}]$ and 
+    <br> $c_d$ is dynamic wave celerity $[\frac{m}{s}]$. 
 
 The dynamic wave celerity can be calculated as (Chow, 1988):
 
 $$
 {c_d} = \sqrt {gy}
 $$
-where *g* is the acceleration by gravity $[\frac{m}{s^{2}}]$ and *y* is the depth of flow $[m]$. For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. The flow velocity is simply:
+where 
+    <br> *g* is the acceleration by gravity $[\frac{m}{s^{2}}]$ and 
+    <br> *y* is the depth of flow $[m]$. 
+<br> For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. The flow velocity is simply:
 
 $$
 V = {Q_{ch}}/A
 $$
-where $Q_{ch}$ is the discharge in the channel $[\frac{m^3}{s}]$, and *A* the cross-sectional area $[m^2]$.
+
+where 
+    <br> $Q_{ch}$ is the discharge in the channel $[\frac{m^3}{s}]$, and 
+    <br> *A* the cross-sectional area $[m^2]$.
 
 The Courant number for the dynamic wave, $C_{dyn}$, can now be computed as:
 
 $$
 C_{dyn} = \frac{(V + c_d)\Delta t}{\Delta x}
 $$
-where *∆t* is the overall model time step \[s\]. The number of sub-steps is then given by:
+where 
+    <br> *∆t* is the overall model time step \[s\]. 
+    
+The number of sub-steps is then given by:
 
 $$
 SubSteps = \max (1,roundup(\frac{C_{dyn}}{C_{dyn,crit}}))
 $$
-where $C_{dyn,crit}$ is the critical Courant number. The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
+
+where 
+    <br> $C_{dyn,crit}$ is the critical Courant number. 
+<br> The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
 
 
 
