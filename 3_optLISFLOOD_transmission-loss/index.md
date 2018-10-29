@@ -48,7 +48,7 @@ As a main difference to the Rao and Maurer 1996, the $TransPower$ parameter is n
 
 No additional maps or tables are needed. Using the transmission loss option involves two steps:
 
-1.  In the 'lfuser' element (replace the file paths/names by the ones you want to use):
+1)  In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
 ```xml
 	<group>                                                             
@@ -81,7 +81,7 @@ No additional maps or tables are needed. Using the transmission loss option invo
 	</group>                                                            
 ```
 
-**TransSub** is the linear transmission loss parameter. Standard is set to 0.3 and the range should be between 01. -- 0.6 (higher values lead to more loss) 
+**TransSub** is the linear transmission loss parameter. Standard is set to 0.3 and the range should be between 0.1 -- 0.6 (higher values lead to more loss) 
 
 **TransPower** is the power transmission loss parameter. Standard is set to 2.0 and the range should be between 1.3 and 2.0 (higher values lead to more loss) 
 
@@ -89,7 +89,7 @@ No additional maps or tables are needed. Using the transmission loss option invo
 
 
 
-2.  Activate the transmission loss option
+2)  Activate the transmission loss option
 
 Add the following line to the 'lfoptions' element:
 
