@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD inflow hydrograph routine, and how it is used. Inflow hydrographs are *optional*, and can be activated by adding the following line to the 'lfoptions' element:
+This page describes the LISFLOOD inflow hydrograph routine, and how it is used. Inflow hydrographs are *optional*, and can be activated by adding the following line to the 'lfoptions' element in the LISFLOOD settings file:
 
 ```xml
 	<setoption name="inflow" choice="1" />
