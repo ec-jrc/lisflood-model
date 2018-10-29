@@ -23,10 +23,10 @@ $$
 
 with:
 
-   $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
-   $H$:	 Water level in lake $[m]$
-   $H_0$:	Water level at which lake outflow is zero $[m]$
-   $A, B$:	Constants \[-\]
+   <br>$O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
+   <br>$H$:	 Water level in lake $[m]$
+   <br>$H_0$:	Water level at which lake outflow is zero $[m]$
+   <br>$A, B$:	Constants \[-\]
 
 
 ![](../media/image45.png)
