@@ -76,7 +76,7 @@ No additional maps or tables are needed for initializing the double kinematic wa
 
 Using the double kinematic wave approach option involves **three steps**:
 
-1. In the 'lfuser' element (replace the file paths/names by the ones you want to use):
+1) In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
 ```xml
 	</textvar>                                                           
@@ -96,13 +96,13 @@ Using the double kinematic wave approach option involves **three steps**:
 
 **QSplitMult** is a factor to the average discharge to determine the bankful discharge. The average discharge map is produced in the initial run (the initial run is already needed to get the groundwater storage). Standard is set to 2.0 (assuming over bankful discharge starts at 2.0·average discharge).
 
-2. Activate the double kinematic wave option by adding the following line to the 'lfoptions' element:
+2) Activate the double kinematic wave option by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="SplitRouting" choice="1" />
 ```
 
-3. Run LISFLOOD first with
+3) Run LISFLOOD first with
 
 ```xml
 	<setoption name="InitLisflood" choice="1" />
