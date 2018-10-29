@@ -27,15 +27,18 @@ Transmission loss is *optional*, and can be activated by adding the following li
 
 The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage of a channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
+<span style="color:red"> Someone please add the equation... I can't find it. Thanks</span>
+
+
 $$
-Outflow = {\left( {Inflo{w^\frac{1}{TransPower}}} - TransSub} \right)^{TransPower}
+Outflow = xxx
 $$
 
 with: 
-   $Outflow$:		discharge at the outflow
-   $Inflow$:		discharge at the Inflow (upstream)
-   $TransPower$: 	Parameter given by the rating curve
-   $TransSub$:		Parameter which is to calibrate
+   <br> $Outflow$:		discharge at the outflow
+   <br> $Inflow$:		discharge at the Inflow (upstream)
+   <br> $TransPower$: 	Parameter given by the rating curve
+   <br> $TransSub$:		Parameter which is to calibrate
 
 As a main difference to the Rao and Maurer 1996, the $TransPower$ parameter is not calculated by using a rating curve but is estimated (calibrated) as the parameter $TransSub$. Transmission loss takes place where the channel gets bigger with more influence of river-aquifer interaction and also with more river-floodplain interaction. Therefore a minimum upstream area is defined where transmission loss starts to get important.
 
