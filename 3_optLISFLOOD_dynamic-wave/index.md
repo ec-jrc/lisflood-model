@@ -17,7 +17,7 @@ This page describes the LISFLOOD dynamic wave routine, and how it is used. A str
 The current dynamic wave implementation requires that all equations are solved using a time step that is much smaller (order of magnitude: seconds-minutes) than the typical overall time step used by LISFLOOD (order of magnitude: hours-day). More specifically, during one (sub) time step no water should be allowed to travel more than 1 cell downstream, i.e.:
 
 $$
-\Delta '{t_{dyn}} \le \frac{{\Delta x}}{{V + {c_d}}}
+\Delta '{t_{dyn}} \le \frac{\Delta x}{V + {c_d}}
 $$
 
 where 
