@@ -45,7 +45,7 @@ In the LISFLOOD settings file (<span style="color:red"> **INSERT LINK TO SETTING
 <span style="color:red"> **Actually the output option and so many others are still missing. We have to make the check that all options are described!**</span>.)
 
 
-***Table:*** *LISFLOOD options.*                                                                                                                                                                                                                                                                                                         
+***Table:*** *LISFLOOD additional reporting options.*                                                                                                                                                                                                                                                                                                         
 
 | Option                                                       | Description                                                  | Default |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- |
