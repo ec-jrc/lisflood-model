@@ -8,7 +8,7 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the direct runoff fraction)
 4. There is no groundwater storage
 
-For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using LISFLOOD's lake option, which is described in **Section XXXXXXXXXXXXXXXX**). **For water covered areas**, LISFLOOD assumes that:
+For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using [LISFLOOD's lake option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_lakes/). **For water covered areas**, LISFLOOD assumes that:
 
 1. The loss of actual evaporation is equal to the potential evaporation on open water
 2. Any water that is not evaporated, reaches the surface is added directly to surface runoff
@@ -28,7 +28,7 @@ For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) d
 
 
 
-If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in **Chapter XXXXXXXXXXXXXXXXXX**), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
+If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in [OPTIONAL LISFLOOD PROCESSES AND OUTPUT](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_overview/)), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
 ![](../media/image24.png)
 
@@ -36,6 +36,6 @@ If you activate any of LISFLOOD's options for writing internal model fluxes to t
 
 
 
-In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in **Chapter XXXXXXXXXXXXXXX**).
+In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate [LISFLOOD's options](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_overview/).
 
 [🔝](#top)
