@@ -22,7 +22,6 @@ O_{lake} = A{(H - {H_0})^B}
 $$
 
 with:
-
    <br>$O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
    <br>$H$:	 Water level in lake $[m]$
    <br>$H_0$:	Water level at which lake outflow is zero $[m]$
