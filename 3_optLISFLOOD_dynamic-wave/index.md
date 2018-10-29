@@ -31,26 +31,29 @@ The dynamic wave celerity can be calculated as (Chow, 1988):
 $$
 {c_d} = \sqrt {gy}
 $$
+
 where 
     <br> *g* is the acceleration by gravity $[\frac{m}{s^{2}}]$ and 
     <br> *y* is the depth of flow $[m]$. 
-<br> For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. The flow velocity is simply:
+<br> For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. 
+
+The flow velocity is simply:
 
 $$
-V = {Q_{ch}}/A
+V = \frac{Q_{ch}}{A}
 $$
 
 where 
     <br> $Q_{ch}$ is the discharge in the channel $[\frac{m^3}{s}]$, and 
-    <br> *A* the cross-sectional area $[m^2]$.
+    <br> $A$ the cross-sectional area $[m^2]$.
 
 The Courant number for the dynamic wave, $C_{dyn}$, can now be computed as:
 
 $$
 C_{dyn} = \frac{(V + c_d)\Delta t}{\Delta x}
 $$
-where 
-    <br> *∆t* is the overall model time step \[s\]. 
+
+where *∆t* is the overall model time step \[s\]. 
     
 The number of sub-steps is then given by:
 
@@ -58,15 +61,13 @@ $$
 SubSteps = \max (1,roundup(\frac{C_{dyn}}{C_{dyn,crit}}))
 $$
 
-where 
-    <br> $C_{dyn,crit}$ is the critical Courant number. 
-<br> The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
+where $C_{dyn,crit}$ is the critical Courant number. The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value (although if you make it too small the model becomes excessively slow). It is recommended to stick to the default value (0.4) that is used the settings file template.
 
 
 
 ## Input data
 
-A number of addition input files are necessary to use the dynamic wave option. First, the channel stretches for which the dynamic wave is to be used are defined on a Boolean map. Next, a cross-section identifier map is needed that links the (dynamic wave) channel pixels to the cross-section table (see further on). A channel bottom level map describes the bottom level of the channel (relative to sea level). Finally, a cross-section table describes the relationship between water height (*H*), channel cross-sectional area (*A*) and wetted perimeter (*P*) for a succession of *H* levels.
+A number of additional input files are necessary to use the dynamic wave option. First, the channel stretches for which the dynamic wave is to be used are defined on a Boolean map. Next, a cross-section identifier map is needed that links the (dynamic wave) channel pixels to the cross-section table (see further down). A channel bottom level map describes the bottom level of the channel (relative to sea level). Finally, a cross-section table describes the relationship between water height (*H*), channel cross-sectional area (*A*) and wetted perimeter (*P*) for a succession of *H* levels.
 
 The following table lists all required input:
 
@@ -120,7 +121,7 @@ The number of H/A/P combinations that are used for each cross section is user-de
 
 ## Using the dynamic wave
 
-The 'lfuser' element contains two parameters that can be set by the user: *CourantDynamicCrit* (which should always be smaller than 1) and a parameter called *DynWaveConstantHeadBoundary*, which defines the boundary condition at the most downstream cell. All remaining dynamic-wave related input is defined in the 'lfbinding' element, and doesn't require any changes from the user (provided that all default names are used, all maps are in the standard 'maps' directory and the profile table is in the 'tables' directory). In 'lfuser' this will look like this:
+The 'lfuser' element contains two parameters that can be set by the user: *CourantDynamicCrit* (which should always be smaller than '1' and a parameter called *DynWaveConstantHeadBoundary*, which defines the boundary condition at the most downstream cell. All remaining dynamic-wave related input is defined in the 'lfbinding' element, and doesn't require any changes from the user (provided that all default names are used, all maps are in the standard 'maps' directory and the profile table is in the 'tables' directory). In 'lfuser' this will look like this:
 
 ```xml
 	<comment>                                                           
