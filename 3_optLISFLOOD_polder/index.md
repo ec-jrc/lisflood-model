@@ -34,7 +34,7 @@ From the Figure, it is easy to see that there can be three situations:
         <br> $b$ is the outflow width $[m]$, 
         <br> $g$ is the acceleration due to gravity ($9.81\ \frac{m}{s^2}$) and 
         <br> $\mu$ is a weir constant which has a value of 0.49. 
-    Furthermore  is $q_{c,p}$ in $\frac{m}{s}$.
+    <br> Furthermore  is $q_{c,p}$ in $\frac{m}{s}$.
 
 
 
