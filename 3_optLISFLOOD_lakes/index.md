@@ -72,7 +72,7 @@ Here a worked example. Be aware that the calculation can be less straightforward
 
 ### EXAMPLE: Calculation of average net lake inflow
 
- <u>Lake characteristics</u> 
+ Lake characteristics 
  - lake area: $215 \cdot 10^6\ m^2$                                            
  - mean annual discharge downstream of lake: $293\ \frac{m^3}{s}$             
  - mean annual discharge upstream of lake: $300\ \frac{m^3}{s}$               
@@ -80,7 +80,7 @@ Here a worked example. Be aware that the calculation can be less straightforward
                                 
  <u>METHOD 1: USING AVERAGE OUTFLOW</u>                                   
  Assuming lake is in quasi steady-state:                               
- 	average net inflow = average net outflow = <u>$293 \frac{m^3}{s}$                                                  
+ 	average net inflow = average net outflow = $293 \frac{m^3}{s}$                                                  
 
  <u>METHOD 2: USING AVERAGE INFLOW AND EVAPORATION</u>                    
  Only use this method if no outflow data are available                 
