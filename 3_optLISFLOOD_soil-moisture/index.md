@@ -2,7 +2,7 @@
 
 ## Introduction
 
-LISFLOOD offers the possibility to calculate pF values from the moisture content of both soil layers. The calculation of pF values is *optional*, and it can be activated by adding the following line to the 'lfoptions' element in the LISFLOOD settings file (<span style="color:red"> add link </span>):
+Hello LISFLOOD offers the possibility to calculate pF values from the moisture content of both soil layers. The calculation of pF values is *optional*, and it can be activated by adding the following line to the 'lfoptions' element in the LISFLOOD settings file (<span style="color:red"> add link </span>):
 
 ```xml
 	<setoption name="simulatePF" choice="1" /> 
