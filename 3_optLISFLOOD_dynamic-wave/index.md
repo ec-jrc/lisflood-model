@@ -32,10 +32,7 @@ $$
 {c_d} = \sqrt {gy}
 $$
 
-where 
-    <br> *g* is the acceleration by gravity $[\frac{m}{s^{2}}]$ and 
-    <br> *y* is the depth of flow $[m]$. 
-<br> For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. 
+where *g* is the acceleration by gravity $[\frac{m}{s^{2}}]$ and *y* is the depth of flow $[m]$. For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. Since the current dynamic wave routine uses irregularly shaped cross-section data, we simply assume than *y* equals the water level above the channel bed. 
 
 The flow velocity is simply:
 
