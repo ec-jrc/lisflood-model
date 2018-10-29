@@ -27,7 +27,7 @@ The water is withdrawn only from discharge in the river network but not from soi
 
 ***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
 
-In the settings.xml you can define:
+In the LISFLOOD settings file you can define:
 
 -   the percentage of water that must remain in a grid cell and is not withdrawn by water use (WUsePercRemain)
 
