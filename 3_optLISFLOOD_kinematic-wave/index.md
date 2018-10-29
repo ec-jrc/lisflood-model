@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD double kinematic wave routine, and how it is used. Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
+This annex describes the LISFLOOD double kinematic wave routine, and how it is used. Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element the to LISFLOOD settings file (<span style="color:red"> add link</span>):
 
 ```xml
 	<setoption name="SplitRouting" choice="1" />
@@ -15,7 +15,7 @@ This annex describes the LISFLOOD double kinematic wave routine, and how it is u
 The flow routing is done by the kinematic wave approach. Therefore two equations have to be solved:
 
 $$
-\frac{{\partial Q}}{{\partial x}} + \frac{{\partial A}}{{\partial t}} = q \rho {\kern 1pt} gA({S_0} - {S_f}) = 0
+\frac{\partial Q}{\partial x} + \frac{\partial A}{\partial t} = q \rho {\kern 1pt} gA({S_0} - {S_f}) = 0
 $$
 
 where $A = \alpha \cdot {Q^{\beta} }$
