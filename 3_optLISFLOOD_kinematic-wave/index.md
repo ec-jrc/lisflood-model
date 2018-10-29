@@ -20,7 +20,7 @@ $$
 
 where $A = \alpha \cdot {Q^{\beta} }$
 
-continuity equation momentum equation as expressed by Chow et al. 1988. Which decreasing inflow the peaks of the resulting outflow will be later in time (see Figure below for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
+The continuity equation momentum equation as expressed by Chow et al. 1988. With decreasing inflow the peaks of the resulting outflow will be later in time (see Figure below for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
 
 ![](../media/image47.png)
 
@@ -50,9 +50,9 @@ The double kinematic approach splits up the channel in two parts (see figure bel
 
 ​	2\. over bankful routing
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image54.png){width="3.142361111111111in"
-height="1.3833333333333333in"}![](https://ec-jrc.github.io/lisflood_manual/media/image55.png){width="1.95in"
-height="1.375in"}
+![](https://ec-jrc.github.io/lisflood_manual/media/image54.png)
+
+![](https://ec-jrc.github.io/lisflood_manual/media/image55.png)
 
 ***Figure:*** *Channel is split in a bankful and over bankful routing*
 
