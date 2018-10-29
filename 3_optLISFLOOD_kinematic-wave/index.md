@@ -62,7 +62,7 @@ Similar methods are used since the 1970s e.g. as multiple linear or non linear s
 
 ## Using double kinematic wave 
 
-No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). A 'warm' start (using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
+No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). A 'warm' start <span style="color:red"> add link</span> (using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
 
 ***Table:***  *Input/output double kinematic wave.*   
 
@@ -76,7 +76,7 @@ No additional maps or tables are needed for initializing the double kinematic wa
 
 Using the double kinematic wave approach option involves **three steps**:
 
-1.  In the 'lfuser' element (replace the file paths/names by the ones you want to use):
+1. In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
 ```xml
 	</textvar>                                                           
@@ -96,7 +96,7 @@ Using the double kinematic wave approach option involves **three steps**:
 
 **QSplitMult** is a factor to the average discharge to determine the bankful discharge. The average discharge map is produced in the initial run (the initial run is already needed to get the groundwater storage). Standard is set to 2.0 (assuming over bankful discharge starts at 2.0·average discharge).
 
-2.  Activate the transmission loss option by adding the following line to the 'lfoptions' element:
+2. Activate the double kinematic wave option by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="SplitRouting" choice="1" />
@@ -110,7 +110,7 @@ Using the double kinematic wave approach option involves **three steps**:
 
 and it will produce a map of average discharge $[\frac{m^3}{s}]$ in the initial folder. This map is used together with the QSplitMult factor to set the value for the second line of routing to start.
 
-For a 'warm start' these initial values are needed (see also table A5.1)
+For a 'warm start' these initial values are needed
 
 ```xml
 	<textvar name="CrossSection2AreaInitValue" value="-9999"> 
