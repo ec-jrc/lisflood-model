@@ -64,7 +64,7 @@ $$
 where $I_l$ is the inflow into the lake and $EW_l$ the lake evaporation (both expressed in $\frac{m^3} {s}$). Re-arranging gives the steady-state lake level:
 
 $$
-H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{\frac{1}{B}}
+H_{ss} = H_0 + (\frac{I_l - EW_l}{A})^{\frac{1}{B}}
 $$
 
 LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow ($=I_l - EW_l$). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
@@ -73,17 +73,17 @@ Here a worked example. Be aware that the calculation can be less straightforward
 
 
 
-### Calculation of average net lake inflow
+### EXAMPLE: Calculation of average net lake inflow
 
  <u>Lake characteristics</u> 
- - lake area: $215•10^6\ m^2$                                            
+ - lake area: $215 \cdot 10^6\ m^2$                                            
  - mean annual discharge downstream of lake: $293\ \frac{m^3}{s}$             
  - mean annual discharge upstream of lake: $300\ \frac{m^3}{s}$               
  - mean annual evaporation: $1100\ \frac{mm}{yr}$ 
                                 
  <u>METHOD 1: USING AVERAGE OUTFLOW</u>                                   
  Assuming lake is in quasi steady-state:                               
- 	average net inflow = average net outflow = <u>$293 m^3 s^{-1}$</u>                                                  
+ 	average net inflow = average net outflow = <u>$293 \frac{m^3}{s}$                                                  
 
  <u>METHOD 2: USING AVERAGE INFLOW AND EVAPORATION</u>                    
  Only use this method if no outflow data are available                 
@@ -92,9 +92,9 @@ Here a worked example. Be aware that the calculation can be less straightforward
 
     $\frac{1100 \frac{mm}{yr}}{1000} = 1.1\ \frac{m}{yr}$           
 
-    $1.1\ \frac{m}{yr} \cdot 215 • 10^{6} m^2 = 2.37•10^8 \frac{m^3}{yr}$     
+    $1.1\ \frac{m}{yr} \cdot 215 \cdot 10^{6} m^2 = 2.37 \cdot 10^8 \frac{m^3}{yr}$     
 
-    $\frac{2.37•10^8 \frac{m^3}{yr}}{365\ days\ \cdot\ 86400 seconds} = 7.5 \frac{m^3}{s}$   
+    $\frac{2.37 \cdot 10^8 \frac{m^3}{yr}}{365\ days\ \cdot\ 86400 seconds} = 7.5 \frac{m^3}{s}$   
 
 
  2.  Compute net inflow:                                           
