@@ -46,26 +46,28 @@ Because lakes (especially large ones) tend to produce a relatively slow response
 of the lake. If $V_l$ is the total lake volume $[m^3]$, the rate of change of $V_l$ at any moment is given by the continuity equation:
 
 $$
-\frac{{dV_l}{dt}} = I(t) - O(t)
+\frac{dV_l}{dt} = I(t) - O(t)
 $$
 
 where $I$ and $O$ are the in- and outflow rates, respectively. For a steady-state situation the storage remains constant, so:
 
 $$
-\frac{{d{V_l}}}{{dt}} = 0\quad \Leftrightarrow \quad I(t) - O(t) = 0
+\frac{dV_l}{dt} = 0\quad \Leftrightarrow \quad I(t) - O(t) = 0
 $$
 
 Substituting all in- and outflow terms gives:
 
 $$
-I_l - EW_l - A \cdot (H - H_0)^B = 0
+I_l - EW_l - A(H - H_0)^B = 0
 $$
-<br> where $I_l$ is the inflow into the lake and $EW_l$ the lake evaporation (both expressed in $\frac{m^3} {s}$). Re-arranging gives the steady-state lake level:
+
+where $I_l$ is the inflow into the lake and $EW_l$ the lake evaporation (both expressed in $\frac{m^3} {s}$). Re-arranging gives the steady-state lake level:
 
 $$
-H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{1/B}
+H_{ss} = H_0 + \frac{I_l - EW_l}{A}^{\frac{1}{B}}
 $$
-<br> LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow ($=I_l - EW_l$). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
+
+LISFLOOD calculates the steady-state lake level based on a user-defined average net inflow ($=I_l - EW_l$). The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
 
 Here a worked example. Be aware that the calculation can be less straightforward for very large lakes with multiple inlets (which are not well represented by the current point approach anyway):
 
