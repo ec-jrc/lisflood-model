@@ -1,24 +1,27 @@
 # Dynamic wave option
 
 ## Introduction
-
-This annex describes the LISFLOOD dynamic wave routine, and how it is used. The current implementation of the dynamic wave function in PCRaster is not a complete dynamic wave formulation according to the summary of the Saint Venant equations as discussed in Chow (1988). The implementation currently consists of the friction force term, the gravity force term and the pressure force term and should therefore be correctly characterised as a diffusion wave formulation. The equations are solved as an explicit, finite forward difference scheme. A straightforward iteration using an Euler solution scheme is used to solve these equations. Dynamic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
+This page describes the LISFLOOD dynamic wave routine, and how it is used. A straightforward iteration using an Euler solution scheme is used to solve these equations. Dynamic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="dynamicWave" choice="1" />
 ```
 
+<span style="color:red"> Is this paragraph still up to date?</span>
+
+<u> Note:</u> The current implementation of the dynamic wave function in PCRaster is not a complete dynamic wave formulation according to the summary of the Saint Venant equations as discussed in Chow (1988). The implementation currently consists of the friction force term, the gravity force term and the pressure force term and should therefore be correctly characterised as a diffusion wave formulation. The equations are solved as an explicit, finite forward difference scheme. 
 
 
 ## Time step selection
 
-The current dynamic wave implementation requires that all equations are solved using a time step that is much smaller (order of magnitude: seconds-minutes) than the typical overall time step used by LISFLOOD
-(order of magnitude: hours-day). More specifically, during one (sub) time step no water should be allowed to travel more than 1 cell downstream, i.e.:
+The current dynamic wave implementation requires that all equations are solved using a time step that is much smaller (order of magnitude: seconds-minutes) than the typical overall time step used by LISFLOOD (order of magnitude: hours-day). More specifically, during one (sub) time step no water should be allowed to travel more than 1 cell downstream, i.e.:
 
 $$
 \Delta '{t_{dyn}} \le \frac{{\Delta x}}{{V + {c_d}}}
 $$
-where $\Delta't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, *∆x* is the length of one channel element (pixel) $[m]$, *V* is the flow velocity $[\frac{m}{s}]$ and $c_d$ is dynamic wave celerity $[\frac{m}{s}]$. 
+
+where 
+$\Delta't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, *∆x* is the length of one channel element (pixel) $[m]$, *V* is the flow velocity $[\frac{m}{s}]$ and $c_d$ is dynamic wave celerity $[\frac{m}{s}]$. 
 
 The dynamic wave celerity can be calculated as (Chow, 1988):
 
