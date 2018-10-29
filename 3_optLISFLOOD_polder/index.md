@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
+This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the settings file <span style="color:red"> add link to settings file here.</span>:
 
 ```xml
 	<setoption name="simulatePolders" choice="1" />
@@ -29,7 +29,12 @@ From the Figure, it is easy to see that there can be three situations:
     $$
     \begin{array}{|} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}
     $$
-    where $b$ is the outflow width $[m]$, $g$ is the acceleration due to gravity ($9.81\ \frac{m}{s^2}$) and $\mu$ is a weir constant which has a value of 0.49. Furthermore  is $q_{c,p}$ in $\frac{m}{s}$.
+
+    where 
+    <br> $b$ is the outflow width $[m]$, 
+    <br> $g$ is the acceleration due to gravity ($9.81\ \frac{m}{s^2}$) and 
+    <br> $\mu$ is a weir constant which has a value of 0.49. 
+    Furthermore  is $q_{c,p}$ in $\frac{m}{s}$.
 
 
 
@@ -44,23 +49,19 @@ From the Figure, it is easy to see that there can be three situations:
 
 ## Regulated and unregulated polders
 
-The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table of the next Section). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
-
-```
-<img src="Assets/icon.png" width="200">
-```
+The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. 
 
 
-
-![](../media/image44.png=200x200)
+![](../media/image44.png)
 
 ***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq XXXX). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq XXXX).*
 
+Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table below). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
 
 
 ## Preparation of input data 
 
-The locations of the reservoirs are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations before running the model (you can do this by displaying the reservoirs map on top of the channel map). The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used. Furthermore, the properties of each polder are described using a number of tables. All required input is listed in the following table:
+The locations of the polders are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations before running the model (you can do this by displaying the polder map on top of the channel map). The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used. Furthermore, the properties of each polder are described using a number of tables. All required input is listed in the following table:
 
 **Table:** *Input requirements polder routine.* 
 
@@ -71,11 +72,13 @@ The locations of the reservoirs are defined on a (nominal) map called '*polders.
 | TabPolderArea | poldarea.txt | polder area | $m^2$  |             |
 | TabPolderOFWidth | poldofw.txt | polder in- and outflow width  | $m$     |             |
 | TabPolderTotalCapacity | poldcap.txt | polder storage capacity     | $m^3$ |             |
-| TabPolderBottomLevel | poldblevel.txt | Bottom level of polder, measured from channel bottom level (see also Figure A4.1)     | $m$      |             |
+| TabPolderBottomLevel | poldblevel.txt | Bottom level of polder, measured from channel bottom level (see also Figure above)     | $m$      |             |
 | TabPolderOpeningTime | poldtopen.txt | Time at which polder is opened    | $time step$ |             |
 | TabPolderReleaseTime | poldtrelease.txt | Time at which water stored in polder is released again     | $time step$ |             |
 
 Note that the polder opening- and release times are both defined a *time step* numbers (*not* days or hours!!). For *unregulated* polders, set both parameters to a bogus value of -9999, i.e.:
+
+<span style="color:red"> Is that still the same or is it now possible to do it with a date stamp? </span>
 
 ```xml
 10 -9999
