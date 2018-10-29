@@ -50,9 +50,9 @@ The double kinematic approach splits up the channel in two parts (see figure bel
 
 ​	2\. over bankful routing
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image54.png)
+![](../media/image54.png)
 
-![](https://ec-jrc.github.io/lisflood_manual/media/image55.png)
+![](../media/image55.png)
 
 ***Figure:*** *Channel is split in a bankful and over bankful routing*
 
