@@ -2,14 +2,15 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD water use routine, and how it is used.
+This page describes the LISFLOOD water use routine, and how it is used.
 
-The water use routine can be used to assess the effect of water withdrawal from different sectors to the water balance. Sectors can be public, industrial, agricultural or energy water withdrawal. As input LISFLOOD needs a stack of maps for one representative year of total water withdrawal demand. According to the available water LISFLOOD calculates if this demand can be fulfilled and removes the possible amount of withdrawal water from the river system. Water use is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
+The water use routine can be used to assess the effect of water withdrawal from different sectors to the water balance. Sectors can be public, industrial, agricultural or energy water withdrawal. As input LISFLOOD needs a stack of maps for one representative year of total water withdrawal demand. LISFLOOD calculates if the available water can fulfill the sectorial water demand and if yes, withdrawals the amount of water from the river system. 
+
+Water use is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="wateruse" choice="1" />
 ```
-
 
 
 ## Calculation of water use
