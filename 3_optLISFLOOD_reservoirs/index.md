@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD reservoirs routine, and how it is used. The simulation of reservoirs is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
+This page describes the LISFLOOD reservoirs routine, and how it is used. The simulation of reservoirs is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="simulateReservoirs" choice="1" />
@@ -14,7 +14,15 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 
 ## Description of the reservoir routine 
 
-Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity $S\ [m^3]$. The relative filling of a reservoir, $F$, is a fraction between 0 and 1. There are three 'special' filling levels. First, each reservoir has a 'dead storage' fraction, since reservoirs never empty completely. The corresponding filling fraction is the 'conservative storage limit', $L_c$. For safety reasons a reservoir is never filled to the full storage capacity. The 'flood storage limit' $L_f$ represents this maximum allowed storage fraction. The buffering capacity of a reservoir is the storage available between the 'flood storage limit' and the 'normal storage limit' ($L_n$). Three additional parameters define the way the outflow of a reservoir is regulated. For e.g. ecological reasons each reservoir has a 'minimum outflow' ($O_{min}$, $[\frac{m^3} {s}]$). For high discharge situations, the 'non-damaging outflow' ($O_{nd}$, $[\frac{m^3} {s}]$) is the maximum possible outflow that will not cause problems downstream. The 'normal outflow' ($O_{norm}$, $[\frac{m^3} {s}]$) is valid once the reservoir reaches its 'normal storage' filling level.
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity $S\ [m^3]$. The relative filling of a reservoir, $F$, is a fraction between 0 and 1. There are three 'special' filling levels. 
+- $L_c$: 'conservative storage limit'. This is the lower limit as reservoirs are  never completely empty. 
+- $L_f$: 'flood storage limit'. This is the upper limit as reservoirs are never filled completly for safety reasons
+- $L_n$: is the available capacity of a reservoir between $L_f$ and $L_c$. 
+
+Three additional parameters define the way the outflow of a reservoir is regulated. 
+- 'minimum outflow' ($O_{min}$, $[\frac{m^3} {s}]$) which is maintained for e.g. ecological reasons; 
+- 'non-damaging outflow' ($O_{nd}$, $[\frac{m^3} {s}]$) is the maximum possible outflow that will not cause problems downstream; and
+- 'normal outflow' ($O_{norm}$, $[\frac{m^3} {s}]$) is the one valid when the reservoir is within its 'normal storage' filling level.
 
 Depending on the relative filling of the reservoir, outflow ($O_{res},[\frac{m^3}{s}]$) is calculated as:
 
@@ -35,16 +43,15 @@ O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd}) ; F \gt L_f
 $$
 
 with:
-
-   $S$:		Reservoir storage capacity $[m^3]$
-   $F$:		Reservoir fill (fraction, 1 at total storage capacity) \[-\]
-   $L_c$:	Conservative storage limit \[-\]
-   $L_n$:	Normal storage limit \[-\]
-   $L_f$:	Flood storage limit \[-\]
-   $O_{min}$:	Minimum outflow $[\frac{m^3} {s}]$
-   $O_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
-   $O_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
-   $I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
+   <br>$S$:		Reservoir storage capacity $[m^3]$
+   <br>$F$:		Reservoir fill (fraction, 1 at total storage capacity) \[-\]
+   <br>$L_c$:	Conservative storage limit \[-\]
+   <br>$L_n$:	Normal storage limit \[-\]
+   <br>$L_f$:	Flood storage limit \[-\]
+   <br>$O_{min}$:	Minimum outflow $[\frac{m^3} {s}]$
+   <br>$O_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
+   <br>$O_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
+   <br>$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
 
 In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value).
 
