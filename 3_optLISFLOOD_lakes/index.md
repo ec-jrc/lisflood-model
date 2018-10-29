@@ -36,7 +36,7 @@ with:
 
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
 
-Both $H$ and $H_0$ can be defined relative to an arbitrary reference level. Since the outflow is a function of the *difference* between both levels, the actual value of this reference level doesn't matter if $H > H_0$. However, it is advised to define both $H$ and $H_0$ relative to the *average bottom level* of the lake. This will result in more realistic simulations during severe drought spells, when the water level drops below $H_0$ (in which case lake outflow ceases). The value of constant *A* can be approximated by the width of the lake outlet in meters, and *B* is within the range 1.5-2 (reference?). Lake evaporation occurs at the potential evaporation rate of an open water surface.
+Both $H$ and $H_0$ can be defined relative to an arbitrary reference level. Since the outflow is a function of the *difference* between both levels, the actual value of this reference level doesn't matter if $H > H_0$. However, it is advised to define both $H$ and $H_0$ relative to the *average bottom level* of the lake. This will result in more realistic simulations during severe drought spells, when the water level drops below $H_0$ (in which case lake outflow ceases). The value of constant *A* can be approximated by the width of the lake outlet in meters, and *B* is within the range 1.5-2 (<span style="color:red"> reference?</span>). Lake evaporation occurs at the potential evaporation rate of an open water surface.
 
 
 
@@ -46,15 +46,16 @@ Because lakes (especially large ones) tend to produce a relatively slow response
 of the lake. If $V_l$ is the total lake volume $[m^3]$, the rate of change of $V_l$ at any moment is given by the continuity equation:
 
 $$
-\frac{{d{V_l}}}{{dt}} = I(t) - O(t)
+\frac{{dV_l}{dt}} = I(t) - O(t)
 $$
-<br>
-where *I* and *O* are the in- and outflow rates, respectively. For a steady-state situation the storage remains constant, so:
+
+where $I$ and $O$ are the in- and outflow rates, respectively. For a steady-state situation the storage remains constant, so:
 
 $$
 \frac{{d{V_l}}}{{dt}} = 0\quad \Leftrightarrow \quad I(t) - O(t) = 0
 $$
-<br> Substituting all in- and outflow terms gives:
+
+Substituting all in- and outflow terms gives:
 
 $$
 I_l - EW_l - A \cdot (H - H_0)^B = 0
