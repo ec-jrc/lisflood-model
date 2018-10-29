@@ -26,20 +26,29 @@ Three additional parameters define the way the outflow of a reservoir is regulat
 
 Depending on the relative filling of the reservoir, outflow ($O_{res},[\frac{m^3}{s}]$) is calculated as:
 
-$$
-O_{res} = min (O_{min} ,\frac{1}{\Delta t} {\cdot F\cdot S) \ ; F \le 2 \cdot L_c}
-$$
+If $$F \le 2 \cdot L_c}$$, then: 
 
 $$
-O_{res} = O_{min } + (O_{norm} - O_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}    ; L_n \ge F \gt 2L_c
+O_{res} = min (O_{min} ,\frac{1}{\Delta t} {\cdot F\cdot S)
 $$
 
-$$
-O_{res} = O_{norm} + \frac{(F - L_n)}{(L_f - L_n)} \cdot \max((I_{res} - O_{norm}),(O_{nd} - O_{norm})); L_f \ge F \gt L_n
-$$
+
+If $$L_n \ge F \gt 2L_c$$, then:
 
 $$
-O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd}) ; F \gt L_f
+O_{res} = O_{min } + (O_{norm} - O_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
+$$
+
+If $$L_f \ge F \gt L_n$$, then:
+
+$$
+O_{res} = O_{norm} + \frac{(F - L_n)}{(L_f - L_n)} \cdot \max((I_{res} - O_{norm}),(O_{nd} - O_{norm}))
+$$
+
+If $$F \gt L_f$$, then:
+
+$$
+O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd})
 $$
 
 with:
