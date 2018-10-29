@@ -24,11 +24,8 @@ $$
 with:
 
    $O_{lake}$:	Lake outflow rate $[\frac{m^3} {s}]$
-
    $H$:	 Water level in lake $[m]$
-
    $H_0$:	Water level at which lake outflow is zero $[m]$
-
    $A, B$:	Constants \[-\]
 
 
@@ -105,7 +102,7 @@ Here a worked example. Be aware that the calculation can be less straightforward
 
 ## Preparation of input data
 
-The lake locations defined on a (nominal) map called '*lakes.map*'. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each lake receives its inflow from its upstream neighbouring channel pixel, you may want to check if each lake has any upstream channel pixels at all (if not, the lake will just gradually empty during a model run!). The lake characteristics are described by 4 tables. The following Table lists all required input:
+The lake locations are defined on a (nominal) map called '*lakes.nc*'. It is important that all lakes are located on a channel pixel (you can verify this by displaying the lake map on top of the channel map). Also, since each lake receives its inflow from its upstream neighbouring channel pixel, you may want to check if each lake has any upstream channel pixels at all (if not, the lake will just gradually empty during a model run!). The lake characteristics are described by 4 tables. The following Table lists all required input:
 
 ***Table:***  *Input requirements lake routine.*                                                                              
 
@@ -120,7 +117,7 @@ The lake locations defined on a (nominal) map called '*lakes.map*'. It is import
 
 
 
->  Note: When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
+<u>Note:</u> When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
 ![](../media/image42.png)
 
@@ -184,7 +181,7 @@ The lake routine produces 4 additional time series and one map (or stack), as li
 
 | Maps            | Default name | Description                    | Units           |
 | --------------- | ------------ | ------------------------------ | --------------- |
-| LakeLevelState  | lakhxxxx.xxx | lake level at last time step12 | $m$             |
+| LakeLevelState  | lakhxxxx.xxx | lake level at last time step | $m$             |
 | **Time series** |              |                                |                 |
 | LakeInflowTS    | qLakeIn.tss  | inflow into lakes              | $\frac{m^3}{s}$ |
 | LakeOutflowTS   | qLakeOut.tss | flow out of lakes              | $\frac{m^3}{s}$ |
