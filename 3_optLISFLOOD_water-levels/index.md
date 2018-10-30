@@ -3,16 +3,21 @@
 
 ## Introduction
 
-Within LISFLOOD it is possible to simulate and report water levels in the channel. The simulation of water levels is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
+Within LISFLOOD it is possible to simulate and report water levels in the river channel. This page describes the LISFLOOD water levels option, and how it is used. The simulation of water levels is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="simulateWaterLevels" choice="1" />
 ```
 
+If the option is switched on, water levels are calculated for river channel pixels where either kinematic or dynamic wave routing is used. Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report water levels. The actual *reporting* of the simulated water levels (as time series or maps) can be activated using two separate options (see below in section 'Reporting of water levels'):
 
+```xml
+	<setoption name="repWaterLevelTs" choice="1" />
+```
 
-If the option is switched on, water levels are calculated for channel pixels where either kinematic or dynamic wave routing is used. Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report water levels. The actual *reporting* of the simulated water levels (as time series or maps) can be activated using two separate options.
-
+```xml
+	<setoption name="repWaterLevelMaps" choice="1" />
+```
 
 
 ## Calculation of water levels
@@ -21,9 +26,9 @@ For channel stretches that are simulated using the dynamic wave, the water level
 
 ![](../media/image57.png)
 
-***Figure:*** *Geometry of channel cross-section in kinematic wave routing. With* $W_b$: *channel bottom width;* $W_u$: *channel upper width;* $z_{bot}$: *channel bottom level;* $z_{fp}$: *floodplain bottom level;* $s$: *channel side slope;* $W_{fp}$: *floodplain width;* $A_{bf}$: *channel cross-sectional area at bankfull;* $A_{fp}$: *floodplain cross-sectional area;* $D_{bf}$: *bankfull channel depth,* $D_{fp}$*: *depth of water on the floodplain.*
+***Figure:*** *Geometry of channel cross-section in kinematic wave routing. With* $W_b$: *channel bottom width;* $W_u$: *channel upper width;* $z_{bot}$: *channel bottom level;* $z_{fp}$: *floodplain bottom level;* $s$: *channel side slope;* $W_{fp}$: *floodplain width;* $A_{bf}$: *channel cross-sectional area at bankfull;* $A_{fp}$: *floodplain cross-sectional area;* $D_{bf}$: *bankfull channel depth,* $D_{fp}$: *depth of water on the floodplain.*
 
-In order to calculate water levels, LISFLOOD needs a map with the with of the floodplain in \[m\], which is defined by 'lfbinding' variable *FloodPlainWidth* (the default name of this map is *chanfpln.map*).
+In order to calculate water levels, LISFLOOD needs a map with the width of the floodplain in \[m\], which is defined by 'lfbinding' variable *FloodPlainWidth* (the default name of this map is *chanfpln.map*).
 
 
 
