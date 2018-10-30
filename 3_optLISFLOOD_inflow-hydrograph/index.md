@@ -32,12 +32,12 @@ The table below lists the input requirements for the inflow hydrograph option. A
 
 Using the inflow hydrograph option involves **four steps**:
 
-1. Create a (nominal) PCRaster map with unique identifiers that point to the location(s) where you want to insert the inflow hydrograph(s)
-2. Save the inflow hydrograph(s) in PCRaster time series format; inflow hydrographs need to be given in $[\frac{m^3}{s}]$
+1) Create a (nominal) PCRaster map with unique identifiers that point to the location(s) where you want to insert the inflow hydrograph(s)
+2) Save the inflow hydrograph(s) in PCRaster time series format; inflow hydrographs need to be given in $[\frac{m^3}{s}]$
 
-  > IMPORTANT: PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the InflowPoints map; the second series to unique identifier 2, and so on. So, even if your InflowPoints map only contains (as an example) identifiers 3 and 4, you still need to include the columns for identifiers 1 and 2!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at t=1, even if you set StepStart to some higher value. For more info on time series files please have a look at the PCRaster documentation.
+<u>IMPORTANT:</u> PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the InflowPoints map; the second series to unique identifier 2, and so on. So, even if your InflowPoints map only contains (as an example) identifiers 3 and 4, you still need to include the columns for identifiers 1 and 2!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at t=1, even if you set StepStart to some higher value. For more info on time series files please have a look at the PCRaster documentation.
 
-3. Make sure that the names of the map and time series are defined in the settings file
+3) Make sure that the names of the map and time series are defined in the settings file
 
 In the 'lfuser' element (replace the file paths/names by the ones you want to use):
 
@@ -67,7 +67,7 @@ In the 'lfuser' element (replace the file paths/names by the ones you want to us
 	</group>                                                            
 ```
 
-4.  Activate the inflow hydrograph option by adding the following line to the 'lfoptions' element:
+4)  Activate the inflow hydrograph option by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="inflow" choice="1" />
@@ -91,12 +91,12 @@ One of the most common uses of the inflow hydrograph option is this: suppose we 
 
 In this case it is important to pay special attention to two issues:
 
-1. <u>Exclude subcatchments from MaskMap</u>
+1) <u>Exclude subcatchments from MaskMap</u>
 
 First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or missing value) on LISFLOOD's *MaskMap* (which defines which pixels are included in the calculations and which are not). If you include it, LISFLOOD will first *simulate* discharge coming out of subcatchment *A*, and then *add* the (measured) inflow on top of it! Of course this doesn't make any sense, so always be careful which areas are included in your simulation and which are not.
 
-2. <u>Make sure your inflow points are where you need them</u>
+2) <u>Make sure your inflow points are where you need them</u>
 
-If you already have all gauge locations on a PCRaster map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
-one pixel downstream of the *outflow* points of the corresponding subcatchment. If you already have a (nominal) map of of your subcatchments, a PCRaster script exists that automatically calculates the corresponding out- and inflow points.
+If you already have all gauge locations on a map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
+one pixel downstream of the *outflow* points of the corresponding subcatchment. If you already have a (nominal) map of of your subcatchments, a PCRaster script exists <span style="color:red"> Script needs uploadin gin the LISFLOOD utilities repository and link needs to be added</span> that automatically calculates the corresponding out- and inflow points.
 
