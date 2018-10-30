@@ -316,27 +316,27 @@ defaults:
 
       - section_title: "Optional LISFLOOD processes"
         items:
-        - title: "Overview"
+        - title: "- Overview"
           url: 3_optLISFLOOD_overview
-        - title: "Lakes"
+        - title: "- Lakes"
           url: 3_optLISFLOOD_lakes
-        - title: "Reservoirs"
+        - title: "- Reservoirs"
           url: 3_optLISFLOOD_reservoirs
-        - title: "Polder"
+        - title: "- Polder"
           url: 3_optLISFLOOD_polder
-        - title: "Kinematic wave"
+        - title: "- Kinematic wave"
           url: 3_optLISFLOOD_kinematic-wave
-        - title: "Dynamic wave"
+        - title: "- Dynamic wave"
           url: 3_optLISFLOOD_dynamic-wave
-        - title: "Soil moisture"
+        - title: "- Soil moisture"
           url: 3_optLISFLOOD_soil-moisture
-        - title: "Water use"
+        - title: "- Water use"
           url: 3_optLISFLOOD_water-use
-        - title: "Transmission loss"
+        - title: "- Transmission loss"
           url: 3_optLISFLOOD_transmission-loss
-        - title: "Inflow hydrograph"
+        - title: "- Inflow hydrograph"
           url: 3_optLISFLOOD_inflow-hydrograph
-        - title: "Water levels"
+        - title: "- Water levels"
           url: 3_optLISFLOOD_water-levels
 
       - section_title: "Annex"
