@@ -9,15 +9,7 @@ Within LISFLOOD it is possible to simulate and report water levels in the river 
 	<setoption name="simulateWaterLevels" choice="1" />
 ```
 
-If the option is switched on, water levels are calculated for river channel pixels where either kinematic or dynamic wave routing is used. Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report water levels. The actual *reporting* of the simulated water levels (as time series or maps) can be activated using two separate options (see below in section 'Reporting of water levels'):
-
-```xml
-	<setoption name="repWaterLevelTs" choice="1" />
-```
-
-```xml
-	<setoption name="repWaterLevelMaps" choice="1" />
-```
+If the option is switched on, water levels are calculated for river channel pixels where either kinematic or dynamic wave routing is used. Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report water levels. The actual *reporting* of the simulated water levels (as time series or maps) can be activated using two separate options (see below in section ['Reporting of water levels')](#reporting-of-water-levels)):
 
 
 ## Calculation of water levels
