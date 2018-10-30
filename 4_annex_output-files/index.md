@@ -81,7 +81,7 @@ In addition, some additional maps and time series may be reported for debugging 
 
 <u>Note</u> again the domains for which variables are valid: all *rate variables* are reported as pixel-average values. Soil moisture and groundwater storage are reported for the permeable fraction of each pixel only. The reported snow cover is the average of the snow depths in snow zones A, B and C.
 
-By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in **Chapter XXXXX**). **Chapter XXX** summarises all options to report additional output maps. The previous remarks related to the domains for which the state variable values are valid also apply to the maps listed in Annex 13.
+By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in the annex on [LISFLOOD input files](https://ec-jrc.github.io/lisflood-model/4_annex_input-files/). The long table below summarises all options to report additional output maps. 
 
 ## Time series
 
@@ -106,7 +106,7 @@ $^2$ Output only if option 'InitLisflood' = 0
 
 | Description                                                  | Units                      | Settings variable      | Default name           |
 | ------------------------------------------------------------ | -------------------------- | ---------------------- | ---------------------- |
-| **STATE VARIABLES AT SITES (option repStateSites)**[^22]     |                            |                        |                        |
+| **STATE VARIABLES AT SITES** (option *repStateSites*)     |                            |                        |                        |
 | depth of water on soil surface                               | $mm$                       | WaterDepthTS           | wDepth.tss             |
 | depth of snow cover on soil surface (pixel-average)          | $mm$                       | SnowCoverTS            | snowCover.tss          |
 | depth of interception storage                                | $mm$                       | CumInterceptionTS      | cumInt.tss             |
@@ -116,7 +116,7 @@ $^2$ Output only if option 'InitLisflood' = 0
 | storage in lower groundwater zone                            | $mm$                       | LZTS                   | lz.tss                 |
 | number of days since last rain                               | $days$                     | DSLRTS                 | dslr.tss               |
 | frost index                                                  | $\frac{°C}{days}$          | FrostIndexTS           | frost.tss              |
-| **RATE VARIABLES AT SITES (option repRateSites)**[^23]       |                            |                        |                        |
+| **RATE VARIABLES AT SITE**S (option *repRateSites*)       |                            |                        |                        |
 | rain (excluding snow)                                        | $\frac{mm}{timestep}$      | RainTS                 | rain.tss               |
 | Snow                                                         | $\frac{mm}{timestep}$      | SnowTS                 | snow.tss               |
 | snow melt                                                    | $\frac{mm}{timestep}$      | SnowmeltTS             | snowMelt.tss           |
@@ -136,13 +136,13 @@ $^2$ Output only if option 'InitLisflood' = 0
 | percolation from upper to lower zone                         | $\frac{mm}{timestep}$      | GwPercUZLZTS           | percUZLZ.tss           |
 | loss from lower zone                                         | $\frac{mm}{timestep}$      | GwLossTS               | loss.tss               |
 | **TIME SERIES, AVERAGE UPSTREAM OF GAUGES**                  |                            |                        |                        |
-| **METEOROLOGICAL INPUT VARIABLES (option *repMeteoUpsGauges*)** |                            |                        |                        |
+| **METEOROLOGICAL INPUT VARIABLES** (option *repMeteoUpsGauges*) |                            |                        |                        |
 | precipitation                                                | $\frac{mm}{timestep}$      | PrecipitationAvUpsTS   | precipUps.tss          |
 | potential reference evapotranspiration                       | $\frac{mm}{timestep}$      | ETRefAvUpsTS           | etUps.tss              |
 | potential evaporation from soil                              | $\frac{mm}{timestep}$      | ESRefAvUpsTS           | esUps.tss              |
 | potential open water evaporation                             | $\frac{mm}{timestep}$      | EWRefAvUpsTS           | ewUps.tss              |
 | average daily temperature                                    | $°C$                       | TavgAvUpsTS            | tAvgUps.tss            |
-| **STATE VARIABLES (option *repStateUpsGauges*)**             |                            |                        |                        |
+| **STATE VARIABLES** (option *repStateUpsGauges*)             |                            |                        |                        |
 | depth of water on soil surface                               | $mm$                       | WaterDepthAvUpsTS      | wdepthUps.tss          |
 | depth of snow cover on                                       | $mm$                       | SnowCoverAvUpsTS       | snowCoverUps.tss       |
 | depth of interception storage                                | $mm$                       | CumInterceptionAvUpsTS | cumInterceptionUps.tss |
@@ -152,7 +152,7 @@ $^2$ Output only if option 'InitLisflood' = 0
 | groundwater lower zone                                       | $mm$                       | LZAvUpsTS              | lzUps.tss              |
 | number of days since last rain                               | $days$                     | DSLRAvUpsTS            | dslrUps.tss            |
 | frost index                                                  | $\frac{°C}{days}$          | FrostIndexAvUpsTS      | frostUps.tss           |
-| **RATE VARIABLES (option *repRateUpsGauges*)**               |                            |                        |                        |
+| **RATE VARIABLES** (option *repRateUpsGauges*)               |                            |                        |                        |
 | rain (excluding snow)                                        | $\frac{mm}{timestep}$      | RainAvUpsTS            | rainUps.tss            |
 | snow                                                         | $\frac{mm}{timestep}$      | SnowAvUpsTS            | snowUps.tss            |
 | snow melt                                                    | $\frac{mm}{timestep}$      | SnowmeltAvUpsTS        | snowMeltUps.tss        |
@@ -171,9 +171,9 @@ $^2$ Output only if option 'InitLisflood' = 0
 | total runoff                                                 | $\frac{mm}{timestep}$      | TotalRunoffAvUpsTS     | totalRunoffUps.tss     |
 | percolation upper to lower zone                              | $\frac{mm}{timestep}$      | GwPercUZLZAvUpsTS      | percUZLZUps.tss        |
 | loss from lower zone                                         | $\frac{mm}{timestep}$      | GwLossTS               | lossUps.tss            |
-| **WATER LEVEL IN CHANNEL (option repWaterLevelTs)**          |                            |                        |                        |
+| **WATER LEVEL IN CHANNEL** (option *repWaterLevelTs*)          |                            |                        |                        |
 | water level in channel                                       | $m$ (above channel bottom) | WaterLevelTS           | waterLevel.tss         |
-| **OUTPUT RELATED TO LOWER ZONE INITIALISATION (option repLZAvInflowSites and repLZAvInflowUpsGauges) |                            |                        |                        |
+| **OUTPUT RELATED TO LOWER ZONE INITIALISATION** (option *repLZAvInflowSites* and *repLZAvInflowUpsGauges*) |                            |                        |                        |
 | average inflow into lower zone                               | $\frac{mm^3}{day}$         | LZAvInflowTS           | lzAvIn.tss             |
 | average inflow into lower zone                               | $\frac{mm^3}{day}$         | LZAvInflowAvUpsTS      | lzAvInUps.tss          |
 
@@ -183,10 +183,10 @@ $^2$ Output only if option 'InitLisflood' = 0
 
 | Description                                                  | Units               | File name         | Domain                               |
 | ------------------------------------------------------------ | ------------------- | ----------------- | ------------------------------------ |
-| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option InitLisflood) |                     |                   |                                      |
+| **AVERAGE RECHARGE MAP (for lower groundwater zone)** (option *InitLisflood*) |                     |                   |                                      |
 | $^1$ average inflow to lower zone                            | $\frac{mm^3}{day}$  | lzavin.map        | other fraction                       |
 | $^1$ average inflow to lower zone (forest)                   | $\frac{mm^3}{day}$  | lzavin_forest.map | forest fraction                      |
-| **INITIAL CONDITION MAPS at defined time steps**26 (option repStateMaps) |                     |                   |                                      |
+| **INITIAL CONDITION MAPS at defined time steps** (option *repStateMaps*) |                     |                   |                                      |
 | $^2$ waterdepth                                              | $mm$                | wdepth00.xxx      | whole pixel                          |
 | $^2$ channel cross-sectional area                            | $m^2$               | chcro000.xxx      | channel                              |
 | $^2$ days since last rain variable                           | $days$              | dslr0000.xxx      | other pixel                          |
@@ -219,13 +219,13 @@ $^2$ Output only if option 'InitLisflood' = 0
 | **DISCHARGE AND WATER LEVEL**           |                        |                            |                                                    |                 |
 | discharge                               | repDischargeMaps       | $\frac{m^3}{s}$            | DischargeMaps                                      | dis             |
 | water level                             | repWaterLevelMaps      | $m$ (above channel bottom) | WaterLevelMaps                                     | wl              |
-| **METEOROLO GICAL INPUT VARIABLES**     |                        |                            |                                                    |                 |
+| **METEOROLOGICAL INPUT VARIABLES**     |                        |                            |                                                    |                 |
 | precipitation                           | repPrecipitationMaps   | $mm$                       | PrecipitationMaps                                  | pr              |
 | potential reference evapotranspiration  | repETRefMaps           | $mm$                       | ETRefMaps                                          | et              |
 | potential evaporation from soil         | repESRefMaps           | $mm$                       | ESRefMaps                                          | es              |
 | potential open water evaporation        | repEWRefMaps           | $mm$                       | EWRefMaps                                          | ew              |
 | average daily temperature               | repTavgMaps            | $mm$                       | TavgMaps                                           | tav             |
-| **STATEVARIABLES**[^30]                 |                        |                            |                                                    |                 |
+| **STATEVARIABLES**                 |                        |                            |                                                    |                 |
 | depth of water on soil surface          | repWaterDepthMaps      | $mm$                       | WaterDepthMaps                                     | wdep            |
 | depth of snow cover on soil surface     | repSnowCoverMaps       | $mm$                       | SnowCoverMaps                                      | scov            |
 | depth of interception storage           | repCumInterceptionMaps | $mm$                       | CumInterceptionMaps <br> CumInterceptionForestMaps | cumi  <br> cumF |
@@ -235,7 +235,7 @@ $^2$ Output only if option 'InitLisflood' = 0
 | storage in lower groundwater zone       | repLZMaps              | $mm$                       | LZMaps <br> LZForestMaps                           | lz <br> lzF     |
 | number of days since last rain          | repDSLRMaps            | $days$                     | DSLRMaps <br> DSLRForestMaps                       | dslr <br> dslF  |
 | frost index                             | repFrostIndexMaps      | $\frac{°C}{days}$          | FrostIndexMaps                                     | frost           |
-| **RATE VARIABLES**[^31]                 |                        |                            |                                                    |                 |
+| **RATE VARIABLES**                 |                        |                            |                                                    |                 |
 | rain (excluding snow)                   | repRainMaps            | $\frac{mm}{timestep}$      | RainMaps                                           | rain            |
 | snow                                    | repSnowMaps            | $\frac{mm}{timestep}$      | SnowMaps                                           | snow            |
 | snow melt                               | repSnowMeltMaps        | $\frac{mm}{timestep}$      | SnowMeltMaps                                       | smelt           |
