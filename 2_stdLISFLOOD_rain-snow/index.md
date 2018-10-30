@@ -49,7 +49,7 @@ The amount of snowmelt and ice melt together can never exceed the actual snow co
 
 For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level. This is shown in Figure below:
 
-![](../media/image10.png)
+![](../media/image10-resize.png)
 
 ***Figure:*** *Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone.*
 
