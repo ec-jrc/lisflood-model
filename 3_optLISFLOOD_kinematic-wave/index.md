@@ -28,7 +28,7 @@ The continuity equation momentum equation as expressed by Chow et al. 1988. With
 
 This is realistic if your channel looks like this:
 
-![](../media/image48.png) ![](../media/image49.png)
+![](../media/image48-resize.png) ![](../media/image49-resize.png)
 
 ***Figure:*** *Schematic cross section of a channel with different water level.*
 
