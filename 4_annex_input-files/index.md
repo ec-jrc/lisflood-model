@@ -1,17 +1,19 @@
-# LISFLOOD input maps and tables
+# LISFLOOD input files
 
-## Maps
+All input that LISFLOOD requires are either in map or table format. Below a listing of all LISFLOOD input files.
 
+
+## LISFLOOD input maps
 
 
 ***Table:*** *LISFLOOD input maps.*
 
-| Map                                                       | Default name[^20]   | Units, range                                           | Description                                                  |
+| Map                                                       | Default name   | Units, range                                           | Description                                                  |
 | --------------------------------------------------------- | ------------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
 | **GENERAL**                                               |                     |                                                        |                                                              |
 | MaskMap                                                   | area.map            | Unit: - <br> Range: 0 or 1                             | Boolean map that defines model boundaries                    |
 | **TOPOGRAPHY**                                            |                     |                                                        |                                                              |
-| Ldd                                                       | ldd.map             | U.: flow directions <br> R.: 1 ≤ map ≤ 9               | local drain direction map (with value 1-9); this file contains flow directions from each cell to its steepest downslope neighbour. Ldd directions are coded according to the following diagram: <br> ![ldd](https://ec-jrc.github.io/lisflood_manual/media/image58.png){width="1.8229166666666667in" height="1.84375in"} <br> This resembles the numeric key pad of your PC's keyboard, except for the value 5, which defines a cell without local drain direction (pit). The pit cell at the end of the path is the outlet point of a catchment. |
+| Ldd                                                       | ldd.map             | U.: flow directions <br> R.: 1 ≤ map ≤ 9               | local drain direction map (with value 1-9); this file contains flow directions from each cell to its steepest downslope neighbour. Ldd directions are coded according to the following diagram: <br> ![](../media/image58.png) <br> This resembles the numeric key pad of your PC's keyboard, except for the value 5, which defines a cell without local drain direction (pit). The pit cell at the end of the path is the outlet point of a catchment. |
 | Grad                                                      | gradient.map        | U.: $\frac{m}{m}$  <br> R.: map > 0 <br> !!!           | Slope gradient                                               |
 | Elevation Stdev                                           | elvstd.map          | U.: $m$ <br> R.: map ≥ 0                               | Standard deviation of elevation                              |
 | **LAND USE -- fraction maps**                             |                     |                                                        |                                                              |
@@ -79,6 +81,8 @@
 
 
 ## Tables
+
+<span style="color:red"> Is this section up to date??</span>
 
 In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one default table is used in the standard LISFLOOD setting. The following table gives an overview:
 
