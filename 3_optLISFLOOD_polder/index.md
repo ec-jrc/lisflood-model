@@ -52,7 +52,7 @@ From the Figure, it is easy to see that there can be three situations:
 The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. 
 
 
-![](../media/image44.png)
+![](../media/image44-resize.png)
 
 ***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to <span style="color:red"> Eq XXXX </span>). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to <span style="color:red"> Eq XXXX </span>).*
 
