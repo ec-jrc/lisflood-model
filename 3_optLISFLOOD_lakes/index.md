@@ -28,7 +28,7 @@ with:
    <br>$A, B$:	  Constants \[-\]
 
 
-![](../media/image45.png)
+![](../media/image45-resize.png)
 
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
 
