@@ -1,6 +1,6 @@
 
 
-![](../media/image2.png)
+![](/media/image2.png)
 
 <span style="color:black; font-family:Georgia; font-size:2em;">LISFLOOD</span>
 <br>
@@ -11,5 +11,5 @@
 <br>
 <span style="color:black; font-family:Georgia; font-size:1em;">LISFLOOD Model Documentation</span>
 
-![](../media/image6.png)
+![](/media/image6.png)
 
