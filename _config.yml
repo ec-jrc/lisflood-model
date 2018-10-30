@@ -281,37 +281,37 @@ defaults:
 
       - section_title: "Standard LISFLOOD processes"
         items:
-        - title: "Overview"
+        - title: "- Overview"
           url: 2_stdLISFLOOD_overview
-        - title: "Snow melt"
+        - title: "- Snow melt"
           url: 2_stdLISFLOOD_rain-snow
-        - title: "Evaporation from the soil surface"
+        - title: "- Evaporation from the soil surface"
           url:  	 	2_stdLISFLOOD_soil-evaporation
-        - title: "Evaporation of interceted water"
+        - title: "- Evaporation of interceted water"
           url:  	2_stdLISFLOOD_evaporation-intercepted-water 	
-        - title: "Interception"
+        - title: "- Interception"
           url: 2_stdLISFLOOD_interception
-        - title: "Water uptake by roots & transpiration"
+        - title: "- Water uptake by roots & transpiration"
           url: 2_stdLISFLOOD_plant-water-uptake
-        - title: "Frost index"
+        - title: "- Frost index"
           url: 2_stdLISFLOOD_fronst-index
-        - title: "Water available for infiltration and direct runoff"
+        - title: "- Water available for infiltration and direct runoff"
           url:  	2_stdLISFLOOD_H20-for-Qdir-infiltration
-        - title: "Infiltration capacity"
+        - title: "- Infiltration capacity"
           url:  	2_stdLISFLOOD_infiltration
-        - title: "Actual infiltration and surface runoff"
+        - title: "- Actual infiltration and surface runoff"
           url:  	2_stdLISFLOOD_actual-infiltration-and-surface-runoff
-        - title: "Soil moisture redistribution"
+        - title: "- Soil moisture redistribution"
           url: 2_stdLISFLOOD_soilmoisture-redistribution
-        - title: "Preferential bypass flow"
+        - title: "- Preferential bypass flow"
           url: 2_stdLISFLOOD_preferential-bypass
-        - title: "Groundwater"
+        - title: "- Groundwater"
           url: 2_stdLISFLOOD_groundwater
-        - title: "Surface runoff routing"
+        - title: "- Surface runoff routing"
           url:  	2_stdLISFLOOD_surface-runnoff-routing
-        - title: "Sub-surface runoff routing"
+        - title: "- Sub-surface runoff routing"
           url: 2_stdLISFLOOD_subsurface-runoff
-        - title: "Channel routing"
+        - title: "- Channel routing"
           url: 2_stdLISFLOOD_channel-routing
 
       - section_title: "Optional LISFLOOD processes"
