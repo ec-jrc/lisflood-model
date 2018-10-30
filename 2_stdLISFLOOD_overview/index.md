@@ -63,7 +63,7 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 
 If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in <span style="color:red"> **Chapter XXX - AD I think this chapter is still missing!**</span>), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
-![](../media/image24.png)
+![](../media/image24-resize.png)
 
 ***Figure:***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
 
