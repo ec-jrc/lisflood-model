@@ -62,10 +62,10 @@ In the LISFLOOD settings file (<span style="color:red"> **INSERT LINK TO SETTING
 | repMBMMTs                                                    | Report timeseries of cumulative mass balance error expressed as mm water slice | 1       |
 | **OUTPUT, MAPS,DISCHARGE**                                   |                                                              |         |
 | repDischargeMaps                                             | Report maps of discharge (for each time step)                | 0       |
-| repWaterLevelMaps[^17]                                       | Report maps of water level in channel (for each time step)   | 0       |
+| repWaterLevelMaps                                       | Report maps of water level in channel (for each time step)   | 0       |
 | **OUTPUT, MAPS, STATE VARIABLES (all, at selected time steps)** |                                                              |         |
 | repStateMaps                                                 | Report maps of model state variables (as defined by "ReportSteps" variable) | 1       |
-| repEndMaps[^18]                                              | Report maps of model state variables (at last time step)     | 0       |
+| repEndMaps                                              | Report maps of model state variables (at last time step)     | 0       |
 | **OUTPUT, MAPS, STATE VARIABLES**                            |                                                              |         |
 | repDSLRMaps                                                  | Report maps of days since last rain (for each time step)     | 0       |
 | repFrostIndexMaps                                            | Report maps of frost index (for each time step)              | 0       |
