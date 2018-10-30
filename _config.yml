@@ -140,6 +140,7 @@ exclude:
   - vendor
   - .asset-cache
   - .bundle
+  - .idea
   - .jekyll-assets-cache
   - .sass-cache
   - assets/js/plugins
