@@ -11,6 +11,6 @@
 <br>
 <span style="color:black; font-family:Georgia; font-size:1em;">LISFLOOD Model Documentation</span>
 
-![](./media/image6.png)
+![](./media/image6-frontpage.png)
 
 Joint Research Centre
