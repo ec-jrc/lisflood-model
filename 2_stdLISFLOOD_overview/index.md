@@ -11,7 +11,15 @@ The figure below provides a first overview on the processes included in LISFLOOD
 <span style="color:red"> CINZIA or AD can you please check that the figure caption is correct - THANKS! Afterwards please delete this comment.</span>
 **
 
-The standard setup of LISFLOOD simulates: snow melt, infiltration, interception of rainfall, leaf drainage, evaporation and water uptake by vegetation, surface runoff, preferential flow (bypass of soil layer), exchange of soil moisture between the two soil layers and drainage to the groundwater, sub-surface and groundwater flow, and flow through river channels. Each of these processes is described in more detail in a seperate section.
+
+The standard LISFLOOD model setup is made up of the following components:
+
+- a 3-layer soil water balance sub-model
+- sub-models for the simulation of groundwater and subsurface flow (using 2 parallel interconnected linear reservoirs)
+- a sub-model for the routing of surface runoff to the nearest river channel
+- a sub-model for the routing of channel flow
+
+The processes that are simulated by the model include also snow melt, infiltration, interception of rainfall, leaf drainage, evaporation and water uptake by vegetation, surface runoff, preferential flow (bypass of soil layer), exchange of soil moisture between the two soil layers and drainage to the groundwater, sub-surface and groundwater flow, and flow through river channels.
 
 ## Sub-grid variability
 
