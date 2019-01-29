@@ -207,6 +207,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-pdf
   - jemoji
 
 # mimic GitHub Pages with --safe
@@ -258,11 +259,15 @@ compress_html:
 # Defaults
 
 defaults:
-  # _pages
-  - scope:
+  -
+    scope:
       path: ""
       type: pages
     values:
+      pdf: true
+#        cache: false | directory | default: .asset-cache
+#        page_size: A4, Letter, etc. | default: A4
+#        layout: layout | default: pdf
       layout: single
       author_profile: true
       read_time: false
@@ -359,6 +364,8 @@ defaults:
           url: 5_references
         - title: "Disclaimer"
           url: 0_disclaimer
+
+
 
 
 theme: jekyll-theme-minimal

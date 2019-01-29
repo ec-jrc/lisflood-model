@@ -32,7 +32,7 @@ where
    *M* is the rate of snowmelt, 
    $T_{avg}$ is the average daily temperature, 
    $T_m$ is some critical temperature and 
-   $C_m$ is a degree-day factor \[$\frac{mm} {°C \ day}$\]. 
+   $C_m$ is a degree-day factor $[\frac{mm} {°C \ day}]$. 
 
 Speers *et al.* (1979) developed an extension of this equation which accounts for accelerated snowmelt that takes place when it is raining (cited in Young, 1985). The equation is supposed to apply when rainfall is greater than 30 mm in 24 hours. Moreover, although the equation is reported to work sufficiently well in forested areas, it is not valid in areas that are above the tree line, where  radiation is the main energy source for snowmelt). LISFLOOD uses a variation on the equation of Speers *et  al.* The modified equation simply assumes that for each mm of rainfall, the rate of snowmelt increases with 1% (compared to a 'dry' situation). This yields the following equation:
 
@@ -41,11 +41,11 @@ M = {C_m} \cdot C_{Seasonal}(1 + 0.01 \cdot R\Delta t)(T_{avg} - T_m) \cdot \Del
 $$
 
 where 
-   *M* is the snowmelt per time step \[$mm$\], 
-   *R* is rainfall (not snow!) intensity \[$\frac {mm}{day}$], and 
-   $\Delta t$ is the time interval \[$days$\]. 
+   *M* is the snowmelt per time step $[mm]$, 
+   *R* is rainfall (not snow!) intensity $[\frac {mm}{day}]$, and 
+   $\Delta t$ is the time interval $[days]$. 
    $T_m$ has a value of 0 $^\circ C$, and 
-   $C_m$ is a degree-day factor \[$\frac{mm} {^\circ C \cdot day}$\]. 
+   $C_m$ is a degree-day factor $[\frac{mm} {^\circ C \cdot day}]$. 
 
 However, it should be stressed that the value of $C_m$ can actually vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __in practice this parameter is often treated as a calibration constant__. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 

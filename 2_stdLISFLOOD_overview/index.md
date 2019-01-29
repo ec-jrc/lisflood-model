@@ -73,8 +73,8 @@ If you activate any of LISFLOOD's options for writing internal model fluxes to t
 
 ![](../media/image24-resize.png)
 
-***Figure:***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water} $ *simulation of aggregated land cover classes in LISFLOOD.*
+***Figure:***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water}$ *simulation of aggregated land cover classes in LISFLOOD.*
 
-In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other}) $ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in <span style="color:red"> **Chapter XXX - AD I think this chapter is still missing!**</span>).
+In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other})$ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in <span style="color:red"> **Chapter XXX - AD I think this chapter is still missing!**</span>).
 
 [🔝](#top)

@@ -1,4 +1,4 @@
-# Routing (horizonal flow processes)
+# Routing (horizontal flow processes)
 
 ## Routing of surface runoff to channel
 
