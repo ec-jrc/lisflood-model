@@ -2,6 +2,10 @@
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+\usepackage{floatrow}
+\floatplacement{figure}{!ht}
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
@@ -200,9 +204,9 @@ $endif$
 \newcommand{\gt}{>}
 \newcommand{\lt}{<}
 
-% set default figure placement to htbp
+% set default figure placement to !ht (was htbp)
 \makeatletter
-\def\fps@figure{htbp}
+\def\fps@figure{!ht}
 \makeatother
 
 $for(header-includes)$

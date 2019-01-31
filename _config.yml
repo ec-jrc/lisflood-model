@@ -263,10 +263,6 @@ defaults:
       path: ""
       type: pages
     values:
-      pdf: true
-#        cache: false | directory | default: .asset-cache
-#        page_size: A4, Letter, etc. | default: A4
-#        layout: layout | default: pdf
       layout: single
       author_profile: true
       read_time: false
@@ -363,8 +359,6 @@ defaults:
           url: 5_references
         - title: "Disclaimer"
           url: 0_disclaimer
-
-
 
 
 theme: jekyll-theme-minimal

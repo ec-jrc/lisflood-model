@@ -30,8 +30,7 @@ For open water (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) d
 
 If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in [OPTIONAL LISFLOOD PROCESSES AND OUTPUT](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_overview/)), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
-![](../media/image24.png)
-
+![aggregated land cover classes](../media/image24.png)
 ***Figure***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water}$ *simulation of aggregated land cover classes in LISFLOOD.*
 
 

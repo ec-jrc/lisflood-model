@@ -12,7 +12,6 @@ flow is only simulated in the permeable fraction of each pixel) . The equation r
 
 The Figure below shows with $c_{pref} = 0$ (red line) every available water for infiltration is converted into preferential flow and bypassing the soil. $c_{pref} = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
 
-![](../media/image34-resize.png)
-
+![Soil moisture and preferential flow relation](../media/image34-resize.png)
 ***Figure:*** *Soil moisture and preferential flow relation.*
 

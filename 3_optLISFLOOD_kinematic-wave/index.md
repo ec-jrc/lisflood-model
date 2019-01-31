@@ -22,20 +22,17 @@ where $A = \alpha \cdot {Q^{\beta} }$
 
 The continuity equation momentum equation as expressed by Chow et al. 1988. With decreasing inflow the peaks of the resulting outflow will be later in time (see Figure below for a simple kinematic wave calculation). The wave propagation slows down because of more friction on the boundaries.
 
-![](../media/image47.png)
-
+![Simulated outflow](../media/image47.png)
 ***Figure:*** *Simulated outflow for different amount of inflow wave propagation gets slower.*
 
 This is realistic if your channel looks like this:
 
-![](../media/image48-resize.png) ![](../media/image49-resize.png)
-
+![Schematic cross section of a channel](../media/image48-resize.png) ![](../media/image49-resize.png)
 ***Figure:*** *Schematic cross section of a channel with different water level.*
 
 But a natural channel looks more like this:
 
-![](../media/image50.png)
-
+![Schematic cross section of a natural channel](../media/image50.png)
 ***Figure:*** *Schematic cross section of a natural channel.*
 
 Which means, opposite to the kinematic wave theory, the wave propagation gets slower as the discharge is increasing, because friction is going up on floodplains with shrubs, trees, bridges. Some of the water is even stored in the floodplains (e.g. retention areas, seepage retention). As a result of this, a single kinematic wave cannot cover these different characteristics of floods and floodplains.
@@ -52,8 +49,7 @@ The double kinematic approach splits up the channel in two parts (see figure bel
 
 ![](../media/image54.png)
 
-![](../media/image55.png)
-
+![Channel is split](../media/image55.png)
 ***Figure:*** *Channel is split in a bankful and over bankful routing*
 
 Similar methods are used since the 1970s e.g. as multiple linear or non linear storage cascade (Chow, 1988). The former forecasting model for the River Elbe (ELBA) used a three stages approach depending on discharge (Fröhlich, 1996).

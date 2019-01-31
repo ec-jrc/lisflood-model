@@ -15,14 +15,12 @@ $$
 Note that the shape parameter *b* is related to the heterogeneity within each grid cell. For a totally homogeneous grid cell *b* approaches zero, which reduces the above equations to a simple 'overflowing bucket' model. Before any water is draining from the soil to the groundwater zone the soil has to be completely filled up. See also red line in the Figure below: e.g. a soil of 60% soil moisture has 40% potential
 infiltration capacity. A $b$ value of 1.0 (see black line) is comparable to a leaking bucket : e.g. a soil of 60% soil moisture has only 10% potential infiltration capacity while 30% is draining directly to groundwater. 
 
-![](../media/image27.png)
-
+![Soil moisture and potential infiltration capacity relation](../media/image27.png)
 ***Figure:*** *Soil moisture and potential infiltration capacity relation.*
 
 Increasing $b$ even further than 1 is comparable to a sieve (see figure below). Most of the water is going directly to groundwater and the potential infiltration capacity is going toward 0.
 
-![](../media/image28.png)
-
+![Analogy picture of increasing Xinanjiang empirical shape parameter](../media/image28.png)
 ***Figure:*** *Analogy picture of increasing Xinanjiang empirical shape parameter* $b$.
 
 

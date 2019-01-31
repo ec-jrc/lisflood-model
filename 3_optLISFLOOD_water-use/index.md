@@ -23,8 +23,7 @@ The water is withdrawn only from discharge in the river network but not from soi
 
 -   If the amount of water withdrawal is larger than the water available in this grid cell water is taken from downstream moving along the local drain direction. This is done by implementing a loop substracting the remaining water from the next downstream cell till all the water for water use is taken or a predefined number of iteration is reached (see figure below -- pixel No. 2 to 5)
 
-![](../media/image56.png)
-
+![Water withdrawal assessing](../media/image56.png)
 ***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
 
 In the LISFLOOD settings file you can define:

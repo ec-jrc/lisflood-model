@@ -25,8 +25,7 @@ $$
 
 where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity and $p$ is the soil water depletion fraction. $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate. The procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003). The following Figure illustrates the relation between $R_{WS}, w,w_{crit}, w_{fc}, w_{wp}$:
 
-![](../media/image26.png)
-
+![Reduction of transpiration in case of water stress](../media/image26.png)
 ***Figure:*** *Reduction of transpiration in case of water stress.* $r_{ws}$ *decreases linearly to zero between* $w_{crit}$ *and* $w_{wp}$.
 
 The **actual transpiration** $T_a$ is now calculated as:

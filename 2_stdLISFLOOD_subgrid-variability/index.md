@@ -6,14 +6,12 @@ Before going into detail with the individual hydrological processes, here first 
 
 In LISFLOOD a number of parameters are linked directly to land cover classes. In the past, this was done through lookup tables. The spatially dominant land use class had been used (see Figure below) to assign the corresponding grid parameter values. This implies that some of the sub-grid variability in land use, and consequently in the parameter of interest, were lost.
 
-![](../media/image13.jpg)
-
+![Land cover aggregation](../media/image13.jpg)
 **_Figure:_** *Land cover aggregation approach in previous versions of LISFLOOD.*
 
 In order to account properly for land use dynamics, some conceptual changes have been made to render LISFLOOD more land-use sensitive. To account for the sub-grid variability in land use, we model the within-grid variability. In the latest version of the hydrological model, the spatial distribution and frequency of each class is defined as a percentage of the whole represented area of the new pixel. Combining land cover classes and modeling aggregated classes, is known as the concept of hydrological response units (HRU). The logic behind this approach is that the non-linear nature of the rainfall-runoff processes on different land cover surfaces observed in reality will be better captured. This concept is also used in models such as SWAT (Arnold and Fohrer, 2005) and PREVAH (Viviroli et al., 2009). LISFLOOD has been transferred a HRU approach on sub-grid level, as shown here:
 
-![](../media/image14.jpg)
-
+![LISFLOOD land cover aggregation by modelling aggregated land use classes separately](../media/image14.jpg)
 **_Figure:_** *LISFLOOD land cover aggregation by modelling aggregated land use classes separately: Percentages of forest (dark green); water (blue), impervious surface (red), other classes (light green).*
 
 ## Soil model
@@ -49,8 +47,7 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 
 If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in <span style="color:red"> **Chapter XXX - AD I think this chapter is still missing!**</span>), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
-![](../media/image24.png)
-
+![aggregated land cover](../media/image24.png)
 ***Figure:***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water}$ *simulation of aggregated land cover classes in LISFLOOD.*
 
 

@@ -16,8 +16,7 @@ Polders can be simulated on channel pixels where dynamic wave routing is used. T
 
 Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), and based on the weir equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in the following Figure:
 
-![](../media/image43.png)
-
+![simulation of polders](../media/image43.png)
 ***Figure:*** *Schematic overview of the simulation of polders.* $p_b$ *is the polder bottom level (above the channel bottom);* $w_c$ *is the water level in the channel;* $h_c$ *and* $h_p$ *are the water levels above the polder in- / outflow, respectively*
 
 
@@ -52,8 +51,7 @@ From the Figure, it is easy to see that there can be three situations:
 The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. 
 
 
-![](../media/image44.png)
-
+![regulated polder](../media/image44.png)
 ***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to <span style="color:red"> Eq XXXX </span>). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to <span style="color:red"> Eq XXXX </span>).*
 
 Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table below). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.

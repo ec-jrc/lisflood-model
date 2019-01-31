@@ -28,8 +28,7 @@ with:
    <br>$A, B$:	  Constants \[-\]
 
 
-![](../media/image45-resize.png)
-
+![Lakes simulation](../media/image45-resize.png)
 ***Figure:*** *Schematic overview of the simulation of lakes.* $H_0$ *is the water level at which the outflow is zero;* $H$ *is the water level in the lake and* $EW$ *is the evaporation from the lake*
 
 Both $H$ and $H_0$ can be defined relative to an arbitrary reference level. Since the outflow is a function of the *difference* between both levels, the actual value of this reference level doesn't matter if $H > H_0$. However, it is advised to define both $H$ and $H_0$ relative to the *average bottom level* of the lake. This will result in more realistic simulations during severe drought spells, when the water level drops below $H_0$ (in which case lake outflow ceases). The value of constant *A* can be approximated by the width of the lake outlet in meters, and *B* is within the range 1.5-2 (<span style="color:red"> reference?</span>). Lake evaporation occurs at the potential evaporation rate of an open water surface.
@@ -118,8 +117,7 @@ The lake locations are defined on a (nominal) map called '*lakes.nc*'. It is imp
 
 <u>Note:</u> When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
-![](../media/image42.png)
-
+![Placement of the lakes](../media/image42.png)
 ***Figure:***  *Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
 
 
