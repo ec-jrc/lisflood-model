@@ -62,7 +62,7 @@ with:
    <br>$O_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
    <br>$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
 
-In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value).
+In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value). THIS NEEDS TO BE REVIEWED
 
 
 
@@ -94,6 +94,7 @@ When you create the map with the reservoir sites, pay special attention to the f
 ## Preparation of settings file
 
 All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the reservoir locations is in the "maps" directory, and all tables in the 'tables" directory. If this is the case, you only have to specify the time-step used for the reservoir calculations and the initial reservoir filling level (expressed as a fraction of the storage capacity). Both are defined in the 'lfuser' element of the settings file. For the reservoir time step (DtSecReservoirs) it is recommended to start with a value of 14400 (4 hours), and try smaller values if the simulated reservoir outflow shows large oscillations. ReservoirInitialFillValue can be either a map or a value (between 0and 1). So we add this to the 'lfuser' element (if it is not there already):
+THIS NEEDS TO BE REVIEWED. DtSecReservoirs IS CURRENTLY NOT READ FROM XML SETTINGS AND NOT USED.
 
 ```xml
 	<group>                                                             
