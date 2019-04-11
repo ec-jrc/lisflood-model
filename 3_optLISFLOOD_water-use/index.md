@@ -2,9 +2,34 @@
 
 ## Introduction
 
+Note AdR: it is strongly advisable to that the water use routine is always used, even in forecasting mode, as irrigation and other abstractions can be substantial
+
 This page describes the LISFLOOD water use routine, and how it is used.
 
-The water use routine can be used to assess the effect of water withdrawal from different sectors to the water balance. Sectors can be public, industrial, agricultural or energy water withdrawal. As input LISFLOOD needs a stack of maps for one representative year of total water withdrawal demand. LISFLOOD calculates if the available water can fulfill the sectorial water demand and if yes, withdrawals the amount of water from the river system. 
+The water use routine is used to include water consumption from various societial sectors:
+. dom: use of water in the public sector, e.g. for domestic use
+. liv: use of water for livestock
+. ene: use of cooling water for the energy sector in thermal or nuclear power plants
+. ind: use of water for the manufacturing industry
+. irr: water used for crop irrigation
+. ric: water used for paddy-rice irrigation
+
+Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
+
+LISFLOOD distinguishes between water demand, water abstraction, and actual water consumption. The difference between water abstraction and water consumption is the water return flow.
+
+Water demand files for each sector need to be created, in mm per timestep per gridcell, so typically:
+dom.nc (mm per timestep per gridcell)
+liv.nc (mm per timestep per gridcell)
+ene.nc (mm per timestep per gridcell)
+ind.nc (mm per timestep per gridcell)
+
+LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination. This is achieved by creating the following maps:
+fracgwused.nc (values between 0 and 1)
+fracncused.nc (values between 0 and 1)
+Lisflood consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water.
+
+LISFLOOD checks per timestep and per waterregion if the demanded water is available. If the water is available, it is abstracted.
 
 Water use is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
 
