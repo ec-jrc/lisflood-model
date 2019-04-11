@@ -5,12 +5,12 @@
 This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable to that the water use routine is always used, even in forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions.
 
 The water use routine is used to include water consumption from various societial sectors:
--   dom: use of water in the public sector, e.g. for domestic use
--   liv: use of water for livestock
--   ene: use of cooling water for the energy sector in thermal or nuclear power plants
--   ind: use of water for the manufacturing industry
--   irr: water used for crop irrigation
--   ric: water used for paddy-rice irrigation
+-   dom:  use of water in the public sector, e.g. for domestic use
+-   liv:  use of water for livestock
+-   ene:  use of cooling water for the energy sector in thermal or nuclear power plants
+-   ind:  use of water for the manufacturing industry
+-   irr:  water used for crop irrigation
+-   ric:  water used for paddy-rice irrigation
 
 The water use is *optional* (though strongly recommended to be always used), and can be activated by adding the following line to the 'lfoptions' element:
 
@@ -35,10 +35,12 @@ They can be switched on by adding the following lines to the 'lfoptions' element
 LISFLOOD distinguishes between water demand, water abstraction, and actual water consumption. The difference between water abstraction and water consumption is the water return flow.
 
 Water demand files for each sector need to be created, in mm per timestep per gridcell, so typically:
--   dom.nc (mm per timestep per gridcell)
--   liv.nc (mm per timestep per gridcell)
--   ene.nc (mm per timestep per gridcell)
--   ind.nc (mm per timestep per gridcell)
+-   dom.nc (mm per timestep per gridcell) for domestic water demand
+-   liv.nc (mm per timestep per gridcell) for livestock water demand
+-   ene.nc (mm per timestep per gridcell) for energy-cooling water demand
+-   ind.nc (mm per timestep per gridcell) for manufacturing industry water demand
+
+Typically, water demand files are related to amounts of population, livestock, GDP changes, GVA changes and can be established from national reported data using downscaling from land use maps.
 
 
 ## Sources of water abstraction
