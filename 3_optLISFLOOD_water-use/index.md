@@ -32,7 +32,7 @@ They can be switched on by adding the following lines to the 'lfoptions' element
 
 ## Water demand, abstraction and consumption
 
-LISFLOOD distinguishes between water demand, water abstraction, and actual water consumption. The difference between water abstraction and water consumption is the water return flow.
+LISFLOOD distinguishes between water demand, water abstraction, and actual water consumption. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due to losses during transport: e.g. leakage in the public supply network, transmission losses during irrigation water transport. Consumptions are typically lower than demands, since only a part of the water evaporates and is lost, and another part is return to the system later on.
 
 Water demand files for each sector need to be created, in mm per timestep per gridcell, so typically:
 -   dom.nc (mm per timestep per gridcell) for domestic water demand
