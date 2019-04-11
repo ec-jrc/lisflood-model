@@ -26,6 +26,8 @@ They can be switched on by adding the following lines to the 'lfoptions' element
 
 ```xml
 	<setoption choice="1" name="drainedIrrigation"/>
+```
+```xml
   <setoption choice="1" name="riceIrrigation"/>
 ```
 
@@ -48,12 +50,16 @@ Typically, water demand files are related to amounts of population, livestock, G
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination. This is achieved by creating the following maps:
 -   fracgwused.nc (values between 0 and 1)
 -   fracncused.nc (values between 0 and 1)
-LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water.
+LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. Depending on the presence of lakes and reservoirs in a water region, a part of the surface water abstraction takes places from the variable amount of water available in them. Note: lakes and reservoirs thus cannot be abstracted to zero. 
 
 
 ## Water Regions
 
-LISFLOOD checks per timestep if the demanded water is available. If the water is available, it is abstracted from so called water regions.
+LISFLOOD checks per timestep if the demanded water is available from a source. 
+
+For groundwater abstraction, water is abstracted from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined.
+
+If the water is available, it is abstracted from so called water regions.
 
 Water use regions can be activated by adding the following line to the 'lfoptions' element:
 
