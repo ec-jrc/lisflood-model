@@ -25,8 +25,8 @@ Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subro
 They can be switched on by adding the following lines to the 'lfoptions' element:
 
 ```xml
-	<setoption choice="1" name="drainedIrrigation"/>                                 
-  <setoption choice="1" name="riceIrrigation"/>                                           
+	<setoption choice="1" name="drainedIrrigation"/>                                                                                                                                
+  <setoption choice="1" name="riceIrrigation"/>                                                                                         
 ```
 
 
@@ -54,6 +54,24 @@ LISFLOOD consequently automatically assumes that the remaining water (1-fracgwus
 ## Groundwater abstractions
 
 LISFLOOD checks per timestep if the demanded water is available from a source. For groundwater abstraction, water is abstracted from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined by monitoring the LZ levels from the start to the end of a simulation.
+
+If the Lower Zone groundwater demand decreases below the 'LZThreshold" or groundwater threshold, the baseflow is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, e.g. the Meuse river basin in 1976.
+
+```xml
+<textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.map">
+<comment>
+threshold value below which there is no outflow to the channel
+</comment>
+</textvar>
+```
+
+These threshold values have to be found through trial and error and/or calibration. The values are likely different for various (sub)river basins. You could start with zero values and then experiment. Keeping large negative values makes sure that there is always baseflow.
+
+When groundwater is abstracted for usage, it typically could cause a local dip in the LZ values compared to neigbouring pixels. Therefore, a simple option to mimick groundwaterflow is added to LISFLOOD, which evens out the groundwaterlevels with neighbouring pixels. This option can be switched on using:
+
+```xml
+	<setoption choice="1" name="groundwaterSmooth"/>
+```
 
 
 ## Non-Conventional abstractions: desalination
