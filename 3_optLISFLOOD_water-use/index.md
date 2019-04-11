@@ -25,8 +25,8 @@ Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subro
 They can be switched on by adding the following lines to the 'lfoptions' element:
 
 ```xml
-	<setoption choice="1" name="drainedIrrigation"/>
-  <setoption choice="1" name="riceIrrigation"/>
+	<setoption choice="1" name="drainedIrrigation"/>                                 
+  <setoption choice="1" name="riceIrrigation"/>                                           
 ```
 
 
@@ -48,22 +48,34 @@ Typically, water demand files are related to amounts of population, livestock, G
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination. This is achieved by creating the following maps:
 -   fracgwused.nc (values between 0 and 1)
 -   fracncused.nc (values between 0 and 1)
-LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. Depending on the presence of lakes and reservoirs in a water region, a part of the surface water abstraction takes places from the variable amount of water available in them. Note: lakes and reservoirs thus cannot be abstracted to zero. 
+LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. 
 
 
-## Water Regions
+## Groundwater abstractions
 
-LISFLOOD checks per timestep if the demanded water is available from a source. 
+LISFLOOD checks per timestep if the demanded water is available from a source. For groundwater abstraction, water is abstracted from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined by monitoring the LZ levels from the start to the end of a simulation.
 
-For groundwater abstraction, water is abstracted from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined.
 
-If the water is available, it is abstracted from so called water regions.
+## Non-Conventional abstractions: desalination
 
-Water use regions can be activated by adding the following line to the 'lfoptions' element:
+It is assumed that the non-conventional fraction of water demand exists. It is abstracted for a 100%.
+
+
+## Surface water abstractions and water regions
+
+If the surface water is available and there is a water demand, it is abstracted from so called 'Waterregions'. These regions are introduced due to the ever higher spatial resolution of water resources models. In a 0.5 degree spatial resolution, we could get away with subtracting the abstraction from the local pixel only, since it was large enough. For finer spatial resolutions, it could well happen that the demand exists in one model pixel, but the actual abstraction takes places in another pixel nearby. We assume here that water abstractions to meet a local water demand do take place within a 'waterregion'
+
+Waterregions can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption choice="1" name="wateruseRegion"/>
 ```
+Depending on the presence of lakes and reservoirs in a water region, a part of the surface water abstraction takes places from the variable amount of water available in them. Note: lakes and reservoirs thus cannot be abstracted to zero. 
+
+
+
+
+
 
 
 ## Calculation of water use
