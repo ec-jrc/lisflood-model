@@ -2,9 +2,7 @@
 
 ## Introduction
 
-Note AdR: it is strongly advisable to that the water use routine is always used, even in forecasting mode, as irrigation and other abstractions can be substantial
-
-This page describes the LISFLOOD water use routine, and how it is used.
+This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable to that the water use routine is always used, even in forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions.
 
 The water use routine is used to include water consumption from various societial sectors:
 -   dom: use of water in the public sector, e.g. for domestic use
@@ -14,7 +12,25 @@ The water use routine is used to include water consumption from various societia
 -   irr: water used for crop irrigation
 -   ric: water used for paddy-rice irrigation
 
+The water use is *optional* (though strongly recommended to be always used), and can be activated by adding the following line to the 'lfoptions' element:
+
+```xml
+	<setoption choice="1" name="wateruse"/>
+```
+
+
+## Crop and paddy-rice irrigation
+
 Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
+They can be switched on by adding the following lines to the 'lfoptions' element:
+
+```xml
+	<setoption choice="1" name="drainedIrrigation"/>
+  <setoption choice="1" name="riceIrrigation"/>
+```
+
+
+## Water demand, abstraction and consumption
 
 LISFLOOD distinguishes between water demand, water abstraction, and actual water consumption. The difference between water abstraction and water consumption is the water return flow.
 
@@ -35,12 +51,12 @@ LISFLOOD consequently automatically assumes that the remaining water (1-fracgwus
 
 ## Water Regions
 
-LISFLOOD checks per timestep and per waterregion if the demanded water is available. If the water is available, it is abstracted.
+LISFLOOD checks per timestep if the demanded water is available. If the water is available, it is abstracted from so called water regions.
 
-Water use is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
+Water use regions can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
-	<setoption name="wateruse" choice="1" />
+	<setoption choice="1" name="wateruseRegion"/>
 ```
 
 
