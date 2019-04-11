@@ -25,8 +25,8 @@ Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subro
 They can be switched on by adding the following lines to the 'lfoptions' element:
 
 ```xml
-	<setoption choice="1" name="drainedIrrigation"/>                                                                                                                                
-  <setoption choice="1" name="riceIrrigation"/>                                                                                         
+<setoption choice="1" name="drainedIrrigation"/>
+<setoption choice="1" name="riceIrrigation"/>
 ```
 
 
