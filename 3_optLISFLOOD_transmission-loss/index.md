@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This page describes the LISFLOOD transmission loss routine, and how it is used.
+Note AdR: The Transition loss option should not be used anymore and gradually deleted from the code and the manual. Water abstractions are dealt within a seperated routine. Open water evaporation in rivers is dealt with by the 'water fraction'. Losses to deeper groundwater are dealt with differently now, using the GroundwaterThresholdValue.
 
 The term 'transmission loss' originate from electronic or communication science and stands for: "The loss of power or voltage of a transmitted wave or current in passing along a transmission line or path or through a circuit device". In river systems, particularly in semi-arid and arid region a similar effect can be observed: The loss of water along river channel especially during low and average flow periods. Main reasons for this loss might be:
 
