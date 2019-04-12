@@ -48,6 +48,7 @@ Typically, water demand files are related to amounts of population, livestock, G
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination. This is achieved by creating the following maps:
 -   fracgwused.nc (values between 0 and 1)
 -   fracncused.nc (values between 0 and 1)
+
 LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. 
 
 
