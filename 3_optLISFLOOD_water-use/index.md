@@ -49,7 +49,7 @@ LISFLOOD can abstract water from groundwater or from surface water (rivers, lake
 -   fracgwused.nc (values between 0 and 1)
 -   fracncused.nc (values between 0 and 1)
 
-LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. 
+LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. 
 
 
 ## Groundwater abstractions
