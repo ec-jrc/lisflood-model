@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable to that the water use routine is always used, even in forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions.
+This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable that the water use routine is always used, even in flood forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions, and also since the water use mode was used during the calibration.
 
 The water use routine is used to include water consumption from various societial sectors:
 -   dom:  use of water in the public sector, e.g. for domestic use
@@ -49,7 +49,7 @@ LISFLOOD can abstract water from groundwater or from surface water (rivers, lake
 -   fracgwused.nc (values between 0 and 1)
 -   fracncused.nc (values between 0 and 1)
 
-LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Details are explained below in a seperate paragraph. 
+LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Details are explained below in a seperate paragraph. 
 
 
 ## Groundwater abstractions
