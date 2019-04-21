@@ -54,9 +54,13 @@ LISFLOOD consequently automatically assumes that the remaining water (1-fracgwus
 
 ## Groundwater abstractions
 
-LISFLOOD checks per timestep if the demanded water is available from a source. For groundwater abstraction, water is abstracted from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined by monitoring the LZ levels from the start to the end of a simulation.
+At every timestep, LISFLOOD checks if the amount of demanded water that is supposed to be abstracted from a source, is actually available. 
 
-If the Lower Zone groundwater demand decreases below the 'LZThreshold" or groundwater threshold, the baseflow is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, e.g. the Meuse river basin in 1976.
+Groundwater abstraction = the total water demand * fracgwused
+
+First, LISFLOOD subtracts groundwater from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined by monitoring the LZ levels from the start to the end of a simulation.
+
+If the Lower Zone groundwater amount decreases below the 'LZThreshold" or groundwater threshold, the baseflow from the LZ to the nearby rivers is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes.
 
 ```xml
 <textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.map">
