@@ -58,6 +58,8 @@ At every timestep, LISFLOOD checks if the amount of demanded water that is suppo
 
 Groundwater abstraction = the total water demand * fracgwused
 
+It is abstracted for a 100%, so no losses are accounted for.
+
 First, LISFLOOD subtracts groundwater from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined by monitoring the LZ levels from the start to the end of a simulation.
 
 If the Lower Zone groundwater amount decreases below the 'LZThreshold" or groundwater threshold, the baseflow from the LZ to the nearby rivers is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes.
@@ -72,7 +74,7 @@ threshold value below which there is no outflow to the channel
 
 These threshold values have to be found through trial and error and/or calibration. The values are likely different for various (sub)river basins. You could start with zero values and then experiment. Keeping large negative values makes sure that there is always baseflow.
 
-When groundwater is abstracted for usage, it typically could cause a local dip in the LZ values compared to neigbouring pixels. Therefore, a simple option to mimick groundwaterflow is added to LISFLOOD, which evens out the groundwaterlevels with neighbouring pixels. This option can be switched on using:
+When groundwater is abstracted for usage, it typically could cause a local dip in the LZ values (~ water table) compared to neigbouring pixels. Therefore, a simple option to mimick groundwaterflow is added to LISFLOOD, which evens out the groundwaterlevels with neighbouring pixels. This option can be switched on using:
 
 ```xml
 	<setoption choice="1" name="groundwaterSmooth"/>
@@ -81,7 +83,11 @@ When groundwater is abstracted for usage, it typically could cause a local dip i
 
 ## Non-Conventional abstractions: desalination
 
-It is assumed that the non-conventional fraction of water demand exists. It is abstracted for a 100%.
+Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined as:
+
+Deaslinated water abstraction = the total water demand * fracncused
+
+It is assumed that the non-conventional water demand is always available. It is abstracted for a 100%, so no losses are accounted for.
 
 
 ## Surface water abstractions and water regions
