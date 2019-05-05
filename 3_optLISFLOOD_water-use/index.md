@@ -4,15 +4,16 @@
 
 This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable that the water use routine is always used, even in flood forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions, and also since the water use mode was used during the calibration.
 
-The water use routine is used to include water consumption from various societial sectors:
+The water use routine is used to include water demand, abstraction, net consumption and return flow from various societial sectors:
 -   dom:  use of water in the public sector, e.g. for domestic use
 -   liv:  use of water for livestock
 -   ene:  use of cooling water for the energy sector in thermal or nuclear power plants
 -   ind:  use of water for the manufacturing industry
 -   irr:  water used for crop irrigation
 -   ric:  water used for paddy-rice irrigation
+Note: the abbreviations 'dom', 'liv' etc are the typical short names also used for the input filenames.
 
-The water use is *optional* (though strongly recommended to be always used), and can be activated by adding the following line to the 'lfoptions' element:
+The water use is *optional* but it is strongly recommended to be always used. The module can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption choice="1" name="wateruse"/>
@@ -32,7 +33,7 @@ They can be switched on by adding the following lines to the 'lfoptions' element
 
 ## Water demand, abstraction and consumption
 
-LISFLOOD distinguishes between water demand, water abstraction, and actual water consumption. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due to losses during transport: e.g. leakage in the public supply network, transmission losses during irrigation water transport. Consumptions are typically lower than demands, since only a part of the water evaporates and is lost, and another part is return to the system later on.
+LISFLOOD distinguishes between water demand, water abstraction, actual water consumption and return flow. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due abstraction limitations (e.g. ecological flow constraints or general availability issues) and/or due to losses during transport from the source of the abstraction to the final destination: e.g. leakage in the public supply network, and transmission losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water evaporates and is lost, and another part is returned to the system later on.
 
 Water demand files for each sector need to be created, in mm per timestep per gridcell, so typically:
 -   dom.nc (mm per timestep per gridcell) for domestic water demand
@@ -40,16 +41,17 @@ Water demand files for each sector need to be created, in mm per timestep per gr
 -   ene.nc (mm per timestep per gridcell) for energy-cooling water demand
 -   ind.nc (mm per timestep per gridcell) for manufacturing industry water demand
 
-Typically, water demand files are related to amounts of population, livestock, GDP changes, GVA changes and can be established from national reported data using downscaling from land use maps.
+Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They are typically obtained by downscaling national or regional reported data using with higher resolution land use maps.
 
 
 ## Sources of water abstraction
 
-LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination. This is achieved by creating the following maps:
--   fracgwused.nc (values between 0 and 1)
--   fracncused.nc (values between 0 and 1)
+LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination or re-used treated waste-water. 
 
-LISFLOOD consequently automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Details are explained below in a seperate paragraph. 
+The sub-division in these three sources is achieved by creating and using the following maps:
+-   fracgwused.nc (values between 0 and 1) ('fraction groundwater used')
+-   fracncused.nc (values between 0 and 1) ('fraction non-conventional used')
+Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Further details on this are explained below in a seperate paragraph. 
 
 
 ## Groundwater abstractions
@@ -58,11 +60,11 @@ At every timestep, LISFLOOD checks if the amount of demanded water that is suppo
 
 Groundwater abstraction = the total water demand * fracgwused
 
-It is abstracted for a 100%, so no losses are accounted for.
+In the current LISFLOOD version, groundwater is abstracted for a 100%, so no addtional losses are accounted for, by which more would need to be abstracted to meet the demand. Also, in the current LISFLOOD version, no limits are set for groundwater abstraction.
 
-First, LISFLOOD subtracts groundwater from the Lower Zone (LZ), at the moment still without limits. Groundwater depletion can thus be examined by monitoring the LZ levels from the start to the end of a simulation.
+LISFLOOD subtracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to monitor more on decadal periods.
 
-If the Lower Zone groundwater amount decreases below the 'LZThreshold" or groundwater threshold, the baseflow from the LZ to the nearby rivers is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes.
+If the Lower Zone groundwater amount decreases below the 'LZThreshold" - a groundwater threshold value -, the baseflow from the LZ to the nearby rivers is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced.
 
 ```xml
 <textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.map">
@@ -72,7 +74,7 @@ threshold value below which there is no outflow to the channel
 </textvar>
 ```
 
-These threshold values have to be found through trial and error and/or calibration. The values are likely different for various (sub)river basins. You could start with zero values and then experiment. Keeping large negative values makes sure that there is always baseflow.
+These threshold values have to be found through trial and error and/or calibration. The values are likely different for various (sub)river basins. You could start with zero values and then experiment, while monitoring simulated and observed baseflows. Keeping large negative values makes sure that there is always baseflow.
 
 When groundwater is abstracted for usage, it typically could cause a local dip in the LZ values (~ water table) compared to neigbouring pixels. Therefore, a simple option to mimick groundwaterflow is added to LISFLOOD, which evens out the groundwaterlevels with neighbouring pixels. This option can be switched on using:
 
@@ -92,39 +94,30 @@ It is assumed that the non-conventional water demand is always available. It is 
 
 ## Surface water abstractions and water regions
 
-If the surface water is available and there is a water demand, it is abstracted from so called 'Waterregions'. These regions are introduced due to the ever higher spatial resolution of water resources models. In a 0.5 degree spatial resolution, we could get away with subtracting the abstraction from the local pixel only, since it was large enough. For finer spatial resolutions, it could well happen that the demand exists in one model pixel, but the actual abstraction takes places in another pixel nearby. We assume here that water abstractions to meet a local water demand do take place within a 'waterregion'
+If the surface water is available and there is a water demand, it is abstracted from so called 'Waterregions'. These regions are introduced in LISFLOOD due to the ever higher spatial resolution of water resources models. In a 0.5 degree spatial resolution model, users could get away with subtracting the abstraction from the local 0.5x0.5 degree pixel only, since it was large enough. For finer spatial resolutions, it could well happen that the demand exists in one model pixel, but the actual abstraction takes places in another pixel nearby. We assume here that water abstractions to meet a local water demand do take place within a 'waterregion'. 
 
-Waterregions can be activated by adding the following line to the 'lfoptions' element:
+Waterregions typically are defined in LISFLOOD as sub-river-basins within a country. Typically, to mimick reality, it is advisable to not allow the model for cross-country-border abstractions. Alternatively, and if the information exists, it would be better to align the waterregions with the actual areas managed by drinkingwater institutions, such as regional waterboards.
+
+Waterregions can be activated in LISFLOOD by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption choice="1" name="wateruseRegion"/>
 ```
+
+## Surface water abstractions from lakes and reservoirs
+
 Depending on the presence of lakes and reservoirs in a water region, a part of the surface water abstraction takes places from the variable amount of water available in them. Note: lakes and reservoirs thus cannot be abstracted to zero. 
 
 
 
 
+## Surface water abstraction from rivers
 
-
-
-## Calculation of water use
-
-The water is withdrawn only from discharge in the river network but not from soil, groundwater or directly from precipitation.
-
--   For each single day a total demand of withdrawal water is loaded from a sparse stack of maps
-
--   Water use is taken from the discharge in the river network. First the water use is taken from the same grid cell (see figure below -- pixel No. 1)
-
--   If the amount of water withdrawal is larger than the water available in this grid cell water is taken from downstream moving along the local drain direction. This is done by implementing a loop substracting the remaining water from the next downstream cell till all the water for water use is taken or a predefined number of iteration is reached (see figure below -- pixel No. 2 to 5)
+The water is withdrawn only from discharge in the river network.
 
 ![Water withdrawal assessing](../media/image56.png)
 ***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
 
-In the LISFLOOD settings file you can define:
-
--   the percentage of water that must remain in a grid cell and is not withdrawn by water use (WUsePercRemain)
-
--   the maximum number of loops (= distance to the water demand cell). For example in figure above: maxNoWateruse = 5
 
 
 
@@ -132,53 +125,6 @@ In the LISFLOOD settings file you can define:
 
 The following Table gives an overview about the maps and table needed for the water use option.
 
-***Table:*** *Input requirements water use.*                                                                                            
-
-| Maps                           | Default name   | Description                                             | Units           |
-| ------------------------------ | -------------- | ------------------------------------------------------- | --------------- |
-| Yearly stack of water use maps | wuse0000.xxx   | Total water withdrawal                                  | $\frac{m^3}{s}$ |
-| Table                          |                |                                                         |                 |
-| WUseofDay                      | WUseofDays.txt | Assignment of day of the year to map stack of water use | -               |
-
-
-
-A sparse map stack of one year of total water withdrawal $[\frac{m^3}{s}]$ with a map every 10 days or a month is needed. Because it is assumed that water use follows a yearly circle, this map stack is used again and again for the following years. For example:
-
-```xml
-	 t   map name 
-	 1   wuse0000.001 
-	 2   wuse0000.032 
-	 3   wuse0000.060 
-	 4   wuse0000.091 
-	 5   wuse0000.121 
-	 6   wuse0000.152 
-	 7   wuse0000.182 
-	 8   wuse0000.213 
-	 9   wuse0000.244 
-	 10  wuse0000.274 
-	 11  wuse0000.305 
-	 12  wuse0000.335 
-```
-
-
-
-To assign each day of simulation the right map a lookup table (WUseOfDay.txt) is necessary:
-
-```xml
-	 <,0.5> 335    
-	 [0.5,32> 1    
-	 [32,60> 32    
-	 [60,91> 60    
-	 [91,121> 91   
-	 [121,152> 121 
-	 [152,182> 152 
-	 [182,213> 182 
-	 [213,244> 213 
-	 [244,274> 244 
-	 [274,305> 274 
-	 [305,335> 305 
-	 [335,> 335
-```
 
 
 
