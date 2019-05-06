@@ -61,7 +61,7 @@ $(PathMaps)/leakage.map
 </textvar>
 ```
 
-The leakage - typically only available as an average percentage per country - is then used to determin the required water abstraction:
+The leakage - typically only available as an average percentage per country - is then used to determine the required water abstraction:
 
 Domestic Water Abstraction = dom.nc * (1 + leakage.map)
 
@@ -111,7 +111,7 @@ Energy Water Return Flow = (1 - EnergyConsumptiveUseFraction) * ene.nc
 
 The manufucaturing industry also required water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD typically reads an 'ind.nc' file which determines the water demand for the industry sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using maps of land use and/or the specific activities.
 
-An "IndustryConsumptiveUseFraction" is used to determine the consumptive water usage of the manufacturing industry.
+An "IndustryConsumptiveUseFraction" is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
 ```xml
 <textvar name="IndustryConsumptiveUseFraction" value="0.15">
@@ -123,14 +123,30 @@ Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
 
 So, the actual: 
 
-Industry Water Consumption = IndustryConsumptiveUseFraction * dom.nc
+Industry Water Consumption = IndustryConsumptiveUseFraction * ind.nc
 
-Industry Water Return Flow = (1 - IndustryConsumptiveUseFraction) * dom.nc
+Industry Water Return Flow = (1 - IndustryConsumptiveUseFraction) * ind.nc
 
 
 ## Livestock water usage
 
-Xxx.
+Livestock also requires water. LISFLOOD typically reads a 'liv.nc' file which determines the water demand for livestock in mm/day/pixel. Mubareka et al. (2013) (http://publications.jrc.ec.europa.eu/repository/handle/JRC79600) estimated the water requirements for the livestock sector. These maps are calculated based on livestock density maps for 2005, normalized by the best available field data at continental scale. Water requirements are calculated for these animal categories: cattle, pigs, poultry and sheep and goats. The cattle category is further disaggregated to calves, heifers, bulls and dairy cows. Using values given in the literature, a relationship using air temperature is inferred for the daily water requirements per livestock category. Daily average temperature maps are used in conjunction with the livestock density maps in order to create a temporal series of water requirements for the livestock sector in Europe. 
+
+An "LivestockConsumptiveUseFraction" is used to determine the consumptive water usage of livestock. This can either be a fixed value, or a spatial explicit map.
+
+```xml
+<textvar name="LivestockConsumptiveUseFraction" value="0.15">
+<comment>
+Consumptive Use (1-Recycling ratio) for livestock water use (0-1)
+</comment>
+</textvar>
+```
+
+So, the actual: 
+
+Livestock Water Consumption = LivestockConsumptiveUseFraction * liv.nc
+
+Livestock Water Return Flow = (1 - LivestockConsumptiveUseFraction) * liv.nc
 
 
 ## Crop irrigation
