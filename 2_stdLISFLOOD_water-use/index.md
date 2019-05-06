@@ -46,7 +46,7 @@ Typically, water demands are related to amounts of population, livestock, Gross 
 Crop irrigation and Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in the irrigation chapter.
 
 
-## Public water usage
+## Public water usage and leakage
 
 Public water demand is the water requirement through the public supply network. The water demand externally estimated in mm/day/gridcell and is read into LISFLOOD. Typically, domestic water demands are obtained by downscaling national reported data with higher resolution population maps.
 
@@ -76,8 +76,10 @@ The actual water consumption of the domestic sector is much less than the abstra
 </textvar>
 ```
 
-So, the actual 
+So, the actual: 
+
 Domestic Water Consumption = DomesticConsumptiveUseFraction * dom.nc
+
 Domestic Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
 
 
