@@ -100,10 +100,22 @@ An "EnergyConsumptiveUseFraction" is used to determine the consumptive water usa
 
 For small rivers the consumptive use varies between 1:2 and 1:3, so 0.33-0.50 (Source: Torcellini et al. (2003) "Consumptive Use for US Power Production"), while for plants close to large open water bodies values of around 0.025 are valid.
 
+So, the actual: 
+
+Energy Water Consumption = EnergyConsumptiveUseFraction * ene.nc
+
+Energy Water Return Flow = (1 - EnergyConsumptiveUseFraction) * ene.nc
+
 
 ## Water usage by the manufacturing industry
 
 The manufucaturing industry also required water for their processing, much depending on the actual product that is produced.
+
+So, the actual: 
+
+Industry Water Consumption = DomesticConsumptiveUseFraction * dom.nc
+
+Industry Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
 
 ## Livestock water usage
 
