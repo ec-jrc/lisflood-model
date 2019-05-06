@@ -265,90 +265,9 @@ Depending on the presence of lakes and reservoirs in a water region, a part of t
 The water is withdrawn only from discharge in the river network.
 
 
-
-## Preparation of input data
-
-The following Table gives an overview about the maps and table needed for the water use option.
-
-
-
-
 ## Preparation of settings file
 
 All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
-
-```xml
-	<textvar name="PathWaterUse" value="./wateruse">                
-	<comment>                                                           
-	Water use maps path                                                   
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="PrefixWaterUse" value="wuse">                    
-	<comment>                                                           
-	prefix water use maps                                                 
-	</comment>                                                          
-	</textvar>                                                          
-	<group>                                                             
-	<comment>                                                           
-	**************************************************************               
-	INPUT WATER USE MAPS AND PARAMETERS                                   
-	**************************************************************               
-	</comment>                                                          
-	<textvar name="WaterUseMaps" value="$(PathOut)/wuse">          
-	<comment>                                                           
-	Reported water use [cu m/s], depending on the availability of       
-	discharge                                                             
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="WaterUseTS" value="$(PathOut)/wateruseUps.tss"> 
-	<comment>                                                           
-	Time series of upstream water use at gauging stations                 
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="StepsWaterUseTS"                                    
-	value="$(PathOut)/stepsWaterUse.tss">                             
-	<comment>                                                           
-	Number of loops needed for water use                                  
-	routine                                                               
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="maxNoWateruse" value="5">                        
-	<comment>                                                           
-	maximum number of loops for calculating the use of water              
-	= distance water is taken for water consuption                        
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="WUsePercRemain" value="0.2">                     
-	<comment>                                                           
-	percentage of water which remains in the channel                      
-	e.g. 0.2 -> 20 percent of discharge is not taken out                 
-	</comment>                                                          
-	</textvar>                                                          
-	</group>                                                            
-```
-
-***PathWaterUse*** is the path to the map stack of water use
-
-***PrefixWaterUse*** is the prefix of the water use maps
-
-***WaterUseMaps*** is the path and prefix of the reported water use $[\frac{m^3}{s}]$ as a result of demand and availability
-
-***WaterUseTS*** are time series of upstream water use $[\frac{m^3}{s}]$ at gauging stations
-
-***StepsWaterUseTS*** is the number of loops needed for water use [-]
-
-***maxNoWateruse*** is maximum number of loops for calculating the use of water (distance water is taken for water consumption)
-
-***WUsePercRemain*** is the percentage of water which remains in the channel (e.g. 0.2 -> 20 percent of discharge is not taken out)
-
-
-
-Finally, you have to tell LISFLOOD that you want to simulate water use. To do this, add the following statement to the 'lfoptions' element:
-
-```xml
-	<setoption name="wateruse" choice="1" />
-```
-
 
 
 ## Water use output files
