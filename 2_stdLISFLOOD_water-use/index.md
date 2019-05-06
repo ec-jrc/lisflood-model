@@ -85,10 +85,25 @@ Domestic Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
 
 ## Water usage by the energy sector for cooling
 
-Thermal powerplants generating energy through nuclear or conventional fuels require water for cooling during their processing.
+Thermal powerplants generate energy through heating water, turn it into steam which spins a steam turbine which drives an electrical generator. Almost all coal, petroleum, nuclear, geothermal, solar thermal electric, and waste incineration plants, as well as many natural gas power stations are thermal, and they require water for cooling during their processing.
+LISFLOOD typically reads an 'ene.nc' file which determines the water demand for the energy sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using a map of the thermal power plants.
+
+An "EnergyConsumptiveUseFraction" is used to determine the consumptive water usage of thermal power plants
+
+```xml
+<textvar name="EnergyConsumptiveUseFraction" value="$(PathMaps)/energyconsumptiveuse.map">
+<comment>
+	# Consumptive Use (1-Recycling ratio) for energy water use (0-1)
+</comment>
+</textvar>
+```
+
+For small rivers the consumptive use varies between 1:2 and 1:3, so 0.33-0.50 (Source: Torcellini et al. (2003) "Consumptive Use for US Power Production"), while for plants close to large open water bodies values of around 0.025 are valid.
+
 
 ## Water usage by the manufacturing industry
 
+The manufucaturing industry also required water for their processing, much depending on the actual product that is produced.
 
 ## Livestock water usage
 
