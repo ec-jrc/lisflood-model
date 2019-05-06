@@ -59,6 +59,22 @@ Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-frac
 
 LISFLOOD reads a map "waterreusem3.nc" which defines the annual availability of re-used treated waste-water in a model pixel. During the irrigation season, this amount is deducted from the required irrigation abstraction, until the available amount is exhausted.
 
+```xml
+<textvar name="IrrigationWaterReUseM3" value="$(PathMaps)/waterreuseBAUm3.map">
+<comment>
+Annual amount (m3) of treated wastewater reused for irrigation
+</comment>
+</textvar>
+
+<textvar name="IrrigationWaterReUseNumDays" value="143">
+<comment>
+Number of days over which the annual amount of treated wastewater for irrigation is used
+</comment>
+</textvar>
+```
+
+If a map with zero values for reuse is used, this option has no influence on the model results.
+
 
 ## Groundwater abstractions
 
