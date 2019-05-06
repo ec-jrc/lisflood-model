@@ -20,20 +20,20 @@ The water use is *optional* but it is strongly recommended to be always used. Th
 ```
 
 
-## Crop and paddy-rice irrigation
-
-Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
-They can be switched on by adding the following lines to the 'lfoptions' element:
-
-```xml
-<setoption choice="1" name="drainedIrrigation"/>
-<setoption choice="1" name="riceIrrigation"/>
-```
-
-
 ## Water demand, abstraction and consumption
 
 LISFLOOD distinguishes between water demand, water abstraction, actual water consumption and return flow. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due abstraction limitations (e.g. ecological flow constraints or general availability issues) and/or due to losses during transport from the source of the abstraction to the final destination: e.g. leakage in the public supply network, and transmission losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water evaporates and is lost, and another part is returned to the system later on.
+
+
+## PART ONE: SECTORS of water demand and consumption
+
+LISFLOOD distinguisges the following sectors of water consumption:
+-   dom:  use of water in the public sector, e.g. for domestic use
+-   liv:  use of water for livestock
+-   ene:  use of cooling water for the energy sector in thermal or nuclear power plants
+-   ind:  use of water for the manufacturing industry
+-   irr:  water used for crop irrigation
+-   ric:  water used for paddy-rice irrigation
 
 Water demand files for each sector need to be created, in mm per timestep per gridcell, so typically:
 -   dom.nc (mm per timestep per gridcell) for domestic water demand
@@ -43,8 +43,49 @@ Water demand files for each sector need to be created, in mm per timestep per gr
 
 Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They are typically obtained by downscaling national or regional reported data using with higher resolution land use maps.
 
+Crop irrigation and Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in different chapters.
 
-## Sources of water abstraction
+
+## Public water usage
+
+Xxx.
+
+## Water usage by the energy sector for cooling
+
+Xxx.
+
+## Water usage by the manufacturing industry
+
+Xxx.
+
+## Livestock water usage
+
+Xxx.
+
+
+## Crop irrigation
+
+Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
+They can be switched on by adding the following lines to the 'lfoptions' element:
+
+```xml
+<setoption choice="1" name="drainedIrrigation"/>
+```
+
+
+## Paddy-rice irrigation
+
+Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
+They can be switched on by adding the following lines to the 'lfoptions' element:
+
+```xml
+<setoption choice="1" name="riceIrrigation"/>
+```
+
+
+
+
+## PART TWO: SOURCES of water abstraction
 
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, typically desalination. LISFLOOD allows a part of the need for irrigation water may come from re-used treated waste-water. 
 
