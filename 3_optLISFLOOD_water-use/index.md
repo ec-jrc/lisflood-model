@@ -55,9 +55,9 @@ The sub-division in these three sources is achieved by creating and using the fo
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Further details on this are explained below in a seperate paragraph. 
 
 
-## Water re-use
+## Water re-use for surface irrigation
 
-LISFLOOD reads a map "waterreusem3.nc" which defines the annual availability of re-used treated waste-water in a model pixel. During the irrigation season, this amount is deducted from the required irrigation abstraction, until the available amount is exhausted.
+LISFLOOD reads a map "waterreusem3.nc" or similar, which defines the annual availability of re-used treated waste-water in a model pixel. During the irrigation season, this amount is deducted from the required irrigation abstraction during a defined number of days ('IrrigationWaterReUseNumDays'), until the available amount is exhausted.
 
 ```xml
 <textvar name="IrrigationWaterReUseM3" value="$(PathMaps)/waterreuseBAUm3.map">
@@ -136,10 +136,6 @@ Depending on the presence of lakes and reservoirs in a water region, a part of t
 ## Surface water abstraction from rivers
 
 The water is withdrawn only from discharge in the river network.
-
-![Water withdrawal assessing](../media/image56.png)
-***Figure:*** *Water withdrawal assessing demand and availability along the flow path.*
-
 
 
 
