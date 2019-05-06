@@ -18,24 +18,7 @@ $$
 D_{uz,lz} = min (GW_{perc} \cdot \Delta t ,UZ)
 $$
 
-Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that can be used as a calibration constant. For many catchments it is quite reasonable to treat the lower groundwater zone as a system with a closed lower boundary (i.e. water is either stored, or added to the channel). However, in some cases the closed boundary assumption makes it impossible to obtain realistic simulations. Because of this, it is **possible to percolate a fixed amount of water out of the lower zone**, as a loss $D_{loss}$:
-
-$$
-D_{loss} = min(f_{loss} \cdot \Delta t,LZ)
-$$
-
-In the previous version of LISFLOOD $D_{loss}$, was calculated as a fixed fraction of $Q_{lz}$, but this leads to a high dependency of $D_{loss}$ from $GW_{perc}$ and $LZ$. For example if either $GW_{perc}$ or $LZ$ is quite low the parameter $D_{loss}$ turns out to be meaningless.
-
-The loss fraction, $f_{loss}$ \[-\], equals 0 for a completely closed lower boundary. If $f_{loss}$ is set to 1, all outflow from the lower zone is treated as a loss. Water that flows out of the lower zone through $D_{loss}$ is quite literally 'lost' forever. Physically, the loss term could represent water that is either lost to deep groundwater systems (that do not necessarily follow catchment boundaries), or even groundwater extraction wells. When using the model, <u>it is suggested to use $f_{loss}$ with some care</u>; start with a value of zero, and only use any other value if it is impossible to get satisfactory results by adjusting the other calibration parameters. At each time step, the amounts of water in the upper and lower zone are updated for the in- and outgoing fluxes, i.e.:
-
-$$
-UZ_t = UZ_{t - 1} + D_{2,gw} - D_{uz,lz} - Q_{uz}
-$$
-
-$$
-LZ_t = LZ_{t - 1} + D_{uz,lz} - Q_{lz} - D_{loss}
-$$
-
+Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that is determined during calibration. 
 Note that these equations are again valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
 [🔝](#top)
