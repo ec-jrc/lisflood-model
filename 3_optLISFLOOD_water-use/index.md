@@ -51,6 +51,7 @@ LISFLOOD can abstract water from groundwater or from surface water (rivers, lake
 The sub-division in these three sources is achieved by creating and using the following maps:
 -   fracgwused.nc (values between 0 and 1) ('fraction groundwater used')
 -   fracncused.nc (values between 0 and 1) ('fraction non-conventional used')
+
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Further details on this are explained below in a seperate paragraph. 
 
 
