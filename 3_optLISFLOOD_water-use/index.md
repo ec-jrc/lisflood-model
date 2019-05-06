@@ -86,7 +86,7 @@ In the current LISFLOOD version, groundwater is abstracted for a 100%, so no add
 
 LISFLOOD subtracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to monitor more on decadal periods.
 
-If the Lower Zone groundwater amount decreases below the 'LZThreshold" - a groundwater threshold value -, the baseflow from the LZ to the nearby rivers is zero. When sufficient recharge is added again to raise the LZ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced.
+If the Lower Zone groundwater amount decreases below the 'LZThreshold" - a groundwater threshold value -, the baseflow from the LZ to the nearby rivers becomes zero. Further abstractions can reduce LZ to far below the LZThreshold. When sufficient recharge is added again to raise the LZ levels above the LZThreshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry years, during which aquifers temporarily lose their connection to major rivers and baseflow is reduced or stopped.
 
 ```xml
 <textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.map">
