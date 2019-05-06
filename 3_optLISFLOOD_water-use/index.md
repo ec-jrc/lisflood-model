@@ -1,4 +1,4 @@
-# Including water use
+# Water abstractions and consumption
 
 ## Introduction
 
@@ -46,13 +46,18 @@ Typically, water demands are related to amounts of population, livestock, Gross 
 
 ## Sources of water abstraction
 
-LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, such as desalination or re-used treated waste-water. 
+LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, typically desalination. LISFLOOD allows a part of the need for irrigation water may come from re-used treated waste-water. 
 
 The sub-division in these three sources is achieved by creating and using the following maps:
 -   fracgwused.nc (values between 0 and 1) ('fraction groundwater used')
 -   fracncused.nc (values between 0 and 1) ('fraction non-conventional used')
 
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Further details on this are explained below in a seperate paragraph. 
+
+
+## Water re-use
+
+LISFLOOD reads a map "waterreusem3.nc" which defines the annual availability of re-used treated waste-water in a model pixel. During the irrigation season, this amount is deducted from the required irrigation abstraction, until the available amount is exhausted.
 
 
 ## Groundwater abstractions
@@ -95,9 +100,9 @@ It is assumed that the non-conventional water demand is always available. It is 
 
 ## Surface water abstractions and water regions
 
-If the surface water is available and there is a water demand, it is abstracted from so called 'Waterregions'. These regions are introduced in LISFLOOD due to the ever higher spatial resolution of water resources models. In a 0.5 degree spatial resolution model, users could get away with subtracting the abstraction from the local 0.5x0.5 degree pixel only, since it was large enough. For finer spatial resolutions, it could well happen that the demand exists in one model pixel, but the actual abstraction takes places in another pixel nearby. We assume here that water abstractions to meet a local water demand do take place within a 'waterregion'. 
+If the surface water is available and if there is still a water demand - after groundwater abstractions, water re-use and desalination are taken into account - the remaining water is abstracted from surface water sources in so called 'Waterregions'. These regions are introduced in LISFLOOD due to the ever higher spatial resolution of water resources models. In a 0.5 degree spatial resolution model, users could get away with subtracting the abstraction from the local 0.5x0.5 degree pixel only, since it was large enough. For finer spatial resolutions, it could well happen that the demand exists in one model pixel, but the actual abstraction takes places in another pixel nearby. We assume here that water abstractions to meet a local water demand do take place within a 'waterregion'. 
 
-Waterregions typically are defined in LISFLOOD as sub-river-basins within a country. Typically, to mimick reality, it is advisable to not allow the model for cross-country-border abstractions. Alternatively, and if the information exists, it would be better to align the waterregions with the actual areas managed by drinkingwater institutions, such as regional waterboards.
+Waterregions typically are defined in LISFLOOD as sub-river-basins within a country. Typically, to mimick reality, it is advisable to not allow the model for cross-country-border abstractions. Alternatively, and if the information exists, it would be better to align the waterregions with the actual areas managed by drinkingwater institutions, such as regional waterboards. For Europe, we often use the River Basin Districts as defined in the Water Framework Directive, subdivided by country.
 
 Waterregions can be activated in LISFLOOD by adding the following line to the 'lfoptions' element:
 
