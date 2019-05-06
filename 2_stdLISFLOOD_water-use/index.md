@@ -43,20 +43,50 @@ Water demand files for each sector need to be created, in mm per timestep per gr
 
 Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They are typically obtained by downscaling national or regional reported data using with higher resolution land use maps.
 
-Crop irrigation and Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in different chapters.
+Crop irrigation and Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in the irrigation chapter.
 
 
 ## Public water usage
 
-Xxx.
+Public water demand is the water requirement through the public supply network. The water demand externally estimated in mm/day/gridcell and is read into LISFLOOD. Typically, domestic water demands are obtained by downscaling national reported data with higher resolution population maps.
+
+LISFLOOD takes into account that leakage exist in the public supply network, which is defined in an input map:
+
+```xml
+<textvar name="LeakageFraction" value="$(PathMaps)/leakage.map">
+<comment>
+$(PathMaps)/leakage.map
+   Fraction of leakage of public water supply (0=no leakage, 1=100% leakage)
+</comment>
+</textvar>
+```
+
+The leakage - typically only available as an average percentage per country - is then used to determin the required water abstraction:
+
+Domestic Water Abstraction = dom.nc * (1 + leakage.map)
+
+The actual water consumption of the domestic sector is much less than the abstraction, and is defined by a fixed coefficient or a map if spatial differences are known:
+
+```xml
+<textvar name="DomesticConsumptiveUseFraction" value="0.20">
+<comment>
+	Consumptive Use (1-Recycling ratio) for domestic water use (0-1)
+	Source: EEA (2005) State of Environment
+</comment>
+</textvar>
+```
+
+So, the actual 
+Domestic Water Consumption = DomesticConsumptiveUseFraction * dom.nc
+Domestic Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
+
 
 ## Water usage by the energy sector for cooling
 
-Xxx.
+Thermal powerplants generating energy through nuclear or conventional fuels require water for cooling during their processing.
 
 ## Water usage by the manufacturing industry
 
-Xxx.
 
 ## Livestock water usage
 
@@ -65,7 +95,7 @@ Xxx.
 
 ## Crop irrigation
 
-Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
+Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in the irrigation chapter.
 They can be switched on by adding the following lines to the 'lfoptions' element:
 
 ```xml
@@ -75,7 +105,7 @@ They can be switched on by adding the following lines to the 'lfoptions' element
 
 ## Paddy-rice irrigation
 
-Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in different chapters.
+Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in the irrigation chapter.
 They can be switched on by adding the following lines to the 'lfoptions' element:
 
 ```xml
