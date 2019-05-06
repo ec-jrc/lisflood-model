@@ -109,13 +109,24 @@ Energy Water Return Flow = (1 - EnergyConsumptiveUseFraction) * ene.nc
 
 ## Water usage by the manufacturing industry
 
-The manufucaturing industry also required water for their processing, much depending on the actual product that is produced.
+The manufucaturing industry also required water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD typically reads an 'ind.nc' file which determines the water demand for the industry sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using maps of land use and/or the specific activities.
+
+An "IndustryConsumptiveUseFraction" is used to determine the consumptive water usage of the manufacturing industry.
+
+```xml
+<textvar name="IndustryConsumptiveUseFraction" value="0.15">
+<comment>
+Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
+</comment>
+</textvar>
+```
 
 So, the actual: 
 
-Industry Water Consumption = DomesticConsumptiveUseFraction * dom.nc
+Industry Water Consumption = IndustryConsumptiveUseFraction * dom.nc
 
-Industry Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
+Industry Water Return Flow = (1 - IndustryConsumptiveUseFraction) * dom.nc
+
 
 ## Livestock water usage
 
