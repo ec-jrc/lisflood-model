@@ -295,6 +295,8 @@ defaults:
           url:  	2_stdLISFLOOD_evaporation-intercepted-water 	
         - title: "- Interception"
           url: 2_stdLISFLOOD_interception
+        - title: "- Irrigation"
+          url: 2_stdLISFLOOD_irrigation
         - title: "- Water uptake by roots & transpiration"
           url: 2_stdLISFLOOD_plant-water-uptake
         - title: "- Frost index"
@@ -317,6 +319,8 @@ defaults:
           url: 2_stdLISFLOOD_subsurface-runoff
         - title: "- Channel routing"
           url: 2_stdLISFLOOD_channel-routing
+        - title: "- Water use"
+          url: 2_stdLISFLOOD_water-use
 
       - section_title: "Optional LISFLOOD processes & output"
         items:
@@ -334,8 +338,6 @@ defaults:
           url: 3_optLISFLOOD_dynamic-wave
         - title: "- Soil moisture"
           url: 3_optLISFLOOD_soil-moisture
-        - title: "- Water use"
-          url: 3_optLISFLOOD_water-use
         - title: "- Transmission loss"
           url: 3_optLISFLOOD_transmission-loss
         - title: "- Inflow hydrograph"
