@@ -308,24 +308,17 @@ The water use routine produces a variety of new output maps and indicators, as l
 | -------- | ----------------------------------------- | ----- | ------ |---------- | ------------------------------------------------ | 
 | Fk1.nc   | Falkenmark 1 index (local water only)     | month | region | m3/capita | water availability per capita (local water only) |
 | Fk3.nc   | Falkenmark 3 index (external inflow also) | month | region	| m3/capita	| water availability per capita (local water + external inflow)|
-| 
 | Eflow.nc | eflow breach indicator (1=breached)	     | day   | pixel  | 0 or 1    | number of days that eflow threshold is breached  |
 | IrSh.nc  | water shortage                            | month | region | m3        | water shortage due to availability restrictions  |
-| 
-| WDI.nc   | Water Dependency Index	                   | month | region	| -(fraction) | local water demand that cannot be met by local water / total water demand
-| WeiA.nc  | Water Exploitation Index Abstraction      | month | region |	-(fraction) |	water abstraction / (local water + external inflow)|
-| WeiC.nc  | Water Exploitation Index Consumption WEI+ | month | region | -(fraction) | water consumption / (local water + external inflow)|
-| WeiD.nc  | Water Exploitation Index Demand WEI       | month | region | -(fraction) |	water demand / (local water + external inflow)     |
-|					
-| domCo.nc | domestic consumption	day	pixel	mm	domestic consumption
-| eneCo.nc | energy consumption	day	pixel	mm	energy consumption
-| indCo.nc | industrial consumption	day	pixel	mm	industrial consumption
-| irrCo.nc | irrigation consumption	day	pixel	mm	irrigation consumption
-| livCo.nc | livestock consumption	day	pixel	mm	livestock consumption
-
-| WaterUseMaps    | $\frac{m^3}{s}$   | bla bla               |
-| Number of loops | $\frac{m^3}{s}$   | bla                   |
-| WaterUseTS      | $\frac{m^3}{s}$   | repwateruseTS         |
+| WDI.nc   | Water Dependency Index	                   | month | region	| fraction  | local water demand that cannot be met by local water / total water demand|
+| WeiA.nc  | Water Exploitation Index Abstraction      | month | region |	fraction  |	water abstraction / (local water + external inflow)|
+| WeiC.nc  | Water Exploitation Index Consumption WEI+ | month | region | fraction  | water consumption / (local water + external inflow)|
+| WeiD.nc  | Water Exploitation Index Demand WEI       | month | region | fraction  |	water demand / (local water + external inflow)   |
+|	domCo.nc | domestic consumption                      | day   | pixel  | mm        |	domestic consumption                             |
+| eneCo.nc | energy consumption                        | day   | pixel  |	mm        |	energy consumption                               |
+| indCo.nc | industrial consumption                    | day   | pixel  |	mm        |	industrial consumption                           |
+| irrCo.nc | irrigation consumption                    | day   | pixel  |	mm        |	irrigation consumption                           |
+| livCo.nc | livestock consumption                     | day   | pixel  |	mm        |	livestock consumption                            |
 
 [🔝](#top)
 
