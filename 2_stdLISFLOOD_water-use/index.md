@@ -304,13 +304,13 @@ The water use routine produces a variety of new output maps and indicators, as l
 
  ***Table:*** *Output of water use routine.*     
 
-| file     | description1     | time    |  area | unit | long description |
-| -------- | ---------------- | ------- | ----- |----- | ---------------- | 
-| Fk1.nc   | Falkenmark 1 index (local water only) | month | region | m3/capita | water availability per capita (local water only) |
-| Fk3.nc   | Falkenmark 3 index (external inflow also)	month	region	m3/capita	water availability per capita (local water + external inflow)
+| file     | short description                         | time  | area   | unit      | long description                                 |
+| -------- | ----------------------------------------- | ----- | ------ |---------- | ------------------------------------------------ | 
+| Fk1.nc   | Falkenmark 1 index (local water only)     | month | region | m3/capita | water availability per capita (local water only) |
+| Fk3.nc   | Falkenmark 3 index (external inflow also) | month | region	| m3/capita	| water availability per capita (local water + external inflow)|
 | 
-| Eflow.nc | eflow breach indicator (1=breached)	day	pixel	0 or 1	number of days that eflow threshold is breached
-| IrSh.nc  | water shortage 	month	region	m3	water shortage due to availability restrictions
+| Eflow.nc | eflow breach indicator (1=breached)	     | day   | pixel  | 0 or 1    | number of days that eflow threshold is breached  |
+| IrSh.nc  | water shortage                            | month | region | m3        | water shortage due to availability restrictions  |
 | 
 | WDI.nc   | Water Dependency Index	                   | month | region	| -(fraction) | local water demand that cannot be met by local water / total water demand
 | WeiA.nc  | Water Exploitation Index Abstraction      | month | region |	-(fraction) |	water abstraction / (local water + external inflow)|
