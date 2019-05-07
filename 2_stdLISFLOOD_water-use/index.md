@@ -304,12 +304,11 @@ The water use routine produces a variety of new output maps and indicators, as l
 
  ***Table:*** *Output of water use routine.*     
 
-| Map name        | Default name      | Option          | Units           |
-| --------------- | ----------------- | --------------- | --------------- |
-| WaterUseMaps    | wusexxxx.xxx      | repwateruseMaps | $\frac{m^3}{s}$ |
-| **Time series** |                   |                 |                 |
-| Number of loops | stepsWaterUse.tss |                 | -               |
-| WaterUseTS      | wateruseUps.tss   | repwateruseTS   | $\frac{m^3}{s}$ |
+| Map name        | Units             | Description           |
+| --------------- | ----------------- | --------------------- | 
+| WaterUseMaps    | $\frac{m^3}{s}$   | bla bla               |
+| Number of loops | $\frac{m^3}{s}$   | bla                   |
+| WaterUseTS      | $\frac{m^3}{s}$   | repwateruseTS         |
 
 [🔝](#top)
 
