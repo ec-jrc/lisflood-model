@@ -1,4 +1,4 @@
-# Water abstractions and consumption
+# Water demand, abstraction and consumption
 
 ## Introduction
 
@@ -255,14 +255,42 @@ Waterregions can be activated in LISFLOOD by adding the following line to the 'l
 
 ## Surface water abstractions from lakes and reservoirs
 
-Depending on the presence of lakes and reservoirs in a water region, a part of the surface water abstraction takes places from the variable amount of water available in them. Note: lakes and reservoirs thus cannot be abstracted to zero. 
+Depending on the presence of lakes and reservoirs in a water region, a part of the surface water abstraction - defined by the FractionLakeReservoirWaterUsed parameter as defined in the settingsfile - takes places from the variable amount of water storage available in the lakes and reservoirs. Thus, lakes and reservoirs cannot be abstracted to zero, but only until a 'reasonable' level. 
 
+```xml
+<textvar name="FractionLakeReservoirWaterUsed" value="0.25">
+<comment>
+lake and reservoir water used, fraction of a pixel (0-1)
+</comment>
+</textvar>
+```
 
+## Surface water abstraction from rivers, and environmental flow
 
+The remaining water abstraction requirement is withdrawn from discharge in the river network within a waterregion. As the exact locations of abstractions are typically not known, we assume that abstractions take place evenly from a waterregion. 
 
-## Surface water abstraction from rivers
+A minum threshold value of water is used to restrict abstractions below that threshold. This threshold - the environmental flow threshold - is user defined in the settingsfile:
 
-The water is withdrawn only from discharge in the river network.
+```xml
+<textvar name="EFlowThreshold" value="$(PathMaps)/dis_nat_10.map">
+<comment>
+$(PathMaps)/eflow.map
+EFlowThreshold is map with m3/s discharge, e.g. the 10th percentile discharge of the baseline run
+</comment>
+</textvar>
+```
+
+For Europe e.g. we have used the 10th percentile discharge from a 'natural' run for 1990-2016, i.e. Europe without reservoirs and human water abstractions. This to mimick natural flow conditions.
+
+The amount that cannot be abstracted is monitores seperately in LISFLOOD as "RegionMonthIrrigationShortageM3" (actually a better term is general water shortage) and can be recalled as a maps:
+
+```xml
+<textvar name="RegionMonthIrrigationShortageM3" value="$(PathOut)/IrSh">
+<comment>
+Irrigation water shortage in m3 for month
+</comment>
+</textvar>
+```
 
 
 ## Preparation of settings file
