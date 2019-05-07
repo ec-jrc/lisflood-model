@@ -300,11 +300,11 @@ All in- and output files need to be defined in the settings file. If you are usi
 
 ## Water use output files
 
-The water use routine can produce 2 additional time series and one map (or stack), as listed in the following Table:
+The water use routine produces a variety of new output maps and indicators, as listed in the following Table:
 
  ***Table:*** *Output of water use routine.*     
 
-| Maps            | Default name      | Option          | Units           |
+| Map name        | Default name      | Option          | Units           |
 | --------------- | ----------------- | --------------- | --------------- |
 | WaterUseMaps    | wusexxxx.xxx      | repwateruseMaps | $\frac{m^3}{s}$ |
 | **Time series** |                   |                 |                 |
