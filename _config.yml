@@ -279,8 +279,8 @@ defaults:
           url: 1_introduction_LISFLOOD
         - title: "About this model documentation"
           url: 1_introduction_document
-        - title: "EXTRA"
-          url: 1_intro-addition
+        - title: "Further notes about the model"
+          url: 1_introduction_general
 
 
       - section_title: "Standard LISFLOOD processes"
