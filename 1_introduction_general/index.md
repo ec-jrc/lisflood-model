@@ -5,11 +5,12 @@ The LISFLOOD model is a hydrological rainfall-runoff model that can help simulat
 
 LISFLOOD has been developed by the Joint Research Centre (JRC) of the European Commission, building on earlier models such as LISEM, HBV and WOFOST. The specific development objective was to produce a tool that can be used in large and transnational catchments for a variety of applications, including:
 
-•	Flood simulation and forecasting;
-•	Water resource simulation in river basins;
-•	Assessing the effects of land-use changes;
-•	Assessing the effects of measures such as river regulation measures and water efficiency measures;
-•	Assessing the effects of climate change.
+
+*	Flood simulation and forecasting;
+*	Water resource simulation in river basins;
+*	Assessing the effects of land-use changes;
+*	Assessing the effects of measures such as river regulation measures and water efficiency measures;
+*	Assessing the effects of climate change.
 
 
 Although there are a wide variety of hydrological models that are suitable for each of these individual tasks, few single models are capable of doing all these jobs. Besides, our objective requires a model that is spatially distributed and, at least to a certain extent, physically based. Also, the focus of our work is on European catchments. Since several databases exist that contain pan-European information on soils (King et al., 1997; Wösten et al., 1999), land cover (CEC, 1993), topography (Hiederer & de Roo, 2003) and meteorology (Rijks et al., 1998), it would be advantageous to have a model that makes the best possible use of these data. Finally, the wide scope of our objective implies that changes and extensions to the model will be required from time to time. Therefore, it is essential to have a model code that can be easily maintained and modified.
