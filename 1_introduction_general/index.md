@@ -1,8 +1,5 @@
 # Introduction
 
-<span style="color:red"> some emphasized markdown text</span>
-Roses are <span style="color:red; font-family:Georgia; font-size:2em;">red.</span>
-
 
 The LISFLOOD model is a hydrological rainfall-runoff model that is capable of simulating the main hydrological processes that occur in a catchment. LISFLOOD has been developed by the Joint Research Centre (JRC) of the European Commission, while building on earlier models such as LISEM, HBV and WOFOST. The specific development objective was to produce a tool that can be used in large and trans-national catchments for a variety of applications, including:
 
