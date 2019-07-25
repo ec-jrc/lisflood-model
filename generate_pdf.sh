@@ -20,7 +20,7 @@ do
   if [[ -d "${dir}" && ! -L "${dir}" ]]; then
     dir=${dir%*/}
     fin=${dir##*/}
-    if [[ "$fin" != "media" && "$fin" != "assets" && "$fin" != "index_old" && "$fin" != "everything" && "$fin" != "index_UserGuide" && "$fin" != "index_pdf" ]]; then
+    if [[ "$fin" != "media" && "$fin" != "assets" && "$fin" != "index_pdf" ]]; then
       echo "-----> ${fin}"
       cp ${dir}/index.md ./_pdf/${fin}.md
       sed -i 's#\.\./media/#\./media/#g' ./_pdf/${fin}.md
@@ -30,7 +30,7 @@ done
 
 echo "pandoc index_pdf.md --normalize --smart --template=template.latex -o _pdf/frontpage.pdf -V geometry:margin=1.5cm"
 pandoc index_pdf.md --normalize --smart --template=template.latex -o _pdf/frontpage.pdf -V geometry:margin=1.5cm
-echo "pandoc _pdf/*.md --normalize --smart --toc -V toc-title:"Table of Contents" --template=template.latex -f markdown+tex_math_dollars+tex_math_single_backslash --latex-engine=xelatex -o _pdf/manual.pdf -V geometry:margin=1.5cm"
+echo "pandoc _pdf/*.md --normalize --smart --toc -V toc-title:"Table of Contents" --template=template.latex -f markdown+tex_math_dollars+tex_math_single_backslash --latex-engine=pdflatex -o _pdf/manual.pdf -V geometry:margin=1.5cm"
 pandoc _pdf/*.md --normalize --smart --toc -V toc-title:"Table of Contents" --template=template.latex -f markdown+tex_math_dollars+tex_math_single_backslash --latex-engine=xelatex -o _pdf/manual.pdf -V geometry:margin=1.5cm
 
 echo "gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=./_pdf/Lisflood_Model.pdf ./_pdf/frontpage.pdf ./_pdf/manual.pdf"
