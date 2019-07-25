@@ -8,7 +8,7 @@ This document is **not a LISFLOOD user guide!**
 
 A LISFLOOD user guide can be found at the dedicated [Github Pages](https://ec-jrc.github.io/lisflood-code/) from lisflood-code repository. It is a step-by-step guide on what you need to do and know throughout the whole processing chain, from defining the system requirements to generating the LISFLOOD output. 
 
-In order to apply this knowledge into practice we have created two use cases, one in [Italy (Po basin)](https://github.com/ec-jrc/lisflood-usecases/blob/master/README.md) and one in [Canada (Fraser basin)](https://github.com/ec-jrc/lisflood-usecases/blob/master/README.md), which should help you set up and test the model on your PC. Once you have mastered this step, you can check that the model has been installed and used by you correctly.
+In order to apply this knowledge into practice we have created two use cases, one in [Italy (Po basin)](https://github.com/ec-jrc/lisflood-usecases/blob/master/README.md#usecase1) and one in [Canada (Fraser basin)](https://github.com/ec-jrc/lisflood-usecases/blob/master/README.md#usecase2), which should help you set up and test the model on your PC. Once you have mastered this step, you can check that the model has been installed and used by you correctly.
 
 In order to help you prepare the set-up of your own catchment we have created another Github repository [lisflood-utilities](https://github.com/ec-jrc/lisflood-utilities) that contains all kinds of useful tools. Each tool is documented with an explanation of how to use it.
 
