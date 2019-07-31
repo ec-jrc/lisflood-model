@@ -14,7 +14,10 @@ Many additional options have been developed to **simulate** all kind of **additi
 - chosing among different routing routines: [double kinematic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_kinematic-wave/) or [dynamic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_dynamic-wave/)
 - Simulating [water levels](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-levels/), [water use](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-use/) and [soil moisture](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_soil-moisture/)
 
-If you like to use an additional option you have to 'activate' it in the LISFLOOD settings file (<span style="color:red"> **INSERT LINK TO SETTINGS FILE HERE**</span>.) under the 'lfoptions' element. Each element under this option section represents a switch with "1" equal to "on", and "0" to "off". The table below shows all the currently implemented additional simulation options including their corresponding defaults. You can activate as many options as you want (or none at all) by setting the switch to 1. This way you can tell the model exactly which processes to calculate and which not.
+If you like to use an additional option you have to 'activate' it in the [LISFLOOD settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml) under the 'lfoptions' element. 
+Each element under this option section represents a switch with "1" equal to "on", and "0" to "off". 
+The table below shows all the currently implemented additional simulation options including their corresponding defaults. 
+You can activate as many options as you want (or none at all) by setting the switch to 1. This way you can tell the model exactly which processes to calculate and which not.
 
 <u>Note</u> that each option generally requires additional items in the settings file. For instance, using the inflow hydrograph option requires an input map and time series, which have to be specified in the settings file. The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. 
 
@@ -40,10 +43,12 @@ If you like to use an additional option you have to 'activate' it in the LISFLOO
 Besides the standard LISFLOOD output (which is discharge and soil moisture), the user has the option to receive all kind of additional output files. The table below lists all currently implemented output options and their corresponding defaults. 
 
 
-In the LISFLOOD settings file (<span style="color:red"> **INSERT LINK TO SETTINGS FILE HERE**</span>.) the 'lfoptions' element gives you additional control over what LISFLOOD is doing. As with the simulation options also the output options are implemented as switches with "1" corrisponding to "on" and "0" to "off". This way you can tell the model exactly which output files are reported and which ones aren't.  You can activate as many options as you want (or none at all). Remember that each option generally requires additional items in the settings file. For instance, if you want to report discharge maps at each time step, you will first have to specify under which name they will be written. The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. 
-
-<span style="color:red"> **Actually the output option and so many others are still missing. We have to make the check that all options are described!**</span>.)
-
+In the LISFLOOD settings file the 'lfoptions' element gives you additional control over what LISFLOOD is doing. 
+As with the simulation options also the output options are implemented as switches with "1" corrisponding to "on" and "0" to "off". 
+This way you can tell the model exactly which output files are reported and which ones aren't. 
+You can activate as many options as you want (or none at all). Remember that each option generally requires additional items in the settings file. 
+For instance, if you want to report discharge maps at each time step, you will first have to specify under which name they will be written. 
+The template settings file that is provided with LISFLOOD always contains file definitions for all optional output maps and time series. 
 
 ***Table:*** *LISFLOOD additional reporting options.*                                                                                                                                                                                                                                                                                                         
 

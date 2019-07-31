@@ -7,7 +7,6 @@ The figure below provides a first overview on the processes included in LISFLOOD
 ![Overview  of the LISFLOOD model](../media/image6.png)
 **Figure:** Overview  of the LISFLOOD model. $P$: precipitation; $E$:  evaporation & evapotranspiration; $SnCoef$: snow melt; $b_{xin}$: infiltration; $Chan_{N2}$: surface runoff; $GW_{perc}$: drainage from upper- to lower groundwater zone; $T_{uz}$: outflow from upper groundwater zone; $T_{lz}$: outflow from lower groundwater zone; $R_{ch}$: drainage from subsoil to upper groundwater zone; drainage from top- to subsoil; $C_{pref}$: preferential flow to upper groundwater zone.
 
-<span style="color:red"> CINZIA or AD can you please check that the figure caption is correct - THANKS! Afterwards please delete this comment.</span>
 **
 
 
@@ -66,11 +65,18 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 | Other (agricultural areas, non-forested natural area, pervious surface of urban areas) | Evapotranspiration lower than for forest but still significant | Rooting depth lower than for forest but still significant | Medium concentration time                                    |
 
 
-If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in <span style="color:red"> **Chapter XXX - AD I think this chapter is still missing!**</span>), the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
+If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in [TODO]()), 
+the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. 
+The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this four aggregated classes. 
+The total sum of evapotranspiration for a pixel is calculated by adding up the fluxes for each class multiplied by the fraction of each class.
 
 ![simulation of aggregated land cover classes](../media/image24-resize.png)
 ***Figure:***  $ET_{forest} \to ET_{other} \to ET_{dr} \to ET_{water}$ *simulation of aggregated land cover classes in LISFLOOD.*
 
-In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other})$ As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written to disk as map or timeseries by activate LISFLOOD's options (described in <span style="color:red"> **Chapter XXX - AD I think this chapter is still missing!**</span>).
+In this example, evapotranspiration (ET) is simulated for each aggregated class separately  $(ET_{forest}, ET_{dr}, ET_{water}, ET_{other})$ 
+As result of the soil model you get four different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other})$, 
+respectively two fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{other})$. 
+However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written 
+to disk as map or timeseries by activate LISFLOOD's options (described in [TODO]()).
 
 [🔝](#top)

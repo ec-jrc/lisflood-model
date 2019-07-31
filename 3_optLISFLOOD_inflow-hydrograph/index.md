@@ -98,7 +98,8 @@ First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or mi
 2) <u>Make sure your inflow points are where you need them</u>
 
 If you already have all gauge locations on a map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
-one pixel downstream of the *outflow* points of the corresponding subcatchment. If you already have a (nominal) map of of your subcatchments, a PCRaster script exists <span style="color:red"> Script needs uploadin gin the LISFLOOD utilities repository and link needs to be added</span> that automatically calculates the corresponding out- and inflow points.
+one pixel downstream of the *outflow* points of the corresponding subcatchment. 
+If you already have a (nominal) map of of your subcatchments, we have an utility that automatically calculates the corresponding out- and inflow points.
 
 
 [🔝](#top)

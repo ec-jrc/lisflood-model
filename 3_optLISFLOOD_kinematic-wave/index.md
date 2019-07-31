@@ -2,12 +2,12 @@
 
 ## Introduction
 
-This annex describes the LISFLOOD double kinematic wave routine, and how it is used. Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element the to LISFLOOD settings file (<span style="color:red"> add link</span>):
+This annex describes the LISFLOOD double kinematic wave routine, and how it is used. Double kinematic wave routing is *optional*, 
+and can be activated by adding the following line to the 'lfoptions' element the to LISFLOOD XML settings file:
 
 ```xml
 	<setoption name="SplitRouting" choice="1" />
 ```
-
 
 
 ## Background
@@ -58,7 +58,8 @@ Similar methods are used since the 1970s e.g. as multiple linear or non linear s
 
 ## Using double kinematic wave 
 
-No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). A 'warm' start <span style="color:red"> add link</span> (using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
+No additional maps or tables are needed for initializing the double kinematic wave. A normal run ('InitLisflood'=0) requires an additional map derived from the prerun ('InitLisflood'=1). 
+A 'warm' start (i.e. using initial values from a previous run) requires two additional maps with state variables for the second (over 'bankful' routing).
 
 ***Table:***  *Input/output double kinematic wave.*   
 

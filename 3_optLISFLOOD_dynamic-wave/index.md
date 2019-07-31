@@ -7,8 +7,6 @@ This page describes the LISFLOOD dynamic wave routine, and how it is used. A str
 	<setoption name="dynamicWave" choice="1" />
 ```
 
-<span style="color:red"> Is this paragraph still up to date?</span>
-
 <u> Note:</u> The current implementation of the dynamic wave function in PCRaster is not a complete dynamic wave formulation according to the summary of the Saint Venant equations as discussed in Chow (1988). The implementation currently consists of the friction force term, the gravity force term and the pressure force term and should therefore be correctly characterised as a diffusion wave formulation. The equations are solved as an explicit, finite forward difference scheme. 
 
 

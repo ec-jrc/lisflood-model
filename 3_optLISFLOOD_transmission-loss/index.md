@@ -25,9 +25,8 @@ Transmission loss is *optional*, and can be activated by adding the following li
 
 ## Description of the transmission loss approach
 
-The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage of a channel with the depth of flow. A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
-
-<span style="color:red"> Someone please add the equation... I can't find it. Thanks</span>
+The approach by Rao and Maurer 1996 builds a one-parameter relationship between the seepage of a channel with the depth of flow. 
+A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
 
 $$

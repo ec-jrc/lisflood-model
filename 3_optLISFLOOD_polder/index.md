@@ -2,19 +2,22 @@
 
 ## Introduction
 
-This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the settings file <span style="color:red"> add link to settings file here.</span>:
+This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the [settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml):
 
 ```xml
 	<setoption name="simulatePolders" choice="1" />
 ```
 
-Polders can be simulated on channel pixels where dynamic wave routing is used. The routine does *not* work for channel stretches where the kinematic wave is used!
+Polders can be simulated on channel pixels where dynamic wave routing is used. 
+The routine does *not* work for channel stretches where the kinematic wave is used!
 
 
 
 ## Description of the polder routine 
 
-Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), and based on the weir equation of Poleni (Bollrich & Preißler, 1992). The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in the following Figure:
+Polders are simulated as points in the channel network. The polder routine is adapted from Förster et. al (2004), 
+and based on the weir equation of Poleni (Bollrich & Preißler, 1992). 
+The flow rates from the channel to the polder area and vice versa are calculated by balancing out the water levels in the channel and in the polder, as shown in the following Figure:
 
 ![simulation of polders](../media/image43.png)
 ***Figure:*** *Schematic overview of the simulation of polders.* $p_b$ *is the polder bottom level (above the channel bottom);* $w_c$ *is the water level in the channel;* $h_c$ *and* $h_p$ *are the water levels above the polder in- / outflow, respectively*
@@ -52,7 +55,8 @@ The above equations are valid for *unregulated* polders. It is also possible to 
 
 
 ![regulated polder](../media/image44.png)
-***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to <span style="color:red"> Eq XXXX </span>). Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to <span style="color:red"> Eq XXXX </span>).*
+***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq XXXX). 
+Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq XXXX).*
 
 Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table below). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
 
@@ -76,9 +80,8 @@ The locations of the polders are defined on a (nominal) map called '*polders.map
 
 Note that the polder opening- and release times are both defined a *time step* numbers (*not* days or hours!!). For *unregulated* polders, set both parameters to a bogus value of -9999, i.e.:
 
-<span style="color:red"> Is that still the same or is it now possible to do it with a date stamp? </span>
 
-```xml
+```text
 10 -9999
 15 -9999
 16 -9999 
@@ -89,7 +92,12 @@ Note that the polder opening- and release times are both defined a *time step* n
 
 ## Preparation of settings file
 
-All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the polder locations is in the "maps" directory, and all tables in the 'tables" directory. If this is the case, you only have to specify the initial reservoir water level in the polders. *PolderInitialLevelValue* is defined in the 'lfuser' element of the settings file, and it can be either a map or a value. The value of the weir constant *μ* is also defined here, although you should not change its default value. So we add this to the 'lfuser' element (if it is not there already):
+All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, 
+all file definitions are already defined in the 'lfbinding' element. 
+Just make sure that the map with the polder locations is in the "maps" directory, and all tables in the 'tables" directory. 
+If this is the case, you only have to specify the initial reservoir water level in the polders. 
+*PolderInitialLevelValue* is defined in the 'lfuser' element of the settings file, and it can be either a map or a value. 
+The value of the weir constant *μ* is also defined here, although you should not change its default value. So we add this to the 'lfuser' element (if it is not there already):
 
 ```xml
 	<group>                                                             
@@ -149,7 +157,5 @@ Note that you can use the map with the polder level at the last time step to def
 ## Limitations
 
 For the moment, polders can be simulated on channel pixels where dynamic wave routing is used. For channels where the kinematic wave is used, the routine will not work and may lead to numerical instabilities or even model crashes. This limitation may be resolved in future model versions.
-<span style="color:red"> Has that been fixed in the meantime? </span>
 
 [🔝](#top)
-
