@@ -48,13 +48,13 @@ Simply stated, the change in storage is equal to inflow minus outflow. To solve 
 The modified Puls approach avoids iteration steps to solve the equation A3.1 by reforming the equation to:
 
 $$
-\frac{S_2}{\Delta t} + \frac{Q_{Out2}}{2}=\left (S1 + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}
+\frac{S_2}{\Delta t} + \frac{Q_{Out2}}{2}=\left (\frac{S_1}{\Delta t} + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}
 $$
 
 The right part of this equation can be solved because $S_1$, $Q_{Out1}$ and $Q_{In1}$ is given from the previous timestep and $Q_{In2}$ is the inflow to the lake at the current timestep.
 
 $$
-SI=\left (S1 + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}
+SI=\left (\frac{S_1}{\Delta t} + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}
 $$
 
 For the left part two assumptions are made here to simplify and fasten the
