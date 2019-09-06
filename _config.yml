@@ -346,6 +346,10 @@ defaults:
           url: 3_optLISFLOOD_water-levels
         - title: "- Read & write NetCDF"
           url: 3_optLISFLOOD_NetCDF
+        - title: "- Variable water fraction"
+          url: 3_optLISFLOOD_varfractionwater
+        - title: "- Transient land use change"
+          url: 3_optLISFLOOD_TransientLandUseChange
 
 
       - section_title: "Annex"
