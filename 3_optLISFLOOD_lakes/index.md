@@ -24,7 +24,7 @@ Lakes are simulated as points in the channel network. The Figure below shows all
 Lake retention can be seen as special case of flood retention with horizontal water level. Therefore the basic equations of channel routing can be written as:
 
 $$
-\frac{(Q_{In1} + Q_{In2})}{2}-\frac{(Q_{Out1} + Q_{Out2})}{2}=\frac{S_2+s_1}{\Delta t}
+\frac{(Q_{In1} + Q_{In2})}{2}-\frac{(Q_{Out1} + Q_{Out2})}{2}=\frac{S_2-S_1}{\Delta t}
 $$
 
 Where:
