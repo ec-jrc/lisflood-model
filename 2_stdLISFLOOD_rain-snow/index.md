@@ -22,7 +22,7 @@ $$
 where 
    *M* is the snowmelt per time step $[mm]$, 
    *R* is rainfall (not snow!) intensity $[\frac {mm}{day}]$, and 
-   $\Delta t$ is the time interval $[days]$. 
+   $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day
    $T_m$ has a value of 0 $^\circ C$, and 
    $C_m$ is a degree-day factor $[\frac{mm} {^\circ C \cdot day}]$. 
 
