@@ -41,15 +41,14 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 
 **For impervious areas**, LISFLOOD assumes that:
 1. A depression storage is filled by precipitation and snowmelt and emptied by evaporation
-2. Any water that is not filling the depression storage, reaches the surface is added directly to surface runoff
+2. Any water that is not filling a depression storage, reaches the surface and is added directly to surface runoff
 3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the direct runoff fraction)
 4. There is no groundwater storage
 
 **For open water** (e.g. lakes, rivers) the water fraction parameter ($f_{water}$) defines the fraction that is covered with water (large lakes that are in direct connection with major river channels can be modelled using [LISFLOOD's lake option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_lakes/). 
 
 **For water covered areas**, LISFLOOD assumes that:
-1. The loss of actual evaporation is equal to the potential evaporation on open water
-2. Any water that is not evaporated, reaches the surface is added directly to surface runoff
+1. Actual evaporation is equal to potential evaporation on open water
 3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the water fraction)
 4. There is no groundwater storage
 
