@@ -1,12 +1,12 @@
 ## Soil moisture redistribution 
 
-The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layer) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from **Darcy's law for 1-D vertical flow rate**:
+The description of the moisture fluxes out of the subsoil (and also between the upper- and lower soil layers) is based on the simplifying assumption that the flow of soil moisture is entirely gravity-driven. Starting from **Darcy's law for 1-D vertical flow rate**:
 
 $$
 q = - K(\theta ) \cdot [\frac{\partial h(\theta )}{\partial z} -1]
 $$
 
-where $q [\frac{mm}{day}]$ is the flow rate out of the soil (e.g. upper soil layer, lower soil layer); $K(\theta) [\frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [\frac{mm^3}{ mm^3}]$ and $\frac{\partial h (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
+where $q [\frac{mm}{day}]$ is the flow rate out of the soil (e.g. superficial soil layer, upper soil layer, lower soil layer); $K(\theta) [\frac{mm }{day}]$ is the hydraulic conductivity (as a function of the volumetric moisture content of the soil, $\theta [\frac{mm^3}{ mm^3}]$ and $\frac{\partial h (\theta )}{\partial z}$ is the matric potential gradient. If we assume a matric potential gradient of zero, the equation reduces to:
 
 $$
 q = K(\theta )
@@ -30,10 +30,13 @@ $$
 K(w)\Delta t \gt {w - w_r}
 $$
 
-In order to solve the soil moisture equations correctly an iterative procedure is used. At the beginning of each time step, the conductivities for both soil layers $[K_1(w_1), K_2(w_2)]$ are calculated using the Van Genuchten equation. Multiplying these values with the time step and dividing by the available moisture gives a Courant-type numerical stability indicator for each respective layer:
+In order to solve the soil moisture equations correctly an iterative procedure is used. At the beginning of each time step, the conductivities for the three soil layers $[K_1a(w_1a),K_1b(w_1b), K_2(w_2)]$ are calculated using the Van Genuchten equation. Multiplying these values with the time step and dividing by the available moisture gives a Courant-type numerical stability indicator for each respective layer:
+$$
+C_1a = \frac{K_1(w_1a) \cdot \Delta t}{w_1a - w_{r1a}}
+$$
 
 $$
-C_1 = \frac{K_1(w_1) \cdot \Delta t}{w_1 - w_{r1}}
+C_1b = \frac{K_1(w_1b) \cdot \Delta t}{w_1b - w_{r1b}}
 $$
 
 $$
@@ -41,15 +44,13 @@ C_2 = \frac{K_2(w_2) \cdot \Delta t}{w_2 - w_{r2}}
 $$
 
 A Courant number that is greater than 1 implies that the calculated outflow exceeds the available soil moisture, resulting in loss of mass balance. Since we need a stable solution for both soil layers, the
-**'overall' Courant number** for the soil moisture routine is the largest value out of $C_1$ and $C_2$:
-
+**'overall' Courant number** for the soil moisture routine is the largest value out of $C_1a$, $C_1b$ and $C_2$:
 $$
-C_{soil} = max (C_1,C_2)
+C_{soil} = max (C_1a,C_1b,C_2)
 $$
 
 In principle, rounding $C_{soil}$ up to the nearest integer gives the number sub-steps needed for a stable solution. In practice, it is often preferable to use a critical Courant number that is lower than 1, because high values can result in unrealistic 'jumps' in the simulated soil moisture pattern when the soil is near saturation (even though mass balance is preserved). Hence, making the critical Courant number a
 user-defined value $C_{crit}$, the number of sub-steps becomes:
-
 $$
 SubSteps = roundup(\frac{C_{soil}}{C_{crit}})
 $$
@@ -61,32 +62,46 @@ $$
 $$
 
 In brief, the iterative procedure now involves the following steps. First, the number of sub-steps and the corresponding sub-time-step are computed as explained above. The amounts of soil moisture in the upper
-and lower layer are copied to temporary variables $$w'_1$$ and $$w'_2$$. Two variables, $$D_{1,2}$$ (flow from upper to lower soil layer) and $$D_{2,gw}$$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
+and lower layers are copied to temporary variables $$w'_1a$$, $$w'_1b$$ and $$w'_2$$. Three variables, $$D_{1a,1b}$$ (flow from superficial soil layer to top soil layer), $$D_{1b,2}$$ (flow from top soil layer to lower soil layer) and $$D_{2,gw}$$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
 
-1. compute hydraulic conductivity for both layers
+1. Compute hydraulic conductivity for the three layers $[K_1a(w_1a),K_1b(w_1b), K_2(w_2)]$ 
 
-2. compute flux from upper to lower soil layer for this sub-step ($D'_{1,2}$, can never exceed storage capacity in lower layer):
+2. Compute flux from superficial to upper soil layer for this sub-step ($D'_{1a,1b}$ can never exceed storage capacity in the upper soil layer)
    $$
-   D'_{1,2} = min [K_1(w'_1)\Delta t,w'_{s2} -w'_2]
+   D'_{1a,1b} = min [K_1a(w'_1a)\Delta t,w'_{s1b} -w'_1b]
    $$
 
-3. compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$), can never exceed available water in lower layer):
+3. Compute flux from upper to lower soil layer for this sub-step ($D'_{1b,2}$ can never exceed storage capacity in lower soil layer):
+   $$
+   D'_{1b,2} = min [K_1b(w'_1b)\Delta t,w'_{s2} -w'_2]
+   $$
+
+4. Compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$) can never exceed available water in lower layer):
    $$
    D'_{2,gw} = min [K_2(w'_2)\Delta t,w'_2 -w'_{r2}]
    $$
 
-4. update $w'_1$ and $w'_2$
+5. Update $w'_1a$,  $w'_1b$ and $w'_2$
 
-5. add $$D'_{1,2}$$ to $$D_{1,2}$$; add $$D'_{2,gw}$$ to $$D_{2,gw}$$
+6. Add $$D'_{1a,1b}$$ to $$D_{1a,1b}$$; $$D'_{1b,2}$$ to $$D_{1b,2}$$; add $$D'_{2,gw}$$ to $$D_{2,gw}$$
 
-If the soil is frozen (*F* \> critical threshold), both $D_{1,2}$ and $D_{2,gw}$ are set to zero. After the iteration loop, the amounts of soil moisture in both layers are updated as follows:
+If the soil is frozen (*F* \> critical threshold), $D_{1a,1b}$, $D_{1b,2}$ and $D_{2,gw}$ are set to zero. After the iteration loop, the amounts of soil moisture in all layers are updated as follows:
+$$
+w_1a = w_1a - D_{1a,1b}
+$$
 
 $$
-w_1 = w_1 - D_{1,2}
+w_1b = w_1b + D_{1a,1b} - D_{1b,2}
 $$
 
 $$
-w_2 = w_2 + D_{1,2} - D_{2,gw}
+w_2 = w_2 + D_{1b,2} - D_{2,gw}
 $$
+
+Total amounts of soil moisture in superficial and upper soil layers is also computed as follows:
+$$
+w_1 = w_1a + w_1b
+$$
+
 
 [🔝](#top)

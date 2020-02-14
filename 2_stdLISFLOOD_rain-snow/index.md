@@ -22,7 +22,7 @@ $$
 where 
    *M* is the snowmelt per time step $[mm]$, 
    *R* is rainfall (not snow!) intensity $[\frac {mm}{day}]$, and 
-   $\Delta t$ is the time interval $[days]$. 
+   $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day
    $T_m$ has a value of 0 $^\circ C$, and 
    $C_m$ is a degree-day factor $[\frac{mm} {^\circ C \cdot day}]$. 
 
@@ -53,7 +53,7 @@ For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow
 ***Figure:** Definition of sub-pixel elevation zones for snow accumulation and melt modelling. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone.*
 
 
-The division in elevation zones was changed from a3 uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km grid cell. Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
+The division in elevation zones was changed from a uniform distribution in the previous LISFLOOD version to a normal distribution, which fits better to the real distribution of e.g. 100m SRTM DEM pixels in a 5x5km grid cell. Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $T_{avg}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate, *L*, of  0.0065 °C per meter elevation difference. Snow, snowmelt and snow accumulation are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone.
 
 
 [🔝](#top)

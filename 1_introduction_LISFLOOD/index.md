@@ -9,13 +9,13 @@ Its most prominent application is probably within the [European Flood Awareness 
 operated under the [Copernicus Emergency Management System](http://emergency.copernicus.eu/) (EMS).
 
 LISFLOOD's wide applicability is due to its modular structure as well as its temporal and spatial flexibility. 
-The model can be extended with additional modules wh4en the need arises, to satisfy the new target objective. 
+The model can be extended with additional modules when the need arises, to satisfy the new target objective. 
 In that sense it can be extended to include anything from a better representation of a particular hydrological flow to the implementation of anthropogenic-influenced processes. 
 
 The model has also been designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, 
 and applications to date have employed grid cells of as little as 100 metres (for medium-sized catchments), 
 to 5000 metres for modelling the whole of Europe and 0.1° (around 11 km) and 0.5° (around 55 km) for modelling at the global scale. 
-The long-term water balance can be simulated (using a daily time step), as can individual flood events (using hourly time intervals, or even smaller). 
+The long-term water balance can be simulated (using daily or sub-daily time steps), as can individual flood events (using hourly time intervals, or even smaller). 
 
 Although LISFLOOD's primary output product is river discharge, all internal rate and state variables (soil moisture, for example) can also be written as output. 
 All output can be written as grids, or time series at user-defined points or areas. 

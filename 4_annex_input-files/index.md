@@ -16,11 +16,10 @@ The meteorological conditions provide the driving forces behind the water balanc
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
-> **Note** that the model needs *daily* average temperature values, even if the model is run on a smaller time interval (e.g. hourly). 
->This is because the routines for snowmelt and soil freezing are use empirical relations which are based on daily temperature data. 
->Just as an example, feeding hourly temperature data into the snowmelt routine can result in a gross overestimation of snowmelt. 
->This is because even on a day on which the average temperature is below $T_m$ (no snowmelt), 
->the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snowmelt rates.
+> **Note** that the model needs sub-daily averages for temperature values when it is run on a sub-daily time interval (e.g. hourly). Sub-daily average temperature values are then considered as daily average value by the model during computations. This is because the routines for snow melt and soil freezing  use empirical relations which are based on daily temperature data. At the end of computation, the daily amount of snow melt is then reduced according to the sub-daily time interval.
+>Just as an example, feeding hourly temperature data into the snow melt routine can result in a gross overestimation of snow melt. 
+>This is because even on a day on which the average temperature is below $T_m$ (no snow melt), 
+>the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snow melt rates.
 
 
 Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, 
