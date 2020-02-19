@@ -9,7 +9,7 @@ $$
 
 Where $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day}]$, constant $κ_{gb}$ is the extinction coefficient for global solar radiation \[-\] and $k_{crop}$ is a crop coefficient, a ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop. $k_{crop}$ is 1 for most vegetation types, except for some excessively transpiring crops like sugarcane or rice. 
 
-> Note that the energy that has been 'consumed' already for the evaporation of intercepted water is simply subtracted here in order to respect the overall energy balance. 
+> Note that the energy that has been 'consumed' already for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ($EW_{int}$). This is done in order to respect the overall energy balance. 
 
 The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
 
@@ -17,7 +17,7 @@ $$
 R_{WS} = \frac{w_1 - w_{wp1}}{w_{crit1} -w_{wp1}}
 $$
 
-where $w_1$ is the amount of moisture in the upper soil layer $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The **critical amount of soil moisture** is calculated as:
+where $w_1$ is the amount of moisture in the superficial and upper soil layers $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The **critical amount of soil moisture** is calculated as:
 
 $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
