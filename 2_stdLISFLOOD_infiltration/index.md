@@ -1,12 +1,12 @@
 ## Infiltration capacity
 
-The infiltration capacity of the soil is estimated using the widely-used Xinanjiang (also known as VIC/ARNO) model (e.g. Zhao & Lui, 1995; Todini, 1996). This approach assumes that the fraction of a grid cell that is contributing to surface runoff (read: saturated) is related to the total amount of soil moisture, and that this relationship can be described through a non-linear distribution function. For any grid cell, if $w_1$ is the total moisture storage in the upper soil layer and $w_{s1}$ is the maximum storage, the corresponding **saturated fraction** $A_s$ is approximated by the following distribution function:
+The infiltration capacity of the soil is estimated using the widely-used Xinanjiang (also known as VIC/ARNO) model (e.g. Zhao & Lui, 1995; Todini, 1996). This approach assumes that the fraction of a grid cell that is contributing to surface runoff (read: saturated) is related to the total amount of soil moisture, and that this relationship can be described through a non-linear distribution function. For any grid cell, if $w_1$ is the total moisture storage in the superficial (1a) and upper (1b) soil layers and $w_{s1}$ is the maximum storage in the superficial (1a) and upper (1b) soil layers, the corresponding **saturated fraction** $A_s$ is approximated by the following distribution function:
 
 $$
 A_s = 1 - (1 - \frac{w_1}{w_{s1}})^b
 $$
 
-where $w_{s1}$ and $w_1$ are the maximum and actual amounts of moisture in the upper soil layer, respectively $[mm]$, and $b$ is an empirical shape parameter. In the LISFLOOD implementation of the Xinanjiang model, $A_s$ is defined as a fraction of the permeable fraction of each pixel (i.e. as a fraction of $(1-d_{rf})$). The **potential infiltration capacity** $INF_{pot} [mm]$ is a function of $w_s$ and $A_s$:
+where $w_{s1}$ and $w_1$ are the maximum and actual amounts of moisture in the superficial and upper soil layers, respectively $[mm]$, and $b$ is an empirical shape parameter. In the LISFLOOD implementation of the Xinanjiang model, $A_s$ is defined as a fraction of the permeable fraction of each pixel (i.e. as a fraction of $(1-d_{rf})$). The **potential infiltration capacity** $INF_{pot} [mm]$ is a function of $w_s$ and $A_s$:
 
 $$
 INF_{pot}= \frac{w_{s1}}{b + 1} - \frac{w_{s1}}{b +1} \cdot [1 - (1 - A_s)^{\frac{b + 1}{b}}]

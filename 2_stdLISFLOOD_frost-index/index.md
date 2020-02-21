@@ -15,5 +15,5 @@ $$
 
 >  Note: $F$ is not allowed to become less than 0.
 
-When the frost index rises above a threshold of 56, every soil process is frozen and transpiration, evaporation, infiltration and the outflow to the second soil layer and to upper groundwater layer is set to zero.
+When the frost index rises above a threshold of 56, every soil process is frozen and transpiration, evaporation, infiltration and water flows between the different soil layers and to the upper groundwater layer are set to zero.
 Any rainfall is bypassing the soil and transformed into surface runoff till the frost index is equal or less than 56.

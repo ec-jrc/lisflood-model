@@ -20,7 +20,7 @@ $$
 ES_a = \min (ES_a,w_1 - w_{res1})
 $$
 
-where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1} [mm]$ is the residual amount of soil moisture. Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen. The amount of moisture in the upper soil layer is updated after the evaporation calculations:
+where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1} [mm]$ is the residual amount of soil moisture. Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen. The amount of moisture in the superficial and upper soil layers is updated after the evaporation calculations:
 
 $$
 w_1 = w_1 - ES_a
