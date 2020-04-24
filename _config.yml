@@ -272,7 +272,7 @@ defaults:
       share: false
       related: false
       sidebar:
-      
+
       - section_title: "Introduction"
         items:
         - title: "About LISFLOOD"
@@ -292,7 +292,7 @@ defaults:
         - title: "- Evaporation from the soil surface"
           url:  	 	2_stdLISFLOOD_soil-evaporation
         - title: "- Evaporation of interceted water"
-          url:  	2_stdLISFLOOD_evaporation-intercepted-water 	
+          url:  	2_stdLISFLOOD_evaporation-intercepted-water
         - title: "- Interception"
           url: 2_stdLISFLOOD_interception
         - title: "- Irrigation"
@@ -368,3 +368,4 @@ defaults:
 
 
 theme: jekyll-theme-minimal
+github: [metadata]
