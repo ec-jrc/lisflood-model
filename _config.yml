@@ -282,7 +282,6 @@ defaults:
         - title: "Further notes about the model"
           url: 1_introduction_general
 
-
       - section_title: "Standard LISFLOOD processes"
         items:
         - title: "- Overview"
@@ -290,9 +289,9 @@ defaults:
         - title: "- Snow melt"
           url: 2_stdLISFLOOD_rain-snow
         - title: "- Evaporation from the soil surface"
-          url:  	 	2_stdLISFLOOD_soil-evaporation
+          url: 2_stdLISFLOOD_soil-evaporation
         - title: "- Evaporation of interceted water"
-          url:  	2_stdLISFLOOD_evaporation-intercepted-water
+          url: 2_stdLISFLOOD_evaporation-intercepted-water
         - title: "- Interception"
           url: 2_stdLISFLOOD_interception
         - title: "- Irrigation"
@@ -302,11 +301,11 @@ defaults:
         - title: "- Frost index"
           url: 2_stdLISFLOOD_frost-index
         - title: "- Water available for infiltration and direct runoff"
-          url:  	2_stdLISFLOOD_H20-for-Qdir-infiltration
+          url: 2_stdLISFLOOD_H20-for-Qdir-infiltration
         - title: "- Infiltration capacity"
-          url:  	2_stdLISFLOOD_infiltration
+          url: 2_stdLISFLOOD_infiltration
         - title: "- Actual infiltration and surface runoff"
-          url:  	2_stdLISFLOOD_actual-infiltration-and-surface-runoff
+          url: 2_stdLISFLOOD_actual-infiltration-and-surface-runoff
         - title: "- Soil moisture redistribution"
           url: 2_stdLISFLOOD_soilmoisture-redistribution
         - title: "- Preferential bypass flow"
@@ -314,7 +313,7 @@ defaults:
         - title: "- Groundwater"
           url: 2_stdLISFLOOD_groundwater
         - title: "- Surface runoff routing"
-          url:  	2_stdLISFLOOD_surface-runnoff-routing
+          url: 2_stdLISFLOOD_surface-runnoff-routing
         - title: "- Sub-surface runoff routing"
           url: 2_stdLISFLOOD_subsurface-runoff
         - title: "- Channel routing"
@@ -351,7 +350,6 @@ defaults:
         - title: "- Transient land use change"
           url: 3_optLISFLOOD_TransientLandUseChange
 
-
       - section_title: "Annex"
         items:
         - title: "LISFLOOD input files"
@@ -364,7 +362,7 @@ defaults:
         - title: "References"
           url: 5_references
         - title: "Disclaimer"
-          url: 0_disclaimer
+          url: 5_disclaimer
 
 
 theme: jekyll-theme-minimal
