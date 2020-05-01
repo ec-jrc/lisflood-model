@@ -183,7 +183,7 @@ kramdown:
   auto_ids: true
   footnote_nr: 1
   entity_output: as_char
-  toc_levels: 1..3
+  toc_levels: 1..4
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
@@ -276,93 +276,93 @@ defaults:
       - section_title: "Introduction"
         items:
         - title: "About LISFLOOD"
-          url: 1_introduction_LISFLOOD
+          url: 1_1_introduction_LISFLOOD
         - title: "About this model documentation"
-          url: 1_introduction_document
+          url: 1_2_introduction_document
         - title: "Further notes about the model"
-          url: 1_introduction_general
+          url: 1_3_introduction_general
 
       - section_title: "Standard LISFLOOD processes"
         items:
         - title: "- Overview"
-          url: 2_stdLISFLOOD_overview
-        - title: "- Snow melt"
-          url: 2_stdLISFLOOD_rain-snow
-        - title: "- Evaporation from the soil surface"
-          url: 2_stdLISFLOOD_soil-evaporation
-        - title: "- Evaporation of interceted water"
-          url: 2_stdLISFLOOD_evaporation-intercepted-water
+          url: 2_01_stdLISFLOOD_overview
         - title: "- Interception"
-          url: 2_stdLISFLOOD_interception
-        - title: "- Irrigation"
-          url: 2_stdLISFLOOD_irrigation
-        - title: "- Water uptake by roots & transpiration"
-          url: 2_stdLISFLOOD_plant-water-uptake
+          url: 2_02_stdLISFLOOD_interception
+        - title: "- Evaporation of interceted water"
+          url: 2_03_stdLISFLOOD_evaporation-intercepted-water
+        - title: "- Snow melt"
+          url: 2_04_stdLISFLOOD_snowmelt
         - title: "- Frost index"
-          url: 2_stdLISFLOOD_frost-index
+          url: 2_05_stdLISFLOOD_frost-index
         - title: "- Water available for infiltration and direct runoff"
-          url: 2_stdLISFLOOD_H20-for-Qdir-infiltration
-        - title: "- Infiltration capacity"
-          url: 2_stdLISFLOOD_infiltration
-        - title: "- Actual infiltration and surface runoff"
-          url: 2_stdLISFLOOD_actual-infiltration-and-surface-runoff
-        - title: "- Soil moisture redistribution"
-          url: 2_stdLISFLOOD_soilmoisture-redistribution
+          url: 2_06_stdLISFLOOD_water_infiltration
+        - title: "- Water uptake by roots & transpiration"
+          url: 2_07_stdLISFLOOD_plant-water-uptake
+        - title: "- Evaporation from the soil surface"
+          url: 2_08_stdLISFLOOD_soil-evaporation
         - title: "- Preferential bypass flow"
-          url: 2_stdLISFLOOD_preferential-bypass
+          url: 2_09_stdLISFLOOD_preferential-bypass
+        - title: "- Infiltration capacity"
+          url: 2_10_stdLISFLOOD_infiltration
+        - title: "- Actual infiltration and surface runoff"
+          url: 2_11_stdLISFLOOD_actual-infiltration-and-surface-runoff
+        - title: "- Soil moisture redistribution"
+          url: 2_12_stdLISFLOOD_soilmoisture-redistribution
         - title: "- Groundwater"
-          url: 2_stdLISFLOOD_groundwater
+          url: 2_13_stdLISFLOOD_groundwater
         - title: "- Surface runoff routing"
-          url: 2_stdLISFLOOD_surface-runnoff-routing
+          url: 2_14_stdLISFLOOD_surface-runnoff-routing
         - title: "- Sub-surface runoff routing"
-          url: 2_stdLISFLOOD_subsurface-runoff
+          url: 2_15_stdLISFLOOD_subsurface-runoff
         - title: "- Channel routing"
-          url: 2_stdLISFLOOD_channel-routing
+          url: 2_16_stdLISFLOOD_channel-routing
+        - title: "- Irrigation"
+          url: 2_17_stdLISFLOOD_irrigation
         - title: "- Water use"
-          url: 2_stdLISFLOOD_water-use
+          url: 2_18_stdLISFLOOD_water-use
 
       - section_title: "Optional LISFLOOD processes & output"
         items:
         - title: "- Overview"
-          url: 3_optLISFLOOD_overview
+          url: 3_01_optLISFLOOD_overview
         - title: "- Lakes"
-          url: 3_optLISFLOOD_lakes
+          url: 3_02_optLISFLOOD_lakes
         - title: "- Reservoirs"
-          url: 3_optLISFLOOD_reservoirs
+          url: 3_03_optLISFLOOD_reservoirs
         - title: "- Polder"
-          url: 3_optLISFLOOD_polder
-        - title: "- Kinematic wave"
-          url: 3_optLISFLOOD_kinematic-wave
+          url: 3_04_optLISFLOOD_polder
+        - title: "- Double kinematic wave"
+          url: 3_05_optLISFLOOD_kinematic-wave
         - title: "- Dynamic wave"
-          url: 3_optLISFLOOD_dynamic-wave
+          url: 3_06_optLISFLOOD_dynamic-wave
         - title: "- Soil moisture"
-          url: 3_optLISFLOOD_soil-moisture
+          url: 3_07_optLISFLOOD_soil-moisture
         - title: "- Transmission loss"
-          url: 3_optLISFLOOD_transmission-loss
+          url: 3_08_optLISFLOOD_transmission-loss
         - title: "- Inflow hydrograph"
-          url: 3_optLISFLOOD_inflow-hydrograph
+          url: 3_09_optLISFLOOD_inflow-hydrograph
         - title: "- Water levels"
-          url: 3_optLISFLOOD_water-levels
+          url: 3_10_optLISFLOOD_water-levels
         - title: "- Read & write NetCDF"
-          url: 3_optLISFLOOD_NetCDF
+          url: 3_11_optLISFLOOD_NetCDF
         - title: "- Variable water fraction"
-          url: 3_optLISFLOOD_varfractionwater
+          url: 3_12_optLISFLOOD_varfractionwater
         - title: "- Transient land use change"
-          url: 3_optLISFLOOD_TransientLandUseChange
+          url: 3_13_optLISFLOOD_TransientLandUseChange
 
       - section_title: "Annex"
         items:
         - title: "LISFLOOD input files"
-          url: 4_annex_input-files
+          url: 4_1_annex_input-files
         - title: "LISFLOOD output files"
-          url: 4_annex_output-files
+          url: 4_2_annex_output-files
 
       - section_title: "Not to forget"
         items:
         - title: "References"
-          url: 5_references
+          url: 5_1_references
         - title: "Disclaimer"
-          url: 5_disclaimer
+          url: 5_2_disclaimer
 
 
 theme: jekyll-theme-minimal
