@@ -14,44 +14,93 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 
 ### Description of the reservoir routine 
 
-Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity $S\ [m^3]$. The relative filling of a reservoir, $F$, is a fraction between 0 and 1. There are three 'special' filling levels. 
-- $L_c$: 'conservative storage limit'. This is the lower limit as reservoirs are  never completely empty. 
-- $L_f$: 'flood storage limit'. This is the upper limit as reservoirs are never filled completly for safety reasons
-- $L_n$: is the available capacity of a reservoir between $L_f$ and $L_c$. 
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir ($I_{res} [\frac{m^3}{s}]$) equals the channel flow upstream of the reservoir. Operational rules for reservoirs are not included implicitly in LISFLOOD, but the model mimics these operational rules by using a number of rules which define reservoir output as a function of the relative filling. The relative filling of a reservoir, $F$, is the ratio between the water volume stored in the reservoir at the computational time $Vt\ [m^3]$ and its total storage capacity $S\ [m^3]$:
 
-Three additional parameters define the way the outflow of a reservoir is regulated. 
+$$
+F = \frac{Vt}{S}
+$$
+
+$F$ varies between 0 and 1.
+
+There are three 'special' relative filling levels:
+- the 'conservative storage limit $L_c$, that is the lower limit of reservoir water storage (reservoirs are never completely empty)
+- the 'flood storage limit' $L_f$, that is the upper limit of the operational relative filling as reservoirs are never filled completly for safety reasons
+- the 'normal storage capacity' $L_n$, that is the available capacity of a reservoir between $L_f$ and $L_c$. 
+
+Three discharge values define the way the outflow of a reservoir is regulated. 
 - 'minimum outflow' ($O_{min}$, $[\frac{m^3} {s}]$) which is maintained for e.g. ecological reasons; 
 - 'non-damaging outflow' ($O_{nd}$, $[\frac{m^3} {s}]$) is the maximum possible outflow that will not cause problems downstream; and
 - 'normal outflow' ($O_{norm}$, $[\frac{m^3} {s}]$) is the one valid when the reservoir is within its 'normal storage' filling level.
+
+$L_c$,$L_f$, $L_n$, $O_{min}$, $O_{nd}$, $O_{norm}$ are input data.
+
+Two calibration parameters, namely $AdjL_n$ and $ResMultO_{norm}$, are used to modulate the reservoir normal filling $L_n$ (balance between lower and upper limit of reservoir filling) and the normal reservoir outflow $O_{norm}$. Both the parameters are non-dimensional and they are used as follows:
+
+$$
+L_{adj,f} = L_n + $AdjL_n$ \cdot (L_f - L_n) 
+$$
+
+where $AdjL_n$ can assume values between 0.01 and 0.99.
+
+$$
+AdjO_{norm} = $ResMultO_{norm}$ \cdot O_{norm}
+$$
+
+where $ResMultO_{norm}$ can assume values between 0.25 and 2; AdjO_{norm} must always be larger than $O_{min}$, and smaller than $O_{nd}$.
 
 Depending on the relative filling of the reservoir, outflow ($O_{res},[\frac{m^3}{s}]$) is calculated as:
 
 If $$F \le 2 \cdot L_c$$, then: 
 
 $$
-O_{res} = min (O_{min} ,\frac{1}{\Delta t} \cdot F \cdot S)
+O_{res} = min (O_{min} , S \cdot frac{1}{\Delta t_{day})
 $$
+where $\Delta t_{day}$ is 86400 meaning that *the total daily inflow I_{res} to the reservor is released downstream* **CHECK**.
 
-
-If $$L_n \ge F \gt 2L_c$$, then:
-
-$$
-O_{res} = O_{min } + (O_{norm} - O_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
-$$
-
-If $$L_f \ge F \gt L_n$$, then:
+If $$2L_c \lt F \le L_n $$, then:
 
 $$
-O_{res} = O_{norm} + \frac{(F - L_n)}{(L_f - L_n)} \cdot \max((I_{res} - O_{norm}),(O_{nd} - O_{norm}))
+O_{res} = O_{min } + (AdjO_{norm}  - O_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
+$$
+
+If $$L_n \lt F \le  L_{adj,f}$$, then:
+
+$$
+O_{res} = AdjO_{norm}  
+$$
+
+where 
+
+If $$L_{adj,f} \lt F \le L_f$$, then:
+
+$$
+O_{res} = AdjO_{norm}  + \frac{(F - L_{adj,f}{(L_f - L_{adj,f} \cdot (O_{nd} - AdjO_{norm})
 $$
 
 If $$F \gt L_f$$, then:
 
 $$
-O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd})
+O_{res} = \max ((F - L_f **-0.01**) \cdot \frac{S}i{\Delta t_{day} , O_{max})
 $$
 
-with:
+with
+$$ O_{max} = \min ( O_{nd} , \max ( **1.2** \cdot I_{res} , O_{nd} ) )$$
+and 
+$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit ($L_f$) is realised to the downstream channel in one day. **CHECK**
+
+Finally, the condition described below is applied in order to prevent outflow values that are too large compared to the inflow value.
+
+If $$(O_{res} gt **1.2** \cdot I_{res})\and (O_{res} gt AdjO_{norm}) \and (F \lt L_f)$$, then:
+
+$$
+O_{res} = \max (( F - L_f - **0.01** ) \cdot \frac{S}{\Delta t_{day}) , **O_{reg}** )
+$$
+
+where $$**O_{reg}** = \min ( O_{nd} , \max ( **1.2** \cdot I_{res} , AdjO_{norm}) )
+
+
+
+Summary of the symbols:
    <br>$S$:		Reservoir storage capacity $[m^3]$
    <br>$F$:		Reservoir fill (fraction, 1 at total storage capacity) \[-\]
    <br>$L_c$:	Conservative storage limit \[-\]
@@ -61,8 +110,12 @@ with:
    <br>$O_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
    <br>$O_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
    <br>$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
+   <br>$I_{res}$:	calibration parameter used to modulate $L_n$ \[-\]
+   <br>$ResMultO_{norm}$:	calibration parameter used to modulate $O_{norm}$ \[-\]
 
-In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value). THIS NEEDS TO BE REVIEWED
+**The reservoir outflow is calculated using the same computational time interval used for the channel routing. **
+
+**ANYTHING ELSE?**
 
 
 
