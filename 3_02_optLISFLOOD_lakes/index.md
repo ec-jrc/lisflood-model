@@ -39,7 +39,7 @@ Simply stated, the change in storage is equal to inflow minus outflow. To solve 
 
 ![Lake relations](../media/image62-resize.jpg)
 
-***Figure:*** *Relation between water depth, lake outflow and lake storage*  **CHANGE THE y AXIS LABEL to "WATER DEPTH" **
+***Figure:*** *Relation between water depth, lake outflow and lake storage*    **CHANGE THE y AXIS LABEL to "WATER DEPTH" **  
 
 
 
@@ -84,7 +84,7 @@ $$
 replacing: $H = \sqrt{\frac{Q_{Out2}}{\alpha}}$
 
 The equation above can be solved as a quadratic equation for $Q_{Out2}$.
-
+to fasten
 $$
 Q_{Out2} = \left ( -LakeFactor+\sqrt{LakeFactor^2 + 2\cdot SI}\right )^2
 $$
