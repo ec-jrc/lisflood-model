@@ -54,7 +54,7 @@ $$
 and 
 
 $$
-RicePercolationDemand = RicePercolation \cdot RiceFraction \cdot \Delta t 
+RicePercolationWater = RicePercolation \cdot RiceFraction \cdot \Delta t 
 $$
 
 where $RicePercolation$ is the amount of water percolating to the upper groundwater layer (UZ). For instance, the percolation for heavy clay soils is 2 mm/day (FAO) **ADD LINK**.
@@ -67,6 +67,6 @@ $$
 
 $RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are extracted from surface water bodies according to the calendar day (**ADD CHAPTER/LINK**).
 
-$RicePercolationDemand$ and $RiceDrainageWater$ are added to the upper groundwater layer UZ  accpording to the calendar day (**ADD CHAPTER/LINK**).
+$RicePercolationWater$ and $RiceDrainageWater$ are added to the upper groundwater layer UZ  accpording to the calendar day (**ADD CHAPTER/LINK**).
 
 
