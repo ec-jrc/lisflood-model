@@ -6,10 +6,9 @@ $$
 D_{pref,gw} =W_{av} \cdot (\frac{w_1}{w_{s1}})^{c_{pref}}
 $$
 
-where $D_{pref,gw}$ is the amount of preferential flow per time step $[mm]$, $W_{av}$ is the amount of water that is available for infiltration, and $c_{pref}$ is an empirical shape parameter. $f_{dr}$ is the 'direct runoff fraction' \[-\], which is the fraction of each pixel that is made up by urban area and open water bodies (i.e. preferential
-flow is only simulated in the permeable fraction of each pixel) . The equation results in a preferential flow component that becomes increasingly important as the soil gets wetter.
+where $D_{pref,gw}$ is the amount of preferential flow per time step $[mm]$, $W_{av}$ is the amount of water that is available for infiltration, and $c_{pref}$ is an empirical shape parameter. The equation results in a preferential flow component that becomes increasingly important as the soil gets wetter. It is here noted that the preferential flow is only simulated in the permeable fraction of each pixel, defined as: $( 1 - f_{dr} )$, where $f_{dr}$ is the 'direct runoff fraction' \[-\]. The 'direct runoff fraction' is the fraction of a pixel occupied by urban areas and open water bodies.
 
-The Figure below shows with $c_{pref} = 0$ (red line) every available water for infiltration is converted into preferential flow and bypassing the soil. $c_{pref} = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
+The Figure below shows with $c_{pref} = 0$ (red line) all the available water for infiltration is converted into preferential flow and it bypasses the soil. $c_{pref} = 1$ (black line) gives a linear relation e.g. at 60% soil saturation 60% of the available water is bypassing the soil matrix. With increasing $c_{pref}$ the percentage of preferential flow is decreasing.
 
 ![Soil moisture and preferential flow relation](../media/image34-resize.png)
 ***Figure:*** *Soil moisture and preferential flow relation.*
