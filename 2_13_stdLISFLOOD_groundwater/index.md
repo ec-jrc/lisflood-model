@@ -47,17 +47,22 @@ LZ = D_{uz,lz}  - totGW_{abstr} - ( GW_{loss} \cdot \Delta t )
 $$
 
 where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); totGW_{abstr} is the total amount of **water abstracted from groundwater** to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
+
 The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
 
-The values of both $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}{day}]$), and $GW_{loss}$ ($[\frac{mm}{day}]$) are obtained by calibration. 
+LISFLOOD hence abstracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to monitor more on decadal periods.
+
+If $LZ$ (lower groundwater amount) decreases below a groundwater threshold value ($LZThreshold$), the baseflow  Q_{lz} from the lower groundwater zone to the nearby rivers is zero. When sufficient recharge is added again to raise the $LZ$ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced. $LZThreshold$ values are likely different for various (sub)river basins. 
+
+The values of $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}{day}]$), $GW_{loss}$ ($[\frac{mm}{day}]$), and $LZThreshold$ ($[mm]$) are obtained by calibration. 
 To avoid spurious results (**and mass balance errors - BE SURE OF THIS**), when $GW_{perc}$<$GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
 
 Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
- M
 
 
-## Groundwater abstractions
+
+## Groundwater abstractions **TO BE MODIFIED**
 
 LISFLOOD includes the option of groundwater abstraction for irrigation and other usage purposes (see water use chapter). LISFLOOD checks if the amount of demanded water that is supposed to be abstracted from a source, is actually available. 
 
