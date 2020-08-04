@@ -6,20 +6,55 @@ $$
 Q_{uz} = \frac{1}{T_{uz}} \cdot UZ \cdot \Delta t
 $$
 
-where $T_{uz}$ is a reservoir constant $[days]$ and $UZ$ is the amount of water that is stored in the upper zone $[mm]$. Similarly, the **outflow from the lower zone** is given by:
+where $T_{uz}$ is the reservoir constant for the upper groundwater layer $[days]$ and $UZ$ is the amount of water that is stored in the upper zone $[mm]$. 
+
+The amount of water stored in the upper zone $UZ$ is computed as follows:
 
 $$
-Q_{lz} = \frac{1}{T_{lz}} \cdot LZ \cdot \Delta t
+UZ = $D'{2,gw}$ + D_{pref,gw} - D_{uz,lz}
 $$
 
-Here, $T_{lz}$ is again a reservoir constant $[days]$, and $LZ$ is the amount of water that is stored in the lower zone $[mm]$. The values of both $T_{uz}$ and $T_{lz}$ are obtained by calibration. The upper zone also provides the inflow into the lower zone. For each time step, a fixed amount of **water percolates from the upper to the lower zone**:
+where $D'{2,gw}$ is the flux from the lower soil layer to groundwater for this sub-step; $D_{pref,gw}$ is the amount of preferential flow per time step; D_{uz,lz} is the amount of **water that percolates from the upper to the lower zone**, all in $[mm]$.
+
+In areas with drained irrigation ($DrainedFraction$), the flux from the lower soil layer to groundwater $D'{2,gw}$ is directly delivered to the river channel, consequenlty, the computation of $UZ$ is modifies as follows:
+
+$$
+UZ = (1 - DrainedFraction) \cdot $D'{2,gw}$ + D_{pref,gw} - D_{uz,lz}
+$$
+
+In areas with flooded irrigation (e.g. rice crops), an additional amount of water is added to $UZ$ during the percolation and draining phases of the agricultural cycle ($RicePercolationeWater$ and $RiceDrainageWater$ are described in **ADD LINK TO CHAPTER**).
+
+The **water percolates from the upper to the lower zone** ($D_{uz,lz}$) is the inflow to the lower groundwater zone. As indicated above, this amount of water is provided by the upper groundwater zone.  $D_{uz,lz}$ is a fixed amount per computational time step and it is defined as follows:
 
 $$
 D_{uz,lz} = min (GW_{perc} \cdot \Delta t ,UZ)
 $$
 
-Here, $GW_{perc} \ [\frac{mm}{day}]$ is a user-defined value that is determined during calibration. 
-Note that these equations are again valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
+Here, $GW_{perc} \ [\frac{mm}{day}]$ is the maximum percolation rate from the upper to the lower groundwater zone. going from the Upper to the Lower
+                    
+The **outflow from the lower zone to the channel** is then computed by:
+
+$$
+Q_{lz} = \frac{1}{T_{lz}} \cdot LZ \cdot \Delta t
+$$
+
+Here, $T_{lz}$ is the reservoir constant for the lower groundwater layer ($[days]$), and $LZ$ is the amount of water that is stored in the lower zone ($[mm]$). 
+
+$LZ$ is computed as follows:
+
+$$
+LZ = D_{uz,lz}  - totGW_{abstr} - ( GW_{loss} \cdot \Delta t ) 
+$$
+
+where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); totGW_{abstr} is the total amount of **water abstracted from groundwater** to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
+The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
+
+The values of both $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}{day}]$), and $GW_{loss}$ ($[\frac{mm}{day}]$) are obtained by calibration. 
+To avoid spurious results (**and mass balance errors - BE SURE OF THIS**), when $GW_{perc}$<$GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
+
+Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
+
+ M
 
 
 ## Groundwater abstractions
