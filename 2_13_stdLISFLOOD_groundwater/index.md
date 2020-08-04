@@ -46,7 +46,7 @@ $$
 LZ = D_{uz,lz}  - totGW_{abstr} - ( GW_{loss} \cdot \Delta t ) 
 $$
 
-where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); totGW_{abstr} is the total amount of **water abstracted from groundwater** to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
+where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $totGW_{abstr}$ is the total amount of **water abstracted from groundwater** to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
 
 The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
 
