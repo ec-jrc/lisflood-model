@@ -130,60 +130,7 @@ For a 'warm start' these initial values are needed
 
 
 
-### Automatic change of the number of sub steps (optional)
 
-For the new method the kinematic wave has to be applied two times.
-
-The calculation of kinematic wave is the most time consuming part in a LISFLOOD run (in general but also depending on the catchment). The use of the double kinematic wave makes it necessary to calculate the
-kinematic wave two times and increasing the computing time. To counteract this, an option is put in place to change automatically the number of sub steps for channel routing.
-
-Double kinematic wave routing is *optional*, and can be activated by adding the following line to the 'lfoptions' element:
-
-```xml
-	<setoption name="VarNoSubStepChannel" choice="1" />
-```
-
-This will calculate the number of sub steps for the kinematic wave according to the discharge. Less number of steps for low and average flow condition, more sub steps for flooding condition because the higher velocity of water.
-
-Activating this option needs to be done before the prerun ('InitLisflood'=1) because the maximum celerity of wave propagation (chanckinmax.map) is created as another initial map and used in the 'normal' runs.
-
-The minimum and maximum number of sub steps can be set in the settings file:
-
-```xml
-	<comment>                                                           
-	**************************************************************               
-	Variable Channel NoSubStepChannel                                     
-	**************************************************************               
-	</comment>                                                          
-	<textvar name="UpLimit" value="1.0E+9">                         
-	<comment>                                                           
-	Upstream area do be included in max. celerity                         
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="MinNoStep" value="5">                            
-	<comment>                                                           
-	minimum number of sub steps for channel                               
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="ChanA" value="30">                               
-	<comment>                                                           
-	max. NoSubStepsChannel = ChanA-ChanB                                  
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="ChanB" value="10">                               
-	<comment>                                                           
-	For calculating the min. No. of substeps                              
-	</comment>                                                          
-	</textvar>                                                          
-```
-
-***UpLimit*** is the minimum upstream area do be included in the calculation of the maximum celerity of wave propagation $[m^2]$
-
-***MinNoStep*** is the absolute minimum number of sub steps for channel routing [-]
-
-***ChanA*** for calculating the maximum number of sub steps for channel routing [-]
-
-***ChanB*** for calculating the minimum number of sub steps for channelrouting [-]
 
 
 [🔝](#top)
