@@ -112,12 +112,12 @@ $$
 LeakageWaterEvaporated = Leakage \cdot LeakageWaterLossFraction
 $$
 
-Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the $DomesticConsumptionFraction$, its value varies between 0 and 1 and it is provided as input data.
+Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the $DomesticConsumptiveUseFraction$, its value varies between 0 and 1 and it is provided as input data.
 
 The total amount of water which leaves the system (and consequently must be subtracted from the water balance) due to domestic water use is then computed as follows:
 
 $$
-DomesticWaterConsumption = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticConsumptionFraction + LeakageWaterEvaporated 
+DomesticWaterConsumptiveUse = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticConsumptiveUseFraction + LeakageWaterEvaporated 
 $$
 
 
@@ -144,30 +144,43 @@ For small rivers the consumptive use varies between 1:2 and 1:3, so 0.33-0.50 (S
 
 So, the actual: 
 
-Energy Water Consumption = EnergyConsumptiveUseFraction * ene.nc
+$$
+EnergyWaterConsumptiveUse = EnergyWaterDemand \cdot EnergyConsumptiveUseFraction 
+$$
 
-Energy Water Return Flow = (1 - EnergyConsumptiveUseFraction) * ene.nc
+The $EnergyWaterAbstraction$ is assumed equal to the $EnergyWaterDemand$ (i.e. losses are assumed to be 0).
+
+
+**Energy Water Return Flow = (1 - EnergyConsumptiveUseFraction) * ene.nc STILL USED???**
 
 
 #### Water usage by the manufacturing industry
 
 The manufucaturing industry also required water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD typically reads an 'ind.nc' file which determines the water demand for the industry sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using maps of land use and/or the specific activities.
 
-An "IndustryConsumptiveUseFraction" is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
+The amount of water that needs to be abstracted to comply with the demand of the manufacturing industry ($IndustrialWaterAbstraction$) is often lower than the actual demand ($IndustrialWaterDemand$) as part of the water is re-used within the industrial processes. The $WaterReUseFraction$ is provided as inpout data, its value varies between 0 and 1 (for instance, a value of 0.5 indicates that half of the water is re-used, that is, used twice). The $IndustrialWaterAbstraction$  is then computed as follows:
+
+$$
+IndustrialWaterAbstraction = IndustrialWaterDemand * (1 - WaterReUseFraction)
+$$
+
+An $IndustrialConsumptiveUseFraction$ is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
 ```xml
-<textvar name="IndustryConsumptiveUseFraction" value="0.15">
+<textvar name="IndustrialConsumptiveUseFraction" value="0.15">
 <comment>
 Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
 </comment>
 </textvar>
 ```
 
-So, the actual: 
+The $IndustrialWaterConsumptiveUse$ is the computed as follows:
 
-Industry Water Consumption = IndustryConsumptiveUseFraction * ind.nc
+$$
+IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction \cdot IndustrialConsumptiveUseFraction 
+$$
 
-Industry Water Return Flow = (1 - IndustryConsumptiveUseFraction) * ind.nc
+**Industry Water Return Flow = (1 - IndustryConsumptiveUseFraction) * ind.nc IS THIS STILL USED???**
 
 
 #### Livestock water usage
@@ -186,9 +199,13 @@ Consumptive Use (1-Recycling ratio) for livestock water use (0-1)
 
 So, the actual: 
 
-Livestock Water Consumption = LivestockConsumptiveUseFraction * liv.nc
+$$
+LivestockWaterConsumptiveUse = LivestockConsumptiveUseFraction * LivestockWaterDemand
+$$
 
-Livestock Water Return Flow = (1 - LivestockConsumptiveUseFraction) * liv.nc
+The $LivestockWaterAbstraction$ is assumed equal to the $LivestockWaterDemand$.
+
+**Livestock Water Return Flow = (1 - LivestockConsumptiveUseFraction) * liv.nc  IS THIS STILL USED???**
 
 
 #### Crop irrigation
@@ -226,10 +243,21 @@ Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-frac
 T**he $DomesticWaterConsumption$ can be supplied by groundwater, non-conventional water sources, and surface water:
 
 **$$
-DomesticWaterAbstractionGW = FractionGroundwaterUsed  \cdot DomesticWaterConsumption
-DomesticWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot DomesticWaterConsumption
-DomesticWaterAbstractionSurfaceWater = DomesticWaterConsumption - DomesticWaterAbstractionGW  - DomesticWaterAbstractionNONconv
+DomesticWaterAbstractionGW = FractionGroundwaterUsed  \cdot DomesticWaterConsumptiveUse
+DomesticWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot DomesticWaterConsumptiveUse
+DomesticWaterAbstractionSurfaceWater = DomesticWaterConsumptiveUse - DomesticWaterAbstractionGW  - DomesticWaterAbstractionNONconv
 $$**
+
+**$$
+IndustrialWaterAbstractionGW = FractionGroundwaterUsed  \cdot IndustrialWaterConsumptiveUse
+IndustrialWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot IndustrialWaterConsumptiveUse
+IndustrialWaterAbstractionSurfaceWater = IndustrialWaterConsumptiveUse - IndustrialWaterAbstractionGW  - IndustrialWaterAbstractionNONconv
+$$**
+
+2
+$$
+EnergyAbstractionSurfaceWaterM3 = EnergyConsumptiveUse              # all taken from surface water
+$$
 
 
 #### Water re-use for surface irrigation
