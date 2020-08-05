@@ -1,16 +1,3 @@
-## Irrigation
-
-Crop irrigation and Paddy-rice irrigation are dealt with by separate model subroutines.
-
-### Crop irrigation
-
-Crop irrigation can be switched on by adding the following lines to the 'lfoptions' element:
-
-```xml
-<setoption choice="1" name="drainedIrrigation"/>
-```
-
-
 ### Paddy-rice irrigation
 
 Paddy-rice irrigation is simulated by a dedicated model subroutine which can be switched on by adding the following lines to the 'lfoptions' element:
@@ -37,13 +24,13 @@ $$
 RiceFloodingDemand = RiceFlooding \cdot RiceFraction \cdot \Delta t 
 $$
 
-where RiceFlooding is the daily amount of water supplied to the field (in $[\frac{mm}{day}]$). For instance, a RiceFlooding supply of 10 $[\frac{mm}{day}]$ will achieve a **final** water depth of 1000 mm. 
+where RiceFlooding is the daily amount of water supplied to the field (in $[\frac{mm}{day}]$). For instance, a RiceFlooding supply of 10 $[\frac{mm}{day}]$ will achieve a water depth of 100 mm. 
 
 $$
 RiceEvaporationDemand = [EW0 - (ES_a+ T_a)] \cdot \Delta t 
 $$
 
-where $EW0$ is the potential evaporation rate from an open water surface, $ES_a$ is the actual evaporation from the soil, and $T_a$ is the actual transpiration (all in $[\frac{mm}{day}]$). The latter two terms are subtracted from the computation as they are alredy considered when computing soil evaporation and transpiration **ADD CHAPTERS/LINKS**. 
+where $EW0$ is the potential evaporation rate from an open water surface, $ES_a$ is the actual evaporation from the soil, and $T_a$ is the actual transpiration (all in $[\frac{mm}{day}]$). The latter two terms are subtracted from the computation as they are already considered when computing [soil evaporation](https://ec-jrc.github.io/lisflood-model/2_08_stdLISFLOOD_soil-evaporation/) and [plant transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). 
 
 * Growing phase: the water level in the field is kept constant starting from the planting day and up to 20 days before harvesting. The amount of water supplied to the field during this phase must compensate for evaporation and percolation losses and is computed as follows:
 
@@ -57,7 +44,7 @@ $$
 RicePercolationWater = RicePercolation \cdot RiceFraction \cdot \Delta t 
 $$
 
-where $RicePercolation$ is the amount of water percolating to the upper groundwater layer (UZ). For instance, the percolation for heavy clay soils is 2 mm/day (FAO) **ADD LINK**.
+where $RicePercolation$ is the amount of water percolating to the upper groundwater layer (UZ). For instance, the percolation for heavy clay soils is 2 mm/day ([FAO](http://www.fao.org/3/a-s8376e.pdf)).
 
 * Draining phase: this phase starts 10 days before the harvesting and lasts for 10 days. The draining has the scope to reduce the soil moisture to the field capacity value, the RiceDrainageWater is computed using the equation below and it is added to the upper groundwater layer (UZ).
 
@@ -65,8 +52,8 @@ $$
 RiceDrainageWater = 0.1 \cdot (w_s_1 - w_f_c_1)+(w_s_2 - w_f_c_2) \cdot RiceFraction \cdot \Delta t
 $$
 
-$RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are extracted from surface water bodies according to the calendar day (**ADD CHAPTER/LINK**).
+$RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) according to the calendar day.
 
-$RicePercolationWater$ and $RiceDrainageWater$ are added to the upper groundwater layer UZ  accpording to the calendar day (**ADD CHAPTER/LINK**).
+$RicePercolationWater$ and $RiceDrainageWater$ are [added to the upper groundwater layer UZ](https://ec-jrc.github.io/lisflood-model/2_13_stdLISFLOOD_groundwater/) according to the calendar day.
 
 
