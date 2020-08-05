@@ -40,8 +40,7 @@ LISFLOOD distinguisges the following sectors of water consumption:
 -   liv:  use of water for livestock
 -   ene:  use of cooling water for the energy sector in thermal or nuclear power plants
 -   ind:  use of water for the manufacturing industry
--   irr:  water used for crop irrigation
--   ric:  water used for paddy-rice irrigation
+**-   irr:  water used for crop irrigation** I DO NOT THINK WE NEED THIS!!
 
 Water demand files for each sector need to be created, in mm per day per gridcell, so typically:
 -   dom.nc (mm per timestep per gridcell) for domestic water demand
@@ -51,8 +50,7 @@ Water demand files for each sector need to be created, in mm per day per gridcel
 
 Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They are typically obtained by downscaling national or regional reported data using with higher resolution land use maps.
 
-**Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in the irrigation chapter.**
-**ADD CROP IRRIGATION HERE**
+Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/); this chapter explains the computation of the water demand for crop irrigation.
 
 
 #### Public water usage and leakage
@@ -208,28 +206,37 @@ The $LivestockWaterAbstraction$ is assumed equal to the $LivestockWaterDemand$.
 **Livestock Water Return Flow = (1 - LivestockConsumptiveUseFraction) * liv.nc  IS THIS STILL USED???**
 
 
-#### Crop irrigation
+#### Water usage for crop irrigation
 
-Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in the irrigation chapter.
-They can be switched on by adding the following lines to the 'lfoptions' element:
+Crop irrigation and paddy-rice irrigation are simulated using seperate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/). This paragraph explains the computation of the water volume required by crop irrigation. The modelling of crop irrigation requires the following keyword in the 'lfoptions' element:
 
 ```xml
 <setoption choice="1" name="drainedIrrigation"/>
 ```
+Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). If $T_a$ is compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
 
+$$
+T_{a,irrig} = \min (T_a, w_1 - w_{wp1})
+$$
 
-#### Paddy-rice irrigation
+$CropIrrigationWaterDemand$ is then computed by:
 
-Crop irrigation and Paddy-rice irrigation are dealt with by seperate model subroutines and are described in the irrigation chapter.
-They can be switched on by adding the following lines to the 'lfoptions' element:
+$$
+CropIrrigationWaterDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult
+$$
 
-```xml
-<setoption choice="1" name="riceIrrigation"/>
-```
+where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
 
+$CropIrrigationWaterAbstraction$ is larger than $CropIrrigationWaterDemand$ in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the $IrrigationEfficiency$ and the $ConveyanceEfficiency$. Both these factors can vary between 0 and 1, the values are required as input data. For example, $IrrigationEfficiency$ is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; $ConveyanceEfficiency$ is ~0.80 for a common type channel. $CropIrrigationWaterAbstraction$ is the computed as follows:
 
+$$
+CropIrrigationWaterAbstraction = \frac{CropIrrigationWaterDemand}{IrrigationEfficiency \cdot ConveyanceEfficiency}
+$$
 
+It is here noted that if the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThreshold$), $CropIrrigationWaterDemand$ is set to 0.
 
+**Groundwater is the primary source to supply $IrrigationWaterAbstraction$, the amount of water that cannot be supplied by groundwater is taken from surface water. DESALINATION IS NOT USED!!!!**
+                   
 ### PART TWO: SOURCES of water abstraction
 
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, typically desalination. LISFLOOD allows a part of the need for irrigation water may come from re-used treated waste-water. 
