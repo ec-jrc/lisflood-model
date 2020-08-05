@@ -1,5 +1,14 @@
 ## Water use
 
+**IMPORTANT: add this info at the end
+            # ************************************************************
+            # ***** TOTAL ABSTRACTIONS (DEMANDED) ************************
+            # ************************************************************
+
+            self.var.TotalAbstractionFromGroundwaterM3 = IrrigationAbstractionFromGroundwaterM3 + DomAbstractionFromGroundwaterM3 + LivestockAbstractionFromGroundwaterM3 + IndustrialAbstractionFromGroundwaterM3
+            self.var.TotalAbstractionFromSurfaceWaterM3 = IrrigationAbstractionFromSurfaceWaterM3 + self.var.PaddyRiceWaterAbstractionFromSurfaceWaterM3 + DomAbstractionFromSurfaceWaterM3 + LivestockAbstractionFromSurfaceWaterM3 + IndustrialAbstractionFromSurfaceWaterM3 + EnergyAbstractionFromSurfaceWaterM3
+**
+
 ### Introduction
 
 This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable that the water use routine is always used, even in flood forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions, and also since the water use mode was used during the calibration.
@@ -11,9 +20,8 @@ The water use routine is used to include water demand, abstraction, net consumpt
 -   ind:  use of water for the manufacturing industry
 -   irr:  water used for crop irrigation
 -   ric:  water used for paddy-rice irrigation
-Note: the abbreviations 'dom', 'liv' etc are the typical short names also used for the input filenames.
 
-The water use is *optional* but it is strongly recommended to be always used. The module can be activated by adding the following line to the 'lfoptions' element:
+The module water use can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption choice="1" name="wateruse"/>
@@ -22,7 +30,7 @@ The water use is *optional* but it is strongly recommended to be always used. Th
 
 ### Water demand, abstraction and consumption
 
-LISFLOOD distinguishes between water demand, water abstraction, actual water consumption and return flow. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due abstraction limitations (e.g. ecological flow constraints or general availability issues) and/or due to losses during transport from the source of the abstraction to the final destination: e.g. leakage in the public supply network, and transmission losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water evaporates and is lost, and another part is returned to the system later on.
+LISFLOOD distinguishes between water demand, water abstraction, actual water consumption and return flow. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due abstraction limitations (e.g. ecological flow constraints or general availability issues) and/or due to: e.g. leakage in the public supply network, and transmission losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water evaporates and is lost, and another part is returned to the system later on.
 
 
 ### PART ONE: SECTORS of water demand and consumption
@@ -35,7 +43,7 @@ LISFLOOD distinguisges the following sectors of water consumption:
 -   irr:  water used for crop irrigation
 -   ric:  water used for paddy-rice irrigation
 
-Water demand files for each sector need to be created, in mm per timestep per gridcell, so typically:
+Water demand files for each sector need to be created, in mm per day per gridcell, so typically:
 -   dom.nc (mm per timestep per gridcell) for domestic water demand
 -   liv.nc (mm per timestep per gridcell) for livestock water demand
 -   ene.nc (mm per timestep per gridcell) for energy-cooling water demand
@@ -43,7 +51,8 @@ Water demand files for each sector need to be created, in mm per timestep per gr
 
 Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They are typically obtained by downscaling national or regional reported data using with higher resolution land use maps.
 
-Crop irrigation and Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in the irrigation chapter.
+**Paddy-rice irrigation water demands are simulated in the model, are dealt with by seperate model subroutines and are described in the irrigation chapter.**
+**ADD CROP IRRIGATION HERE**
 
 
 #### Public water usage and leakage
@@ -81,6 +90,39 @@ So, the actual:
 Domestic Water Consumption = DomesticConsumptiveUseFraction * dom.nc
 
 Domestic Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
+
+$$
+DomesticWaterAbstraction = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticWaterLeakageConstant
+$$
+
+where 
+* $$DomesticWaterSavingConstant = 1 - WaterSavingFraction$$ and $WaterSavingFraction$ accounts for water saving strategies implemented by the households (and not included in the current use scenario).
+* $$DomesticWaterLeakageConstant = \frac{1}{1-[DomesticLeakageFraction \cdot (1 - DomesticLeakageReductionFraction)]}$$. $DomesticLeakageFraction$ represents the fraction of water lost during transport from the source of the abstraction to the final destination and $DomesticLeakageReductionFraction$ allows to account for a reduction in leakage compared to the current scenario.
+$WaterSavingFraction$, $DomesticLeakageFraction$, and $DomesticLeakageReductionFraction$ are provided as input data, the baseline value is 0, the maximum value is 1. The value of $DomesticWaterAbstraction$ is decreased by $$DomesticWaterSavingConstant$ and increased by $DomesticWaterLeakageConstant$.
+
+The leakage volume is then computed as follows:
+
+$$
+Leakage = (DomesticWaterLeakageConstant - 1) \cdot DomesticWaterDemand \cdot DomesticWaterSavingConstant
+$$
+
+The input value $LeakageWaterLossFraction$ allows to compute the leakage volume which is lost because of evaporation:
+
+$$
+LeakageWaterEvaporated = Leakage \cdot LeakageWaterLossFraction
+$$
+
+Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the $DomesticConsumptionFraction$, its value varies between 0 and 1 and it is provided as input data.
+
+The total amount of water which leaves the system (and consequently must be subtracted from the water balance) due to domestic water use is then computed as follows:
+
+$$
+DomesticWaterConsumption = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticConsumptionFraction + LeakageWaterEvaporated 
+$$
+
+
+
+
 
 
 #### Water usage by the energy sector for cooling
@@ -180,6 +222,14 @@ The sub-division in these three sources is achieved by creating and using the fo
 -   fracncused.nc (values between 0 and 1) ('fraction non-conventional used')
 
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water. Surface water sources for abstraction may consist of lakes, reservoirs and rivers themselves. Further details on this are explained below in a seperate paragraph. 
+
+T**he $DomesticWaterConsumption$ can be supplied by groundwater, non-conventional water sources, and surface water:
+
+**$$
+DomesticWaterAbstractionGW = FractionGroundwaterUsed  \cdot DomesticWaterConsumption
+DomesticWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot DomesticWaterConsumption
+DomesticWaterAbstractionSurfaceWater = DomesticWaterConsumption - DomesticWaterAbstractionGW  - DomesticWaterAbstractionNONconv
+$$**
 
 
 #### Water re-use for surface irrigation
