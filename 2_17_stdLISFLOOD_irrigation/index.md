@@ -52,7 +52,12 @@ $$
 RiceDrainageWater = 0.1 \cdot (w_s_1 - w_f_c_1)+(w_s_2 - w_f_c_2) \cdot RiceFraction \cdot \Delta t
 $$
 
-$RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) according to the calendar day.
+$RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) according to the calendar day and they define the $RiceIrrigationWaterAbstraction$:
+
+$$
+RiceIrrigationSurfaceWaterAbstraction = RiceSaturationDemand + TotalRiceFloodingDemand + TotalRiceGrowingDemand
+$$
+
 
 $RicePercolationWater$ and $RiceDrainageWater$ are [added to the upper groundwater layer UZ](https://ec-jrc.github.io/lisflood-model/2_13_stdLISFLOOD_groundwater/) according to the calendar day.
 
