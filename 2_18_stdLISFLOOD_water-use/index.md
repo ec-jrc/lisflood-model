@@ -1,12 +1,5 @@
 ## Water use
 
-**IMPORTANT: add this info at the end
-            # ************************************************************
-            # ***** TOTAL ABSTRACTIONS (DEMANDED) ************************
-            # ************************************************************
-
-            self.var.TotalAbstractionFromGroundwaterM3 = IrrigationAbstractionFromGroundwaterM3 + DomAbstractionFromGroundwaterM3 + LivestockAbstractionFromGroundwaterM3 + IndustrialAbstractionFromGroundwaterM3
-
 
 ### Introduction
 
@@ -29,8 +22,7 @@ The module water use can be activated by adding the following line to the 'lfopt
 
 ### Water demand, abstraction and consumption
 
-LISFLOOD distinguishes between water demand, water abstraction, actual water consumption and return flow. The difference between water abstraction and water consumption is the water return flow. Abstractions are typically higher than demands due abstraction limitations (e.g. ecological flow constraints or general availability issues) and/or due to: e.g. leakage in the public supply network, and transmission losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water evaporates and is lost, and another part is returned to the system later on.
-
+LISFLOOD distinguishes between water demand, water abstraction, water consumption and return flow. Abstractions are typically higher than demands due leakage in the public supply network, transmission and evaporation losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water is actually used (and hence exits the system), while the remaining fraction is returned to the system later on. The difference between water abstraction and water consumption is the water return flow. The consumptive water use is the water removed from available supplies without return to a water resource system. LISFLOOD computes the consumptive water use.
 
 ### PART ONE: SECTORS of water demand and consumption
 
@@ -39,7 +31,6 @@ LISFLOOD distinguisges the following sectors of water consumption:
 -   liv:  use of water for livestock
 -   ene:  use of cooling water for the energy sector in thermal or nuclear power plants
 -   ind:  use of water for the manufacturing industry
-**-   irr:  water used for crop irrigation** I DO NOT THINK WE NEED THIS!!
 
 Water demand files for each sector need to be created, in mm per day per gridcell, so typically:
 -   dom.nc (mm per timestep per gridcell) for domestic water demand
@@ -117,6 +108,8 @@ $$
 DomesticWaterConsumptiveUse = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticConsumptiveUseFraction + LeakageWaterEvaporated 
 $$
 
+It is here noted that the return flow is given by the difference between the domestic water abstraction and the domestic water consumptive use.
+
 
 #### Water usage by the energy sector for cooling
 
@@ -142,8 +135,7 @@ $$
 EnergyWaterConsumptiveUse = EnergyWaterDemand \cdot EnergyConsumptiveUseFraction 
 $$
 
-
-**Energy Water Return Flow = (1 - EnergyConsumptiveUseFraction) * ene.nc STILL USED???**
+It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
 
 #### Water usage by the manufacturing industry
@@ -172,7 +164,7 @@ $$
 IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction \cdot IndustrialConsumptiveUseFraction 
 $$
 
-**Industry Water Return Flow = (1 - IndustryConsumptiveUseFraction) * ind.nc IS THIS STILL USED???**
+It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
 
 #### Livestock water usage
@@ -197,8 +189,7 @@ $$
 
 The $LivestockWaterAbstraction$ is assumed equal to the $LivestockWaterDemand$.
 
-**Livestock Water Return Flow = (1 - LivestockConsumptiveUseFraction) * liv.nc  IS THIS STILL USED???**
-
+It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
 #### Water usage for crop irrigation
 
@@ -227,7 +218,7 @@ $$
 CropIrrigationWaterAbstraction = \frac{CropIrrigationWaterDemand}{IrrigationEfficiency \cdot ConveyanceEfficiency}
 $$
 
-It is here noted that if the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThreshold$), $CropIrrigationWaterDemand$ is set to 0.
+If the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThreshold$), $CropIrrigationWaterDemand$ is set to 0.
 
 
                    
@@ -381,7 +372,7 @@ EFlowThreshold is map with m3/s discharge, e.g. the 10th percentile discharge of
 </textvar>
 ```
 
-For Europe e.g.  the 10th percentile discharge from a 'natural' run for 1990-2016 can be used to define the environmental flow threshold. In order to mimick natural flow conditions, a 'natural' run does not include without reservoirs and human water abstractions.
+For Europe e.g.  the 10th percentile discharge from a 'natural' run for 1990-2016 can be used to define the environmental flow threshold. In order to mimick natural flow conditions, a 'natural' run does not include without reservoirs and human water abstractions. LISFLOOD also counts the number of days in which the channel flow is lower than the *environmental flow threshold* ($EFlowThreshold$) as this piece of information is important for water rousources and ecosystem management.
 
 The water volume which can be potentially abstracted from the river within a *water region* is then:
 
@@ -397,72 +388,36 @@ $$
 WaterAbstractedFromChannels = \min (AvailableVolumeChannel , WaterToBeAbstractedChannels)
 $$
 
-           ** self.var.WUseAddM3 = frac{WaterAbstractedChannels}{WaterToBeAbstractedChannel} * PixelAvailableWaterFromChannelsM3
-            # pixel abstracted water in m3** **MAYBE YOU DO NOT NEED THIS**
-
-A condition in which $$WaterAbstractedFromChannels \lt WaterToBeAbstractedChannels$$ means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the $WaterUseShortage$ and it can be quantified as follows:
+A condition in which $$WaterAbstractedFromChannels \lt WaterToBeAbstractedChannels$$ means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the $WaterUseShortage$ and it is quantified as follows:
 
 $$
 WaterUseShortage =  WaterToBeAbstractedChannels - WaterToBeAbstractedChannels
 $$
 
-In condition of water scarcity, the available water resource must comply with the domestic demand first. The other uses are satisfied according to the following order: energetic, livestock, industry, and irrigation. The latter sentence implies that when $$WaterUseShortage  \gt 0$$, LISFLOOD reduces the water volume delivered to irrigated fields.
+In condition of water scarcity, water uses are satisfied according to the following order of importance: domestic, energetic, livestock, industry, and irrigation. The latter sentence implies that when $$WaterUseShortage  \gt 0$$, LISFLOOD reduces the water volume delivered to the irrigated fields. Specifically, the amount $WaterUseShortage$ is subtracted from the total amount of water required from surface water bodies by crops and paddy rice, meaning that the total amount of water effectively supplied to the irrigated fields ($IrrigationWater$) is:
 
-**THIS IS DONE AS FOLLOWS**
-    # totalEne = areatotal(decompress(self.var.EnergyConsumptiveUseMM*self.var.MMtoM3),self.var.WUseRegion)
-            AreatotalIrriM3 = np.take(np.bincount(self.var.WUseRegionC,
-                                                  weights=IrrigationAbstractionFromSurfaceWaterM3 + self.var.PaddyRiceWaterAbstractionFromSurfaceWaterM3),
-                                      self.var.WUseRegionC)
-            # AreatotalDomM3 = np.take(np.bincount(self.var.WUseRegionC, weights=DomAbstractionFromSurfaceWaterM3),
-            #                          self.var.WUseRegionC)
-            # AreatotalLiveM3 = np.take(np.bincount(self.var.WUseRegionC, weights=LivestockAbstractionFromSurfaceWaterM3),
-            #                           self.var.WUseRegionC)
-            # AreatotalIndM3 = np.take(np.bincount(self.var.WUseRegionC, weights=IndustrialAbstractionFromSurfaceWaterM3),
-            #                          self.var.WUseRegionC)
-            # AreatotalEneM3 = np.take(np.bincount(self.var.WUseRegionC, weights=EnergyAbstractionFromSurfaceWaterM3),
-            #                          self.var.WUseRegionC)
+$$
+IrrigationWater = CropIrrigationWaterAbstractionGW  + CropIrrigationWaterAbstractionSurfaceWater +  RiceIrrigationWaterAbstractionSurfaceWater - WaterUseShortage
+$$
 
-            # Allocation rule: Domestic ->  Energy -> Livestock -> Industry -> Irrigation
-            self.var.AreatotalIrrigationShortageM3 = np.take(np.bincount(self.var.WUseRegionC, weights=self.var.WaterUseShortageM3), self.var.WUseRegionC)
-            self.var.AreatotalIrrigationUseM3 = np.maximum(AreatotalIrriM3 - self.var.AreatotalIrrigationShortageM3, 0.0)
+The value $IrrigationWater$ is then used to compute the water content of the superficial soil layer ($w_{1a}$) and of the upper soil layer ($w_{1b}$). The value $IrrigationWater$ (after convertion in [mm]) is first added to the superficial soil layer, until the water content of this layer ($w_{1a}$) is equal $$w_{fill,1a} = \min(w_{crit,1a}, w_{fc,1a}). The remainder amount of water (if any) is then added to the upper soil layer ($w_{1b}$). It is here reminded that $w_{crit}$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata, while $w_{fc}$ is the amount of soil moisture at field capacity; a detailed description can be found in the chapter [water uptake by plant roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
 
-The amount that cannot be abstracted is monitores seperately in LISFLOOD as "RegionMonthIrrigationShortageM3" (actually a better term is general water shortage) and can be recalled as a maps:
-
-```xml
-<textvar name="RegionMonthIrrigationShortageM3" value="$(PathOut)/IrSh">
-<comment>
-Irrigation water shortage in m3 for month
-</comment>
-</textvar>
-```
-
-
-### Preparation of settings file
-
-All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
+Finally, in order to check the conservation of mass within the modelled system, LISFLOOD computes the amount of water consumed by irrigation $IrriLossCum$ (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors $IrrigationEfficiency$ and $ConveyanceEfficiency$), the resulting water content of the superficial and upper soil layers.
 
 
 #### Water use output files
 
-The water use routine produces a variety of new output maps and indicators, as listed in the following Table:
+The water use routine produces a variety of new output maps and indicators, a number of relevant examples is listed in the following Table:
 
  ***Table:*** *Output of water use routine.*     
 
 | file     | short description                         | time  | area   | unit      | long description                                 |
 | -------- | ----------------------------------------- | ----- | ------ |---------- | ------------------------------------------------ | 
-| Fk1.nc   | Falkenmark 1 index (local water only)     | month | region | m3/capita | water availability per capita (local water only) |
-| Fk3.nc   | Falkenmark 3 index (external inflow also) | month | region	| m3/capita	| water availability per capita (local water + external inflow)|
 | Eflow.nc | eflow breach indicator (1=breached)	     | day   | pixel  | 0 or 1    | number of days that eflow threshold is breached  |
-| IrSh.nc  | water shortage                            | month | region | m3        | water shortage due to availability restrictions  |
-| WDI.nc   | Water Dependency Index	                   | month | region	| fraction  | local water demand that cannot be met by local water / total water demand|
-| WeiA.nc  | Water Exploitation Index Abstraction      | month | region |	fraction  |	water abstraction / (local water + external inflow)|
-| WeiC.nc  | Water Exploitation Index Consumption WEI+ | month | region | fraction  | water consumption / (local water + external inflow)|
-| WeiD.nc  | Water Exploitation Index Demand WEI       | month | region | fraction  |	water demand / (local water + external inflow)   |
-|	domCo.nc | domestic consumption                      | day   | pixel  | mm        |	domestic consumption                             |
-| eneCo.nc | energy consumption                        | day   | pixel  |	mm        |	energy consumption                               |
-| indCo.nc | industrial consumption                    | day   | pixel  |	mm        |	industrial consumption                           |
-| irrCo.nc | irrigation consumption                    | day   | pixel  |	mm        |	irrigation consumption                           |
-| livCo.nc | livestock consumption                     | day   | pixel  |	mm        |	livestock consumption                            |
+| eneCo.nc | energy consumptive use                    | day   | pixel  |	mm        |	energy consumptive use                           |
+| indCo.nc | industrial consumptive use                | day   | pixel  |	mm        |	industrial consumptive use                       |
+| livCo.nc | livestock consumptive use                 | day   | pixel  |	mm        |	livestock consumptive use                        |
+| domCo.nc | domestic consumptive use                  | day   | pixel  |	mm        |	livestock consumptive use                        |
 
 [🔝](#top)
 
