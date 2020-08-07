@@ -417,7 +417,14 @@ The water use routine produces a variety of new output maps and indicators, a nu
 | eneCo.nc | energy consumptive use                    | day   | pixel  |	mm        |	energy consumptive use                           |
 | indCo.nc | industrial consumptive use                | day   | pixel  |	mm        |	industrial consumptive use                       |
 | livCo.nc | livestock consumptive use                 | day   | pixel  |	mm        |	livestock consumptive use                        |
-| domCo.nc | domestic consumptive use                  | day   | pixel  |	mm        |	livestock consumptive use                        |
+| domCo.nc | domestic consumptive use                  | day   | pixel  |	mm        |	domestic consumptive use                         |
+| Fk1.nc 	 | Falkenmark 1 index (local water only)     | month |region  |	m3/capita |	water availability per capita (local water only) |
+| Fk3.nc   | Falkenmark 3 index (external inflow also) | month | region	| m3/capita	| water availability per capita (local water + external inflow)|
+| IrSh.nc  | water shortage                            | month | region | m3        | water shortage due to availability restrictions  |
+| WDI.nc   | Water Dependency Index	                   | month | region	| fraction  | local water demand that cannot be met by local water / total water demand|
+| WeiA.nc  | Water Exploitation Index Abstraction      | month | region |	fraction  |	water abstraction / (local water + external inflow)|
+| WeiC.nc  | Water Exploitation Index Consumption WEI+ | month | region | fraction  | water consumption / (local water + external inflow)|
+| WeiD.nc  | Water Exploitation Index Demand WEI       | month | region | fraction  |	water demand / (local water + external inflow)   |
 
 [🔝](#top)
 
