@@ -12,7 +12,7 @@ The figure below provides a first overview on the processes included in LISFLOOD
 **
 
 
-<img src="https://github.com/StefaniaGrimaldi/lisflood-model/tree/master/media/LISFLOOD.png" width="48">
+<img src="https://github.com/StefaniaGrimaldi/lisflood-model/tree/master/media/LISFLOOD.png" width="480">
 
 
 ![ LISFLOOD model scheme (symbols)](../media/LISFLOOD.png) ![ LISFLOOD model scheme (explained)](../media/LISFLOOD_explained.png)
