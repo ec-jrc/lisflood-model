@@ -12,6 +12,9 @@ The figure below provides a first overview on the processes included in LISFLOOD
 **
 
 
+![ LISFLOOD model scheme (model variables and component)](../media/LISFLOOD_explained.png)
+
+
 The standard LISFLOOD model setup is made up of the following components:
 
 - a 3-layer soil water balance sub-model
