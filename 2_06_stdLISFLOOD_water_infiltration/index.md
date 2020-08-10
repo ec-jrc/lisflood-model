@@ -38,7 +38,7 @@ $$
 StorageSealed = StorageSealedInit + InterceptionSealed - EW0
 $$
 
-Direct runoff $R_d$ is added to surface runoff (**ADD LINK TO CHAPTER**)  
+Direct runoff $R_d$ is added to [surface runoff](https://ec-jrc.github.io/lisflood-model/2_14_stdLISFLOOD_surface-runnoff-routing/).  
 
-Note here that $W_{av}$ is valid for the permeable fraction only, whereas $R_d$ is computed for the full pixel **(permeable + direct runoff areas)**.
+Note here that $W_{av}$ is valid for the permeable fraction only, whereas $R_d$ is computed for the full pixel (permeable + direct runoff areas).
 
