@@ -20,7 +20,7 @@ $$
 ES_a = \min (ES_a,w_1 - w_{res1})
 $$
 
-where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1} [mm]$ is the residual amount of soil moisture . Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen (i.e. when the frost index $F$ is above the critical threshold of 56, as explained in **ADD REFERENCE TO CHAPTER**). 
+where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1} [mm]$ is the residual amount of soil moisture . Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen (i.e. when the [frost index $F$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is above the crtitical threshold value). 
 
 The actual soil evaporation is extracted from the superficial soil layer ($ES_a_1_a$) and, subsequently, from the upper soil layer ($ES_a_1_b$):
 
