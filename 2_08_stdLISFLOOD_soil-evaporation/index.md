@@ -12,7 +12,8 @@ $$
 ES_a = ES_{max } \cdot (\sqrt{D_{slr}} - \sqrt{D_{slr} - 1} )
 $$
 
-The variable $D_{slr}$ represents the number of days since the last rain event. Its value increases over time: if the amount of water that is available for infiltration ($W_{av}$) is below a critical threshold,  $D_{slr}$ increases by an amount of $\Delta t [days]$ for each time step. $D_{slr}$ is reset to 1 if the critical amount of water is exceeded (In the LISFLOOD settings file this critical amount is currently expressed as an *intensity* $[\frac{mm}{day}]$. This is because the equation was originally designed for a daily time step only. Because the current implementation will likely lead to *DSLR* being reset too frequently, the exact formulation may change in future versions (e.g. by keeping track of the accumulated available water of the last 24 hours). 
+The variable $D_{slr}$ represents the number of days since the last rain event. Its value increases over time: if the amount of water that is available for infiltration ($W_{av}$) is below a critical threshold,  $D_{slr}$ increases by an amount of $\Delta t [days]$ for each time step. $D_{slr}$ is reset to 1 if the critical amount of water is exceeded.
+In the LISFLOOD settings file this critical amount is currently expressed as an *intensity* $[\frac{mm}{day}]$. This is because the equation was originally designed for a daily time step only. Because the current implementation will likely lead to *DSLR* being reset too frequently, the exact formulation may change in future versions (e.g. by keeping track of the accumulated available water of the last 24 hours). 
 
 The **actual soil evaporation** is always the smallest value out of the result of the equation above and the available amount of moisture in the soil, i.e.:
 
