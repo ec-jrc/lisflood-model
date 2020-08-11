@@ -1,15 +1,18 @@
 ## Water uptake by plant roots and transpiration
 
-Water uptake and transpiration by vegetation and direct evaporation from the soil surface are modelled as two separate processes. The approach used here is largely based on Supit *et al*. (1994) and Supit & Van Der
-Goot (2000). The **maximum transpiration** per time step \[mm\] is given by:
+Water uptake and transpiration by vegetation and direct evaporation from the soil surface are modelled as two separate processes. This chapter describes the computation of the roots water uptake to support plant transpiration, the computation of direct evaporation from the soil surface is detailed in the next chapter.
+The approach used in LISFLOOD for the computation of plan transpiration is  based on the studies by Supit *et al*. (1994) and Supit & Van Der
+Goot (2000). Specifically, the **maximum transpiration** per time step \[mm\] is given by:
 
 $$
-T_{max } = k_{crop} \cdot ET0 \cdot [1 - e^{( - \kappa_{gb} \cdot LAI)}] \cdot \Delta t - EW_{int}
+T_{max } = k_{crop} \cdot ET0 \cdot [1 - e^{( - \kappa_{gb} \cdot LAI)}] \cdot \Delta t - Int
 $$
 
-Where $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day}]$, constant $κ_{gb}$ is the extinction coefficient for global solar radiation \[-\] and $k_{crop}$ is a crop coefficient, a ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop. $k_{crop}$ is 1 for most vegetation types, except for some excessively transpiring crops like sugarcane or rice. 
+where $k_{crop}$ is a crop coefficient, $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day}]$, the constant $κ_{gb}$ is the extinction coefficient for global solar radiation \[-\], $LAI$ is the Leaf Area Index $[frac{m^2}{m^2}]$, $Int$ is the intercepted water, and $\Delta t$ is the computational time step. 
 
-> Note that the energy that has been 'consumed' already for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ($EW_{int}$). This is done in order to respect the overall energy balance. 
+$k_{crop}$ is the ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop; its value is 1 for most vegetation types, except for some highly transpiring crops like sugarcane or rice. 
+
+> Note that the energy that has already been 'consumed' already for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ($EW_{int}$). This is done in order to respect the overall energy balance. 
 
 The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
 
@@ -36,10 +39,36 @@ $$
 
 with $T_a$ and $T_{max}$ in $[mm]$.
 
-Transpiration is set to zero when the soil is frozen (i.e. when frost index *F* exceeds its critical threshold). The amount of **moisture in the upper soil layer** is updated after the transpiration calculations:
+Transpiration is set to zero when the soil is frozen (i.e. when frost index *F* exceeds its critical threshold). 
+
+The amount of **moisture in the upper soil layer** is updated after computing the actual transpiration. Specifically, $T_a$ is first abstracted from the superficial soil layer 1a and then from the upper soil layer 1b under *non stressed* conditions (that is, the remaining amount of water in both the soil layers has to be larger or equal to the critical amount of soil mositure):
 
 $$
-w_1 = w_1 - T_a
+w_{AvailableNonStressed,1a}=w_{1a}-w_{crit,1a}
+w_{AvailableNonStressed,1b}=w_{1b}-w_{crit,1b}
+T_{a,1a,Ns}= \min(T_a,w_{AvailableNonStressed,1a})
 $$
+If $$T_{a,1a,Ns} \lt T_a$$ then T_{a,1b,Ns}= \min((T_a-T_{a,1a,Ns}),w_{AvailableNonStressed,1b}$$.
+
+The total amount of water supplied to the plants under *non stressed* conditions is then  $$T_{a,1a,Ns} + T_{a,1b,Ns}$$,  soil water depletion under *stressed* conditions occurs if $$T_[T_{a,s}=[(T_{a,1a,Ns} + T_{a,1b,Ns}] \gt 0$$. The distribution of water abstraction is then proportional to the water availability of each layer:
+
+$$
+w_{AvailableStressed,1a}=w_{1a}-T_{a,1a,Ns}-w_{wp,1a}
+w_{AvailableStressed,1b}=w_{1b}-T_{b,1b,Ns}-w_{wp,1b}
+w_{AvailableStressed,tot}=w_{AvailableStressed,1a}+w_{AvailableStressed,1b}
+T_{a,1a,s}= (\frac{w_{AvailableStressed,1a}}{w_{AvailableStressed,1a}+w_{AvailableStressed,1b}})\cdot T_{a,s}
+T_{a,1b,s}= (\frac{w_{AvailableStressed,1b}}{w_{AvailableStressed,1a}+w_{AvailableStressed,1b}})\cdot T_{a,s}
+$$
+
+Finally, the amount of water in the superficial and upper soil layers is updated as follows:
+
+$$
+w_{1a} = w_{1a} - T_{a,1a,Ns} -T_{a,1a,s}
+w_{1b} = w_{1b} - T_{b,1b,Ns} -T_{b,1b,s}
+w_1 = w_{1a}  + w_{1b} 
+$$
+
+
+
 
 [🔝](#top)
