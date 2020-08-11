@@ -9,11 +9,11 @@ M = {C_m}({T_{avg}} - {TempMelt}) \cdot \Delta t
 $$
 
 where 
-   *M* is the snowmelt per time step $[mm]$,  
-    $C_m$ is a degree-day factor $[\frac{mm} {°C \ day}]$,
-    $T_{avg}$ is the average daily temperature $[°C]$, 
-    $TempMelt$ is the average temperature at which snow melts $[°C]$, and
-    $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day.
+   * *M* is the snowmelt per time step $[mm]$,  
+   * $C_m$ is a degree-day factor $[\frac{mm} {°C \ day}]$,
+   * $T_{avg}$ is the average daily temperature $[°C]$, 
+   * $TempMelt$ is the average temperature at which snow melts $[°C]$, and
+   * $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day.
 
 Speers *et al.* (1979) developed an extension of this equation which accounts for accelerated snowmelt that takes place when it is raining (cited in Young, 1985). The equation is supposed to apply when rainfall is greater than 30 mm in 24 hours. Moreover, although the equation is reported to work sufficiently well in forested areas, it is not valid in areas that are above the tree line, where  radiation is the main energy source for snowmelt). LISFLOOD uses a variation on the equation of Speers *et  al.* The modified equation simply assumes that for each mm of rainfall, the rate of snowmelt increases with 1% (compared to a 'dry' situation). This yields the following equation:
 
@@ -22,13 +22,13 @@ M = ({C_m} + C_{Seasonal})(1 + 0.01 \cdot R\Delta t)(T_{avg} - T_m) \cdot \Delta
 $$
 
 where 
-   *M* is the snowmelt per time step $[mm]$, 
-    $C_m$ is a degree-day factor $[\frac{mm} {^\circ C \cdot day}]$, 
-    $C_{Seasonal}$ is a degree-day factor introduced to account for seasonal effects $[\frac{mm} {^\circ C \cdot day}]$, 
-   *R* is rainfall (not snow!) intensity $[\frac {mm}{day}]$,
-    $T_{avg}$ is the average daily temperature $[°C]$, 
-    $TempMelt$ is the average temperature at which snow melts $[°C]$, and
-    $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day.
+  * *M* is the snowmelt per time step $[mm]$, 
+  *  $C_m$ is a degree-day factor $[\frac{mm} {^\circ C \cdot day}]$, 
+  *  $C_{Seasonal}$ is a degree-day factor introduced to account for seasonal effects $[\frac{mm} {^\circ C \cdot day}]$, 
+  * *R* is rainfall (not snow!) intensity $[\frac {mm}{day}]$,
+  *  $T_{avg}$ is the average daily temperature $[°C]$, 
+  *  $TempMelt$ is the average temperature at which snow melts $[°C]$, and
+  *  $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day.
 
 $TempMelt$ can be defined by the user, the value $TempMelt = 1^\circ C$ is recommended.
 It must be stressed that the value of $C_m$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __in practice this parameter is used as calibration parameter__. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
