@@ -1,11 +1,12 @@
 # LISFLOOD input files
 
-All input that LISFLOOD requires are either in map or table format. Before showing a listing of all LISFLOOD input files, first some important remarks on the meteorological input data LISFLOOD requires.
+All input that LISFLOOD requires are either in map or table format. This chapter describes the most important input files.
+A companion document, the [**LISFLOOD USER GUIDE**](https://ec-jrc.github.io/lisflood-code/) provides a list of all the input files required for the model set-up (including both the standard and the optional processes).
 
 
-## Treatment of meteorological input variables
+## Meteorological input variables
 
-The meteorological conditions provide the driving forces behind the water balance. LISFLOOD uses the following meteorological input variables:
+The meteorological conditions are the drivers of the hydrological processes. LISFLOOD uses the following meteorological input variables:
 
 
 | **Code**      | **Description**                                        | **Unit**               |
@@ -16,20 +17,15 @@ The meteorological conditions provide the driving forces behind the water balanc
 | $ES0$     | Potential evaporation rate from bare soil surface  | $[\frac{mm}{day}]$ |
 | $T_{avg}$ | Average *daily* temperature                        | $^\circ C$         |
 
-> **Note** that the model needs sub-daily averages for temperature values when it is run on a sub-daily time interval (e.g. hourly). Sub-daily average temperature values are then considered as daily average value by the model during computations. This is because the routines for snow melt and soil freezing  use empirical relations which are based on daily temperature data. At the end of computation, the daily amount of snow melt is then reduced according to the sub-daily time interval.
->Just as an example, feeding hourly temperature data into the snow melt routine can result in a gross overestimation of snow melt. 
->This is because even on a day on which the average temperature is below $T_m$ (no snow melt), 
->the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snow melt rates.
+> **Note** that the routines for snow melt and soil freezing  use empirical relations which are based on daily temperature data. Just as an example, feeding hourly temperature data into the snow melt routine can result in a gross overestimation of snow melt. This is because even on a day on which the average temperature is below $T_m$ (no snow melt),the instantaneous (or hourly) temperature may be higher for a part of the day, leading to unrealistically high simulated snow melt rates. When using sub-daily computational time steps, the computed daily amount of snow melt is reduced according to the sub-daily time interval.
+
+Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, $\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following,  unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. 
+**LISVAP** is a dedicated pre-processing application that has been developed for the computation of $ET0$, $EW0$ and $ES0$. The methodologies implemented in LISVAP are detailed in a [separate manual](https://ec-jrc.github.io/lisflood-lisvap/).
 
 
-Both precipitation and evaporation are internally converted from *intensities* $[\frac{mm}{day}]$ to *quantities per time step* $[mm]$ by multiplying them with the time step, 
-$\Delta t$ (in $days$). For the sake of consistency, all in- and outgoing fluxes will also be described as *quantities per time step* $[mm]$ in the following, 
-unless stated otherwise. $ET0$, $EW0$ and $ES0$ can be calculated using standard meteorological observations. 
-To this end a dedicated pre-processing application has been developed (LISVAP), which is documented in a [separate manual](https://ec-jrc.github.io/lisflood-lisvap/).
+## Input maps
 
-
-## LISFLOOD input maps
-
+The use of maps is essential to include the sub-grid variability of each parameter.
 
 ***Table:*** *LISFLOOD input maps.*
 
@@ -53,46 +49,54 @@ To this end a dedicated pre-processing application has been developed (LISVAP), 
 | Crop group number for forest                              | crgrnum_other.map   | U.: [-] <br> R.: 1 ≤ map ≤ 5                           | Crop group number for other                                  |
 | Manning for forest                                        | mannings_forest.map | U.: [-] <br> R.: 0.2≤ map ≤ 0.4                        | Manning's roughness for forest                               |
 | Manning for other                                         | mannings_other.map  | U.: [-] <br> R.: 0.01≤ map ≤0.3                        | Manning's roughness for other                                |
-| Soil depth for forest for layer1                          | soildep1_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1 (rooting depth)           |
-| Soil depth for other for layer1                           | soildep1_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil depth for soil layer 1 (rooting depth)            |
-| Soil depth for forest for layer2                          | Soildep2_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 2                           |
-| Soil depth for other for layer2                           | Soildep2_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 2                       |
+| Soil depth for forest for layer1a                         | soildepth1_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1a (superficial)           |
+| Soil depth for other for layer1a                          | soildepth1_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil depth for soil layer 1a (superficial)            |
+| Soil depth for forest for layer1b                         | Soildepth2_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1b (upper)                          |
+| Soil depth for other for layer1b                          | Soildepth2_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 1b (upper)                    |
+| Soil depth for forest for layer2                          | Soildepth3_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 2 (lower)                         |
+| Soil depth for other for layer2                           | Soildepth3_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 2 (lower)                      |
 | **SOIL HYDRAULIC PROPERTIES (depending on soil texture)** |                     |                                                        |                                                              |
-| ThetaSat1 for forest                                      | thetas1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1           |
-| ThetaSat1 for other                                       | thetas1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1           |
-| ThetaSat2 for forest and other                            | thetas2.map         | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 2           |
-| ThetaRes1 for forest                                      | thetar1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1            |
-| ThetaRes1 for other                                       | thetar1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1            |
-| ThetaRes2 for forest and other                            | thetar2.map         | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 2            |
-| Lambda1 for forest                                        | lambda1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1                                  |
-| Lambda1 for other                                         | lambda1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1                                  |
-| Lambda2 for forest and other                              | lambda2.map         | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 2                                  |
-| GenuAlpha1 for forest                                     | alpha1_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1                            |
-| GenuAlpha1 for other                                      | alpha1_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1                            |
-| GenuAlpha2 for forest and other                           | alpha2.map          | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 2                            |
-| Sat1 for forest                                           | ksat1_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1                               |
-| Sat1 for other                                            | ksat1_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1                               |
-| Sat2 for forest and other                                 | ksat2.map           | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 2                               |
-| **CHANNEL GEOMETRY**                                      |                     |                                                        |                                                              |
-| Channels                                                  | chan.map            | U.: [-] <br> R.: 0 or 1                                | Map with Boolean 1 for all channel pixels, and Boolean 0 for all other pixels on MaskMap |
-| ChanGrad                                                  | changrad.map        | U.: $\frac{m} {m}$ <br> R.: map > 0  <br> !!!          | Channel gradient                                             |
-| ChanMan                                                   | chanman.map         | U.: [-] <br> R.: map > 0                               | Manning's roughness coefficient for channels                 |
-| ChanLength                                                | chanleng.map        | U.: $m$ <br> R.: map > 0                               | Channel length (can exceed grid size, to account for meandering rivers) |
-| ChanBottomWidth                                           | chanbw.map          | U.: $m$ <br> R.: map > 0                               | Channel bottom width                                         |
-| ChanSdXdY                                                 | chans.map           | U.: $\frac{m} {m}$ <br> R.: map ≥ 0                    | Channel side slope Important: defined as horizontal divided by vertical distance (dx/dy); this may be confusing because slope is usually defined the other way round (i.e. dy/dx)! |
+| ThetaSat1a for forest                                      | thetas1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1a           |
+| ThetaSat1a for other                                       | thetas1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1a           |
+| ThetaSat1b for forest                                      | thetas2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1b           |
+| ThetaSat1b for other                                       | thetas2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1b           |
+| ThetaSat2 for forest and other                             | thetas3.map         | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 2           |
+| ThetaRes1a for forest                                      | thetar1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1a            |
+| ThetaRes1a for other                                       | thetar1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1a            |
+| ThetaRes1b for forest                                      | thetar2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1b            |
+| ThetaRes1b for other                                       | thetar2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1b            |
+| ThetaRes2 for forest and other                             | thetar3.map         | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 2            |
+| Lambda1a for forest                                        | lambda1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1a                                  |
+| Lambda1a for other                                         | lambda1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1a                                  |
+| Lambda1b for forest                                        | lambda2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1b                                  |
+| Lambda1b for other                                         | lambda2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1b                                 |
+| Lambda2 for forest and other                               | lambda3.map         | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 2                                  |
+| GenuAlpha1a for forest                                     | alpha1_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1a                            |
+| GenuAlpha1a for other                                      | alpha1_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1a                            |
+| GenuAlpha1b for forest                                     | alpha2_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1b                            |
+| GenuAlpha1b for other                                      | alpha2_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1b                            |
+| GenuAlpha2 for forest and other                            | alpha3.map          | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 2                            |
+| Sat1a for forest                                           | ksat1_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1a                               |
+| Sat1a for other                                            | ksat1_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1a                               |
+| Sat1b for forest                                           | ksat2_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1b                               |
+| Sat1b for other                                            | ksat2_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1b                               |
+| Sat2 for forest and other                                  | ksat3.map           | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 2                               |
+| **CHANNEL GEOMETRY**                                       |                     |                                                        |                                                              |
+| Channels                                                   | chan.map            | U.: [-] <br> R.: 0 or 1                                | Map with Boolean 1 for all channel pixels, and Boolean 0 for all other pixels on MaskMap |
+| ChanGrad                                                   | changrad.map        | U.: $\frac{m} {m}$ <br> R.: map > 0  <br> !!!          | Channel gradient                                             |
+| ChanMan                                                    | chanman.map         | U.: [-] <br> R.: map > 0                               | Manning's roughness coefficient for channels                 |
+| ChanLength                                                 | chanleng.map        | U.: $m$ <br> R.: map > 0                               | Channel length (can exceed grid size, to account for meandering rivers) |
+| ChanBottomWidth                                            | chanbw.map          | U.: $m$ <br> R.: map > 0                               | Channel bottom width                                         |
+| ChanSdXdY                                                  | chans.map           | U.: $\frac{m} {m}$ <br> R.: map ≥ 0                    | Channel side slope Important: defined as horizontal divided by vertical distance (dx/dy); this may be confusing because slope is usually defined the other way round (i.e. dy/dx)! |
 | ChanDepthThreshold                                        | chanbnkf.map        | U.: $m$ <br> R.: map > 0                               | Bankfull channel depth                                       |
-| **METEOROLOGICAL VARIABLES**                              |                     |                                                        |                                                              |
-| PrecipitationMaps                                         | pr                  | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Precipitation rate                                           |
-| TavgMaps                                                  | ta                  | U.: $°C$ <br> R.:-50 ≤map ≤ +50                        | Average daily temperature                                    |
-| E0Maps                                                    | e                   | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Daily potential evaporation rate, free water surface         |
-| ES0Maps                                                   | es                  | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Daily potential evaporation rate, bare soil                  |
-| ET0Maps                                                   | et                  | U.: $\frac{mm} {day}$ <br> R.: map ≥ 0                 | Daily potential evapotranspiration rate, reference crop      |
-| **DEVELOPMENT OF VEGETATION OVER TIME**                   |                     |                                                        |                                                              |
-| LAIMaps for forest                                        | lai_forest          | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for forest                     |
-| LAIMaps for other                                         | lai_other           | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for other                      |
-| **DEFINITION OF INPUT/OUTPUT TIMESERIES**                 |                     |                                                        |                                                              |
-| Gauges                                                    | outlets.map         | U.: [-] <br> R.: For each station an individual number | Nominal map with locations at which discharge timeseries are reported (usually correspond to gauging stations) |
-| Sites                                                     | sites.map           | U.: [-] <br> R.: For each station an individual number | Nominal map with locations (individual pixels or areas) at which timeseries of intermediate state and rate variables are reported (soil moisture, infiltration, snow, etcetera) |
+
+| **DEVELOPMENT OF VEGETATION OVER TIME**                    |                     |                                                        |                                                              |
+| LAIMaps for forest                                         | lai_forest          | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for forest                     |
+| LAIMaps for irrigated areas                                | lai_irrigation          | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for irrigated areas                    |
+| LAIMaps for other                                          | lai_other           | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for other                      |
+| **DEFINITION OF INPUT/OUTPUT TIMESERIES**                  |                     |                                                        |                                                              |
+| Gauges                                                     | outlets.map         | U.: [-] <br> R.: For each station an individual number | Nominal map with locations at which discharge timeseries are reported (usually correspond to gauging stations) |
+| Sites                                                      | sites.map           | U.: [-] <br> R.: For each station an individual number | Nominal map with locations (individual pixels or areas) at which timeseries of intermediate state and rate variables are reported (soil moisture, infiltration, snow, etcetera) |
 
 
 
@@ -106,14 +110,23 @@ To this end a dedicated pre-processing application has been developed (LISVAP), 
 
 
 ## Tables
-
-In the previous version of LISFLOOD a number of model parameters are read through tables that are linked to the classes on the land use and soil (texture) maps. Those tables are replaced by maps (e.g. soil hydraulic property maps) in order to include the sub-grid variability of each parameter. Therefore only one default table is used in the standard LISFLOOD setting. The following table gives an overview:
+The following table gives an overview of the relevant tables required by LISFLOOD.
 
 ***Table:*** *LISFLOOD input tables.*                      
 
-| Table                  | Default name | Description                              |
-| ---------------------- | ------------ | ---------------------------------------- |
-| **LAND USE**           |              |                                          |
-| Day of the year -> LAI | LaiOfDay.txt | Lookup table: Day of the year -> LAI map |
+| Table                                            | Default name | Description                                                           |
+| -----------------------------------------------  | ------------ | ----------------------------------------------------------------------|
+| **LAND USE**                                     |              |                                                                       |
+| Day of the year -> LAI                           | LaiOfDay.txt | Lookup table: Day of the year -> LAI map                              |
+| **LAKE MODULE**                                  |              |                                                                       |
+| Lake ID -> area                                  | lakearea.txt | Lookup table: lake ID -> lake surface area $[m^2]$                    |
+| Lake ID -> $\alpha$                              | lakea.txt    | Lookup table: lake ID -> lake parameter $\alpha$                      |
+| Lake ID -> av. inflow                            | lakeavin.txt | Lookup table: lake ID -> lake average inflow $[m^3/s]$                |
+| **RESERVOIR MODULE**                             |              |                                                                       |
+| Reservoir ID -> total storage                    | rstor.txt    | Lookup table: reservoir ID -> total reservoir storage volume  $[m^3]$ |
+| Reservoir ID -> conservative storage             | rclim.txt    | Lookup table: reservoir ID -> conservative storage volume  $[m^3]$    |
+|  Reservoir ID -> flood storage limit             | rflim.txt    | Lookup table: reservoir ID -> conservative storage volume  $[m^3]$    |
+|  Reservoir ID -> minimum outflow                 | rminq.txt    | Lookup table: reservoir ID -> minimum outflow  $[m^3\s]$              |
+|  Reservoir ID -> maximum non-damaging outflow    | rndq.txt     | Lookup table: reservoir ID ->  maximum non-damaging outflow $[m^3\s]$ |
 
 [🔝](#top)
