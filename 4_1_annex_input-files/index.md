@@ -89,7 +89,6 @@ The use of maps is essential to include the sub-grid variability of each paramet
 | ChanBottomWidth                                            | chanbw.map          | U.: $m$ <br> R.: map > 0                               | Channel bottom width                                         |
 | ChanSdXdY                                                  | chans.map           | U.: $\frac{m} {m}$ <br> R.: map ≥ 0                    | Channel side slope Important: defined as horizontal divided by vertical distance (dx/dy); this may be confusing because slope is usually defined the other way round (i.e. dy/dx)! |
 | ChanDepthThreshold                                        | chanbnkf.map        | U.: $m$ <br> R.: map > 0                               | Bankfull channel depth                                       |
-
 | **DEVELOPMENT OF VEGETATION OVER TIME**                    |                     |                                                        |                                                              |
 | LAIMaps for forest                                         | lai_forest          | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for forest                     |
 | LAIMaps for irrigated areas                                | lai_irrigation          | U.: $\frac{m^2} {m^2}$ <br> R.: map ≥ 0                | Pixel-average Leaf Area Index for irrigated areas                    |
