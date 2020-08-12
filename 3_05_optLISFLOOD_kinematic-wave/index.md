@@ -54,22 +54,14 @@ The double kinematic approach splits up the channel in two parts (see figure bel
 
 Similar methods are used since the 1970s e.g. as multiple linear or non linear storage cascade (Chow, 1988). The former forecasting model for the River Elbe (ELBA) used a three stages approach depending on discharge (Fröhlich, 1996).
 
-The total water volume ($q_{ch}  \cdot L{ch}) entering the river system is computed as explained in the chpater [channel routing](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/) is conveyed by the main channel, and, when the main channel flow capacity is exceeded, by the floodplain. 
+The total water volume ($q_{ch}  \cdot L{ch}) entering the river system is computed as explained in the chpater [channel routing](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/) is conveyed by the main channel, and, when the main channel flow capacity is exceeded, by the floodplain.
+The total discharge $Q$ is partitioned between the main channel and the floodplain as follows:
 
-               SideflowRatio=np.where((self.var.ChanM3Kin + self.var.Chan2M3Kin) > 0,self.var.ChanM3Kin/(self.var.ChanM3Kin+self.var.Chan2M3Kin),0.0)
-
-                # CM ##################################
-                self.var.Sideflow1Chan = np.where(self.var.ChanM3Kin > self.var.M3Limit, SideflowRatio*SideflowChan, SideflowChan)
-                # This is creating instability because ChanM3Kin can be < M3Limit between two routing sub-steps
-                #######################################
-                # self.var.Sideflow1Chan = np.where((self.var.ChanM3Kin + self.var.Chan2M3Kin-self.var.Chan2M3Start) > self.var.M3Limit,
-                #                                   SideflowRatio*SideflowChan, SideflowChan)
-
-                self.var.Sideflow1Chan = np.where(np.abs(SideflowChan) < 1e-7, SideflowChan, self.var.Sideflow1Chan)
-                # too small values are avoided
-                Sideflow2Chan = SideflowChan - self.var.Sideflow1Chan
-               
-                Sideflow2Chan = Sideflow2Chan + self.var.Chan2QStart * self.var.InvChanLength   # originale
+$$
+FlowRatio = \frac{ChannelVolume}{ChannelVolume+FloodplainVolume}
+ChannelQ = FlowRatio \cdot Q
+FlooplainQ = Q - ChannelQ
+$$
 
 
 ### Using double kinematic wave 
