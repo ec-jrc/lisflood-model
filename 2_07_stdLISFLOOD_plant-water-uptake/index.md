@@ -20,16 +20,24 @@ $$
 R_{WS} = \frac{w_1 - w_{wp1}}{w_{crit1} -w_{wp1}}
 $$
 
-where $w_1$ is the amount of moisture in the superficial and upper soil layers $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the amount of moisture below which water uptake is reduced and plants start closing their stomata. The **critical amount of soil moisture** is calculated as:
+where $w_1$ is the amount of moisture in the superficial and upper soil layers $[mm]$, $w_{wp1} [mm]$ is the amount of soil moisture at wilting point (pF 4.2) and $w_{crit1} [mm]$ is the **critical amount of soil moisture** below which water uptake is reduced and plants start closing their stomata. The value $w_{crit1} [mm]$ depends on the soil and on the crop type, it is computed as follows:
 
 $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
-where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity and $p$ is the soil water depletion fraction. $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate. The procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003). The following Figure illustrates the relation between $R_{WS}, w,w_{crit}, w_{fc}, w_{wp}$:
+where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($Crop_{GroupNumber}$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
+
+$$
+p= \frac{1}{0.76 + 1.5 \cdot ET0} - 0.1 \cdot (5-Crop_{GroupNumber})  when Crop_{GroupNumber} \gt 2.5
+p= p + frac{0.1 \cdot  ET0 - 0.6}{Crop_{GroupNumber}^2+3}             when Crop_{GroupNumber} \le 2.5
+$$
+
+$R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. The following Figure illustrates the relation between $R_{WS}, w, w_{crit}, w_{wp}$:
 
 ![Reduction of transpiration in case of water stress](../media/image26.png)
-***Figure:*** *Reduction of transpiration in case of water stress.* $r_{ws}$ *decreases linearly to zero between* $w_{crit}$ *and* $w_{wp}$.
+***Figure:*** *Reduction of transpiration in case of water stress.* $R_{WS}$ *is 1 when* $w \ge w_{crit}$, *it decreases linearly between* $w_{crit}$ *and* $w_{wp}$, *and it reaches zero when $w=w_{wp}$.*
+
 
 The **actual transpiration** $T_a$ is now calculated as:
 
