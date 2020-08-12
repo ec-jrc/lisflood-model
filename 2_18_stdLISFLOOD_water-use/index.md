@@ -84,8 +84,8 @@ DomesticWaterAbstraction = DomesticWaterDemand \cdot DomesticWaterSavingConstant
 $$
 
 where 
-* $$DomesticWaterSavingConstant = 1 - WaterSavingFraction$$ and $WaterSavingFraction$ accounts for water saving strategies implemented by the households (and not included in the current use scenario).
-* $$DomesticWaterLeakageConstant = \frac{1}{1-[DomesticLeakageFraction \cdot (1 - DomesticLeakageReductionFraction)]}$$. $DomesticLeakageFraction$ represents the fraction of water lost during transport from the source of the abstraction to the final destination and $DomesticLeakageReductionFraction$ allows to account for a reduction in leakage compared to the current scenario.
+* $DomesticWaterSavingConstant = 1 - WaterSavingFraction$ and $WaterSavingFraction$ accounts for water saving strategies implemented by the households (and not included in the current use scenario).
+* $DomesticWaterLeakageConstant = \frac{1}{1-[DomesticLeakageFraction \cdot (1 - DomesticLeakageReductionFraction)]}$. $DomesticLeakageFraction$ represents the fraction of water lost during transport from the source of the abstraction to the final destination and $DomesticLeakageReductionFraction$ allows to account for a reduction in leakage compared to the current scenario.
 $WaterSavingFraction$, $DomesticLeakageFraction$, and $DomesticLeakageReductionFraction$ are provided as input data, the baseline value is 0, the maximum value is 1. The value of $DomesticWaterAbstraction$ is decreased by $$DomesticWaterSavingConstant$ and increased by $DomesticWaterLeakageConstant$.
 
 The leakage volume is then computed as follows:
@@ -235,32 +235,24 @@ The sub-division in these three sources is achieved by creating and using the fo
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water.
 Specifically, $DomesticWaterConsumpttiveUse$, $IndustrialWaterConsumpttiveUse$, and $LivestockWaterConsumpttiveUse$ can be supplied by groundwater, non-conventional water sources, and surface water. Water resources allocation is computed as follows:
 
-$$
-DomesticWaterAbstractionGW = FractionGroundwaterUsed  \cdot DomesticWaterConsumptiveUse
-DomesticWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot DomesticWaterConsumptiveUse
-DomesticWaterAbstractionSurfaceWater = DomesticWaterConsumptiveUse - DomesticWaterAbstractionGW  - DomesticWaterAbstractionNONconv
-$$
+<br>$DomesticWaterAbstractionGW = FractionGroundwaterUsed  \cdot DomesticWaterConsumptiveUse$
+<br>$DomesticWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot DomesticWaterConsumptiveUse$
+<br>$DomesticWaterAbstractionSurfaceWater = DomesticWaterConsumptiveUse - DomesticWaterAbstractionGW  - DomesticWaterAbstractionNONconv$
 
-$$
-IndustrialWaterAbstractionGW = FractionGroundwaterUsed  \cdot IndustrialWaterConsumptiveUse
-IndustrialWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot IndustrialWaterConsumptiveUse
-IndustrialWaterAbstractionSurfaceWater = IndustrialWaterConsumptiveUse - IndustrialWaterAbstractionGW  - IndustrialWaterAbstractionNONconv
-$$
+<br>$IndustrialWaterAbstractionGW = FractionGroundwaterUsed  \cdot IndustrialWaterConsumptiveUse$
+<br>$IndustrialWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot IndustrialWaterConsumptiveUse$
+<br>$IndustrialWaterAbstractionSurfaceWater = IndustrialWaterConsumptiveUse - IndustrialWaterAbstractionGW  - IndustrialWaterAbstractionNONconv$
 
-$$
-LivestockWaterAbstractionGW = FractionGroundwaterUsed  \cdot LivestockWaterConsumptiveUse
-LivestockWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot LivestockWaterConsumptiveUse
-LivestockWaterAbstractionSurfaceWater = LivestockWaterConsumptiveUse - LivestockWaterAbstractionGW  - LivestockWaterAbstractionNONconv
-$$
+<br>$LivestockWaterAbstractionGW = FractionGroundwaterUsed  \cdot LivestockWaterConsumptiveUse$
+<br>$LivestockWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot LivestockWaterConsumptiveUse$
+<br>$LivestockWaterAbstractionSurfaceWater = LivestockWaterConsumptiveUse - LivestockWaterAbstractionGW  - LivestockWaterAbstractionNONconv$
 
-$EnergyWaterConsumpttiveUse$ is supplied exclusively by surface water: $$ EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$$.
+$EnergyWaterConsumpttiveUse$ is supplied exclusively by surface water: $EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$.
 
 $CropIrrigationWaterAbstraction$ is supplied by groundwater and surface water:
+<br>$CropIrrigationWaterAbstractionGW = FractionGroundwaterUsed  \cdot CropIrrigationWaterAbstraction$
+<br>$CropIrrigationWaterAbstractionSurfaceWater = CropIrrigationWaterAbstraction - CropIrrigationWaterAbstractionGW$
 
-$$
-CropIrrigationWaterAbstractionGW = FractionGroundwaterUsed  \cdot CropIrrigationWaterAbstraction
-CropIrrigationWaterAbstractionSurfaceWater = CropIrrigationWaterAbstraction - CropIrrigationWaterAbstractionGW 
-$$
 
 [$RiceIrrigationAbstractionSurfaceWater$](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/) is supplied exclusively by surface water.
 
@@ -270,8 +262,7 @@ Surface water sources for abstraction may consist of lakes, reservoirs, and rive
 
 The total amount of water that is required from groundwater resources is:
 
-$$
-TotalWaterAbstractionFromGroundWater = DomesticWaterAbstractionGW  + IndustrialWaterAbstractionGW  + 
+$$TotalWaterAbstractionFromGroundWater = DomesticWaterAbstractionGW  + IndustrialWaterAbstractionGW  + 
 LivestockWaterAbstractionGW + CropIrrigationWaterAbstractionGW 
 $$
 
@@ -345,11 +336,9 @@ WaterAbstractedLakesReservoirs = \min (TotalAvailableVolumeLakesReservoirs , Fra
 $$
 
 The quantities below are then subtracted from the [lake storage](https://ec-jrc.github.io/lisflood-model/3_02_optLISFLOOD_lakes/) and the [reservoir storage](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/):
+<br>$WaterAbstractedLakes = \frac{WaterAbstractedLakesReservoirs}{TotalAvailableVolumeLakesReservoirs} * AvailableVolumeLakes$
+<br>$WaterAbstractedReservoirs = \frac{WaterAbstractedLakesReservoirs}{TotalAvailableVolumeLakesReservoirs} * AvailableVolumeReservoirs$
 
-$$
-WaterAbstractedLakes = \frac{WaterAbstractedLakesReservoirs}{TotalAvailableVolumeLakesReservoirs} * AvailableVolumeLakes
-WaterAbstractedReservoirs = \frac{WaterAbstractedLakesReservoirs}{TotalAvailableVolumeLakesReservoirs} * AvailableVolumeReservoirs
-$$
 
 
 #### Surface water abstraction from rivers, and environmental flow
