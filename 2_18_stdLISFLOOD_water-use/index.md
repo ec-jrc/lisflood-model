@@ -247,9 +247,9 @@ Specifically, $DomesticWaterConsumpttiveUse$, $IndustrialWaterConsumpttiveUse$, 
 <br>$LivestockWaterAbstractionNONconv= FractionNONconventionalSourcesUsed  \cdot LivestockWaterConsumptiveUse$
 <br>$LivestockWaterAbstractionSurfaceWater = LivestockWaterConsumptiveUse - LivestockWaterAbstractionGW  - LivestockWaterAbstractionNONconv$
 
-$EnergyWaterConsumpttiveUse$ is supplied exclusively by surface water: $EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$.
+<br>$$EnergyWaterConsumpttiveUse$ is supplied exclusively by surface water: $EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$.
 
-$CropIrrigationWaterAbstraction$ is supplied by groundwater and surface water:
+<br>$$CropIrrigationWaterAbstraction$ is supplied by groundwater and surface water:
 <br>$CropIrrigationWaterAbstractionGW = FractionGroundwaterUsed  \cdot CropIrrigationWaterAbstraction$
 <br>$CropIrrigationWaterAbstractionSurfaceWater = CropIrrigationWaterAbstraction - CropIrrigationWaterAbstractionGW$
 
