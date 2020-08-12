@@ -36,6 +36,7 @@ $$
 $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. The following Figure illustrates the relation between $R_{WS}, w, w_{crit}, w_{wp}$:
 
 ![Reduction of transpiration in case of water stress](../media/image26.png)
+
 ***Figure:*** *Reduction of transpiration in case of water stress.* $R_{WS}$ *is 1 when* $w \ge w_{crit}$, *it decreases linearly between* $w_{crit}$ *and* $w_{wp}$, *and it reaches zero when $w=w_{wp}$.*
 
 
