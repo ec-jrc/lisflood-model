@@ -26,15 +26,15 @@ where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1}
 The actual soil evaporation is extracted from the superficial soil layer ($ES_a_1_a$) and, subsequently, from the upper soil layer ($ES_a_1_b$):
 
 $$
-ES_a_1_a = \min ([w_1_a - w_{res1a}] , ES_a)
+ES_a_1_a = \min ([w_1_a - w_{res1a}] , ES_a) \\
 ES_a_1_b = \max ([ES_a-ES_a_1_a], 0)
 $$
 
 The amount of moisture in the superficial and upper soil layers is then updated as follows:
 
 $$
-w_1_a = w_1_a - ES_a_1_a 
-w_1_b = w_1_b - ES_a_1_b
+w_1_a = w_1_a - ES_a_1_a \\
+w_1_b = w_1_b - ES_a_1_b \\
 w_1 = w_1_a + w_1_b
 $$
 
