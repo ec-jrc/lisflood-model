@@ -58,6 +58,50 @@ The values of $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}
 
 Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
+***Lower groundwater zone: steady state storage
+
+The computation of $D_{uz,lz}$ and $Q_{lz}$ then allows to model the response of the lower groundwater zone.
+Now, let’s do a simple numerical experiment: assuming that $D_{uz,lz}$ is a constant value, we can take some arbitrary initial value for $LZ$ and then simulate the development over LZ over time. The Figure below shows the results of two numerical experiments. In the upper Figure, we start with a very high initial storage (1500 mm). The inflow rate is fairly small (0.2 mm/day), and $T_{lz}$ is quite small as well (a small value leads to a quick responce and hence a relatively short residence time of the water in the lower zone). What is interesting here is that, over time, the storage evolves asymptotically towards a constant state. In the lower Figure, we start with a much smaller initial storage (50 mm), but the inflow rate is much higher (1.5 mm/day) and so is $T_{lz}$ (1000 days). Here we see an upward trend, again towards a constant value. However, in this case the constant ‘end’ value is not reached within the simulation period, which is mainly because $T_{lz}$ is set to a value for which the response is very slow. 
+
+<img src="https://github.com/StefaniaGrimaldi/lisflood-model/blob/StefaniaGrimaldi-irrigation_draft1/media/image39.png">
+
+**Figure** Two 10-year simulations of lower zone storage with constant inflow. Upper Figure: high initial storage, storage approaches steady-state storage
+(dashed) after about 1500 days. Lower Figure: low initial storage, storage doesn’t reach steady-state within 10 years.
+
+At this point it should be clear that being able to know the ‘end’ storages in the Figure above in advance would be very helpful, because it would eliminate any trends. As it happens, this can be done very easily from the model equations. The condition in which *the storage is constant over time means that the in- and outflow terms balance each other out*. This condition is known as a **steady state situation**, and the constant ‘end’ storage is in fact the *steady state storage*.
+The rate of change of the lower zone’s storage at any moment is given by the continuity equation:
+
+$$
+\frac{dLZ}{dt}=I(t)-O(t)
+$$
+
+where $I$ is the (time dependent) inflow (i.e. groundwater recharge) and $O$ is the outflow rate. For a situation where the storage remains constant, we can write:
+
+$$
+\frac{dLZ}{dt}=0  only if I(t)=O(t)
+$$
+
+This equation can be re-written as:
+
+$$
+I(t) - \frac{1}{T_{lz}} \cdot LZ
+$$
+
+Solving this for LZ gives the steady state storage:
+
+$$
+LZ_{ss} = T_{lz} \cdot I(t)
+$$
+
+Applying these equations to the examples above we obtain the *steady state storage* values shown in the Figure.
+
+|T_{lz}  | I(t)  | LZ_{ss} |
+|--------|-------|---------|
+|250     | 0.2   | 50      |
+|1000    | 1.5   | 1500    |
+
+
+LISFLOOD provides the possibility to compute the *steady state storage* values internally, all the instrutions are provided in the chapter [Initialisation](https://ec-jrc.github.io/lisflood-code/3_step5_model-initialisation/) of the User Guide.
 
 
 [🔝](#top)
