@@ -7,7 +7,6 @@ W_{av} = R \cdot \Delta t + M + D_{int} - Int
 $$
 
 where:
-
 <br> - $R$: 		Rainfall $[\frac{mm}{day}]$,
 <br> - $M$: 	Snow melt $[mm]$,
 <br> - $D_{int}$: 	Leaf drainage $[mm]$,
