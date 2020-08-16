@@ -50,20 +50,20 @@ where $ResMultQ_{norm}$ can assume values between 0.25 and 2; AdjQ_{norm} must a
 
 Depending on the relative filling of the reservoir, outflow ($Q_{res},[\frac{m^3}{s}]$) is calculated as:
 
-If $$F \le 2 \cdot L_c$$, then: 
+If $F \le 2 \cdot L_c$, then: 
 
 $$
 Q_{res} = min (Q_{min} , S \cdot frac{1}{\Delta t_{day})
 $$
 where $\Delta t_{day}$ is 86400 meaning that *the total daily inflow I_{res} to the reservor is released downstream*.
 
-If $$2L_c \lt F \le L_n $$, then:
+If $2L_c \lt F \le L_n $, then:
 
 $$
 Q_{res} = Q_{min } + (AdjQ_{norm}  - Q_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
 $$
 
-If $$L_n \lt F \le  L_{adj,f}$$, then:
+If $L_n \lt F \le  L_{adj,f}$, then:
 
 $$
 Q_{res} = AdjQ_{norm}  
@@ -71,22 +71,22 @@ $$
 
 where 
 
-If $$L_{adj,f} \lt F \le L_f$$, then:
+If $L_{adj,f} \lt F \le L_f$, then:
 
 $$
 Q_{res} = AdjQ_{norm}  + \frac{(F - L_{adj,f}{(L_f - L_{adj,f} \cdot (Q_{nd} - AdjQ_{norm})
 $$
 
-If $$F \gt L_f$$, then:
+If $F \gt L_f$, then:
 
 $$
 Q_{res} = \max ((F - L_f **-0.01**) \cdot \frac{S}i{\Delta t_{day} , Q_{max})
 $$
 
-with
-$$ Q_{max} = \min ( Q_{nd} , \max ( **1.2** \cdot I_{res} , Q_{nd} ) )$$
-and 
-*$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit ($L_f$) is realised to the downstream channel in one day*. 
+<br>with
+<br>$ Q_{max} = \min ( Q_{nd} , \max ( **1.2** \cdot I_{res} , Q_{nd} ) )$
+<br>and 
+<br>*$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit ($L_f$) is realised to the downstream channel in one day*. 
 
 Finally, the condition described below is applied in order to prevent outflow values that are too large compared to the inflow value.
 
