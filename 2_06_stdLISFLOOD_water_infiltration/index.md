@@ -8,11 +8,11 @@ $$
 
 where:
 
- > $R$: 		Rainfall $[\frac{mm}{day}]$,
- > $M$: 	Snow melt $[mm]$,
- > $D_{int}$: 	Leaf drainage $[mm]$,
- > $Int$: 	Interception $[mm]$, and
- > $\Delta t$: 	time step $[days]$.
+<br> - $R$: 		Rainfall $[\frac{mm}{day}]$,
+<br> - $M$: 	Snow melt $[mm]$,
+<br> - $D_{int}$: 	Leaf drainage $[mm]$,
+<br> - $Int$: 	Interception $[mm]$, and
+<br> - $\Delta t$: 	time step $[days]$.
 
 Since no infiltration can take place in each pixel's 'direct runoff fraction', **direct runoff** is calculated as:
 
@@ -27,7 +27,9 @@ $InterceptionSealed$ is the water in $mm$ retained by the depressions of the imp
 $$
 InterceptionSealed = R \cdot \Delta t + M
 $$ 
+
 when 
+
 $$
 AvailableStorageSealed= SMAXsealed - StorageSealed > 0
 $$
