@@ -6,33 +6,19 @@
 
 The figure below provides a first overview on the processes included in LISFLOOD:
 
-![Overview  of the LISFLOOD model](../media/image6.png)
-**Figure:** Overview  of the LISFLOOD model. $P$: precipitation; $E$:  evaporation & evapotranspiration; $SnCoef$: snow melt; $b_{xin}$: infiltration; $Chan_{N2}$: surface runoff; $GW_{perc}$: drainage from upper- to lower groundwater zone; $T_{uz}$: outflow from upper groundwater zone; $T_{lz}$: outflow from lower groundwater zone; $R_{ch}$: drainage from subsoil to upper groundwater zone; drainage from top- to subsoil; $C_{pref}$: preferential flow to upper groundwater zone.
 
-**
-
-
-
-
-![ LISFLOOD model scheme (symbols)](../media/LISFLOOD.png){width="2.802083333333333in" height="2.541666666666667in"}
+![ LISFLOOD model scheme (symbols)](../media/LISFLOOD.png)
 
 ![ LISFLOOD model scheme (explained)](../media/LISFLOOD_explained.png)
-**Figure:** model variables and component
+**Figure:** Modellled processes and model variables.
 
-
-![TEST](../media/image36.png){width="1.802083333333333in"height="1.541666666666667in"}
-
-
-
-![](https://github.com/StefaniaGrimaldi/lisflood-code/tree/gh-pages/media/image36.png){width="1.802083333333333in"
-height="1.541666666666667in"}
 
 The standard LISFLOOD model setup is made up of the following components:
 
-- a 3-layer soil water balance sub-model
-- sub-models for the simulation of groundwater and subsurface flow (using 2 parallel interconnected linear reservoirs)
-- a sub-model for the routing of surface runoff to the nearest river channel
-- a sub-model for the routing of channel flow
+- a 3-layer soil water balance sub-model;
+- sub-models for the simulation of groundwater and subsurface flow (using 2 parallel interconnected linear reservoirs);
+- a sub-model for the routing of surface runoff to the nearest river channel;
+- a sub-model for the routing of channel flow.
 
 The processes that are simulated by the model include also snow melt, infiltration, interception of rainfall, leaf drainage, evaporation and water uptake by vegetation, surface runoff, preferential flow (bypass of soil layer), exchange of soil moisture between the two soil layers and drainage to the groundwater, sub-surface and groundwater flow, and flow through river channels.
 
@@ -81,7 +67,7 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 | Irrigated agriculture                                        | Evapotranspiration lower than for forest but still significant | Rooting depth lower than for forest but still significant | Medium concentration time                                    |
 | Other (agricultural areas, non-forested natural area, pervious surface of urban areas) | Evapotranspiration lower than for forest but still significant | Rooting depth lower than for forest but still significant | Medium concentration time                                    |
 
-If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in the [user's guide](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/).
+If you activate any of LISFLOOD's options for writing internal model fluxes to time series or maps (described in the [User Guide](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/)).
  
 the model will report the real fluxes, which are the fluxes multiplied by the corresponding fraction. 
 The Figure below illustrates this for evapotranspiration (evaporation and transpiration) which calculated differently for each of this five aggregated classes. 
@@ -94,6 +80,6 @@ In this example, evapotranspiration (ET) is simulated for each aggregated class 
 As result of the soil model you get five different surface fluxes weighted by the corresponding fraction $(f_{dr},f_{water},f_{forest},f_{other},f_{irrigated})$, 
 respectively three fluxes for the upper and lower groundwater zone and for groundwater loss also weighted by the corresponding fraction $(f_{forest},f_{irrigated},f_{other})$. 
 However a lot of the internal flux or states (e.g. preferential flow for forested areas) can be written 
-to disk as map or timeseries by activate LISFLOOD's options (described in the [user's guide](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/)).
+to disk as map or timeseries by activate LISFLOOD's options (described in the [User Guide](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/)).
 
 [🔝](#top)
