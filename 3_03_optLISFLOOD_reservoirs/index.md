@@ -57,7 +57,7 @@ Q_{res} = min (Q_{min} , S \cdot frac{1}{\Delta t_{day})
 $$
 where $\Delta t_{day}$ is 86400 meaning that *the total daily inflow I_{res} to the reservor is released downstream*.
 
-If $2L_c \lt F \le L_n $, then:
+If $2L_c \lt F \le L_n$, then:
 
 $$
 Q_{res} = Q_{min } + (AdjQ_{norm}  - Q_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
@@ -66,7 +66,7 @@ $$
 If $L_n \lt F \le  L_{adj,f}$, then:
 
 $$
-Q_{res} = AdjQ_{norm}  
+Q_{res} = AdjQ_{norm}
 $$
 
 If $L_{adj,f} \lt F \le L_f$, then:
