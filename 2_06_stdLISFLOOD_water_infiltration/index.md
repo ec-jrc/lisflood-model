@@ -8,11 +8,11 @@ $$
 
 where:
 
-  $R$: 		Rainfall $[\frac{mm}{day}]$
-  $M$: 	Snow melt $[mm]$
-  $D_{int}$: 	Leaf drainage $[mm]$
-  $Int$: 	Interception $[mm]$
-  $\Delta t$: 	time step $[days]$
+ > $R$: 		Rainfall $[\frac{mm}{day}]$,
+ > $M$: 	Snow melt $[mm]$,
+ > $D_{int}$: 	Leaf drainage $[mm]$,
+ > $Int$: 	Interception $[mm]$, and
+ > $\Delta t$: 	time step $[days]$.
 
 Since no infiltration can take place in each pixel's 'direct runoff fraction', **direct runoff** is calculated as:
 
