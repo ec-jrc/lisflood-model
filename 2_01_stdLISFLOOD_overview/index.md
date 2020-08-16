@@ -8,6 +8,7 @@ The figure below provides a first overview on the processes included in LISFLOOD
 
 
 ![ LISFLOOD model scheme (explained)](../media/LISFLOOD_explained.png) ![ LISFLOOD model scheme (symbols)](../media/LISFLOOD.png)
+
 **Figure:** Modellled processes and model variables.
 
 
