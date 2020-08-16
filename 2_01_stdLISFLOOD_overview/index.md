@@ -12,11 +12,16 @@ The figure below provides a first overview on the processes included in LISFLOOD
 **
 
 
-<img src="https://github.com/StefaniaGrimaldi/lisflood-model/tree/master/media/LISFLOOD.png" width="480">
 
 
-![ LISFLOOD model scheme (symbols)](../media/LISFLOOD.png) ![ LISFLOOD model scheme (explained)](../media/LISFLOOD_explained.png)
+![ LISFLOOD model scheme (symbols)](../media/LISFLOOD.png){width="2.802083333333333in" height="2.541666666666667in"}
+
+![ LISFLOOD model scheme (explained)](../media/LISFLOOD_explained.png)
 **Figure:** model variables and component
+
+width="5.802083333333333in"
+height="4.541666666666667in"}
+
 
 The standard LISFLOOD model setup is made up of the following components:
 
