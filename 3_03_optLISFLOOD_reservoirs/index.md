@@ -69,8 +69,6 @@ $$
 Q_{res} = AdjQ_{norm}  
 $$
 
-where 
-
 If $L_{adj,f} \lt F \le L_f$, then:
 
 $$
@@ -97,8 +95,6 @@ Q_{res} = \max (( F - L_f - **0.01** ) \cdot \frac{S}{\Delta t_{day}) , **Q_{reg
 $$
 
 where $$**Q_{reg}** = \min ( O_{nd} , \max ( **1.2** \cdot I_{res} , AdjQ_{norm}) )
-
-
 
 Summary of the symbols:
    <br>$S$:		Reservoir storage capacity $[m^3]$
