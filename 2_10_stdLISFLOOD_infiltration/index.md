@@ -6,7 +6,7 @@ $$
 A_s = 1 - (1 - \frac{w_1}{w_{s1}})^b
 $$
 
-where $w_{s1}$ and $w_1$ are the maximum and actual amounts of moisture in the superficial (1a) and upper (1b) soil layers, respectively. Specifically, $$w_{s1} = w_{s1a} + w_{s1b}$$ and $$w_1 = w_{1a} + w_{1b}$$, all the values are in $[mm]. $b$ is an empirical non-dimensional shape parameter; its value is generally used as a calibration parameter. In LISFLOOD, $A_s$ is computed for the permeable fraction of each pixel (i.e. for the fraction $(1-f_{dr})$, meaning that the *direct runoff* is not considered in this computation). The **potential infiltration capacity** $INF_{pot} [mm]$ is a function of $w_{s1}$ and $A_s$:
+where $w_{s1}$ and $w_1$ are the maximum and actual amounts of moisture in the superficial (1a) and upper (1b) soil layers, respectively. Specifically, $w_{s1} = w_{s1a} + w_{s1b}$ and $w_1 = w_{1a} + w_{1b}$, all the values are in $[mm]. $b$ is an empirical non-dimensional shape parameter; its value is generally used as a calibration parameter. In LISFLOOD, $A_s$ is computed for the permeable fraction of each pixel (i.e. for the fraction $(1-f_{dr})$, meaning that the *direct runoff* is not considered in this computation). The **potential infiltration capacity** $INF_{pot} [mm]$ is a function of $w_{s1}$ and $A_s$:
 
 $$
 INF_{pot}= \frac{w_{s1}}{b +1} \cdot (1 - A_s)^{\frac{b + 1}{b}}
