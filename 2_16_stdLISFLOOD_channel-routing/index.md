@@ -37,7 +37,11 @@ Here, the positive sign indicates water volumes that are addded to the channel f
 
 $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$, $Q_{res}$, $Q_{lake}$, $Q_{polder}$, $totQchan_{abstr}$, and $EvapChan$ are all expressed in **[$m^3]$ per time step**. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. 
 
-Finally, it is noted that the kinematic wave channel routing can be run using a smaller (user-defined) time-step than the over simulation timestep ($\Delta t$).
+In order to improve the model accuracy, the kinematic wave channel routing can be run using a smaller (user-defined) time-step than the overall simulation time-step ($\Delta t$).
+
+Clearly, the smaller the computational time-step, the larger the computational time required to complete the simulation. In order to ammeliorate this problem and achieve the optimal trade-off between computational accuracy and time demand, the kinematic wave calculations for both surface and channel routing have been parallelised using the approach described in Liu *et al.* (2014). The user can then switch from a serial exectution to a parallel exection and set the number of parallel threads using the option $numCPUs_parallelKinematicWave$. Detailed instructions on the use of the parallel computing option are provided by the paragraph [Compile the cython module kinematic wave parallel tool](https://ec-jrc.github.io/lisflood-code/3_step2_installation/) of the [User Guide](https://ec-jrc.github.io/lisflood-code/1_introduction_LISFLOOD/).
+
+> J. Liu, A. Zhu, Y. Liu, T. Zhu, C. Z. Qin, A layered approach to parallel computing for spatially distributed hydrological modeling, Environ. Model. Softw., 51 (2014), pp. 221-227
 
 
 [🔝](#top)
