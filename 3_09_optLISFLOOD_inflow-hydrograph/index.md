@@ -90,6 +90,7 @@ One of the most common uses of the inflow hydrograph option is this: suppose we 
 
 
 ![inflow hydrograph](../media/image46-resize.png)
+
 ***Figure:*** *Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text below for explanation.*
 
 
