@@ -24,7 +24,7 @@ The module water use can be activated by adding the following line to the 'lfopt
 
 LISFLOOD distinguishes between water demand, water abstraction, water consumption and return flow. Abstractions are typically higher than demands due leakage in the public supply network, transmission and evaporation losses during irrigation water transport. Water consumption per sector is typically lower than water demand per sector, since only a part of the water is actually used (and hence exits the system), while the remaining fraction is returned to the system later on. The difference between water abstraction and water consumption is the water return flow. The consumptive water use is the water removed from available supplies without return to a water resource system. LISFLOOD computes the consumptive water use.
 
-### PART ONE: SECTORS of water demand and consumption
+#### PART ONE: SECTORS of water demand and consumption
 
 LISFLOOD distinguisges the following sectors of water consumption:
 -   dom:  use of water in the public sector, e.g. for domestic use
@@ -43,7 +43,7 @@ Typically, water demands are related to amounts of population, livestock, Gross 
 Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/); this chapter explains the computation of the water demand for crop irrigation.
 
 
-#### Public water usage and leakage
+##### Public water usage and leakage
 
 Public water demand is the water requirement through the public supply network. The water demand externally estimated in mm/day/gridcell and is read into LISFLOOD. Typically, domestic water demands are obtained by downscaling national reported data with higher resolution population maps.
 
@@ -111,7 +111,7 @@ $$
 It is here noted that the return flow is given by the difference between the domestic water abstraction and the domestic water consumptive use.
 
 
-#### Water usage by the energy sector for cooling
+##### Water usage by the energy sector for cooling
 
 Thermal powerplants generate energy through heating water, turn it into steam which spins a steam turbine which drives an electrical generator. Almost all coal, petroleum, nuclear, geothermal, solar thermal electric, and waste incineration plants, as well as many natural gas power stations are thermal, and they require water for cooling during their processing.
 LISFLOOD typically reads an 'ene.nc' file which determines the water demand for the energy sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using a map of the thermal power plants.
@@ -138,7 +138,7 @@ $$
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
 
-#### Water usage by the manufacturing industry
+##### Water usage by the manufacturing industry
 
 The manufucaturing industry also required water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD typically reads an 'ind.nc' file which determines the water demand for the industry sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using maps of land use and/or the specific activities.
 
@@ -167,7 +167,7 @@ $$
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
 
-#### Livestock water usage
+##### Livestock water usage
 
 Livestock also requires water. LISFLOOD typically reads a 'liv.nc' file which determines the water demand for livestock in mm/day/pixel. Mubareka et al. (2013) (http://publications.jrc.ec.europa.eu/repository/handle/JRC79600) estimated the water requirements for the livestock sector. These maps are calculated based on livestock density maps for 2005, normalized by the best available field data at continental scale. Water requirements are calculated for these animal categories: cattle, pigs, poultry and sheep and goats. The cattle category is further disaggregated to calves, heifers, bulls and dairy cows. Using values given in the literature, a relationship using air temperature is inferred for the daily water requirements per livestock category. Daily average temperature maps are used in conjunction with the livestock density maps in order to create a temporal series of water requirements for the livestock sector in Europe. 
 
@@ -191,7 +191,7 @@ The $LivestockWaterAbstraction$ is assumed equal to the $LivestockWaterDemand$.
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
-#### Water usage for crop irrigation
+##### Water usage for crop irrigation
 
 Crop irrigation and paddy-rice irrigation are simulated using seperate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/). This paragraph explains the computation of the water volume required by crop irrigation. The modelling of crop irrigation requires the following keyword in the 'lfoptions' element:
 
@@ -224,7 +224,7 @@ If the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThres
 
 
                    
-### PART TWO: sources of water abstraction
+#### PART TWO: sources of water abstraction
 
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, typically desalination.  
 
@@ -258,7 +258,7 @@ Specifically, $DomesticWaterConsumpttiveUse$, $IndustrialWaterConsumpttiveUse$, 
 
 Surface water sources for abstraction may consist of lakes, reservoirs, and rivers. The definition of the contribution of each surface water body is explained in the paragraph *Surface water abstractions from reservoirs, lakes, and rivers*.
 
-#### Groundwater abstractions 
+##### Groundwater abstractions 
 
 The total amount of water that is required from groundwater resources is:
 
@@ -286,7 +286,7 @@ When groundwater is abstracted for usage, it typically could cause a local dip i
 	<setoption choice="1" name="groundwaterSmooth"/>
 ```
 
-#### Non-Conventional abstractions: desalination
+##### Non-Conventional abstractions: desalination
 
 Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined using the factor $FractionNONconventionalSourcesUsed$. 
 It is assumed that the non-conventional water demand is always available. It is abstracted for a 100%, so no losses are accounted for.
@@ -298,7 +298,7 @@ LivestockWaterAbstractionNONconv
 $$
 
 
-#### Surface water abstractions and water regions
+##### Surface water abstractions and water regions
 
 The total amount of water to be abstracted by surface water bodies is:
 
@@ -317,7 +317,7 @@ The $TotalWaterAbstractionFromSurfaceWater$ is extracted within *water regions*.
 	<setoption choice="1" name="wateruseRegion"/>
 ```
 
-## Surface water abstractions from lakes and reservoirs
+##### Surface water abstractions from lakes and reservoirs
 
 Lakes and reservoirs within a *water region* can supply part of the surface water abstraction.  The parameter $FractionLakeReservoirWaterUsed$ defines the fraction of surface water abstraction which should be supplied by lakes and reservoirs. TThe value of this parameter (between 0 and 1) is provided in input to the model.
 
@@ -341,7 +341,7 @@ The quantities below are then subtracted from the [lake storage](https://ec-jrc.
 
 
 
-#### Surface water abstraction from rivers, and environmental flow
+##### Surface water abstraction from rivers, and environmental flow
 
 The remaining water abstraction volume is demanded to the rivers. The amount of water that *should be* extracted from the rivers is computed by:
 
@@ -404,7 +404,33 @@ The remainder amount of water (if any) is then added to the upper soil layer ($w
 In order to check the conservation of mass within the modelled system, LISFLOOD computes the amount of water consumed by irrigation $IrriLossCum$ (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors $IrrigationEfficiency$ and $ConveyanceEfficiency$), the resulting water content of the superficial and upper soil layers.
 
 
-#### Water use output files
+### Transient or constant water demand
+
+Water demand can change over time. The option *TransientWaterDemandChange* allows to activate the use of water demand maps containing different values over time. 
+
+```xml
+<setoption choice="1" name="TransientWaterDemandChange"/>
+```
+When *TransientWaterDemandChange=1* water demand maps must be provided to LISFLOOD as a NetCDF stack (readNetcdfStack=1). Maps can be provided with any frequency, frequency can be different in time. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack (see figure below). Water demand maps follow the same time convention as all other LISFLOOD maps: maps are stored using the timestamp from the end of the time interval they refer to. When *TransientWaterDemandChange=0*, the same water demand map is used for all time steps. 
+
+
+![img](..\media\WaterDemand_confluence.png)
+
+**Figure:** *Use of transient water demand maps.*
+
+The option *useWaterDemandAveYear* activates the use of water demand average year, namely a set of water demand maps for one single year that will be cycled for every year in the simulation.
+
+```xml
+<setoption choice="1" name="useWaterDemandAveYear"/>
+```
+
+When *useWaterDemandAveYear=1*, water demand maps for one single year must be provided to LISFLOOD as a NetCDF stack (readNetcdfStack=1). Maps can be provided with any frequency, frequency can also change in time. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack. The same year will be cycled in time. This option is frequently used for forecasting, when water demand information are not available.
+    
+^Note: LISFLOOD cannot switch *useWaterDemandAveYear* on and off during the same simulation. This means it is not possible to run a continuous simulation using water demand maps for a period and an average water demand year for another period. If an average year must be used together with other water demand maps, it is necessary to create a NetCDF file containing existing water demand information and the necessary number of average years.
+
+
+
+### Water use output files
 
 The water use routine produces a variety of new output maps and indicators, a number of relevant examples is listed in the following Table:
 
