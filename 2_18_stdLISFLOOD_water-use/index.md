@@ -414,7 +414,7 @@ Water demand can change over time. The option *TransientWaterDemandChange* allow
 When *TransientWaterDemandChange=1* water demand maps must be provided to LISFLOOD as a NetCDF stack (readNetcdfStack=1). Maps can be provided with any frequency, frequency can be different in time. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack (see figure below). Water demand maps follow the same time convention as all other LISFLOOD maps: maps are stored using the timestamp from the end of the time interval they refer to. When *TransientWaterDemandChange=0*, the same water demand map is used for all time steps. 
 
 
-![img](..\media\WaterDemand_confluence.png)
+![img](../media/WaterDemad_Confluence_small.png)
 
 **Figure:** *Use of transient water demand maps.*
 
