@@ -426,7 +426,7 @@ The option *useWaterDemandAveYear* activates the use of water demand average yea
 
 When *useWaterDemandAveYear=1*, water demand maps for one single year must be provided to LISFLOOD as a NetCDF stack (readNetcdfStack=1). Maps can be provided with any frequency, frequency can also change in time. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack. The same year will be cycled in time. This option is frequently used for forecasting, when water demand information are not available.
     
-^Note: LISFLOOD cannot switch *useWaterDemandAveYear* on and off during the same simulation. This means it is not possible to run a continuous simulation using water demand maps for a period and an average water demand year for another period. If an average year must be used together with other water demand maps, it is necessary to create a NetCDF file containing existing water demand information and the necessary number of average years.
+>Note: LISFLOOD cannot switch *useWaterDemandAveYear* on and off during the same simulation. This means it is not possible to run a continuous simulation using water demand maps for a period and an average water demand year for another period. If an average year must be used together with other water demand maps, it is necessary to create a NetCDF file containing existing water demand information and the necessary number of average years.
 
 
 
