@@ -7,7 +7,7 @@
 The figure below provides a first overview on the processes included in LISFLOOD:
 
 
-![](../media/LISFLOOD_schematic_Confluence_small.png)
+![](../media/LISFLOOD_schematic_Confluence.png)
 
 **Figure:** Modellled processes and model variables.
 
