@@ -58,7 +58,7 @@ The values of $T_{uz}$ $[days]$, $T_{lz}$ $[days]$, $GW_{perc}$ $[\frac{mm}{day}
 
 Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
-***Lower groundwater zone: steady state storage
+###**Lower groundwater zone: steady state storage**
 
 The computation of $D_{uz,lz}$ and $Q_{lz}$ then allows to model the response of the lower groundwater zone.
 Now, let’s do a simple numerical experiment: assuming that $D_{uz,lz}$ is a constant value, we can take some arbitrary initial value for $LZ$ and then simulate the development over LZ over time. The Figure below shows the results of two numerical experiments. In the upper Figure, we start with a very high initial storage (1500 mm). The inflow rate is fairly small (0.2 mm/day), and $T_{lz}$ is quite small as well (a small value leads to a quick responce and hence a relatively short residence time of the water in the lower zone). What is interesting here is that, over time, the storage evolves asymptotically towards a constant state. In the lower Figure, we start with a much smaller initial storage (50 mm), but the inflow rate is much higher (1.5 mm/day) and so is $T_{lz}$ (1000 days). Here we see an upward trend, again towards a constant value. However, in this case the constant ‘end’ value is not reached within the simulation period, which is mainly because $T_{lz}$ is set to a value for which the response is very slow. 
