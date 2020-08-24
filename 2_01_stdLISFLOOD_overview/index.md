@@ -9,7 +9,7 @@ The figure below provides a first overview on the processes included in LISFLOOD
 
 ![](../media/LISFLOOD_schematic_Confluence_small.png)
 
-**Figure:** Modellled processes and model variables.
+**Figure:** Modelled processes and model variables.
 
 
 The standard LISFLOOD model setup is made up of the following components:
