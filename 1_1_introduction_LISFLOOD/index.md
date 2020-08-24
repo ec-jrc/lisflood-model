@@ -8,7 +8,7 @@ LISFLOOD has been applied to a wide range of water resources applications such a
 flood forecasting, drought and soil moisture assessment and forecasting, the impacts of climate and land-use changes on water resources, 
 and the impact of various water efficiency measures on water resources.
 The current most prominent application of LISFLOOD is within the [European Flood Awareness System](https://www.efas.eu/) (EFAS).
-LISFLOOD will also be used in the next realise of the [Global Flood Awareness System](https://www.globalfloods.eu/general-information/about-glofas/) (GLOFAS) as detailed in [Alfieri et al. (2020)](https://www.sciencedirect.com/science/article/pii/S2589915519300331). Both EFAS and GLOFAS are operated under the [Copernicus Emergency Management System](http://emergency.copernicus.eu/) (EMS).
+LISFLOOD will also be used in the next release of the [Global Flood Awareness System](https://www.globalfloods.eu/general-information/about-glofas/) (GLOFAS) as detailed in [Alfieri et al. (2020)](https://www.sciencedirect.com/science/article/pii/S2589915519300331). Both EFAS and GLOFAS are operated under the [Copernicus Emergency Management System](http://emergency.copernicus.eu/) (EMS).
 
 LISFLOOD's wide applicability is due to its modular structure as well as its temporal and spatial flexibility. 
 The model can be extended with additional modules when the need arises, to satisfy the new target objective. 
