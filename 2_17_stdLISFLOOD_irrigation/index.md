@@ -18,16 +18,16 @@ where $w_{s1}$, $w_{s2}$ and $w_1$, $w_2$ are the maximum and actual amounts of 
 <br>$TotalRiceFloodingDemand = RiceFloodingDemand + RiceEvaporationDemand$
 $RiceFloodingDemand$ is computed as follows:
 <br>$RiceFloodingDemand = RiceFlooding \cdot RiceFraction \cdot \Delta t$
-where RiceFlooding is the daily amount of water supplied to the field (in $[\frac{mm}{day}]$). For instance, a RiceFlooding supply of 10 $[\frac{mm}{day}]$ will achieve a water depth of 100 mm. 
+<br>where RiceFlooding is the daily amount of water supplied to the field (in $[\frac{mm}{day}]$). For instance, a RiceFlooding supply of 10 $[\frac{mm}{day}]$ will achieve a water depth of 100 mm. 
 $RiceEvaporationDemand$ is given by:
 <br>$RiceEvaporationDemand = [EW0 - (ES_a+ T_a)] \cdot \Delta t$ 
-where $EW0$ is the potential evaporation rate from an open water surface, $ES_a$ is the actual evaporation from the soil, and $T_a$ is the actual transpiration (all in $[\frac{mm}{day}]$). The latter two terms are subtracted from the computation as they are already considered when computing [soil evaporation](https://ec-jrc.github.io/lisflood-model/2_08_stdLISFLOOD_soil-evaporation/) and [plant transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). 
+<br>where $EW0$ is the potential evaporation rate from an open water surface, $ES_a$ is the actual evaporation from the soil, and $T_a$ is the actual transpiration (all in $[\frac{mm}{day}]$). The latter two terms are subtracted from the computation as they are already considered when computing [soil evaporation](https://ec-jrc.github.io/lisflood-model/2_08_stdLISFLOOD_soil-evaporation/) and [plant transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). 
 
 * Growing phase: the water level in the field is kept constant starting from the planting day and up to 20 days before harvesting. The amount of water supplied to the field during this phase must compensate for evaporation and percolation losses and is computed as follows:
 <br>$TotalRiceGrowingDemand = RicePercolationDemand + RiceEvaporationDemand$
 and 
 <br>$RicePercolationWater = RicePercolation \cdot RiceFraction \cdot \Delta t $
-where $RicePercolation$ is the amount of water percolating to the upper groundwater layer (UZ). For instance, the percolation for heavy clay soils is 2 mm/day ([FAO](http://www.fao.org/3/a-s8376e.pdf)).
+<br>where $RicePercolation$ is the amount of water percolating to the upper groundwater layer (UZ). For instance, the percolation for heavy clay soils is 2 mm/day ([FAO](http://www.fao.org/3/a-s8376e.pdf)).
 
 * Draining phase: this phase starts 10 days before the harvesting and lasts for 10 days. The draining has the scope to reduce the soil moisture to the field capacity value, the RiceDrainageWater is computed using the equation below and it is added to the upper groundwater layer (UZ).
 <br>$RiceDrainageWater = 0.1 \cdot (w_{s1} - w_{fc,1})+(w_{s2} - w_{fc,2}) \cdot RiceFraction \cdot \Delta t$
