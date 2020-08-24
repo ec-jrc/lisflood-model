@@ -64,6 +64,7 @@ The total amount of water supplied to the plants under *not stressed* conditions
 <br>$T_{a,1b,s}= (\frac{w_{AvStressed,1b}}{w_{AvStressed,1a}+w_{AvStressed,1b}})\cdot T_{a,s}$
 
 
+
 Finally, the amount of water in the superficial and upper soil layers is updated as follows:
 <br>$w_{1a} = w_{1a} - T_{a,1a,Ns} -T_{a,1a,s}$
 <br>$w_{1b} = w_{1b} - T_{b,1b,Ns} -T_{b,1b,s}$
