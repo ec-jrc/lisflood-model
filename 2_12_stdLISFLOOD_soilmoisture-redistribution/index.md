@@ -90,7 +90,6 @@ In brief, the iterative procedure now involves the following steps. First, the n
 6. Add $D_{1a,1b}'$ to $D_{1a,1b}$; $D_{1b,2}'$ to $D_{1b,2}$; add $D_{2,gw}'$ to $D_{2,gw}$
 
 If the soil is frozen (*F* \> critical threshold), $D_{1a,1b}$, $D_{1b,2}$ and $D_{2,gw}$ are set to zero. After the iteration loop, the amounts of soil moisture in all layers are updated as follows:
-
 <br>$w_{1a} = w_{1a} - D_{1a,1b}$
 <br>$w_{1b} = w_{1b} + D_{1a,1b} - D_{1b,2}$
 <br>$w_2 = w_2 + D_{1b,2} - D_{2,gw}$
