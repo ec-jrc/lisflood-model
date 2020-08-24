@@ -56,12 +56,9 @@ Similar methods are used since the 1970s e.g. as multiple linear or non linear s
 
 The total water volume ($q_{ch}  \cdot L{ch}) entering the river system is computed as explained in the chapter [channel routing](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/) is conveyed by the main channel, and, when the main channel flow capacity is exceeded, by the floodplain.
 The total discharge $Q$ is partitioned between the main channel and the floodplain as follows:
-
-$$
-FlowRatio = \frac{ChannelVolume}{ChannelVolume+FloodplainVolume}
-ChannelQ = FlowRatio \cdot Q
-FlooplainQ = Q - ChannelQ
-$$
+<br>$FlowRatio = \frac{ChannelVolume}{ChannelVolume+FloodplainVolume}$
+<br>$ChannelQ = FlowRatio \cdot Q$
+<br>$FlooplainQ = Q - ChannelQ$
 
 
 ### Using double kinematic wave 
