@@ -75,38 +75,26 @@ The actual water consumption of the domestic sector is much less than the abstra
 
 So, the actual: 
 
-Domestic Water Consumption = DomesticConsumptiveUseFraction * dom.nc
-
-Domestic Water Return Flow = (1 - DomesticConsumptiveUseFraction) * dom.nc
-
-$$
-DomesticWaterAbstraction = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticWaterLeakageConstant
-$$
+<br>$Domestic Water Consumption = DomesticConsumptiveUseFraction \cdot dom.nc$
+<br>$Domestic Water Return Flow = (1 - DomesticConsumptiveUseFraction) \cdot dom.nc$
+<br>$DomesticWaterAbstraction = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot <br>
+                                \cdot DomesticWaterLeakageConstant$
 
 where 
 * $DomesticWaterSavingConstant = 1 - WaterSavingFraction$ and $WaterSavingFraction$ accounts for water saving strategies implemented by the households (and not included in the current use scenario).
-* $DomesticWaterLeakageConstant = \frac{1}{1-[DomesticLeakageFraction \cdot (1 - DomesticLeakageReductionFraction)]}$. $DomesticLeakageFraction$ represents the fraction of water lost during transport from the source of the abstraction to the final destination and $DomesticLeakageReductionFraction$ allows to account for a reduction in leakage compared to the current scenario.
-$WaterSavingFraction$, $DomesticLeakageFraction$, and $DomesticLeakageReductionFraction$ are provided as input data, the baseline value is 0, the maximum value is 1. The value of $DomesticWaterAbstraction$ is decreased by $$DomesticWaterSavingConstant$ and increased by $DomesticWaterLeakageConstant$.
+* $DomesticWaterLeakageConstant = 1/{1-[DomesticLeakageFraction \cdot (1 - DomesticLeakageReductionFraction)]}$. $DomesticLeakageFraction$ represents the fraction of water lost during transport from the source of the abstraction to the final destination and $DomesticLeakageReductionFraction$ allows to account for a reduction in leakage compared to the current scenario.
+$WaterSavingFraction$, $DomesticLeakageFraction$, and $DomesticLeakageReductionFraction$ are provided as input data, the baseline value is 0, the maximum value is 1. The value of $DomesticWaterAbstraction$ is decreased by $DomesticWaterSavingConstant$ and increased by $DomesticWaterLeakageConstant$.
 
 The leakage volume is then computed as follows:
-
-$$
-Leakage = (DomesticWaterLeakageConstant - 1) \cdot DomesticWaterDemand \cdot DomesticWaterSavingConstant
-$$
+<br>$Leakage = (DomesticWaterLeakageConstant - 1) \cdot DomesticWaterDemand \cdot DomesticWaterSavingConstant$
 
 The input value $LeakageWaterLossFraction$ allows to compute the leakage volume which is lost because of evaporation:
-
-$$
-LeakageWaterEvaporated = Leakage \cdot LeakageWaterLossFraction
-$$
+<br>$LeakageWaterEvaporated = Leakage \cdot LeakageWaterLossFraction$
 
 Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the $DomesticConsumptiveUseFraction$, its value varies between 0 and 1 and it is provided as input data.
 
 The total amount of water which leaves the system (and consequently must be subtracted from the water balance) due to domestic water use is then computed as follows:
-
-$$
-DomesticWaterConsumptiveUse = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticConsumptiveUseFraction + LeakageWaterEvaporated 
-$$
+<br>$DomesticWaterConsumptiveUse = DomesticWaterDemand \cdot DomesticWaterSavingConstant \cdot DomesticConsumptiveUseFraction + LeakageWaterEvaporated$
 
 It is here noted that the return flow is given by the difference between the domestic water abstraction and the domestic water consumptive use.
 
@@ -130,10 +118,7 @@ For small rivers the consumptive use varies between 1:2 and 1:3, so 0.33-0.50 (S
 
 
 The $EnergyWaterAbstraction$ is assumed equal to the $EnergyWaterDemand$ (i.e. losses are assumed to be 0). So, the actual $EnergyWaterConsumptiveUse$ is:
-
-$$
-EnergyWaterConsumptiveUse = EnergyWaterDemand \cdot EnergyConsumptiveUseFraction 
-$$
+<br>$EnergyWaterConsumptiveUse = EnergyWaterDemand \cdot EnergyConsumptiveUseFraction$
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
@@ -143,10 +128,7 @@ It is here noted that the return flow is given by the difference between the wat
 The manufucaturing industry also required water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD typically reads an 'ind.nc' file which determines the water demand for the industry sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using maps of land use and/or the specific activities.
 
 The amount of water that needs to be abstracted to comply with the demand of the manufacturing industry ($IndustrialWaterAbstraction$) is often lower than the actual demand ($IndustrialWaterDemand$) as part of the water is re-used within the industrial processes. The $WaterReUseFraction$ is provided as inpout data, its value varies between 0 and 1 (for instance, a value of 0.5 indicates that half of the water is re-used, that is, used twice). The $IndustrialWaterAbstraction$  is then computed as follows:
-
-$$
-IndustrialWaterAbstraction = IndustrialWaterDemand * (1 - WaterReUseFraction)
-$$
+<br>$IndustrialWaterAbstraction = IndustrialWaterDemand * (1 - WaterReUseFraction)$
 
 An $IndustrialConsumptiveUseFraction$ is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
@@ -159,10 +141,7 @@ Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
 ```
 
 The $IndustrialWaterConsumptiveUse$ is the computed as follows:
-
-$$
-IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction \cdot IndustrialConsumptiveUseFraction 
-$$
+<br>$IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction \cdot IndustrialConsumptiveUseFraction$
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
@@ -182,10 +161,7 @@ Consumptive Use (1-Recycling ratio) for livestock water use (0-1)
 ```
 
 So, the actual: 
-
-$$
-LivestockWaterConsumptiveUse = LivestockConsumptiveUseFraction * LivestockWaterDemand
-$$
+<br>$LivestockWaterConsumptiveUse = LivestockConsumptiveUseFraction * LivestockWaterDemand$
 
 The $LivestockWaterAbstraction$ is assumed equal to the $LivestockWaterDemand$.
 
@@ -200,25 +176,18 @@ Crop irrigation and paddy-rice irrigation are simulated using seperate model sub
 ```
 Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
 
-$$
-T_{a,irrig} = \min (T_a, w_1 - w_{wp1})
-$$
+<br>$T_{a,irrig} = \min (T_a, w_1 - w_{wp1})$
 
 where $w_1$ and $w_{wp1}$ are the amount of water available and at wilting point, respectively. Root water uptake depletes the soil moisture of the superficial (1a) and upper (1b) soil layers. 
 
 $CropIrrigationWaterDemand$ is then computed by:
 
-$$
-CropIrrigationWaterDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult
-$$
+<br>$CropIrrigationWaterDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult$
 
 where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
 
 $CropIrrigationWaterAbstraction$ is larger than $CropIrrigationWaterDemand$ in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the $IrrigationEfficiency$ and the $ConveyanceEfficiency$. Both these factors can vary between 0 and 1, the values are required as input data. For example, $IrrigationEfficiency$ is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; $ConveyanceEfficiency$ is ~0.80 for a common type channel. $CropIrrigationWaterAbstraction$ is the computed as follows:
-
-$$
-CropIrrigationWaterAbstraction = \frac{CropIrrigationWaterDemand}{IrrigationEfficiency \cdot ConveyanceEfficiency}
-$$
+<br>$CropIrrigationWaterAbstraction = \frac{CropIrrigationWaterDemand}{IrrigationEfficiency \cdot ConveyanceEfficiency}$
 
 If the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThreshold$), $CropIrrigationWaterDemand$ is set to 0.
 
@@ -303,7 +272,7 @@ $$
 The total amount of water to be abstracted by surface water bodies is:
 
 $$
-TotalWaterAbstractionFromSurfaceWater = DomesticWaterAbstractionSurfaceWater  + IndustrialWaterAbstractionSurfaceWater  + 
+TotalWaterAbstractionFromSurfaceWater = DomesticWaterAbstractionSurfaceWater  + IndustrialWaterAbstractionSurfaceWater  + <br>
 LivestockWaterAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationWaterAbstractionSurfaceWater +  RiceIrrigationWaterAbstractionSurfaceWater
 $$
 
@@ -368,7 +337,7 @@ For Europe e.g.  the 10th percentile discharge from a 'natural' run for 1990-201
 The water volume which can be potentially abstracted from the river within a *water region* is then:
 
 $$
-AvailableVolumeChannels = \max((Q_{ch} - EFlowThreshold) \cdot \Deltat , 0) \cdot (1 - WUsePercRemain) 
+AvailableVolumeChannels = \max((Q_{ch} - EFlowThreshold) \cdot \Delta t , 0) \cdot (1 - WUsePercRemain) 
 $$
 
 where $WUsePercRemain$ is the percentage of water which always remains in the channel. This value (between 0 and 1) is defined by the user.
