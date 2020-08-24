@@ -12,7 +12,7 @@ where $EW0$ is the potential evaporation rate from an open water surface $[\frac
 The actual amount of evaporation $EW_{int} mm]$ is clearly limited by the amount of water stored on the leaves $Int_{cum}$:
 
 $$
-EW_{int} = _{min}({EW_{max } \cdot \Delta t},{Int_{cum}})
+EW_{int} = \min({EW_{max } \cdot \Delta t},{Int_{cum}})
 $$
 
 $EW_{int}$ quantifies the amount of water that is lost from the interception storage because of evaporation. Another amount of water falls to the soil because of leaf drainage. Specifically, leaf drainage is modelled as a linear reservoir:
