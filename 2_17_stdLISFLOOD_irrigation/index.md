@@ -21,11 +21,13 @@ $RiceEvaporationDemand$ is given by:
 
 * Growing phase: the water level in the field is kept constant starting from the planting day and up to 20 days before harvesting. The amount of water supplied to the field during this phase must compensate for evaporation and percolation losses and is computed as follows:
 <br>$TotalRiceGrowingDemand = RicePercolationWater + RiceEvaporationDemand$
-<br>$RicePercolationWate$ depends on the value $RicePercolation$, which represents he amount of water percolating to the upper groundwater layer (UZ). For instance, the percolation for heavy clay soils is 2 mm/day ([FAO](http://www.fao.org/3/a-s8376e.pdf)).
+<br>$RicePercolationWate$ depends on the value $RicePercolation$, which represents he amount of water percolating to the upper groundwater layer (UZ):
 <br>$RicePercolationWater = RicePercolation \cdot RiceFraction \cdot \Delta t $
+<br>For instance, the percolation for heavy clay soils is 2 mm/day ([FAO](http://www.fao.org/3/a-s8376e.pdf)).
 
-* Draining phase: this phase starts 10 days before the harvesting and lasts for 10 days. The draining has the scope to reduce the soil moisture to the field capacity value, the RiceDrainageWater is computed using the equation below and it is added to the upper groundwater layer (UZ).
+* Draining phase: this phase starts 10 days before the harvesting and lasts for 10 days. The draining has the scope to reduce the soil moisture to the field capacity value, the quantity $RiceDrainageWater$ is computed as follows:
 <br>$RiceDrainageWater = 0.1 \cdot (w_{s1} - w_{fc,1})+(w_{s2} - w_{fc,2}) \cdot RiceFraction \cdot \Delta t$
+<br>$RiceDrainageWater$ is added to the upper groundwater layer (UZ).
 
 $RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) according to the calendar day and they define the $RiceIrrigationWaterAbstraction$:
 <br>$RiceIrrigationSurfaceWaterAbstraction = RiceSaturationDemand + TotalRiceFloodingDemand + TotalRiceGrowingDemand$
