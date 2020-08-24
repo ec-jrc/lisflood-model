@@ -28,9 +28,9 @@ The actual soil evaporation is extracted from the superficial soil layer ($ES_{a
 <br>$ES_{a,1b} = \max ([ES_a-ES_{a,1a}], 0)$
 
 The amount of moisture in the superficial and upper soil layers is then updated as follows:
-<br>$w_1_a = w_1_a - ES_a_1_a$
-<br>$w_1_b = w_1_b - ES_a_1_b$
-<br>$w_1 = w_1_a + w_1_b$
+<br>$w_{1a} = w_{1a} - ES_{a,1a}$
+<br>$w_{1b} = w_{1b} - ES_{a,1b}$
+<br>$w_1 = w_{1a} + w_{1b}$
 
 
 
