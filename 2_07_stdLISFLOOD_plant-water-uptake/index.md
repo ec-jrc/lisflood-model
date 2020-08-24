@@ -54,7 +54,7 @@ The amount of **moisture in the upper soil layer** is updated after computing th
 
 If $T_{a,1a,Ns} \lt T_a$ then $T_{a,1b,Ns}= \min((T_a-T_{a,1a,Ns}),w_{AvNotStressed,1b}$.
 
-The total amount of water supplied to the plants under *not stressed* conditions is then  $T_{a,1a,Ns} + T_{a,1b,Ns}$,  soil water depletion under *stressed* conditions occurs if $[T_{a,s}=[(T_{a,1a,Ns} + T_{a,1b,Ns}] \gt 0$. The distribution of water abstraction is then proportional to the water availability of each layer:
+The total amount of water supplied to the plants under *not stressed* conditions is then  $T_{a,1a,Ns} + T_{a,1b,Ns}$,  soil water depletion under *stressed* conditions occurs if $T_{a,s}=[(T_{a,1a,Ns} + T_{a,1b,Ns}] \gt 0$. The distribution of water abstraction is then proportional to the water availability of each layer:
 <br>$w_{AvStressed,1a}=w_{1a}-T_{a,1a,Ns}-w_{wp,1a}$
 <br>$w_{AvStressed,1b}=w_{1b}-T_{b,1b,Ns}-w_{wp,1b}$
 <br>$w_{AvStressed,tot}=w_{AvStressed,1a}+w_{AvStressed,1b}$
