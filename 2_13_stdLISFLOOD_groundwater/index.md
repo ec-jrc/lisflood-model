@@ -76,15 +76,12 @@ $$
 $$
 
 where $I$ is the (time dependent) inflow (i.e. groundwater recharge) and $O$ is the outflow rate. For a situation where the storage remains constant, we can write:
-
 <br>$\frac{dLZ}{dt}=0$  only if  $I(t)=O(t)$
 
 This equation can be re-written as:
-
 <br>$I(t) - \frac{1}{T_{lz}} \cdot LZ$
 
 Solving this for LZ gives the steady state storage:
-
 <br>$LZ_{ss} = T_{lz} \cdot I(t)$
 
 
