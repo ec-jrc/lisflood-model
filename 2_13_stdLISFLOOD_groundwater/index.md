@@ -52,9 +52,9 @@ The amount of water defined by $GW_{loss}$ never rejoins the river channel and i
 
 LISFLOOD hence abstracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to monitor more on decadal periods.
 
-If $LZ$ (lower groundwater amount) decreases below a groundwater threshold value ($LZThreshold$), the baseflow  Q_{lz} from the lower groundwater zone to the nearby rivers is zero. When sufficient recharge is added again to raise the $LZ$ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced. $LZThreshold$ values are likely different for various (sub)river basins. 
+If $LZ$ (lower groundwater amount) decreases below a groundwater hold value ($LZ_{Threshold}$), the baseflow  Q_{lz} from the lower groundwater zone to the nearby rivers is zero. When sufficient recharge is added again to raise the $LZ$ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced. $LZ_{Threshold}$ values are likely different for various (sub)river basins. 
 
-The values of $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}{day}]$), $GW_{loss}$ ($[\frac{mm}{day}]$), and $LZThreshold$ ($[mm]$) are obtained by calibration. To avoid spurious results, when $GW_{perc}$<$GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
+The values of $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}{day}]$), $GW_{loss}$ ($[\frac{mm}{day}]$), and $LZ_{Threshold}$ ($[mm]$) are obtained by calibration. To avoid spurious results, when $GW_{perc}$<$GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
 
 Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
