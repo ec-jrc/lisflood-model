@@ -17,7 +17,7 @@ In that sense it can be extended to include anything from a better representatio
 The model has also been designed to be applied across a wide range of spatial and temporal scales. LISFLOOD is grid-based, 
 and applications to date have employed grid cells of as little as 100 metres (for medium-sized catchments), 
 to 5000 metres for modelling the whole of Europe and 0.1° (around 11 km) and 0.5° (around 55 km) for modelling at the global scale. 
-LISLFLOOD can simulate the long-term water balance (using daily or sub-daily time steps), as wellas individual flood events (using hourly or even sub-hourly time intervals). 
+LISLFLOOD can simulate the long-term water balance (using daily or sub-daily time steps), as well as individual flood events (using hourly or even sub-hourly time intervals). 
 
 Although LISFLOOD's primary output product is river discharge, all the internal rate and state variables (soil moisture, for example) can be written as output. 
 All output can be written as maps covering the full computational domain, or time series at user-defined points or areas. 
