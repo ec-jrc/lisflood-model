@@ -2,8 +2,8 @@
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation into rain and snow. This distinction is controlled by the average temperature ($T_{avg}$). If $T_{avg}$ is below a threshold $TempSnow$, all the measured precipitation is assumed to be snow; the value $TempSnow = 1^\circ C$ is recommended. A snow correction factor $SnowFactor$ is then applied to correct for undercatch of snow precipitation. Undercatch in this context refers to the mismeasurement of snowfall by a precipitation measuement instrument. For instance, when using traditional rain gauges,wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
-* If $T_{avg} \lt TempSnow:   $Snow = SnowFactor \cdot Precipitation$
-* Else If $T_{avg} \ge TempSnow:   $Rain = Precipitation$
+* If $T_{avg} \lt TempSnow$:   $Snow = SnowFactor \cdot Precipitation$
+* Else If $T_{avg} \ge TempSnow$:   $Rain = Precipitation$
 
 Differently from rain, snow accumulates on the soil surface until it melts. The rate of snowmelt is estimated using a simple degree-day factor method. Degree-day factor type snow melt models usually take the following form (e.g. see WMO, 1986):
 
