@@ -41,7 +41,7 @@ It must be stressed that the value of $C_m$ can vary greatly both in space and t
 -   The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in
     the amount of net solar radiation
 
-The following Figure shows an example where a mean value $C_m = 3.0 $\frac{mm} {^\circ C \cdot day}$ is modulated using $C_{Seasonal}$. The value of $C_m$ is reduced by 0.5 at $21^{st}$ December and a 0.5 is added on the $21^{st}$ June. In between a sinus function is applied. It is noted that this example refers to the Northern emisphere (LISFLOOD clearly accounts for the different seasons in the Northern and Southern Hemisphere).
+The following Figure shows an example where a mean value $C_m = 3.0 \frac{mm}{^\circ C \cdot day}$ is modulated using $C_{Seasonal}$. The value of $C_m$ is reduced by $0.5$ at $21^{st}$ December and a $0.5$ is added on the $21^{st}$ June. In between a sinus function is applied. It is noted that this example refers to the Northern emisphere (LISFLOOD clearly accounts for the different seasons in the Northern and Southern Hemisphere).
 
 ![snow melt coefficient](../media/image7.jpg) 
 
