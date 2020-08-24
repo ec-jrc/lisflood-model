@@ -60,7 +60,7 @@ $(PathMaps)/leakage.map
 
 The leakage - typically only available as an average percentage per country - is then used to determine the required water abstraction:
 
-Domestic Water Abstraction = dom.nc * (1 + leakage.map)
+<br>*Domestic Water Abstraction = dom.nc * (1 + leakage.map)*
 
 The actual water consumption of the domestic sector is much less than the abstraction, and is defined by a fixed coefficient or a map if spatial differences are known:
 
@@ -77,8 +77,7 @@ So, the actual:
 
 <br>*DomesticConsumption = DomesticConsumptiveUseFraction * dom*
 <br>*DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) * dom*
-<br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * <br>
-                                * DomesticLeakageConstant*
+<br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * DomesticLeakageConstant*
 
 where 
 * *DomesticSavingConstant = 1 - WaterSavingFraction* and *WaterSavingFraction* accounts for water saving strategies implemented by the households (and not included in the current use scenario).
@@ -86,8 +85,7 @@ where
 *WaterSavingFraction*, *DomesticLeakageFraction*, and *DomesticLeakageReductionFraction* are provided as input data, the baseline value is 0, the maximum value is 1. The value of *DomesticAbstraction* is decreased by *DomesticSavingConstant* and increased by *DomesticLeakageConstant*.
 
 The leakage volume is then computed as follows:
-<br>*Leakage = (DomesticLeakageConstant - 1) * DomesticDemand * <br>
-* DomesticSavingConstant*
+<br>*Leakage = (DomesticLeakageConstant - 1) * DomesticDemand * DomesticSavingConstant*
 
 The input value *LeakageLossFraction* allows to compute the leakage volume which is lost because of evaporation:
 <br>*LeakageEvaporated = Leakage \cdot LeakageLossFraction*
@@ -95,8 +93,7 @@ The input value *LeakageLossFraction* allows to compute the leakage volume which
 Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the *DomesticConsumptiveUseFraction*, its value varies between 0 and 1 and it is provided as input data.
 
 The total amount of water which leaves the system (and consequently must be subtracted from the water balance) due to domestic water use is then computed as follows:
-<br>*DomesticConsumptiveUse = DomesticDemand * DomesticSavingConstant * <br> 
-* DomesticConsumptiveUseFraction + LeakageEvaporated*
+<br>*DomesticConsumptiveUse = DomesticDemand * DomesticSavingConstant * DomesticConsumptiveUseFraction + LeakageEvaporated*
 
 It is here noted that the return flow is given by the difference between the domestic water abstraction and the domestic water consumptive use.
 
@@ -231,8 +228,7 @@ Surface water sources for abstraction may consist of lakes, reservoirs, and rive
 ##### Groundwater abstractions 
 
 The total amount of water that is required from groundwater resources is:
-<br>*TotalAbstractionFromGroundWater = DomesticAbstractionGW  + IndustrialAbstractionGW  + <br>
-+ LivestockAbstractionGW + CropIrrigationAbstractionGW*
+<br>*TotalAbstractionFromGroundWater = DomesticAbstractionGW  + IndustrialAbstractionGW  + LivestockAbstractionGW + CropIrrigationAbstractionGW*
 
 **In the current LISFLOOD version, groundwater is abstracted for a 100%, so no addtional losses are accounted for, by which more water would need to be abstracted to meet the demand. Also, in the current LISFLOOD version, no limits are set for groundwater abstraction.**
 
@@ -259,17 +255,14 @@ When groundwater is abstracted for usage, it typically could cause a local dip i
 Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined using the factor $FractionNONconventionalSourcesUsed$. 
 It is assumed that the non-conventional water demand is always available. It is abstracted for a 100%, so no losses are accounted for.
 The total amount of water supplied by non-conventional sources is:
-<br>*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + <br>
-+ IndustrialAbstractioNONconv + LivestockAbstractionNONconv* 
+<br>*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + IndustrialAbstractioNONconv + LivestockAbstractionNONconv* 
 
 
 
 ##### Surface water abstractions and water regions
 
 The total amount of water to be abstracted by surface water bodies is:
-<br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater  + <br>
-LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater 
-+ <br>  RiceIrrigationAbstractionSurfaceWater*
+<br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater + LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater + RiceIrrigationAbstractionSurfaceWater*
 
 
 The *TotalWaterAbstractionFromSurfaceWater* is extracted within *water regions*. These regions are introduced in LISFLOOD due to allow the realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, the abstraction of surface water from the local 0.5x0.5 degree pixel is a reasonable representation of the real process. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area icluding the locations of water demand and abstraction.
@@ -339,8 +332,7 @@ A condition in which $$WaterAbstractedFromChannels \lt WaterToBeAbstractedChanne
 <br>*WaterUseShortage =  WaterToBeAbstractedChannels - WaterToBeAbstractedChannels*
 
 In condition of water scarcity, water uses are satisfied according to the following order of importance: domestic, energetic, livestock, industry, and irrigation. The latter sentence implies that when *WaterUseShortage*  $\gt 0$, LISFLOOD reduces the water volume delivered to the irrigated fields. Specifically, the amount *WaterUseShortage* is subtracted from the total amount of water required from surface water bodies by crops and paddy rice, meaning that the total amount of water effectively supplied to the irrigated fields (*IrrigationWater*) is:
-<br>*IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater + <br>
-+ RiceIrrigationAbstractionSurfaceWater - WaterUseShortage*
+<br>*IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater + RiceIrrigationAbstractionSurfaceWater - WaterUseShortage*
 
 The value *IrrigationWater* is then used to compute the water content of the superficial soil layer ($w_{1a}$) and of the upper soil layer ($w_{1b}$). 
 Specifically, the value *IrrigationWater* (after convertion in [mm]) is first added to the superficial soil layer, until the water content of this layer ($w_{1a}$) is equal to:
