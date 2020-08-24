@@ -2,7 +2,7 @@
 
 All water that flows out of the upper- and lower groundwater zone is routed to the nearest downstream channel pixel within one time step.
 Recalling once more that the groundwater equations are valid for the pixel's permeable fraction only, 
-the contribution of each pixel to the nearest channel is made up of $(f_{forest}+f_{other)+f_{irrigated}) \cdot (Q_uz + Q_lz)$. 
+the contribution of each pixel to the nearest channel is made up of $(f_{forest}+f_{other}+f_{irrigated}) \cdot (Q_uz + Q_lz)$. 
 
 
 The Figure below illustrates the routing procedure: for each pixel that contains a river channel, its contributing pixels are defined by the drainage network. 
