@@ -118,7 +118,6 @@ An "EnergyConsumptiveUseFraction" is used to determine the consumptive water usa
 
 For small rivers the consumptive use varies between 1:2 and 1:3, so 0.33-0.50 (Source: Torcellini et al. (2003) "Consumptive Use for US Power Production"), while for plants close to large open water bodies values of around 0.025 are valid.
 
-
 The *EnergyAbstraction* is assumed equal to the *EnergyDemand* (i.e. losses are assumed to be 0). So, the actual *EnergyConsumptiveUse* is:
 <br>*EnergyConsumptiveUse = EnergyDemand \cdot EnergyConsumptiveUseFraction*
 
@@ -177,15 +176,11 @@ Crop irrigation and paddy-rice irrigation are simulated using seperate model sub
 <setoption choice="1" name="drainedIrrigation"/>
 ```
 Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
-
 <br>$T_{a,irrig} = \min (T_a, w_1 - w_{wp1})$
-
 where $w_1$ and $w_{wp1}$ are the amount of water available and at wilting point, respectively. Root water uptake depletes the soil moisture of the superficial (1a) and upper (1b) soil layers. 
 
 $CropIrrigationDemand$ is then computed by:
-
 <br>$CropIrrigationDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult$
-
 where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
 
 *CropIrrigationAbstraction* is larger than *CropIrrigationDemand* in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the *IrrigationEfficiency* and the *ConveyanceEfficiency*. Both these factors can vary between 0 and 1, the values are required as input data. For example, *IrrigationEfficiency* is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; *ConveyanceEfficiency* is ~0.80 for a common type channel. *CropIrrigationAbstraction* is the computed as follows:
@@ -236,8 +231,7 @@ Surface water sources for abstraction may consist of lakes, reservoirs, and rive
 ##### Groundwater abstractions 
 
 The total amount of water that is required from groundwater resources is:
-
-*TotalAbstractionFromGroundWater = DomesticAbstractionGW  + IndustrialAbstractionGW  + <br>
+<br>*TotalAbstractionFromGroundWater = DomesticAbstractionGW  + IndustrialAbstractionGW  + <br>
 + LivestockAbstractionGW + CropIrrigationAbstractionGW*
 
 **In the current LISFLOOD version, groundwater is abstracted for a 100%, so no addtional losses are accounted for, by which more water would need to be abstracted to meet the demand. Also, in the current LISFLOOD version, no limits are set for groundwater abstraction.**
@@ -265,8 +259,7 @@ When groundwater is abstracted for usage, it typically could cause a local dip i
 Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined using the factor $FractionNONconventionalSourcesUsed$. 
 It is assumed that the non-conventional water demand is always available. It is abstracted for a 100%, so no losses are accounted for.
 The total amount of water supplied by non-conventional sources is:
-
-*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + <br>
+<br>*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + <br>
 + IndustrialAbstractioNONconv + LivestockAbstractionNONconv* 
 
 
@@ -274,8 +267,7 @@ The total amount of water supplied by non-conventional sources is:
 ##### Surface water abstractions and water regions
 
 The total amount of water to be abstracted by surface water bodies is:
-
-*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater  + <br>
+<br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater  + <br>
 LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater 
 + <br>  RiceIrrigationAbstractionSurfaceWater*
 
