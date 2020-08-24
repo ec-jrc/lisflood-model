@@ -74,7 +74,6 @@ The actual water consumption of the domestic sector is much less than the abstra
 ```
 
 So, the actual: 
-
 <br>*DomesticConsumption = DomesticConsumptiveUseFraction * dom*
 <br>*DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) * dom*
 <br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * DomesticLeakageConstant*
@@ -116,7 +115,7 @@ An "EnergyConsumptiveUseFraction" is used to determine the consumptive water usa
 For small rivers the consumptive use varies between 1:2 and 1:3, so 0.33-0.50 (Source: Torcellini et al. (2003) "Consumptive Use for US Power Production"), while for plants close to large open water bodies values of around 0.025 are valid.
 
 The *EnergyAbstraction* is assumed equal to the *EnergyDemand* (i.e. losses are assumed to be 0). So, the actual *EnergyConsumptiveUse* is:
-<br>*EnergyConsumptiveUse = EnergyDemand \cdot EnergyConsumptiveUseFraction*
+<br>*EnergyConsumptiveUse = EnergyDemand * EnergyConsumptiveUseFraction*
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
@@ -148,7 +147,7 @@ It is here noted that the return flow is given by the difference between the wat
 
 Livestock also requires water. LISFLOOD typically reads a 'liv.nc' file which determines the water demand for livestock in mm/day/pixel. Mubareka et al. (2013) (http://publications.jrc.ec.europa.eu/repository/handle/JRC79600) estimated the water requirements for the livestock sector. These maps are calculated based on livestock density maps for 2005, normalized by the best available field data at continental scale. Water requirements are calculated for these animal categories: cattle, pigs, poultry and sheep and goats. The cattle category is further disaggregated to calves, heifers, bulls and dairy cows. Using values given in the literature, a relationship using air temperature is inferred for the daily water requirements per livestock category. Daily average temperature maps are used in conjunction with the livestock density maps in order to create a temporal series of water requirements for the livestock sector in Europe. 
 
-An "LivestockConsumptiveUseFraction" is used to determine the consumptive water usage of livestock. This can either be a fixed value, or a spatial explicit map.
+A "LivestockConsumptiveUseFraction" is used to determine the consumptive water usage of livestock. This can either be a fixed value, or a spatial explicit map.
 
 ```xml
 <textvar name="LivestockConsumptiveUseFraction" value="0.15">
@@ -264,7 +263,6 @@ The total amount of water supplied by non-conventional sources is:
 The total amount of water to be abstracted by surface water bodies is:
 <br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater + LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater + RiceIrrigationAbstractionSurfaceWater*
 
-
 The *TotalWaterAbstractionFromSurfaceWater* is extracted within *water regions*. These regions are introduced in LISFLOOD due to allow the realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, the abstraction of surface water from the local 0.5x0.5 degree pixel is a reasonable representation of the real process. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area icluding the locations of water demand and abstraction.
 
 *Water regions* are generally defined by sub-river-basins within a Country. In order to mimick reality, it is advisable to avoid cross-Country-border abstractions. Whenever information is available, it is strongly recommended to align the *water regions* with the actual areas managed by water management authorities, such as regional water boards. In Europe, the River Basin Districts, as defined in the Water Framework Directive and subdivided by country, can be used.
@@ -288,11 +286,9 @@ The volume which is actually abstracted from lakes and reservoirs within a *wate
 <br>*WaterAbstractedLakesReservoirs = min (TotalAvailableVolumeLakesReservoirs , <br>
 FractionLakeReservoirWaterUsed * TotalAbstractionFromSurfaceWater)*
 
-
 The quantities below are then subtracted from the [lake storage](https://ec-jrc.github.io/lisflood-model/3_02_optLISFLOOD_lakes/) and the [reservoir storage](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/):
 <br>*WaterAbstractedLakes = WaterAbstractedLakesReservoirs/TotalAvailableVolumeLakesReservoirs * AvailableVolumeLakes*
 <br>*WaterAbstractedReservoirs = WaterAbstractedLakesReservoirs/TotalAvailableVolumeLakesReservoirs * AvailableVolumeReservoirs*
-
 
 
 ##### Surface water abstraction from rivers, and environmental flow
