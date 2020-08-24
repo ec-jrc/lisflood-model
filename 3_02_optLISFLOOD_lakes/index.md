@@ -35,44 +35,45 @@ Where:
    <br>$S_1$: Lake storage at time 1 ($t$)
    <br>$S_2$: Lake storage at time 2 ($t+\Delta t$)
 
-Simply stated, the change in storage is equal to inflow minus outflow. To solve this equation you need to know the lake storage curve S=f(h) and the rating curve Q=f(h). Lake storage and discharge have to be linked to each other by the water level (see figure).
+Simply stated, the change in storage is equal to inflow minus outflow. To solve this equation you need to know the lake storage curve S=f(h) and the rating curve Q=f(h). Lake storage and discharge have to be linked to each other by the water depth (see figure).
 
 ![Lake relations](../media/image62-resize.jpg)
 
-***Figure:*** *Relation between sea level, lake outflow and lake storage*
+***Figure:*** *Relation between water depth, lake outflow and lake storage*    **CHANGE THE y AXIS LABEL to "WATER DEPTH" **  
 
 
 
 #### Modified Puls Approach (see also Maniak, 1997)
 
-The modified Puls approach avoids iteration steps to solve the equation A3.1 by reforming the equation to:
+The modified Puls approach suggests to rewrite the equation above as follows:
 
 $$
-\frac{S_2}{\Delta t} + \frac{Q_{Out2}}{2}=\left (\frac{S_1}{\Delta t} + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}
+\frac{S_2}{\Delta t} + \frac{Q_{Out2}}{2}=\left (\frac{S_1}{\Delta t} - \frac{Q_{Out1}}{2}  \right )  + \frac{(Q_{In1} + Q_{In2})}{2}
 $$
 
 The right part of this equation can be solved because $S_1$, $Q_{Out1}$ and $Q_{In1}$ is given from the previous timestep and $Q_{In2}$ is the inflow to the lake at the current timestep.
 
 $$
-SI=\left (\frac{S_1}{\Delta t} + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}
+SI=\left (\frac{S_1}{\Delta t} - \frac{Q_{Out1}}{2}  \right )  + \frac{(Q_{In1} + Q_{In2})}{2}
 $$
 
-For the left part two assumptions are made here to simplify and fasten the
-modified Puls approach:
+For the left part two assumptions are made here to simplify and speed up the solution of the modified Puls approach:
 
 1.  The outflow of the lake is based on a modification of the weir equation of Poleni (Bollrich & Preißler, 1992)
-    $Q=\mu c b \sqrt{2g}\cdot H^{\frac{3}{2}}$ (Poleni weir equation fro rectangular weir)
-    Assuming the weir is not rectangular but is a parabola we can simplify this to: $Q=\alpha\cdot H^2$
+    $Q=\mu c b \sqrt{2g}\cdot H^{\frac{3}{2}}$ (Poleni weir equation for rectangular weir)
+    Assuming the weir is not rectangular but parabolic we can simplify this to: $Q=\alpha\cdot H^2$
     where:
-      <br>$Q$:  outflow discharge
-      <br>$H$:  sea level
-      <br>$\alpha$: parameter of channel width, gravity and weir coefficient
+      <br>$Q$:  outflow discharge,
+      <br>$H$:  lake water depth,
+      <br>$\alpha$: parameter of channel width, gravity and weir coefficient.
+
+The parameter $\alpha$ is used as calibration coeffient. Specifically,$\alpha$ is computed as follows: $$\alpha = \alpha_1 \cdot \alpha{Mult}$$, where        $\alpha_1$ is a first estimate of the value of $\alpha$ **(often equal to the width of the lake outlet)** and $\alpha{Mult}$ is defined during the calibration.
       
 2.  The best approach for a sea level vs. lake storage function would be a lookup table. For a simpliefied approach a linear realation is assumed: $S=A\cdot H$
     where:
       <br>$S$:  lake storage
       <br>$A$:  lake area
-      <br>$H$:  sea level
+      <br>$H$:  lake water depth
 
 Therefore:
 
@@ -83,14 +84,14 @@ $$
 replacing: $H = \sqrt{\frac{Q_{Out2}}{\alpha}}$
 
 The equation above can be solved as a quadratic equation for $Q_{Out2}$.
-
+to fasten
 $$
 Q_{Out2} = \left ( -LakeFactor+\sqrt{LakeFactor^2 + 2\cdot SI}\right )^2
 $$
 
 Where:
    <br>$LakeFactor = \frac{A}{\Delta t \cdot \sqrt{\alpha}}$
-   <br>$SI = \left (S1 + \frac{Q_{Out1}}{2}  \right )  - Q_{Out1} + \frac{(Q_{In1} + Q_{In2})}{2}$
+   <br>$SI = \left (\frac{S_1}{\Delta t} - \frac{Q_{Out1}}{2}  \right )  + \frac{(Q_{In1} + Q_{In2})}{2}$
 
 
 
@@ -102,7 +103,7 @@ Because lakes (especially large ones) tend to produce a relatively slow response
 
 2.  If `LakeInitialLevelValue` is set to `-9999` the initial lake level will be calculated from a steady-state net-lake inflow \[$m^3/s$\]. The steady-state net-lake inflow is given by a table called '*TabLakeAvNetInflowEstimate*'.
 
-Inb this table, the average net inflow ($=I_l - EW_l$) is listed. The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
+In this table, the average net inflow ($=I_l - EW_l$) is listed. The average net inflow can be estimated using measured discharge and evaporation records. If measured discharge is available just *downstream* of the lake (i.e. the *outflow*), the (long-term) average outflow can be used as the net inflow estimate (since, for a steady state situation, inflow equals outflow). If only inflow is available, all average inflows should be summed, and the average lake evaporation should be subtracted from this figure.
 
 Here a worked example. Be aware that the calculation can be less straightforward for very large lakes with multiple inlets (which are not well represented by the current point approach anyway):
    

@@ -12,13 +12,18 @@ This page describes the LISFLOOD inflow hydrograph routine, and how it is used. 
 
 ### Description of the inflow hydrograph routine
 
-When using the inflow hydrograph option, time series of discharge $[\frac{m^3}{s}]$ are added at some user-defined location(s) on the channel network. The inflow is added as side-flow in the channel routing equations (this works for both kinematic and dynamic wave). *Negative* inflows (i.e. outflows) are also possible, but large outflow rates may sometimes result in numerical problems in the routing equations. If you use a negative inflow rate, we advise to carefully inspect the model output for any signs of numerical problems (i.e. strange oscillations in simulated discharge, generation of missing values). Also check the mass balance time series after your simulation (numerical problems often result in unusually large mass balance errors).
+When using the inflow hydrograph option, time series of discharge $[\frac{m^3}{s}]$ are added at some user-defined location(s) on the channel network. The inflow is added as side-flow in the channel routing equations (this works for both kinematic and split routing). *Negative* inflows (i.e. outflows) are also possible, but have never been verified.
 
+In order to activate the inflow points, LISFLOOD needs a map that defines where we want to add the inflow, and a time series with the corresponding inflow rates.
 
+Inflow map can be a netCDF map or a PCRaster map. It must contain inflow points IDs as integer numbers. Any ID can be used, ID numbers can be consecutive or not.
 
-### Using inflow hydrographs 
+Time series file are ascii formatted time series that contain inflow values formatted in rows and columns (tss file format). The inflow values in a row are assigned to the cells in the inflow map according to the unique ID that is used in both the tss file and the inflow map. Tss files produced as output by LISFLOOD can be used as inflow tss.
 
-The table below lists the input requirements for the inflow hydrograph option. All you need is a map that defines where you want to add the inflow, and a time series with the corresponding inflow rates.
+If an inflow ID from inflow map is not available in the tss file, the inflow point is automatically removed and a warning message is printed. Tss files can contain more columns than the number of inflow points in the inflow map.
+
+Tss files with no header can also be used. In this case, tss columns are number progressively and IDs from 1 to the number of columns in the tss file must be used in the inflow map.
+
 
 ***Table:*** *Input requirements inflow hydrograph routine.*                                                                     
 
@@ -32,11 +37,11 @@ The table below lists the input requirements for the inflow hydrograph option. A
 
 Using the inflow hydrograph option involves **four steps**:
 
-1) Create a (nominal) PCRaster map with unique identifiers that point to the location(s) where you want to insert the inflow hydrograph(s)
+1) Create a (nominal) map with unique identifiers that point to the location(s) where you want to insert the inflow hydrograph(s)
 
-2) Save the inflow hydrograph(s) in PCRaster time series format; inflow hydrographs need to be given in $[\frac{m^3}{s}]$
+2) Save the inflow hydrograph(s) in time series format; inflow hydrographs need to be given in $[\frac{m^3}{s}]$
 
-<u>IMPORTANT:</u> PCRaster assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the InflowPoints map; the second series to unique identifier 2, and so on. So, even if your InflowPoints map only contains (as an example) identifiers 3 and 4, you still need to include the columns for identifiers 1 and 2!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at t=1, even if you set StepStart to some higher value. For more info on time series files please have a look at the PCRaster documentation.
+<u>IMPORTANT:</u> when using PCRaster format, you must remember that PCRASTER assumes that the first data series in the time series file (i.e. the second column, since the first column contains the time step number) corresponds to unique identifier 1 on the InflowPoints map; the second series to unique identifier 2, and so on. So, even if your InflowPoints map only contains (as an example) identifiers 3 and 4, you still need to include the columns for identifiers 1 and 2!! The best thing to do in such a case is to fill any unused columns with zeroes (0). Also, your inflow hydrograph time series should always start at t=1, even if you set StepStart to some higher value. For more info on time series files please have a look at the [PCRaster documentation](https://pcraster.geo.uu.nl/pcraster/4.3.0/documentation/pcraster_manual/sphinx/secdatbase.html).
 
 3) Make sure that the names of the map and time series are defined in the settings file
 
@@ -85,6 +90,7 @@ One of the most common uses of the inflow hydrograph option is this: suppose we 
 
 
 ![inflow hydrograph](../media/image46-resize.png)
+
 ***Figure:*** *Using the inflow hydrograph using measured discharge of subcatchment A. MaskMap must have boolean(0) (or missing value) for subcatchment A, see text below for explanation.*
 
 
@@ -100,6 +106,7 @@ First, make sure that subcatchment *A* is *excluded* (i.e. have boolean(0) or mi
 If you already have all gauge locations on a map, these mostly cannot be used directly as inflow hydrograph locations. The reason is simple: suppose --in our previous example-- we know the outflow point of subcatchment *A*. This point is the most downstream point within that subcatchment. However, the flow out of subcatchment *A* is actually added to the main river one cell downstream! Also, if we exclude subcatchment *A* from our simulation (as explained in the foregoing), this means we also exclude the outflow point of that subcatchment. Because of this, *inflow* points into the main river are usually located
 one pixel downstream of the *outflow* points of the corresponding subcatchment. 
 If you already have a (nominal) map of of your subcatchments, we have an utility that automatically calculates the corresponding out- and inflow points.
+
 
 
 [🔝](#top)

@@ -17,11 +17,9 @@ Although there are a wide variety of hydrological models that are suitable for e
 
 
 LISFLOOD has been specifically developed to satisfy these requirements. The model is designed to be applied across a wide range of spatial and temporal scales. 
-
-
 LISFLOOD is grid-based, and applications so far have employed grid cells of as little as 100 metres (for medium-sized catchments), to 5,000 metres for modelling the whole of Europe and up to 0.1° (around 10 km) for modelling on a global scale. 
 
 
-Long-term water balance can be simulated (using a daily time step), as can individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". 
+LISFLOOD can simulate long-term water balance (using a daily time step), as well as individual flood events (using hourly time intervals, or even smaller). The output of a "water balance run" can be used to provide the initial conditions of a "flood run". 
 
 Although the model's primary output product is channel discharge, all internal rate and state variables (soil moisture, for example) can also be written as output. In addition, all output can be written as grids, or time series at user-defined points or areas. The user has complete control over how output is written, thus minimising any waste of disk space or CPU time.
