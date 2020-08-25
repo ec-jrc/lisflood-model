@@ -86,7 +86,7 @@ The leakage volume is then computed as follows:
 <br>*Leakage = (DomesticLeakageConstant - 1) * DomesticDemand * DomesticSavingConstant*
 
 The input value *LeakageLossFraction* allows to compute the leakage volume which is lost because of evaporation:
-<br>*LeakageEvaporated = Leakage \cdot LeakageLossFraction*
+<br>*LeakageEvaporated = Leakage * LeakageLossFraction*
 
 Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the *DomesticConsumptiveUseFraction*, its value varies between 0 and 1 and it is provided as input data.
 
@@ -174,8 +174,8 @@ Crop irrigation water demand is assumed equal to the difference between potentia
 <br>$T_{a,irrig} = \min (T_a, w_1 - w_{wp1})$
 <br>where $w_1$ and $w_{wp1}$ are the amount of water available and at wilting point, respectively. Root water uptake depletes the soil moisture of the superficial (1a) and upper (1b) soil layers. 
 
-$CropIrrigationDemand$ is then computed by:
-<br>$CropIrrigationDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult$
+*CropIrrigationDemand* is then computed by:
+<br>*CropIrrigationDemand =* $( T_{max} - T_{a,irrig} ) \cdot IrrigationMult$
 <br>where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
 
 *CropIrrigationAbstraction* is larger than *CropIrrigationDemand* in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the *IrrigationEfficiency* and the *ConveyanceEfficiency*. Both these factors can vary between 0 and 1, the values are required as input data. For example, *IrrigationEfficiency* is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; *ConveyanceEfficiency* is ~0.80 for a common type channel. *CropIrrigationAbstraction* is the computed as follows:
