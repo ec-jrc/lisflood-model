@@ -73,9 +73,9 @@ The actual water consumption of the domestic sector is much less than the abstra
 ```
 
 So, the actual: 
-<br>*DomesticConsumption = DomesticConsumptiveUseFraction * dom*
-<br>*DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) * dom*
-<br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * DomesticLeakageConstant*
+<br>*DomesticConsumption = DomesticConsumptiveUseFraction * dom.nc*
+<br>*DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) * dom.nc*
+<br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * DomesticLeakageConstan*
 
 where 
 * *DomesticSavingConstant = 1 - WaterSavingFraction* and *WaterSavingFraction* accounts for water saving strategies implemented by the households (and not included in the current use scenario).
@@ -126,7 +126,7 @@ The manufucaturing industry also required water for their processing, much depen
 The amount of water that needs to be abstracted to comply with the demand of the manufacturing industry (*IndustrialAbstraction*) is often lower than the actual demand (*IndustrialDemand*) as part of the water is re-used within the industrial processes. The *WaterReUseFraction* is provided as inpout data, its value varies between 0 and 1 (for instance, a value of 0.5 indicates that half of the water is re-used, that is, used twice). The *IndustrialAbstraction*  is then computed as follows:
 <br>*IndustrialAbstraction = IndustrialDemand * (1 - WaterReUseFraction)*
 
-An $IndustrialConsumptiveUseFraction$ is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
+An *IndustrialConsumptiveUseFraction* is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
 ```xml
 <textvar name="IndustrialConsumptiveUseFraction" value="0.15">
@@ -135,7 +135,7 @@ Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
 </comment>
 </textvar>
 ```
-The $IndustrialWaterConsumptiveUse$ is the computed as follows:
+The *IndustrialWaterConsumptiveUse* is the computed as follows:
 <br>*IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction * IndustrialConsumptiveUseFraction*
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
@@ -181,7 +181,7 @@ $CropIrrigationDemand$ is then computed by:
 *CropIrrigationAbstraction* is larger than *CropIrrigationDemand* in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the *IrrigationEfficiency* and the *ConveyanceEfficiency*. Both these factors can vary between 0 and 1, the values are required as input data. For example, *IrrigationEfficiency* is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; *ConveyanceEfficiency* is ~0.80 for a common type channel. *CropIrrigationAbstraction* is the computed as follows:
 <br>*CropIrrigationAbstraction = (CropIrrigationDemand)/(IrrigationEfficiency * ConveyanceEfficiency)*
 
-If the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThreshold$), *CropIrrigationDemand* is set to 0.
+If the soil is frozen (i.e. the [$FrostIndex$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is larger than the $FrostIndexThreshold$), *CropIrrigationDemand* is set to 0.
 
 
                    
@@ -190,11 +190,12 @@ If the soil is frozen (i.e. the $FrostIndex$ is larger than the $FrostIndexThres
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or it is derived from unconventional sources, typically desalination.  
 
 The sub-division in these three sources is achieved by creating and using the following maps:
--   fracgwused.nc (values between 0 and 1) ($FractionGroundwaterUsed$)
--   fracncused.nc (values between 0 and 1) ($FractionNONconventionalSourcesUsed$)
+-   fracgwused.nc (values between 0 and 1) is *FractionGroundwaterUsed*
+-   fracncused.nc (values between 0 and 1) is *FractionNONconventionalSourcesUsed*
 
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water.
 Specifically, *DomesticConsumpttiveUse*, *IndustrialConsumpttiveUse*, and *LivestockConsumpttiveUse* can be supplied by groundwater, non-conventional water sources, and surface water. Water resources allocation is computed as follows:
+
 <br>*DomesticAbstractionGW = FractionGroundwaterUsed * DomesticWaterConsumptiveUse*
 <br>*DomesticAbstractionNONconv= FractionNONconventionalSourcesUsed * DomesticWaterConsumptiveUse*
 <br>*DomesticAbstractionSurfaceWater = DomesticWaterConsumptiveUse - DomesticWaterAbstractionGW  - DomesticAbstractionNONconv*
@@ -210,8 +211,8 @@ Specifically, *DomesticConsumpttiveUse*, *IndustrialConsumpttiveUse*, and *Lives
 <br>*EnergyConsumpttiveUse* is supplied exclusively by surface water: 
 <br>*EnergyAbstractionSurfaceWater = EnergyConsumptiveUse*.
 
-<br>*CropIrrigationibstraction$ is supplied by groundwater and surface water:
-<br>*CropIrrigationAbstractionGW = FractionGroundwaterUsed * CropIrrigationAbstraction$
+<br>*CropIrrigationibstraction* is supplied by groundwater and surface water:
+<br>*CropIrrigationAbstractionGW = FractionGroundwaterUsed * CropIrrigationAbstraction*
 <br>*CropIrrigationAbstractionSurfaceWater = CropIrrigationAbstraction - CropIrrigationAbstractionGW*.
 
 [$RiceIrrigationAbstractionSurfaceWater$](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/) is supplied exclusively by surface water.
@@ -227,7 +228,7 @@ The total amount of water that is required from groundwater resources is:
 
 LISFLOOD subtracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to extend the monitoring period to at least a decade.
 
-The total amount of water that is required from groundwater resources is compared to the amount of water that is actually available in the Lower Zone. If the water storage in the lower groundwater zone  decreases below the value $LZThreshold$ [mm], the flow from the lower zone to the nearby rivers (base-flow) stops. When sufficient recharge is added to raise the lower zone levels above the threshold, base-flow starts again. This mimics the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and base-flow is reduced. The value $$LZThreshold$$ has to be found via calibration. Note that keeping large negative values makes sure that there is always baseflow.
+The total amount of water that is required from groundwater resources is compared to the amount of water that is actually available in the Lower Zone. If the water storage in the lower groundwater zone  decreases below the value $LZ_{Threshold}$ [mm], the flow from the lower zone to the nearby rivers (base-flow) stops. When sufficient recharge is added to raise the lower zone levels above the threshold, base-flow starts again. This mimics the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and base-flow is reduced. The value $LZ_{Threshold}$ has to be found via calibration. Note that keeping large negative values makes sure that there is always baseflow.
 
 ```xml
 <textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.map">
@@ -269,7 +270,7 @@ The *TotalWaterAbstractionFromSurfaceWater* is extracted within *water regions*.
 
 ##### Surface water abstractions from lakes and reservoirs
 
-Lakes and reservoirs within a *water region* can supply part of the surface water abstraction.  The parameter $FractionLakeReservoirWaterUsed$ defines the fraction of surface water abstraction which should be supplied by lakes and reservoirs. TThe value of this parameter (between 0 and 1) is provided in input to the model.
+Lakes and reservoirs within a *water region* can supply part of the surface water abstraction.  The parameter *FractionLakeReservoirWaterUsed* defines the fraction of surface water abstraction which should be supplied by lakes and reservoirs. The value of this parameter (between 0 and 1) is provided in input to the model.
 
 LISFLOOD then computes the available water volume in lakes and reservoirs. **The available water volume of a lake is defined equal to the 10% of its total volume storage**. **The available water volume in a reservoir is assumed equal to the minimum between the 1% of its [total storage capacity](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) and the 2% of the volume [stored in the reservoir](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) at the computational time step.**  These conditions are imposed to constantly preserve a 'reasonable' amount of water in reservoirs and lakes. The total water volume which can be potentially abstracted from reservoirs and lakes is then:
 <br>*TotalAvailableVolumeLakesReservoirs = AvailableVolumeLakes + AvailableVolumeReservoirs*
@@ -317,7 +318,7 @@ where $WUsePercRemain$ is the percentage of water which always remains in the ch
 The amount of water extracted from the rivers is:
 <br>*WaterAbstractedFromChannels = min (AvailableVolumeChannel , WaterToBeAbstractedChannels)*
 
-A condition in which $$WaterAbstractedFromChannels \lt WaterToBeAbstractedChannels$$ means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the *WaterUseShortage* and it is quantified as follows:
+A condition in which *WaterAbstractedFromChannels* is lower than *WaterToBeAbstractedChannels* means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the *WaterUseShortage* and it is quantified as follows:
 <br>*WaterUseShortage =  WaterToBeAbstractedChannels - WaterToBeAbstractedChannels*
 
 In condition of water scarcity, water uses are satisfied according to the following order of importance: domestic, energetic, livestock, industry, and irrigation. The latter sentence implies that when *WaterUseShortage*  $\gt 0$, LISFLOOD reduces the water volume delivered to the irrigated fields. Specifically, the amount *WaterUseShortage* is subtracted from the total amount of water required from surface water bodies by crops and paddy rice, meaning that the total amount of water effectively supplied to the irrigated fields (*IrrigationWater*) is:
@@ -333,7 +334,7 @@ $$
 where $w_{crit,1a}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1a}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa).
 The remainder amount of water (if any) is then added to the upper soil layer ($w_{1b}$). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
 
-In order to check the conservation of mass within the modelled system, LISFLOOD computes the amount of water consumed by irrigation $IrriLossCum$ (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors $IrrigationEfficiency$ and $ConveyanceEfficiency$), the resulting water content of the superficial and upper soil layers.
+In order to check the conservation of mass within the modelled system, LISFLOOD computes the amount of water consumed by irrigation *IrriLossCum* (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors *IrrigationEfficiency* and *ConveyanceEfficiency*), the resulting water content of the superficial and upper soil layers.
 
 
 ### Transient or constant water demand
