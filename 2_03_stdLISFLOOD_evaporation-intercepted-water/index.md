@@ -22,3 +22,4 @@ D_{int} = \frac{1}{T_{int}} \cdot Int_{cum} \cdot \Delta t
 $$
 
 where $D_{int}$ is the amount of leaf drainage per time step $[mm]$ and $T_{int}$ is a time constant (or residence time) of the interception store $[days]$.  $T_{int}$ can be defined by the user, however, a value of $1 [day]$ is strongly recommended. Setting $T_{int}=1 [day]$ means that all the water in the interception store $Int_{cum}$ evaporates or falls to the soil surface as leaf drainage within one day.
+

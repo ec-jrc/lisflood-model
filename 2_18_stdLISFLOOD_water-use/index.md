@@ -127,6 +127,7 @@ The manufucaturing industry also required water for their processing, much depen
 The amount of water that needs to be abstracted to comply with the demand of the manufacturing industry (*IndustrialAbstraction*) is often lower than the actual demand (*IndustrialDemand*) as part of the water is re-used within the industrial processes. The *WaterReUseFraction* is provided as inpout data, its value varies between 0 and 1 (for instance, a value of 0.5 indicates that half of the water is re-used, that is, used twice). The *IndustrialAbstraction*  is then computed as follows:
 <br>*IndustrialAbstraction = IndustrialDemand * (1 - WaterReUseFraction)*
 
+
 An $IndustrialConsumptiveUseFraction$ is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
 ```xml
@@ -136,9 +137,11 @@ Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
 </comment>
 </textvar>
 ```
+The $IndustrialWaterConsumptiveUse$ is the computed as follows:
 
-The *IndustrialConsumptiveUse* is the computed as follows:
-<br>*IndustrialConsumptiveUse = IndustrialAbstraction * IndustrialConsumptiveUseFraction*
+$$
+IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction \cdot IndustrialConsumptiveUseFraction 
+$$
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
@@ -163,6 +166,7 @@ So, the actual:
 The *LivestockAbstraction* is assumed equal to the *LivestockDemand*.
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
+
 
 ##### Water usage for crop irrigation
 
@@ -254,6 +258,7 @@ When groundwater is abstracted for usage, it typically could cause a local dip i
 Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined using the factor $FractionNONconventionalSourcesUsed$. 
 It is assumed that the non-conventional water demand is always available. It is abstracted for a 100%, so no losses are accounted for.
 The total amount of water supplied by non-conventional sources is:
+
 <br>*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + IndustrialAbstractioNONconv + LivestockAbstractionNONconv* 
 
 
@@ -300,6 +305,7 @@ The remaining water abstraction volume is demanded to the rivers. The amount of 
 *WaterToBeAbstractedChannels* is withdrawn from discharge in the river network within the same *water region*. Moreoever, since the exact locations of abstractions are typically not known, river water abstractions are assumed to be homogeneously distributed within the *water region*.
 
 River discharge at aech time step $Q_{ch}$ is computed by the [routing module](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/). 
+
 A minum amount of water must always flow in a river. This value is the *environmental flow threshold* ($EFlowThreshold$) and it is imposed by the user in the settingsfile:
 
 ```xml
@@ -322,6 +328,7 @@ $$
 where $WUsePercRemain$ is the percentage of water which always remains in the channel. This value (between 0 and 1) is defined by the user.
 
 The amount of water extracted from the rivers is:
+
 <br>*WaterAbstractedFromChannels = min (AvailableVolumeChannel , WaterToBeAbstractedChannels)*
 
 A condition in which $$WaterAbstractedFromChannels \lt WaterToBeAbstractedChannels$$ means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the *WaterUseShortage* and it is quantified as follows:

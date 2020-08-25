@@ -33,6 +33,7 @@ where
   *  $TempMelt$ is the average temperature at which snow melts $[°C]$, and
   *  $\Delta t$ is the time interval $[days]$. $\Delta t$ can be $<1 day$.
 
+
 $TempMelt$ can be defined by the user, the value $TempMelt = 1^\circ C$ is recommended.
 It must be stressed that the value of $C_m$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __in practice this parameter is used as calibration parameter__. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 
@@ -42,6 +43,7 @@ It must be stressed that the value of $C_m$ can vary greatly both in space and t
     the amount of net solar radiation
 
 The following Figure shows an example where a mean value $C_m = 3.0 \frac{mm}{^\circ C \cdot day}$ is modulated using $C_{Seasonal}$. The value of $C_m$ is reduced by $0.5$ at $21^{st}$ December and a $0.5$ is added on the $21^{st}$ June. In between a sinus function is applied. It is noted that this example refers to the Northern emisphere (LISFLOOD clearly accounts for the different seasons in the Northern and Southern Hemisphere).
+
 
 ![snow melt coefficient](../media/image7.jpg) 
 
