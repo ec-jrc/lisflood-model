@@ -6,6 +6,7 @@ Paddy-rice irrigation is simulated by a dedicated model subroutine which can be 
 <setoption choice="1" name="riceIrrigation"/>
 ```
 Water abstraction and return is computed differently during the following phases: soil preparation, planting, growth, and harvest. 
+
 * Soil saturation: it is assumed that the soil is saturated in 10 days, starting from 20 days before the planting day. The **daily** rice soil saturation demand is then computed as follows:
 <br>$RiceSaturationDemand = 0.1 \cdot (w_{s1} - w_1)+(w_{s2} - w_2) \cdot RiceFraction \cdot \Delta t$
 <br>where $w_{s1}$, $w_{s2}$ and $w_1$, $w_2$ are the maximum and actual amounts of moisture in the upper and lower soil layers, respectively (all in $[mm]$), and $RiceFraction is the fraction of a pixel used to grow rice (this value is suppllied as an input data).
@@ -31,6 +32,7 @@ $RiceEvaporationDemand$ is given by:
 
 $RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) according to the calendar day and they define the $RiceIrrigationWaterAbstraction$:
 <br>$RiceIrrigationSurfaceWaterAbstraction = RiceSaturationDemand + TotalRiceFloodingDemand + TotalRiceGrowingDemand$
+
 
 $RicePercolationWater$ and $RiceDrainageWater$ are [added to the upper groundwater layer UZ](https://ec-jrc.github.io/lisflood-model/2_13_stdLISFLOOD_groundwater/) according to the calendar day.
 

@@ -8,11 +8,13 @@ $$
 T_{max } = k_{crop} \cdot ET0 \cdot [1 - e^{( - \kappa_{gb} \cdot LAI)}] \cdot \Delta t - EW_{Int}
 $$
 
+
 where $k_{crop}$ is a crop coefficient, $ET0$ is the potential (reference) evapotranspiration rate $[\frac{mm}{day}]$, the constant $κ_{gb}$ is the extinction coefficient for global solar radiation \[-\], $LAI$ is the Leaf Area Index $[\frac{m^2}{m^2}]$, $EW_{Int}$ is the evaporation of intercepted water, and $\Delta t$ is the computational time step. 
 
 $k_{crop}$ is the ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop; its value is 1 for most vegetation types, except for some highly transpiring crops like sugarcane or rice. 
 
 > Note that the energy that has already been 'consumed' for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ([$EW_{Int}$](https://ec-jrc.github.io/lisflood-model/2_03_stdLISFLOOD_evaporation-intercepted-water/)). This is done in order to respect the overall energy balance. 
+
 
 The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
 
@@ -27,8 +29,10 @@ w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
 where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($Crop_{GroupNumber}$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
+
 <br>$p= \frac{1}{0.76 + 1.5 \cdot ET0} - 0.1 \cdot (5-Crop_{GroupNumber})$ when $Crop_{GroupNumber} \gt 2.5 $
 <br>$p= p + \frac{0.1 \cdot  ET0 - 0.6}{Crop_{GroupNumber}^2+3}$ when $Crop_{GroupNumber} \le 2.5 $
+
 
 $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. The following Figure illustrates the relation between $R_{WS}, w, w_{crit}, w_{wp}$:
 

@@ -23,3 +23,4 @@ $$
 where $R_d$ is the direct runoff (generated in the pixel's 'direct runoff fraction'). If the soil is frozen (*F* \> critical threshold) no infiltration takes place. 
 
 
+
