@@ -59,7 +59,6 @@ $(PathMaps)/leakage.map
 ```
 
 The leakage - typically only available as an average percentage per country - is then used to determine the required water abstraction:
-
 <br>*Domestic Water Abstraction = dom.nc * (1 + leakage.map)*
 
 The actual water consumption of the domestic sector is much less than the abstraction, and is defined by a fixed coefficient or a map if spatial differences are known:
@@ -127,7 +126,6 @@ The manufucaturing industry also required water for their processing, much depen
 The amount of water that needs to be abstracted to comply with the demand of the manufacturing industry (*IndustrialAbstraction*) is often lower than the actual demand (*IndustrialDemand*) as part of the water is re-used within the industrial processes. The *WaterReUseFraction* is provided as inpout data, its value varies between 0 and 1 (for instance, a value of 0.5 indicates that half of the water is re-used, that is, used twice). The *IndustrialAbstraction*  is then computed as follows:
 <br>*IndustrialAbstraction = IndustrialDemand * (1 - WaterReUseFraction)*
 
-
 An $IndustrialConsumptiveUseFraction$ is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
 ```xml
@@ -138,10 +136,7 @@ Consumptive Use (1-Recycling ratio) for industrial water use (0-1)
 </textvar>
 ```
 The $IndustrialWaterConsumptiveUse$ is the computed as follows:
-
-$$
-IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction \cdot IndustrialConsumptiveUseFraction 
-$$
+<br>*IndustrialWaterConsumptiveUse = IndustrialWaterAbstraction * IndustrialConsumptiveUseFraction*
 
 It is here noted that the return flow is given by the difference between the water abstraction and the water consumptive use.
 
@@ -177,11 +172,11 @@ Crop irrigation and paddy-rice irrigation are simulated using seperate model sub
 ```
 Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
 <br>$T_{a,irrig} = \min (T_a, w_1 - w_{wp1})$
-where $w_1$ and $w_{wp1}$ are the amount of water available and at wilting point, respectively. Root water uptake depletes the soil moisture of the superficial (1a) and upper (1b) soil layers. 
+<br>where $w_1$ and $w_{wp1}$ are the amount of water available and at wilting point, respectively. Root water uptake depletes the soil moisture of the superficial (1a) and upper (1b) soil layers. 
 
 $CropIrrigationDemand$ is then computed by:
 <br>$CropIrrigationDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult$
-where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
+<br>where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
 
 *CropIrrigationAbstraction* is larger than *CropIrrigationDemand* in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the *IrrigationEfficiency* and the *ConveyanceEfficiency*. Both these factors can vary between 0 and 1, the values are required as input data. For example, *IrrigationEfficiency* is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; *ConveyanceEfficiency* is ~0.80 for a common type channel. *CropIrrigationAbstraction* is the computed as follows:
 <br>*CropIrrigationAbstraction = (CropIrrigationDemand)/(IrrigationEfficiency * ConveyanceEfficiency)*
@@ -200,21 +195,17 @@ The sub-division in these three sources is achieved by creating and using the fo
 
 Next, LISFLOOD automatically assumes that the remaining water (1-fracgwused-fracncused) is derived from various sources of surface water.
 Specifically, *DomesticConsumpttiveUse*, *IndustrialConsumpttiveUse*, and *LivestockConsumpttiveUse* can be supplied by groundwater, non-conventional water sources, and surface water. Water resources allocation is computed as follows:
-
 <br>*DomesticAbstractionGW = FractionGroundwaterUsed * DomesticWaterConsumptiveUse*
 <br>*DomesticAbstractionNONconv= FractionNONconventionalSourcesUsed * DomesticWaterConsumptiveUse*
-<br>*DomesticAbstractionSurfaceWater = DomesticWaterConsumptiveUse - DomesticWaterAbstractionGW  +<br>
-- DomesticAbstractionNONconv*
+<br>*DomesticAbstractionSurfaceWater = DomesticWaterConsumptiveUse - DomesticWaterAbstractionGW  - DomesticAbstractionNONconv*
 
 <br>*IndustrialAbstractionGW = FractionGroundwaterUsed * IndustrialConsumptiveUse*
 <br>*IndustrialAbstractionNONconv= FractionNONconventionalSourcesUsed * IndustrialConsumptiveUse*
-<br>*IndustrialAbstractionSurfaceWater = IndustrialConsumptiveUse - IndustrialAbstractionGW +<br>
-- IndustrialbstractionNONconv*
+<br>*IndustrialAbstractionSurfaceWater = IndustrialConsumptiveUse - IndustrialAbstractionGW - IndustrialbstractionNONconv*
 
 <br>*LivestockAbstractionGW = FractionGroundwaterUsed * LivestockConsumptiveUse*
 <br>*LivestockAbstractionNONconv= FractionNONconventionalSourcesUsed * LivestockConsumptiveUse*
-<br>*LivestockAbstractionSurfaceWater = LivestockConsumptiveUse - LivestockAbstractionGW +<br> 
-- LivestockAbstractionNONconv*
+<br>*LivestockAbstractionSurfaceWater = LivestockConsumptiveUse - LivestockAbstractionGW - LivestockAbstractionNONconv*
 
 <br>*EnergyConsumpttiveUse* is supplied exclusively by surface water: 
 <br>*EnergyAbstractionSurfaceWater = EnergyConsumptiveUse*.
@@ -222,7 +213,6 @@ Specifically, *DomesticConsumpttiveUse*, *IndustrialConsumpttiveUse*, and *Lives
 <br>*CropIrrigationibstraction$ is supplied by groundwater and surface water:
 <br>*CropIrrigationAbstractionGW = FractionGroundwaterUsed * CropIrrigationAbstraction$
 <br>*CropIrrigationAbstractionSurfaceWater = CropIrrigationAbstraction - CropIrrigationAbstractionGW*.
-
 
 [$RiceIrrigationAbstractionSurfaceWater$](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/) is supplied exclusively by surface water.
 
@@ -262,7 +252,6 @@ The total amount of water supplied by non-conventional sources is:
 <br>*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + IndustrialAbstractioNONconv + LivestockAbstractionNONconv* 
 
 
-
 ##### Surface water abstractions and water regions
 
 The total amount of water to be abstracted by surface water bodies is:
@@ -288,8 +277,7 @@ LISFLOOD then computes the available water volume in lakes and reservoirs. **The
 It is here reminded that all the lakes and reservoirs within the same *water region* as the water demand are considered for the computation of the available water volume.
 
 The volume which is actually abstracted from lakes and reservoirs within a *water region* is then given by:
-<br>*WaterAbstractedLakesReservoirs = min (TotalAvailableVolumeLakesReservoirs , <br>
-FractionLakeReservoirWaterUsed * TotalAbstractionFromSurfaceWater)*
+<br>*WaterAbstractedLakesReservoirs = min (TotalAvailableVolumeLakesReservoirs , FractionLakeReservoirWaterUsed * TotalAbstractionFromSurfaceWater)*
 
 The quantities below are then subtracted from the [lake storage](https://ec-jrc.github.io/lisflood-model/3_02_optLISFLOOD_lakes/) and the [reservoir storage](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/):
 <br>*WaterAbstractedLakes = WaterAbstractedLakesReservoirs/TotalAvailableVolumeLakesReservoirs * AvailableVolumeLakes*
@@ -299,7 +287,6 @@ The quantities below are then subtracted from the [lake storage](https://ec-jrc.
 ##### Surface water abstraction from rivers, and environmental flow
 
 The remaining water abstraction volume is demanded to the rivers. The amount of water that *should be* extracted from the rivers is computed by:
-
 <br>*WaterToBeAbstractedChannels = TotalAbstractionFromSurfaceWater - WaterAbstractedLakesReservoirs*
 
 *WaterToBeAbstractedChannels* is withdrawn from discharge in the river network within the same *water region*. Moreoever, since the exact locations of abstractions are typically not known, river water abstractions are assumed to be homogeneously distributed within the *water region*.
@@ -328,7 +315,6 @@ $$
 where $WUsePercRemain$ is the percentage of water which always remains in the channel. This value (between 0 and 1) is defined by the user.
 
 The amount of water extracted from the rivers is:
-
 <br>*WaterAbstractedFromChannels = min (AvailableVolumeChannel , WaterToBeAbstractedChannels)*
 
 A condition in which $$WaterAbstractedFromChannels \lt WaterToBeAbstractedChannels$$ means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the *WaterUseShortage* and it is quantified as follows:
