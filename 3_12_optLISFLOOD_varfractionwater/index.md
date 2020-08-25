@@ -26,15 +26,10 @@ $$
 
 $\Delta f_{water,i}$ represents the additional amount of water at month $i$ compared to the baseline in $f_{water}$ and it is the amount that needs to be removed from the other fractions in order to maintain the sum equal to 1.
 This is done iteratively removing fractions in order (first $f_{other}$, then $f_{forest}$, $f_{irrigation}$ and $f_{runoff}$)  until they reach $0$ or until $\Delta f_{water,i}$ runs out:
-
-$$
-\begin{array}{rlrl}
-f_{other,i}=&\!\!\! \max\left(f_{other} - \Delta f_{water,i}\right,0),& \epsilon_{other,i}=&\!\!\! \max(\Delta f_{water,i} - f_{other},0)\\
-f_{forest,i}=&\!\!\! \max\left(f_{forest} - \epsilon_{other,i}\right,0),& \epsilon_{forest,i}=&\!\!\! \max(\epsilon_{other,i} - f_{forest},0)\\
-f_{irrigation,i}=&\!\!\! \max\left(f_{irrigation} - \epsilon_{forest,i}\right,0),& \epsilon_{irrigation,i}=&\!\!\! \max(\epsilon_{forest,i} - f_{irrigation},0)\\ 
-f_{runoff,i}=&\!\!\! \max\left(f_{runoff} - \epsilon_{irrigation,i}\right,0),&&
-\end{array}
-$$
+<br>$f_{other,i}=\max(f_{other} - \Delta f_{water,i}),0)$ and $\epsilon_{other,i}= \max(\Delta f_{water,i} - f_{other},0)$
+<br>$f_{forest,i}=\max(f_{forest} - \epsilon_{other,i},0)$ and $\epsilon_{forest,i}=\max(\epsilon_{other,i} - f_{forest},0)$
+<br>$f_{irrigation,i}= \max(f_{irrigation} - \epsilon_{forest,i},0) $ and $\epsilon_{irrigation,i}= \max(\epsilon_{forest,i} - f_{irrigation},0)$
+<br>$f_{runoff,i}= \max(f_{runoff} - \epsilon_{irrigation,i},0)$
 
 Where, for each land type $k$:
    <br> $f_{k,i}$ is the fraction of land type $k$ at for month $i$;

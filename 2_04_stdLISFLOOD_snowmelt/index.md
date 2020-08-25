@@ -2,8 +2,8 @@
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation into rain and snow. This distinction is controlled by the average temperature ($T_{avg}$). If $T_{avg}$ is below a threshold $TempSnow$, all the measured precipitation is assumed to be snow; the value $TempSnow = 1^\circ C$ is recommended. A snow correction factor $SnowFactor$ is then applied to correct for undercatch of snow precipitation. Undercatch in this context refers to the mismeasurement of snowfall by a precipitation measuement instrument. For instance, when using traditional rain gauges,wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
-* If $T_{avg} \lt TempSnow:   $Snow = SnowFactor \cdot Precipitation$
-* Else If $T_{avg} \ge TempSnow:   $Rain = Precipitation$
+* If $T_{avg} \lt TempSnow$:   $Snow = SnowFactor \cdot Precipitation$
+* Else If $T_{avg} \ge TempSnow$:   $Rain = Precipitation$
 
 Differently from rain, snow accumulates on the soil surface until it melts. The rate of snowmelt is estimated using a simple degree-day factor method. Degree-day factor type snow melt models usually take the following form (e.g. see WMO, 1986):
 
@@ -31,7 +31,8 @@ where
   * *R* is rainfall (not snow!) intensity $[\frac {mm}{day}]$,
   *  $T_{avg}$ is the average daily temperature $[°C]$, 
   *  $TempMelt$ is the average temperature at which snow melts $[°C]$, and
-  *  $\Delta t$ is the time interval $[days]$. $\Delta t$ can be <1 day.
+  *  $\Delta t$ is the time interval $[days]$. $\Delta t$ can be $<1 day$.
+
 
 $TempMelt$ can be defined by the user, the value $TempMelt = 1^\circ C$ is recommended.
 It must be stressed that the value of $C_m$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __in practice this parameter is used as calibration parameter__. A low value of $C_m$ indicates slow snow melt. $C_{Seasonal}$ is a seasonal variable melt factor which is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
@@ -41,7 +42,8 @@ It must be stressed that the value of $C_m$ can vary greatly both in space and t
 -   The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in
     the amount of net solar radiation
 
-The following Figure shows an example where a mean value $C_m = 3.0 $\frac{mm} {^\circ C \cdot day}$ is modulated using $C_{Seasonal}$. The value of $C_m$ is reduced by 0.5 at $21^{st}$ December and a 0.5 is added on the $21^{st}$ June. In between a sinus function is applied. It is noted that this example refers to the Northern emisphere (LISFLOOD clearly accounts for the different seasons in the Northern and Southern Hemisphere).
+The following Figure shows an example where a mean value $C_m = 3.0 \frac{mm}{^\circ C \cdot day}$ is modulated using $C_{Seasonal}$. The value of $C_m$ is reduced by $0.5$ at $21^{st}$ December and a $0.5$ is added on the $21^{st}$ June. In between a sinus function is applied. It is noted that this example refers to the Northern emisphere (LISFLOOD clearly accounts for the different seasons in the Northern and Southern Hemisphere).
+
 
 ![snow melt coefficient](../media/image7.jpg) 
 

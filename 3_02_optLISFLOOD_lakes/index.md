@@ -39,7 +39,7 @@ Simply stated, the change in storage is equal to inflow minus outflow. To solve 
 
 ![Lake relations](../media/image62-resize.jpg)
 
-***Figure:*** *Relation between water depth, lake outflow and lake storage*    **CHANGE THE y AXIS LABEL to "WATER DEPTH" **  
+***Figure:*** *Relation between water depth, lake outflow and lake storage*    
 
 
 

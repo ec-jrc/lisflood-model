@@ -23,7 +23,7 @@ where $n$ is Manning’s roughness coefficient and $P_{ch}$ is the wetted perime
 The term $q_{ch}$ (**sideflow**)  represents the runoff that enters the channel per unit channel length:
 
 $$
-q_{ch} = \frac{\sum Q_{sr} + \sum Q_{uz} + \sum Q_{lz} + Q_{in} + Q_{res} + Q_{lake} - Q_{polder} - totQchan_{abstr} - EvapChan }{L_{ch}}
+q_{ch} = \frac{\sum Q_{sr} + \sum Q_{uz} + \sum Q_{lz} + Q_{in} + Q_{res} + Q_{lake} - totQchan_{abstr} - EvapChan }{L_{ch}}
 $$
 
 Here, the positive sign indicates water volumes that are addded to the channel flow, conversely, the negative sign indicates water volumes that are removed from the channel. Each contribution (with both positive and negative sign) is defined hereafter. 
@@ -31,11 +31,11 @@ Here, the positive sign indicates water volumes that are addded to the channel f
 * $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the ['inflow hydrograph' option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_inflow-hydrograph/) is activated. 
 * $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the ['reservoir' option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_reservoirs/) is activated. 
 * $Q_{lake}$ is the water that flows out of a lake into the channel; by default its value is 0, unless the ['lake' option](https://ec-jrc.github.io/lisflood-model/3_02_optLISFLOOD_lakes/) is activated. 
-* *Q_{polder} represents the volume of water which is transferrred from the channel to the polders: it is very important to note that this option is not active yet for the kinematic wave routing. Q_{polder} is currenlty only activated for the dynamic wave routing, nevertheless, it is reported here to allow a complete description of all the contributions to the channel discharge.The computation is described in the chapter ['polder' option](https://ec-jrc.github.io/lisflood-model/3_04_optLISFLOOD_polder/)*. 
 * $totQchan_{abstr}$ is the total volume of water removed from the channel to respond to domestic, agricoltural, livestock, energetic, and industrial water demands. $totQchan_{abstr}$ is by default 0, unless the ['water use' option](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) is activated. 
 * $EvapChan$ is the volume of water that evaporates from the channel; its value is by default 0, unless the ['openwaterevapo' option](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/) is activated. The volume of potential evaporation from water surface per time step is given by the product of teh potential evaporation rate from an open water surface $EW0$ times the pixel water fraction $F_{water}$. $F_{water}$ can be constant or change every month ($ f_{water,i}$, with $i = 1,2,\ldots 12$), as detailed in the ['variable water fraction' chapter](https://ec-jrc.github.io/lisflood-model/3_12_optLISFLOOD_varfractionwater/). The actual evaporation form the channel cannot exceed the 90% of the channel discharge.
 
-$Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$, $Q_{res}$, $Q_{lake}$, $Q_{polder}$, $totQchan_{abstr}$, and $EvapChan$ are all expressed in **[$m^3]$ per time step**. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. 
+$Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$, $Q_{res}$, $Q_{lake}$, $totQchan_{abstr}$, and $EvapChan$ are all expressed in $[$m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. 
+
 
 In order to improve the model accuracy, the kinematic wave channel routing can be run using a smaller (user-defined) time-step than the overall simulation time-step ($\Delta t$).
 

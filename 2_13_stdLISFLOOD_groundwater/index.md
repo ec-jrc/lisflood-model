@@ -11,15 +11,15 @@ where $T_{uz}$ is the reservoir constant for the upper groundwater layer $[days]
 The amount of water stored in the upper zone $UZ$ is computed as follows:
 
 $$
-UZ = $D'{2,gw}$ + D_{pref,gw} - D_{uz,lz}
+UZ = D'{2,gw} + D_{pref,gw} - D_{uz,lz}
 $$
 
-where $D'{2,gw}$ is the flux from the lower soil layer to groundwater for this sub-step; $D_{pref,gw}$ is the amount of preferential flow per time step; D_{uz,lz} is the amount of **water that percolates from the upper to the lower zone**, all in $[mm]$.
+where $D'{2,gw}$ is the flux from the lower soil layer to groundwater for this sub-step; $D_{pref,gw}$ is the amount of preferential flow per time step; $D_{uz,lz}$ is the amount of **water that percolates from the upper to the lower zone**, all in $[mm]$.
 
 In areas with drained irrigation ($DrainedFraction$), the flux from the lower soil layer to groundwater $D'{2,gw}$ is directly delivered to the river channel, consequenlty, the computation of $UZ$ is modifies as follows:
 
 $$
-UZ = (1 - DrainedFraction) \cdot $D'{2,gw}$ + D_{pref,gw} - D_{uz,lz}
+UZ = (1 - DrainedFraction) \cdot D'{2,gw} + D_{pref,gw} - D_{uz,lz}
 $$
 
 In areas with flooded irrigation (e.g. rice crops), an additional amount of water is added to $UZ$ during the percolation and draining phases of the agricultural cycle ($RicePercolationeWater$ and $RiceDrainageWater$ are described in a [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/).
@@ -30,7 +30,7 @@ $$
 D_{uz,lz} = min (GW_{perc} \cdot \Delta t ,UZ)
 $$
 
-Here, $GW_{perc} \ [\frac{mm}{day}]$ is the maximum percolation rate from the upper to the lower groundwater zone. 
+Here, $GW_{perc} [\frac{mm}{day}]$ is the maximum percolation rate from the upper to the lower groundwater zone. 
                     
 The **outflow from the lower zone to the channel** is then computed by:
 
@@ -52,18 +52,18 @@ The amount of water defined by $GW_{loss}$ never rejoins the river channel and i
 
 LISFLOOD hence abstracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to monitor more on decadal periods.
 
-If $LZ$ (lower groundwater amount) decreases below a groundwater threshold value ($LZThreshold$), the baseflow  Q_{lz} from the lower groundwater zone to the nearby rivers is zero. When sufficient recharge is added again to raise the $LZ$ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced. $LZThreshold$ values are likely different for various (sub)river basins. 
+If $LZ$ (lower groundwater amount) decreases below a groundwater hold value ($LZ_{Threshold}$), the baseflow  Q_{lz} from the lower groundwater zone to the nearby rivers is zero. When sufficient recharge is added again to raise the $LZ$ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced. $LZ_{Threshold}$ values are likely different for various (sub)river basins. 
 
-The values of $T_{uz}$ ($[days]$), $T_{lz}$ ($[days]$), $GW_{perc}$ ($[\frac{mm}{day}]$), $GW_{loss}$ ($[\frac{mm}{day}]$), and $LZThreshold$ ($[mm]$) are obtained by calibration. To avoid spurious results, when $GW_{perc}$<$GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
+The values of $T_{uz}$ $[days]$, $T_{lz}$ $[days]$, $GW_{perc}$ $[\frac{mm}{day}]$, $GW_{loss}$ $[\frac{mm}{day}]$, and $LZ_{Threshold}$ $[mm]$ are obtained by calibration. To avoid spurious results, when $GW_{perc}$<$GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
 
 Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
-***Lower groundwater zone: steady state storage
+###**Lower groundwater zone: steady state storage**
 
 The computation of $D_{uz,lz}$ and $Q_{lz}$ then allows to model the response of the lower groundwater zone.
 Now, let’s do a simple numerical experiment: assuming that $D_{uz,lz}$ is a constant value, we can take some arbitrary initial value for $LZ$ and then simulate the development over LZ over time. The Figure below shows the results of two numerical experiments. In the upper Figure, we start with a very high initial storage (1500 mm). The inflow rate is fairly small (0.2 mm/day), and $T_{lz}$ is quite small as well (a small value leads to a quick responce and hence a relatively short residence time of the water in the lower zone). What is interesting here is that, over time, the storage evolves asymptotically towards a constant state. In the lower Figure, we start with a much smaller initial storage (50 mm), but the inflow rate is much higher (1.5 mm/day) and so is $T_{lz}$ (1000 days). Here we see an upward trend, again towards a constant value. However, in this case the constant ‘end’ value is not reached within the simulation period, which is mainly because $T_{lz}$ is set to a value for which the response is very slow. 
 
-<img src="https://github.com/StefaniaGrimaldi/lisflood-model/blob/StefaniaGrimaldi-irrigation_draft1/media/image39.png">
+<img src="../media/image39.png">
 
 **Figure** Two 10-year simulations of lower zone storage with constant inflow. Upper Figure: high initial storage, storage approaches steady-state storage
 (dashed) after about 1500 days. Lower Figure: low initial storage, storage doesn’t reach steady-state within 10 years.
@@ -76,22 +76,14 @@ $$
 $$
 
 where $I$ is the (time dependent) inflow (i.e. groundwater recharge) and $O$ is the outflow rate. For a situation where the storage remains constant, we can write:
-
-$$
-\frac{dLZ}{dt}=0  only if I(t)=O(t)
-$$
+<br>$\frac{dLZ}{dt}=0$  only if  $I(t)=O(t)$
 
 This equation can be re-written as:
-
-$$
-I(t) - \frac{1}{T_{lz}} \cdot LZ
-$$
+<br>$I(t) - \frac{1}{T_{lz}} \cdot LZ$
 
 Solving this for LZ gives the steady state storage:
+<br>$LZ_{ss} = T_{lz} \cdot I(t)$
 
-$$
-LZ_{ss} = T_{lz} \cdot I(t)
-$$
 
 Applying these equations to the examples above we obtain the *steady state storage* values shown in the Figure.
 

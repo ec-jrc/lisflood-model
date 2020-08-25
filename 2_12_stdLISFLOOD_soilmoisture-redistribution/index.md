@@ -63,21 +63,20 @@ $$
 \Delta 't = \frac{\Delta t}{SubSteps}
 $$
 
-In brief, the iterative procedure now involves the following steps. First, the number of sub-steps and the corresponding sub-time-step are computed as explained above. The amounts of soil moisture in the upper
-and lower layers are copied to temporary variables $w'_1a$, $w'_1b$ and $w'_2$. Three variables, $D_{1a,1b}$ (flow from superficial soil layer to top soil layer), $D_{1b,2}$ (flow from top soil layer to lower soil layer) and $D_{2,gw}$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
+In brief, the iterative procedure now involves the following steps. First, the number of sub-steps and the corresponding sub-time-step are computed as explained above. The amounts of soil moisture in the upper and lower layers are copied to temporary variables $w_{1a}'$, $w_{1b}'$  and  $w_2'$. Three variables, $D_{1a,1b}$ (flow from superficial soil layer to top soil layer), $D_{1b,2}$ (flow from top soil layer to lower soil layer) and $D_{2,gw}$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
 
-1. Compute hydraulic conductivity for the three layers $[K_1a(w_{1a}),K_1b(w_{1b}), K_2(w_2)]$ 
+1. Compute hydraulic conductivity for the three layers $[K_{1a}(w_{1a}),K_{1b}(w_{1b}), K_2(w_2)]$ 
 
 2. Compute flux from superficial to upper soil layer for this sub-step ($D'_{1a,1b}$ can never exceed storage capacity in the upper soil layer)
 
    $$
-   D'_{1a,1b} = min [K_1a(w'_{1a})\Delta t,w'_{s1b} -w'_1b]
+   D'_{1a,1b} = min [K_{1a}(w'_{1a})\Delta t,w'_{s1b} -w'_{1b}]
    $$
 
 3. Compute flux from upper to lower soil layer for this sub-step ($D'_{1b,2}$ can never exceed storage capacity in lower soil layer):
 
    $$
-   D'_{1b,2} = min [K_1b(w'_{1b})\Delta t,w'_{s2} -w'_2]
+   D'_{1b,2} = min [K_{1b}(w'_{1b})\Delta t,w'_{s2} -w'_2]
    $$
 
 4. Compute flux from lower soil layer to groundwater for this sub-step ($D'_{2,gw}$) can never exceed available water in lower layer):
@@ -86,28 +85,18 @@ and lower layers are copied to temporary variables $w'_1a$, $w'_1b$ and $w'_2$. 
    D'_{2,gw} = min [K_2(w'_2)\Delta t,w'_2 -w'_{r2}]
    $$
 
-5. Update $w'_1a$,  $w'_1b$ and $w'_2$
+5. Update $w_{1a}'$,  $w_{1b}'$ and $w'_2$
 
-6. Add $D'_{1a,1b}$ to $D_{1a,1b}$; $D'_{1b,2}$ to $D_{1b,2}$; add $D'_{2,gw}$ to $D_{2,gw}$
+6. Add $D_{1a,1b}'$ to $D_{1a,1b}$; $D_{1b,2}'$ to $D_{1b,2}$; add $D_{2,gw}'$ to $D_{2,gw}$
 
 If the soil is frozen (*F* \> critical threshold), $D_{1a,1b}$, $D_{1b,2}$ and $D_{2,gw}$ are set to zero. After the iteration loop, the amounts of soil moisture in all layers are updated as follows:
-
-$$
-w_{1a} = w_{1a} - D_{1a,1b}
-$$
-
-$$
-w_{1b} = w_{1b} + D_{1a,1b} - D_{1b,2}
-$$
-
-$$
-w_2 = w_2 + D_{1b,2} - D_{2,gw}
-$$
+<br>$w_{1a} = w_{1a} - D_{1a,1b}$
+<br>$w_{1b} = w_{1b} + D_{1a,1b} - D_{1b,2}$
+<br>$w_2 = w_2 + D_{1b,2} - D_{2,gw}$
 
 Total amounts of soil moisture in superficial and upper soil layers is also computed as follows:
-$$
-w_1 = w_{1a} + w_{1b}
-$$
+<br>$w_1 = w_{1a} + w_{1b}$
+
 
 
 [🔝](#top)
