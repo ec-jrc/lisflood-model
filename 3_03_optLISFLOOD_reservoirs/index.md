@@ -82,19 +82,19 @@ Q_{res} = \max ((F - L_f -0.01) \cdot \frac{S}{\Delta t_{day}} , Q_{max})
 $$
 
 <br>with
-<br>$Q_{max} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , Q_{nd} ) )$
+<br>$Q_{max} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm} ) )$
 <br>and 
 <br>$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit ($L_f$) is realised to the downstream channel in one day. 
 
 Finally, the condition described below is applied in order to prevent outflow values that are too large compared to the inflow value.
 
-If $(Q_{res} gt 1.2 \cdot I_{res})$ and $(Q_{res} gt AdjQ_{norm})$ and $(F \lt L_f)$, then:
+If $(Q_{res} \gt 1.2 \cdot I_{res})$ and $(Q_{res} \gt AdjQ_{norm})$ and $(F \lt L_f)$, then:
 
 $$
 Q_{res} = \max (( F - L_f - 0.01 ) \cdot \frac{S}{\Delta t_{day}} , Q_{reg} )
 $$
 
-where $Q_{reg} = \min ( O_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm}) )$
+where $Q_{reg} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm}) )$
 
 Summary of the symbols:
    <br>$S$:		Reservoir storage capacity $[m^3]$
@@ -106,7 +106,7 @@ Summary of the symbols:
    <br>$Q_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
    <br>$Q_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
    <br>$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
-   <br>$I_{res}$:	calibration parameter used to modulate $L_n$ \[-\]
+   <br>$AdjL_n$:	calibration parameter used to modulate $L_n$ \[-\]
    <br>$ResMultQ_{norm}$:	calibration parameter used to modulate $Q_{norm}$ \[-\]
 
 **The reservoir outflow is calculated using the same computational time interval used for the channel routing. **
