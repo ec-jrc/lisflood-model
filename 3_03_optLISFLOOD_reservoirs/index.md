@@ -84,7 +84,7 @@ $$
 <br>with
 <br>$Q_{max} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm} ) )$
 <br>and 
-<br>$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit ($L_f$) is realised to the downstream channel in one day. 
+<br>$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit is realised to the downstream channel in one day. 
 
 Finally, the condition described below is applied in order to prevent outflow values that are too large compared to the inflow value.
 
