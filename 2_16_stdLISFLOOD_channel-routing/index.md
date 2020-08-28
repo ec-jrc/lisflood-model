@@ -15,7 +15,7 @@ $$
 where $S_0$ now equals the gradient of the channel bed, and $S_0=S_f$. As with the surface runoff, values for parameter $α_{k,ch}$ are estimated using Manning's equation:
 
 $$
-\alpha _{k,ch} = (\frac{n \cdot ^{2/3}}{\sqrt{S_0}})^{0.6}; \beta _k=0.6
+\alpha_{k,ch} = (\frac{n \cdot P_{ch}^{2/3}}{\sqrt{S_0}})^{0.6}; \beta_k=0.6
 $$
 
 where $n$ is Manning’s roughness coefficient and $P_{ch}$ is the wetted perimeter of the channel cross-section. The $n$ roughness value is a calibrated parameter. LISFLOOD assumes a trapezoidal cross section shape and $P_{ch}$ is computed using a static (reference) channel flow depth (half bankfull). Cross section bottom  and top width and bank slope value are provided as input data to the model (these values can be retrieved from local or global databases).
