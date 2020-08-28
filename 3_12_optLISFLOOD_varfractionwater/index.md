@@ -26,14 +26,14 @@ $$
 
 $\Delta f_{water,i}$ represents the additional amount of water at month $i$ compared to the baseline in $f_{water}$ and it is the amount that needs to be removed from the other fractions in order to maintain the sum equal to 1.
 This is done iteratively removing fractions in order (first $f_{other}$, then $f_{forest}$, $f_{irrig}$ and $f_{runoff}$)  until they reach $0$ or until $\Delta f_{water,i}$ runs out:
-<br>$f_{other,i}=\max(f_{other} - \Delta f_{water,i}),0)$ and $\e_{other,i}= \max(\Delta f_{water,i} - f_{other},0)$
-<br>$f_{forest,i}=\max(f_{forest} - \e_{other,i},0)$ and $\e_{forest,i}=\max(\e_{other,i} - f_{forest},0)$
-<br>$f_{irrig,i}= \max(f_{irrig} - \e_{forest,i},0) $ and $\e_{irrig,i}= \max(\e_{forest,i} - f_{irrig,0)$
-<br>$f_{runoff,i}= \max(f_{runoff} - \e_{irrig,i},0)$
+<br>$f_{other,i}=\max(f_{other} - \Delta f_{water,i}),0)$ and $e_{other,i}= \max(\Delta f_{water,i} - f_{other},0)$
+<br>$f_{forest,i}=\max(f_{forest} - e_{other,i},0)$ and $e_{forest,i}=\max(e_{other,i} - f_{forest},0)$
+<br>$f_{irrig,i}= \max(f_{irrig} - e_{forest,i},0) $ and $e_{irrig,i}= \max(e_{forest,i} - f_{irrig,0})$
+<br>$f_{runoff,i}= \max(f_{runoff} - e_{irrig,i},0)$
 
 Where, for each land type $k$:
    <br> $f_{k,i}$ is the fraction of land type $k$ at for month $i$;
-   <br> $\e_{k,i}$ is the remainder of $\Delta f_{water,i}$ still to be distributed after $f_{k,i}$ has been calculated.
+   <br> $e_{k,i}$ is the remainder of $\Delta f_{water,i}$ still to be distributed after $f_{k,i}$ has been calculated.
 
 
 ### Preparation of input data

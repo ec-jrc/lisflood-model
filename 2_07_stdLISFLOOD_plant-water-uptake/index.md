@@ -28,11 +28,11 @@ $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
-where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($Crop_{GroupNumber}$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
-<br> - when $Crop_{GroupNumber} \gt 2.5$:
-<br>$p= \frac{1}{0.76 + 1.5 \cdot ET0} - 0.1 \cdot (5-Crop_{GroupNumber})$,
-<br> - when $Crop_{GroupNumber} \le 2.5$:
-<br>$p= p + \frac{0.1 \cdot  ET0 - 0.6}{Crop_{GroupNumber}^2+3}$ 
+where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
+<br> - when $CropGroupNum \gt 2.5$:
+<br> $ p= 1/(0.76 + 1.5 \cdot ET0) - 0.1 \cdot (5-CropGroupNum)$,
+<br> - when $CropGroupNum \le 2.5$:
+<br> $ p= p + \frac{0.1 \cdot  ET0 - 0.6}{CropGroupNum^2+3}$ 
 
 $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. The following Figure illustrates the relation between $R_{WS}, w, w_{crit}, w_{wp}$:
 

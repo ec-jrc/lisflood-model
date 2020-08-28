@@ -75,21 +75,18 @@ The actual water consumption of the domestic sector is much less than the abstra
 So, the actual: 
 <br>*DomesticConsumption = DomesticConsumptiveUseFraction * dom.nc*
 <br>*DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) * dom.nc*
-<br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * DomesticLeakageConstan*
-
+<br>*DomesticAbstraction = DomesticDemand * DomesticSavingConstant * DomesticLeakageConstant*
 where 
-* *DomesticSavingConstant = 1 - WaterSavingFraction* and *WaterSavingFraction* accounts for water saving strategies implemented by the households (and not included in the current use scenario).
-* *DomesticLeakageConstant = 1/{1-[DomesticLeakageFraction * (1 - DomesticLeakageReductionFraction)]}*. *DomesticLeakageFraction* represents the fraction of water lost during transport from the source of the abstraction to the final destination and *DomesticLeakageReductionFraction* allows to account for a reduction in leakage compared to the current scenario.
+* *DomesticSavingConstant = 1 - WaterSavingFraction*; *WaterSavingFraction* accounts for water saving strategies implemented by the households (and not included in the current use scenario).
+* *DomesticLeakageConstant = 1/{1-[DomLeakageFr * (1 - DomLeakageReductionFrac)]}*. 
+*DomLeakageFrac* represents the fraction of water lost during transport from the source of the abstraction to the final destination and *DomLeakageReductionFrac* allows to account for a reduction in leakage compared to the current scenario.
 *WaterSavingFraction*, *DomesticLeakageFraction*, and *DomesticLeakageReductionFraction* are provided as input data, the baseline value is 0, the maximum value is 1. The value of *DomesticAbstraction* is decreased by *DomesticSavingConstant* and increased by *DomesticLeakageConstant*.
 
 The leakage volume is then computed as follows:
 <br>*Leakage = (DomesticLeakageConstant - 1) * DomesticDemand * DomesticSavingConstant*
-
 The input value *LeakageLossFraction* allows to compute the leakage volume which is lost because of evaporation:
 <br>*LeakageEvaporated = Leakage * LeakageLossFraction*
-
 Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the *DomesticConsumptiveUseFraction*, its value varies between 0 and 1 and it is provided as input data.
-
 The total amount of water which leaves the system (and consequently must be subtracted from the water balance) due to domestic water use is then computed as follows:
 <br>*DomesticConsumptiveUse = DomesticDemand * DomesticSavingConstant * DomesticConsumptiveUseFraction + LeakageEvaporated*
 
@@ -181,7 +178,7 @@ Crop irrigation water demand is assumed equal to the difference between potentia
 *CropIrrigationAbstraction* is larger than *CropIrrigationDemand* in order to account for the water losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the *IrrigationEfficiency* and the *ConveyanceEfficiency*. Both these factors can vary between 0 and 1, the values are required as input data. For example, *IrrigationEfficiency* is ~0.90 for drip irrigation, and ~0.75 for sprinkling irrigation; *ConveyanceEfficiency* is ~0.80 for a common type channel. *CropIrrigationAbstraction* is the computed as follows:
 <br>*CropIrrigationAbstraction = (CropIrrigationDemand)/(IrrigationEfficiency * ConveyanceEfficiency)*
 
-If the soil is frozen (i.e. the [$FrostIndex$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is larger than the $FrostIndexThreshold$), *CropIrrigationDemand* is set to 0.
+If the soil is frozen (i.e. the [$FrostIndex$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is larger than a selected threshold), *CropIrrigationDemand* is set to 0.
 
 
                    
@@ -215,7 +212,7 @@ Specifically, *DomesticConsumpttiveUse*, *IndustrialConsumpttiveUse*, and *Lives
 <br>*CropIrrigationAbstractionGW = FractionGroundwaterUsed * CropIrrigationAbstraction*
 <br>*CropIrrigationAbstractionSurfaceWater = CropIrrigationAbstraction - CropIrrigationAbstractionGW*.
 
-[$RiceIrrigationAbstractionSurfaceWater$](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/) is supplied exclusively by surface water.
+[*RiceIrrSurfWaterAbstr*](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/) is supplied exclusively by surface water.
 
 Surface water sources for abstraction may consist of lakes, reservoirs, and rivers. The definition of the contribution of each surface water body is explained in the paragraph *Surface water abstractions from reservoirs, lakes, and rivers*.
 
@@ -246,7 +243,7 @@ When groundwater is abstracted for usage, it typically could cause a local dip i
 
 ##### Non-Conventional abstractions: desalination
 
-Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined using the factor $FractionNONconventionalSourcesUsed$. 
+Water obtained through desalination is the most common type of non-conventional water usage. It will likely only be active near coastal zones only, since otherwise transportation costs are too high. The amount of desalinated water usage in LISFLOOD is defined using the factor *FractionNONconventionalSourcesUsed*. 
 It is assumed that the non-conventional water demand is always available. It is abstracted for a 100%, so no losses are accounted for.
 The total amount of water supplied by non-conventional sources is:
 
@@ -256,7 +253,7 @@ The total amount of water supplied by non-conventional sources is:
 ##### Surface water abstractions and water regions
 
 The total amount of water to be abstracted by surface water bodies is:
-<br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater + LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater + RiceIrrigationAbstractionSurfaceWater*
+<br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater + LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater + RiceIrrSurfWaterAbstr*
 
 The *TotalWaterAbstractionFromSurfaceWater* is extracted within *water regions*. These regions are introduced in LISFLOOD due to allow the realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, the abstraction of surface water from the local 0.5x0.5 degree pixel is a reasonable representation of the real process. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area icluding the locations of water demand and abstraction.
 
@@ -308,12 +305,8 @@ EFlowThreshold is map with m3/s discharge, e.g. the 10th percentile discharge of
 For Europe e.g.  the 10th percentile discharge from a 'natural' run for 1990-2016 can be used to define the environmental flow threshold. In order to mimick natural flow conditions, a 'natural' run does not include without reservoirs and human water abstractions. LISFLOOD also counts the number of days in which the channel flow is lower than the *environmental flow threshold* ($EFlowThreshold$) as this piece of information is important for water rousources and ecosystem management.
 
 The water volume which can be potentially abstracted from the river within a *water region* is then:
-
-$$
-AvailableVolumeChannels = \max((Q_{ch} - EFlowThreshold) \cdot \Delta t , 0) \cdot (1 - WUsePercRemain) 
-$$
-
-where $WUsePercRemain$ is the percentage of water which always remains in the channel. This value (between 0 and 1) is defined by the user.
+<br>*AvailableVolumeChannels* = $\max((Q_{ch} - EFlowThreshold) \cdot \Delta t , 0) \cdot (1 - WUsePercRemain)$
+<br>where $WUsePercRemain$ is the percentage of water which always remains in the channel. This value (between 0 and 1) is defined by the user.
 
 The amount of water extracted from the rivers is:
 <br>*WaterAbstractedFromChannels = min (AvailableVolumeChannel , WaterToBeAbstractedChannels)*
@@ -322,16 +315,12 @@ A condition in which *WaterAbstractedFromChannels* is lower than *WaterToBeAbstr
 <br>*WaterUseShortage =  WaterToBeAbstractedChannels - WaterToBeAbstractedChannels*
 
 In condition of water scarcity, water uses are satisfied according to the following order of importance: domestic, energetic, livestock, industry, and irrigation. The latter sentence implies that when *WaterUseShortage*  $\gt 0$, LISFLOOD reduces the water volume delivered to the irrigated fields. Specifically, the amount *WaterUseShortage* is subtracted from the total amount of water required from surface water bodies by crops and paddy rice, meaning that the total amount of water effectively supplied to the irrigated fields (*IrrigationWater*) is:
-<br>*IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater + RiceIrrigationAbstractionSurfaceWater - WaterUseShortage*
+<br>*IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater + RiceIrrSurfWaterAbstr - WaterUseShortage*
 
 The value *IrrigationWater* is then used to compute the water content of the superficial soil layer ($w_{1a}$) and of the upper soil layer ($w_{1b}$). 
 Specifically, the value *IrrigationWater* (after convertion in [mm]) is first added to the superficial soil layer, until the water content of this layer ($w_{1a}$) is equal to:
-
-$$
-w_{fill,1a} = \min(w_{crit,1a}, w_{pF3,1a})
-$$
-
-where $w_{crit,1a}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1a}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa).
+<br>$w_{fill,1a} = \min(w_{crit,1a}, w_{pF3,1a})$
+<br>where $w_{crit,1a}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1a}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa).
 The remainder amount of water (if any) is then added to the upper soil layer ($w_{1b}$). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
 
 In order to check the conservation of mass within the modelled system, LISFLOOD computes the amount of water consumed by irrigation *IrriLossCum* (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors *IrrigationEfficiency* and *ConveyanceEfficiency*), the resulting water content of the superficial and upper soil layers.

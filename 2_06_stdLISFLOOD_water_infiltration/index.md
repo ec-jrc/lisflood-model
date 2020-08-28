@@ -17,15 +17,15 @@ Since no infiltration can take place in each pixel's 'direct runoff fraction', *
 
 $$
 
-R_d = f_{dr} \cdot (R \cdot \Delta t + M - InterceptionSealed) + WaterFraction \cdot (R \cdot \Delta t + M - EW0)
+R_d = f_{dr} \cdot (R \cdot \Delta t + M - IntercSealed) + WaterFraction \cdot (R \cdot \Delta t + M - EW0)
 $$
 
-where $R_d$ is in $mm$ per time step and $InterceptionSealed$ is the water in $mm$ retained by the depressions of the impervious surfaces and not immediately available to generate direct runoff. 
-More specifically, $InterceptionSealed$ is equal to the total of raifall and snow melt until all the depressions have been filled, that is until the $AvailableStorageSealed$ is larger than 0. The computation is shown by the following equations:
+where $R_d$ is in $mm$ per time step and $IntercSealed$ is the water in $mm$ retained by the depressions of the impervious surfaces and not immediately available to generate direct runoff. 
+More specifically, $IntercSealed$ is equal to the total of raifall and snow melt until all the depressions have been filled, that is until the $AvailableStorageSealed$ is larger than 0. The computation is shown by the following equations:
 
 
 $$
-InterceptionSealed = R \cdot \Delta t + M
+IntercSealed = R \cdot \Delta t + M
 $$ 
 
 when 
@@ -37,7 +37,7 @@ $$
 where $SMAXsealed$ is the maximum depression storage in $mm$ (provided as input data), and $StorageSealed$ is the volume already filled by water in $mm$. The computation of the latter accounts for the volume already used at the initial time step ($StorageSealedInit$, provided as input data) and the water volume loss due to evaporation:
 
 $$
-StorageSealed = StorageSealedInit + InterceptionSealed - EW0
+StorageSealed = StorageSealedInit + IntercSealed - EW0
 $$
 
 Direct runoff $R_d$ is added to [surface runoff](https://ec-jrc.github.io/lisflood-model/2_14_stdLISFLOOD_surface-runnoff-routing/).  
