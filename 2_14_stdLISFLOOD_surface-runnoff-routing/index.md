@@ -34,13 +34,13 @@ $$
 If $α_{k,sr}$ and $β_k$ are known, this non-linear equation can be solved for each pixel and during each time step using an iterative procedure. This numerical solution scheme is available as a built-in function in the PCRaster software. The coefficients $α_{k,sr}$ and $β_k$ are calculated by substituting Manning's equation in the right-hand side of Equation:
 
 $$
-A_{sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}}) \cdot Q_{sr}^{3/5}
+A_{sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}})^{3/5} \cdot Q_{sr}^{3/5}
 $$
 
-where *n* is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation gives:
+where $n$ is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation gives:
 
 $$
-\alpha _{k,sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}})^{0.6} ; \beta_k=0.6
+\alpha_{k,sr} = (\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}})^{0.6} ; \beta_k=0.6
 $$
 
 At present, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. The [**surface runoff ($R_s$)**](https://ec-jrc.github.io/lisflood-model/2_11_stdLISFLOOD_actual-infiltration-and-surface-runoff/) which is generated at each computational time step **is added as side-flow ($q_{sr}$)** in the flow routing equation explained in this chapter. 
