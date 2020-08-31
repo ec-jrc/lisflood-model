@@ -37,13 +37,13 @@ $L_c$,$L_f$, $L_n$, $Q_{min}$, $Q_{nd}$, $Q_{norm}$ are input data.
 Two calibration parameters, namely $AdjL_n$ and $ResMultQ_{norm}$, are used to modulate the reservoir normal filling $L_n$ (balance between lower and upper limit of reservoir filling) and the normal reservoir outflow $Q_{norm}$. Both the parameters are non-dimensional and they are used as follows:
 
 $$
-L_{adj,f} = L_n + $AdjL_n$ \cdot (L_f - L_n) 
+L_{adj,f} = L_n + AdjL_n \cdot (L_f - L_n) 
 $$
 
 where $AdjL_n$ can assume values between 0.01 and 0.99.
 
 $$
-AdjQ_{norm} = $ResMultQ_{norm}$ \cdot Q_{norm}
+AdjQ_{norm} = ResMultQ_{norm} \cdot Q_{norm}
 $$
 
 where $ResMultQ_{norm}$ can assume values between 0.25 and 2; AdjQ_{norm} must always be larger than $Q_{min}$, and smaller than $Q_{nd}$.
@@ -53,14 +53,14 @@ Depending on the relative filling of the reservoir, outflow ($Q_{res},[\frac{m^3
 If $F \le 2 \cdot L_c$, then: 
 
 $$
-Q_{res} = min (Q_{min} , S \cdot frac{1}{\Delta t_{day})
+Q_{res} = \min(Q_{min}, S \cdot frac{1}{\Delta t_{day}})
 $$
 where $\Delta t_{day}$ is 86400 meaning that *the total daily inflow I_{res} to the reservoir is released downstream*.
 
 If $2L_c \lt F \le L_n$, then:
 
 $$
-Q_{res} = Q_{min } + (AdjQ_{norm}  - Q_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
+Q_{res} = Q_{min} + (AdjQ_{norm}  - Q_{min}) \cdot \frac{F - 2L_c}{L_n - 2L_c}
 $$
 
 If $L_n \lt F \le  L_{adj,f}$, then:
@@ -72,29 +72,29 @@ $$
 If $L_{adj,f} \lt F \le L_f$, then:
 
 $$
-Q_{res} = AdjQ_{norm}  + \frac{(F - L_{adj,f}{(L_f - L_{adj,f} \cdot (Q_{nd} - AdjQ_{norm})
+Q_{res} = AdjQ_{norm}  + \frac{F - L_{adj,f}}{L_f - L_{adj,f}} \cdot (Q_{nd} - AdjQ_{norm})
 $$
 
 If $F \gt L_f$, then:
 
 $$
-Q_{res} = \max ((F - L_f -0.01) \cdot \frac{S}{\Delta t_{day} , Q_{max})
+Q_{res} = \max ((F - L_f -0.01) \cdot \frac{S}{\Delta t_{day}} , Q_{max})
 $$
 
 <br>with
-<br>$ Q_{max} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , Q_{nd} ) )$
+<br>$Q_{max} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm} ) )$
 <br>and 
-<br>$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit ($L_f$) is realised to the downstream channel in one day. 
+<br>$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit is realised to the downstream channel in one day. 
 
 Finally, the condition described below is applied in order to prevent outflow values that are too large compared to the inflow value.
 
-If $(Q_{res} gt 1.2 \cdot I_{res})$ and $(Q_{res} gt AdjQ_{norm})$ and $(F \lt L_f)$, then:
+If $(Q_{res} \gt 1.2 \cdot I_{res})$ and $(Q_{res} \gt AdjQ_{norm})$ and $(F \lt L_f)$, then:
 
 $$
-Q_{res} = \max (( F - L_f - 0.01 ) \cdot \frac{S}{\Delta t_{day}) , Q_{reg} )
+Q_{res} = \max (( F - L_f - 0.01 ) \cdot \frac{S}{\Delta t_{day}} , Q_{reg} )
 $$
 
-where $Q_{reg} = \min ( O_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm}) )$
+where $Q_{reg} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm}) )$
 
 Summary of the symbols:
    <br>$S$:		Reservoir storage capacity $[m^3]$
@@ -106,7 +106,7 @@ Summary of the symbols:
    <br>$Q_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
    <br>$Q_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
    <br>$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
-   <br>$I_{res}$:	calibration parameter used to modulate $L_n$ \[-\]
+   <br>$AdjL_n$:	calibration parameter used to modulate $L_n$ \[-\]
    <br>$ResMultQ_{norm}$:	calibration parameter used to modulate $Q_{norm}$ \[-\]
 
 **The reservoir outflow is calculated using the same computational time interval used for the channel routing. **

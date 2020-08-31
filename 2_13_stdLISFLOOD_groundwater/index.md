@@ -11,18 +11,18 @@ where $T_{uz}$ is the reservoir constant for the upper groundwater layer $[days]
 The amount of water stored in the upper zone $UZ$ is computed as follows:
 
 $$
-UZ = D'{2,gw} + D_{pref,gw} - D_{uz,lz}
+UZ = D_{2,gw} + D_{pref,gw} - D_{uz,lz}
 $$
 
-where $D'{2,gw}$ is the flux from the lower soil layer to groundwater for this sub-step; $D_{pref,gw}$ is the amount of preferential flow per time step; $D_{uz,lz}$ is the amount of **water that percolates from the upper to the lower zone**, all in $[mm]$.
+where $D_{2,gw}$ is the flux from the lower soil layer to groundwater for this sub-step; $D_{pref,gw}$ is the amount of preferential flow per time step; $D_{uz,lz}$ is the amount of **water that percolates from the upper to the lower zone**, all in $[mm]$.
 
-In areas with drained irrigation ($DrainedFraction$), the flux from the lower soil layer to groundwater $D'{2,gw}$ is directly delivered to the river channel, consequenlty, the computation of $UZ$ is modifies as follows:
+In areas with drained irrigation ($DrainedFraction$), the flux from the lower soil layer to groundwater $D_{2,gw}$ is directly delivered to the river channel, consequenlty, the computation of $UZ$ is modifies as follows:
 
 $$
-UZ = (1 - DrainedFraction) \cdot D'{2,gw} + D_{pref,gw} - D_{uz,lz}
+UZ = (1 - DrainedFraction) \cdot D_{2,gw} + D_{pref,gw} - D_{uz,lz}
 $$
 
-In areas with flooded irrigation (e.g. rice crops), an additional amount of water is added to $UZ$ during the percolation and draining phases of the agricultural cycle ($RicePercolationeWater$ and $RiceDrainageWater$ are described in a [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/).
+In areas with flooded irrigation (e.g. rice crops), an additional amount of water is added to $UZ$ during the percolation and draining phases of the agricultural cycle (*RicePercolationWater* and *RiceDrainageWater* are described in a [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/).
 
 The **water percolates from the upper to the lower zone** ($D_{uz,lz}$) is the inflow to the lower groundwater zone. As indicated above, this amount of water is provided by the upper groundwater zone.  $D_{uz,lz}$ is a fixed amount per computational time step and it is defined as follows:
 
@@ -43,10 +43,10 @@ Here, $T_{lz}$ is the reservoir constant for the lower groundwater layer ($[days
 $LZ$ is computed as follows:
 
 $$
-LZ = D_{uz,lz}  - TotalWaterAbstractionFromGroundWater - ( GW_{loss} \cdot \Delta t ) 
+LZ = D_{uz,lz}  - TotalAbstractionFromGroundWater - ( GW_{loss} \cdot \Delta t ) 
 $$
 
-where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalWaterAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
+where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
 
 The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
 
@@ -58,7 +58,7 @@ The values of $T_{uz}$ $[days]$, $T_{lz}$ $[days]$, $GW_{perc}$ $[\frac{mm}{day}
 
 Note that these equations are valid for the permeable fraction of the pixel only: storage in the direct runoff fraction equals 0 for both $UZ$ and $LZ$.
 
-###**Lower groundwater zone: steady state storage**
+###Lower groundwater zone: steady state storage
 
 The computation of $D_{uz,lz}$ and $Q_{lz}$ then allows to model the response of the lower groundwater zone.
 Now, let’s do a simple numerical experiment: assuming that $D_{uz,lz}$ is a constant value, we can take some arbitrary initial value for $LZ$ and then simulate the development over LZ over time. The Figure below shows the results of two numerical experiments. In the upper Figure, we start with a very high initial storage (1500 mm). The inflow rate is fairly small (0.2 mm/day), and $T_{lz}$ is quite small as well (a small value leads to a quick responce and hence a relatively short residence time of the water in the lower zone). What is interesting here is that, over time, the storage evolves asymptotically towards a constant state. In the lower Figure, we start with a much smaller initial storage (50 mm), but the inflow rate is much higher (1.5 mm/day) and so is $T_{lz}$ (1000 days). Here we see an upward trend, again towards a constant value. However, in this case the constant ‘end’ value is not reached within the simulation period, which is mainly because $T_{lz}$ is set to a value for which the response is very slow. 

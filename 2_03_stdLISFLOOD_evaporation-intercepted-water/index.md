@@ -9,7 +9,7 @@ $$
 
 where $EW0$ is the potential evaporation rate from an open water surface $[\frac{mm}{day}]$, and $EW_{max}$ is in $[mm]$ per time step. Constant $\kappa_{gb} [-]$ is the extinction coefficient for global solar radiation. In LISFLOOD, $\kappa_{gb}$ is given by the product $0.75 \cdot \kappa_{df}$, where $\kappa_{df} [-]$ is the extinction coefficient for diffuse visible light: its value is provided as input to the model and it varies between $0.4$ and $1.1$.
 
-The actual amount of evaporation $EW_{int} mm]$ is clearly limited by the amount of water stored on the leaves $Int_{cum}$:
+The actual amount of evaporation $EW_{int} [mm]$ is clearly limited by the amount of water stored on the leaves $Int_{cum}$:
 
 $$
 EW_{int} = \min({EW_{max } \cdot \Delta t},{Int_{cum}})

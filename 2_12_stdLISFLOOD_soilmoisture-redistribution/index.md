@@ -30,14 +30,14 @@ $$
 K(w)\Delta t \gt {w - w_r}
 $$
 
-In order to solve the soil moisture equations correctly an iterative procedure is used. At the beginning of each time step, the conductivities for the three soil layers $[K_1a(w_{1a}),K_1b(w_{1b}), K_2(w_2)]$ are calculated using the Van Genuchten equation. Multiplying these values with the time step and dividing by the available moisture gives a Courant-type numerical stability indicator for each respective layer:
+In order to solve the soil moisture equations correctly an iterative procedure is used. At the beginning of each time step, the conductivities for the three soil layers $[K_{1a}(w_{1a}),K_{1b}(w_{1b}), K_2(w_2)]$ are calculated using the Van Genuchten equation. Multiplying these values with the time step and dividing by the available moisture gives a Courant-type numerical stability indicator for each respective layer:
 
 $$
-C_1a = \frac{K_1(w_{1a}) \cdot \Delta t}{w_{1a} - w_{r1a}}
+C_{1a} = \frac{K_{1a}(w_{1a}) \cdot \Delta t}{w_{1a} - w_{r1a}}
 $$
 
 $$
-C_1b = \frac{K_1(w_{1b}) \cdot \Delta t}{w_{1b} - w_{r1b}}
+C_{1b} = \frac{K_{1b}(w_{1b}) \cdot \Delta t}{w_{1b} - w_{r1b}}
 $$
 
 $$

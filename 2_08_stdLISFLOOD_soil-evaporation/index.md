@@ -3,7 +3,7 @@
 The **maximum amount of evaporation from the soil surface** equals the maximum evaporation from a shaded soil surface, $ES_{max} [mm]$, which is computed as:
 
 $$
-ES_{max} = ES0 \cdot e^{(\frac{- \kappa _{gb} \cdot LAI} {\Delta t})}
+ES_{max} = ES0 \cdot e^{(\frac{- \kappa_{gb} \cdot LAI} {\Delta t})}
 $$
 
 where $ES0$ is the potential evaporation rate from bare soil surface $[\frac{mm}{day}]$. The **actual evaporation from the soil** mainly depends on the amount of soil moisture near the soil surface: evaporation decreases as the topsoil is drying. In the model this is simulated using a reduction factor which is a function of the number of days since the last rain storm (Stroosnijder, 1987, 1982):
@@ -24,7 +24,7 @@ $$
 where $w_1 [mm]$ is the amount of moisture in the upper soil layer and $w_{res1} [mm]$ is the residual amount of soil moisture . Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen (i.e. when the [frost index $F$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is above the crtitical threshold value). 
 
 The actual soil evaporation is extracted from the superficial soil layer ($ES_{a,1a}$) and, subsequently, from the upper soil layer ($ES_{a,1b}$):
-<br>$ES_{a,1a} = \min ([w_1_a - w_{res1a}] , ES_a)$
+<br>$ES_{a,1a} = \min ([w_{1a} - w_{res1a}] , ES_a)$
 <br>$ES_{a,1b} = \max ([ES_a-ES_{a,1a}], 0)$
 
 The amount of moisture in the superficial and upper soil layers is then updated as follows:

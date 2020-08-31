@@ -28,11 +28,11 @@ $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
-where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($Crop_{GroupNumber}$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
-
-<br>$p= \frac{1}{0.76 + 1.5 \cdot ET0} - 0.1 \cdot (5-Crop_{GroupNumber})$ when $Crop_{GroupNumber} \gt 2.5 $
-<br>$p= p + \frac{0.1 \cdot  ET0 - 0.6}{Crop_{GroupNumber}^2+3}$ when $Crop_{GroupNumber} \le 2.5 $
-
+where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
+<br> - when $CropGroupNum \gt 2.5$:
+<br> $ p= 1/(0.76 + 1.5 \cdot ET0) - 0.1 \cdot (5-CropGroupNum)$,
+<br> - when $CropGroupNum \le 2.5$:
+<br> $ p= p + \frac{0.1 \cdot  ET0 - 0.6}{CropGroupNum^2+3}$ 
 
 $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. The following Figure illustrates the relation between $R_{WS}, w, w_{crit}, w_{wp}$:
 
@@ -56,9 +56,9 @@ The amount of **moisture in the upper soil layer** is updated after computing th
 <br>$ w_{AvNotStressed,1b}=w_{1b}-w_{crit,1b} $
 <br>$ T_{a,1a,Ns}= \min(T_a,w_{AvNotStressed,1a}) $
 
-If $T_{a,1a,Ns} \lt T_a$ then $T_{a,1b,Ns}= \min((T_a-T_{a,1a,Ns}),w_{AvNotStressed,1b}$.
+If $T_{a,1a,Ns} \lt T_a$ then $T_{a,1b,Ns}= \min((T_a-T_{a,1a,Ns}),w_{AvNotStressed,1b})$.
 
-The total amount of water supplied to the plants under *not stressed* conditions is then  $T_{a,1a,Ns} + T_{a,1b,Ns}$,  soil water depletion under *stressed* conditions occurs if $T_{a,s}=[(T_{a,1a,Ns} + T_{a,1b,Ns}] \gt 0$. The distribution of water abstraction is then proportional to the water availability of each layer:
+The total amount of water supplied to the plants under *not stressed* conditions is then  $T_{a,1a,Ns} + T_{a,1b,Ns}$,  soil water depletion under *stressed* conditions occurs if $T_{a,s}=[T_{a,1a,Ns} + T_{a,1b,Ns}] \gt 0$. The distribution of water abstraction is then proportional to the water availability of each layer:
 <br>$w_{AvStressed,1a}=w_{1a}-T_{a,1a,Ns}-w_{wp,1a}$
 <br>$w_{AvStressed,1b}=w_{1b}-T_{b,1b,Ns}-w_{wp,1b}$
 <br>$w_{AvStressed,tot}=w_{AvStressed,1a}+w_{AvStressed,1b}$
