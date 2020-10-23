@@ -8,8 +8,7 @@ This page describes the LISFLOOD polder routine, and how it is used. The simulat
 	<setoption name="simulatePolders" choice="1" />
 ```
 
-Polders can be simulated on channel pixels where dynamic wave routing is used. 
-The routine does *not* work for channel stretches where the kinematic wave is used!
+The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used.
 
 
 
@@ -26,7 +25,7 @@ The flow rates from the channel to the polder area and vice versa are calculated
 
 From the Figure, it is easy to see that there can be three situations:
 
-1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$, is calculated using:
+1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$ [$\frac{m^3}{s}$], is calculated using:
 
     $$
     \begin{array}{|ll} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}
@@ -34,13 +33,13 @@ From the Figure, it is easy to see that there can be three situations:
 
     where 
         <br> $b$ is the outflow width $[m]$, 
-        <br> $g$ is the acceleration due to gravity ($9.81\ \frac{m}{s^2}$) and 
-        <br> $\mu$ is a weir constant which has a value of 0.49. 
-    <br> Furthermore  is $q_{c,p}$ in $\frac{m}{s}$.
+        <br> $g$ is the acceleration due to gravity ($9.81\ \frac{m}{s^2}$),
+        <br> $\mu$ is a weir constant which has a value of 0.49,
+        <br> $c$ is the weir factor.
 
 
 
-2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ is now calculated using:
+2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ [$\frac{m^3}{s}$] is now calculated using:
 
     $$
     \begin{array}{|ll} q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2} \\  c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}
@@ -51,19 +50,20 @@ From the Figure, it is easy to see that there can be three situations:
 
 ### Regulated and unregulated polders
 
-The above equations are valid for *unregulated* polders. It is also possible to simulated *regulated* polders, which is illustrated in following Figure. 
+The above equations are valid for *unregulated* polders. The functioning of *regulated* polders is simulated according to the schematic shown in the following Figure. 
 
 
 ![regulated polder](../media/image44.png)
-***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (flow rate according to Eq XXXX). 
-Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate according to Eq XXXX).*
+***Figure:*** *Simulation of a regulated polder. Polder is closed (inactive) until user-defined opening time, after which it fills up to its capacity (the flow rate is $q_{c,p}$ and it is computed using the above defined equation). 
+Water stays in polder until user-defined release time, after which water is released back to the channel (flow rate is now $q_{p,c}$ and it is computed using the above defined equation).*
 
-Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables (see Table below). In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs) you should only run the polders in unregulated mode.
+Regulated polders are opened at a user-defined time (typically during the rising limb of a flood peak). The polder closes automatically once it is full. Subsequently, the polder is opened again to release the stored water back into the channel, which also occurs at a user-defined time. The opening- and release times for each polder are defined in two lookup tables. In order to simulate the polders in *unregulated* mode these times should both be set to a bogus value of -9999. *Only* if *both* opening- and release time are set to some other value, LISFLOOD will simulate a polder in regulated mode. Since LISFLOOD only supports *one* single regulated open-close-release cycle per simulation, you should use regulated mode *only* for single flood events. For continuous simulations (e.g. long-tem waterbalance runs), it is recommended to use the unregulated mode.
 
 
-### Preparation of input data 
+### Preparation of the input data 
 
-The locations of the polders are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations before running the model (you can do this by displaying the polder map on top of the channel map). The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used. Furthermore, the properties of each polder are described using a number of tables. All required input is listed in the following table:
+The locations of the polders are defined on a (nominal) map called '*polders.map*'. Any polders that are *not* on a channel pixel are ignored by LISFLOOD, so you may want to check the polder locations before running the model (you can do this by displaying the polder map on top of the channel map). The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used. 
+The properties of each polder are described using a number of tables. All the required input data are listed below:
 
 **Table:** *Input requirements polder routine.* 
 

@@ -2,7 +2,8 @@
 
 ## Default LISFLOOD output
 
-LISFLOOD can generate a wide variety of output. Output is generated as either maps or time series (PCRaster format, which can be visualised with PCRaster's 'aguila' application; or as NetCDF). Reporting of output files can be switched on and off using options in the LISFLOOD settings file. Also, a number of output files are specific to other optional modules, such as the simulation of reservoirs. The following table lists all the output time series that are reported by default (<u>note</u> that the file names can always be changed by the user, although this is not recommended):
+LISFLOOD can generate a wide variety of output. Output is generated as either maps or time series (PCRaster format, which can be visualised with PCRaster's ['aguila'](https://pcraster.geo.uu.nl/projects/developments/aguila/) application; or as NetCDF). Reporting of output files can be switched on and off using options in the LISFLOOD settings file. Moreover, a number of output files are specific to other optional modules, such as the simulation of reservoirs. This chapter focuses on the maps and series that are reported by default. The reader is referred to the [User Guide](https://ec-jrc.github.io/lisflood-code/) for a comprehensive list of the setting options and output files.
+
 
 ***Table:*** *LISFLOOD default output time series.*  
 
@@ -19,7 +20,9 @@ LISFLOOD can generate a wide variety of output. Output is generated as either ma
 $^1$ Output only if option  'InitLisflood' = 1  (pre-run)  
 $^2$ Output only if option  'InitLisflood' = 0  
 
-To speed up the pre-run and to prevent that results are taken from the pre-run, all additional output is disabled if option 'InitLisflood' = 1 is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss, lzavin.map, lzavin\_forest.map* and some other initial maps if additional option like e.g. the double kinematic wave is chosen.
+<u>note</u> that the file names can always be changed by the user, although this is not recommended.
+
+To speed up the pre-run and to prevent that the actual simulation (run) takes the results from the pre-run, all additional output is disabled if option 'InitLisflood' = 1 is chosen. With 'InitLisflood' = 1 the output is limited to *dis.tss, lzavin.map, lzavin\_forest.map* and some other initial maps if additional option like e.g. the double kinematic wave is chosen.
 
 In addition to these time series, by default LISFLOOD reports maps of all state variables at the last timestep of a simulation. These maps can be used to define the initial conditions of a succeeding simulation. For instance, you can do a 1-year simulation on a daily time step, and use the 'end maps' of this simulation to simulate a flood event using an hourly time step. The table below lists all these maps. Note that some state variables are valid for the whole pixel, whereas others are only valid for a sub-domain of each pixel. This is indicated in the last column of the table.
 
@@ -81,7 +84,7 @@ In addition, some additional maps and time series may be reported for debugging 
 
 <u>Note</u> again the domains for which variables are valid: all *rate variables* are reported as pixel-average values. Soil moisture and groundwater storage are reported for the permeable fraction of each pixel only. The reported snow cover is the average of the snow depths in snow zones A, B and C.
 
-By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in the annex on [LISFLOOD input files](https://ec-jrc.github.io/lisflood-model/4_annex_input-files/). The long table below summarises all options to report additional output maps. 
+By default, the names of the reported discharge maps start with the prefix '*dis*' and end with the time step number (the naming conventions are identical to the ones used for the input maps with meteorological variables, which is explained in the annex on [LISFLOOD input files](https://ec-jrc.github.io/lisflood-model/4_annex_input-files/). The long table below summarises most of the options to report additional output maps. 
 
 ## Time series
 

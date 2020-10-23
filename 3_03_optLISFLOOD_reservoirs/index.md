@@ -14,55 +14,103 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 
 ### Description of the reservoir routine 
 
-Reservoirs are simulated as points in the channel network. The inflow into each reservoir equals the channel flow upstream of the reservoir. The outflow behaviour is described by a number of parameters. First, each reservoir has a total storage capacity $S\ [m^3]$. The relative filling of a reservoir, $F$, is a fraction between 0 and 1. There are three 'special' filling levels. 
-- $L_c$: 'conservative storage limit'. This is the lower limit as reservoirs are  never completely empty. 
-- $L_f$: 'flood storage limit'. This is the upper limit as reservoirs are never filled completly for safety reasons
-- $L_n$: is the available capacity of a reservoir between $L_f$ and $L_c$. 
-
-Three additional parameters define the way the outflow of a reservoir is regulated. 
-- 'minimum outflow' ($O_{min}$, $[\frac{m^3} {s}]$) which is maintained for e.g. ecological reasons; 
-- 'non-damaging outflow' ($O_{nd}$, $[\frac{m^3} {s}]$) is the maximum possible outflow that will not cause problems downstream; and
-- 'normal outflow' ($O_{norm}$, $[\frac{m^3} {s}]$) is the one valid when the reservoir is within its 'normal storage' filling level.
-
-Depending on the relative filling of the reservoir, outflow ($O_{res},[\frac{m^3}{s}]$) is calculated as:
-
-If $$F \le 2 \cdot L_c$$, then: 
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir ($I_{res} [\frac{m^3}{s}]$) equals the channel flow upstream of the reservoir. Operational rules for reservoirs are not included implicitly in LISFLOOD, but the model mimics these operational rules by using a number of rules which define reservoir output as a function of the relative filling. The relative filling of a reservoir, $F$, is the ratio between the water volume stored in the reservoir at the computational time $Vt\ [m^3]$ and its total storage capacity $S\ [m^3]$:
 
 $$
-O_{res} = min (O_{min} ,\frac{1}{\Delta t} \cdot F \cdot S)
+F = \frac{Vt}{S}
 $$
 
+$F$ varies between 0 and 1.
 
-If $$L_n \ge F \gt 2L_c$$, then:
+There are three 'special' relative filling levels:
+- the 'conservative storage limit $L_c$, that is the lower limit of reservoir water storage (reservoirs are never completely empty)
+- the 'flood storage limit' $L_f$, that is the upper limit of the operational relative filling as reservoirs are never filled completly for safety reasons
+- the 'normal storage capacity' $L_n$, that is the available capacity of a reservoir between $L_f$ and $L_c$. 
+
+Three discharge values define the way the outflow of a reservoir is regulated. 
+- 'minimum outflow' ($Q_{min}$, $[\frac{m^3} {s}]$) which is maintained for e.g. ecological reasons; 
+- 'non-damaging outflow' ($Q_{nd}$, $[\frac{m^3} {s}]$) is the maximum possible outflow that will not cause problems downstream; and
+- 'normal outflow' ($Q_{norm}$, $[\frac{m^3} {s}]$) is the one valid when the reservoir is within its 'normal storage' filling level.
+
+$L_c$,$L_f$, $L_n$, $Q_{min}$, $Q_{nd}$, $Q_{norm}$ are input data.
+
+Two calibration parameters, namely $AdjL_n$ and $ResMultQ_{norm}$, are used to modulate the reservoir normal filling $L_n$ (balance between lower and upper limit of reservoir filling) and the normal reservoir outflow $Q_{norm}$. Both the parameters are non-dimensional and they are used as follows:
 
 $$
-O_{res} = O_{min } + (O_{norm} - O_{min}) \cdot \frac{(F - 2L_c)}{(L_n - 2L_c)}
+L_{adj,f} = L_n + AdjL_n \cdot (L_f - L_n) 
 $$
 
-If $$L_f \ge F \gt L_n$$, then:
+where $AdjL_n$ can assume values between 0.01 and 0.99.
 
 $$
-O_{res} = O_{norm} + \frac{(F - L_n)}{(L_f - L_n)} \cdot \max((I_{res} - O_{norm}),(O_{nd} - O_{norm}))
+AdjQ_{norm} = ResMultQ_{norm} \cdot Q_{norm}
 $$
 
-If $$F \gt L_f$$, then:
+where $ResMultQ_{norm}$ can assume values between 0.25 and 2; AdjQ_{norm} must always be larger than $Q_{min}$, and smaller than $Q_{nd}$.
+
+Depending on the relative filling of the reservoir, outflow ($Q_{res},[\frac{m^3}{s}]$) is calculated as:
+
+If $F \le 2 \cdot L_c$, then: 
 
 $$
-O_{res} = \max (\frac{(F - L_f)}{\Delta t} \cdot S,O_{nd})
+Q_{res} = \min(Q_{min}, S \cdot frac{1}{\Delta t_{day}})
+$$
+where $\Delta t_{day}$ is 86400 meaning that *the total daily inflow I_{res} to the reservoir is released downstream*.
+
+If $2L_c \lt F \le L_n$, then:
+
+$$
+Q_{res} = Q_{min} + (AdjQ_{norm}  - Q_{min}) \cdot \frac{F - 2L_c}{L_n - 2L_c}
 $$
 
-with:
+If $L_n \lt F \le  L_{adj,f}$, then:
+
+$$
+Q_{res} = AdjQ_{norm}
+$$
+
+If $L_{adj,f} \lt F \le L_f$, then:
+
+$$
+Q_{res} = AdjQ_{norm}  + \frac{F - L_{adj,f}}{L_f - L_{adj,f}} \cdot (Q_{nd} - AdjQ_{norm})
+$$
+
+If $F \gt L_f$, then:
+
+$$
+Q_{res} = \max ((F - L_f -0.01) \cdot \frac{S}{\Delta t_{day}} , Q_{max})
+$$
+
+<br>with
+<br>$Q_{max} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm} ) )$
+<br>and 
+<br>$\Delta t_{day}$ is 86400 meaning that the amount of water exceeding the flood storage limit is realised to the downstream channel in one day. 
+
+Finally, the condition described below is applied in order to prevent outflow values that are too large compared to the inflow value.
+
+If $(Q_{res} \gt 1.2 \cdot I_{res})$ and $(Q_{res} \gt AdjQ_{norm})$ and $(F \lt L_f)$, then:
+
+$$
+Q_{res} = \max (( F - L_f - 0.01 ) \cdot \frac{S}{\Delta t_{day}} , Q_{reg} )
+$$
+
+where $Q_{reg} = \min ( Q_{nd} , \max ( 1.2 \cdot I_{res} , AdjQ_{norm}) )$
+
+Summary of the symbols:
    <br>$S$:		Reservoir storage capacity $[m^3]$
    <br>$F$:		Reservoir fill (fraction, 1 at total storage capacity) \[-\]
    <br>$L_c$:	Conservative storage limit \[-\]
    <br>$L_n$:	Normal storage limit \[-\]
    <br>$L_f$:	Flood storage limit \[-\]
-   <br>$O_{min}$:	Minimum outflow $[\frac{m^3} {s}]$
-   <br>$O_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
-   <br>$O_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
+   <br>$Q_{min}$:	Minimum outflow $[\frac{m^3} {s}]$
+   <br>$Q_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
+   <br>$Q_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
    <br>$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
+   <br>$AdjL_n$:	calibration parameter used to modulate $L_n$ \[-\]
+   <br>$ResMultQ_{norm}$:	calibration parameter used to modulate $Q_{norm}$ \[-\]
 
-In order to prevent numerical problems, the reservoir outflow is calculated using a user-defined time interval (or *Δt*, if it is smaller than this value). THIS NEEDS TO BE REVIEWED
+**The reservoir outflow is calculated using the same computational time interval used for the channel routing. **
+
 
 
 
@@ -87,41 +135,14 @@ For the simulation of reservoirs a number of additional input files are necessar
 When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outflow point, see Figure below), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map by one cell in downstream direction.
 
 ![Placement of the reservoirs](../media/image42.png)
+
 ***Figure:*** *Placement of the reservoirs: reservoirs on the outflow point (left) result in erroneous behavior of the reservoir routine.*
 
 
 
 ### Preparation of settings file
 
-All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the reservoir locations is in the "maps" directory, and all tables in the 'tables" directory. If this is the case, you only have to specify the time-step used for the reservoir calculations and the initial reservoir filling level (expressed as a fraction of the storage capacity). Both are defined in the 'lfuser' element of the settings file. For the reservoir time step (DtSecReservoirs) it is recommended to start with a value of 14400 (4 hours), and try smaller values if the simulated reservoir outflow shows large oscillations. ReservoirInitialFillValue can be either a map or a value (between 0and 1). So we add this to the 'lfuser' element (if it is not there already):
-THIS NEEDS TO BE REVIEWED. DtSecReservoirs IS CURRENTLY NOT READ FROM XML SETTINGS AND NOT USED.
-
-```xml
-	<group>                                                             
-	<comment>                                                           
-	**************************************************************               
-	RESERVOIR OPTION                                                      
-	**************************************************************               
-	</comment>                                                          
-	<textvar name="DtSecReservoirs" value="14400">                  
-	<comment>                                                           
-	Sub time step used for reservoir simulation [s]. Within the model,  
-	the smallest out of DtSecReservoirs and DtSec is used.                
-	</comment>                                                          
-	</textvar>                                                          
-	<textvar name="ReservoirInitialFillValue" value="-9999">        
-	<comment>                                                           
-	Initial reservoir fill fraction                                       	
-	-9999 sets initial fill to normal storage limit                       
-	if you're not using the reservoir option, enter some bogus value     
-	</comment>                                                          
-	</textvar>                                                          
-	</group>                                                            
-```
-
-The value -9999 tells the model to set the initial reservoir fill to the normal storage limit. Note that this value is completely arbitrary. However, if no other information is available this may be a reasonable
-starting point.
-
+All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element. Just make sure that the map with the reservoir locations is in the "maps" directory, and all tables in the 'tables" directory. 
 Finally, you have to tell LISFLOOD that you want to simulate reservoirs! To do this, add the following statement to the 'lfoptions' element:
 
 ```xml
