@@ -250,12 +250,14 @@ The total amount of water supplied by non-conventional sources is:
 <br>*TotalAbstractionFromNonConventionalSources = DomesticAbstractionNONconv  + IndustrialAbstractioNONconv + LivestockAbstractionNONconv* 
 
 
-##### Surface water abstractions and water regions
-
+##### Surface water abstractions 
 The total amount of water to be abstracted by surface water bodies is:
 <br>*TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater + LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater + RiceIrrSurfWaterAbstr*
 
-The *TotalWaterAbstractionFromSurfaceWater* is extracted within *water regions*. These regions are introduced in LISFLOOD due to allow the realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, the abstraction of surface water from the local 0.5x0.5 degree pixel is a reasonable representation of the real process. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area icluding the locations of water demand and abstraction.
+
+##### Water regions
+
+The  *TotalAbstractionFromGroundWater*, the *TotalAbstractionFromNonConventionalSources* and the *TotalWaterAbstractionFromSurfaceWater* are extracted within *water regions*. These regions are introduced in LISFLOOD due to allow the realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, the abstraction of surface water from the local 0.5x0.5 degree pixel is a reasonable representation of the real process. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area icluding the locations of water demand and abstraction.
 
 *Water regions* are generally defined by sub-river-basins within a Country. In order to mimick reality, it is advisable to avoid cross-Country-border abstractions. Whenever information is available, it is strongly recommended to align the *water regions* with the actual areas managed by water management authorities, such as regional water boards. In Europe, the River Basin Districts, as defined in the Water Framework Directive and subdivided by country, can be used.
 
@@ -265,6 +267,7 @@ The *TotalWaterAbstractionFromSurfaceWater* is extracted within *water regions*.
 	<setoption choice="1" name="wateruseRegion"/>
 ```
 
+
 ##### Surface water abstractions from lakes and reservoirs
 
 Lakes and reservoirs within a *water region* can supply part of the surface water abstraction.  The parameter *FractionLakeReservoirWaterUsed* defines the fraction of surface water abstraction which should be supplied by lakes and reservoirs. The value of this parameter (between 0 and 1) is provided in input to the model.
@@ -272,7 +275,7 @@ Lakes and reservoirs within a *water region* can supply part of the surface wate
 LISFLOOD then computes the available water volume in lakes and reservoirs. **The available water volume of a lake is defined equal to the 10% of its total volume storage**. **The available water volume in a reservoir is assumed equal to the minimum between the 1% of its [total storage capacity](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) and the 2% of the volume [stored in the reservoir](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) at the computational time step.**  These conditions are imposed to constantly preserve a 'reasonable' amount of water in reservoirs and lakes. The total water volume which can be potentially abstracted from reservoirs and lakes is then:
 <br>*TotalAvailableVolumeLakesReservoirs = AvailableVolumeLakes + AvailableVolumeReservoirs*
 
-It is here reminded that all the lakes and reservoirs within the same *water region* as the water demand are considered for the computation of the available water volume.
+It is here reminded that all the lakes and reservoirs within the same *water region* are considered for the computation of the available water volume. Similarly, the water demand is computed by considering the whole water region.
 
 The volume which is actually abstracted from lakes and reservoirs within a *water region* is then given by:
 <br>*WaterAbstractedLakesReservoirs = min (TotalAvailableVolumeLakesReservoirs , FractionLakeReservoirWaterUsed * TotalAbstractionFromSurfaceWater)*
@@ -324,6 +327,13 @@ Specifically, the value *IrrigationWater* (after convertion in [mm]) is first ad
 The remainder amount of water (if any) is then added to the upper soil layer ($w_{1b}$). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
 
 In order to check the conservation of mass within the modelled system, LISFLOOD computes the amount of water consumed by irrigation *IrriLossCum* (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors *IrrigationEfficiency* and *ConveyanceEfficiency*), the resulting water content of the superficial and upper soil layers.
+
+
+##### Important techical note for the adequate definition of the water regions
+
+Water demand and water abstraction are spatially distributed within each water region. In other words, the water resourses (surface water bodies and groundwater) are shared inside the water region in order to meet the cumulative requirements of the water region area. For this reason, it is strongly recommended to include the entire water region(s) in the modelled area. If a portion of the water region is not included in the modelled area, then LISFLOOD cannot adequately compute the water demand and abstraction. In other words, LISFLOOD will not be able to account for sources of water outside of the computational domain (it is important to notice that LISFLOOD will not crush but the results will be affected by this discrepancy).
+The inclusion of the complete water region in the computational domain becomes compulsory under the specific circumstances of model calibration.
+Calibrated parameters are optmised for a specific model set up. It is often required to calibrate the parameters of several subcatchments inside a basin. Each calibration subcatchment must include a finite number of water regions (each water region can belong to only one subctatchment). If this condition is met, the calibrated parameters can be correctly optimised. Conversely, when a water region belongs to one or more calibration sub-catchments, the water resources are allocated and abstracted in different quantities when modelling the calibration subcatchment only or the entire basin. Similarly, the option groundwater smooth leads to different  geometries of the cone of depression due to groundwater abstraction when modelling the subcatchment only or the entire basin. These two scenarios impede the correct calibration of the model parameters and must be avoided. The user is advised to switch off the groundwater smooth option and to ensure the consistency between water regione and calibration cacthments. The utility [waterregions](https://github.com/ec-jrc/lisflood-utilities) can be used to 1) verify the consistency between calibration catchments and water regions or 2) create a water region map which is consistent with a set of calibration points.
 
 
 ### Transient or constant water demand
