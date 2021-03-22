@@ -8,6 +8,14 @@ html {
   min-height: 100%;
 }
 
+h1[id]::before,h2[id]::before,h3[id]::before {
+  display: block;
+  content: " ";
+  margin-top: -75px; // Set the Appropriate Height
+  height: 75px; // Set the Appropriate Height
+  visibility: hidden;
+}
+
 img {
   display: block;
   margin-left: auto;
