@@ -111,7 +111,9 @@ Summary of the symbols:
 
 **The reservoir outflow is calculated using the same computational time interval used for the channel routing. **
 
+![Reservoirs_operation](../media/reservoirs_routine.png)
 
+***Figure:*** *Schematic of the reservoirs routine.*
 
 
 ### Preparation of input data 
