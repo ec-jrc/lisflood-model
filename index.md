@@ -1,7 +1,7 @@
 
 
 ![](./media/image2.png)
-------------------------------------<br>
+------------------------------------
 It is with deep sadness that we inform you that on Monday 26th September, our beloved colleague, and the creator of Lisflood, Ad de Roo passed away.
 <br>
 Ad was an internationally renowned hydrologist, who never ceased to share his knowledge and enthusiasm, to the benefit of many JRC and Commission colleagues, and indeed to the European Union.
