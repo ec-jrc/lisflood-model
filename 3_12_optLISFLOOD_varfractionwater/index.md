@@ -5,12 +5,11 @@
 
 This page describes the LISFLOOD option for variable water fraction.
 This option allows to specify the seasonal variation of water fraction.
-The option can be activated adding the following line to the 'lfoption' element in the LISFLOOD settings file:
+The option can be activated adding the following line to the `lfoption` element in the LISFLOOD settings file:
 
 ```xml 
-<setoption name="varfractionwater" choice="1" />
+<setoption choice="1" name="varfractionwater"/>
 ```
-
 
 ### Description of the variable water fraction option
 
@@ -35,7 +34,6 @@ Where, for each land type $k$:
    <br> $f_{k,i}$ is the fraction of land type $k$ at for month $i$;
    <br> $e_{k,i}$ is the remainder of $\Delta f_{water,i}$ still to be distributed after $f_{k,i}$ has been calculated.
 
-
 ### Preparation of input data
 
 In order to use the transient land use change option, the following maps and map stacks need to be provided:
@@ -48,32 +46,34 @@ In order to use the transient land use change option, the following maps and map
 | FracMaxWater    | fracmaxwater      | Map of maximum water fraction in a pixel          | -         |                                                               |
 | WFractionMaps   | varW              | Map stack of seasonal variation of water fraction | -         | 12 maps, one per month.                                       |
 
-<u>Note:</u> The values in WFractionMaps are in the range [0,1] and represent the relative positioning of the monthly value of water fraction between the two extremes determined by the maps WaterFraction and FracMaxWater. WFractionMaps = 0 implies that for that month, the water fraction is equal to the value in the map WaterFraction; while WFractionMaps = 1 implies that it is equal to FracMaxWater. Values in between are linearly interpolated.
+> **_NOTE:_** The values in _WFractionMaps_ are in the range [0,1] and represent the relative monthly value of water fraction between the two extremes determined by the maps _WaterFraction_ and _FracMaxWater_. 
+> * A _WFractionMaps_ value of 0 implies that, for that month, the water fraction is equal to the map _WaterFraction_.
+> * A _WFractionMaps_ value of 1 implies that it is equal to _FracMaxWater_. 
+> * Values in between are linearly interpolated.
 
 ### Preparation of settings file
 
 All input files need to be defined in the settings file.
-If you are using a default LISFLOOD settings template, all file definitions are already defined in the 'lfbinding' element.
-Just make sure that the maps are in the directory indicated by *PathMaps*.
+If you are using a default LISFLOOD settings template, all file definitions are already defined in the `lfbinding` element. Just make sure that the maps are in the directory indicated by *PathMaps*.
 
 ```xml
 <textvar name="WaterFraction" value="$(PathMaps)/fracwater">
-<comment>
-$(PathMapsLanduse)/fracwater.map
-Water fraction of a pixel (0-1)
-</comment>
+    <comment>
+    $(PathMapsLanduse)/fracwater.map
+    Water fraction of a pixel (0-1)
+    </comment>
 </textvar>
 
 <textvar name="FracMaxWater" value="$(PathMaps)/fracmaxwater">
-<comment>
-Fraction of maximum extend of water (0-1)
-</comment>
+    <comment>
+    Fraction of maximum extend of water (0-1)
+    </comment>
 </textvar>
 
 <textvar name="WFractionMaps" value="$(PathMaps)/varW">
-<comment>
-Map stack of seasonal variation of water fraction (0-1)
-</comment>
+    <comment>
+    Map stack of seasonal variation of water fraction (0-1)
+    </comment>
 </textvar>
 ```
 
