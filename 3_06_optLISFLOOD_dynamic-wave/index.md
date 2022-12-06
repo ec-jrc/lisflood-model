@@ -5,12 +5,9 @@
 The kinematic solution is the only numerical methodology currently implemented by LISFLOOD. Nevertheless, a future development of the model can feature the implementation of the diffusive or dynamic solutions of the Saint Venant equations. This page describes one option for such a further development.
 > Within the current implementation, the option *dynamicWave* must be switched off.
 
-
-
 ### PCRaster solution of the diffusive wave formulation
 
 PCRaster provides a solution of the diffusive wave formulation of the Saint Venant equations which includes the friction force term, the gravity force term and the pressure force term. The equations are solved as an explicit, finite forward difference scheme. 
-
 
 #### Time step selection
 
@@ -21,18 +18,18 @@ $$
 $$
 
 where 
-    <br> $\Delta't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, 
-    <br> *∆x* is the length of one channel element (pixel) $[m]$, 
-    <br> *V* is the flow velocity $[\frac{m}{s}]$ and 
+    <br> $\Delta 't_{dyn}$ is the sub-step for the dynamic wave $[seconds]$, 
+    <br> $\Delta x$ is the length of one channel element (pixel) $[m]$, 
+    <br> $V$ is the flow velocity $[\frac{m}{s}]$ and 
     <br> $c_d$ is dynamic wave celerity $[\frac{m}{s}]$. 
 
 The dynamic wave celerity can be calculated as (Chow, 1988):
 
 $$
-{c_d} = \sqrt {gy}
+{c_d} = \sqrt {g \cdot y}
 $$
 
-where *g* is the gravitational acceleration $[\frac{m}{s^{2}}]$ and *y* is the flow depth $[m]$. For a cross-section of a regular geometric shape, *y* can be calculated from the channel dimensions. When using irregularly shaped cross-section data, *y* can be approximated by the water level above the channel bed. 
+where $g$ is the gravitational acceleration $[\frac{m}{s^{2}}]$ and $y$ is the flow depth $[m]$. For a cross-section of a regular geometric shape, $y$ can be calculated from the channel dimensions. When using irregularly shaped cross-section data, $y$ can be approximated by the water level above the channel bed. 
 
 The flow velocity is simply:
 
@@ -47,42 +44,43 @@ where
 The Courant number, $C_{dyn}$, can now be computed as:
 
 $$
-C_{dyn} = \frac{(V + c_d)\Delta t}{\Delta x}
+C_{dyn} = \frac{(V + c_d) \cdot \Delta t}{\Delta x}
 $$
 
-where *∆t* is the overall model time step \[s\]. 
+where $\Delta t$ is the overall model time step $[s]$. 
     
 The number of sub-steps of the numerical solution is then given by:
 
 $$
-SubSteps = \max (1,roundup(\frac{C_{dyn}}{C_{dyn,crit}}))
+SubSteps = \max \left(1, \; roundup \left(\frac{C_{dyn}}{C_{dyn,crit}} \right) \right)
 $$
 
-where $C_{dyn,crit}$ is the critical Courant number. The maximum value of the critical Courant number is 1; in practice it is safer to use a somewhat smaller value such as 0.4. 
-
-
+where $C_{dyn,crit}$ is the critical Courant number. The maximum value of the critical Courant number is 1; in practice, it is safer to use a somewhat smaller value, such as 0.4. 
 
 #### Input data
 
-A number of additional input files are necessary to solve the diffusion wave equations. First, the channel stretches for which this numerical solution has to be used must be defined by a Boolean map. Next, a cross-section identifier map is needed to links the (diffusion or dynamic wave) channel pixels to the cross-section table (see further down). Further, a channel bottom level map that describes the bottom level of the channel (relative to sea level) is required. Finally, a cross-section table that describes the relationship between water height (*H*), channel cross-sectional area (*A*) and wetted perimeter (*P*) for a succession of *H* levels is needed.
+A number of additional input files are necessary to solve the diffusion wave equations:
+
+1. A boolean map that defines the channel stretches for which this numerical solution has to be used.
+2. A cross-section identifier map that links the (diffusion or dynamic wave) channel pixels to the cross-section table (see further down).
+3. A channel bottom level map that describes the bottom level of the channel (relative to sea level).
+4. A cross-section table that describes the relationship between water height ($H$), channel cross-sectional area ($A$) and wetted perimeter ($P$) for a succession of $H$ levels.
 
 The following table lists all the required inputs:
 
-***Table:***  
+***Table. Input data required for the the dynamic wave simulation.***  
 
 | Maps              | Default name  | Description                           | Units                            | Remarks |
 | ----------------- | ------------- | ------------------------------------- | -------------------------------- | ------- |
-| ChannelsDynamic   | chandyn.map   | dynamic wave channels (1,0)           | -                                | Boolean |
+| ChannelsDynamic   | chandyn.map   | dynamic wave channels (1,0)           | -                                | boolean |
 | ChanCrossSections | chanxsect.map | channel cross section IDs             | -                                | nominal |
 | ChanBottomLevel   | chblevel.map  | channel bottom level                  | $m$                              |         |
 | **Tables**        |               |                                       |                                  |         |
 | TabCrossSections  | chanxsect.txt | cross section parameter table (H,A,P) | H: $m$ <br> A: $m^2$ <br> P: $m$ |         |
 
-
-
 #### Layout of the cross-section parameter table
 
-The cross-section parameter table is a text file that contains --for each cross-section- a sequence of water levels (*H*) with their corresponding cross-sectional area (*A*) and wetted perimeter (*P*). The format of each line is as follows:
+The cross-section parameter table is a text file that contains --for each cross-section ($ID$)-- a sequence of water levels ($H$) with their corresponding cross-sectional area ($A$) and wetted perimeter ($P$). The format of each line is as follows:
 
 > ID H A P
 
@@ -109,16 +107,13 @@ As an example:
 ```
 
 
+Note here that the first $H$ level is always 0, for which $A$ and $P$ are, of course, 0 as well. For the last line for each cross-section it is recommended to use some very (i.e. unrealistically) high $H$ level. The reason for doing this is that the dynamic wave routine will crash if during a simulation a water level (or cross-sectional area) is simulated which is beyond the range of the table. This can occur due to a number of reasons (e.g. if the measured cross-section is incomplete, or during calibration of the model). To estimate the corresponding values of $A$ and $P$ one could for example calculate $dA/dH$ and $dP/dH$ over the last two 'real' (i.e. measured) $H$ levels, and extrapolate the results to a very high $H$ level.
 
-Note here that the first *H*-level is always 0, for which *A* and *P* are (of course) 0 as well. For the last line for each cross-section it is recommended to use some very (i.e. unrealistically) high *H*-level. The reason for doing this is that the dynamic wave routine will crash if during a simulation a water level (or cross-sectional area) is simulated which is beyond the range of the table. This can occur due to a number of reasons (e.g. if the measured cross-section is incomplete, or during calibration of the model). To estimate the corresponding values of *A* and *P* one could for example calculate *dA/dH* and *dP/dH* over the last two 'real' (i.e. measured) *H*-levels, and extrapolate the results to a very high *H*-level.
-
-The number of H/A/P combinations that are used for each cross section is user-defined. LISFLOOD automatically interpolates in between the table values.
-
-
+The number of $H/A/P$ combinations that are used for each cross section is user-defined. LISFLOOD automatically interpolates in between the table values.
 
 #### Using the numerical solution wave
 
-The 'lfuser' element has already been edited for the use of the dynamic wave solution. In fact, it contains two parameters that can be set by the user: *CourantDynamicCrit* (which should always be smaller than '1') and a parameter called *DynWaveConstantHeadBoundary*, which defines the boundary condition at the most downstream cell. All remaining dynamic-wave related inputs can be defined in the 'lfbinding' element, and do not require any changes from the user (provided that all default names are used, all maps are in the standard 'maps' directory and the profile table is in the 'tables' directory). In 'lfuser' this will look like this:
+The `lfuser` element of the settings file has already been edited for the use of the dynamic wave solution. In fact, it contains two parameters that can be set by the user: *CourantDynamicCrit* (which should always be smaller than 1), and a parameter called *DynWaveConstantHeadBoundary*, which defines the boundary condition at the most downstream cell. All remaining dynamic-wave related inputs can be defined in the `lfbinding` element, and do not require any changes from the user (provided that all default names are used, all maps are in the standard "maps" directory and the profile table is in the "tables" directory). In `lfuser` this will look like this:
 
 ```xml
 	<comment>                                                           
