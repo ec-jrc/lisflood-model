@@ -12,11 +12,10 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 
 ### Description of the reservoir routine 
 
-Reservoirs are simulated as points in the channel network. The inflow into each reservoir, $I_{res} [\frac{m^3}{s}]$, equals the channel flow upstream of the reservoir. Operational rules for reservoirs are not included implicitly in LISFLOOD, but the model mimics them by using a number of rules which define reservoir output as a function of the relative filling. The relative filling of a reservoir, $F$, is the ratio between the water volume stored in the reservoir at a computational time, $V_t\ [m^3]$, and its total storage capacity, $S\ [m^3]$:
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir, $I_{res} [\frac{m^3}{s}]$, equals the channel flow upstream of the reservoir. Operational rules for reservoirs are not included implicitly in LISFLOOD, but the model mimics them by using a number of rules which define reservoir output as a function of the relative filling. The relative filling of a reservoir, $F$, is the ratio between the water volume stored in the reservoir at a specific time step, $V_t\ [m^3]$, and its total storage capacity, $S\ [m^3]$:
 
 $$
-F = \frac{V_t}{S} \\
-0 \le F \le 1
+F = \frac{V_t}{S} \in [0, 1]
 $$
 
 There are three _special_ relative filling levels:
@@ -29,7 +28,7 @@ Three discharge values define the way the outflow $[\frac{m^3}{s}]$ of a reservo
 - The _non-damaging outflow_, $Q_{nd}$, is the maximum possible outflow that will not cause problems downstream.
 - The _normal outflow_, $Q_{norm}$, is the one valid when the reservoir is within its _normal storage_ filling level.
 
-The previous six parameters ($L_c$,$L_f$, $L_n$, $Q_{min}$, $Q_{nd}$, $Q_{norm}$) are input data.
+The previous six parameters ($L_c$, $L_f$, $L_n$, $Q_{min}$, $Q_{nd}$, $Q_{norm}$) are input data.
 
 There are two non-dimensional calibration parameters that modulate how the reservoir behaves when its normal filling ($L_n$) is exceeded. 
 
@@ -81,18 +80,18 @@ Summary of symbols:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$AdjL_n$:	calibration parameter used to modulate $L_n$ \[-\]
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$ResMultQ_{norm}$:	calibration parameter used to modulate $Q_{norm}$ \[-\]
 
-**The reservoir outflow is calculated using the same computational time interval used for the channel routing.**
+>**Note**. The reservoir outflow is calculated using the same computational time interval used for the channel routing.
 
 ![Reservoirs_operation](../media/reservoirs_routine.png)
 
-***Figure:*** *Schematic of the reservoirs routine.*
+***Figure:*** *Schematic of the reservoir routine.*
 
 ### Preparation of input data 
 
 For the simulation of reservoirs a number of additional input files are necessary. 
 
-1. The locations of the reservoirs are defined on a (nominal) map called *res.map*. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each reservoir receives its inflow from its upstream neighbouring channel pixel, you may want to check if each reservoir has any upstream channel pixels at all (if not, the reservoir will gradually empty during a model run!). 
-2. The management of the reservoirs is described by 7 tables. Each of these tables (text files) should contain as many lines as reservoirs, and each line contains two columns (tab separated) with the reservoir ID and the value of the corresponding characteristic. An example of such text file is as follows:
+1. The locations of the reservoirs are defined on a (nominal) map called *res.map*. It is important that all reservoirs are located on a channel pixel (you can verify this by displaying the reservoirs map on top of the channel map). Also, since each reservoir receives its inflow from its upstream neighbouring channel pixel, you may want to check if each reservoir has any upstream channel pixels at all; if not, the reservoir will gradually empty during a model run!. 
+2. The management of the reservoirs is described by 7 tables (TXT files). Each of these tables should contain as many lines as reservoirs, and each line contains two columns (tab separated) with the reservoir ID and the value of the corresponding characteristic. An example of such text file is as follows:
 
 ```text
 1	77.2
@@ -104,7 +103,7 @@ The following table lists all required input:
 ***Table:*** *Input requirements for the reservoir routine.*
 
 | **Maps**    | **Default name**   | **Description** | **Units**   | **Remarks** |
-|-------------|-------------|-------------|-------------|-------------|
+|-------------|--------------------|-----------------|-------------|-------------|
 | ReservoirSites | res.map     | reservoir locations  | \-          | nominal     |
 | TabTotStorage | rtstor.txt  | reservoir storage capacity  | $[m^3]$ |             |
 | TabConservativeStorageLimit | rclim.txt   | conservative storage limit | \-          | fraction of storage |
@@ -114,16 +113,16 @@ The following table lists all required input:
 | TabNormalOutflowQ | rnormq.txt  | normal outflow     | $[m^3]$ |             |
 | TabNonDamagingOutflowQ | rndq.txt    | non-damaging outflow | $[m^3]$ |             |
 
-When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outflow point, see Figure below), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map donwstream by one cell in downstream direction.
+When you create the map with the reservoir sites, pay special attention to the following: if a reservoir is on the most downstream cell (i.e. the outlet of the catchment, see Figure below), the reservoir routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map donwstream by one cell in downstream direction.
 
 ![Placement of the reservoirs](../media/image42.png)
 
-***Figure:*** *Placement of the reservoirs: reservoirs on the outflow point (left) result in erroneous behavior of the reservoir routine.*
+***Figure:*** *Placement of the reservoirs: reservoirs on the outlet (left) result in erroneous behavior of the reservoir routine.*
 
 ### Preparation of settings file
 
 All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the `lfbinding` element. Just make sure that the map with the reservoir locations is in the "maps" directory, and all tables in the "tables" directory. 
-Finally, you have to tell LISFLOOD that you want to simulate reservoirs! To do this, add the following statement to the `lfoptions` element:
+Finally, you have to tell LISFLOOD that you want to simulate reservoirs. To do this, add the following statement to the `lfoptions` element:
 
 ```xml
 	<setoption name="simulateReservoirs" choice="1" />
