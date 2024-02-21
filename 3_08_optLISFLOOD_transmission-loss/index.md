@@ -20,7 +20,6 @@ The transmission loss module is *optional*, and can be activated by adding the f
 ```
 
 
-
 ### Description of the transmission loss approach
 
 The approach by [Rao and Maurer (1996)](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1752-1688.1996.tb03484.x) builds a one-parameter relationship between the seepage of a channel with the depth of flow. 
@@ -43,6 +42,7 @@ with:
 The main difference to the approach by [Rao and Maurer (1996)](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1752-1688.1996.tb03484.x) is that the $TransPower$ parameter is not calculated using a rating curve, but is estimated (calibrated) as the parameter $TransSub$. 
 
 Transmission loss takes place where the channel gets bigger, with more influence of river-aquifer interaction and also with more river-floodplain interaction. Therefore, transmission losses only affect river pixels that exceed a minimum upstream area.
+
 
 ### Using transmission loss 
 
