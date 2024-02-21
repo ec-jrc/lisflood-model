@@ -27,14 +27,18 @@ The approach by [Rao and Maurer (1996)](https://onlinelibrary.wiley.com/doi/abs/
 A power relationship is then utilized for the stage-discharge relationship, which is coupled with the seepage relationship.
 
 $$
-Outflow = (Inflow^{-TransPower} - TransSub)^{TransPower}
+\begin{aligned}
+Outflow &= (Inflow^{TransPower^{-1}} - TransSub)^{TransPower} \\
+TransLoss &= Inflow - Outflow
+\end{aligned}
 $$
 
 with: 
-       <br> $Outflow$:		discharge at the outflow
-       <br> $Inflow$:		discharge at the Inflow (upstream)
-       <br> $TransPower$: 	parameter given by the rating curve
-       <br> $TransSub$:		parameter which is to calibrate
+       <br> $Outflow$: discharge after deduction of transmission losses.
+       <br> $Inflow$: original discharge before deducting transmission losses.
+       <br> $TransPower$: parameter given by the rating curve.
+       <br> $TransSub$: parameter to be calibrated.
+       <br> $TransLoss$: transmission losses.
 
 The main difference to the approach by [Rao and Maurer (1996)](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1752-1688.1996.tb03484.x) is that the $TransPower$ parameter is not calculated using a rating curve, but is estimated (calibrated) as the parameter $TransSub$. 
 
@@ -70,7 +74,7 @@ No additional maps or tables are needed. Using the transmission loss option invo
         </textvar>                                                          
         <textvar name="TransArea" value="5.0E+10">                      
             <comment>                                                           
-            downstream area taking into account for transmission loss             
+            mimimum upstream area from which transmission losses are computed             
             Standard: 5.0E+10 Range: 1.0E+10 -- 1.0E+11                           
             </comment>                                                          
         </textvar>                                                          
@@ -81,7 +85,7 @@ No additional maps or tables are needed. Using the transmission loss option invo
 
 * `TransPower` is the power transmission loss parameter. By default, it is set to 2.0, but it may range between 1.3 and 2.0 (higher values lead larger losses).
 
-* `TransArea` is the minimum upstream area (in km²) from which river pixels are affected by transmission losses. The default value is $5.0 \cdot 10^{10}$, but it may range between $1.0 \cdot 10^{10}$ and $1.0 \cdot 10^{11}$ (higher values lead to lower losses as fewer river pixels are affected).
+* `TransArea` is the minimum upstream area (in m²) from which river pixels are affected by transmission losses. The default value is $5.0 \cdot 10^{10}$, but it may range between $1.0 \cdot 10^{10}$ and $1.0 \cdot 10^{11}$ (higher values lead to lower losses as fewer river pixels are affected).
 
 
 2. Activate the transmission loss option by adding this line to the `lfoptions` element:
@@ -95,7 +99,7 @@ Now you are ready to run the model with the transmission loss option.
 
 ### Transmission loss output file
 
-The transmission loss option can put out an additional time series as listed in the following table:
+The transmission loss module can put out an additional time series (TSS file) as listed in the following table:
 
 ***Table:*** *Output of transmission loss routine -- Average upstream of gauges.*                                                           
 
