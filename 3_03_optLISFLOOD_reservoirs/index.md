@@ -12,7 +12,7 @@ Reservoirs can be simulated on channel pixels where kinematic wave routing is us
 
 ### Description of the reservoir routine 
 
-Reservoirs are simulated as points in the channel network. The inflow into each reservoir, $I_{res} [\frac{m^3}{s}]$, equals the channel flow upstream of the reservoir. Operational rules for reservoirs are not included implicitly in LISFLOOD, but the model mimics them by using a number of rules which define reservoir output as a function of the relative filling. The relative filling of a reservoir, $F$, is the ratio between the water volume stored in the reservoir at a specific time step, $V_t\ [m^3]$, and its total storage capacity, $S\ [m^3]$:
+Reservoirs are simulated as points in the channel network. The inflow into each reservoir, $I [\frac{m^3}{s}]$, equals the channel flow upstream of the reservoir. Operational rules for reservoirs are not included implicitly in LISFLOOD, but the model mimics them by using a number of rules which define reservoir output as a function of the relative filling. The relative filling of a reservoir, $F$, is the ratio between the water volume stored in the reservoir at a specific time step, $V_t\ [m^3]$, and its total storage capacity, $S\ [m^3]$:
 
 $$
 F = \frac{V_t}{S} \in [0, 1]
@@ -26,59 +26,108 @@ There are three _special_ relative filling levels:
 Three discharge values define the way the outflow $[\frac{m^3}{s}]$ of a reservoir is regulated. 
 - The _minimum outflow_, $Q_{min}$, is the lowest discharge that is maintained for e.g. ecological reasons. 
 - The _non-damaging outflow_, $Q_{nd}$, is the maximum possible outflow that will not cause problems downstream.
-- The _normal outflow_, $Q_{norm}$, is the one valid when the reservoir is within its _normal storage_ filling level.
+- The _normal outflow_, $Q_{n}$, is the one valid when the reservoir is within its _normal storage_ filling level.
 
-The previous six parameters ($L_c$, $L_f$, $L_n$, $Q_{min}$, $Q_{nd}$, $Q_{norm}$) are input data.
+The previous six parameters ($L_c$, $L_f$, $L_n$, $Q_{min}$, $Q_{nd}$, $Q_{n}$) are input data. Apart from them, there are two adimensional calibration parameters that modulate the reservoir behaviour when its normal filling ($L_n$) is exceeded. 
 
-There are two non-dimensional calibration parameters that modulate how the reservoir behaves when its normal filling ($L_n$) is exceeded. 
-
-* $AdjL_n$ defines a new filling level in between $L_n$ and $L_f$. Therefore, it can assume values between 0.01 and 0.99.
+* $\alpha$ defines a new filling level in between $L_n$ and $L_f$. Therefore, it can assume values between 0.01 and 0.99.
 $$
-L_{adj,f} = L_n + AdjL_n \cdot (L_f - L_n)
+L_{n,adj} = L_n + \alpha \cdot (L_f - L_n)
 $$
-* $ResMultQ_{norm}$ defines the outflow at the previous $L_{adj,f}$ filling level. It can assume values between 0.25 and 2.
+* $\beta$ defines the outflow at the previous $L_{n,adj}$ filling level. It can assume values between 0.25 and 2.
 $$
-AdjQ_{norm} = ResMultQ_{norm} \cdot Q_{norm} \\
-Q_{min} \lt AdjQ_{norm} \lt Q_{nd}
+Q_{n,adj} = \beta \cdot Q_{n} \\
+Q_{min} \lt Q_{n,adj} \lt Q_{nd}
 $$
 
-The outflow, $Q_{res} \; [\frac{m^3}{s}]$, depends on the reservoir relative filling:
+The outflow, $Q \; [\frac{m^3}{s}]$, depends on the reservoir relative filling:
 
 $$
-Q_{res} = \begin{cases} \\
-\min\left(Q_{min}, \; \frac{S}{\Delta t_{day}}\right) & if \; F \le 2 \cdot L_c \\
-Q_{min} + \left( AdjQ_{norm}  - Q_{min} \right) \cdot \frac{F - 2 \cdot L_c}{L_n - 2 \cdot L_c} & if \; 2 \cdot L_c \lt F \le L_n \\
-AdjQ_{norm} & if \; L_n \lt F \le  L_{adj,f} \\
-AdjQ_{norm}  + \frac{F - L_{adj,f}}{L_f - L_{adj,f}} \cdot (Q_{nd} - AdjQ_{norm}) & if \; L_{adj,f} \lt F \le L_f \\
-\max \left( \left( F - L_f -0.01 \right) \cdot \frac{S}{\Delta t_{day}} , \; Q_{max} \right) & if \; F \gt L_f \\
+Q = \begin{cases} \\
+\min\left(Q_{min}, \; \frac{V_t}{\Delta t}\right) & if \; F \le 2 \cdot L_c \\
+Q_{min} + \left( Q_{n,adj}  - Q_{min} \right) \cdot \frac{F - 2 \cdot L_c}{L_n - 2 \cdot L_c} & if \; 2 \cdot L_c \lt F \le L_n \\
+Q_{n,adj} & if \; L_n \lt F \le  L_{n,adj} \\
+Q_{n,adj}  + (Q_{nd} - Q_{n,adj}) \cdot \frac{F - L_{n,adj}}{L_f - L_{n,adj}} & if \; L_{n,adj} \lt F \le L_f \\
+\max \left( \left( F - L_f -0.01 \right) \cdot \frac{S}{\Delta t} , \; Q_{max} \right) & if \; F \gt L_f \\
 \end{cases}
 $$
-where $\Delta t_{day}$ is equal to 86400 s, and
+where $\Delta t$ is the duration of a time step in seconds (for a daily simulation it would be 86400 s), and
 $$
-Q_{max} = \min \left( Q_{nd} , \; \max \left( 1.2 \cdot I_{res} , \, AdjQ_{norm} \right) \right)
-$$
-
-Finally, the following condition prevents the outflow from being too large compared to the inflow. If $(Q_{res} \gt 1.2 \cdot I_{res})$ and $(Q_{res} \gt AdjQ_{norm})$ and $(F \lt L_f)$, then:
-$$
-Q_{res} = \max \left( \left( F - L_f - 0.01 \right) \cdot \frac{S}{\Delta t_{day}} , \; Q_{reg} \right)
-$$
-where
-$$
-Q_{reg} = \min \left( Q_{nd} , \; \max \left( 1.2 \cdot I_{res} , \, AdjQ_{norm} \right) \right)
+Q_{max} = \min \left( Q_{nd} , \; \max \left( 1.2 \cdot I , \, Q_{n,adj} \right) \right)
 $$
 
+Finally, the following condition prevents the outflow from being too large compared to the inflow.
+
+$$
+Q = \min \left( Q , \max \left( I , Q_{n,adj} \right) \right) \quad \text{if} \quad Q > 1.2 \cdot I \quad \text{and} \quad L_{n,adj} < F < L_f
+$$
+
+***
+<font color='red'>
+$$
+Q = \begin{cases} \\
+Q_{min} & if \; F \le 2 \cdot L_c \\
+Q_{min} + \left( Q_{n,adj}  - Q_{min} \right) \cdot \frac{F - 2 \cdot L_c}{L_n - 2 \cdot L_c} & if \; 2 \cdot L_c \lt F \le L_n \\
+Q_{n,adj} & if \; L_n \lt F \le  L_{n,adj} \\
+\min \left( Q_{n,adj}  + (Q_{nd} - Q_{n,adj}) \cdot \frac{F - L_{n,adj}}{L_f - L_{n,adj}} , \; \max \left( 1.2 \cdot I , \; Q_{n,adj} \right) \right) & if \; L_{n,adj} \lt F \le L_f \\
+\max \left( \left( F - L_f \right) \cdot \frac{S}{\Delta t} , \; \min \left( Q_{nd} , \; \max \left( 1.2 \cdot I , \, Q_{n,adj} \right) \right) \right) & if \; F \gt L_f \\
+\end{cases}
+$$
+
+where $\Delta t$ is the duration of a time step in seconds (for a daily simulation it would be 86400 s). Finally, the following condition prevents the reservoir from emptying below $L_c$ or from overtopping.
+
+$$
+Q = \max \left( \min \left( Q , \; \frac{ \left( F - L_c \right) \cdot S}{\Delta t} \right) , \; \frac{ \left( F - 1 \right) \cdot S}{\Delta t} \right)
+$$
+
+<font color='red'>**Changes**</font>
+* <font color='red'>When $F \le 2 \cdot L_c$, I've removed the minimum limitation because I apply it at the very end. Apart from that, the limitation is now $\frac{V_t - V_c}{\Delta t}$ instead of simply $\frac{V_t}{\Delta t}$, so that the reservoir storage is never below the conservative limit.</font>
+* <font color='red'>When $L_{n,adj} \lt F \le L_f$, I've added the limitation that was previously done in the end of the routine, since it only applies to this storage zone. On top of it, I have changed the limitation to $\max \left( 1.2 \cdot I , \, Q_{n,adj} \right)$ instead of $\max \left( I , \, Q_{n,adj} \right)$ to be coherent with the rule in the following storage zone.</font>
+* <font color='red'>When $F \gt L_f$, I've removed the $\frac{0.01 \cdot S}{\Delta t}$ reduction of the outflow, because I don't understand its purpose and a 1% of the total volume can be a very large discharge if released in a single time step.</font>
+* <font color='red'>I've added a condition at the end of the routine to make sure that the storage stays between the conservative limit and the total capacity.</font>
+</font>
+***
+
+***
+<font color='green'>
+$$
+Q = \begin{cases} \\
+Q_{min} & if \; F \le 2 \cdot L_c \\
+Q_{min} + \left( Q_{n,adj}  - Q_{min} \right) \cdot \frac{F - 2 \cdot L_c}{L_n - 2 \cdot L_c} & if \; 2 \cdot L_c \lt F \le L_n \\
+Q_{n,adj} & if \; L_n \lt F \le  L_{n,adj} \\
+\min \left( Q_{n,adj}  + (Q_{nd} - Q_{n,adj}) \cdot \frac{F - L_{n,adj}}{L_f - L_{n,adj}} , \; \max \left( 1.2 \cdot I , \; Q_{n,adj} \right) \right) & if \; L_{n,adj} \lt F \le L_f \\
+\max \left( Q_{nd} , \; I \right) & if \; F \gt L_f \\
+\end{cases}
+$$
+
+where $\Delta t$ is the duration of a time step in seconds (for a daily simulation it would be 86400 s). Finally, the following condition prevents the reservoir from emptying below $L_c$ or from overtopping.
+
+$$
+Q = \max \left( \min \left( Q , \; \frac{ \left( F - L_c \right) \cdot S}{\Delta t} \right) , \; \frac{ \left( F - 1 \right) \cdot S}{\Delta t} \right)
+$$
+
+<font color='green'>**Changes**</font>
+* <font color='green'>When $F \le 2 \cdot L_c$, I've removed the minimum limitation because I apply it at the very end. Apart from that, the limitation is now $\frac{V_t - V_c}{\Delta t}$ instead of simply $\frac{V_t}{\Delta t}$, so that the reservoir storage is never below the conservative limit.</font>
+* <font color='green'>When $L_{n,adj} \lt F \le L_f$, I've added the limitation that was previously done in the end of the routine, since it only applies to this storage zone. On top of it, I have changed the limitation to $\max \left( 1.2 \cdot I , \, Q_{n,adj} \right)$ instead of $\max \left( I , \, Q_{n,adj} \right)$ to be coherent with the rule in the following storage zone.</font>
+* <font color='green'>When $F \gt L_f$, I've removed the $\frac{0.01 \cdot S}{\Delta t}$ reduction of the outflow, because I don't understand its purpose and a 1% of the total volume can be a very large discharge if released in a single time step.</font>
+* <font color='green'>I've added a condition at the end of the routine to make sure that the storage stays between the conservative limit and the total capacity.</font>
+</font>
+***
+
+    
 Summary of symbols:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$S$:		Reservoir storage capacity $[m^3]$
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$F$:		Reservoir relative filling (1 at total storage capacity) \[-\]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;$I$:	Reservoir inflow $[\frac{m^3} {s}]$
+<br>&nbsp;&nbsp;&nbsp;&nbsp;$Q$:	Reservoir outflow $[\frac{m^3} {s}]$
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$L_c$:	Conservative storage limit \[-\]
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$L_n$:	Normal storage limit \[-\]
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$L_f$:	Flood storage limit \[-\]
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$Q_{min}$:	Minimum outflow $[\frac{m^3} {s}]$
-<br>&nbsp;&nbsp;&nbsp;&nbsp;$Q_{norm}$:	Normal outflow $[\frac{m^3} {s}]$
+<br>&nbsp;&nbsp;&nbsp;&nbsp;$Q_{n}$:	Normal outflow $[\frac{m^3} {s}]$
 <br>&nbsp;&nbsp;&nbsp;&nbsp;$Q_{nd}$:	Non-damaging outflow  $[\frac{m^3} {s}]$
-<br>&nbsp;&nbsp;&nbsp;&nbsp;$I_{res}$:	Reservoir inflow $[\frac{m^3} {s}]$
-<br>&nbsp;&nbsp;&nbsp;&nbsp;$AdjL_n$:	calibration parameter used to modulate $L_n$ \[-\]
-<br>&nbsp;&nbsp;&nbsp;&nbsp;$ResMultQ_{norm}$:	calibration parameter used to modulate $Q_{norm}$ \[-\]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;$\alpha$:	calibration parameter used to modulate $L_n$ \[-\] (`adjust_Normal_FLood` in the settings file)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;$\beta$:	calibration parameter used to modulate $Q_{n}$ \[-\] (`ReservoirRnormqMult` in the settings file)
 
 >**Note**. The reservoir outflow is calculated using the same computational time interval used for the channel routing.
 
