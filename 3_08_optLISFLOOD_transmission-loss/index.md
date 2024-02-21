@@ -3,7 +3,7 @@
 
 ### Introduction
 
-> **Note Ad de Roo**. The Transition loss option should not be used anymore and be gradually deleted from the code and the manual. Water abstractions are modelled in a seperated routine. Open water evaporation in rivers is dealt with by the 'water fraction'. Losses to deeper groundwater are dealt with differently now, using the `GroundwaterThresholdValue`.
+> **Note Ad de Roo**. The Transition loss option should not be used anymore and be gradually deleted from the code and the manual. Water abstractions are modelled in a separated routine. Open water evaporation in rivers is dealt with by the 'water fraction'. Losses to deeper groundwater are dealt with differently now, using the `GroundwaterThresholdValue`.
 
 The term 'transmission loss' originates from electronic or communication science and stands for: "the loss of power or voltage of a transmitted wave or current in passing along a transmission line or path or through a circuit device". In river systems, particularly in semi-arid and arid region, a similar effect can be observed: a loss of water along river channel, especially during low and average flow periods. The main causes for this loss might be:
 
