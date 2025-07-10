@@ -31,8 +31,8 @@ This distinction is controlled by the average temperature ($\bar{T}$). If $\bar{
 
 $$
 \begin{cases}
-\text{SF}_z = \text{SnowFactor} \cdot \text{P} & \text{if } T_z < T_{snow} \\
-\text{RF}_z = \text{P} & \text{if } T_z \ge T_{snow}
+SF_z = \text{SnowFactor} \cdot P & \text{if } T_z < T_{snow} \\
+RF_z = P & \text{if } T_z \ge T_{snow}
 \end{cases}
 $$
 
@@ -41,17 +41,17 @@ $$
 Differently from rain, snow accumulates on the soil surface until it melts. The rate of snowmelt is estimated using a simple degree-day factor method (e.g. see WMO, 1986). LISFLOOD uses a variation on the degree-day method that includes an increased snowmelt when it [rains over snow](#Rain-over-snow), and a [seasonal variation of the snowmelt coefficient](#Seasonal-variation-of-the-snowmelt-coefficient).
 
 $$
-\text{SM}_z = 
-\begin{cases}({C_{sm}} + C_{seasonal})(1 + 0.01 \cdot \text{RF} \cdot \Delta t)(T_z - T_{melt}) \cdot \Delta t & \text{if } T_z > T_{melt} \\
+SM_z = 
+\begin{cases}({C_{sm}} + C_{seasonal})(1 + 0.01 \cdot RF_z \cdot \Delta t)(T_z - T_{melt}) \cdot \Delta t & \text{if } T_z > T_{melt} \\
 0 & \text{else}
 \end{cases}
 $$
 
 where:
-* $\text{SM}_z$ is the snowmelt ($mm$) per time step in elevation zone $z$.
+* $SM_z$ is the snowmelt ($mm$) per time step in elevation zone $z$.
 * $C_{sm}$ is the degree-day factor ($\frac{mm} {^\circ\mathrm{C} \ day}$), a.k.a. snowmelt coefficient.
 * $C_{seasonal}$ is the seasonal variation of the degree-day factor ($\frac{mm} {^\circ\mathrm{C} \ day}$).
-* $\text{RF}$ is the rainfall (not snow!) intensity $[\frac{mm}{day}]$.
+* $RF_z$ is the rainfall (not snow!) intensity ($\frac{mm}{day}$) in the eleavatoin zone $z$.
 * $T_z$ is the average temperature ($^\circ\mathrm{C}$) in the elevation zone $z$.
 * $T_{melt}$ is the temperature threshold ($^\circ\mathrm{C}$) at which snow melt starts. It can be defined by the user, but a value of $1\,^\circ\mathrm{C}$ is recommended.
 * $\Delta t$ is the time interval ($day$). It can be smaller than 1 day.
@@ -90,11 +90,11 @@ At high altitudes, where the temperature never exceeds $1\,^\circ \text{C}$, the
 In LISFLOOD, this process is emulated by melting the ice in higher altitudes on an annual basis over summer.
 
 $$
-\text{IM}_z = T_z \cdot C_{im} \cdot \Delta t
+IM_z = T_z \cdot C_{im} \cdot \Delta t
 $$
 
 where:
-* $\text{IM}_z$ is the icemelt ($mm$) per time step and elevation zone.
+* $IM_z$ is the icemelt ($mm$) per time step and elevation zone.
 * $C_{im}$ is the seasonally-varying icemelt coefficent ($\frac{mm} {^\circ\mathrm{C} \ day}$).
 
 The seasonal icemelt coefficient enforces that icemelt only happens during summer (from June 13 to September 13 in the Norherm Hemisphere, from December 13 to March 14 in the Southern Hemisphere). It also takes the shape of a sine function with a maximum value of $7\,\frac{mm} {^\circ\mathrm{C} \ day}$:
@@ -115,14 +115,14 @@ where $\text{start}$ and $\text{end}$ are the days of the year representing the 
 
 ### Glacier melt
 
-In the global simulations using the GloFAS setup, it has been observed that the snow water equivalent ($\text{SWE}$) tend to accumulate over the years in some areas of the world. To solve this issue, glacier melting was introduced in LISFLOOD v5.
+In the global simulations using the GloFAS setup, it has been observed that the snow water equivalent ($SWE$) tend to accumulate over the years in some areas of the world. To solve this issue, glacier melting was introduced in LISFLOOD v5.
 
 The glacier melt routine establishes a maximum value of the SWE of 2000 mm in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
 
 $$
-\text{GM} = 
+GM = 
 \begin{cases}
-\left( \text{SWE}_z - 2000 \right) \cdot C_{gm} & \text{if } \text{SWE}_z \gt 2000 \\
+\left( SWE_z - 2000 \right) \cdot C_{gm} & \text{if } SWE_z \gt 2000 \\
 0 & \text{else}
 \end{cases}
 $$
@@ -133,8 +133,8 @@ At each time step and elevation zone, the initial snow water equivalent ($\text{
 
 $$
 \begin{aligned}
-\text{M}_z &= \min \left( \text{SM}_z + \text{IM}_z + \text{GM}_z,\ \text{SWE}_{z,t} \right),\ 0 \\
-\text{SWE}_{z,t+1} &= \text{SWE}_{z,t} + \text{SF} - \text{M}_z
+M_z &= \min \left( SM_z + IM_z + GM_z,\ SWE_{z,t} \right),\ 0 \\
+SWE_{z,t+1} &= SWE_{z,t} + SF - M_z
 \end{aligned}
 $$
 
