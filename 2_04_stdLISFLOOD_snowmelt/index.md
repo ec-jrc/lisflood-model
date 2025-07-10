@@ -27,14 +27,24 @@ Snow accumulation and melting are subsequently modelled separately for each elev
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
 
-This distinction is controlled by the average temperature ($\bar{T}$). If $\bar{T}$ is below a threshold $T_{snow}$, all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ C$ is recommended. A snow correction factor $SnowFactor$ is then applied to correct for undercatch of snow precipitation. Undercatch in this context refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
+This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ C$ is recommended. A snow correction factor $SnowFactor$ is then applied to correct for undercatch of snow precipitation. Undercatch in this context refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
 $$
 \begin{cases}
-SF_z = \text{SnowFactor} \cdot P & \text{if } T_z < T_{snow} \\
-RF_z = P & \text{if } T_z \ge T_{snow}
+\begin{aligned}
+SF_z &= \text{SnowFactor} \cdot P \\
+RF_z &= 0
+\end{aligned}
+& \text{if } T_z < T_{\text{snow}} \\
+\\
+\begin{aligned}
+SF_z &= 0 \\
+RF_z &= P
+\end{aligned}
+& \text{if } T_z \ge T_{\text{snow}}
 \end{cases}
 $$
+
 
 ## Snow melt
 
@@ -133,7 +143,7 @@ At each time step and elevation zone, the initial snow water equivalent ($\text{
 
 $$
 \begin{aligned}
-M_z &= \min \left( SM_z + IM_z + GM_z,\ SWE_{z,t} \right),\ 0 \\
+M_z &= \min \left( SM_z + IM_z + GM_z,\ SWE_{z,t} \right) \\
 SWE_{z,t+1} &= SWE_{z,t} + SF - M_z
 \end{aligned}
 $$
