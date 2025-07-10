@@ -2,6 +2,8 @@
 
 The LISFLOOD snow module uses a modification of the degree-day method to simulate the snow water equivalent ($\text{SWE}$) accumulated over every pixel in the catchment.
 
+The snow module uses as inputs the map stack of precipitation and average temperature as meteorological forcings, and the snowmelt coefficient —either as a map or a fixed value—. The output is a map stack of snow water equivalent in each of the [elevation zones](#Elevation-zones).
+
 ## Elevation zones
 
 For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel levelas shown in Figure 1.
