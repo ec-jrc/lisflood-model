@@ -81,7 +81,7 @@ Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ C \c
 
 <img src="../media/image7.jpg" alt="seasonal oscillation of the snowmelt coefficient" width="600">
 
-***Figure 2.** Sine-shaped snow melt coefficient ($C_{sm} + C_{seasonal}$) as a function of the day of the year.*
+***Figure 2.** Sine-shaped snow melt coefficient (*$C_{sm} + C_{seasonal}$*) as a function of the day of the year.*
 
 ## Ice melt
 
