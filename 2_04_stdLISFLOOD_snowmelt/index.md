@@ -31,8 +31,8 @@ This distinction is controlled by the average temperature ($\bar{T}$). If $\bar{
 
 $$
 \begin{cases}
-SF_z = SnowFactor \cdot P & \text{if } T_z < T_{snow} \\
-RF_z = P & \text{if } T_z \ge T_{snow}
+\text{SF}_z = \text{SnowFactor} \cdot \text{P} & \text{if } T_z < T_{snow} \\
+\text{RF}_z = \text{P} & \text{if } T_z \ge T_{snow}
 \end{cases}
 $$
 
@@ -42,7 +42,7 @@ Differently from rain, snow accumulates on the soil surface until it melts. The 
 
 $$
 \text{SM}_z = 
-\begin{cases}({C_{sm}} + C_{seasonal})(1 + 0.01 \cdot \text{RF} \cdot \Delta t)(T_z - T_{melt}) \cdot \Delta t & \text{if } T_z > T_{\text{melt}} \\
+\begin{cases}({C_{sm}} + C_{seasonal})(1 + 0.01 \cdot \text{RF} \cdot \Delta t)(T_z - T_{melt}) \cdot \Delta t & \text{if } T_z > T_{melt} \\
 0 & \text{else}
 \end{cases}
 $$
