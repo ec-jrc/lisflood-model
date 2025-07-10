@@ -31,8 +31,8 @@ This distinction is controlled by the average temperature ($\bar{T}$). If $\bar{
 
 $$
 \begin{cases}
-\text{SF}_z = \text{SnowFactor} \cdot \text{P} & \text{if } T_z < T_{\text{snow}} \\
-\text{RF}_z = \text{P} & \text{if } T_z \ge T_{\text{snow}}
+SF_z = SnowFactor \cdot P & \text{if } T_z < T_{snow} \\
+RF_z = P & \text{if } T_z \ge T_{snow}
 \end{cases}
 $$
 
