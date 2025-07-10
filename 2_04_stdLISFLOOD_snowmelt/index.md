@@ -27,7 +27,7 @@ Snow accumulation and melting are subsequently modelled separately for each elev
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
 
-This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ C$ is recommended. A snow correction factor $SnowFactor$ is then applied to correct for undercatch of snow precipitation. Undercatch in this context refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
+This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ C$ is recommended. A snow correction factor $SnowFactor$ is applied to correct for undercatch of snowfall. Undercatch, in this context, refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
 $$
 \begin{cases}
