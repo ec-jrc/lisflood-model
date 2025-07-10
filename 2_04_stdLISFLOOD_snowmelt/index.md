@@ -1,8 +1,8 @@
-## Snow module
+# Snow module
 
 The LISFLOOD snow module uses a modification of the degree-day method to simulate the snow water equivalent ($\text{SWE}$) accumulated over every pixel in the catchment.
 
-### Elevation zones
+## Elevation zones
 
 For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel levelas shown in Figure 1.
 
@@ -23,7 +23,7 @@ $$
 
 Snow accumulation and melting are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone. Only the glacier melt redistributes snow from the higher to the lower elevation zones.
 
-### Snowfall-rainfall partition
+## Snowfall-rainfall partition
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
 
@@ -36,7 +36,7 @@ RF_z = P & \text{if } T_z \ge T_{snow}
 \end{cases}
 $$
 
-### Snow melt
+## Snow melt
 
 Differently from rain, snow accumulates on the soil surface until it melts. The rate of snowmelt is estimated using a simple degree-day factor method (e.g. see WMO, 1986). LISFLOOD uses a variation on the degree-day method that includes an increased snowmelt when it [rains over snow](#Rain-over-snow), and a [seasonal variation of the snowmelt coefficient](#Seasonal-variation-of-the-snowmelt-coefficient).
 
@@ -58,13 +58,13 @@ where:
 
 The value of $C_{sm}$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __this parameter is used as calibration parameter__. The parameter range used in the model calibration can be found in this [link](https://ec-jrc.github.io/lisflood-code/4_annex_parameters/).
 
-#### Rain over snow
+### Rain over snow
 
 Speers *et al.* (1979) developed an extension of the degree-day method that accounts for accelerated snowmelt when it is raining (cited in Young, 1985). The equation is supposed to apply when rainfall is greater than 30 mm in 24 hours. Moreover, although the equation is reported to work sufficiently well in forested areas, it is not valid in areas that are above the tree line, where  radiation is the main energy source for snowmelt.
 
 In LISFLOOD, the increased snowmelt under rain assumes that, for each mm of rainfall, the rate of snowmelt increases by 1% compared to a dry situation. 
 
-#### Seasonal variation of the snowmelt coefficient
+### Seasonal variation of the snowmelt coefficient
 
 The seasonal snowmelt coefficient ($C_{seasonal}$) allows for an annual oscillation of the snowmelt coefficient over its base value. It is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 
@@ -83,7 +83,7 @@ Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ C \c
 
 ***Figure 2.** Sine-shaped snow melt coefficient ($C_{sm} + C_{seasonal}$) as a function of the day of the year.*
 
-### Ice melt
+## Ice melt
 
 At high altitudes, where the temperature never exceeds $1\,^\circ \text{C}$, the model accumulates snow as the temperature threshold for melting ($T_{melt}$) is never exceeded. In these altitudes runoff from glacier melt is an important part. Snow will accumulate and convert into firn; then, firn is converted into ice and transported to the lower regions. This process can take decades or even hundreds of years. In the ablation area the ice is melted. 
 
@@ -113,7 +113,7 @@ where $\text{start}$ and $\text{end}$ are the days of the year representing the 
 
 ***Figure 3.** Sine-shaped icemelt coefficient as a function of the day of the year. This graph refers to the Northern Hemisphere.*
 
-### Glacier melt
+## Glacier melt
 
 In the global simulations using the GloFAS setup, it has been observed that the snow water equivalent ($SWE$) tend to accumulate over the years in some areas of the world. To solve this issue, glacier melting was introduced in LISFLOOD v5.
 
@@ -137,8 +137,6 @@ M_z &= \min \left( SM_z + IM_z + GM_z,\ SWE_{z,t} \right),\ 0 \\
 SWE_{z,t+1} &= SWE_{z,t} + SF - M_z
 \end{aligned}
 $$
-
-
 
 
 [🔝](#top)
