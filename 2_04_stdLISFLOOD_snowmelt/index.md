@@ -17,9 +17,9 @@ The division in elevation zones is based on a normal distribution, which was fou
 $$
 T_z = 
 \begin{cases}
-\bar{T} - 0.9674 \cdot \sigma_z \cdot \gamma & \text{if zone A} \\
+\bar{T} + 0.9674 \cdot \sigma_z \cdot \gamma & \text{if zone A} \\
 \bar{T} & \text{if zone B} \\
-\bar{T} + 0.9674 \cdot \sigma_z \cdot \gamma & \text{if zone C}
+\bar{T} - 0.9674 \cdot \sigma_z \cdot \gamma & \text{if zone C}
 \end{cases}
 $$
 
@@ -29,7 +29,7 @@ Snow accumulation and melting are subsequently modelled separately for each elev
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
 
-This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ C$ is recommended. A snow correction factor $SnowFactor$ is applied to correct for undercatch of snowfall. Undercatch, in this context, refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
+This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ \text{C}$ is recommended. A snow correction factor $SnowFactor$ is applied to correct for undercatch of snowfall. Undercatch, in this context, refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
 $$
 \begin{cases}
@@ -89,7 +89,7 @@ $$
 C_{seasonal} = \sin \left( \left( \text{doy} - 81 \right) \frac{2 \cdot \pi}{365.25} \right)
 $$
 
-Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ C \cdot day}$ is modulated using $C_{seasonal}$. The value of $C_{sm}$ is reduced by $0.5$ at December 21 and a increased by $0.5$ on the June 21. This example refers to the Northern emisphere.
+Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ \text{C} \cdot day}$ is modulated using $C_{seasonal}$. The value of $C_{sm}$ is reduced by $0.5$ at December 21 and a increased by $0.5$ on the June 21. This example refers to the Northern emisphere.
 
 <img src="../media/image7.jpg" alt="seasonal oscillation of the snowmelt coefficient" width="600">
 
@@ -129,7 +129,7 @@ where $\text{start}$ and $\text{end}$ are the days of the year representing the 
 
 In the global simulations using the GloFAS setup, it has been observed that the snow water equivalent ($SWE$) tend to accumulate over the years in some areas of the world. To solve this issue, glacier melting was introduced in LISFLOOD v5.
 
-The glacier melt routine establishes a maximum value of the SWE of 2000 mm in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
+The glacier melt routine establishes a maximum value of the SWE of $2000\,\text{mm}$ in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
 
 $$
 GM = 
@@ -138,6 +138,8 @@ GM =
 0 & \text{else}
 \end{cases}
 $$
+
+where the glacier melt coefficient ($C_{gm}$) was empirically given a value of $0.01$.
 
 ## Swow water equivalent
 
