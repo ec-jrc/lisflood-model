@@ -143,12 +143,12 @@ where the glacier melt coefficient ($C_{gm}$) was empirically given a value of $
 
 ## Swow water equivalent
 
-At each time step and elevation zone, the initial snow water equivalent ($\text{SWE}_{z,t}$) is updated with the snowfall ($\text{SF}$), the snowmelt ($\text{SM}$) the icemelt ($\text{IM}$) and the glacier melt ($\text{GM}$). The total amount of melting (snow, ice and glacier melt) cannot exceed the available snow water equivalent.
+At each time step and elevation zone, the initial snow water equivalent ($\text{SWE}_{z,t}$) is updated with the snowfall ($\text{SF}$), the snowmelt ($\text{SM}$) the icemelt ($\text{IM}$) and the glacier melt ($\text{GM}$). The total amount of melting (snow, ice and glacier) cannot exceed the available snow water equivalent.
 
 $$
 \begin{aligned}
-M_z &= \min \left( SM_z + IM_z + GM_z,\ SWE_{z,t} \right) \\
-SWE_{z,t+1} &= SWE_{z,t} + SF_z - M_z
+M_{z,t} &= \min \left( SM_{z,t} + IM_{z,t} + GM_{z,t},\ SWE_{z,t-1} \right) \\
+SWE_{z,t} &= SWE_{z,t-1} + SF_{z,t} - M_{z,t}
 \end{aligned}
 $$
 
