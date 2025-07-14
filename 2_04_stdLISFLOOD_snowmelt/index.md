@@ -132,7 +132,7 @@ In the global simulations using the GloFAS setup, it has been observed that the 
 The glacier melt routine establishes a maximum value of the SWE of $2000\,\text{mm}$ in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
 
 $$
-GM = 
+GM_z = 
 \begin{cases}
 \left( SWE_z - 2000 \right) \cdot C_{gm} & \text{if } SWE_z \gt 2000 \\
 0 & \text{else}
@@ -143,7 +143,7 @@ where the glacier melt coefficient ($C_{gm}$) was empirically given a value of $
 
 ## Swow water equivalent
 
-At each time step and elevation zone, the initial snow water equivalent ($\text{SWE}_{z,t-1}$) is updated with the snowfall ($\text{SF}$), the snowmelt ($\text{SM}$) the icemelt ($\text{IM}$) and the glacier melt ($\text{GM}$). The total amount of melting (snow, ice and glacier) cannot exceed the available snow water equivalent.
+At each time step and elevation zone, the initial snow water equivalent ($\text{SWE}_{z,t-1}$) is updated with the snowfall ([$\text{SF}$](#Snowfall-rainfall-partition)), the snowmelt ([$\text{SM}$](#Snow-melt)) the icemelt ([$\text{IM}$](#Ice-melt)) and the glacier melt ([$\text{GM}$](#Glacier-melt)). The total amount of melting (snow, ice and glacier) cannot exceed the available snow water equivalent.
 
 $$
 \begin{aligned}
