@@ -147,8 +147,8 @@ At each time step and elevation zone, the initial snow water equivalent ($\text{
 
 $$
 \begin{aligned}
-M_z &= \min \left( SM_z + IM_z + GM_z,\ SWE_{z,t} \right) \\
-SWE_{z,t+1} &= SWE_{z,t} + SF - M_z
+M_z &= \min \left( SM_z + IM_z + GM_z,\ \text{SWE}_{z,t} \right) \\
+\text{SWE}_{z,t+1} &= SWE_{z,t} + SF_z - M_z
 \end{aligned}
 $$
 
