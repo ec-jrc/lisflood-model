@@ -6,13 +6,15 @@ The snow module uses as inputs the map stack of precipitation and average temper
 
 ## Elevation zones
 
-For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel levelas shown in Figure 1.
+For large pixel sizes, there may be considerable sub-pixel heterogeneity in snow accumulation and melt, which is a particular problem if there are large elevation differences within a pixel. Because of this, snow melt and accumulation are modelled separately for 3 separate elevation zones, which are defined at the sub-pixel level, as shown in Figure 1.
 
 <img src="../media/image10.png" alt="elevation zones in the LISFLOOD snow module" width="500">
 
 ***Figure 1.** Definition of sub-pixel elevation zones in the snow module. Snowmelt and accumulation calculations in each zone are based on elevation (and derived temperature) in centroid of each zone.*
 
-The division in elevation zones is based on a normal distribution, which was found to adequately fit the real distribution of the elevation of e.g. 100m SRTM DEM pixels within a 5x5km grid cell. Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. Assuming further that $\bar{T}$ is valid for the average pixel elevation, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones, using a fixed temperature lapse rate ($\gamma$) of $0.0065~^\circ\mathrm{C}\,\mathrm{m}^{-1}$. 
+The elevations zones are determined based on a normal distribution of elevation values, which has been found to represent well the actual distributions. To this purpose, the standard deviation of elevation within a grid cell is calculated from the Multi-Error-Removed Improved-Terrain (MERIT) DEM with a spatial resolution of 90 m ([Yamazaki et al., 2017](https://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM/)). Three elevation zones *A*, *B*, and *C* are defined with each zone occupying one third of the pixel surface. 
+
+The model assumes that $\bar{T}$ is valid for the average pixel elevation, i.e., the elevation zone *B*. For the other two zones, average temperature is extrapolated to the centroids of the lower (*A*) and upper (*C*) elevation zones using a fixed temperature lapse rate ($\gamma$) of $0.0065~^\circ\mathrm{C} \cdot \mathrm{m}^{-1}$. 
 
 $$
 T_z = 
@@ -29,7 +31,7 @@ Snow accumulation and melting are subsequently modelled separately for each elev
 
 In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
 
-This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1\,^\circ \text{C}$ is recommended. A snow correction factor $SnowFactor$ is applied to correct for undercatch of snowfall. Undercatch, in this context, refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
+This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1 ^\circ \text{C}$ is recommended. A snow correction factor $SnowFactor$ is applied to correct for undercatch of snowfall. Undercatch, in this context, refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
 $$
 \begin{cases}
@@ -50,7 +52,7 @@ $$
 
 ## Snow melt
 
-Differently from rain, snow accumulates on the soil surface until it melts. The rate of snowmelt is estimated using a simple degree-day factor method (e.g. see WMO, 1986). LISFLOOD uses a variation on the degree-day method that includes an increased snowmelt when it [rains over snow](#Rain-over-snow), and a [seasonal variation of the snowmelt coefficient](#Seasonal-variation-of-the-snowmelt-coefficient).
+Differently from rain, snow accumulates on the soil surface until it melts. The rate of snowmelt is estimated using a simple degree-day factor method (e.g. see WMO, 1986). LISFLOOD uses a variation on the degree-day method that includes an increased snowmelt when it [rains over snow](#Rain-over-snow), and a [seasonal variation of the snowmelt coefficient](#Seasonal-variation).
 
 $$
 SM_z = 
@@ -65,7 +67,7 @@ where:
 * $C_{seasonal}$ is the seasonal variation of the degree-day factor ($\frac{mm} {^\circ\mathrm{C} \ day}$).
 * $RF_z$ is the rainfall (not snow!) intensity ($\frac{mm}{day}$) in the eleavatoin zone $z$.
 * $T_z$ is the average temperature ($^\circ\mathrm{C}$) in the elevation zone $z$.
-* $T_{melt}$ is the temperature threshold ($^\circ\mathrm{C}$) at which snow melt starts. It can be defined by the user, but a value of $1\,^\circ\mathrm{C}$ is recommended.
+* $T_{melt}$ is the temperature threshold ($^\circ\mathrm{C}$) at which snow melt starts. It can be defined by the user, but a value of $1 ^\circ\mathrm{C}$ is recommended.
 * $\Delta t$ is the time interval ($day$). It can be smaller than 1 day.
 
 The value of $C_{sm}$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __this parameter is used as calibration parameter__. The parameter range used in the model calibration can be found in this [link](https://ec-jrc.github.io/lisflood-code/4_annex_parameters/).
@@ -76,14 +78,14 @@ Speers *et al.* (1979) developed an extension of the degree-day method that acco
 
 In LISFLOOD, the increased snowmelt under rain assumes that, for each mm of rainfall, the rate of snowmelt increases by 1% compared to a dry situation. 
 
-### Seasonal variation of the snowmelt coefficient
+### Seasonal variation
 
 The seasonal snowmelt coefficient ($C_{seasonal}$) allows for an annual oscillation of the snowmelt coefficient over its base value. It is also used in several other models (e.g. Anderson 2006, Viviroli et al., 2009). There are mainly two reasons to use a seasonally variable melt factor:
 
 * The solar radiation has an effect on the energy balance and varies with the time of the year.
 * The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in the amount of net solar radiation.
 
-In LISFLOOD, a sine funcion of amplitue $1\,\frac{mm}{°C \ day}$ allows for a varition over the base value of the snowmelt coefficient depending on the day of the year ($\text{doy}$). The centering of this ocsillation changes in the Northern Hemisphere (maximun on June 21) and Southern Hemisphere (maximum on December 21):
+In LISFLOOD, a sine funcion of amplitue $1 \frac{mm}{°C \ day}$ allows for a varition over the base value of the snowmelt coefficient depending on the day of the year ($\text{doy}$). The centering of this ocsillation changes in the Northern Hemisphere (maximun on June 21) and Southern Hemisphere (maximum on December 21):
 
 $$
 C_{seasonal} = \sin \left( \left( \text{doy} - 81 \right) \frac{2 \cdot \pi}{365.25} \right)
@@ -97,7 +99,7 @@ Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ \tex
 
 ## Ice melt
 
-At high altitudes, where the temperature never exceeds $1\,^\circ \text{C}$, the model accumulates snow as the temperature threshold for melting ($T_{melt}$) is never exceeded. In these altitudes runoff from glacier melt is an important part. Snow will accumulate and convert into firn; then, firn is converted into ice and transported to the lower regions. This process can take decades or even hundreds of years. In the ablation area the ice is melted. 
+At high altitudes, where the temperature never exceeds $1 ^\circ \text{C}$, the model accumulates snow as the temperature threshold for melting ($T_{melt}$) is never exceeded. In these altitudes runoff from glacier melt is an important part. Snow will accumulate and convert into firn; then, firn is converted into ice and transported to the lower regions. This process can take decades or even hundreds of years. In the ablation area the ice is melted. 
 
 In LISFLOOD, this process is emulated by melting the ice in higher altitudes on an annual basis over summer.
 
@@ -109,7 +111,7 @@ where:
 * $IM_z$ is the icemelt ($mm$) per time step and elevation zone.
 * $C_{im}$ is the seasonally-varying icemelt coefficent ($\frac{mm} {^\circ\mathrm{C} \ day}$).
 
-The seasonal icemelt coefficient enforces that icemelt only happens during summer (from June 13 to September 13 in the Norherm Hemisphere, from December 13 to March 14 in the Southern Hemisphere). It also takes the shape of a sine function with a maximum value of $7\,\frac{mm} {^\circ\mathrm{C} \ day}$:
+The seasonal icemelt coefficient enforces that icemelt only happens during summer (from June 13 to September 13 in the Norherm Hemisphere, from December 13 to March 14 in the Southern Hemisphere). It also takes the shape of a sine function with a maximum value of $7 \frac{mm} {^\circ\mathrm{C} \ day}$:
 
 $$
 C_{im} =
@@ -129,7 +131,7 @@ where $\text{start}$ and $\text{end}$ are the days of the year representing the 
 
 In the global simulations using the GloFAS setup, it has been observed that the snow water equivalent ($SWE$) tend to accumulate over the years in some areas of the world. To solve this issue, glacier melting was introduced in LISFLOOD v5.
 
-The glacier melt routine establishes a maximum value of the SWE of $2000\,\text{mm}$ in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
+The glacier melt routine establishes a maximum value of the SWE of $2000 \text{mm}$ in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
 
 $$
 GM_z = 
