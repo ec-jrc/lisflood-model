@@ -116,7 +116,7 @@ The seasonal icemelt coefficient enforces that icemelt only happens during summe
 $$
 C_{im} =
 \begin{cases}
-7 \cdot \sin\left( \left(\text{doy} - \text{start} \right) \cdot \frac{\pi}{365.25} \right) & \text{if } \text{start} < \text{doy} < \text{end} \\
+7 \cdot \sin\left( \left(\text{doy} - \text{start} \right) \cdot \frac{4 \cdot \pi}{365.25} \right) & \text{if } \text{start} < \text{doy} < \text{end} \\
 0 & \text{else}
 \end{cases}
 $$
