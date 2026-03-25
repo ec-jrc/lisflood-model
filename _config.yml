@@ -332,7 +332,9 @@ defaults:
         - title: "- Polder"
           url: 3_04_optLISFLOOD_polder
         - title: "- Double kinematic wave"
-          url: 3_05_optLISFLOOD_kinematic-wave
+          url: 3_05_optLISFLOOD_kinematic-wave		  
+        - title: "- Diffusive wave (MCT)"
+          url: 3_14_optLISFLOOD_diffusive-wave		  
         - title: "- Dynamic wave"
           url: 3_06_optLISFLOOD_dynamic-wave
         - title: "- Soil moisture"
