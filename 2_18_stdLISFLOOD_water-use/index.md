@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This page describes the LISFLOOD water use routine, and how it is used. It is strongly advisable that the water use routine is always used, even in flood forecasting mode, as irrigation and other abstractions can be of substantial influence to flow conditions, and also since the water use mode was used during the calibration.
+This page describes the LISFLOOD water use routine, and how it is used. Water abstraction for human use can have large impact on flow conditions. If this modules is used in calibration, then it must be used also for forecast computations.
 
 The module water use can be activated by adding the following line to the `lfoptions` element:
 
@@ -16,7 +16,7 @@ The module water use can be activated by adding the following line to the `lfopt
 
 LISFLOOD distinguishes between water demand, water abstraction, water consumption and return flow. Abstractions are typically higher than demands due to leakage in the public supply network, transmission and evaporation losses during irrigation water transport. For any sector, water consumption is typically lower than water demand, since only a part of the water is actually used (and hence exits the system), while the remaining fraction is returned to the system later on. The difference between water abstraction and water consumption is the water return flow. The consumptive use represents water that does not to the system after being used. LISFLOOD extracts the water demand from groundwater and surface water bodies, the consumptive use leaves the water cycle, and the remainder returns to the channels.
 
-The water use routine considers water demand, abstraction, net consumption and return flow from various societial sectors:
+The water use routine considers water demand, abstraction, net consumption and return flow from various societal sectors:
 
 -   _dom_:  use of water in the public sector, e.g. for domestic use
 -   _liv_:  use of water for livestock
@@ -25,20 +25,21 @@ The water use routine considers water demand, abstraction, net consumption and r
 -   _irr_:  water used for crop irrigation
 -   _ric_:  water used for paddy-rice irrigation
 
-For each sector, a NetCDF file specifies the water demand in mm/(day·pixel):
+For four sectors, a NetCDF file specifies the water demand in mm/(day·pixel):
 -   _dom.nc_ for domestic water demand.
 -   _liv.nc_ for livestock water demand.
 -   _ene.nc_ for energy-cooling water demand.
 -   _ind.nc_ for manufacturing industry water demand.
 
-Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They are typically obtained by downscaling national or regional reported data using higher resolution land use maps.
+Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They can be obtained by downscaling national or regional reported data. This chapter --- TO DO ADD CHAPTER and REFERECNE/no time? ADD the link to the utilities --- explains how OS LISFLOOD sectoral water demand maps are computed.
 
-Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/); that chapter explains the computation of the water demand for crop irrigation.
+Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/)  --- TO DO: CHANGE CHAPTER TITLE --- .
+Computation of the water demand for all the other types of crops is described in this page.
 
 
 ### Domestic use
 
-This water demanded by the public water supply network can be obtained by downscaling national reported data with higher resolution population maps. A NetCDF file provides the domestic demand in mm/(day·pixel); this file is indicated in the settings file using the parameter `PrefixWaterUseDomestic`, which by default takes the value _"dom"_.
+The amount of water demanded by the public water supply network can be obtained by downscaling national reported data with higher resolution population maps (please visit --TO DO --- THIS PAGE for a more detailed description of the methodology). A NetCDF file provides the domestic demand in mm/(day·pixel); this file is indicated in the settings file using the parameter `PrefixWaterUseDomestic`, which by default takes the value _"dom"_.
 
 LISFLOOD considers leakages in the public supply network. The proportion of water loss in the system can be specified in the parameter `LeakageFraction` of settings file either as a constant or as a map:
 
@@ -52,11 +53,28 @@ LISFLOOD considers leakages in the public supply network. The proportion of wate
 </textvar>
 ```
 
-The leakage is often reported as an average percentage per country. The water demand defined in _dom.nc_ is then augmented by the leakage fraction to estimate the water abstracted to fufil the demand:
+The leakage is often reported as an average percentage per country.
+LISFLOOD also allows to account for interventions to reduce leakages compared to the current scenario: this is achieved via the input value *LeakageReductionFraction*.
+
+$LeakageFraction$ is therefore adjusted as follows:
+$LeakageFraction$ = $LeakageFraction$ * (1-$LeakageReductionFraction$)
+
+The water demand defined in _dom.nc_ is then augmented by the leakage fraction to estimate the water abstracted to fulfill the demand:
 
 $$DomesticWaterAbstraction = DomesticDemand · (1 + LeakageFraction)$$
 
-The actual water consumption of the domestic sector is far smaller than the abstraction, and is defined in the settings file either as a constant or a map:
+Water saving strategies implemented by the households (and not included in the current use scenario) reduces the DomesticDemand, and, consequently, DomesticWaterAbstraction.
+
+Water saving strategies are accounted for using WaterSavingFraction
+
+$$DomesticAbstraction = DomesticDemand \cdot \left( 1 - WaterSavingFraction \right) · (1 + LeakageFraction)$$
+
+$WaterSavingFraction$, $LeakageFraction$, and $LeakageReductionFraction$ must be provided as input to the model. The baseline value is 0, the maximum value is 1. The value of $DomesticAbstraction$ is reduced by *WaterSavingFraction* and increased by *DomesticLeakage*.
+
+The leakage volume is considered lost due to evaporation. Consequently to the definitions above, the leakage volume is 
+Leakage = LeakageFraction * DomesticDemand \cdot \left( 1 - WaterSavingFraction \right)
+
+It must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the consumptive use, it is a value between 0 ans 1, and it is defined in the settings file. It can be either a constant or a map:
 
 ```xml
 <textvar name="DomesticConsumptiveUseFraction" value="0.20">
@@ -69,37 +87,22 @@ The actual water consumption of the domestic sector is far smaller than the abst
 
 So, the actual:
 
-$$DomesticConsumption = DomesticConsumptiveUseFraction \cdot DomesticDemand$$
-<!-- $$DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) \cdot DomesticDemand$$ -->
-$$DomesticAbstraction = DomesticDemand \cdot \left( 1 - WaterSavingFraction \right) \cdot DomesticLeakageConstant$$
+$$DomesticConsumption = DomesticConsumptiveUseFraction \cdot DomesticDemand \cdot \left( 1 - WaterSavingFraction \right)$$
 
-where:
-* $WaterSavingFraction$ accounts for water saving strategies implemented by the households (and not included in the current use scenario).
-* $DomesticLeakageConstant = \left( 1-[DomLeakageFr \cdot (1 - DomLeakageReductionFrac)] \right)^{-1}$. 
-*DomLeakageFrac* represents the fraction of water lost during transport from the source of the abstraction to the final destination and *DomLeakageReductionFrac* allows to account for a reduction in leakage compared to the current scenario.
-
-$WaterSavingFraction$, $DomesticLeakageFraction$, and $DomesticLeakageReductionFraction$ are provided as input data, the baseline value is 0, the maximum value is 1. The value of $DomesticAbstraction$ is reduced by *WaterSavingFraction* and increased by *DomesticLeakageConstant*.
-
-The leakage volume is then computed as follows:
-
-$$Leakage = (DomesticLeakageConstant - 1) \cdot DomesticDemand \cdot DomesticSavingConstant$$
-
-The input value $LeakageLossFraction$ allows to compute the leakage volume which is lost because of evaporation:
-
-$$LeakageEvaporated = Leakage \cdot LeakageLossFraction$$
-
-Finally, it must be considered that only a fraction of the domestic water demand is consumed by the households. This fraction is the $DomesticConsumptiveUseFraction$, its value varies between 0 and 1 and it is provided as input data.
 The total amount of water which leaves the system (and consequently must be subtracted from the water balance) due to domestic water use is then computed as follows:
 
-$$DomesticConsumptiveUse = DomesticDemand \cdot DomesticSavingConstant \cdot DomesticConsumptiveUseFraction + LeakageEvaporated$$
+$$DomesticConsumptiveUse = DomesticDemand \cdot \left( 1 - WaterSavingFraction \right) \cdot DomesticConsumptiveUseFraction + Leakage$$
 
 The return flow is the difference between the domestic water abstraction and the domestic water consumptive use.
+<!-- $$DomesticReturnFlow = (1 - DomesticConsumptiveUseFraction) \cdot DomesticDemand$$ -->
+
+--- TO DO --- EXPLAIN BUG FIX RETURN FLOW GROUNDWATER ----
 
 
 ### Energy sector
 
 Thermal powerplants generate energy through heating water, turn it into steam which spins a steam turbine that drives an electrical generator. Almost all coal, petroleum, nuclear, geothermal, solar thermal electric, and waste incineration plants, as well as many natural gas power stations are thermal, and they require water for cooling during their processing.
-LISFLOOD typically reads an _ene.nc_ file that determines the water demand for the energy sector in mm/day/pixel. Typically, this map is derived from downscaling national reported data using a map of the thermal power plants.
+LISFLOOD typically reads an _ene.nc_ file that determines the water demand for the energy sector in mm/day/pixel. --- TO DO --- This chapter provides guidelines for the generation of such input map.
 
 The parameter `EnergyConsumptiveUseFraction` is used to determine the consumptive water usage of thermal power plants. It can be either a constant or a map:
 
@@ -119,16 +122,12 @@ We assume no losses in the energy sector, so the demand equals the actual water 
 $$EnergyAbstraction = EnergyDemand$$
 $$EnergyConsumptiveUse = EnergyDemand \cdot EnergyConsumptiveUseFraction$$
 
-The return flow is the difference between the water abstracted and the water consumed.
+The return flow is the difference between the water abstracted and the water consumed.  ---- TO CHECK -----------ONLY SURFACE WATER
 
 
 ### Manufacturing industry
 
-The manufucaturing industry also requires water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD reads an _ind.nc_ file which determines the water demand for the industry sector in mm/day/pixel. This map is derived from downscaling national reported data using maps of land use and/or the specific activities.
-
-The amount of water that needs to be abstracted to comply with the demand of the manufacturing industry (*IndustrialAbstraction*) is often lower than the actual demand (*IndustrialDemand*) as part of the water is re-used within the industrial processes. The *WaterReUseFraction* is provided as input data, its value varies between 0 and 1 (for instance, a value of 0.5 indicates that half of the water is re-used, that is, used twice). The *IndustrialAbstraction*  is then computed as follows:
-
-$$IndustrialAbstraction = IndustrialDemand \cdot (1 - WaterReUseFraction)$$
+The manufacturing industry also requires water for their processing, much depending on the actual product that is produced, e.g. the paper industry or the clothing industry. LISFLOOD reads an _ind.nc_ file which determines the water demand for the industry sector in mm/day/pixel. This map is derived from downscaling national reported data. --- TO DO --- This chapter provides guidelines for the generation of such input map.
 
 An *IndustrialConsumptiveUseFraction* is used to determine the consumptive water usage of the manufacturing industry. This can either be a fixed value, or a spatial explicit map.
 
@@ -146,10 +145,12 @@ $$IndustrialWaterConsumptiveUse = IndustrialAbstraction \cdot IndustrialConsumpt
 
 The return flow is the difference between the water abstracted and the water consumed.
 
+--- TO DO --- EXPLAIN BUG FIX RETURN FLOW GROUNDWATER ----
+
 
 ### Livestock
 
-Livestock also requires water. LISFLOOD reads a _liv.nc_ file which determines the water demand for livestock in mm/day/pixel. Mubareka et al. (2013) (http://publications.jrc.ec.europa.eu/repository/handle/JRC79600) estimated the water requirements for the livestock sector. These maps are calculated based on livestock density maps for 2005, normalized by the best available field data at continental scale. Water requirements are calculated for these animal categories: cattle, pigs, poultry, and sheep and goats. The cattle category is further disaggregated to calves, heifers, bulls and dairy cows. Using values given in the literature, a relationship using air temperature is inferred for the daily water requirements per livestock category. Daily average temperature maps are used in conjunction with the livestock density maps in order to create a temporal series of water requirements for the livestock sector in Europe. 
+Livestock also requires water. LISFLOOD reads a _liv.nc_ file which determines the water demand for livestock in mm/day/pixel. For instance, Mubareka et al. (2013) (http://publications.jrc.ec.europa.eu/repository/handle/JRC79600) estimated the water requirements for the livestock sector in Europe, based on livestock density maps for 2005.  Livestock water demand maps should account for different animal categories (e.g. cattle, pigs, poultry, and sheep and goats). -- TO DO -- This chapter provides guidelines for the preparation of liverstock water demand maps. 
 
 The parameter `LivestockConsumptiveUseFraction` is used to determine the consumptive water usage of livestock. This can either be a fixed value, or a spatial explicit map.
 
@@ -161,7 +162,7 @@ The parameter `LivestockConsumptiveUseFraction` is used to determine the consump
 </textvar>
 ```
 
-Assuming no losses in the livestock sector, the water abstracted and the demand are equal. Therfore, the consumptive use is:
+Assuming no losses in the livestock sector, the water abstracted and the demand are equal. Therefore, the consumptive use is:
 
 $$LivestockConsumptiveUse = LivestockConsumptiveUseFraction \cdot LivestockDemand$$
 
@@ -170,11 +171,8 @@ The return flow is the difference between the water abstracted and the water con
 
 ### Crop irrigation
 
-Crop irrigation and paddy-rice irrigation are simulated using seperate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/). This paragraph explains the computation of the water volume required by crop irrigation. The modelling of crop irrigation requires the following parameter in the `lfoptions` element:
-
-```xml
-<setoption choice="1" name="drainedIrrigation"/>
-```
+Crop irrigation and paddy-rice irrigation are simulated using separate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/)-- TO DO -- Correct file name ---. 
+This page explains the computation of the water volume required by crop irrigation. 
 
 Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
 
@@ -188,7 +186,7 @@ $$ CropIrrigationDemand = ( T_{max} - T_{a,irrig} ) \cdot IrrigationMult$$
 
 where $IrrigationMult$ is a non-dimensional factor generally larger than 1 having the function to account for the additional amount of water required to prevent salinisation problems.
 
-The crop irrigation absracted is larger than the demand in order to account for the losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the $IrrigationEfficiency$ and the $ConveyanceEfficiency$. Both range between 0 and 1 and must be defined in the settings file.
+Water abstracted for crop irrigation is larger than the water demand in order to account for the losses within the irrigation system. These losses are quantified using two non-dimensional factors, namely the $IrrigationEfficiency$ and the $ConveyanceEfficiency$. Both range between 0 and 1 and must be defined in the settings file.
 
 ```xml
 <textvar name="IrrigationEfficiency" value="0.75">
@@ -205,21 +203,28 @@ The crop irrigation absracted is larger than the demand in order to account for 
     </comment>
 </textvar>
 ```
-
 Using these two parameters, the water abstraction for crop irrigation is computed as follows:
 
 $$CropIrrigationAbstraction = \frac{CropIrrigationDemand}{IrrigationEfficiency \cdot ConveyanceEfficiency}$$
 
-If the soil is frozen (i.e. the [$FrostIndex$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is larger than a selected threshold), the crop irrigation demand is set to 0.
+If the soil is frozen (i.e. the [$FrostIndex$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is larger than a selected threshold), water demand for crop irrigation is set to 0.
+
+Finally, the modelling of crop irrigation includes also the option $drainedIrrigation$:
+```xml
+<setoption choice="1" name="drainedIrrigation"/>
+```
+This option acts on the portion of irrigated area defined by the value $DrainedFraction$ (between 0 and 1).
+In areas with drained irrigation, seepage flow from the third soil layer by-passes groundwater and it is directly added to the sub-surface flow from the upper groundwater zone to the channels.
+
 
 ### Transient or constant water demand
 
-Water demand can change over time. A parameter in the settings file allows to activate the use of water demand maps containing different values over time. 
+Water demand values generally experience inter- and intra- annual variability. A parameter in the settings file allows to activate the use of water demand maps containing different values over time. 
 
 ```xml
 <setoption choice="1" name="TransientWaterDemandChange"/>
 ```
-When activated, water demand maps must be provided to LISFLOOD as a NetCDF stack (`readNetcdfStack=1`). Maps can be provided with any, even non-constant, frequency. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack (see figure below). Water demand maps follow the same time convention as all other LISFLOOD maps: maps are stored using the timestamp from the end of the time interval they refer to. When this option is deactivated, the same water demand map is used for all time steps. 
+When activated, water demand maps must be provided to LISFLOOD as a NetCDF stack (`readNetcdfStack=1`). Maps can be provided with any, even non-constant, frequency.  Water demand maps follow the same time convention as all other LISFLOOD maps: maps are stored using the timestamp from the end of the time interval they refer to. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack (see figure below). 
 
 
 ![img](../media/WaterDemad_Confluence_small.png)
@@ -232,7 +237,7 @@ Another options allows using water demands of an average year, namely a set of w
 <setoption choice="1" name="useWaterDemandAveYear"/>
 ```
 
-When activated, water demand maps for one single year must be provided to LISFLOOD as a NetCDF stack (`readNetcdfStack=1`). Maps can be provided with any, even non-constant, frequency. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack. The same year will be cycled over time. This option is frequently used for forecasting, when water demand information are not available.
+When activated, water demand maps for one single year must be provided to LISFLOOD as a NetCDF stack (`readNetcdfStack=1`). Maps can be provided with any, even non-constant, frequency. LISFLOOD will continue using the same water demand map until a new water demand map is available in the NetCDF stack. The same year will be cycled over time. This option is frequently used for forecasting, when future water demand information is not available.
     
 >**Note**: LISFLOOD cannot switch `useWaterDemandAveYear` on and off during the same simulation. This means it is not possible to run a continuous simulation using water demand maps for a period and an average water demand year for another period. If an average year must be used together with other water demand maps, it is necessary to create a NetCDF file containing existing water demand information and the necessary number of average years.
 >
@@ -241,12 +246,14 @@ When activated, water demand maps for one single year must be provided to LISFLO
 
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or derive it from unconventional sources, such as desalination.  
 
-The sub-division in these three sources is achieved by creating and using the following maps:
+The sub-division in these three sources is achieved by creating and using the following maps (--TO DO --- please find the guidelines in this chapter):
 
 -   fracgwused.nc (values between 0 and 1) is *FractionGroundwaterUsed*
 -   fracncused.nc (values between 0 and 1) is *FractionNONconventionalSourcesUsed*
 
-Next, LISFLOOD automatically assumes that the remaining water ($1-FractionGroundwaterUsed-FractionNONconventionalSourcesUsed$) is derived from various sources of surface water. Specifically, *DomesticConsumptiveUse*, *IndustrialConsumptiveUse*, and *LivestockConsumptiveUse* can be supplied by groundwater, non-conventional water sources, and surface water. Water resources allocation is computed as follows:
+LISFLOOD automatically assumes that the remaining water ($1-FractionGroundwaterUsed-FractionNONconventionalSourcesUsed$) is derived from various sources of surface water. 
+
+*DomesticConsumptiveUse*, *IndustrialConsumptiveUse*, and *LivestockConsumptiveUse* can be supplied by groundwater, non-conventional water sources, and surface water. Water resources allocation is computed as follows:
 
 $$DomesticAbstractionGW = FractionGroundwaterUsed \cdot DomesticWaterConsumptiveUse$$
 $$DomesticAbstractionNONconv= FractionNONconventionalSourcesUsed \cdot DomesticWaterConsumptiveUse$$
@@ -260,18 +267,30 @@ $$LivestockAbstractionGW = FractionGroundwaterUsed \cdot LivestockConsumptiveUse
 $$LivestockAbstractionNONconv= FractionNONconventionalSourcesUsed \cdot LivestockConsumptiveUse$$
 $$LivestockAbstractionSurfaceWater = LivestockConsumptiveUse - LivestockAbstractionGW - LivestockAbstractionNONconv$$
 
-$EnergyConsumpttiveUse$ is supplied exclusively by surface water:
-
-$$EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$$
-
 $CropIrrigationibstraction$ is supplied by groundwater and surface water:
 
 $$CropIrrigationAbstractionGW = FractionGroundwaterUsed \cdot CropIrrigationAbstraction$$
 $$CropIrrigationAbstractionSurfaceWater = CropIrrigationAbstraction - CropIrrigationAbstractionGW$$
 
+$EnergyConsumpttiveUse$ is supplied exclusively by surface water:
+
+$$EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$$
+
 [*RiceIrrSurfWaterAbstr*](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/) is supplied exclusively by surface water.
 
 Surface water sources for abstraction may consist of lakes, reservoirs, and rivers. The definition of the contribution of each surface water body is explained in the paragraph [*Surface water abstractions from reservoirs, lakes, and rivers*](#Surface-water-abstractions).
+
+### Water regions  
+
+The total abstractions (either from groundwater, non-conventional sources or surface water) are extracted within *water regions*. These regions are introduced in LISFLOOD to enable more realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, it is reasonable to assume that the water demand in a pixel is supplied by the water resources in that same pixel. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area encompassing the locations of both water demand and abstraction.
+
+*Water regions* are generally defined by sub-river-basins within a Country. In order to mimick reality, it is advisable to avoid cross-Country-border abstractions. Whenever information is available, it is strongly recommended to align the *water regions* with the actual areas managed by water management authorities, such as regional water boards. In Europe, the River Basin Districts, as defined in the Water Framework Directive and subdivided by country, can be used.
+
+*Water regions* are activated by adding the following line to the `lfoptions` element to the LISFLOOD settings file:
+
+```xml
+	<setoption choice="1" name="wateruseRegion"/>
+```
 
 ### Groundwater
 
@@ -279,14 +298,17 @@ The total amount of water that is required from groundwater resources is:
 
 $$TotalAbstractionFromGroundWater = DomesticAbstractionGW  + IndustrialAbstractionGW  + LivestockAbstractionGW + CropIrrigationAbstractionGW$$
 
->**Note**. In the current LISFLOOD version, groundwater is abstracted for a 100%, so no additional losses are accounted for, by which more water would need to be abstracted to meet the demand. Also, in the current LISFLOOD version, no limits are set for groundwater abstraction.
+LISFLOOD subtracts groundwater from the Lower Zone (LZ).
 
-LISFLOOD subtracts groundwater from the Lower Zone (LZ). Groundwater depletion can thus be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to extend the monitoring period to at least a decade.
+>**Note**. In the current LISFLOOD version, no limits are set for groundwater abstraction, meaning that LZ relative levels can become negative.
 
-The total amount of water that is required from groundwater resources is compared to the amount of water that is actually available in the Lower Zone. If the water storage in the lower groundwater zone decreases below the value $LZ_{Threshold}$ [mm], the flow from the lower zone to the nearby rivers (base-flow) stops. When sufficient recharge is added to raise the lower zone levels above the threshold, base-flow starts again. This mimics the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and base-flow is reduced. The value $LZ_{Threshold}$ has to be found via calibration. Note that keeping large negative values makes sure that there is always baseflow.
+Groundwater depletion can be examined by monitoring the LZ levels between the start and the end of a simulation. Given the intra- and inter-annual fluctuations of LZ, it is advisable to extend the monitoring period to at least a decade.
+
+Groundwater lower zone generally contribute to rivers baseflow.
+If LZ level decreases below the value $LZ_{Threshold}$ [mm], the flow from the lower zone to the nearby rivers (i.e. the baseflow) stops. When sufficient recharge is added to raise LZ levels above the threshold, baseflow starts again. This mimics the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and base-flow is reduced. The value $LZ_{Threshold}$ is generally identified via calibration. Note that large negative values ensure that there is always baseflow.
 
 ```xml
-<textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.map">
+<textvar name="LZThreshold" value="$(PathMaps)/lzthreshold.nc">
     <comment>
     Water storage [mm] in the lower groundwater zone below which baseflow stops,
     i.e., the flow from the lower groundwater zone into the river
@@ -295,11 +317,13 @@ The total amount of water that is required from groundwater resources is compare
 </textvar>
 ```
 
-When groundwater is abstracted for usage, it typically could cause a local dip in the LZ values (~ water table) compared to neigbouring pixels. Therefore, a simple option to mimick groundwaterflow is added to LISFLOOD, which evens out the groundwaterlevels with neighbouring pixels. This option can be switched on using:
+When groundwater is abstracted for usage, it typically could cause a local dip in the LZ values (~ water table) compared to neigbouring pixels. 
+The option $groundwaterSmooth$ roughly mimicks groundwater flow as it evens out the groundwaterlevels with neighbouring pixels. This option can be switched on using:
 
 ```xml
 	<setoption choice="1" name="groundwaterSmooth"/>
 ```
+>**Note**. The use of the option $groundwaterSmooth$ is not consistent with a calibration approach based on top-down intercatchemnets, where parameters are optimized independently for each catchment when moving from upstream to downstream. When using this type of calibration approach, the option must be off.  
 
 ### Non-Conventional sources: desalination
 
@@ -317,21 +341,9 @@ The total amount of water to be abstracted by surface water bodies is:
 $$TotalAbstractionFromSurfaceWater = DomesticAbstractionSurfaceWater  + IndustrialAbstractionSurfaceWater + LivestockAbstractionSurfaceWater + EnergyAbstractionSurfaceWater + CropIrrigationAbstractionSurfaceWater + RiceIrrSurfWaterAbstr$$
 
 
-#### Water regions
-
-The total abstractions (either from groundwater, non-conventional sources or surface water) are extracted within *water regions*. These regions are introduced in LISFLOOD to allow the realistic representation of surface water abstraction in high resolution modelling set-ups. When using a 0.5 degree spatial resolution model, we can assume that the water demand in a pixel is supplied by the water resources in that same pixel. Conversely, when using finer spatial resolutions, the water demand of a pixel could be supplied by another pixel nearby (that is, water demand and water abstraction actually occur in different pixels). The *water regions* were therefore introduced to solve this problem. Specifically, a *water region* is the area icluding the locations of water demand and abstraction.
-
-*Water regions* are generally defined by sub-river-basins within a Country. In order to mimick reality, it is advisable to avoid cross-Country-border abstractions. Whenever information is available, it is strongly recommended to align the *water regions* with the actual areas managed by water management authorities, such as regional water boards. In Europe, the River Basin Districts, as defined in the Water Framework Directive and subdivided by country, can be used.
-
-*Water regions* are activated by adding the following line to the `lfoptions` element to the LISFLOOD settings file:
-
-```xml
-	<setoption choice="1" name="wateruseRegion"/>
-```
-
 #### Abstractions from lakes and reservoirs
 
-Lakes and reservoirs within a *water region* can supply part of the surface water abstraction. The parameter $FractionLakeReservoirWaterUsed$ defines the fraction of surface water abstraction which should be supplied by lakes and reservoirs. The value of this parameter (between 0 and 1) is provided as input to the model through the settings file.
+Lakes and reservoirs can supply part of the surface water abstraction. The parameter $FractionLakeReservoirWaterUsed$ defines the fraction of surface water abstraction which should be supplied by lakes and reservoirs. The value of this parameter (between 0 and 1) is provided as input to the model through the settings file.
 
 ```xml
 <textvar name="FractionLakeReservoirWaterUsed" value="0.25">
@@ -341,7 +353,7 @@ lake and reservoir water used, fraction of a pixel (0-1)
 </textvar>
 ```
 
-LISFLOOD then computes the available water volume in lakes and reservoirs. The available water volume of a lake is defined equal to the 10% of its total volume storage. The available water volume in a reservoir is assumed equal to the minimum between the 1% of its [total storage capacity](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) and the 2% of the volume [stored in the reservoir](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) at the computational time step. These conditions are imposed to constantly preserve a reasonable amount of water in reservoirs and lakes. The total water volume which can be potentially abstracted from reservoirs and lakes is then:
+LISFLOOD then computes the available water volume in lakes and reservoirs. The available water volume of a lake is defined equal to the 10% of its total storage volume at that specific computational step. The available water volume in a reservoir is assumed equal to the minimum between the 1% of its [total storage capacity](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) and the 2% of the volume currently [stored in the reservoir](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) at the computational time step. These conditions are imposed to constantly preserve a reasonable amount of water in reservoirs and lakes. The total water volume which can be potentially abstracted from reservoirs and lakes is then:
 
 $$TotalAvailableVolumeLakesReservoirs = AvailableVolumeLakes + AvailableVolumeReservoirs$$
 
@@ -367,25 +379,22 @@ The water to be abstracted from channels is withdrawn from discharge in the rive
 
 River discharge at each time step $Q_{ch}$ is computed by the [routing module](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/). 
 
-A minum amount of water must always flow in a river. This value is the *environmental flow threshold*, which is imposed by the user in the settings file:
+A minimum amount of water must always flow in a river. This value is the *environmental flow threshold*, which is imposed by the user in the settings file:
 
 ```xml
-<textvar name="EFlowThreshold" value="$(PathMaps)/dis_nat_10.map">
+<textvar name="EFlowThreshold" value="$(PathMaps)/eflow.nc">
     <comment>
     Environmental flow threshold [m3/s] below which water abstraction stops.
-    E.g. the 10th percentile discharge of the baseline run
-        $(PathMaps)/eflow.map
+    E.g. the 10th percentile discharge of the baseline run, that is a multi-decade "natural" run 
     </comment>
 </textvar>
 ```
 
-For Europe e.g.  the 10th percentile discharge from a 'natural' run for 1990-2016 can be used to define the environmental flow threshold. In order to mimick natural flow conditions, a 'natural' run does not include neither reservoirs nor human water abstractions. LISFLOOD also counts the number of days in which the channel flow is lower than the *environmental flow threshold* as this piece of information is important for water rousources and ecosystem management.
+The 10th percentile discharge from a 'natural' run for at least a few decades can be used to define the environmental flow threshold. In order to mimick natural flow conditions, a 'natural' run does not include neither reservoirs nor human water abstractions. LISFLOOD also counts the number of days in which the channel flow is lower than the *environmental flow threshold* as this piece of information is important for water resources and ecosystem management.
 
 The water volume which can be potentially abstracted from the river within a *water region* is then:
 
-$$AvailableVolumeChannels = \max \left( ( Q_{ch} - EFlowThreshold ) \cdot \Delta t , 0 \right) \cdot \left( 1 - WUsePercRemain \right)$$
-
-where $WUsePercRemain$ is the percentage of water which always remains in the channel. This value (between 0 and 1) is defined by the user.
+$$AvailableVolumeChannels = \max \left( ( Q_{ch} - EFlowThreshold ) \cdot \Delta t , 0 \right) 
 
 The amount of water extracted from the rivers is:
 
@@ -393,11 +402,13 @@ $$WaterAbstractedFromChannels = \min \left(AvailableVolumeChannel, WaterToBeAbst
 
 A condition in which *WaterAbstractedFromChannels* is lower than *WaterToBeAbstractedChannels* means that the sum of the water abstractions from groundwater, non-convential sources, and surface water is lower than the total water abstraction demand. The amount of water which was requested but could not be supplied is the *WaterUseShortage* and it is quantified as follows:
 
-$$WaterUseShortage =  WaterToBeAbstractedChannels - WaterToBeAbstractedChannels$$
+$$WaterUseShortage =  WaterToBeAbstractedChannels - WaterAbstractedFromChannels$$
 
-In condition of water scarcity, water uses are satisfied according to the following order of importance: domestic, energetic, livestock, industry, and irrigation. The latter sentence implies that when $WaterUseShortage \gt 0$, LISFLOOD reduces the water volume delivered to the irrigated fields. Specifically, the amount *WaterUseShortage* is subtracted from the total amount of water required from surface water bodies by crops and paddy rice, meaning that the total amount of water effectively supplied to the irrigated fields is:
 
-$$IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater + RiceIrrSurfWaterAbstr - WaterUseShortage$$
+
+In condition of water scarcity, water uses are satisfied according to the following order of importance: domestic, energetic, livestock, industry, and irrigation. The latter sentence implies that when $WaterUseShortage \gt 0$, LISFLOOD reduces the water volume delivered to the irrigated fields. Specifically, the amount *WaterUseShortage* is subtracted from the total amount of water required from surface channels by irrigated fields (excluding paddy rice irrigation), meaning that the total amount of water effectively supplied to the irrigated fields is:
+
+$$IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater - WaterUseShortage$$
 
 The value *IrrigationWater* is then used to compute the water content of the superficial soil layer ($w_{1a}$) and the upper soil layer ($w_{1b}$). Specifically, the value *IrrigationWater* (after convertion in [mm]) is first added to the superficial soil layer, until the water content of this layer ($w_{1a}$) is equal to:
 
@@ -408,33 +419,34 @@ where $w_{crit,1a}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_
 In order to check the conservation of mass within the system, LISFLOOD computes the amount of water consumed by irrigation *IrriLossCum* (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors *IrrigationEfficiency* and *ConveyanceEfficiency*), the resulting water content of the superficial and upper soil layers.
 
 
+
+
 #### Important techical note for the adequate definition of the water regions
 
 Water demand and water abstraction are spatially distributed within each water region. In other words, the water resourses (surface water bodies and groundwater) are shared inside the water region in order to meet the cumulative requirements of the water region area. For this reason, it is strongly recommended to include the entire water region(s) in the modelled area. If a portion of the water region is not included in the modelled area, then LISFLOOD cannot adequately compute the water demand and abstraction. In other words, LISFLOOD will not be able to account for sources of water outside of the computational domain (it is important to notice that LISFLOOD will not crush but the results will be affected by this discrepancy).
 
-**The inclusion of the complete water region in the computational domain becomes compulsory under the specific circumstances of model calibration**. Calibrated parameters are optmised for a specific model set up. It is often required to calibrate the parameters of several subcatchments inside a basin. Each calibration subcatchment must include a finite number of water regions (each water region can belong to only one subctatchment). If this condition is met, the calibrated parameters can be correctly optimised. Conversely, when a water region belongs to one or more calibration sub-catchments, the water resources are allocated and abstracted in different quantities when modelling the calibration subcatchment only or the entire basin. Similarly, the option groundwater smooth leads to different  geometries of the cone of depression due to groundwater abstraction when modelling the subcatchment only or the entire basin. These two scenarios impede the correct calibration of the model parameters and must be avoided. The user is advised to switch off the groundwater smooth option and to ensure the consistency between water regions and calibration cacthments. The utility [waterregions](https://github.com/ec-jrc/lisflood-utilities) can be used to 1) verify the consistency between calibration catchments and water regions or 2) create a water region map which is consistent with a set of calibration points.
+**The inclusion of the complete water region in the computational domain becomes compulsory when performing catchment-based calibration, where parameters are optimized separately for each catchment inside the larger computational domain**. In this case, calibrated parameters are optmised for a specific model model domain. Each calibration domain must include a finite number of water regions (and each water region must be entirely included in one catchment). If this condition is met, the calibrated parameters can be correctly optimised. Conversely, when a water region belongs to one or more calibration catchments, the water resources are allocated and abstracted in different quantities when modelling the calibration catchment only as opposed to the entire basin. Similarly, the option groundwater smooth leads to different  geometries of the cone of depression due to groundwater abstraction when modelling the subcatchment only or the entire basin (still in the case of catchment-based calibration). These two scenarios impede the correct calibration of the model parameters and must be avoided. The user is advised to switch off the groundwater smooth option and to ensure the consistency between water regions and calibration cacthments. The utility [waterregions](https://github.com/ec-jrc/lisflood-utilities) can be used to 1) verify the consistency between calibration catchments and water regions or 2) create a water region map which is consistent with a set of calibration points.
 
 
 ## Output files
 
-The water use routine produces a variety of new output maps and indicators, a number of relevant examples is listed in the following Table:
+The water use routine produces a variety of output maps and indicators, a few examples are listed in the table below.
 
  ***Table:*** *Output of water use routine.*     
 
 | file       | short description                         | time  | area   | unit      | long description                                        |
 | ---------- | ----------------------------------------- | ----- | ------ |---------- | ------------------------------------------------------- | 
-| _Eflow.nc_ | eflow breach indicator (1=breached)       | day   | pixel  | 0 or 1    | number of days that the environmental flow is breached  |
-| _eneCo.nc_ | energy consumptive use                    | day   | pixel  |	mm        |	energy consumptive use                                  |
-| _indCo.nc_ | industrial consumptive use                | day   | pixel  |	mm        |	industrial consumptive use                              |
-| _livCo.nc_ | livestock consumptive use                 | day   | pixel  |	mm        |	livestock consumptive use                               |
-| _domCo.nc_ | domestic consumptive use                  | day   | pixel  |	mm        |	domestic consumptive use                                |
+| _EFlowIndicator.nc_ | eflow breach indicator (1=breached)       | dt   | pixel  | 0 or 1    | number of days that the environmental flow is breached  |
+| _onsumption_required_domestic_M3MonthRegion.nc_ | domestic consumption       | month   | water region  | m3  | domestic consumptive user per month, per water region  |
+| _TotalAbstractionFromGroundwaterM3.nc_ | total abstraction from groundwater                   |dt | pixel |	m3        |	total abstraction from groundwater resources                                |
+| _TotalAbstractionFromSurfaceWaterM3.nc_ |  total abstraction from surface water                 |dt |pixel  |	m3        |	 total abstraction from surface water                            |
+| _RegionMonthWaterAbstractedfromLakesReservoirsM3.nc_ |  Reservoir and Lake abstraction in m3                  |month | water region  |	m3        |	 Reservoir and Lake abstraction in m3                               |
 | _Fk1.nc_ 	 | Falkenmark 1 index (local water only)     | month |region  |	m3/capita |	water availability per capita (local water only)        |
 | _Fk3.nc_   | Falkenmark 3 index (external inflow also) | month | region | m3/capita | water availability per capita (local water + external inflow)|
 | _IrSh.nc_  | water shortage                            | month | region | m3        | water shortage due to availability restrictions         |
 | _WDI.nc_   | Water Dependency Index	                 | month | region | fraction  | local water demand that cannot be met by local water / total water demand|
-| _WeiA.nc_  | Water Exploitation Index Abstraction      | month | region |	fraction  |	water abstraction / (local water + external inflow)     |
-| _WeiC.nc_  | Water Exploitation Index Consumption WEI+ | month | region | fraction  | water consumption / (local water + external inflow)     |
-| _WeiD.nc_  | Water Exploitation Index Demand WEI       | month | region | fraction  |	water demand / (local water + external inflow)          |
+| _WSI.nc_  |  Water Security Index      | month | region |	fraction  |Upstream Inflow Actually Used / Upstream Inflow Available     |
+| _WTI.nc_  | Water Sustainability Index| month | region | fraction  | 1-SurfaceWaterDeficit / TotalWaterDemand     |
 
 [🔝](#top)
 
