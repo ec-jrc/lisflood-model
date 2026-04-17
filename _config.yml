@@ -316,10 +316,6 @@ defaults:
           url: 2_15_stdLISFLOOD_subsurface-runoff
         - title: "- Channel routing"
           url: 2_16_stdLISFLOOD_channel-routing
-        - title: "- Irrigation"
-          url: 2_17_stdLISFLOOD_paddy-rice
-        - title: "- Water use"
-          url: 2_18_stdLISFLOOD_water-use
 
       - section_title: "Optional LISFLOOD processes & output"
         items:
@@ -329,7 +325,11 @@ defaults:
           url: 3_02_optLISFLOOD_lakes
         - title: "- Reservoirs"
           url: 3_03_optLISFLOOD_reservoirs
-        - title: "- Polder"
+        - title: "- Irrigation"
+          url: 2_17_optLISFLOOD_paddy-rice
+        - title: "- Water use"
+          url: 2_18_optLISFLOOD_water-use          
+        - title: "- Polder"        
           url: 3_04_optLISFLOOD_polder
         - title: "- Double kinematic wave"
           url: 3_05_optLISFLOOD_kinematic-wave		  
