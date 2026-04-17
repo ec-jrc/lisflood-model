@@ -317,7 +317,7 @@ defaults:
         - title: "- Channel routing"
           url: 2_16_stdLISFLOOD_channel-routing
         - title: "- Irrigation"
-          url: 2_17_stdLISFLOOD_irrigation
+          url: 2_17_stdLISFLOOD_paddy-rice
         - title: "- Water use"
           url: 2_18_stdLISFLOOD_water-use
 

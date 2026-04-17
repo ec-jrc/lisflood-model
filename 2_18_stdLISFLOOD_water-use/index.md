@@ -33,7 +33,7 @@ For four sectors, a NetCDF file specifies the water demand in mm/(day·pixel):
 
 Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They can be obtained by downscaling national or regional reported data. More detailed information on the generaion of these map can be found in the [Input maps: water use](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_water-use/) in the OS LISFLOOD user guide.
 
-Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_paddy_rice/).
+Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_paddy-rice/).
 Computation of the water demand for all the other types of crops is described in this page.
 
 
@@ -172,7 +172,7 @@ The return flow is the difference between the water abstracted and the water con
 
 ### Crop irrigation
 
-Crop irrigation and paddy-rice irrigation are simulated using separate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_paddy_rice/). 
+Crop irrigation and paddy-rice irrigation are simulated using separate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_paddy-rice/). 
 This page explains the computation of the water volume required by crop irrigation. 
 
 Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
@@ -247,10 +247,12 @@ When activated, water demand maps for one single year must be provided to LISFLO
 
 LISFLOOD can abstract water from groundwater or from surface water (rivers, lakes and or reservoirs), or derive it from unconventional sources, such as desalination.  
 
-The sub-division in these three sources is achieved by creating and using the following maps (--TO DO --- please find the guidelines in this chapter):
+The sub-division in these three sources is achieved by creating and using the following maps:
 
 -   fracgwused.nc (values between 0 and 1) is *FractionGroundwaterUsed*
 -   fracncused.nc (values between 0 and 1) is *FractionNONconventionalSourcesUsed*
+
+[This chapter](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_water-use/) of the OS LISFLOOD user guide provides guidelines for the generation of such input map.
 
 LISFLOOD automatically assumes that the remaining water ($1-FractionGroundwaterUsed-FractionNONconventionalSourcesUsed$) is derived from various sources of surface water. 
 
@@ -277,7 +279,7 @@ $EnergyConsumpttiveUse$ is supplied exclusively by surface water:
 
 $$EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$$
 
-[*RiceIrrSurfWaterAbstr*](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_paddy_rice/) is supplied exclusively by surface water.
+[*RiceIrrSurfWaterAbstr*](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_paddy-rice/) is supplied exclusively by surface water.
 
 Surface water sources for abstraction may consist of lakes, reservoirs, and rivers. The definition of the contribution of each surface water body is explained in the paragraph [*Surface water abstractions from reservoirs, lakes, and rivers*](#Surface-water-abstractions).
 
