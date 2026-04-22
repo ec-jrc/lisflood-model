@@ -143,12 +143,6 @@ The lake locations are defined on a (nominal) map called **_lakes.nc_**. It is i
 | TabLakeAvNetInflowEstimate | lakeavinflow.txt | Net inflow                       | $m^3/s$   |                                       |
 
 
-> **Note.** When you create the map with the lake locations, pay special attention to the following: if a lake is located on the most downstream cell (i.e. the outflow point, see Figure below), the lake routine may produce erroneous output. In particular, the mass balance errors cannot be calculated correctly in that case. The same applies if you simulate only a sub-catchment of a larger map (by selecting the subcatchment in the mask map). This situation can usually be avoided by extending the mask map one pixel downstream.
-
-![Placement of the lakes](../media/image42.png)
-
-***Figure:** Placement of the lakes: lakes on the outflow point (left) result in erroneous behavior of the lake routine.*
-
 ### Settings file
 
 All in- and output files need to be defined in the settings file. If you are using a default LISFLOOD settings template, all file definitions are already defined in the **`lfbinding`** element. Make sure that the map with the lake locations is in the "maps" directory (`PathMaps` variable in the settings file), and all tables in the "tables" directory (`PathTables`). If this is the case, you only have to specify the initial lake level and, if you are using the steady-state option, the mean net lake inflow (make this a map if you're simulating multiple lakes simultaneously). Both can be set in the **`lfuser`** element. *LakeInitialLevelValue* can be either a map or a single value. Setting *LakeInitialLevelValue* to *-9999* will cause LISFLOOD to calculate the steady-state level. 
