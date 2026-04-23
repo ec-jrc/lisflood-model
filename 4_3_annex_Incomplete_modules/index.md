@@ -3,18 +3,7 @@
 This Annex provides information on code functionalities which were (partially) developed in the past, but are not currently readily available for use.
 Development and maintenance of these functionalities has been dismissed. The relevant code is still included in the open source repository, but its use would require updating and/or bug-fixing. The documentation provided in this annex aims to keep track of these functionalities, for possible future use or uptake by external collaborators. Nevertheless, this documentation might be incomplete and affected by imprecisions.
 
-### Polder option 
-
-#### Introduction
-
-This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the [settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml):
-
-```xml
-	<setoption name="simulatePolders" choice="1" />
-```
-
-The current implementation of the polder routine may result in numerical instabilities for kinematic wave pixels, so for the moment it is recommended to define polders *only* on channels where the dynamic wave is used.
-
+Incomplete modules are: dynamic wave routing, polders, variable water fraction.
 
 
 ### Dynamic wave routing
@@ -159,8 +148,17 @@ The `lfuser` element of the settings file has already been edited for the use of
 
 
 
+### Polder option 
 
+#### Introduction
 
+This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the [settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml):
+
+```xml
+	<setoption name="simulatePolders" choice="1" />
+```
+
+The routing was designed to work in channels where routing is modelled using the dynamic wave solution.
 
 #### Polders
 
@@ -304,7 +302,8 @@ Note that you can use the map with the polder level at the last time step to def
 
 #### Limitations
 
-For the moment, polders can be simulated on channel pixels where **dynamic wave routing** is used. For channels where the kinematic wave is used, the routine will not work and may lead to numerical instabilities or even model crashes. 
+This module was concieved for areas where **dynamic wave routing** is used. For channels where the kinematic wave is used, the routine will not work and may lead to numerical instabilities or even model crashes. 
+
 
 
 
