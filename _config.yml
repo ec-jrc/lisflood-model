@@ -335,8 +335,6 @@ defaults:
           url: 3_05_optLISFLOOD_kinematic-wave		  
         - title: "- Diffusive wave (MCT)"
           url: 3_14_optLISFLOOD_diffusive-wave		  
-        - title: "- Dynamic wave"
-          url: 3_06_optLISFLOOD_dynamic-wave
         - title: "- Soil moisture"
           url: 3_07_optLISFLOOD_soil-moisture
         - title: "- Transmission loss"
@@ -347,8 +345,6 @@ defaults:
           url: 3_10_optLISFLOOD_water-levels
         - title: "- Read & write NetCDF"
           url: 3_11_optLISFLOOD_NetCDF
-        - title: "- Variable water fraction"
-          url: 3_12_optLISFLOOD_varfractionwater
         - title: "- Transient land use change"
           url: 3_13_optLISFLOOD_TransientLandUseChange
 
@@ -358,6 +354,8 @@ defaults:
           url: 4_1_annex_input-files
         - title: "LISFLOOD output files"
           url: 4_2_annex_output-files
+        - title: "Incomplete modules"
+          url: 4_3_annex_Incomplete-modules          
 
       - section_title: "Not to forget"
         items:
