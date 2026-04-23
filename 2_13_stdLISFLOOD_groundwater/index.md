@@ -57,10 +57,10 @@ Smaller values of $T_{lz}$ lead to a quick response and hence a relatively short
 $LZ$ is then updated as follows:
 
 $$
-LZ = D_{uz,lz}  -  GW_{loss} - Q_{lz} - TotalAbstractionFromGroundWater
+LZ = D_{uz,lz} - Q_{lz} - TotalAbstractionFromGroundWater \cdot \Delta t -  GW_{loss} \cdot \Delta t
 $$
 
-where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$); $GW_{loss}$ is the maximum percolation from the lower groundwater zone ($[mm]$). 
+where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$); $GW_{loss}$ is the maximum percolation from the lower groundwater zone ($[\frac{mm}{day}]$). 
 
 The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
 
