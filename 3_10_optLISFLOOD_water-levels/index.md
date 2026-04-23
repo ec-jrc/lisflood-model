@@ -1,18 +1,20 @@
-## Simulation and reporting of water levels
+## Reporting of water level values from the channel bottom
 
 
 ### Introduction
 
-Within LISFLOOD it is possible to simulate and report water levels in the river channel. This page describes the LISFLOOD water levels option, and how it is used. The simulation of water levels is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
+Within LISFLOOD it is possible to simulate report water depth in the river channel. This is achieved by switching on a dedicated module called "simulateWaterLevels". This module is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="simulateWaterLevels" choice="1" />
 ```
 
-If the option is switched on, water levels are calculated for river channel pixels where flow routing is computed. Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report water levels. The actual *reporting* of the simulated water levels (as time series or maps) can be activated using two separate options (see below in section ['Reporting of water levels'](#reporting-of-water-levels)):
+If the option is switched on, water level values from the channel bottom (water depth values) are calculated for river channel pixels where flow routing is computed *using the [kinematic wave](/3_05_optLISFLOOD_kinematic-wave) solution*. Using this option does *not* influence the actual model results in any way, and it is included only to allow the model user to report water levels. Water level values from the channel bottom can include both the main channel and the second line of routing (Split Routing option).
 
+**Limitation 1** : In the current implementation, water level values from the channel bottom (water depth values) are not reported for pixels where routing is computed using the [diffusive wave routing](/3_14_optLISFLOOD_diffusive-wave). 
+**Limitation 2** : The computation of water level values from the channel bottom (water depth values) requires information about river geometry (bathymetry). Inaccuracies in the representation of channel geometry will directly affect the computation of water level. As detailed in the chapter [Channel geomtery](/4_Static-Maps_channel-geometry/index.md) of the [user guide](https://ec-jrc.github.io/lisflood-code/), OS LISFLOOD assumes a trapezoidal cross section (image below), with geometrical parameters (e.g. bottom width, banckfull depth) computed using approximated equations or continenatl to global datasets. These approximations must be taken into account when using the results of the module described in this page.
 
-### Calculation of water levels
+### Calculation of water level values from the channel bottom
 
 When using the kinematic solution of the Saint Venant Equations, only approximate water levels can be estimated from the cross-sectional (wetted) channel area, $A_{ch}$ for each time step. Since the channel cross-section is described as a trapezoid, water levels follow directly from $A_{ch}$ , channel bottom width, side slope and bankfull level. If $A_{ch}$ exceeds the bankfull cross-sectional area ($A_{bf}$), the surplus is distributed evenly over the (rectangular) floodplain, and the depth of water on the floodplain is added to the (bankfull) channel depth. The Figure below further illustrates the cross-section geometry. All water levels are relative to channel bottom level ($z_{bot}$ in the Figure).
 
@@ -21,7 +23,6 @@ When using the kinematic solution of the Saint Venant Equations, only approximat
 
 In order to calculate water levels, LISFLOOD needs a map with the width of the floodplain in \[m\], which is defined by 'lfbinding' variable *FloodPlainWidth* (the default name of this map is *chanfpln.map*).
 
->Note that for channel stretches that are simulated using the dynamic solution of the Saint Venant Equations the water level in the channel is simply the difference between the channel head and the channel bottom level.
 
 
 
