@@ -3,7 +3,8 @@
 This Annex provides information on code functionalities which were (partially) developed in the past, but are not currently readily available for use.
 Development and maintenance of these functionalities has been dismissed. The relevant code is still included in the open source repository, but its use would require updating and/or bug-fixing. The documentation provided in this annex aims to keep track of these functionalities, for possible future use or uptake by external collaborators. Nevertheless, this documentation might be incomplete and affected by imprecisions.
 
-Incomplete modules are: dynamic wave routing, polders, variable water fraction.
+Incomplete modules are: [dynamic wave routing](/4_3_annex_Incomplete_modules/index.md#dynamic-wave-routing), polders, variable water fraction.
+
 
 
 ### Dynamic wave routing
@@ -144,6 +145,7 @@ The `lfuser` element of the settings file has already been edited for the use of
 	</comment>                                                          
 	</textvar>                                                          
 ```
+
 
 
 
