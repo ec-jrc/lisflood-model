@@ -308,12 +308,10 @@ defaults:
           url: 2_11_stdLISFLOOD_actual-infiltration-and-surface-runoff
         - title: "- Soil moisture redistribution"
           url: 2_12_stdLISFLOOD_soilmoisture-redistribution
-        - title: "- Groundwater"
+        - title: "- Groundwater and sub-surface runoff"
           url: 2_13_stdLISFLOOD_groundwater
         - title: "- Surface runoff routing"
           url: 2_14_stdLISFLOOD_surface-runnoff-routing
-        - title: "- Sub-surface runoff routing"
-          url: 2_15_stdLISFLOOD_subsurface-runoff
         - title: "- Channel routing"
           url: 2_16_stdLISFLOOD_channel-routing
 
