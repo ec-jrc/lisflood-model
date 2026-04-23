@@ -1,6 +1,7 @@
 ## Groundwater storage and sub-surface runoff
 
-Groundwater storage and transport are modelled using two parallel linear reservoirs, similar to the approach used in the HBV-96 model (Lindström et al., 1997). The upper zone represents a quick runoff component, which includes fast groundwater and subsurface flow through macro-pores in the soil. The lower zone represents the slow groundwater component that generates the base flow. 
+Groundwater storage and transport are modelled using two parallel linear reservoirs, similar to the approach used in the HBV-96 model (Lindström et al., 1997). The upper zone represents a quick sub-surface runoff component, which includes fast groundwater and subsurface flow through macro-pores in the soil. The lower zone represents the slow groundwater component that generates the base flow. 
+Ourtflow from the [upper groundwater zone](2_13_stdLISFLOOD_groundwater/index.md#upper-groundwater-zone) (quick sub-surface runoff) and from the [lower groundwater zone](2_13_stdLISFLOOD_groundwater/index.md#lower-groundwater-zone) (base flow) is added up to generate the [sub-surface runoff](2_13_stdLISFLOOD_groundwater/index.md#sub-surface-runoff).
 
 
 ### Upper groundwater zone
@@ -59,7 +60,7 @@ $$
 LZ = D_{uz,lz}  -  GW_{loss} - Q_{lz} - TotalAbstractionFromGroundWater
 $$
 
-where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$);$GW_{loss}$ is the maximum percolation rate from the lower groundwater zone ($[\frac{mm}{day}]$). 
+where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand ($[mm]$); $GW_{loss}$ is the maximum percolation from the lower groundwater zone ($[mm]$). 
 
 The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
 
@@ -109,7 +110,7 @@ Applying these equations to the examples above we obtain the *steady state stora
 
 LISFLOOD provides the possibility to compute the *steady state storage* values internally, all the instrutions are provided in the chapter [Initialisation](/3_step5_model-initialisation/) of the User Guide.
 
-### Sub-surface runoff routing
+### Sub-surface runoff
 
 All water that flows out of the upper- and lower- groundwater zone is routed to the nearest downstream channel pixel within one time step.
 Recalling that the groundwater equations are valid for the pixel's permeable fraction only,the contribution of each pixel to the channel is given by the sum
