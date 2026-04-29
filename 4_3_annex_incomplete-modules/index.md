@@ -189,7 +189,7 @@ From the Figure, it is easy to see that there can be three situations:
 
 
 
-2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ [$\frac{m^3}{s}$] is now calculated using:
+2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ [ $\frac{m^3}{s}$ ] is now calculated using:
 
     $q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2}$
 
