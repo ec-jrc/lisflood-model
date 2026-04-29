@@ -3,7 +3,7 @@
 This Annex provides information on code functionalities which were (partially) developed in the past, but are not currently readily available for use.
 Development and maintenance of these functionalities has been dismissed. The relevant code is still included in the open source repository, but its use would require updating and/or bug-fixing. The documentation provided in this annex aims to keep track of these functionalities, for possible future use or uptake by external collaborators. Nevertheless, this documentation might be incomplete and affected by imprecisions.
 
-Incomplete modules are: [dynamic wave routing](/4_3_annex_incomplete_modules/index.md#dynamic-wave-routing), [polders](/4_3_annex_incomplete_modules/index.md#polder-option), [variable water fraction](/4_3_annex_incomplete_modules/index.md#variable-water-fraction-option), [reporting of channel water depth values](/4_3_annex_incomplete-modules/index.md#reporting-of-channel-water-depth-values).
+Incomplete modules are: [dynamic wave routing](/4_3_annex_incomplete-modules/index.md#dynamic-wave-routing), [polders](/4_3_annex_incomplete-modules/index.md#polder-option), [variable water fraction](/4_3_annex_incomplete-modules/index.md#variable-water-fraction-option), [reporting of channel water depth values](/4_3_annex_incomplete-modules/index.md#reporting-of-channel-water-depth-values).
 
 
 
@@ -177,9 +177,7 @@ From the Figure, it is easy to see that there can be three situations:
 
 1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$ [$\frac{m^3}{s}$], is calculated using:
 
-    $$
-    \begin{array}{|ll} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}
-    $$
+    $$\begin{array}{|ll} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}$$
 
     where 
         <br> $b$ is the outflow width $[m]$, 
@@ -191,9 +189,7 @@ From the Figure, it is easy to see that there can be three situations:
 
 2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ [$\frac{m^3}{s}$] is now calculated using:
 
-    $$
-    \begin{array}{|ll} q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2} \\  c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}
-    $$
+    $$\begin{array}{|ll} q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2} \\  c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}$$
     
 3.  $h_c = h_p$: no water flowing into either direction (note here that the minimum value of $h_c$ is zero). In this case both $q_{c,p}$ and  $q_{p,c}$ are zero.
 
@@ -399,9 +395,9 @@ Users interested in the modelling of seasonal variation of water fraction might 
 #### Introduction
 
 Within LISFLOOD it is possible to simulate and report water level values from the channel bottom (water depth). This is achieved by switching on a dedicated module called "simulateWaterLevels". 
-<pre>
-The use of *level* is not fully correct, and it should be replaced by *depth* in improved versions of the module (important note: *waterdepth* output name is already used to indicate the water depth of the surface runoff or overalnd flow, as explained in [this section](https://ec-jrc.github.io/lisflood-code/4_annex_output-files/) of the LISFLOOD User Guide).
-</pre>
+
+> **_NOTE:_**The use of *level* is not fully correct, and it should be replaced by *depth* in improved versions of the module (important note: *waterdepth* output name is already used to indicate the water depth of the surface runoff or overalnd flow, as explained in [this section](https://ec-jrc.github.io/lisflood-code/4_annex_output-files/) of the LISFLOOD User Guide).
+
 The module "simulateWaterLevels" is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
@@ -434,14 +430,15 @@ To generate a time series, add the following line to the 'lfoptions' element of 
 ```xml
 	<setoption name="repWaterLevelTs" choice="1" />
 ```
+The reporting options should be used *in addition* to the 'simulateWaterLevels' option. If you do not include the 'simulateWaterLevels' option, there will be nothing to report and LISFLOOD will exit with an error message.
 
-For maps, use the following line instead:
+For maps, the following line **and** a correction in the source code (global_modules/default_options.py) are **both** needed:
 
 ```xml
 	<setoption name="repWaterLevelMaps" choice="1" />
 ```
 
-In either case, the reporting options should be used *in addition* to the 'simulateWaterLevels' option. If you do not include the 'simulateWaterLevels' option, there will be nothing to report and LISFLOOD will exit with an error message.
+
 
 #### Preparation of settings file
 
