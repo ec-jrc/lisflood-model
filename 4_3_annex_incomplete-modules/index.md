@@ -177,7 +177,8 @@ From the Figure, it is easy to see that there can be three situations:
 
 1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$ [$\frac{m^3}{s}$], is calculated using:
 
-    $$\begin{array}{|ll} q_{c,p} = \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2} \\ c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}$$
+    $q_{c,p}= \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2}$
+    $c = \sqrt{1 - [\frac{h_p}{h_c}]^{16}}\end{array}$
 
     where 
         <br> $b$ is the outflow width $[m]$, 
@@ -189,7 +190,8 @@ From the Figure, it is easy to see that there can be three situations:
 
 2.  $h_c < h_p$: water flows out of the polder back into the channel. The flow rate, $q_{p,c}$ [$\frac{m^3}{s}$] is now calculated using:
 
-    $$\begin{array}{|ll} q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2} \\  c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}$$
+    $q_{p,c} = \mu \cdot c \cdot b\sqrt{2g} \cdot h_p^{3/2}$
+    $c = \sqrt {1 - [\frac{h_c}{h_p}]^{16}}\end{array}$
     
 3.  $h_c = h_p$: no water flowing into either direction (note here that the minimum value of $h_c$ is zero). In this case both $q_{c,p}$ and  $q_{p,c}$ are zero.
 
@@ -454,7 +456,7 @@ Time series:
 	</textvar>                                                           
 ```
 
-Map stack:
+Map stack (requiring a correction in the source code: global_modules/default_options.py):
 
 ```xml
 	<textvar name="WaterLevelMaps" value="$(PathOut)/wl"> 
