@@ -339,8 +339,6 @@ defaults:
           url: 3_08_optLISFLOOD_transmission-loss
         - title: "- Inflow hydrograph"
           url: 3_09_optLISFLOOD_inflow-hydrograph
-        - title: "- Water levels"
-          url: 3_10_optLISFLOOD_water-levels
         - title: "- Read & write NetCDF"
           url: 3_11_optLISFLOOD_NetCDF
         - title: "- Transient land use change"
