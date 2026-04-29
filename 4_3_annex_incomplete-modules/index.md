@@ -3,7 +3,7 @@
 This Annex provides information on code functionalities which were (partially) developed in the past, but are not currently readily available for use.
 Development and maintenance of these functionalities has been dismissed. The relevant code is still included in the open source repository, but its use would require updating and/or bug-fixing. The documentation provided in this annex aims to keep track of these functionalities, for possible future use or uptake by external collaborators. Nevertheless, this documentation might be incomplete and affected by imprecisions.
 
-Incomplete modules are: [dynamic wave routing](/4_3_annex_Incomplete_modules/index.md#dynamic-wave-routing), [polders](/4_3_annex_Incomplete_modules/index.md#polder-option), [variable water fraction](/4_3_annex_Incomplete_modules/index.md#variable-water-fraction-option), [Reporting of channel water depth values](/4_3_annex_Incomplete_modules/index.md#reporting-of-channel-water-depth-values).
+Incomplete modules are: [dynamic wave routing](/4_3_annex_incomplete_modules/index.md#dynamic-wave-routing), [polders](/4_3_annex_incomplete_modules/index.md#polder-option), [variable water fraction](/4_3_annex_incomplete_modules/index.md#variable-water-fraction-option), [reporting of channel water depth values](/4_3_annex_incomplete-modules/index.md#reporting-of-channel-water-depth-values).
 
 
 
@@ -338,7 +338,7 @@ $\Delta f_{water,i}$ represents the additional amount of water at month $i$ comp
 This is done iteratively removing fractions in order (first $f_{other}$, then $f_{forest}$, $f_{irrig}$ and $f_{runoff}$)  until they reach $0$ or until $\Delta f_{water,i}$ runs out:
 <br>$f_{other,i}=\max(f_{other} - \Delta f_{water,i}),0)$ and $e_{other,i}= \max(\Delta f_{water,i} - f_{other},0)$
 <br>$f_{forest,i}=\max(f_{forest} - e_{other,i},0)$ and $e_{forest,i}=\max(e_{other,i} - f_{forest},0)$
-<br>$f_{irrig,i}= \max(f_{irrig} - e_{forest,i},0) $ and $e_{irrig,i}= \max(e_{forest,i} - f_{irrig,0})$
+<br>$f_{irrig,i}= \max(f_{irrig} - e_{forest,i},0)$ and $e_{irrig,i}= \max(e_{forest,i} - f_{irrig,0})$
 <br>$f_{runoff,i}= \max(f_{runoff} - e_{irrig,i},0)$
 
 Where, for each land type $k$:
@@ -398,15 +398,17 @@ Users interested in the modelling of seasonal variation of water fraction might 
 
 #### Introduction
 
-Within LISFLOOD it is possible to simulate and report water level values from the channel bottom (water depth). 
-This is achieved by switching on a dedicated module called "simulateWaterLevels". The use of *level* is not fully correct, and it should be replaced by *depth* in improved versions of the module (important note: *waterdepth* output name is already used to indicate the water depth of the surface runoff or overalnd flow, as explained in [this section](https://ec-jrc.github.io/lisflood-code/4_annex_output-files/) of the LISFLOOD User Guide).
-This module is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
+Within LISFLOOD it is possible to simulate and report water level values from the channel bottom (water depth). This is achieved by switching on a dedicated module called "simulateWaterLevels". 
+<pre>
+The use of *level* is not fully correct, and it should be replaced by *depth* in improved versions of the module (important note: *waterdepth* output name is already used to indicate the water depth of the surface runoff or overalnd flow, as explained in [this section](https://ec-jrc.github.io/lisflood-code/4_annex_output-files/) of the LISFLOOD User Guide).
+</pre>
+The module "simulateWaterLevels" is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
 ```xml
 	<setoption name="simulateWaterLevels" choice="1" />
 ```
-
-If the option is switched on, water level values from the channel bottom (water depth values) are calculated for river channel pixels where flow routing is computed *using the [kinematic wave](/3_05_optLISFLOOD_kinematic-wave) solution*. Using this option does *not* influence flow routing results, and it is only a reporting option. Computed water level values from the channel bottom can include both the main channel and (where needed) the second line of routing (Split Routing option).
+Using this option does *not* influence flow routing results, and it is only a reporting option.
+Water level values from the channel bottom (water depth values) are calculated *only* for river channel pixels where flow routing is computed *using the [kinematic wave](/3_05_optLISFLOOD_kinematic-wave) solution*. Computed water level values from the channel bottom can include both the main channel and (where needed) the second line of routing (Split Routing option).
 
 **Limitation 1** : In the current implementation, water level values from the channel bottom (water depth values) are not reported for pixels where routing is computed using the [diffusive wave routing](/3_14_optLISFLOOD_diffusive-wave). 
 
