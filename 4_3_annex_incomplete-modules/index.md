@@ -175,7 +175,7 @@ The flow rates from the channel to the polder area and vice versa are calculated
 
 From the Figure, it is easy to see that there can be three situations:
 
-1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$ [$\frac{m^3}{s}$], is calculated using:
+1.  $h_c > h_p$: water flows out of the channel, into the polder. The flow rate, $q_{c,p}$ [ $\frac{m^3}{s}$ ], is calculated using:
 
     $q_{c,p}= \mu \cdot c \cdot b \cdot  \sqrt{2g} \cdot h_c^{3/2}$
 
