@@ -3,7 +3,12 @@
 This Annex provides information on code functionalities which were (partially) developed in the past, but are not currently readily available for use.
 Development and maintenance of these functionalities has been dismissed. The relevant code is still included in the open source repository, but its use would require updating and/or bug-fixing. The documentation provided in this annex aims to keep track of these functionalities, for possible future use or uptake by external collaborators. Nevertheless, this documentation might be incomplete and affected by imprecisions.
 
-Incomplete modules are: [dynamic wave routing](/4_3_annex_incomplete-modules/index.md#dynamic-wave-routing), [polders](/4_3_annex_incomplete-modules/index.md#polder-option), [variable water fraction](/4_3_annex_incomplete-modules/index.md#variable-water-fraction-option), [reporting of channel water depth values](/4_3_annex_incomplete-modules/index.md#reporting-of-channel-water-depth-values).
+List of incomplete modules:
+- [dynamic wave routing](../4_3_annex_incomplete-modules/index.md#dynamic-wave-routing)
+- [polders](../4_3_annex_incomplete-modules/index.md#polder-option)
+- [variable water fraction](../4_3_annex_incomplete-modules/index.md#variable-water-fraction-option)
+- [reporting of channel water depth values](../4_3_annex_incomplete-modules/index.md#reporting-of-channel-water-depth-values)
+- [Monte Carlo, Kalman Filter](../4_3_annex_incomplete-modules/index.md#Monte-Carlo,-Kalman-Filter)
 
 
 
@@ -468,6 +473,19 @@ Map stack (requiring a correction in the source code: global_modules/default_opt
 	</textvar>                                                 
 ```
 
+
+### Monte Carlo, Kalman Filter
+
+The data assimilation code has not been maintained since the publication of Karssenberg et al. (2010, full reference belows). This means that (substantial) edits are required to activate the data assimilation routine with the most updated OS LISFLOOD code.
+
+Karssenberg, D J, Schmitz, O, Salamon, P, de Jong, K & Bierkens, M F P 2010, 'A software framework for construction of process-based stochastic spatio-temporal models and data assimilation', Environmental Modelling and
+Software, vol. 25, pp. 489-502. https://doi.org/10.1016/j.envsoft.2009.10.004
+
+Readers might also be interested in the two references reported below:
+
+Wanders, N., Karssenberg, D., de Roo, A., de Jong, S. M., and Bierkens, M. F. P.: The suitability of remotely sensed soil moisture for improving operational flood forecasting, Hydrol. Earth Syst. Sci., 18, 2343–2357, https://doi.org/10.5194/hess-18-2343-2014, 2014.
+
+Revilla Romero B; Niko W; Burek P; Salamon P; De Roo A. Integrating remotely sensed surface water extent into continental scale hydrology. JOURNAL OF HYDROLOGY 543 (Part B); 2016, https://doi.org/10.1016/j.jhydrol.2016.10.041 
 
 
 [🔝](#top)
