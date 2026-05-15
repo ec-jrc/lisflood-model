@@ -39,7 +39,32 @@ $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$, $Q_{res}$, $Q_{lake}$, $totQchan_{abstr}$, and
 
 In order to improve the model accuracy, the kinematic wave channel routing can be run using a smaller (user-defined) time-step than the overall simulation time-step ($\Delta t$).
 
-Clearly, the smaller the computational time-step, the larger the computational time required to complete the simulation. In order to ammeliorate this problem and achieve the optimal trade-off between computational accuracy and time demand, the kinematic wave calculations for both surface and channel routing have been parallelised using the approach described in Liu *et al.* (2014). The user can then switch from a serial exectution to a parallel exection and set the number of parallel threads using the option *numCPUs_parallelKinematicWave*. Detailed instructions on the use of the parallel computing option are provided by the paragraph [Compile the cython module kinematic wave parallel tool](https://ec-jrc.github.io/lisflood-code/3_step2_installation/) of the [User Guide](https://ec-jrc.github.io/lisflood-code/1_introduction_LISFLOOD/).
+Clearly, the smaller the computational time-step, the larger the computational time required to complete the simulation. 
+
+In order to ammeliorate this problem and achieve the optimal trade-off between computational accuracy and time demand, the kinematic wave calculations for both surface and channel routing have been parallelised using the approach described in Liu *et al.* (2014). 
+
+Users can identify the optimal parallelization approach for their own set-up using the following lines of the settings.xml. 
+It is here noted that the setting "numCPUs_parallelNumba" will be applied to both the computation of routing and of soil water infiltration.
+
+```xml
+<comment>
+**************************************************************
+PARALLELISATION WITH NUMBA (USED IN ROUTING AND SOILLOOP)
+**************************************************************
+</comment>
+
+!-- Parallelisation of using Numba runtime compiled library .
+The option "numCPUs_parallelNumba" may take the following values:
+    - "0"           : set to NUMBA_NUM_THREADS Environment Variable 
+                      (if NUMBA_NUM_THREADS is not set, will take the number of CPU cores determined by python's multiprocessing.cpu_count())
+    - "1"           : serial execution (not parallel)
+    - "2", "3", ... : manual setting of the number of parallel threads.
+                      (if exceeding NUMBA_NUM_THREADS, the value is set to NUMBA_NUM_THREADS) -->
+<textvar name="numCPUs_parallelNumba" value="0"/>
+
+<comment>
+```
+
 
 > J. Liu, A. Zhu, Y. Liu, T. Zhu, C. Z. Qin, A layered approach to parallel computing for spatially distributed hydrological modeling, Environ. Model. Softw., 51 (2014), pp. 221-227
 
