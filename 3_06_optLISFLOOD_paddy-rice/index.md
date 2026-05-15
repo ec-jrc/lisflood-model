@@ -1,10 +1,11 @@
-### Paddy-rice irrigation
+### Paddy rice irrigation
 
 Paddy-rice irrigation is simulated by a dedicated model subroutine which can be switched on by adding the following lines to the `lfoptions` element of the settings file:
 
 ```xml
 <setoption choice="1" name="riceIrrigation"/>
 ```
+> Simulation of paddy rice irrigation requires the activation of the optional module **water use**.
 
 Water abstraction and return is computed differently during the following phases: soil preparation, planting, growth, and harvest. 
 

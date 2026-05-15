@@ -313,7 +313,7 @@ defaults:
         - title: "- Surface runoff routing"
           url: 2_14_stdLISFLOOD_surface-runnoff-routing
         - title: "- Channel routing"
-          url: 2_16_stdLISFLOOD_channel-routing
+          url: 2_15_stdLISFLOOD_channel-routing
 
       - section_title: "Optional LISFLOOD processes & output"
         items:
@@ -323,26 +323,25 @@ defaults:
           url: 3_02_optLISFLOOD_lakes
         - title: "- Reservoirs"
           url: 3_03_optLISFLOOD_reservoirs
-        - title: "- Irrigation"
-          url: 2_17_optLISFLOOD_paddy-rice
-        - title: "- Water use"
-          url: 2_18_optLISFLOOD_water-use          
-        - title: "- Polder"        
-          url: 3_04_optLISFLOOD_polder
-        - title: "- Double kinematic wave"
-          url: 3_05_optLISFLOOD_kinematic-wave		  
-        - title: "- Diffusive wave (MCT)"
-          url: 3_14_optLISFLOOD_diffusive-wave		  
-        - title: "- Soil moisture"
+        - title: "- Double kinematic wave routing (Split Routing)"
+          url: 3_04_optLISFLOOD_kinematic-wave-split-routing		  
+        - title: "- Diffusive wave routing (MCT)"
+          url: 3_05_optLISFLOOD_diffusive-wave-routing
+        - title: "- Paddy rice irrigation"
+          url: 3_06_optLISFLOOD_paddy-rice         		  
+        - title: "- Transmission Loss"
           url: 3_07_optLISFLOOD_soil-moisture
         - title: "- Transmission loss"
           url: 3_08_optLISFLOOD_transmission-loss
+        - title: "- Land Use Change"
+          url: 3_09_optLISFLOOD_TransientLandUseChange          
         - title: "- Inflow hydrograph"
-          url: 3_09_optLISFLOOD_inflow-hydrograph
+          url: 3_10_optLISFLOOD_inflow-hydrograph
+        - title: "- Reporting Soil Moisture pF"
+          url: 3_11_optLISFLOOD_reporting-soil-moisture-pf        
         - title: "- Read & write NetCDF"
-          url: 3_11_optLISFLOOD_NetCDF
-        - title: "- Transient land use change"
-          url: 3_13_optLISFLOOD_TransientLandUseChange
+          url: 3_12_optLISFLOOD_managing-input-output-NetCDF
+
 
       - section_title: "Annex"
         items:
