@@ -13,7 +13,7 @@ where $k_{crop}$ is a crop coefficient, $ET0$ is the potential (reference) evapo
 
 $k_{crop}$ is the ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop; its value is 1 for most vegetation types, except for some highly transpiring crops like sugarcane or rice. 
 
-> Note that the energy that has already been 'consumed' for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ([$EW_{Int}$](https://ec-jrc.github.io/lisflood-model/2_03_stdLISFLOOD_evaporation-intercepted-water/)). This is done in order to respect the overall energy balance. 
+> Note that the energy that has already been 'consumed' for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ([EW_{Int}](https://ec-jrc.github.io/lisflood-model/2_03_stdLISFLOOD_evaporation-intercepted-water/)). This is done in order to respect the overall energy balance. 
 
 
 The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
@@ -29,10 +29,19 @@ w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
 where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
-<br> - when $CropGroupNum \gt 2.5$:
-<br> $ p= 1/(0.76 + 1.5 \cdot ET0) - 0.1 \cdot (5-CropGroupNum)$,
-<br> - when $CropGroupNum \le 2.5$:
-<br> $ p= p + \frac{0.1 \cdot  ET0 - 0.6}{CropGroupNum^2+3}$ 
+
+- where $CropGroupNum \gt 2.5$:
+
+$$ 
+p= 1/(0.76 + 1.5 \cdot (min (0.1 \cdot ET0,1)) - 0.1 \cdot (5-CropGroupNum)
+$$
+
+- where $CropGroupNum \le 2.5$:
+
+$$
+p= p + \frac{min (0.1 \cdot ET0,1) - 0.6}{CropGroupNum \cdot (CropGroupNum+3)}
+$$
+
 
 $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are truncated to 0 and 1, respectively. The following Figure illustrates the relation between $R_{WS}, w, w_{crit}, w_{wp}$:
 
@@ -52,9 +61,9 @@ with $T_a$ and $T_{max}$ in $[mm]$.
 Transpiration is set to zero when the soil is frozen (i.e. when frost index *F* exceeds its critical threshold). 
 
 The amount of **moisture in the upper soil layer** is updated after computing the actual transpiration. Specifically, $T_a$ is first abstracted from the superficial soil layer 1a and then from the upper soil layer 1b under *not stressed* conditions (that is, the remaining amount of water in both the soil layers has to be larger or equal to the critical amount of soil mositure):
-<br>$ w_{AvNotStressed,1a}=w_{1a}-w_{crit,1a} $
-<br>$ w_{AvNotStressed,1b}=w_{1b}-w_{crit,1b} $
-<br>$ T_{a,1a,Ns}= \min(T_a,w_{AvNotStressed,1a}) $
+<br>$w_{AvNotStressed,1a}=w_{1a}-w_{crit,1a} $
+<br>$w_{AvNotStressed,1b}=w_{1b}-w_{crit,1b} $
+<br>$T_{a,1a,Ns}= \min(T_a,w_{AvNotStressed,1a}) $
 
 If $T_{a,1a,Ns} \lt T_a$ then $T_{a,1b,Ns}= \min((T_a-T_{a,1a,Ns}),w_{AvNotStressed,1b})$.
 

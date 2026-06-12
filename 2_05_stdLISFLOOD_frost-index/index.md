@@ -21,7 +21,7 @@ Where:
 - $d_s$ is the ratio of the (pixel-average) depth of the snow cover (expressed as $mm$ equivalent water depth) and a parameter called snow water equivalent,(Maidment, 1993): $d_s = \frac{SnowCover}{SnowWaterEquivalent}$
 
 
-In LISFLOOD, $A_f$ and $K$ are set to 0.97 and 0.57 $[\frac{1}{cm}]$ respectively.
+In LISFLOOD, $A_f$ and $K$ are set to 0.97 $[\frac{1}{day}]$ and 0.57 $[\frac{1}{cm}]$ respectively.
 
 The recommended value of $SnowWaterEquivalent$ is 0.45 (based on snow density of 450 $[\frac{kg}{m^3}]$, e.g. Tarboton and Luce, 1996).
 
