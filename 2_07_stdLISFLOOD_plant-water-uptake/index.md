@@ -28,12 +28,14 @@ $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
-where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
+where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. 
+
+LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
 
 - where $CropGroupNum \gt 2.5$:
 
 $$ 
-p= \frac{1}{0.76 + 1.5 \cdot (min (0.1 \cdot ET0,1)} - 0.1 \cdot (5-CropGroupNum)
+p= \frac{1}{0.76 + 1.5 \cdot min (0.1 \cdot ET0,1)} - 0.1 \cdot (5-CropGroupNum)
 $$
 
 - where $CropGroupNum \le 2.5$:
