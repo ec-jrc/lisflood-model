@@ -43,7 +43,11 @@ $$
 
 where $k$ is a release coefficient that modulates the release in the emergency zone when the flood inflow is exceeded. It is a function of catchment area ($A$ in m²) and flood volume (in m³), and it reflects the amount of average rainfall over the catchment that can be stored in the flood and emergency zones. If the reservoir is able to store 200 mm of rainfall, $k$ becomes zero and the emergency release is equal to the flood outflow. Larger values of $k$ indicate a smaller regulation capacity and larger releases.
 
-$$k = \max \left(1 - \frac{1}{0.2} \cdot \frac{V_{tot} - V_f}{A}, 0 \right)$$
+The equatiion used in LISFLOOD follows the approach explained in [Casado et al., 2026](https://egusphere.copernicus.org/preprints/2026/egusphere-2026-904/):
+
+$$k = \max \left(1 - \frac{1}{0.2} \cdot \frac{V_{tot} - V}{A}, 0 \right)$$
+
+All the computations are done considering relative level of filling values, rather than absolute volume values. The relative level of filling is the ratio between the current storage volume and the reservoir storage capacity. In this way, both calibration parameters mentioned above (flood limit and the factor $\alpha$) are scalar values.
 
 A visual representation of the routine can be seen in the figure below. The blue line represents the reservoir release under normal conditions, whereas the orange line the release in case of a flood event. For a given relative filling, the release is always smaller under normal conditions.
 
@@ -74,7 +78,7 @@ The table below summarises the inputs required by the reservoir routine.
 |-------------------|----------|-----------------|------------------|-----------|-------------|
 | `ReservoirSites`  | map      | Reservoir location and ID | *reservoirs.nc* | -  | Nominal   |
 | `ReservoirTotalStorage`| table | Reservoir capacity | *res_storage.txt* | $m^3$ |           |
-| `ReservoirFloodLimit` | map/table | Relative storage that defines the flood storage limit | *res_flood_limit.(txt/nc)* | - | Calibration parameter. Default value 0.75 |
+| `ReservoirFloodLimit` | map/table | Relative storage (level of filling) that defines the flood storage limit | *res_flood_limit.(txt/nc)* | - | Calibration parameter. Default value 0.75 |
 | `ReservoirFloodOutflow` | table | Flood outflow | *res_flood_outflow.txt* | $\frac{m^3}{s}$ | 100-year return period of inflow |
 | `ReservoirFloodOutflowFactor`| map/table | Modifier of the flood outflow | *res_outflow_factor.(txt/nc)* | - | Calibration parameter. Default value 0.30 |
 | `ReservoirNormalOutflow` | table | Normal outflow | *res_normal_outflow.txt* | $\frac{m^3}{s}$ | Average inflow |

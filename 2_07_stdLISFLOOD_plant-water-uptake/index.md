@@ -13,7 +13,7 @@ where $k_{crop}$ is a crop coefficient, $ET0$ is the potential (reference) evapo
 
 $k_{crop}$ is the ration between the potential (reference) evapotranspiration rate and the potential evaporation rate of a specific crop; its value is 1 for most vegetation types, except for some highly transpiring crops like sugarcane or rice. 
 
-> Note that the energy that has already been 'consumed' for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ([EW_{Int}](https://ec-jrc.github.io/lisflood-model/2_03_stdLISFLOOD_evaporation-intercepted-water/)). This is done in order to respect the overall energy balance. 
+> Note that the energy that has already been 'consumed' for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ([EW_Int](https://ec-jrc.github.io/lisflood-model/2_03_stdLISFLOOD_evaporation-intercepted-water/)). This is done in order to respect the overall energy balance. 
 
 
 The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
