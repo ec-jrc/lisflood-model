@@ -33,7 +33,7 @@ where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ i
 - where $CropGroupNum \gt 2.5$:
 
 $$ 
-p= 1/(0.76 + 1.5 \cdot (min (0.1 \cdot ET0,1)) - 0.1 \cdot (5-CropGroupNum)
+p= \frac{1}{0.76 + 1.5 \cdot (min (0.1 \cdot ET0,1)} - 0.1 \cdot (5-CropGroupNum)
 $$
 
 - where $CropGroupNum \le 2.5$:
