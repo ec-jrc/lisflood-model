@@ -6,13 +6,13 @@ Molnau & Bissell (1983, cited in Maidment 1993), and adjusted for variable time 
 For each time step the value of $F$ $[\frac{\circ C}{ day}]$ is updated as:
 
 $$
-F_t = F_t_-_1 + \frac{dF}{dt}\Delta t
+F_t = F_{(t-1)}  + \frac{dF}{dt}\Delta t
 $$
 
 The **rate at which the frost index changes** $\frac{dF}{dt}$ is expressed in $[\frac{\circ C}{day} \cdot \frac{1}{day}]$ and it is computed as follows:
 
 $$
-\frac{dF}{dt} = - (1 - {A_f})\cdot F_t_-_1 - {T_{av}} \cdot {e^{ - 0.04 \cdot K \cdot {d_s} }}
+\frac{dF}{dt} = - (1 - {A_f})\cdot F_{(t-1)} - {T_{av}} \cdot {e^{ - 0.04 \cdot K \cdot {d_s} }}
 $$
 
 Where:
