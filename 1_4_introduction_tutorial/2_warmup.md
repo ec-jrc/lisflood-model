@@ -8,7 +8,7 @@
 
 The purpose of this run is to obtain the model state variables at the beginning of the period of interest. Hence, the model is run from the beginning of the meteorological data (01-01-1979) to the timestep prior to the beginning of the period of interest (31-12-1989). The initial conditions are set as default values, but we use the two outputs of the initialization run to set the average discharge (`avgdis`) and the average inflow into the lower groundwater zone (`lzavin`). From this run we want as a result only the map of the state variables at the end of the simulation.
 
-This run is not necessary in many studies. We have created this run only to show how the end maps of one simulation can be used as the initial conditions in the succeeding simulation, as it would be done in an operational forecasting system, for instance. This warmup run could be replaced by extending the final run a few years and discarding those first few years from the results. As explained in the [User Guide](https://ec-jrc.github.io/lisflood-code/3_step5_model-initialisation/), the lenght of time to be discarded depends on the "memory" of the water storages inside the model, which is usually in the order of months. A possible way to estimate the necessary time would be to run the model with completely different initial conditions and check when the results converge; from that moment on, the results are reliable.
+This run is not necessary in many studies. We have created this run only to show how the end maps of one simulation can be used as the initial conditions in the succeeding simulation, as it would be done in an operational forecasting system, for instance. This warmup run could be replaced by extending the final run a few years and discarding those first few years from the results. As explained in the [User Guide](https://ec-jrc.github.io/lisflood-code/3_step5_model-initialisation/), the length of time to be discarded depends on the "memory" of the water storages inside the model, which is usually in the order of months. A possible way to estimate the necessary time would be to run the model with completely different initial conditions and check when the results converge; from that moment on, the results are reliable.
 
 
 ```python
@@ -129,7 +129,7 @@ for var in ['tha', 'thb', 'thc', 'uz', 'lz', 'rsfil']:
 # plot end conditions
 fig, axes = plt.subplots(ncols=3, nrows=3, figsize=(12, 9.75))
 plot_config = {'soil': {'keys': ['tha', 'thb', 'thc'], 'cmap': 'Blues'},
-               'groudwater': {'keys': ['uz', 'lz'], 'cmap': 'Greens'},
+               'groundwater': {'keys': ['uz', 'lz'], 'cmap': 'Greens'},
                'reservoir': {'keys': ['rsfil'], 'cmap': 'Reds'}}
 for row, (group, config) in enumerate(plot_config.items()):
     for col, key in enumerate(config['keys']):

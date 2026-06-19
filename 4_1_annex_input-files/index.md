@@ -124,7 +124,7 @@ The following table gives an overview of the relevant tables required by LISFLOO
 | **RESERVOIR MODULE**                             |              |                                                                       |
 | Reservoir ID -> total storage                    | rstor.txt    | Lookup table: reservoir ID -> total reservoir storage volume  $[m^3]$ |
 | Reservoir ID -> conservative storage             | rclim.txt    | Lookup table: reservoir ID -> conservative storage volume  $[m^3]$    |
-|  Reservoir ID -> flood storage limit             | rflim.txt    | Lookup table: reservoir ID -> conservative storage volume  $[m^3]$    |
+|  Reservoir ID -> flood storage limit             | rflim.txt    | Lookup table: reservoir ID -> flood storage volume  $[m^3]$    |
 |  Reservoir ID -> minimum outflow                 | rminq.txt    | Lookup table: reservoir ID -> minimum outflow  $[m^3\s]$              |
 |  Reservoir ID -> maximum non-damaging outflow    | rndq.txt     | Lookup table: reservoir ID ->  maximum non-damaging outflow $[m^3\s]$ |
 

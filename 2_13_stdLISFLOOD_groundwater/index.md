@@ -24,9 +24,9 @@ $$
 
 where $D_{2,gw}$ is the flux from the lower soil layer to groundwater for each time step; $D_{pref,gw}$ is the amount of preferential flow per each time step; $D_{uz,lz}$ is the amount of **water that percolates from the upper to the lower zone** for each time step, all in $[mm]$.
 
-$D_{2,gw}$ is the weighted sum of the vertical downward fluzes from the three land cover fractions.
+$D_{2,gw}$ is the weighted sum of the vertical downward fluxes from the three land cover fractions.
 
-In areas with drained irrigation ($DrainedFraction$), the flux from the lower soil layer to groundwater $D_{2,gw}$ is directly delivered to the river channel, consequenlty, the computation of $UZ$ is modifies as follows:
+In areas with drained irrigation ($DrainedFraction$), the flux from the lower soil layer to groundwater $D_{2,gw}$ is directly delivered to the river channel, consequently, the computation of $UZ$ is modifies as follows:
 
 $$
 UZ = (1 - DrainedFraction) \cdot D_{2,gw} + D_{pref,gw} - D_{uz,lz} - Q_{uz}
@@ -69,7 +69,7 @@ LISFLOOD hence abstracts groundwater from the Lower Zone (LZ). Groundwater deple
 If $LZ$ (lower groundwater amount) decreases below a groundwater hold value ($LZ_{Threshold}$), the baseflow  Q_{lz} from the lower groundwater zone to the nearby rivers is zero. When sufficient recharge is added again to raise the $LZ$ levels above the threshold, baseflow will start again. This mimicks the behaviour of some river basins in very dry episodes, where aquifers temporarily lose their connection to major rivers and baseflow is reduced. $LZ_{Threshold}$ values are likely different for various (sub)river basins. 
 
 The values of $T_{uz}$ $[days]$, $T_{lz}$ $[days]$, $GW_{perc}$ $[\frac{mm}{day}]$, $GW_{loss}$ $[\frac{mm}{day}]$, and $LZ_{Threshold}$ $[mm]$ are obtained by calibration. To avoid spurious results, when $GW_{perc}$ < $GW_{loss}$, $GW_{perc}$ is set equal to $GW_{loss}$.
-In the current model implementation, no limit is imposed to water abstraction from groundwarer and LZ can become negative: more details are porvided in the chapter [Water use](/2_18_optLISFLOOD_water-use).
+In the current model implementation, no limit is imposed to water abstraction from groundwater and LZ can become negative: more details are provided in the chapter [Water use](/2_18_optLISFLOOD_water-use).
 
 Note seepage from soil to upper groundwater zone and percolation from upper to lower groundwater zone are computed only for the permeable fraction of each pixel: groundwater storage in the direct runoff fraction equals 0.
 
@@ -108,7 +108,7 @@ Applying these equations to the examples above we obtain the *steady state stora
 |1000    | 1.5   | 1500    |
 
 
-LISFLOOD provides the possibility to compute the *steady state storage* values internally, all the instrutions are provided in the chapter [Initialisation](/3_step5_model-initialisation/) of the User Guide.
+LISFLOOD provides the possibility to compute the *steady state storage* values internally, all the instructions are provided in the chapter [Initialisation](/3_step5_model-initialisation/) of the User Guide.
 
 ### Sub-surface runoff
 

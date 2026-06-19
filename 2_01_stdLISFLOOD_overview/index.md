@@ -23,7 +23,7 @@ The processes that are simulated by the model include also snow melt, infiltrati
 
 ### Sub-grid variability
 
-Before going into detail with the individual hydrological processes, here first some explaination on a larger conceptual approach on how LISFLOOD is dealing with sub-grid variability in land cover and the consecutive influence on various processes.
+Before going into detail with the individual hydrological processes, here first some explanation on a larger conceptual approach on how LISFLOOD is dealing with sub-grid variability in land cover and the consecutive influence on various processes.
 
 #### Representation of land cover
 

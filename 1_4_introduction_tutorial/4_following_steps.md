@@ -6,7 +6,7 @@
 <br>
 <br>
 
-So far we have developed a LISFLOOD model than runs and it is correctly initialized. However, we are using default model parameters, so there's no confidence at all in the accuracy of the model. Before you can extract any conclusions from your model results, the model needs to be calibrated. As a result of the calibration, the model parameters are tuned so that the outputs reproduce observed data as good as possible. Calibration is usually performed on the river discharge timeseries at one or more gauging stations, but there are plenty of other calibration procedures. 
+So far we have developed a LISFLOOD model that runs and it is correctly initialized. However, we are using default model parameters, so there's no confidence at all in the accuracy of the model. Before you can extract any conclusions from your model results, the model needs to be calibrated. As a result of the calibration, the model parameters are tuned so that the outputs reproduce observed data as good as possible. Calibration is usually performed on the river discharge timeseries at one or more gauging stations, but there are plenty of other calibration procedures. 
 
 To perform a calibration, LISFLOOD proposes a [calibration tool](https://github.com/ec-jrc/lisflood-calibration) based on DEAP (Distributed Evolutionary Algorithms in Python) (Fortin et al., 2012).The calibration procedure exceeds the scope of this tutorial, so we will not get into it. Please, feel free to use any other calibration procedure and optimization algorithm.
 
@@ -107,7 +107,7 @@ In our study case, the change in the _lzavin_ is notorious.
 
 ## 3 Warmup
 
-As explained in [Chapter 3 - Warmup](#2_warmup.ipynb), this objective of this run is to find the initial conditions at the begining of the target run. The usual output of these simulation is a set of maps (NetCDF) with the model state variables at the end of the simulation. For educational purposes, we chose to write, not only the end state maps, but also the map stack of one of the state variables: the lower groundwater zone.
+As explained in [Chapter 3 - Warmup](#2_warmup.ipynb), objective of this run is to find the initial conditions at the beginning of the target run. The usual output of these simulation is a set of maps (NetCDF) with the model state variables at the end of the simulation. For educational purposes, we chose to write, not only the end state maps, but also the map stack of one of the state variables: the lower groundwater zone.
 
 Let's see how some of the outputs of this run has changed with the calibrated parameters and the new initialization maps.
 
@@ -131,7 +131,7 @@ for var in ['tha', 'thb', 'thc', 'uz', 'lz']:
 # plot end state maps
 fig, ax = plt.subplots(ncols=3, nrows=4, figsize=(12, 14))
 plot_config = {'soil': {'vars': ['tha', 'thb', 'thc'], 'cmap': 'Blues'},
-               'groudwater': {'vars': ['uz', 'lz'], 'cmap': 'Greens'}}
+               'groundwater': {'vars': ['uz', 'lz'], 'cmap': 'Greens'}}
 for g, (group, config) in enumerate(plot_config.items()):
     for col, var in enumerate(config['vars']):
         # calculate minimum and maximum values for the colorbar

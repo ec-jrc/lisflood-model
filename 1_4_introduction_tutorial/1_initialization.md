@@ -29,7 +29,7 @@ os.chdir('../../')
 
 ## 1 Settings file
 
-In the following lines, a snippet of the settings file (_settings_initialization.xml_) shows the most relevant lines in this file for the initializatin run.
+In the following lines, a snippet of the settings file (_settings_initialization.xml_) shows the most relevant lines in this file for the initialization run.
 
 ```xml
 <lfoptions>
@@ -95,10 +95,10 @@ In the following lines, a snippet of the settings file (_settings_initialization
 </lfuser>
 ```
 
-* In the element `<lfoptions>`, the option `InitLisflood` tells LISFLOOD that this run is an initialization. Since we are using as a routing module the split kinematic wave, we must deactivate the option `InitLisfloodwithoutsplit`; otherwise, the initialization run will not produce the file _avgdis.nc_ and we will not be able to initialize the routing module in suceeding runs. 
+* In the element `<lfoptions>`, the option `InitLisflood` tells LISFLOOD that this run is an initialization. Since we are using as a routing module the split kinematic wave, we must deactivate the option `InitLisfloodwithoutsplit`; otherwise, the initialization run will not produce the file _avgdis.nc_ and we will not be able to initialize the routing module in succeeding runs. 
 * In the element `<lfuser>`, we must define the simulation period, the location of the output files, and the initial conditions.
     * The initialization run spans from 01-01-1979 to 31-12-2019. Following the [end of timestep naming convention](https://ec-jrc.github.io/lisflood-code/2_ESSENTIAL_time-management/) in LISFLOOD, the previous dates will be shifted forward by 1 day; that's why in the settings file the `StepStart` and `StepEnd` are 02-01-1979 and 01-01-2020, respectively. 
-    * We will save the two ouput files (_lzavin.nc_ and _avgdis.nc_) in a folder named _initial_. It is not necessary to specify the extension of the NetCDF files.
+    * We will save the two output files (_lzavin.nc_ and _avgdis.nc_) in a folder named _initial_. It is not necessary to specify the extension of the NetCDF files.
     * Regarding the initial conditions, those in the section water balance must be initialized with a value or a map (we define default values of 0 or 1), whereas the rest of the variables can be internally initialized by setting the value -9999.
     
 
@@ -117,7 +117,7 @@ The outputs are the two maps (NetCDF format) mentioned at the top of this notebo
 
 
 ```python
-# load average inflow into the lower groundware zone
+# load average inflow into the lower groundwater zone
 lzavin = xr.open_dataarray('initial/lzavin.nc')
 lzavin.close()
 
@@ -140,4 +140,4 @@ for ax, da in zip(axes, [lzavin, avgdis]):
 
 ***Figure 1**. Output maps of the initialization run.*
 
-Both outputs represent an average flow rate, therefore, they have are a single map with no temporal dimension.
+Both outputs represent an average flow rate, therefore, they have a single map with no temporal dimension.
