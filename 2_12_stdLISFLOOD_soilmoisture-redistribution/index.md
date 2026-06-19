@@ -65,7 +65,7 @@ $$
 
 In brief, the iterative procedure now involves the following steps. First, the number of sub-steps and the corresponding sub-time-step are computed as explained above. The amounts of soil moisture in the upper and lower layers are copied to temporary variables $w_{1}'$, $w_{2}'$  and  $w_3'$. Three variables, $D_{1,2}$ (flow from superficial soil layer to top soil layer), $D_{2,3}$ (flow from top soil layer to lower soil layer) and $D_{3,gw}$ (flow from lower soil layer to groundwater) are initialized (set to zero). Then, for each sub-step, the following sequence of calculations is performed:
 
-1. Compute hydraulic conductivity for the three layers $[K_{1}(w_{1}),K_{1}(w_{1}), K_3(w_3)]$ 
+1. Compute hydraulic conductivity for the three layers $[K_{1}(w_{1}),K_{2}(w_{2}), K_3(w_3)]$ 
 
 2. Compute flux from superficial to upper soil layer for this sub-step ($D'_{1,2}$ can never exceed storage capacity in the upper soil layer)
 
@@ -85,7 +85,7 @@ In brief, the iterative procedure now involves the following steps. First, the n
    D'_{3,gw} = min [K_3(w'_3)\Delta t,w'_3 -w'_{r3}]
    $$
 
-5. Update $w_{2}'$,  $w_{2}'$ and $w'_2$
+5. Update $w_{1}'$, $w_{2}'$ and $w'_3$
 
 6. Add $D_{1,2}'$ to $D_{1,2}$; $D_{2,3}'$ to $D_{2,3}$; add $D_{3,gw}'$ to $D_{3,gw}$
 

@@ -35,7 +35,7 @@ If $\alpha_{k,sr}$ and $\beta_k$ are known, this non-linear equation can be solv
 
 $$A_{sr} = \left( \frac{n \cdot {P_{sr}}^{2/3}}{\sqrt{S_0}} \right)^{3/5} \cdot {Q_{sr}}^{3/5}$$
 
-where $n$ is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation gives:
+where $n$ is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in the above equation gives:
 
 $$
 \alpha_{k,sr} = \left(\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}}\right)^{0.6} ; \beta_k=0.6

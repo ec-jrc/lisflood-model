@@ -29,7 +29,7 @@ Snow accumulation and melting are subsequently modelled separately for each elev
 
 ## Snowfall-rainfall partition
 
-In order to achieve an accurate represenation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
+In order to achieve an accurate representation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
 
 This distinction is controlled by the average temperature ($\bar{T}$). If the temperature is below a threshold ($T_{snow}$), all the observed precipitation is assumed to be snow. A $T_{snow}$ value of $1 ^\circ \text{C}$ is recommended. A snow correction factor $SnowFactor$ is applied to correct for undercatch of snowfall. Undercatch, in this context, refers to the mismeasurement of snowfall by a rain gauge. For instance, when using traditional rain gauges, wind gusts can blow some of the snow away from the gauge, or, vice-versa, accumulate snow within the gauge. The computation is summarised as follows:
 
@@ -65,7 +65,7 @@ where:
 * $SM_z$ is the snowmelt ($mm$) per time step in elevation zone $z$.
 * $C_{sm}$ is the degree-day factor ($\frac{mm} {^\circ\mathrm{C} \ day}$), a.k.a. snowmelt coefficient.
 * $C_{seasonal}$ is the seasonal variation of the degree-day factor ($\frac{mm} {^\circ\mathrm{C} \ day}$).
-* $RF_z$ is the rainfall (not snow!) intensity ($\frac{mm}{day}$) in the eleavatoin zone $z$.
+* $RF_z$ is the rainfall (not snow!) intensity ($\frac{mm}{day}$) in the elevation zone $z$.
 * $T_z$ is the average temperature ($^\circ\mathrm{C}$) in the elevation zone $z$.
 * $T_{melt}$ is the temperature threshold ($^\circ\mathrm{C}$) at which snow melt starts. It can be defined by the user, but a value of $1 ^\circ\mathrm{C}$ is recommended.
 * $\Delta t$ is the time interval ($day$). It can be smaller than 1 day.
@@ -85,13 +85,13 @@ The seasonal snowmelt coefficient ($C_{seasonal}$) allows for an annual oscillat
 * The solar radiation has an effect on the energy balance and varies with the time of the year.
 * The albedo of the snow has a seasonal variation, because fresh snow is more common in the mid winter and aged snow in the late winter/spring. This produce an even greater seasonal variation in the amount of net solar radiation.
 
-In LISFLOOD, a sine funcion of amplitue $1 \frac{mm}{°C \ day}$ allows for a varition over the base value of the snowmelt coefficient depending on the day of the year ($\text{doy}$). The centering of this ocsillation changes in the Northern Hemisphere (maximun on June 21) and Southern Hemisphere (maximum on December 21):
+In LISFLOOD, a sine function of amplitude $1 \frac{mm}{°C \ day}$ allows for a variation over the base value of the snowmelt coefficient depending on the day of the year ($\text{doy}$). The centering of this oscillation changes in the Northern Hemisphere (maximum on June 21) and Southern Hemisphere (maximum on December 21):
 
 $$
 C_{seasonal} = \sin \left( \left( \text{doy} - 81 \right) \frac{2 \cdot \pi}{365.25} \right)
 $$
 
-Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ \text{C} \cdot day}$ is modulated using $C_{seasonal}$. The value of $C_{sm}$ is reduced by $0.5$ at December 21 and a increased by $0.5$ on the June 21. This example refers to the Northern emisphere.
+Figure 2 shows an example where a mean value $C_{sm} = 3.0 \frac{mm}{^\circ \text{C} \cdot day}$ is modulated using $C_{seasonal}$. The value of $C_{sm}$ is reduced by $0.5$ at December 21 and a increased by $0.5$ on the June 21. This example refers to the Northern Hemisphere.
 
 <img src="../media/image7.jpg" alt="seasonal oscillation of the snowmelt coefficient" width="600">
 
@@ -111,7 +111,7 @@ where:
 * $IM_z$ is the icemelt ($mm$) per time step and elevation zone.
 * $C_{im}$ is the seasonally-varying icemelt coefficent ($\frac{mm} {^\circ\mathrm{C} \ day}$).
 
-The seasonal icemelt coefficient enforces that icemelt only happens during summer (from June 13 to September 13 in the Norherm Hemisphere, from December 13 to March 14 in the Southern Hemisphere). It also takes the shape of a sine function with a maximum value of $7 \frac{mm} {^\circ\mathrm{C} \ day}$:
+The seasonal icemelt coefficient enforces that icemelt only happens during summer (from June 13 to September 13 in the Norhern Hemisphere, from December 13 to March 14 in the Southern Hemisphere). It also takes the shape of a sine function with a maximum value of $7 \frac{mm} {^\circ\mathrm{C} \ day}$:
 
 $$
 C_{im} =
@@ -131,7 +131,7 @@ where $\text{start}$ and $\text{end}$ are the days of the year representing the 
 
 In the global simulations using the GloFAS setup, it has been observed that the snow water equivalent ($SWE$) tend to accumulate over the years in some areas of the world. To solve this issue, glacier melting was introduced in LISFLOOD v5.
 
-The glacier melt routine establishes a maximum value of the SWE of $2000 \text{mm}$ in each elevation zone. If this threshold is exceeded, the excedent is moved to the inmediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
+The glacier melt routine establishes a maximum value of the SWE of $2000 \text{mm}$ in each elevation zone. If this threshold is exceeded, the excess is moved to the immediately lower zone, expecting that the higher temperature will melt it and prevent accumulation.
 
 $$
 GM_z = 
@@ -143,7 +143,7 @@ $$
 
 where the glacier melt coefficient ($C_{gm}$) was empirically given a value of $0.01$.
 
-## Swow water equivalent
+## Snow water equivalent
 
 At each time step and elevation zone, the initial snow water equivalent ($SWE_{z,t-1}$) is updated with the [snowfall](#Snowfall-rainfall-partition) ($SF_{z,t}$), the [snowmelt](#Snow-melt) ($SM_{z,t}$) the [ice melt](#Ice-melt) ($IM_{z,t}$) and the [glacier melt](#Glacier-melt) ($GM_{z,t}$). The total amount of melting (snow, ice and glacier) cannot exceed the available snow water equivalent.
 

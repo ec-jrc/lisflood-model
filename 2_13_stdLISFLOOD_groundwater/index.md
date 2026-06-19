@@ -1,7 +1,7 @@
 ## Groundwater storage and sub-surface runoff
 
 Groundwater storage and transport are modelled using two parallel linear reservoirs, similar to the approach used in the HBV-96 model (Lindström et al., 1997). The upper zone represents a quick sub-surface runoff component, which includes fast groundwater and subsurface flow through macro-pores in the soil. The lower zone represents the slow groundwater component that generates the base flow. 
-Ourtflow from the [upper groundwater zone](2_13_stdLISFLOOD_groundwater/index.md#upper-groundwater-zone) (quick sub-surface runoff) and from the [lower groundwater zone](2_13_stdLISFLOOD_groundwater/index.md#lower-groundwater-zone) (base flow) is added up to generate the [sub-surface runoff](2_13_stdLISFLOOD_groundwater/index.md#sub-surface-runoff).
+Outflow from the [upper groundwater zone](2_13_stdLISFLOOD_groundwater/index.md#upper-groundwater-zone) (quick sub-surface runoff) and from the [lower groundwater zone](2_13_stdLISFLOOD_groundwater/index.md#lower-groundwater-zone) (base flow) is added up to generate the [sub-surface runoff](2_13_stdLISFLOOD_groundwater/index.md#sub-surface-runoff).
 
 
 ### Upper groundwater zone
