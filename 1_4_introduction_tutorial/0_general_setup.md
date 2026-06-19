@@ -43,7 +43,7 @@ They are included in the folder _maps_, classified according to topics (_channel
 
 The specific maps for this case study were created by cutting the global maps to the catchment defined by our outlet gauging stations. The `cutmaps` tool from the [LISFLOOD utilities repository](https://github.com/ec-jrc/lisflood-utilities) allows you to perform this task. 
 
-LISFLOOD requires a set of maps that define catchment properties such as topography, soil properties, land use, etc. LISFLOOD users are encouraged to produce their own maps following the protocol explained [here](https://ec-jrc.github.io/lisflood-code/4_Static-Maps-introduction/). European maps at 1 arcminute resolution and global maps at 3 arcminute resolution will be publicly available in 2023.
+LISFLOOD requires a set of maps that define catchment properties such as topography, soil properties, land use, etc. LISFLOOD users are encouraged to produce their own maps following the protocol explained [here](https://ec-jrc.github.io/lisflood-code/4_Static-Maps-introduction/). European maps at 1 arcminute resolution and global maps at 3 arcminute resolution and are publicly available.
 
 #### 2.1.1 Static maps
 

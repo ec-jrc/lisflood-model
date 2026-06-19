@@ -138,7 +138,7 @@ To speed up the pre-run and to prevent that results are taken from the pre-run, 
 | potential reference evapotranspiration  | repETRefMaps           | $mm$                       | ETRefMaps                                          | et              |
 | potential evaporation from soil         | repESRefMaps           | $mm$                       | ESRefMaps                                          | es              |
 | potential open water evaporation        | repEWRefMaps           | $mm$                       | EWRefMaps                                          | ew              |
-| average daily temperature               | repTavgMaps            | $mm$                       | TavgMaps                                           | tav             |
+| average daily temperature               | repTavgMaps            | $°C$                       | TavgMaps                                           | tav             |
 | **VOLUME VARIABLES**                 |                        |                            |                                                    |                 |
 | depth of water on soil surface (overland flow)         | repWaterDepthMaps      | $mm$                       | WaterDepthMaps                                     | wdep            |
 | depth of snow cover on soil surface     | repSnowCoverMaps       | $mm$                       | SnowCoverMaps                                      | scov            |
