@@ -16,7 +16,6 @@ where:
 Since no infiltration can take place in each pixel's 'direct runoff fraction', **direct runoff** is calculated as:
 
 $$
-
 R_d = f_{dr} \cdot (R \cdot \Delta t + M - IntercSealed) + WaterFraction \cdot (R \cdot \Delta t + M - EW0)
 $$
 
