@@ -23,19 +23,19 @@ In the LISFLOOD settings file this critical amount is currently expressed as an 
 The **actual soil evaporation** is always the smallest value out of the result of the equation above and the available amount of moisture in the soil, i.e.:
 
 $$
-ES_a = \min (ES_a,w_1 - w_{res1})
+ES_a = \min (ES_a,w_{1t} - w_{res1t})
 $$
 
-where $w_1 [mm]$ is the amount of moisture in the superficial and upper soil layer and $w_{res1} [mm]$ is the residual amount of soil moisture . Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen (i.e. when the [frost index F](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is above the crtitical threshold value). 
+where $w_{1t} [mm]$ is the amount of moisture in the superficial and upper soil layer and $w_{res1t} [mm]$ is the residual amount of soil moisture in the combined layer. Like transpiration, direct evaporation from the soil is set to zero if the soil is frozen (i.e. when the [frost index F](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is above the crtitical threshold value). 
 
-The actual soil evaporation is extracted from the superficial soil layer ($ES_{a,1a}$) and, subsequently, from the upper soil layer ($ES_{a,1b}$):
-<br>$ES_{a,1a} = \min ([w_{1a} - w_{res1a}] , ES_a)$
-<br>$ES_{a,1b} = \max ([ES_a-ES_{a,1a}], 0)$
+The actual soil evaporation is extracted from the superficial soil layer ($ES_{a,1}$) and, subsequently, from the upper soil layer ($ES_{a,2}$):
+<br>$ES_{a,1} = \min ([w_{1} - w_{res1}] , ES_a)$
+<br>$ES_{a,2} = \max ([ES_a-ES_{a,1}], 0)$
 
 The amount of moisture in the superficial and upper soil layers is then updated as follows:
-<br>$w_{1a} = w_{1a} - ES_{a,1a}$
-<br>$w_{1b} = w_{1b} - ES_{a,1b}$
-<br>$w_1 = w_{1a} + w_{1b}$
+<br>$w_{1} = w_{1} - ES_{a,1}$
+<br>$w_{2} = w_{2} - ES_{a,2}$
+<br>$w_{1t} = w_{1} + w_{2}$
 
 
 

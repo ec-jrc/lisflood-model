@@ -42,9 +42,9 @@ Output time series can be classified in the following categories:
 | depth of water on soil surface                               | $mm$                       | WaterDepthAvUpsTS      | wdepthUps.tss          |
 | depth of snow cover on                                       | $mm$                       | SnowCoverAvUpsTS       | snowCoverUps.tss       |
 | depth of interception storage                                | $mm$                       | CumInterceptionAvUpsTS | cumInterceptionUps.tss |
-| soil moisture upper layer                                    | $\frac{mm^3}{mm^3}$        | Theta1AvUpsTS          | th1aAvUps.tss           |
-| soil moisture lower layer                                    | $\frac{mm^3}{mm^3}$        | Theta2AvUpsTS          | th1bAvUps.tss           |
-| soil moisture layer 2                                        | $\frac{mm^3}{mm^3}$        | Theta3AvUpsTS          | th2AvUps.tss           |
+| soil moisture layer 1                                        | $\frac{mm^3}{mm^3}$        | Theta1AvUpsTS          | th1AvUps.tss           |
+| soil moisture layer 2                                        | $\frac{mm^3}{mm^3}$        | Theta2AvUpsTS          | th2AvUps.tss           |
+| soil moisture layer 3                                        | $\frac{mm^3}{mm^3}$        | Theta3AvUpsTS          | th3AvUps.tss           |
 | groundwater upper zone                                       | $mm$                       | UZAvUpsTS              | uzUps.tss              |
 | groundwater lower zone                                       | $mm$                       | LZAvUpsTS              | lzUps.tss              |
 | number of days since last rain                               | $days$                     | DSLRAvUpsTS            | dslrUps.tss            |
@@ -71,9 +71,9 @@ Output time series can be classified in the following categories:
 | **STATE VARIABLES AT SITES** (option *repStateSites*)     |                            |                        |                        |
 | depth of snow cover on soil surface (pixel-average)          | $mm$                       | SnowCoverTS            | snowCover.tss          |
 | depth of interception storage                                | $mm$                       | CumInterceptionTS      | cumInt.tss             |
-| soil moisture content superficial layer                            | $\frac{mm^3}{mm^3}$        | Theta1TS               | th1a.tss              |
-| soil moisture content upper layer                            | $\frac{mm^3}{mm^3}$        | Theta2TS               | th1b.tss              |
-| soil moisture layer bottom layer                                        | $\frac{mm^3}{mm^3}$        | Theta3TS               | th2.tss              |
+| soil moisture content superficial layer                            | $\frac{mm^3}{mm^3}$        | Theta1TS               | th1.tss              |
+| soil moisture content upper layer                            | $\frac{mm^3}{mm^3}$        | Theta2TS               | th2.tss              |
+| soil moisture layer bottom layer                                        | $\frac{mm^3}{mm^3}$        | Theta3TS               | th3.tss              |
 | storage in upper groundwater zone                            | $mm$                       | UZTS                   | uz.tss                 |
 | storage in lower groundwater zone                            | $mm$                       | LZTS                   | lz.tss                 |
 | number of days since last rain                               | $days$                     | DSLRTS                 | dslr.tss               |
@@ -160,8 +160,8 @@ To speed up the pre-run and to prevent that results are taken from the pre-run, 
 | leaf drainage                           | repLeafDrainageMaps    | $\frac{mm}{timestep}$      | LeafDrainageMaps <br> LeafDrainageForestMaps                                   | ldra <br> draF            |
 | infiltration                            | repInfiltrationMaps    | $\frac{mm}{timestep}$      | InfiltrationMaps <br> InfiltrationForestMaps                                   | inf <br> infF             |
 | preferential (bypass) flow              | repPrefFlowMaps        | $\frac{mm}{timestep}$      | PrefFlowMaps <br> PrefFlowtherMaps <br> PrefFlowForestMaps <br> PrefFlowIrrigationMaps                                       | pflowpixel <br> pflow <br> pflowF <br> pflowi           |
-| percolation upper to lower soil layer   | repPercolationMaps     | $\frac{mm}{timestep}$      | Percolation1ato1bOtherMaps <br> Percolation1ato1bForestMaps <br> Percolation1ato1bIrrigationMaps <br> Percolation1bto2OtherMaps <br> Percolation1bto2ForestMaps <br> Percolation1bto2IrrigationMaps                                    | Percolation1ato1bOther <br> Percolation1ato1bForest <br> Percolation1ato1bIrrigation <br> Percolation1bto2Other <br> Percolation1bto2Forest <br> Percolation1bto2Irrigation           |
-| percolation lower soil layer to subsoil | repSeepSubToGWMaps     | $\frac{mm}{timestep}$      | SeepSubToGWMaps <br> SeepSubToGWotherMaps <br> SeepSubToGWforestMaps <br> SeepSubToGWoirrigationMaps                                    | sgwPixel <br> sgwOther <br> sgwForest <br> sgwIrrigation          |
+| percolation upper to lower soil layer   | repPercolationMaps     | $\frac{mm}{timestep}$      | Percolation1to2OtherMaps <br> Percolation1to2ForestMaps <br> Percolation1to2IrrigationMaps <br> Percolation2to3OtherMaps <br> Percolation2to3ForestMaps <br> Percolation2to3IrrigationMaps                                    | Percolation1to2Other <br> Percolation1to2Forest <br> Percolation1to2Irrigation <br> Percolation2to3Other <br> Percolation2to3Forest <br> Percolation2to3Irrigation           |
+| percolation lower soil layer to groundwater (upper zone) | repSeepSubToGWMaps     | $\frac{mm}{timestep}$      | SeepSubToGWMaps <br> SeepSubToGWotherMaps <br> SeepSubToGWforestMaps <br> SeepSubToGWoirrigationMaps                                    | sgwPixel <br> sgwOther <br> sgwForest <br> sgwIrrigation          |
 | surface runoff                          | repSurfaceRunoffMaps   | $\frac{mm}{timestep}$      | SurfaceRunoffMaps                                  | srun            |
 | outflow from upper zone | repUZOutflowMaps       | $\frac{mm}{timestep}$      | UZOutflowMaps, UZOutflowForestMaps <br> UZOutflowIrrigationMaps                                      | quzPixel <br>  quz <br> quzF <br> quzi             |
 | outflow from lower zone                 | repLZOutflowMaps       | $\frac{mm}{timestep}$      | LZOutflowMaps                                      | qlz             |

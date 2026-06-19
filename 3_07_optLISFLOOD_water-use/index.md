@@ -179,7 +179,7 @@ Crop irrigation water demand is assumed equal to the difference between potentia
 
 $$T_{a,irrig} = \min \left(T_a, w_1 - w_{wp1} \right)$$
 
-where $w_1$ and $w_{wp1}$ are, respectively, the amount of water available and the wilting point. Root water uptake depletes the soil moisture of the superficial (1a) and upper (1b) soil layers. 
+where $w_1$ and $w_{wp1}$ are, respectively, the amount of water available and the wilting point. Root water uptake depletes the soil moisture of the superficial (1) and upper (2) soil layers. 
 
 The demand for crop irrigation is then computed as:
 
@@ -416,11 +416,11 @@ In condition of water scarcity, water uses are satisfied according to the follow
 
 $$IrrigationWater = CropIrrigationAbstractionGW  + CropIrrigationAbstractionSurfaceWater - WaterUseShortage$$
 
-The value *IrrigationWater* is then used to compute the water content of the superficial soil layer ($w_{1a}$) and the upper soil layer ($w_{1b}$). Specifically, the value *IrrigationWater* (after convertion in [mm]) is first added to the superficial soil layer, until the water content of this layer ($w_{1a}$) is equal to:
+The value *IrrigationWater* is then used to compute the water content of the superficial soil layer ($w_{1}$) and the upper soil layer ($w_{2}$). Specifically, the value *IrrigationWater* (after convertion in [mm]) is first added to the superficial soil layer, until the water content of this layer ($w_{1}$) is equal to:
 
-$$w_{fill,1a} = \min \left( w_{crit,1a}, w_{pF3,1a} \right)$$
+$$w_{fill,1} = \min \left( w_{crit,1}, w_{pF3,1} \right)$$
 
-where $w_{crit,1a}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1a}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa). The remainder amount of water (if any) is then added to the upper soil layer ($w_{1b}$). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
+where $w_{crit,1}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa). The remainder amount of water (if any) is then added to the upper soil layer ($w_{2}$). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
 
 In order to check the conservation of mass within the system, LISFLOOD computes the amount of water consumed by irrigation *IrriLossCum* (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors *IrrigationEfficiency* and *ConveyanceEfficiency*), the resulting water content of the superficial and upper soil layers.
 
