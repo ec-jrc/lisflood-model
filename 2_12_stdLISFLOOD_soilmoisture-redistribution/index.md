@@ -24,6 +24,10 @@ $$
 m = \frac{\lambda }{\lambda + 1}
 $$
 
+<img src="../media/plot_04_van_genuchten_conductivity.png" alt="Van Genuchten relative hydraulic conductivity for different soil textures" width="600">
+
+***Figure:*** *Relative hydraulic conductivity $K/K_s$ as a function of effective saturation for different soil textures. Coarse soils (sand) maintain higher conductivity at lower saturations compared to fine soils (clay).*
+
 For large values of *Δt* (e.g. 1 day) the above equation often results in amounts of outflow that exceed the available soil moisture storage, i.e:
 
 $$

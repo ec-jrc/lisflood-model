@@ -16,7 +16,7 @@ $k_{crop}$ is the ratio between the potential (reference) evapotranspiration rat
 > Note that the energy that has already been 'consumed' for the evaporation of intercepted water is simply accounted for here by subtracting the evaporated water volume here ([EW_Int](https://ec-jrc.github.io/lisflood-model/2_03_stdLISFLOOD_evaporation-intercepted-water/)). This is done in order to respect the overall energy balance. 
 
 
-The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a reduction factor is applied to simulate this effect:
+The **actual transpiration rate** is reduced when the amount of moisture in the soil is small. In the model, a **water stress reduction factor** $R_{WS}$ [-] is applied to simulate this effect. $R_{WS}$ ranges between 0 (no transpiration, soil at wilting point) and 1 (no stress, soil moisture above the critical level):
 
 $$
 R_{WS} = \frac{w_t - w_{wp1}}{w_{crit1} -w_{wp1}}
@@ -28,7 +28,7 @@ $$
 w_{crit1} = (1 - p) \cdot (w_{fc1} - w_{wp1}) + w_{wp1}
 $$
 
-where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fration. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. 
+where $w_{fc1} [mm]$ is the amount of soil moisture at field capacity, and $p$ is the soil water depletion fraction. Specifically, $p$ represents the fraction of soil moisture between $w_{fc1}$ and $w_{wp1}$ that can be extracted from the soil without reducing the transpiration rate. Its value is a function of both vegetation type and the potential evapotranspiration rate $ET0$. The vegetation type is defined using the crop group number ($CropGroupNum$) which is s an indicator of adaptation to dry climate. 
 
 LISFLOOD computes $p$ according to the procedure to estimate $p$ is described in detail in Supit & Van Der Goot (2003) and in Van Diepen *et al.* (1988):
 
@@ -50,6 +50,10 @@ $R_{WS}$ varies between 0 and 1. Negative values and values greater than 1 are t
 ![Reduction of transpiration in case of water stress](../media/image26.png)
 
 ***Figure:*** *Reduction of transpiration in case of water stress.* $R_{WS}$ *is 1 when* $w \ge w_{crit}$, *it decreases linearly between* $w_{crit}$ *and* $w_{wp}$, *and it reaches zero when $w=w_{wp}$.*
+
+<img src="../media/plot_10_rws_crop_types.png" alt="R_WS for different crop types" width="650">
+
+***Figure:*** *Transpiration reduction factor $R_{WS}$ for different crop group numbers. Drought-sensitive crops (low CropGroupNum) have a higher $w_{crit}$ and start reducing transpiration earlier. Drought-tolerant crops (high CropGroupNum) can extract water to lower moisture levels before stress occurs.*
 
 
 The **actual transpiration** $T_a$ is now calculated as:

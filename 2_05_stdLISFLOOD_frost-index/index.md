@@ -30,5 +30,9 @@ The recommended value of $SnowWaterEquivalent$ is 0.45 (based on snow density of
 When the frost index rises above a threshold of 56, every soil process is frozen and transpiration, evaporation, infiltration and water flows between the different soil layers and to the upper groundwater layer are set to zero.
 Any rainfall is bypassing the soil and transformed into surface runoff till the frost index is equal or less than 56.
 
+<img src="../media/plot_02_frost_index_evolution.png" alt="Frost index evolution under different scenarios" width="700">
+
+***Figure:*** *Frost index evolution under three scenarios: (a) sustained cold without snow cover — F quickly reaches the cap; (b) cold with snow insulation — F rises much more slowly; (c) alternating warm/cold — F oscillates but can still cross the frozen threshold.*
+
 Starting from LISFLOOD v4.0.0, *the maximum frost index value is set to 57*. This choice was made to prevent nonrealistic large discharge values in specific climatic conditions.  
 When such a limitation to the maximum value of the frost index is not used, very long cold periods lead to very high values of the frost index (>100). This effect is exacerbated in the absence of precipitation (snow). A sudden increase in temperature and a precipitation event (rain) on a deeply frozen soil (frost index much larger than 56) results in a large discharge value in the channels as all the rain is transformed into surface runoff and routed to the channels. This behavior of the numerical model was observed in many European and North American rivers and such large discharge values were deemed nonrealistic after the comparison with the observed discharge time series. Conversely, the modelled results are consistent with the observations when the maximum value of the frost index is set to 57. 

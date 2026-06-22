@@ -20,6 +20,10 @@ $D_{slr}$ is reset to 1 if the critical amount of water is exceeded.
 
 In the LISFLOOD settings file this critical amount is currently expressed as an *intensity* $[\frac{mm}{day}]$. This is because the equation was originally designed for a daily time step only. Because the current implementation will likely lead to *DSLR* being reset too frequently, the exact formulation may change in future versions (e.g. by keeping track of the accumulated available water of the last 24 hours). 
 
+<img src="../media/plot_03_dslr_soil_evaporation.png" alt="Soil evaporation reduction with DSLR" width="750">
+
+***Figure:*** *Left: daily soil evaporation reduction factor as a function of days since last rain ($D_{slr}$). Right: cumulative evaporation follows a square-root-of-time relationship.*
+
 The **actual soil evaporation** is always the smallest value out of the result of the equation above and the available amount of moisture in the soil, i.e.:
 
 $$

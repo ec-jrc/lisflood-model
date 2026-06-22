@@ -25,3 +25,7 @@ $$
 
 
 Clearly, at each computational time step, $Int$ cannot exceed the rainfall amount. Moreover, the value of $Int$ can never exceed the interception storage capacity, which is defined as the difference between $S_{max}$ and the accumulated amount of water that is stored as interception, $Int_{cum}$. 
+
+<img src="../media/plot_06_interception_lai_rainfall.png" alt="Interception as function of LAI and rainfall" width="800">
+
+***Figure:*** *Left: interception per time step as a function of LAI for different rainfall amounts. Right: maximum interception storage $S_{max}$ as a function of LAI (Von Hoyningen-Huene, 1981).*

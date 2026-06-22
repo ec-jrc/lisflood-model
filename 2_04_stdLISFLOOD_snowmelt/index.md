@@ -27,6 +27,10 @@ $$
 
 Snow accumulation and melting are subsequently modelled separately for each elevation zone, assuming that temperature can be approximated by the temperature at the centroid of each respective zone. Only the glacier melt redistributes snow from the higher to the lower elevation zones.
 
+<img src="../media/plot_09_elevation_zones_temperature.png" alt="Elevation zones and temperature lapse" width="800">
+
+***Figure:*** *Left: normal distribution of sub-pixel elevation partitioned into three equal-area zones (A, B, C), with dashed lines indicating zone centroids. Right: resulting temperature in each zone after applying the lapse rate correction ($\gamma$ = 0.0065 °C/m).*
+
 ## Snowfall-rainfall partition
 
 In order to achieve an accurate representation of the catchment hydrological processes, it is important to partition the measured precipitation ($P$) into rainfall ($RF$) and snowfall ($SF$). 
