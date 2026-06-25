@@ -90,7 +90,11 @@ $$
 \frac{dLZ}{dt}=I(t)-O(t)
 $$
 
-where $I$ is the (time dependent) inflow (i.e. groundwater recharge) and $O$ is the outflow rate. For a situation where the storage remains constant, we can write:
+where $I$ is the (time dependent) inflow (i.e. groundwater recharge) and $O$ is the outflow rate. The second governing assumption of the linear storage theory is that:
+$$
+\frac{LZ}{dt}=O(t)
+$$
+For a situation where the storage remains constant, we can set:
 <br>$\frac{dLZ}{dt}=0$  only if  $I(t)=O(t)$
 
 This equation can be re-written as:
@@ -102,7 +106,7 @@ Solving this for LZ gives the steady state storage:
 
 Applying these equations to the examples above we obtain the *steady state storage* values shown in the Figure.
 
-|T_{lz}  | I(t)  | LZ_{ss} |
+|$T_{lz}$  | I(t)  | $LZ_{ss}$ |
 |--------|-------|---------|
 |250     | 0.2   | 50      |
 |1000    | 1.5   | 1500    |
