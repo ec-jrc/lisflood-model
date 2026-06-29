@@ -35,11 +35,15 @@ If $\alpha_{k,sr}$ and $\beta_k$ are known, this non-linear equation can be solv
 
 $$A_{sr} = \left( \frac{n \cdot {P_{sr}}^{2/3}}{\sqrt{S_0}} \right)^{3/5} \cdot {Q_{sr}}^{3/5}$$
 
-where $n$ is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in equation gives:
+where $n$ is Manning's roughness coefficient and $P_{sr}$ is the wetted perimeter of a cross-section of the surface flow. Substituting the right-hand side of this equation for $A_{sr}$ in the above equation gives:
 
 $$
 \alpha_{k,sr} = \left(\frac{n \cdot P_{sr}^{2/3}}{\sqrt{S_0}}\right)^{0.6} ; \beta_k=0.6
 $$
+
+<img src="../media/plot_07_kinematic_wave_stencil.png" alt="4-point implicit finite-difference scheme for kinematic wave" width="500">
+
+***Figure:*** *4-point implicit finite-difference scheme for the kinematic wave equation. The spatial flux (blue) connects upstream and downstream nodes at the new time level; the temporal storage change (red) connects old and new time levels at the downstream node; lateral inflow (green) is averaged over the time step.*
 
 At the moment, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. The [**surface runoff ($R_s$)**](https://ec-jrc.github.io/lisflood-model/2_11_stdLISFLOOD_actual-infiltration-and-surface-runoff/) which is generated at each computational time step **is added as side-flow ($q_{sr}$)** in the flow routing equation explained in this chapter. 
 

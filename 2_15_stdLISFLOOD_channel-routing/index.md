@@ -26,13 +26,13 @@ $$
 q_{ch} = \frac{\sum Q_{sr} + \sum Q_{uz} + \sum Q_{lz} + Q_{in} + Q_{res} + Q_{lake} - totQchan_{abstr} - EvapChan }{L_{ch}}
 $$
 
-Here, the positive sign indicates water volumes that are addded to the channel flow, conversely, the negative sign indicates water volumes that are removed from the channel. Each contribution (with both positive and negative sign) is defined hereafter. 
+Here, the positive sign indicates water volumes that are added to the channel flow, conversely, the negative sign indicates water volumes that are removed from the channel. Each contribution (with both positive and negative sign) is defined hereafter. 
 * $Q_{sr}, Q_{uz}$ and $Q_{lz}$ denote the contributions of surface runoff, outflow from the upper zone and outflow from the lower zone, respectively. 
 * $Q_{in}$ is the inflow from an external inflow hydrograph; by default its value is 0, unless the ['inflow hydrograph' option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_inflow-hydrograph/) is activated. 
 * $Q_{res}$ is the water that flows out of a reservoir into the channel; by default its value is 0, unless the ['reservoir' option](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_reservoirs/) is activated. 
 * $Q_{lake}$ is the water that flows out of a lake into the channel; by default its value is 0, unless the ['lake' option](https://ec-jrc.github.io/lisflood-model/3_02_optLISFLOOD_lakes/) is activated. 
-* $totQchan_{abstr}$ is the total volume of water removed from the channel to respond to domestic, agricoltural, livestock, energetic, and industrial water demands. $totQchan_{abstr}$ is by default 0, unless the ['water use' option](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) is activated. 
-* $EvapChan$ is the volume of water that evaporates from the channel; its value is by default 0, unless the ['openwaterevapo' option](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/) is activated. The volume of potential evaporation from water surface per time step is given by the product of teh potential evaporation rate from an open water surface $EW0$ times the pixel water fraction $F_{water}$. $F_{water}$ can be constant or change every month ($ f_{water,i}$, with $i = 1,2,\ldots 12$), as detailed in the ['variable water fraction' chapter](https://ec-jrc.github.io/lisflood-model/3_12_optLISFLOOD_varfractionwater/). The actual evaporation form the channel cannot exceed the 90% of the channel discharge.
+* $totQchan_{abstr}$ is the total volume of water removed from the channel to respond to domestic, agricultural, livestock, energetic, and industrial water demands. $totQchan_{abstr}$ is by default 0, unless the ['water use' option](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) is activated. 
+* $EvapChan$ is the volume of water that evaporates from the channel; its value is by default 0, unless the ['openwaterevapo' option](https://ec-jrc.github.io/lisflood-code/4_annex_settings_and_options/) is activated. The volume of potential evaporation from water surface per time step is given by the product of the potential evaporation rate from an open water surface $EW0$ times the pixel water fraction $F_{water}$. $F_{water}$ can be constant or change every month ($ f_{water,i}$, with $i = 1,2,\ldots 12$), as detailed in the ['variable water fraction' chapter](https://ec-jrc.github.io/lisflood-model/3_12_optLISFLOOD_varfractionwater/). The actual evaporation form the channel cannot exceed the 90% of the channel discharge.
 
 $Q_{sr}, Q_{uz}, Q_{lz}, Q_{in}$, $Q_{res}$, $Q_{lake}$, $totQchan_{abstr}$, and $EvapChan$ are all expressed in $[m^3]$ per time step. $L_{ch}$ is the channel length $[m]$, which may exceed the pixel size ($\Delta x$) in case of meandering channels. 
 
@@ -41,7 +41,7 @@ In order to improve the model accuracy, the kinematic wave channel routing can b
 
 Clearly, the smaller the computational time-step, the larger the computational time required to complete the simulation. 
 
-In order to ammeliorate this problem and achieve the optimal trade-off between computational accuracy and time demand, the kinematic wave calculations for both surface and channel routing have been parallelised using the approach described in Liu *et al.* (2014). 
+In order to ameliorate this problem and achieve the optimal trade-off between computational accuracy and time demand, the kinematic wave calculations for both surface and channel routing have been parallelised using the approach described in Liu *et al.* (2014). 
 
 Users can identify the optimal parallelization approach for their own set-up using the following lines of the settings.xml. 
 It is here noted that the setting "numCPUs_parallelNumba" will be applied to both the computation of routing and of soil water infiltration.

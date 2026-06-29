@@ -16,3 +16,5 @@ npm-debug.log*
 _pdf/
 /log.lgo
 .ipynb_checkpoints/
+media/*.py
+REVIEW_findings.md

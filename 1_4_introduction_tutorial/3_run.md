@@ -6,7 +6,7 @@
 <br>
 <br>
 
-Once we have done the initialization run and we have estimated the initial conditions in the warmup run, we are in a position to perform our target simulation. We want to simulate the 30 years period between 01-01-1990 and 31-12-2019  in order to estimate the climatology of the hydrological processes in the Nam Ngum River Basin. Remember that in [LISFLOOD time convention](https://ec-jrc.github.io/lisflood-code/2_ESSENTIAL_time-management/) this dates corresponds to 02-01-1990 and 01-01-2020, respectively.
+Once we have done the initialization run and we have estimated the initial conditions in the warmup run, we are in a position to perform our target simulation. We want to simulate the 30 years period between 01-01-1990 and 31-12-2019  in order to estimate the climatology of the hydrological processes in the Nam Ngum River Basin. Remember that in [LISFLOOD time convention](https://ec-jrc.github.io/lisflood-code/2_ESSENTIAL_time-management/) these dates corresponds to 02-01-1990 and 01-01-2020, respectively.
 
 
 ```python
@@ -94,7 +94,7 @@ We will introduce a few changes in the settings file (*settings_run.xml*) compar
 
 In the `<lfoptions>` element, timeseries and maps to be reported are activated/deactivated. We chose to report timeseries of discharge (`repDischargeTs`) and reservoirs (`repsimulateReservoirs`). Regarding maps, in this case we're not interested in the end state maps, therefore `repEndMaps` is deactivated. We're only interested in the map stacks of state variables, therefore we activated `RepStateMaps`. However, this variable will not create the discharge and water abstraction map stacks; for that we need to activate the variables `repDischargeMaps` and `RepTotalAbs`. Finally, to generate the water exploitation index maps, we need to activate both `indicator` and `repWIndex`.
 
-In the `<lfuser>` element, we need to set several features. First, the points in the river network for which timeseries output will be generated; we defined three points using their longitude and latitude separated by spaces (there are other posibilities to set the reporting points). We set the simulation period, i.e., the start and end dates (`StepStart` and `StepEnd`), the timestep from which initial conditions may be read (`timestepInit`) and the timesteps that will be included in the output map stacks (`ReportSteps`). Later, the paths for the initial conditions and outputs are set. Finaly, the location of the initial condition maps must be specified. Special remark on the lower groundwater zone initial value (`LZInitValue`), for which we generated a map stack during the warmup run, instead of a end map; that's the reason why the directory where the map is located is different.
+In the `<lfuser>` element, we need to set several features. First, the points in the river network for which timeseries output will be generated; we defined three points using their longitude and latitude separated by spaces (there are other possibilities to set the reporting points). We set the simulation period, i.e., the start and end dates (`StepStart` and `StepEnd`), the timestep from which initial conditions may be read (`timestepInit`) and the timesteps that will be included in the output map stacks (`ReportSteps`). Later, the paths for the initial conditions and outputs are set. Finally, the location of the initial condition maps must be specified. Special remark on the lower groundwater zone initial value (`LZInitValue`), for which we generated a map stack during the warmup run, instead of a end map; that's the reason why the directory where the map is located is different.
 
 > **Note**. Pay special attention to the 5 nines in the variable `ReportSteps` (`1..99999`), which are necessary since the simulation exceeds the 10,000 timesteps
 
@@ -146,7 +146,7 @@ plot_mapstacks(soil_storages, vmin=vmin, vmax=vmax, ylabel='soil moisture')
     
 
 
-***Figure 1**. Evolution of soil moisture in the three soil layers trhoughout the main run.*
+***Figure 1**. Evolution of soil moisture in the three soil layers throughout the main run.*
 
 From the previous plots we can extract the following thoughts:
 

@@ -46,41 +46,41 @@ The use of maps is essential to include the sub-grid variability of each paramet
 | Crop coef. for forest                                     | cropcoef_forest.map | U.: [-] <br> R.: 0.8≤ map ≤ 1.2                        | Crop coefficient for forest                                  |
 | Crop coef. for other                                      | cropcoef_other.map  | U.: [-] <br> R.: 0.8≤ map ≤ 1.2                        | Crop coefficient for other                                   |
 | Crop group number for forest                              | crgrnum_forest.map  | U.: [-] <br> R.: 1 ≤ map ≤ 5                           | Crop group number for forest                                 |
-| Crop group number for forest                              | crgrnum_other.map   | U.: [-] <br> R.: 1 ≤ map ≤ 5                           | Crop group number for other                                  |
+| Crop group number for other                              | crgrnum_other.map   | U.: [-] <br> R.: 1 ≤ map ≤ 5                           | Crop group number for other                                  |
 | Manning for forest                                        | mannings_forest.map | U.: [-] <br> R.: 0.2≤ map ≤ 0.4                        | Manning's roughness for forest                               |
 | Manning for other                                         | mannings_other.map  | U.: [-] <br> R.: 0.01≤ map ≤0.3                        | Manning's roughness for other                                |
-| Soil depth for forest for layer1a                         | soildepth1_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1a (superficial)           |
-| Soil depth for other for layer1a                          | soildepth1_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil depth for soil layer 1a (superficial)            |
-| Soil depth for forest for layer1b                         | Soildepth2_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1b (upper)                          |
-| Soil depth for other for layer1b                          | Soildepth2_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 1b (upper)                    |
-| Soil depth for forest for layer2                          | Soildepth3_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 2 (lower)                         |
-| Soil depth for other for layer2                           | Soildepth3_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 2 (lower)                      |
+| Soil depth for forest for layer1                         | soildepth1_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 1 (superficial)           |
+| Soil depth for other for layer1                          | soildepth1_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil depth for soil layer 1 (superficial)            |
+| Soil depth for forest for layer2                         | Soildepth2_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 2 (upper)                          |
+| Soil depth for other for layer2                          | Soildepth2_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 2 (upper)                    |
+| Soil depth for forest for layer3                          | Soildepth3_forest.map | U.: $mm$ <br> R.: map ≥ 50                             | Forest soil depth for soil layer 3 (lower)                         |
+| Soil depth for other for layer3                           | Soildepth3_other.map  | U.: $mm$ <br> R.: map ≥ 50                             | Other soil soil depth for soil layer 3(lower)                      |
 | **SOIL HYDRAULIC PROPERTIES (depending on soil texture)** |                     |                                                        |                                                              |
-| ThetaSat1a for forest                                      | thetas1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1a           |
-| ThetaSat1a for other                                       | thetas1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1a           |
-| ThetaSat1b for forest                                      | thetas2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1b           |
-| ThetaSat1b for other                                       | thetas2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1b           |
-| ThetaSat2 for forest and other                             | thetas3.map         | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 2           |
-| ThetaRes1a for forest                                      | thetar1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1a            |
-| ThetaRes1a for other                                       | thetar1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1a            |
-| ThetaRes1b for forest                                      | thetar2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1b            |
-| ThetaRes1b for other                                       | thetar2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1b            |
-| ThetaRes2 for forest and other                             | thetar3.map         | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 2            |
-| Lambda1a for forest                                        | lambda1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1a                                  |
-| Lambda1a for other                                         | lambda1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1a                                  |
-| Lambda1b for forest                                        | lambda2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1b                                  |
-| Lambda1b for other                                         | lambda2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1b                                 |
-| Lambda2 for forest and other                               | lambda3.map         | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 2                                  |
-| GenuAlpha1a for forest                                     | alpha1_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1a                            |
-| GenuAlpha1a for other                                      | alpha1_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1a                            |
-| GenuAlpha1b for forest                                     | alpha2_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1b                            |
-| GenuAlpha1b for other                                      | alpha2_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1b                            |
-| GenuAlpha2 for forest and other                            | alpha3.map          | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 2                            |
-| Sat1a for forest                                           | ksat1_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1a                               |
-| Sat1a for other                                            | ksat1_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1a                               |
-| Sat1b for forest                                           | ksat2_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1b                               |
-| Sat1b for other                                            | ksat2_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1b                               |
-| Sat2 for forest and other                                  | ksat3.map           | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 2                               |
+| ThetaSat1 for forest                                      | thetas1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1           |
+| ThetaSat1 for other                                       | thetas1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 1           |
+| ThetaSat2 for forest                                      | thetas2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 2           |
+| ThetaSat2 for other                                       | thetas2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Saturated volumetric soil moisture content layer 2           |
+| ThetaSat3 for forest and other                             | thetas3.map         | U.: [-] <br> R.: 0 < map < 1                         | Saturated volumetric soil moisture content layer 3           |
+| ThetaRes1 for forest                                      | thetar1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1            |
+| ThetaRes1 for other                                       | thetar1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 1            |
+| ThetaRes2 for forest                                      | thetar2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 2            |
+| ThetaRes2 for other                                       | thetar2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Residual volumetric soil moisture content layer 2            |
+| ThetaRes3 for forest and other                             | thetar3.map         | U.: [-] <br> R.: 0 < map < 1                         | Residual volumetric soil moisture content layer 3            |
+| Lambda1 for forest                                        | lambda1_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1                                  |
+| Lambda1 for other                                         | lambda1_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 1                                  |
+| Lambda2 for forest                                        | lambda2_forest.map  | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 2                                  |
+| Lambda2 for other                                         | lambda2_other.map   | U.: [-] <br> R.: 0 < map < 1                           | Pore size index (λ) layer 2                                 |
+| Lambda3 for forest and other                               | lambda3.map         | U.: [-] <br> R.: 0 < map < 1                         | Pore size index (λ) layer 3                                  |
+| GenuAlpha1 for forest                                     | alpha1_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1                            |
+| GenuAlpha1 for other                                      | alpha1_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 1                            |
+| GenuAlpha2 for forest                                     | alpha2_forest.map   | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 2                            |
+| GenuAlpha2 for other                                      | alpha2_other.map    | U.: [-] <br> R.: 0 < map < 1                           | Van Genuchten parameter α layer 2                            |
+| GenuAlpha3 for forest and other                            | alpha3.map          | U.: [-] <br> R.: 0 < map < 1                          | Van Genuchten parameter α layer 3                            |
+| Sat1 for forest                                           | ksat1_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1                               |
+| Sat1 for other                                            | ksat1_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 1                               |
+| Sat2 for forest                                           | ksat2_forest.map    | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 2                               |
+| Sat2 for other                                            | ksat2_other.map     | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 2                               |
+| Sat3 for forest and other                                 | ksat3.map           | U.: $\frac{cm} {day}$ <br> R.: 1 ≤ map ≤ 100           | Saturated conductivity layer 3                               |
 | **CHANNEL GEOMETRY**                                       |                     |                                                        |                                                              |
 | Channels                                                   | chan.map            | U.: [-] <br> R.: 0 or 1                                | Map with Boolean 1 for all channel pixels, and Boolean 0 for all other pixels on MaskMap |
 | ChanGrad                                                   | changrad.map        | U.: $\frac{m} {m}$ <br> R.: map > 0  <br> !!!          | Channel gradient                                             |
@@ -124,7 +124,7 @@ The following table gives an overview of the relevant tables required by LISFLOO
 | **RESERVOIR MODULE**                             |              |                                                                       |
 | Reservoir ID -> total storage                    | rstor.txt    | Lookup table: reservoir ID -> total reservoir storage volume  $[m^3]$ |
 | Reservoir ID -> conservative storage             | rclim.txt    | Lookup table: reservoir ID -> conservative storage volume  $[m^3]$    |
-|  Reservoir ID -> flood storage limit             | rflim.txt    | Lookup table: reservoir ID -> conservative storage volume  $[m^3]$    |
+|  Reservoir ID -> flood storage limit             | rflim.txt    | Lookup table: reservoir ID -> flood storage volume  $[m^3]$    |
 |  Reservoir ID -> minimum outflow                 | rminq.txt    | Lookup table: reservoir ID -> minimum outflow  $[m^3\s]$              |
 |  Reservoir ID -> maximum non-damaging outflow    | rndq.txt     | Lookup table: reservoir ID ->  maximum non-damaging outflow $[m^3\s]$ |
 

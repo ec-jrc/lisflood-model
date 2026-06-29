@@ -13,7 +13,7 @@ Many additional options have been developed to **simulate** all kind of **additi
 - Including: [reservoirs](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_reservoirs/), [polder](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_polder/), 
 [lakes](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_lakes/), 
 [inflow hydrographs](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_inflow-hydrograph/) and [transmission losses](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_transmission-loss/)
-- chosing among different routing routines: [double kinematic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_kinematic-wave/) or [dynamic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_dynamic-wave/)
+- choosing among different routing routines: [double kinematic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_kinematic-wave/) or [dynamic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_dynamic-wave/)
 - Simulating [water levels](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-levels/), [water use](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-use/) and [soil moisture](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_soil-moisture/)
 
 If you like to use an additional option you have to 'activate' it in the [LISFLOOD settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml) under the 'lfoptions' element. 
@@ -46,7 +46,7 @@ Besides the standard LISFLOOD output (which is discharge and soil moisture), the
 
 
 In the LISFLOOD settings file the 'lfoptions' element gives you additional control over what LISFLOOD is doing. 
-As with the simulation options also the output options are implemented as switches with "1" corrisponding to "on" and "0" to "off". 
+As with the simulation options also the output options are implemented as switches with "1" corresponding to "on" and "0" to "off". 
 This way you can tell the model exactly which output files are reported and which ones aren't. 
 You can activate as many options as you want (or none at all). Remember that each option generally requires additional items in the settings file. 
 For instance, if you want to report discharge maps at each time step, you will first have to specify under which name they will be written. 

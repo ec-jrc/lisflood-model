@@ -6,7 +6,7 @@
 <br>
 <br>
 
-The objective of this this use case is to present new users the steps necessary to develop a LISFLOOD catchment model. We will guide you through the input data, the most important parts of the settings file, the diverse runs you will need to initialize the model, and the outputs of every run.
+The objective of this use case is to present new users the steps necessary to develop a LISFLOOD catchment model. We will guide you through the input data, the most important parts of the settings file, the diverse runs you will need to initialize the model, and the outputs of every run.
 
 We will suppose that there is a project in which we are asked to run a 30-year long simulation of the Nam Ngum river (Laos) to assess the water resources in the catchment.
 
@@ -27,7 +27,7 @@ os.chdir('../../')
 
 The Nam Ngum River is a tributary of the Mekong River that flows into it a few kilometers downstream of Laos' capital city, Vientiane. The catchment has an area of approximately 16,000 km2, of which 8,400 km2 are regulated by the Nam Ngum Reservoir. The mean annual rainfall in the catchment is 1200 mm and a mean annual temperature around 12 ºC.
 
-According to the [GloFAS](https://www.globalfloods.eu/) (Global Flood Awareness System) dataset, the are two gauges within the Nam Ngum River catchment. In this exercise, we will use the gauge downstream to cut the static maps and the meteorological forcing that LISFLOOD needs as input data. However, we are not interested specifically in these two gaugins stations; instead, we will define three reporting points, one corresponding to the downstream gauge and two points we will choose in the tributaries of the Nam Ngum River.
+According to the [GloFAS](https://www.globalfloods.eu/) (Global Flood Awareness System) dataset, there are two gauges within the Nam Ngum River catchment. In this exercise, we will use the gauge downstream to cut the static maps and the meteorological forcing that LISFLOOD needs as input data. However, we are not interested specifically in these two gaugins stations; instead, we will define three reporting points, one corresponding to the downstream gauge and two points we will choose in the tributaries of the Nam Ngum River.
 
 ![Run explanation](images/introduction_map.png)
 
@@ -41,13 +41,13 @@ The input data required by the LISFLOOD model can be divided in three groups: st
 
 They are included in the folder _maps_, classified according to topics (_channels_, _general_, _lakes_...). This organization is voluntary, you can find your own way to organize the maps, as long as you reference them correctly in the settings file.
 
-The specific maps for this case study were created by cutting the global maps to the catchment defined by our oulet gauging stations. The `cutmaps` tool from the [LISFLOOD utilities repository](https://github.com/ec-jrc/lisflood-utilities) allows you to perform this task. 
+The specific maps for this case study were created by cutting the global maps to the catchment defined by our outlet gauging stations. The `cutmaps` tool from the [LISFLOOD utilities repository](https://github.com/ec-jrc/lisflood-utilities) allows you to perform this task. 
 
-LISFLOOD requires a set of maps that define catchment properties such as topography, soil properties, land use, etc. LISFLOOD users are encouraged to produce their own maps following the protocol explained [here](https://ec-jrc.github.io/lisflood-code/4_Static-Maps-introduction/). European maps at 1 arcminute resolution and global maps at 3 arcminute resolution will be publicly available in 2023.
+LISFLOOD requires a set of maps that define catchment properties such as topography, soil properties, land use, etc. LISFLOOD users are encouraged to produce their own maps following the protocol explained [here](https://ec-jrc.github.io/lisflood-code/4_Static-Maps-introduction/). European maps at 1 arcminute resolution and global maps at 3 arcminute resolution and are publicly available.
 
 #### 2.1.1 Static maps
 
-The vast majority of these maps are static, i.e., they do not change over time. These maps include the channel properties, land cover related maps, soil hydraulics, etc. Let's see how some of the soil hydraulis properties look like:
+The vast majority of these maps are static, i.e., they do not change over time. These maps include the channel properties, land cover related maps, soil hydraulics, etc. Let's see how some of the soil hydraulic properties look like:
 
 
 ```python
