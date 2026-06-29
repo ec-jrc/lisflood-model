@@ -44,6 +44,12 @@ C\. Double kinematic wave routing and Muskingum-Cunge-Todini routing (combinatio
 	<setoption name="MCTRouting" choice="1" />
 ```
 
+When using MCT wave routing, an additional option is available to prescribe the use of calibration stations location. At the grid cells corresponding with a calibration station, the river flow from the upstream grid cells is passed to the river reach as a lateral flow. This option allows to reproduce the calibration results, where an equivalent modelling choice is performed using the inflow feature.
+
+```xml
+    <setoption choice="1" name="simulateCalibrationPoints"/>
+```
+
 
 ### Input data
 
@@ -98,6 +104,20 @@ The riverbed roughness for channels where MCT diffusive wave routing is used can
     <comment>
         default: 3.0 [-]
         Multiplier [-] applied to Channel Manning's n for MCT routing
+    </comment>
+</textvar>
+```
+
+
+### Calibration points
+
+The prescribed location of calibration points can be set using the key *CalibrationPoints* in LISFLOOD settings file. *CalibrationPoints* is a map with locations for calibration stations as integer positive numbers and zeroes elsewhere.
+
+```xml
+<textvar name="CalibrationPoints" value="$(PathRoot)/maps/CalibrationPoints.nc">
+    <comment>
+        location of calibration points
+        OPTIONAL: nominal map with locations of calibration points
     </comment>
 </textvar>
 ```
