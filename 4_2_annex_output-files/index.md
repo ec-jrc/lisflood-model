@@ -123,7 +123,7 @@ In addition, some additional maps and time series may be reported for debugging 
 | average inflow to lower zone                            | $mm$  | lzavin.nc        | whole pixel                      |
 | average channel discharge (if option 'SplitRouting' = 1)                  | $\frac{m}{s}$  | avgdis.nc| channel                      |
 
-LISFLOOD can also generate output end-files to allow the initialization of the soil moisture of the three soil layers and the water content of the upper groundwater zone, as well as maps of the average seppage flow from the second to the third soil layer. More details are provided in the chapter dedicated to [model initialization](../3_step4_model-initialisation).
+LISFLOOD can also generate output end-files to allow the initialization of the soil moisture of the three soil layers and the water content of the upper groundwater zone, as well as maps of the average seppage flow from the second to the third soil layer. More details are provided in the chapter dedicated to [model initialization](https://ec-jrc.github.io/lisflood-code/3_step4_model-initialisation/).
 To speed up the pre-run and to prevent that results are taken from the pre-run, not necessary outputs are disabled if option 'InitLisflood' = 1 is chosen. 
 
 

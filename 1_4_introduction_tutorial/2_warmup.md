@@ -98,7 +98,7 @@ In the `<lfoptions>` element, the initialization model is deactivated, and sever
 
 In the `<lfuser>` element, the first thing to do is to set the start and end of the simulation, and to configure reporting at every timestep in the variable `ReportSteps`. Then, the name and location of the output maps are defined; these maps represent the model state variables at the last timestep of the simulation, and the stack map of the lower groundwater zone storage. For the sake of simplicity, in the snippet above only a few of them are shown. We chose to save the end maps in the _initial_ subfolder of the project, together with the outputs of the initialization run, whereas the map stack will be saved in the subfolder _output/warmup_.
 
-In the `<lfbinding>` element, we must define the initialization maps we've just created with the [initialization run](1_initialization.ipynb).
+In the `<lfbinding>` element, we must define the initialization maps we've just created with the [initialization run](1_initialization.md).
 
 ## 2 Run the simulation
 

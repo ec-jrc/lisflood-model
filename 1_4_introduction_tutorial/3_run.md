@@ -98,7 +98,7 @@ In the `<lfuser>` element, we need to set several features. First, the points in
 
 > **Note**. Pay special attention to the 5 nines in the variable `ReportSteps` (`1..99999`), which are necessary since the simulation exceeds the 10,000 timesteps
 
-In the `<lfbinding>` element, same as in the warmup run, we must define the two maps that we generated in the [initialization run](1_initialization.ipynb).
+In the `<lfbinding>` element, same as in the warmup run, we must define the two maps that we generated in the [initialization run](1_initialization.md).
 
 ## 2 Run the simulation
 

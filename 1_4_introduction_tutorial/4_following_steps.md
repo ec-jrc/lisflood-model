@@ -72,7 +72,7 @@ path_out = f'{path_model}out/run/'
 
 ## 2 Initialization
 
-As explained in [Chapter 2 - Initialization](#1_initialization.ipynb), this run is meant to create two outmaps that define the average river discharge (_avgdis.nc_) and the average inflow into the lower groundwater zone (_lzavin.nc_). Let's see how these initialization maps change once we apply the calibration parameters.
+As explained in [Chapter 2 - Initialization](1_initialization.md), this run is meant to create two outmaps that define the average river discharge (_avgdis.nc_) and the average inflow into the lower groundwater zone (_lzavin.nc_). Let's see how these initialization maps change once we apply the calibration parameters.
 
 
 ```python
@@ -107,7 +107,7 @@ In our study case, the change in the _lzavin_ is notorious.
 
 ## 3 Warmup
 
-As explained in [Chapter 3 - Warmup](#2_warmup.ipynb), objective of this run is to find the initial conditions at the beginning of the target run. The usual output of these simulation is a set of maps (NetCDF) with the model state variables at the end of the simulation. For educational purposes, we chose to write, not only the end state maps, but also the map stack of one of the state variables: the lower groundwater zone.
+As explained in [Chapter 3 - Warmup](2_warmup.md), objective of this run is to find the initial conditions at the beginning of the target run. The usual output of these simulation is a set of maps (NetCDF) with the model state variables at the end of the simulation. For educational purposes, we chose to write, not only the end state maps, but also the map stack of one of the state variables: the lower groundwater zone.
 
 Let's see how some of the outputs of this run has changed with the calibrated parameters and the new initialization maps.
 

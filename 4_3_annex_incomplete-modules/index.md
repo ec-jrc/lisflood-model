@@ -413,13 +413,13 @@ The module "simulateWaterLevels" is *optional*, and it can be activated by addin
 	<setoption name="simulateWaterLevels" choice="1" />
 ```
 Using this option does *not* influence flow routing results, and it is only a reporting option.
-Water level values from the channel bottom (water depth values) are calculated *only* for river channel pixels where flow routing is computed *using the [kinematic wave](/3_05_optLISFLOOD_kinematic-wave) solution*. Computed water level values from the channel bottom can include both the main channel and (where needed) the second line of routing (Split Routing option).
+Water level values from the channel bottom (water depth values) are calculated *only* for river channel pixels where flow routing is computed *using the [kinematic wave](../3_04_optLISFLOOD_double-kinematic-wave-split-routing/index.md) solution*. Computed water level values from the channel bottom can include both the main channel and (where needed) the second line of routing (Split Routing option).
 
-**Limitation 1** : In the current implementation, water level values from the channel bottom (water depth values) are not reported for pixels where routing is computed using the [diffusive wave routing](/3_14_optLISFLOOD_diffusive-wave). 
+**Limitation 1** : In the current implementation, water level values from the channel bottom (water depth values) are not reported for pixels where routing is computed using the [diffusive wave routing](../3_05_optLISFLOOD_diffusive-wave-routing/index.md). 
 
 **Limitation 2** : In the current implementation, specif gemetrical and flow conditions can return non-physical results in some pixels, even when using the kinematic wave routing. The cause of these non-physical results must be further investigated.
 
-**Limitation 3** : The computation of water level values from the channel bottom (water depth values) requires information about river geometry (bathymetry). **Inaccuracies in the representation of channel geometry will directly affect the computation of water level**. As detailed in the chapter [Channel geomtery](/4_Static-Maps_channel-geometry/index.md) of the [user guide](https://ec-jrc.github.io/lisflood-code/), OS LISFLOOD assumes a trapezoidal cross section (image below), with geometrical parameters (e.g. bottom width, banckfull depth) computed using approximated equations or continenatl to global datasets. These approximations must be taken into account when using the results of the module described in this page.
+**Limitation 3** : The computation of water level values from the channel bottom (water depth values) requires information about river geometry (bathymetry). **Inaccuracies in the representation of channel geometry will directly affect the computation of water level**. As detailed in the chapter [Channel geomtery](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_channel-geometry/index.md) of the [user guide](https://ec-jrc.github.io/lisflood-code/), OS LISFLOOD assumes a trapezoidal cross section (image below), with geometrical parameters (e.g. bottom width, banckfull depth) computed using approximated equations or continenatl to global datasets. These approximations must be taken into account when using the results of the module described in this page.
 
 #### Calculation of water level values from the channel bottom
 
