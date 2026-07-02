@@ -1,6 +1,6 @@
 ## Read and write NetCDF files
 
-> Albeit OS LISFLOOD can still read maps in pcraster format, users are strongly recommended to prepare their own input maps in NetCDF format: pcraster format will be discarded in future versions of OS LISFLOOD (timeline not yet defined). Users interested in converting their existing pcraster maps into NetCDF format can refer to the [OS LISFLOOD untility pcr2nc](https://github.com/ec-jrc/lisflood-utilities#pcr2nc).
+> Albeit OS LISFLOOD can still read maps in pcraster format, users are strongly recommended to prepare their own input maps in NetCDF format: pcraster format will be discarded in future versions of OS LISFLOOD (timeline not yet defined). Users interested in converting their existing pcraster maps into NetCDF format can refer to the [OS LISFLOOD utility pcr2nc](https://github.com/ec-jrc/lisflood-utilities#pcr2nc).
 
 
 ### Reading NetCDF files

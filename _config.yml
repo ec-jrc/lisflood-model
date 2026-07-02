@@ -324,13 +324,13 @@ defaults:
         - title: "- Reservoirs"
           url: 3_03_optLISFLOOD_reservoirs
         - title: "- Double kinematic wave routing (Split Routing)"
-          url: 3_04_optLISFLOOD_kinematic-wave-split-routing		  
+          url: 3_04_optLISFLOOD_double-kinematic-wave-split-routing 
         - title: "- Diffusive wave routing (MCT)"
           url: 3_05_optLISFLOOD_diffusive-wave-routing
         - title: "- Paddy rice irrigation"
           url: 3_06_optLISFLOOD_paddy-rice         		  
-        - title: "- Transmission Loss"
-          url: 3_07_optLISFLOOD_soil-moisture
+        - title: "- Water use"
+          url: 3_07_optLISFLOOD_water-use
         - title: "- Transmission loss"
           url: 3_08_optLISFLOOD_transmission-loss
         - title: "- Land Use Change"
