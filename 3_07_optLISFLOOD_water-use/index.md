@@ -33,7 +33,7 @@ For four sectors, a NetCDF file specifies the water demand in mm/(day·pixel):
 
 Typically, water demands are related to amounts of population, livestock, Gross Domestic Product (GDP), gross value added (GVA). They can be obtained by downscaling national or regional reported data. More detailed information on the generaion of these map can be found in the [Input maps: water use](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_water-use/) in the OS LISFLOOD user guide.
 
-Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_optLISFLOOD_paddy-rice/).
+Paddy-rice irrigation water demand is simulated as described in the [dedicated chapter](../3_06_optLISFLOOD_paddy-rice/index.md).
 Computation of the water demand for all the other types of crops is described in this page.
 
 
@@ -172,10 +172,10 @@ The return flow is the difference between the water abstracted and the water con
 
 ### Crop irrigation
 
-Crop irrigation and paddy-rice irrigation are simulated using separate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](https://ec-jrc.github.io/lisflood-model/2_17_optLISFLOOD_paddy-rice/). 
+Crop irrigation and paddy-rice irrigation are simulated using separate model subroutines. The methodology for the modelling of paddy-rice irrigation is described [here](../3_06_optLISFLOOD_paddy-rice/index.md). 
 This page explains the computation of the water volume required by crop irrigation. 
 
-Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
+Crop irrigation water demand is assumed equal to the difference between potential transpiration ($T_{max}$) and actual transpiration ($T_a$). The computation of $T_{max}$ and $T_a$ is described in the chapter [Water uptake by roots and transpiration](../2_07_stdLISFLOOD_plant-water-uptake/index.md). It is here reminded that $T_a$ is lower than $T_{max}$ because plant trasnpiration decreases with decreasing values of soil moisture. $T_a$ is then compared with the amount of water already available in the soil to compute the amount of water to be supplied by irrigation:
 
 $$T_{a,irrig} = \min \left(T_a, w_1 - w_{wp1} \right)$$
 
@@ -208,7 +208,7 @@ Using these two parameters, the water abstraction for crop irrigation is compute
 
 $$CropIrrigationAbstraction = \frac{CropIrrigationDemand}{IrrigationEfficiency \cdot ConveyanceEfficiency}$$
 
-If the soil is frozen (i.e. the [$FrostIndex$](https://ec-jrc.github.io/lisflood-model/2_05_stdLISFLOOD_frost-index/) is larger than a selected threshold), water demand for crop irrigation is set to 0.
+If the soil is frozen (i.e. the [$FrostIndex$](../2_05_stdLISFLOOD_frost-index/) is larger than a selected threshold), water demand for crop irrigation is set to 0.
 
 Finally, the modelling of crop irrigation includes also the option $drainedIrrigation$:
 ```xml
@@ -279,7 +279,7 @@ $EnergyConsumpttiveUse$ is supplied exclusively by surface water:
 
 $$EnergyAbstractionSurfaceWater = EnergyConsumptiveUse$$
 
-[*RiceIrrSurfWaterAbstr*](https://ec-jrc.github.io/lisflood-model/2_17_optLISFLOOD_paddy-rice/) is supplied exclusively by surface water.
+[*RiceIrrSurfWaterAbstr*](../3_06_optLISFLOOD_paddy-rice/index.md) is supplied exclusively by surface water.
 
 Surface water sources for abstraction may consist of lakes, reservoirs, and rivers. The definition of the contribution of each surface water body is explained in the paragraph [*Surface water abstractions from reservoirs, lakes, and rivers*](#Surface-water-abstractions).
 
@@ -358,7 +358,7 @@ lake and reservoir water used, fraction of a pixel (0-1)
 </textvar>
 ```
 
-LISFLOOD then computes the available water volume in lakes and reservoirs. The available water volume of a lake is defined equal to the 10% of its total storage volume at that specific computational step. The available water volume in a reservoir is assumed equal to the minimum between the 1% of its [total storage capacity](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) and the 2% of the volume currently [stored in the reservoir](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/) at the computational time step. These conditions are imposed to constantly preserve a reasonable amount of water in reservoirs and lakes. The total water volume which can be potentially abstracted from reservoirs and lakes is then:
+LISFLOOD then computes the available water volume in lakes and reservoirs. The available water volume of a lake is defined equal to the 10% of its total storage volume at that specific computational step. The available water volume in a reservoir is assumed equal to the minimum between the 1% of its [total storage capacity](../3_03_optLISFLOOD_reservoirs/) and the 2% of the volume currently [stored in the reservoir](../3_03_optLISFLOOD_reservoirs/) at the computational time step. These conditions are imposed to constantly preserve a reasonable amount of water in reservoirs and lakes. The total water volume which can be potentially abstracted from reservoirs and lakes is then:
 
 $$TotalAvailableVolumeLakesReservoirs = AvailableVolumeLakes + AvailableVolumeReservoirs$$
 
@@ -368,7 +368,7 @@ The volume which is actually abstracted from lakes and reservoirs within a *wate
 
 $$WaterAbstractedLakesReservoirs = \min \left(TotalAvailableVolumeLakesReservoirs, FractionLakeReservoirWaterUsed \cdot TotalAbstractionFromSurfaceWater \right)$$
 
-The quantities below are then subtracted from the [lake storage](https://ec-jrc.github.io/lisflood-model/3_02_optLISFLOOD_lakes/) and the [reservoir storage](https://ec-jrc.github.io/lisflood-model/3_03_optLISFLOOD_reservoirs/):
+The quantities below are then subtracted from the [lake storage](../3_02_optLISFLOOD_lakes/) and the [reservoir storage](../3_03_optLISFLOOD_reservoirs/):
 
 $$WaterAbstractedLakes = \frac{WaterAbstractedLakesReservoirs}{TotalAvailableVolumeLakesReservoirs} \cdot AvailableVolumeLakes$$
 
@@ -383,7 +383,7 @@ $$WaterToBeAbstractedChannels = TotalAbstractionFromSurfaceWater - WaterAbstract
 
 The water to be abstracted from channels is withdrawn from discharge in the river network within the same *water region*. Moreoever, since the exact locations of abstractions are typically not known, river water abstractions are assumed to be homogeneously distributed within the *water region*.
 
-River discharge at each time step $Q_{ch}$ is computed by the [routing module](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/). 
+River discharge at each time step $Q_{ch}$ is computed by the [routing module](../2_15_stdLISFLOOD_channel-routing/index.md). 
 
 A minimum amount of water must always flow in a river. This value is the *environmental flow threshold*, which is imposed by the user in the settings file:
 
@@ -420,7 +420,7 @@ The value *IrrigationWater* is then used to compute the water content of the sup
 
 $$w_{fill,1} = \min \left( w_{crit,1}, w_{pF3,1} \right)$$
 
-where $w_{crit,1}$ is the [critical](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa). The remainder amount of water (if any) is then added to the upper soil layer ($w_{2}$). Finally, the [actual transpiration rate](https://ec-jrc.github.io/lisflood-model/2_07_optLISFLOOD_plant-water-uptake/) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
+where $w_{crit,1}$ is the [critical](../2_07_stdLISFLOOD_plant-water-uptake/index.md) amount of moisture below which water uptake is reduced and plants start closing their stomata, and $w_{pF3,1}$ is the lower boundary of the water content which is rapidly available for root water uptake (pF=1000 hPa). The remainder amount of water (if any) is then added to the upper soil layer ($w_{2}$). Finally, the [actual transpiration rate](../2_07_stdLISFLOOD_plant-water-uptake/index.md) ($T_a$) is updated to account for the soil moisture deficit due to the irrigation shortage.
 
 In order to check the conservation of mass within the system, LISFLOOD computes the amount of water consumed by irrigation *IrriLossCum* (this amount of water exits the system): this value accounts for the irrigation water abstracted from groundwater, the irrigation water effectively abstracted from surface water, the amount of water returned to the system due to leakages and losses (defined by the factors *IrrigationEfficiency* and *ConveyanceEfficiency*), the resulting water content of the superficial and upper soil layers.
 

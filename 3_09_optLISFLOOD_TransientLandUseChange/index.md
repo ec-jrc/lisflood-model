@@ -29,7 +29,7 @@ In order to use the transient land use change option, the following map stacks n
 | `DirectRunoffFractionMaps` | _fs_ or _fracsealed_    | Map stack of direct runoff fractions at different times   | -         | Substitutes values in map `DirectRunoffFraction` (default: _fracsealed_)  |
 
 > ***NOTE:*** for each land type, two maps are loaded: the "static" map defined in *\<Landtypename\>Fraction* (eg *WaterFraction*, *ForestFraction*), and the "dynamic" map defined in *\<Landtypename\>FractionMaps* (eg *WaterFractionMaps*, *ForestFractionMaps*). 
-The definition of the land use types can be found in the chapter [overview](https://ec-jrc.github.io/lisflood-model/2_01_stdLISFLOOD_overview/). 
+The definition of the land use types can be found in the chapter [overview](../2_01_stdLISFLOOD_overview/). 
 The "static" maps are loaded at the beginning of the simulation, whereas the "dynamic" maps are loaded at every time step if the `TransientLandUseChange` option is on; their values replace the ones previously loaded.
 Even if the values in the "static" maps loaded at the beginning of the simulation are never actually used, as they are replaced in the first simulation step, they need to be defined in the settings file.
 However, provided that the time defined in `CalendarDayStart` is one of the time steps of the "dynamic" map stacks, these can be used as input for both the "static" and the "dynamic" maps. In this case, the model loads the map at time `CalendarDayStart` at the beginning of the simulation, and replaces it at each subsequent time step with the map corresponding to that time step (or the most recent one available).

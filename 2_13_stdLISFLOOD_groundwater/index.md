@@ -32,7 +32,7 @@ $$
 UZ = (1 - DrainedFraction) \cdot D_{2,gw} + D_{pref,gw} - D_{uz,lz} - Q_{uz}
 $$
 
-In areas with flooded irrigation (e.g. rice crops), an additional amount of water is added to $UZ$ during the percolation and draining phases of the agricultural cycle (*RicePercolationWater* and *RiceDrainageWater* are described in a [dedicated chapter](https://ec-jrc.github.io/lisflood-model/2_17_stdLISFLOOD_irrigation/).
+In areas with flooded irrigation (e.g. rice crops), an additional amount of water is added to $UZ$ during the percolation and draining phases of the agricultural cycle (*RicePercolationWater* and *RiceDrainageWater* are described in a [dedicated chapter](../3_06_optLISFLOOD_paddy-rice/index.md).
 
 The **water percolates from the upper to the lower zone** ($D_{uz,lz}$) is the inflow to the lower groundwater zone. As indicated above, this amount of water is provided by the upper groundwater zone.  $D_{uz,lz}$ is a fixed amount per computational time step and it is defined as follows:
 
@@ -60,7 +60,7 @@ $$
 LZ = D_{uz,lz} - Q_{lz} - TotalAbstractionFromGroundWater -  GW_{loss} \cdot \Delta t
 $$
 
-where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) to comply with domestic,industrial, irrigation, and livestock demand; $GW_{loss}$ is the maximum percolation from the lower groundwater zone ($[\frac{mm}{day}]$). 
+where $D_{uz,lz}$ is the percolation from the upper groundwater zone ($[mm]$); $TotalAbstractionFromGroundWater$ is the total amount of [**water abstracted from groundwater**](../3_07_optLISFLOOD_water-use/index.md) to comply with domestic,industrial, irrigation, and livestock demand; $GW_{loss}$ is the maximum percolation from the lower groundwater zone ($[\frac{mm}{day}]$). 
 
 The amount of water defined by $GW_{loss}$ never rejoins the river channel and it's lost beyond the catchment boundaries or to deep groundwater systems. $GW_{loss}$ is set to zero in catchments were no information is available. The larger the value of $GW_{loss}$, the larger the amount of water that leaves the system.
 
@@ -112,7 +112,7 @@ Applying these equations to the examples above we obtain the *steady state stora
 |1000    | 1.5   | 1500    |
 
 
-LISFLOOD provides the possibility to compute the *steady state storage* values internally, all the instructions are provided in the chapter [Initialisation](https://ec-jrc.github.io/lisflood-code/3_step5_model-initialisation/) of the User Guide.
+LISFLOOD provides the possibility to compute the *steady state storage* values internally, all the instructions are provided in the chapter [Initialisation](https://ec-jrc.github.io/lisflood-code/3_step4_model-initialisation/) of the User Guide.
 
 ### Sub-surface runoff
 

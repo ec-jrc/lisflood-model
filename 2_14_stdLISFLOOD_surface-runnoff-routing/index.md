@@ -45,8 +45,8 @@ $$
 
 ***Figure:*** *4-point implicit finite-difference scheme for the kinematic wave equation. The spatial flux (blue) connects upstream and downstream nodes at the new time level; the temporal storage change (red) connects old and new time levels at the downstream node; lateral inflow (green) is averaged over the time step.*
 
-At the moment, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. The [**surface runoff ($R_s$)**](https://ec-jrc.github.io/lisflood-model/2_11_stdLISFLOOD_actual-infiltration-and-surface-runoff/) which is generated at each computational time step **is added as side-flow ($q_{sr}$)** in the flow routing equation explained in this chapter. 
+At the moment, LISFLOOD uses values for $α_{k,sr}$ which are based on a static (reference) flow depth, and a flow width that equals the pixel size, $\Delta x$. The [**surface runoff ($R_s$)**](../2_11_stdLISFLOOD_actual-infiltration-and-surface-runoff/) which is generated at each computational time step **is added as side-flow ($q_{sr}$)** in the flow routing equation explained in this chapter. 
 
-For each flowpath, surface runoff routing finishes at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated). $Q_{sr}$ is then added as lateral flow input to compute the [channel routing](https://ec-jrc.github.io/lisflood-model/2_16_stdLISFLOOD_channel-routing/).
+For each flowpath, surface runoff routing finishes at the first downstream pixel that is part of the channel network. In other words, the routine only routes the surface runoff *to* the nearest channel; no runoff *through* the channel network is simulated at this stage (runoff- and channel routing are completely separated). $Q_{sr}$ is then added as lateral flow input to compute the [channel routing](../2_15_stdLISFLOOD_channel-routing/index.md).
 
 [🔝](#top)

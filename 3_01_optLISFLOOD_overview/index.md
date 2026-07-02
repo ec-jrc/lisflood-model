@@ -10,13 +10,13 @@ The model description under 'STANDARD LISFLOOD PROCESSES' covers the processes t
 
 Many additional options have been developed to **simulate** all kind of **additional features**, such as e.g.:
 
-- Including: [reservoirs](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_reservoirs/), [polder](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_polder/), 
-[lakes](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_lakes/), 
-[inflow hydrographs](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_inflow-hydrograph/) and [transmission losses](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_transmission-loss/)
-- choosing among different routing routines: [double kinematic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_kinematic-wave/) or [dynamic wave routing](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_dynamic-wave/)
-- Simulating [water levels](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-levels/), [water use](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_water-use/) and [soil moisture](https://ec-jrc.github.io/lisflood-model/3_optLISFLOOD_soil-moisture/)
+- Including: [reservoirs](../3_03_optLISFLOOD_reservoirs/index.md), [polder](../4_3_annex_incomplete-modules/index.md#polder-option), 
+[lakes](../3_02_optLISFLOOD_lakes/index.md), 
+[inflow hydrographs](../3_10_optLISFLOOD_inflow-hydrograph/index.md) and [transmission losses](../3_08_optLISFLOOD_transmission-loss/index.md)
+- choosing among different routing routines: [double kinematic wave routing](../3_04_optLISFLOOD_double-kinematic-wave-split-routing/index.md) or [dynamic wave routing](../4_3_annex_incomplete-modules/index.md#dynamic-wave-routing)
+- Simulating [water levels](../4_3_annex_incomplete-modules/index.md#reporting-of-channel-water-depth-values), [water use](../3_07_optLISFLOOD_water-use/index.md) and [soil moisture](../2_12_stdLISFLOOD_soilmoisture-redistribution/index.md)
 
-If you like to use an additional option you have to 'activate' it in the [LISFLOOD settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml) under the 'lfoptions' element. 
+If you like to use an additional option you have to 'activate' it in the [LISFLOOD settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/lisfloodSettings_reference.xml) under the 'lfoptions' element. 
 Each element under this option section represents a switch with "1" equal to "on", and "0" to "off". 
 The table below shows all the currently implemented additional simulation options including their corresponding defaults. 
 You can activate as many options as you want (or none at all) by setting the switch to 1. This way you can tell the model exactly which processes to calculate and which not.

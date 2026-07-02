@@ -25,7 +25,7 @@ $RiceEvaporationDemand$ is the amount of evaporation required to fulfil the open
 $$
 RiceEvaporationDemand = \left[EW_0 - (ES_a+ T_a)\right] \cdot \Delta t
 $$
-where $EW_0$ is the potential evaporation rate from an open water surface, $ES_a$ is the actual evaporation from the soil, and $T_a$ is the actual transpiration (all in mm/day). The latter two terms are subtracted from the computation as they are already considered when computing [soil evaporation](https://ec-jrc.github.io/lisflood-model/2_08_stdLISFLOOD_soil-evaporation/) and [plant transpiration](https://ec-jrc.github.io/lisflood-model/2_07_stdLISFLOOD_plant-water-uptake/). 
+where $EW_0$ is the potential evaporation rate from an open water surface, $ES_a$ is the actual evaporation from the soil, and $T_a$ is the actual transpiration (all in mm/day). The latter two terms are subtracted from the computation as they are already considered when computing [soil evaporation](../2_08_stdLISFLOOD_soil-evaporation/) and [plant transpiration](../2_07_stdLISFLOOD_plant-water-uptake/). 
 
 4. **Growing phase** expands from the planting day to 20 days before harvesting. During this phase, the water level in the field is kept constant; therefore, the amount of water supplied to the field during this phase must compensate for evaporation and percolation losses and is computed as follows:
 $$
@@ -44,9 +44,9 @@ $$
 where $w_{s1}$, $w_{s2}$, $w_{fc,1}$ and $w_{fc,2}$ are the amounts of moisture at saturation and field capacity in the superficial and upper soil layers, respectively (all in mm). $RiceDrainageWater$ is added to the upper groundwater layer (UZ).
 <br>
 
-$RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](https://ec-jrc.github.io/lisflood-model/2_18_stdLISFLOOD_water-use/) according to the calendar day and they define the $RiceIrrSurfWaterAbstr$:
+$RiceSaturationDemand$, $TotalRiceFloodingDemand$, $TotalRiceGrowingDemand$ are [extracted from surface water bodies](../3_07_optLISFLOOD_water-use/index.md) according to the calendar day and they define the $RiceIrrSurfWaterAbstr$:
 $$
 RiceIrrSurfWaterAbstr = RiceSaturationDemand + TotalRiceFloodingDemand + TotalRiceGrowingDemand
 $$
 
-$RicePercolationWater$ and $RiceDrainageWater$ are [added to the upper groundwater layer UZ](https://ec-jrc.github.io/lisflood-model/2_13_stdLISFLOOD_groundwater/) according to the calendar day.
+$RicePercolationWater$ and $RiceDrainageWater$ are [added to the upper groundwater layer UZ](../2_13_stdLISFLOOD_groundwater/) according to the calendar day.
