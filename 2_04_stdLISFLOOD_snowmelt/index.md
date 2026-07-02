@@ -74,7 +74,7 @@ where:
 * $T_{melt}$ is the temperature threshold ($^\circ\mathrm{C}$) at which snow melt starts. It can be defined by the user, but a value of $1 ^\circ\mathrm{C}$ is recommended.
 * $\Delta t$ is the time interval ($day$). It can be smaller than 1 day.
 
-The value of $C_{sm}$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __this parameter is used as calibration parameter__. The parameter range used in the model calibration can be found in this [link](https://ec-jrc.github.io/lisflood-code/4_annex_parameters/).
+The value of $C_{sm}$ can vary greatly both in space and time (e.g. see Martinec *et al*., 1998). Therefore, __this parameter is used as calibration parameter__. The parameter range used in the model calibration can be found in this [link](https://ec-jrc.github.io/lisflood-code/5_annex_parameters/).
 
 ### Rain over snow
 

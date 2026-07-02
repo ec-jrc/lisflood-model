@@ -159,7 +159,7 @@ The `lfuser` element of the settings file has already been edited for the use of
 
 #### Introduction
 
-This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the [settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/settingsEUMerged.xml):
+This page describes the LISFLOOD polder routine, and how it is used. The simulation of polders is *optional*, and it can be activated by adding the following line to the 'lfoptions' element of the [settings file](https://github.com/ec-jrc/lisflood-code/blob/master/src/lisfloodSettings_reference.xml):
 
 ```xml
 	<setoption name="simulatePolders" choice="1" />
@@ -405,7 +405,7 @@ Users interested in the modelling of seasonal variation of water fraction might 
 
 Within LISFLOOD it is possible to simulate and report water level values from the channel bottom (water depth). This is achieved by switching on a dedicated module called "simulateWaterLevels". 
 
-> **_NOTE:_**The use of *level* is not fully correct, and it should be replaced by *depth* in improved versions of the module (important note: *waterdepth* output name is already used to indicate the water depth of the surface runoff or overalnd flow, as explained in [this section](https://ec-jrc.github.io/lisflood-code/4_annex_output-files/) of the LISFLOOD User Guide).
+> **_NOTE:_**The use of *level* is not fully correct, and it should be replaced by *depth* in improved versions of the module (important note: *waterdepth* output name is already used to indicate the water depth of the surface runoff or overalnd flow, as explained in [this section](https://ec-jrc.github.io/lisflood-code/5_annex_output-files/) of the LISFLOOD User Guide).
 
 The module "simulateWaterLevels" is *optional*, and it can be activated by adding the following line to the 'lfoptions' element:
 
@@ -419,7 +419,7 @@ Water level values from the channel bottom (water depth values) are calculated *
 
 **Limitation 2** : In the current implementation, specif gemetrical and flow conditions can return non-physical results in some pixels, even when using the kinematic wave routing. The cause of these non-physical results must be further investigated.
 
-**Limitation 3** : The computation of water level values from the channel bottom (water depth values) requires information about river geometry (bathymetry). **Inaccuracies in the representation of channel geometry will directly affect the computation of water level**. As detailed in the chapter [Channel geomtery](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_channel-geometry/index.md) of the [user guide](https://ec-jrc.github.io/lisflood-code/), OS LISFLOOD assumes a trapezoidal cross section (image below), with geometrical parameters (e.g. bottom width, banckfull depth) computed using approximated equations or continenatl to global datasets. These approximations must be taken into account when using the results of the module described in this page.
+**Limitation 3** : The computation of water level values from the channel bottom (water depth values) requires information about river geometry (bathymetry). **Inaccuracies in the representation of channel geometry will directly affect the computation of water level**. As detailed in the chapter [Channel geomtery](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_channel-geometry) of the [user guide](https://ec-jrc.github.io/lisflood-code/), OS LISFLOOD assumes a trapezoidal cross section (image below), with geometrical parameters (e.g. bottom width, banckfull depth) computed using approximated equations or continenatl to global datasets. These approximations must be taken into account when using the results of the module described in this page.
 
 #### Calculation of water level values from the channel bottom
 
