@@ -13,5 +13,5 @@ The Figure below shows with $c_{pref} = 0$ (red line) all the available water fo
 
 ![Soil moisture and preferential flow relation](../media/image34-resize.png)
 
-***Figure:*** *Soil moisture and preferential flow relation.*
+***Figure:*** *Preferential bypass fraction ($D_{pref}/W_{av}$) as a function of relative soil moisture ($w_1/w_{s1}$) for different values of the shape parameter $c_{pref}$. With $c_{pref}=0$, all available water bypasses the soil matrix regardless of saturation (red line). $c_{pref}=1$ gives a linear relationship (black line): e.g. at 60% soil saturation, 60% of the available water bypasses the soil. Higher $c_{pref}$ values concentrate bypass flow in near-saturated conditions, reducing preferential flow for drier soils.*
 

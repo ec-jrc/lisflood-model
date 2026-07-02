@@ -23,7 +23,7 @@ The processes that are simulated by the model include also snow melt, infiltrati
 
 ### Sub-grid variability
 
-Before going into detail with the individual hydrological processes, here first some explaination on a larger conceptual approach on how LISFLOOD is dealing with sub-grid variability in land cover and the consecutive influence on various processes.
+Before going into detail with the individual hydrological processes, here first some explanation on a larger conceptual approach on how LISFLOOD is dealing with sub-grid variability in land cover and the consecutive influence on various processes.
 
 #### Representation of land cover
 
@@ -53,8 +53,8 @@ If a part of a pixel is made up of built-up areas this will influence that pixel
 
 **For water covered areas**, LISFLOOD assumes that:
 1. Actual evaporation is equal to potential evaporation on open water
-3. The storage capacity of the soil is zero (i.e. no soil moisture storage in the water fraction)
-4. There is no groundwater storage
+2. The storage capacity of the soil is zero (i.e. no soil moisture storage in the water fraction)
+3. There is no groundwater storage
 
 **For forest** $(f_{forest})$ **or irrigated agriculture** $(f_{irrigated})$ **or other land cover** $(f_{other}=1-f_{forest}-f_{irrigated}-f_{dr}-f_{water})$ the description of all soil- and groundwater-related processes below (evaporation, transpiration, infiltration, preferential flow, soil moisture redistribution and groundwater flow) are valid. While the modelling structure for forest, irrigated agriculture and other classes is the same, the difference is the use of different map sets for leaf area index, soil and soil hydraulic properties. Because of the nonlinear nature of the rainfall runoff processes this should yield better results than running the model with average parameter values. The table below summarises the profiles of the four individually modelled categories of land cover classes.
 

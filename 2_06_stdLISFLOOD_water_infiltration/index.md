@@ -16,12 +16,11 @@ where:
 Since no infiltration can take place in each pixel's 'direct runoff fraction', **direct runoff** is calculated as:
 
 $$
-
 R_d = f_{dr} \cdot (R \cdot \Delta t + M - IntercSealed) + WaterFraction \cdot (R \cdot \Delta t + M - EW0)
 $$
 
 where $R_d$ is in $mm$ per time step and $IntercSealed$ is the water in $mm$ retained by the depressions of the impervious surfaces and not immediately available to generate direct runoff. 
-More specifically, $IntercSealed$ is equal to the total of raifall and snow melt until all the depressions have been filled, that is until the $AvailableStorageSealed$ is larger than 0. The computation is shown by the following equations:
+More specifically, $IntercSealed$ is equal to the total of rainfall and snow melt until all the depressions have been filled, that is until the $AvailableStorageSealed$ is larger than 0. The computation is shown by the following equations:
 
 
 $$

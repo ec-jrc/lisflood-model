@@ -8,13 +8,15 @@ Bódis, K., 2009. *Development of a data set for continental hydrologic modellin
 
 Chow, V.T., Maidment, D.R., Mays, L.M., 1988. Applied Hydrology, McGraw-Hill, Singapore, 572 pp.
 
+Cunge, J.A., 1969. On the subject of a flood propagation computation method (Muskingum method). Journal of Hydraulic Research, 7(2), 205–230. https://doi.org/10.1080/00221686909500264
+
 De Roo, A., Thielen, J., Gouweleeuw, B., 2003. LISFLOOD, a Distributed Water-Balance, Flood Simulation, and Flood Inundation Model, User Manual version 1.2. Internal report, Joint Research Center of the European Communities, Ispra, Italy, 74 pp.
 
 Fröhlich, W., 1996. Wasserstandsvorhersage mit dem Prgramm ELBA. Wasserwirtschaft Wassertechnik, ISSN: 0043-0986, Nr. 7, 1996, 34-37.
 
 Goudriaan, J., 1977. Crop micrometeorology: a simulation study. Simulation Monographs. Pudoc, Wageningen.
 
-Hock, 2003Hock, R., 2003. Temperature index melt modelling in mountain areas. *Journal of Hydrology*, 282(1-4), 104--115.
+Hock, R., 2003. Temperature index melt modelling in mountain areas. *Journal of Hydrology*, 282(1-4), 104--115.
 
 Lindström, G., Johansson, B., Persson, M., Gardelin, M., Bergström, S., Development and test of the distributed HBV-96 hydrological model. Journal of Hydrology 201, 272-288
 
@@ -26,7 +28,19 @@ Merriam, R.A., 1960. A note on the interception loss equation. Journal of Geophy
 
 Molnau, M., Bissell, V.C., 1983. A continuous frozen ground index for flood forecasting. In: Proceedings 51^st^ Annual Meeting Western Snow Conference, 109-119.
 
+Moussa, R., Bocquillon, C., 1996. Criteria for the choice of flood routing methods in natural channels. Journal of Hydrology, 186, 1–30. https://doi.org/10.1016/S0022-1694(96)03045-4
+
+Ponce, V.M., Li, R., Simons, D.B., 1978. Applicability of kinematic and diffusion models. Journal of Hydraulic Engineering, 104, 353–360. https://doi.org/10.1061/JYCEAJ.0004958
+
+Ponce, V.M., 1989. Engineering Hydrology, Principles and Practices. Prentice Hall College Division, New Jersey.
+
 Rao, C.X. and Maurer, E.P., 1996. A simplified model for predicting daily transmission losses in a stream channel. Water Resources Bulletin, Vol. 31, No. 6., 1139-1146.
+
+Reggiani, P., Todini, E., Meißner, D., 2014a. A conservative flow routing formulation: Déjà vu and the variable-parameter Muskingum method revisited. Journal of Hydrology, 519, 1506–1515. https://doi.org/10.1016/j.jhydrol.2014.08.057
+
+Reggiani, P., Todini, E., Meißner, D., 2014b. Analytical solution of a kinematic wave approximation for channel routing. Hydrological Research, 45(1), 43–57. https://doi.org/10.2166/nh.2013.157
+
+Shastry, A., Egbert, R., Aristizabal, F., Luo, C., Yu, C.-W., Praskievicz, S., 2019. Using steady-state backwater analysis to predict inundated area from National Water Model streamflow simulations. Journal of the American Water Resources Association, 55(4), 940–951. https://doi.org/10.1111/1752-1688.12785
 
 Speers, D.D. , Versteeg, J.D., 1979. Runoff forecasting for reservoir operations -- the past and the future. In: Proceedings 52^nd^ Western Snow Conference, 149-156.
 
@@ -38,7 +52,13 @@ Supit I., A.A. Hooijer, C.A. van Diepen (eds.), 1994. System Description of the 
 
 Supit, I. , van der Goot, E. (eds.), 2003. Updated System Description of the WOFOST Crop Growth Simulation Model as Implemented in the Crop Growth Monitoring System Applied by the European Commission, Treemail, Heelsum, The Netherlands, 120 pp.
 
+Tang, X., Samuels, P.G., 1999. Variable parameter Muskingum-Cunge method for flood routing in a compound channel. Journal of Hydraulic Research, 37, 591–614. https://doi.org/10.1080/00221689909498519
+
 Todini, E., 1996. The ARNO rainfall----runoff model. Journal of Hydrology 175, 339-382.
+
+Todini, E., 2007a. A mass conservative and water storage consistent variable parameter Muskingum-Cunge approach. Hydrology and Earth System Sciences, 11, 1645–1659. https://doi.org/10.5194/hess-11-1645-2007
+
+Todini, E., 2007b. Corrigendum to "A mass conservative and water storage consistent variable parameter Muskingum-Cunge approach" published in Hydrology and Earth System Sciences, 11, 1645–1659. Hydrology and Earth System Sciences, 11, 1783–1783. https://doi.org/10.5194/hess-11-1783-2007
 
 Van Der Knijff, J., De Roo, A., 2006. LISFLOOD -- Distributed Water Balance and Flood Simulation Model, User Manual. EUR 22166 EN, Office for Official Publications of the European Communities, Luxembourg, 88
 pp.
@@ -51,9 +71,9 @@ van der Knijff, J. M., Younis, J. and de Roo, A. P. J.: LISFLOOD: A GIS-based di
 
 Van Genuchten, M.Th., 1980. A closed-form equation for predicting the hydraulic conductivity of unsaturated soils. Soil Science Society of America Journal 44, 892-898.
 
-Viviroli et al., 2009Viviroli, D., Zappa, M., Gurtz, J., & Weingartner, R., 2009. An introduction to the hydrological modelling system PREVAH and its pre- and post-processing-tools. *Environmental Modelling & Software*, 24(10), 1209--1222.
+Viviroli et al., 2009. An introduction to the hydrological modelling system PREVAH and its pre- and post-processing-tools. *Environmental Modelling & Software*, 24(10), 1209--1222.
 
-Vogt et al., 2007Vogt, J., Soille, P., de Jager, A., Rimaviciute, E., Mehl, W., Foisneau, S., Bodis, K., Dusart, M., Parachini, M., Hasstrup, P.,2007. *A pan-European River and Catchment Database*. JRC Reference Report EUR 22920 EN, Institute for Environment and Sustainability, Joint Research Centre of the European Commission.
+Vogt et al., 2007. *A pan-European River and Catchment Database*. JRC Reference Report EUR 22920 EN, Institute for Environment and Sustainability, Joint Research Centre of the European Commission.
 
 Von Hoyningen-Huene, J., 1981. Die Interzeption des Niederschlags in landwirtschaftlichen Pflanzenbeständen (Rainfall interception in agricultural plant stands). In: Arbeitsbericht Deutscher Verband für Wasserwirtschaft und Kulturbau, DVWK, Braunschweig, p.63.
 
